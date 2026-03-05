@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SELCS Mentor Training — Scenario-Based Learning</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #4a7c59;
+    --sage-light: #6fa882;
+    --sage-pale: #e8f2ec;
+    --gold: #c9953a;
+    --gold-light: #f0c97a;
+    --cream: #faf8f3;
+    --charcoal: #2c2c2c;
+    --border: #ddd8cc;
+    --D: #c0392b; --D-light: #fdecea;
+    --I: #e67e22; --I-light: #fef3e2;
+    --S: #27ae60; --S-light: #e8f8ee;
+    --C: #2980b9; --C-light: #e8f4fc;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, #2c4a35 0%, var(--sage) 100%);
+    color: white;
+    padding: 22px 40px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+  }
+  .logo-badge {
+    background: var(--gold);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; flex-shrink: 0;
+  }
+  header h1 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; }
+  header p { font-size: 12px; opacity: 0.75; margin-top: 3px; }
+
+  /* Progress bar */
+  .progress-bar {
+    background: rgba(255,255,255,0.15);
+    height: 4px;
+    width: 100%;
+  }
+  .progress-fill {
+    background: var(--gold-light);
+    height: 4px;
+    transition: width 0.5s ease;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 36px 24px 80px;
+  }
+
+  /* Step indicator */
+  .step-indicator {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 24px;
+  }
+  .step-dot {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    border: 2px solid var(--border);
+    color: #aaa; background: white;
+    transition: all 0.3s;
+  }
+  .step-dot.active { border-color: var(--sage); color: white; background: var(--sage); }
+  .step-dot.done { border-color: var(--sage-light); color: white; background: var(--sage-light); }
+  .step-label { font-size: 13px; font-weight: 500; color: var(--charcoal); }
+  .step-sep { flex: 1; height: 2px; background: var(--border); border-radius: 2px; }
+
+  /* Screen panels */
+  .screen { display: none; animation: fadeIn 0.4s ease; }
+  .screen.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Card */
+  .card {
+    background: white;
+    border-radius: 16px;
+    border: 1.5px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    margin-bottom: 24px;
+  }
+  .card-header {
+    background: linear-gradient(135deg, #2c4a35 0%, var(--sage) 100%);
+    color: white;
+    padding: 22px 28px;
+  }
+  .scenario-tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 4px 12px; margin-bottom: 10px;
+  }
+  .card-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; margin-bottom: 6px;
+  }
+  .card-header p { font-size: 13px; opacity: 0.85; line-height: 1.55; }
+
+  .qc-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--gold);
+    color: white;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 20px;
+    margin-top: 10px;
+  }
+
+  .card-body { padding: 26px 28px; }
+
+  /* Scene */
+  .scene-block {
+    background: #f8f5f0;
+    border-left: 4px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .scene-label {
+    font-size: 11px; font-weight: 700; color: var(--gold);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* Quality Check note */
+  .qc-note {
+    background: #fffbf0;
+    border: 1.5px solid #f0d090;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 8px;
+  }
+  .qc-note-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 10px;
+  }
+  .qc-icon {
+    background: var(--gold);
+    color: white;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+  }
+  .qc-note-header strong {
+    font-size: 14px; font-weight: 700; color: #7a5010;
+  }
+  .qc-note-header span { font-size: 12px; color: #a07030; }
+  .qc-note p { font-size: 13.5px; color: #5a3c08; line-height: 1.65; }
+
+  /* Next button */
+  .next-btn {
+    background: var(--sage);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    display: flex; align-items: center; gap: 8px;
+    transition: all 0.2s;
+  }
+  .next-btn:hover { background: #3a6347; transform: translateX(3px); }
+
+  /* Screen 2 — Question */
+  .mentee-banner {
+    background: linear-gradient(135deg, var(--sage-pale), #d0e8d8);
+    border: 1.5px solid #b0d4bc;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 22px;
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .mentee-icon {
+    background: var(--sage);
+    color: white;
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .mentee-banner h3 { font-size: 15px; font-weight: 700; color: var(--sage); margin-bottom: 4px; }
+  .mentee-banner p { font-size: 14px; line-height: 1.55; color: var(--charcoal); }
+
+  .question-label {
+    font-size: 12px; font-weight: 700; color: var(--mid, #5a5a5a);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .question-text {
+    font-size: 16px; font-weight: 500; line-height: 1.55;
+    margin-bottom: 22px;
+    color: var(--charcoal);
+  }
+
+  /* Options */
+  .options { display: flex; flex-direction: column; gap: 11px; }
+  .option-btn {
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 15px 18px;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--charcoal);
+    transition: all 0.2s ease;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--sage-light);
+    background: var(--sage-pale);
+    transform: translateX(3px);
+  }
+  .option-btn:disabled { cursor: not-allowed; }
+  .option-letter {
+    font-weight: 700; font-size: 13px;
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    background: #f0ece4;
+    color: #666;
+    margin-top: 1px;
+    transition: all 0.2s;
+  }
+
+  .option-btn.correct-answer { border-color: var(--sage); background: #edf7ef; }
+  .option-btn.correct-answer .option-letter { background: var(--sage); color: white; }
+  .option-btn.wrong-answer { border-color: #e57373; background: #fff2f2; }
+  .option-btn.wrong-answer .option-letter { background: #e57373; color: white; }
+  .option-btn.dimmed { opacity: 0.38; }
+
+  /* Feedback */
+  .feedback-block {
+    display: none;
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-top: 16px;
+    animation: fadeIn 0.35s ease;
+  }
+  .feedback-block.wrong { background: #fff2f2; border: 1.5px solid #f5c6c6; }
+  .feedback-block.right { background: #edf7ef; border: 1.5px solid #a8dbb0; }
+  .feedback-block h4 {
+    font-size: 15px; font-weight: 700;
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .feedback-block p { font-size: 14px; line-height: 1.65; margin-bottom: 10px; }
+  .feedback-block p:last-child { margin-bottom: 0; }
+
+  .action-steps {
+    background: rgba(255,255,255,0.75);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 12px;
+    border: 1px solid #c8e6cf;
+  }
+  .action-steps h5 {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--sage); margin-bottom: 12px;
+  }
+  .action-steps ol {
+    padding-left: 20px;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--charcoal);
+  }
+  .action-steps ol li { margin-bottom: 6px; }
+
+  .try-again-btn {
+    background: #e57373;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px; font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.2s;
+  }
+  .try-again-btn:hover { background: #c0392b; }
+
+  #confetti-canvas {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 999;
+  }
+
+  footer {
+    text-align: center; font-size: 11.5px; color: #aaa;
+    padding: 24px; border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 16px 18px; }
+    .container { padding: 24px 16px 60px; }
+    .card-body, .card-header { padding: 18px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<header>
+  <div class="logo-badge">MSA</div>
+  <div>
+    <h1>SELCS Mentor Training</h1>
+    <p>Mentor Success Academy · Scenario-Based Learning Module</p>
+  </div>
+</header>
+<div class="progress-bar"><div class="progress-fill" id="progress" style="width:50%"></div></div>
+
+<div class="container">
+
+  <!-- Step Indicator -->
+  <div class="step-indicator">
+    <div class="step-dot active" id="dot-1">1</div>
+    <div class="step-label" id="label-1">Observe the Scene</div>
+    <div class="step-sep"></div>
+    <div class="step-dot" id="dot-2">2</div>
+    <div class="step-label" id="label-2">Coaching Challenge</div>
+  </div>
+
+  <!-- SCREEN 1: Scene + Quality Check -->
+  <div class="screen active" id="screen-1">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">📋 Scenario 1 · Preschool Classroom</div>
+        <h2>The Conflict at the Block Corner</h2>
+        <p>Read the classroom scene and Quality Check analysis below. When you're ready, you'll move on to the coaching challenge.</p>
+        <div class="qc-badge">🔍 Quality Check Focus: Emotional Support</div>
+      </div>
+
+      <div class="card-body">
+        <div class="scene-block">
+          <div class="scene-label">📽 The Scene</div>
+          It's free choice time in a preschool classroom. Two children, Marcus and Lily, both reach for the same large red block at the block center. Marcus grabs it first; Lily immediately bursts into tears. The teacher, Ms. Torres, walks over briskly and says: <em>"Marcus, just give it to her — she's crying. You can find another one."</em> Marcus reluctantly hands it over, looking frustrated. Ms. Torres pats Lily on the back and walks away. The conflict ends — but Marcus sulks in the corner for the rest of free choice time.
+        </div>
+
+        <div class="qc-note">
+          <div class="qc-note-header">
+            <div class="qc-icon">🔍</div>
+            <div>
+              <strong>Quality Check: What's Missing Here?</strong>
+              <span style="display:block">Focus Area: Teacher Responsiveness &amp; Child Agency</span>
+            </div>
+          </div>
+          <p>High-quality early childhood interactions involve <strong>acknowledging all children's emotions</strong> — not just the loudest ones. When a teacher steps in and resolves conflict through authority rather than facilitation, two things happen: the immediate problem disappears, but the deeper learning opportunity is lost.</p>
+          <p style="margin-top:10px;">Ms. Torres responded to Lily's distress but dismissed Marcus's feelings entirely. Neither child practiced naming emotions, negotiating, or arriving at a solution together. The teacher's role in high-quality interactions is to <strong>slow down the moment</strong>, name what each child is feeling, and guide them toward their own resolution — building the social-emotional skills that last a lifetime.</p>
+          <p style="margin-top:10px;">This moment reflects a common pattern: <em>efficiency over depth</em>. The classroom moves on — but the children leave without the tools they needed most.</p>
+        </div>
+
+        <button class="next-btn" onclick="goToScreen2()">
+          Go to Coaching Challenge <span>→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: SELCS Question + Options -->
+  <div class="screen" id="screen-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">🎯 Coaching Challenge · Scenario 1</div>
+        <h2>The Block Corner — Coaching Conversation</h2>
+        <p>You just observed Ms. Torres. Now it's time to coach. Read your mentee's SELCS profile below, then choose your approach.</p>
+      </div>
+
+      <div class="card-body">
+
+        <div class="mentee-banner">
+          <div class="mentee-icon">🔍</div>
+          <div>
+            <h3>Your Mentee's SELCS Style: The Cultivator (C)</h3>
+            <p>Ms. Torres is analytical, principled, and detail-oriented. She takes pride in doing things correctly and can become quietly defensive when feedback feels like a personal judgment rather than a professional discussion.</p>
+          </div>
+        </div>
+
+        <div class="question-label">Your Coaching Question</div>
+        <div class="question-text">You are meeting with Ms. Torres for your post-observation coaching conversation. She is a <strong>Cultivator</strong>. How do you open the conversation in a way that will help her grow — rather than shut down?</div>
+
+        <div class="options" id="options">
+
+          <button class="option-btn" onclick="handleAnswer('A')" data-style="A">
+            <div class="option-letter">A</div>
+            <div>"Let's be direct — the way you handled that conflict today didn't serve Marcus. You solved the problem, but you missed the real teaching opportunity. I need you to come back next week with three things you'll do differently."</div>
+          </button>
+
+          <button class="option-btn" onclick="handleAnswer('B')" data-style="B">
+            <div class="option-letter">B</div>
+            <div>"Okay, first — you stepped in so fast, that shows how much you care! I was thinking, imagine if we could turn those little moments into this whole social-emotional magic? Kids learning to problem-solve together! Wouldn't that be SO powerful? I can totally see you doing that!"</div>
+          </button>
+
+          <button class="option-btn" onclick="handleAnswer('C')" data-style="C">
+            <div class="option-letter">C</div>
+            <div>"I can see how much you care about keeping the peace in your classroom. There's no pressure at all — when you feel comfortable, maybe we could talk a little about how the children might have been feeling in that moment…"</div>
+          </button>
+
+          <button class="option-btn" onclick="handleAnswer('D')" data-style="D">
+            <div class="option-letter">D</div>
+            <div>"I'd like to walk through that block corner moment together — step by step. What each child needed, what the research tells us about emotion coaching at this age, and where there might be a gap in the approach. From there we can build a very specific plan."</div>
+          </button>
+
+        </div>
+
+        <!-- Feedback: A (Director mismatch) -->
+        <div class="feedback-block wrong" id="feedback-A">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>This direct, bottom-line approach resonates well with a <strong>Director</strong> mentee — but delivered to a <strong>Cultivator</strong>, it's likely to backfire. Cultivators take deep pride in accuracy and quality. Being told bluntly that they "missed it" — without evidence, rationale, or shared analysis — will feel like an attack on their professionalism rather than a growth conversation.</p>
+          <p>Ms. Torres may comply on the surface, but expect withdrawal or quiet resentment. Cultivators need the <em>why</em> before they can hear the <em>what</em>.</p>
+          <button class="try-again-btn" onclick="resetQuestion()">↩ Try Again</button>
+        </div>
+
+        <!-- Feedback: B (Inspirer mismatch) -->
+        <div class="feedback-block wrong" id="feedback-B">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>This warm, enthusiastic approach is a natural fit for an <strong>Inspirer</strong> mentee — but a <strong>Cultivator</strong> will likely receive it with polite skepticism. Cultivators need specificity and logic. Language like "social-emotional magic" without grounding in evidence or a clear framework can feel imprecise — and imprecision makes Cultivators tune out.</p>
+          <p>Ms. Torres will smile and nod, but the conversation won't produce real change. Enthusiasm is a great starting point, but Cultivators need depth behind it.</p>
+          <button class="try-again-btn" onclick="resetQuestion()">↩ Try Again</button>
+        </div>
+
+        <!-- Feedback: C (Sustainer mismatch) -->
+        <div class="feedback-block wrong" id="feedback-C">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>Gentleness is something a Cultivator can appreciate — but this approach is <em>too tentative</em>. Phrases like "no pressure at all" and "when you feel comfortable" signal that there isn't a clear standard to work toward. Ironically, Cultivators <strong>want</strong> honest, precise feedback — they simply need it to be grounded in logic and evidence rather than emotion or authority.</p>
+          <p>This open-ended, low-stakes approach would be perfect for a <strong>Sustainer</strong> mentee. For Ms. Torres, it may feel like the mentor isn't taking the coaching seriously.</p>
+          <button class="try-again-btn" onclick="resetQuestion()">↩ Try Again</button>
+        </div>
+
+        <!-- Feedback: D (CORRECT — Cultivator match) -->
+        <div class="feedback-block right" id="feedback-D">
+          <h4>🎉 Excellent Match — You Read Your Mentee!</h4>
+          <p>This approach speaks directly to what a <strong>Cultivator</strong> values most: <em>structure, evidence, and the chance to analyze and problem-solve</em>. By framing the conversation as a step-by-step examination — grounded in research and leading to a specific plan — you give Ms. Torres something concrete to engage with intellectually.</p>
+          <p>The gap becomes a <em>puzzle to solve together</em>, not a personal failure. Expect Ms. Torres to lean in, ask clarifying questions, and likely arrive at key insights on her own. That is a Cultivator doing their best learning.</p>
+          <div class="action-steps">
+            <h5>✅ Follow-Up Action Steps for Continued Growth</h5>
+            <ol>
+              <li><strong>Self-assess together first.</strong> Before sharing your observations, ask Ms. Torres to walk through the moment herself: "What was each child feeling? What did each child need?" Let her analysis lead.</li>
+              <li><strong>Introduce an emotion coaching framework.</strong> Share a two-step script: (1) <em>Name the emotion</em> for each child — "Marcus, you grabbed it first and now you're being asked to give it up. That feels really unfair." (2) <em>Invite problem-solving</em> — "What could we do so both of you feel okay about this?" Practice it in a role-play during your session.</li>
+              <li><strong>Anchor in research.</strong> Offer one focused resource on emotion coaching in early childhood — concepts like "Name It to Tame It" (Dan Siegel) give Cultivators intellectual grounding for the practice shift you're asking them to make.</li>
+              <li><strong>Set a precise observation target.</strong> Before your next visit, agree on exactly one observable behavior to watch for — e.g., "I want to see you name both children's emotions before offering any solution." A specific target, not a vague goal, is what motivates a Cultivator.</li>
+              <li><strong>Debrief with evidence.</strong> At your follow-up, document what changed with concrete examples: "In the paint table conflict today, you named both children's feelings before stepping in — here's what happened next." Data-driven feedback is deeply motivating for this temperament.</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>SELCS is the intellectual property of Mentor Success Academy · Developed by Mary Wardlaw &amp; Rebecca Munlyn · All rights reserved</footer>
+
+<script>
+  let answered = false;
+  const correct = 'D';
+
+  function goToScreen2() {
+    document.getElementById('screen-1').classList.remove('active');
+    document.getElementById('screen-2').classList.add('active');
+    document.getElementById('dot-1').classList.remove('active');
+    document.getElementById('dot-1').classList.add('done');
+    document.getElementById('dot-1').textContent = '✓';
+    document.getElementById('dot-2').classList.add('active');
+    document.getElementById('progress').style.width = '100%';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function handleAnswer(style) {
+    if (answered) return;
+
+    const buttons = document.querySelectorAll('.option-btn');
+    buttons.forEach(btn => {
+      btn.disabled = true;
+      const s = btn.getAttribute('data-style');
+      if (s === style) {
+        btn.classList.add(style === correct ? 'correct-answer' : 'wrong-answer');
+      } else {
+        if (style !== correct) btn.classList.add('dimmed');
+      }
+    });
+
+    document.getElementById('feedback-' + style).style.display = 'block';
+
+    if (style === correct) {
+      answered = true;
+      launchConfetti();
+    }
+  }
+
+  function resetQuestion() {
+    answered = false;
+    const buttons = document.querySelectorAll('.option-btn');
+    buttons.forEach(btn => {
+      btn.disabled = false;
+      btn.classList.remove('correct-answer', 'wrong-answer', 'dimmed');
+    });
+    ['A','B','C','D'].forEach(s => {
+      document.getElementById('feedback-' + s).style.display = 'none';
+    });
+  }
+
+  function launchConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const colors = ['#4a7c59','#c9953a','#f0c97a','#6fa882','#2980b9','#e67e22','#27ae60','#f4a261'];
+    const pieces = Array.from({ length: 200 }, () => ({
+      x: Math.random() * canvas.width,
+      y: -10 - Math.random() * 250,
+      w: 7 + Math.random() * 9, h: 4 + Math.random() * 5,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      angle: Math.random() * Math.PI * 2,
+      spin: (Math.random() - 0.5) * 0.14,
+      vx: (Math.random() - 0.5) * 3.5,
+      vy: 2.5 + Math.random() * 4,
+      opacity: 1
+    }));
+    let frame = 0;
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      frame++;
+      let alive = false;
+      pieces.forEach(p => {
+        if (p.y < canvas.height + 20) alive = true;
+        p.x += p.vx; p.y += p.vy; p.vy += 0.04;
+        p.angle += p.spin;
+        if (frame > 90) p.opacity -= 0.011;
+        p.opacity = Math.max(0, p.opacity);
+        ctx.save();
+        ctx.globalAlpha = p.opacity;
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      });
+      if (alive && frame < 200) requestAnimationFrame(animate);
+      else ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    animate();
+  }
+</script>
+</body>
+</html>

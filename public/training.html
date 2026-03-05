@@ -4,331 +4,226 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SELCS Mentor Training — Scenario-Based Learning</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --sage: #4a7c59;
-    --sage-light: #6fa882;
-    --sage-pale: #e8f2ec;
-    --gold: #c9953a;
-    --gold-light: #f0c97a;
-    --cream: #faf8f3;
-    --charcoal: #2c2c2c;
-    --border: #ddd8cc;
-    --D: #c0392b; --D-light: #fdecea;
-    --I: #e67e22; --I-light: #fef3e2;
-    --S: #27ae60; --S-light: #e8f8ee;
-    --C: #2980b9; --C-light: #e8f4fc;
+    --sage: #4a7c59; --sage-d: #2c4a35; --sage-light: #6fa882; --sage-pale: #e8f2ec;
+    --gold: #c9953a; --gold-light: #f0c97a; --gold-pale: #fffbf0;
+    --cream: #faf8f3; --charcoal: #2c2c2c; --mid: #5a5a5a;
+    --border: #ddd8cc; --border-l: #eee8dc;
+    --D: #c0392b; --D-light: #fdecea; --D-mid: #e57373;
+    --I: #d4770a; --I-light: #fef3e2; --I-mid: #f0a040;
+    --S: #27ae60; --S-light: #e8f8ee; --S-mid: #6abf85;
+    --C: #2980b9; --C-light: #e8f4fc; --C-mid: #5ba8d4;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); min-height: 100vh; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--charcoal);
-    min-height: 100vh;
-  }
-
+  /* ── HEADER ── */
   header {
-    background: linear-gradient(135deg, #2c4a35 0%, var(--sage) 100%);
-    color: white;
-    padding: 22px 40px;
-    display: flex;
-    align-items: center;
-    gap: 18px;
+    background: linear-gradient(135deg, var(--sage-d) 0%, var(--sage) 100%);
+    color: white; padding: 22px 40px;
+    display: flex; align-items: center; gap: 18px;
     box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+    position: sticky; top: 0; z-index: 200;
   }
   .logo-badge {
-    background: var(--gold);
-    color: white;
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    width: 48px; height: 48px;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; flex-shrink: 0;
+    background: var(--gold); color: white;
+    font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
+    width: 48px; height: 48px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
   header h1 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; }
   header p { font-size: 12px; opacity: 0.75; margin-top: 3px; }
+  .progress-bar { background: rgba(255,255,255,0.12); height: 4px; }
+  .progress-fill { background: var(--gold-light); height: 4px; transition: width 0.5s ease; }
 
-  /* Progress bar */
-  .progress-bar {
-    background: rgba(255,255,255,0.15);
-    height: 4px;
-    width: 100%;
+  /* ── SCENARIO NAV ── */
+  .scenario-nav {
+    background: white; border-bottom: 1.5px solid var(--border);
+    padding: 0 24px; display: flex; gap: 0; overflow-x: auto;
+    position: sticky; top: 94px; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
-  .progress-fill {
-    background: var(--gold-light);
-    height: 4px;
-    transition: width 0.5s ease;
+  .snav-btn {
+    padding: 14px 20px; border: none; background: none;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    color: var(--mid); cursor: pointer; white-space: nowrap;
+    border-bottom: 3px solid transparent; transition: all 0.2s;
+    display: flex; align-items: center; gap: 8px;
   }
+  .snav-btn:hover { color: var(--charcoal); background: var(--cream); }
+  .snav-btn.active { color: var(--sage); border-bottom-color: var(--sage); font-weight: 600; }
+  .snav-badge {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 10px;
+  }
+  .snav-badge.D { background: var(--D-light); color: var(--D); }
+  .snav-badge.I { background: var(--I-light); color: var(--I); }
+  .snav-badge.S { background: var(--S-light); color: var(--S); }
+  .snav-badge.C { background: var(--C-light); color: var(--C); }
 
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 36px 24px 80px;
-  }
+  /* ── CONTAINER ── */
+  .container { max-width: 800px; margin: 0 auto; padding: 36px 24px 80px; }
 
-  /* Step indicator */
-  .step-indicator {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 24px;
-  }
+  /* ── SCENARIO PANELS ── */
+  .scenario-panel { display: none; animation: fadeIn 0.35s ease; }
+  .scenario-panel.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── STEP INDICATOR ── */
+  .step-indicator { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
   .step-dot {
     width: 32px; height: 32px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-size: 13px; font-weight: 700;
-    border: 2px solid var(--border);
-    color: #aaa; background: white;
-    transition: all 0.3s;
+    border: 2px solid var(--border); color: #aaa; background: white; transition: all 0.3s;
   }
   .step-dot.active { border-color: var(--sage); color: white; background: var(--sage); }
   .step-dot.done { border-color: var(--sage-light); color: white; background: var(--sage-light); }
   .step-label { font-size: 13px; font-weight: 500; color: var(--charcoal); }
   .step-sep { flex: 1; height: 2px; background: var(--border); border-radius: 2px; }
 
-  /* Screen panels */
+  /* ── SCREEN PANELS ── */
   .screen { display: none; animation: fadeIn 0.4s ease; }
   .screen.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* Card */
-  .card {
-    background: white;
-    border-radius: 16px;
-    border: 1.5px solid var(--border);
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    margin-bottom: 24px;
-  }
-  .card-header {
-    background: linear-gradient(135deg, #2c4a35 0%, var(--sage) 100%);
-    color: white;
-    padding: 22px 28px;
-  }
+  /* ── CARD ── */
+  .card { background: white; border-radius: 16px; border: 1.5px solid var(--border); overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 24px; }
+  .card-header { background: linear-gradient(135deg, var(--sage-d) 0%, var(--sage) 100%); color: white; padding: 22px 28px; }
   .scenario-tag {
     display: inline-flex; align-items: center; gap: 5px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 20px;
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 0.08em; text-transform: uppercase;
+    background: rgba(255,255,255,0.15); border-radius: 20px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
     padding: 4px 12px; margin-bottom: 10px;
   }
-  .card-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px; margin-bottom: 6px;
-  }
+  .card-header h2 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 6px; }
   .card-header p { font-size: 13px; opacity: 0.85; line-height: 1.55; }
-
   .qc-badge {
     display: inline-flex; align-items: center; gap: 6px;
-    background: var(--gold);
-    color: white;
-    font-size: 11px; font-weight: 700;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    padding: 4px 12px; border-radius: 20px;
-    margin-top: 10px;
+    background: var(--gold); color: white;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 20px; margin-top: 10px;
   }
-
   .card-body { padding: 26px 28px; }
 
-  /* Scene */
+  /* ── SCENE ── */
   .scene-block {
-    background: #f8f5f0;
-    border-left: 4px solid var(--gold);
-    border-radius: 0 10px 10px 0;
-    padding: 18px 20px;
-    margin-bottom: 20px;
-    font-size: 15px;
-    line-height: 1.75;
+    background: #f8f5f0; border-left: 4px solid var(--gold);
+    border-radius: 0 10px 10px 0; padding: 18px 20px;
+    margin-bottom: 20px; font-size: 15px; line-height: 1.75;
   }
-  .scene-label {
-    font-size: 11px; font-weight: 700; color: var(--gold);
-    letter-spacing: 0.1em; text-transform: uppercase;
-    margin-bottom: 8px;
-  }
+  .scene-label { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
 
-  /* Quality Check note */
-  .qc-note {
-    background: #fffbf0;
-    border: 1.5px solid #f0d090;
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin-bottom: 8px;
-  }
-  .qc-note-header {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 10px;
-  }
-  .qc-icon {
-    background: var(--gold);
-    color: white;
-    width: 32px; height: 32px;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 15px; flex-shrink: 0;
-  }
-  .qc-note-header strong {
-    font-size: 14px; font-weight: 700; color: #7a5010;
-  }
+  /* ── QUALITY CHECK ── */
+  .qc-note { background: #fffbf0; border: 1.5px solid #f0d090; border-radius: 12px; padding: 18px 20px; margin-bottom: 8px; }
+  .qc-note-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .qc-icon { background: var(--gold); color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .qc-note-header strong { font-size: 14px; font-weight: 700; color: #7a5010; }
   .qc-note-header span { font-size: 12px; color: #a07030; }
   .qc-note p { font-size: 13.5px; color: #5a3c08; line-height: 1.65; }
 
-  /* Next button */
+  /* ── NEXT BTN ── */
   .next-btn {
-    background: var(--sage);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 14px 32px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px; font-weight: 600;
-    cursor: pointer;
-    margin-top: 20px;
-    display: flex; align-items: center; gap: 8px;
-    transition: all 0.2s;
+    background: var(--sage); color: white; border: none; border-radius: 10px;
+    padding: 14px 32px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
+    cursor: pointer; margin-top: 20px; display: flex; align-items: center; gap: 8px; transition: all 0.2s;
   }
-  .next-btn:hover { background: #3a6347; transform: translateX(3px); }
+  .next-btn:hover { background: var(--sage-d); transform: translateX(3px); }
 
-  /* Screen 2 — Question */
+  /* ── MENTEE BANNER ── */
   .mentee-banner {
-    background: linear-gradient(135deg, var(--sage-pale), #d0e8d8);
-    border: 1.5px solid #b0d4bc;
-    border-radius: 12px;
-    padding: 18px 22px;
-    margin-bottom: 22px;
-    display: flex; align-items: flex-start; gap: 14px;
+    border-radius: 12px; padding: 18px 22px; margin-bottom: 22px;
+    display: flex; align-items: flex-start; gap: 14px; border: 1.5px solid;
   }
+  .mentee-banner.D { background: var(--D-light); border-color: #f5c6c6; }
+  .mentee-banner.I { background: var(--I-light); border-color: #fdd8a0; }
+  .mentee-banner.S { background: var(--S-light); border-color: #a8dbb0; }
+  .mentee-banner.C { background: var(--C-light); border-color: #a0c8e8; }
   .mentee-icon {
-    background: var(--sage);
-    color: white;
-    width: 42px; height: 42px;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px; flex-shrink: 0;
+    width: 42px; height: 42px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
   }
-  .mentee-banner h3 { font-size: 15px; font-weight: 700; color: var(--sage); margin-bottom: 4px; }
+  .mentee-icon.D { background: var(--D); }
+  .mentee-icon.I { background: var(--I); }
+  .mentee-icon.S { background: var(--S); }
+  .mentee-icon.C { background: var(--C); }
+  .mentee-banner h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .mentee-banner.D h3 { color: var(--D); }
+  .mentee-banner.I h3 { color: var(--I); }
+  .mentee-banner.S h3 { color: var(--S); }
+  .mentee-banner.C h3 { color: var(--C); }
   .mentee-banner p { font-size: 14px; line-height: 1.55; color: var(--charcoal); }
 
-  .question-label {
-    font-size: 12px; font-weight: 700; color: var(--mid, #5a5a5a);
-    letter-spacing: 0.08em; text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .question-text {
-    font-size: 16px; font-weight: 500; line-height: 1.55;
-    margin-bottom: 22px;
-    color: var(--charcoal);
-  }
+  .question-label { font-size: 12px; font-weight: 700; color: var(--mid); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .question-text { font-size: 16px; font-weight: 500; line-height: 1.55; margin-bottom: 22px; color: var(--charcoal); }
 
-  /* Options */
+  /* ── OPTIONS ── */
   .options { display: flex; flex-direction: column; gap: 11px; }
   .option-btn {
-    background: white;
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    padding: 15px 18px;
-    cursor: pointer;
-    text-align: left;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14.5px;
-    line-height: 1.55;
-    color: var(--charcoal);
-    transition: all 0.2s ease;
+    background: white; border: 2px solid var(--border); border-radius: 12px;
+    padding: 15px 18px; cursor: pointer; text-align: left;
+    font-family: 'DM Sans', sans-serif; font-size: 14.5px; line-height: 1.55;
+    color: var(--charcoal); transition: all 0.2s ease;
     display: flex; gap: 14px; align-items: flex-start;
   }
-  .option-btn:hover:not(:disabled) {
-    border-color: var(--sage-light);
-    background: var(--sage-pale);
-    transform: translateX(3px);
-  }
+  .option-btn:hover:not(:disabled) { border-color: var(--sage-light); background: var(--sage-pale); transform: translateX(3px); }
   .option-btn:disabled { cursor: not-allowed; }
   .option-letter {
-    font-weight: 700; font-size: 13px;
-    width: 28px; height: 28px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    background: #f0ece4;
-    color: #666;
-    margin-top: 1px;
-    transition: all 0.2s;
+    font-weight: 700; font-size: 13px; width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    background: #f0ece4; color: #666; margin-top: 1px; transition: all 0.2s;
   }
-
-  .option-btn.correct-answer { border-color: var(--sage); background: #edf7ef; }
+  .option-btn.correct-answer { border-color: var(--sage); background: var(--sage-pale); }
   .option-btn.correct-answer .option-letter { background: var(--sage); color: white; }
   .option-btn.wrong-answer { border-color: #e57373; background: #fff2f2; }
   .option-btn.wrong-answer .option-letter { background: #e57373; color: white; }
   .option-btn.dimmed { opacity: 0.38; }
 
-  /* Feedback */
-  .feedback-block {
-    display: none;
-    border-radius: 12px;
-    padding: 20px 22px;
-    margin-top: 16px;
-    animation: fadeIn 0.35s ease;
-  }
+  /* ── FEEDBACK ── */
+  .feedback-block { display: none; border-radius: 12px; padding: 20px 22px; margin-top: 16px; animation: fadeIn 0.35s ease; }
   .feedback-block.wrong { background: #fff2f2; border: 1.5px solid #f5c6c6; }
   .feedback-block.right { background: #edf7ef; border: 1.5px solid #a8dbb0; }
-  .feedback-block h4 {
-    font-size: 15px; font-weight: 700;
-    margin-bottom: 10px;
-    display: flex; align-items: center; gap: 8px;
-  }
+  .feedback-block h4 { font-size: 15px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
   .feedback-block p { font-size: 14px; line-height: 1.65; margin-bottom: 10px; }
   .feedback-block p:last-child { margin-bottom: 0; }
-
-  .action-steps {
-    background: rgba(255,255,255,0.75);
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin-top: 12px;
-    border: 1px solid #c8e6cf;
-  }
-  .action-steps h5 {
-    font-size: 11px; font-weight: 700;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--sage); margin-bottom: 12px;
-  }
-  .action-steps ol {
-    padding-left: 20px;
-    font-size: 13.5px;
-    line-height: 1.75;
-    color: var(--charcoal);
-  }
+  .action-steps { background: rgba(255,255,255,0.75); border-radius: 10px; padding: 16px 18px; margin-top: 12px; border: 1px solid #c8e6cf; }
+  .action-steps h5 { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sage); margin-bottom: 12px; }
+  .action-steps ol { padding-left: 20px; font-size: 13.5px; line-height: 1.75; color: var(--charcoal); }
   .action-steps ol li { margin-bottom: 6px; }
-
   .try-again-btn {
-    background: #e57373;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13.5px; font-weight: 600;
-    cursor: pointer;
-    margin-top: 12px;
-    transition: background 0.2s;
+    background: #e57373; color: white; border: none; border-radius: 8px;
+    padding: 10px 20px; font-family: 'DM Sans', sans-serif; font-size: 13.5px; font-weight: 600;
+    cursor: pointer; margin-top: 12px; transition: background 0.2s;
   }
-  .try-again-btn:hover { background: #c0392b; }
+  .try-again-btn:hover { background: var(--D); }
 
-  #confetti-canvas {
-    position: fixed; top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none; z-index: 999;
+  /* ── SCENARIO COMPLETE BANNER ── */
+  .complete-banner {
+    display: none; background: linear-gradient(135deg, var(--sage-d), var(--sage));
+    color: white; border-radius: 14px; padding: 24px 28px; margin-top: 20px; text-align: center;
+    animation: fadeIn 0.4s ease;
   }
+  .complete-banner h3 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 8px; }
+  .complete-banner p { font-size: 14px; opacity: 0.88; margin-bottom: 18px; line-height: 1.55; }
+  .next-scenario-btn {
+    background: var(--gold); color: white; border: none; border-radius: 8px;
+    padding: 12px 28px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .next-scenario-btn:hover { background: #b8842e; transform: translateY(-1px); }
 
-  footer {
-    text-align: center; font-size: 11.5px; color: #aaa;
-    padding: 24px; border-top: 1px solid var(--border);
-    margin-top: 40px;
-  }
+  /* ── CONFETTI ── */
+  #confetti-canvas { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:999; }
+
+  footer { text-align: center; font-size: 11.5px; color: #aaa; padding: 24px; border-top: 1px solid var(--border); margin-top: 40px; }
 
   @media (max-width: 600px) {
     header { padding: 16px 18px; }
     .container { padding: 24px 16px 60px; }
     .card-body, .card-header { padding: 18px 18px; }
+    .snav-btn { padding: 12px 14px; font-size: 12px; }
   }
 </style>
 </head>
@@ -340,38 +235,70 @@
   <div class="logo-badge">MSA</div>
   <div>
     <h1>SELCS Mentor Training</h1>
-    <p>Mentor Success Academy · Scenario-Based Learning Module</p>
+    <p>Mentor Success Academy · Scenario-Based Learning</p>
   </div>
 </header>
-<div class="progress-bar"><div class="progress-fill" id="progress" style="width:50%"></div></div>
+<div class="progress-bar"><div class="progress-fill" id="global-progress" style="width:0%"></div></div>
+
+<!-- ── SCENARIO NAV ── -->
+<div class="scenario-nav">
+  <button class="snav-btn active" onclick="switchScenario(1)" id="snav-1">
+    Scenario 1 <span class="snav-badge C">Cultivator</span>
+  </button>
+  <button class="snav-btn" onclick="switchScenario(2)" id="snav-2">
+    Scenario 2 <span class="snav-badge D">Director</span>
+  </button>
+  <button class="snav-btn" onclick="switchScenario(3)" id="snav-3">
+    Scenario 3 <span class="snav-badge I">Inspirer</span>
+  </button>
+  <button class="snav-btn" onclick="switchScenario(4)" id="snav-4">
+    Scenario 4 <span class="snav-badge S">Sustainer</span>
+  </button>
+  <button class="snav-btn" onclick="switchScenario(5)" id="snav-5">
+    Scenario 5 <span class="snav-badge D">Director</span>
+  </button>
+  <button class="snav-btn" onclick="switchScenario(6)" id="snav-6">
+    Scenario 6 <span class="snav-badge I">Inspirer</span>
+  </button>
+  <button class="snav-btn" onclick="switchScenario(7)" id="snav-7">
+    Scenario 7 <span class="snav-badge S">Sustainer</span>
+  </button>
+  <button class="snav-btn" onclick="switchScenario(8)" id="snav-8">
+    Scenario 8 <span class="snav-badge C">Cultivator</span>
+  </button>
+</div>
 
 <div class="container">
 
-  <!-- Step Indicator -->
+<!-- ════════════════════════════════════════════════════
+     SCENARIO 1 — CULTIVATOR MENTEE
+     Scene: Block corner conflict / Emotional Support
+     ════════════════════════════════════════════════════ -->
+<div class="scenario-panel active" id="scenario-1">
+
+  <!-- Step indicator -->
   <div class="step-indicator">
-    <div class="step-dot active" id="dot-1">1</div>
-    <div class="step-label" id="label-1">Observe the Scene</div>
+    <div class="step-dot active" id="s1-dot-1">1</div>
+    <div class="step-label">Observe the Scene</div>
     <div class="step-sep"></div>
-    <div class="step-dot" id="dot-2">2</div>
-    <div class="step-label" id="label-2">Coaching Challenge</div>
+    <div class="step-dot" id="s1-dot-2">2</div>
+    <div class="step-label">Coaching Challenge</div>
   </div>
 
-  <!-- SCREEN 1: Scene + Quality Check -->
-  <div class="screen active" id="screen-1">
+  <!-- Screen 1: Scene -->
+  <div class="screen active" id="s1-screen-1">
     <div class="card">
       <div class="card-header">
         <div class="scenario-tag">📋 Scenario 1 · Preschool Classroom</div>
         <h2>The Conflict at the Block Corner</h2>
-        <p>Read the classroom scene and Quality Check analysis below. When you're ready, you'll move on to the coaching challenge.</p>
-        <div class="qc-badge">🔍 Quality Check Focus: Emotional Support</div>
+        <p>Read the classroom scene and Quality Check analysis below. When you're ready, move on to the coaching challenge.</p>
+        <div class="qc-badge">🔍 Quality Check Focus: Emotional Support · Teacher Responsiveness</div>
       </div>
-
       <div class="card-body">
         <div class="scene-block">
           <div class="scene-label">📽 The Scene</div>
           It's free choice time in a preschool classroom. Two children, Marcus and Lily, both reach for the same large red block at the block center. Marcus grabs it first; Lily immediately bursts into tears. The teacher, Ms. Torres, walks over briskly and says: <em>"Marcus, just give it to her — she's crying. You can find another one."</em> Marcus reluctantly hands it over, looking frustrated. Ms. Torres pats Lily on the back and walks away. The conflict ends — but Marcus sulks in the corner for the rest of free choice time.
         </div>
-
         <div class="qc-note">
           <div class="qc-note-header">
             <div class="qc-icon">🔍</div>
@@ -380,133 +307,1024 @@
               <span style="display:block">Focus Area: Teacher Responsiveness &amp; Child Agency</span>
             </div>
           </div>
-          <p>High-quality early childhood interactions involve <strong>acknowledging all children's emotions</strong> — not just the loudest ones. When a teacher steps in and resolves conflict through authority rather than facilitation, two things happen: the immediate problem disappears, but the deeper learning opportunity is lost.</p>
-          <p style="margin-top:10px;">Ms. Torres responded to Lily's distress but dismissed Marcus's feelings entirely. Neither child practiced naming emotions, negotiating, or arriving at a solution together. The teacher's role in high-quality interactions is to <strong>slow down the moment</strong>, name what each child is feeling, and guide them toward their own resolution — building the social-emotional skills that last a lifetime.</p>
-          <p style="margin-top:10px;">This moment reflects a common pattern: <em>efficiency over depth</em>. The classroom moves on — but the children leave without the tools they needed most.</p>
+          <p>High-quality early childhood interactions involve acknowledging <strong>all children's emotions</strong> — not just the loudest ones. Ms. Torres responded to Lily's distress but dismissed Marcus's feelings entirely. Neither child practiced naming emotions, negotiating, or arriving at a solution together.</p>
+          <p style="margin-top:10px">The teacher's role is to <strong>slow down the moment</strong> — name what each child is feeling, and guide them toward their own resolution. This builds the social-emotional skills that last a lifetime. What happened here is a very common pattern: <em>efficiency over depth</em>. The classroom moves on, but the children leave without the tools they needed most.</p>
         </div>
-
-        <button class="next-btn" onclick="goToScreen2()">
-          Go to Coaching Challenge <span>→</span>
-        </button>
+        <button class="next-btn" onclick="goToScreen2(1)">Go to Coaching Challenge <span>→</span></button>
       </div>
     </div>
   </div>
 
-  <!-- SCREEN 2: SELCS Question + Options -->
-  <div class="screen" id="screen-2">
+  <!-- Screen 2: Question -->
+  <div class="screen" id="s1-screen-2">
     <div class="card">
       <div class="card-header">
         <div class="scenario-tag">🎯 Coaching Challenge · Scenario 1</div>
         <h2>The Block Corner — Coaching Conversation</h2>
-        <p>You just observed Ms. Torres. Now it's time to coach. Read your mentee's SELCS profile below, then choose your approach.</p>
+        <p>You just observed Ms. Torres. Now it's time to coach. Read your mentee's SELCS profile, then choose your approach.</p>
       </div>
-
       <div class="card-body">
-
-        <div class="mentee-banner">
-          <div class="mentee-icon">🔍</div>
+        <div class="mentee-banner C">
+          <div class="mentee-icon C">🔍</div>
           <div>
             <h3>Your Mentee's SELCS Style: The Cultivator (C)</h3>
             <p>Ms. Torres is analytical, principled, and detail-oriented. She takes pride in doing things correctly and can become quietly defensive when feedback feels like a personal judgment rather than a professional discussion.</p>
           </div>
         </div>
-
         <div class="question-label">Your Coaching Question</div>
-        <div class="question-text">You are meeting with Ms. Torres for your post-observation coaching conversation. She is a <strong>Cultivator</strong>. How do you open the conversation in a way that will help her grow — rather than shut down?</div>
-
-        <div class="options" id="options">
-
-          <button class="option-btn" onclick="handleAnswer('A')" data-style="A">
+        <div class="question-text">You are meeting with Ms. Torres for your post-observation debrief. She is a <strong>Cultivator</strong>. How do you open the conversation in a way that will help her grow — rather than shut down?</div>
+        <div class="options">
+          <button class="option-btn" onclick="handleAnswer(1,'A')" data-style="A">
             <div class="option-letter">A</div>
             <div>"Let's be direct — the way you handled that conflict today didn't serve Marcus. You solved the problem, but you missed the real teaching opportunity. I need you to come back next week with three things you'll do differently."</div>
           </button>
-
-          <button class="option-btn" onclick="handleAnswer('B')" data-style="B">
+          <button class="option-btn" onclick="handleAnswer(1,'B')" data-style="B">
             <div class="option-letter">B</div>
             <div>"Okay, first — you stepped in so fast, that shows how much you care! I was thinking, imagine if we could turn those little moments into this whole social-emotional magic? Kids learning to problem-solve together! Wouldn't that be SO powerful? I can totally see you doing that!"</div>
           </button>
-
-          <button class="option-btn" onclick="handleAnswer('C')" data-style="C">
+          <button class="option-btn" onclick="handleAnswer(1,'C')" data-style="C">
             <div class="option-letter">C</div>
             <div>"I can see how much you care about keeping the peace in your classroom. There's no pressure at all — when you feel comfortable, maybe we could talk a little about how the children might have been feeling in that moment…"</div>
           </button>
-
-          <button class="option-btn" onclick="handleAnswer('D')" data-style="D">
+          <button class="option-btn" onclick="handleAnswer(1,'D')" data-style="D">
             <div class="option-letter">D</div>
             <div>"I'd like to walk through that block corner moment together — step by step. What each child needed, what the research tells us about emotion coaching at this age, and where there might be a gap in the approach. From there we can build a very specific plan."</div>
           </button>
-
         </div>
 
-        <!-- Feedback: A (Director mismatch) -->
-        <div class="feedback-block wrong" id="feedback-A">
+        <div class="feedback-block wrong" id="s1-feedback-A">
           <h4>❌ Style Mismatch — Let's Reconsider</h4>
           <p>This direct, bottom-line approach resonates well with a <strong>Director</strong> mentee — but delivered to a <strong>Cultivator</strong>, it's likely to backfire. Cultivators take deep pride in accuracy and quality. Being told bluntly that they "missed it" — without evidence, rationale, or shared analysis — will feel like an attack on their professionalism rather than a growth conversation.</p>
           <p>Ms. Torres may comply on the surface, but expect withdrawal or quiet resentment. Cultivators need the <em>why</em> before they can hear the <em>what</em>.</p>
-          <button class="try-again-btn" onclick="resetQuestion()">↩ Try Again</button>
+          <button class="try-again-btn" onclick="resetQuestion(1)">↩ Try Again</button>
         </div>
-
-        <!-- Feedback: B (Inspirer mismatch) -->
-        <div class="feedback-block wrong" id="feedback-B">
+        <div class="feedback-block wrong" id="s1-feedback-B">
           <h4>❌ Style Mismatch — Let's Reconsider</h4>
           <p>This warm, enthusiastic approach is a natural fit for an <strong>Inspirer</strong> mentee — but a <strong>Cultivator</strong> will likely receive it with polite skepticism. Cultivators need specificity and logic. Language like "social-emotional magic" without grounding in evidence or a clear framework can feel imprecise — and imprecision makes Cultivators tune out.</p>
           <p>Ms. Torres will smile and nod, but the conversation won't produce real change. Enthusiasm is a great starting point, but Cultivators need depth behind it.</p>
-          <button class="try-again-btn" onclick="resetQuestion()">↩ Try Again</button>
+          <button class="try-again-btn" onclick="resetQuestion(1)">↩ Try Again</button>
         </div>
-
-        <!-- Feedback: C (Sustainer mismatch) -->
-        <div class="feedback-block wrong" id="feedback-C">
+        <div class="feedback-block wrong" id="s1-feedback-C">
           <h4>❌ Style Mismatch — Let's Reconsider</h4>
-          <p>Gentleness is something a Cultivator can appreciate — but this approach is <em>too tentative</em>. Phrases like "no pressure at all" and "when you feel comfortable" signal that there isn't a clear standard to work toward. Ironically, Cultivators <strong>want</strong> honest, precise feedback — they simply need it to be grounded in logic and evidence rather than emotion or authority.</p>
+          <p>Gentleness is something a Cultivator can appreciate — but this approach is <em>too tentative</em>. Phrases like "no pressure at all" and "when you feel comfortable" signal that there isn't a clear standard to work toward. Ironically, Cultivators <strong>want</strong> honest, precise feedback — they simply need it grounded in logic and evidence, not softened into irrelevance.</p>
           <p>This open-ended, low-stakes approach would be perfect for a <strong>Sustainer</strong> mentee. For Ms. Torres, it may feel like the mentor isn't taking the coaching seriously.</p>
-          <button class="try-again-btn" onclick="resetQuestion()">↩ Try Again</button>
+          <button class="try-again-btn" onclick="resetQuestion(1)">↩ Try Again</button>
         </div>
-
-        <!-- Feedback: D (CORRECT — Cultivator match) -->
-        <div class="feedback-block right" id="feedback-D">
+        <div class="feedback-block right" id="s1-feedback-D">
           <h4>🎉 Excellent Match — You Read Your Mentee!</h4>
-          <p>This approach speaks directly to what a <strong>Cultivator</strong> values most: <em>structure, evidence, and the chance to analyze and problem-solve</em>. By framing the conversation as a step-by-step examination — grounded in research and leading to a specific plan — you give Ms. Torres something concrete to engage with intellectually.</p>
-          <p>The gap becomes a <em>puzzle to solve together</em>, not a personal failure. Expect Ms. Torres to lean in, ask clarifying questions, and likely arrive at key insights on her own. That is a Cultivator doing their best learning.</p>
+          <p>This approach speaks directly to what a <strong>Cultivator</strong> values most: <em>structure, evidence, and the chance to analyze and problem-solve together</em>. By framing the conversation as a step-by-step examination grounded in research, you give Ms. Torres something concrete to engage with intellectually. The gap becomes a puzzle to solve, not a personal failure.</p>
+          <p>Expect Ms. Torres to lean in, ask clarifying questions, and likely arrive at key insights on her own. That is a Cultivator doing their best learning.</p>
           <div class="action-steps">
             <h5>✅ Follow-Up Action Steps for Continued Growth</h5>
             <ol>
               <li><strong>Self-assess together first.</strong> Before sharing your observations, ask Ms. Torres to walk through the moment herself: "What was each child feeling? What did each child need?" Let her analysis lead.</li>
-              <li><strong>Introduce an emotion coaching framework.</strong> Share a two-step script: (1) <em>Name the emotion</em> for each child — "Marcus, you grabbed it first and now you're being asked to give it up. That feels really unfair." (2) <em>Invite problem-solving</em> — "What could we do so both of you feel okay about this?" Practice it in a role-play during your session.</li>
-              <li><strong>Anchor in research.</strong> Offer one focused resource on emotion coaching in early childhood — concepts like "Name It to Tame It" (Dan Siegel) give Cultivators intellectual grounding for the practice shift you're asking them to make.</li>
-              <li><strong>Set a precise observation target.</strong> Before your next visit, agree on exactly one observable behavior to watch for — e.g., "I want to see you name both children's emotions before offering any solution." A specific target, not a vague goal, is what motivates a Cultivator.</li>
-              <li><strong>Debrief with evidence.</strong> At your follow-up, document what changed with concrete examples: "In the paint table conflict today, you named both children's feelings before stepping in — here's what happened next." Data-driven feedback is deeply motivating for this temperament.</li>
+              <li><strong>Introduce an emotion coaching framework.</strong> Share a two-step script: (1) <em>Name the emotion</em> for each child. (2) <em>Invite problem-solving</em> — "What could we do so both of you feel okay about this?" Practice it together in a role-play.</li>
+              <li><strong>Anchor in research.</strong> Offer one focused resource on emotion coaching — concepts like "Name It to Tame It" give Cultivators the intellectual grounding they need before making a practice shift.</li>
+              <li><strong>Set a precise observation target.</strong> Agree on exactly one observable behavior to watch for next visit — e.g., "I want to see you name both children's emotions before offering any solution." Specific targets, not vague goals, motivate Cultivators.</li>
+              <li><strong>Debrief with evidence.</strong> At your follow-up, document what changed with concrete examples. Data-driven feedback is deeply motivating for this temperament.</li>
             </ol>
           </div>
+          <div class="complete-banner" id="s1-complete">
+            <h3>Scenario 1 Complete! 🎓</h3>
+            <p>You successfully matched your coaching approach to a Cultivator mentee. Ready to try a different SELCS style?</p>
+            <button class="next-scenario-btn" onclick="switchScenario(2)">Try Scenario 2 — Director →</button>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div><!-- end scenario-1 -->
 
+
+<!-- ════════════════════════════════════════════════════
+     SCENARIO 2 — DIRECTOR MENTEE
+     Scene: Circle time — teacher over-talks, children passive
+     Domain: Instructional Depth / Higher-Order Questioning
+     ════════════════════════════════════════════════════ -->
+<div class="scenario-panel" id="scenario-2">
+
+  <div class="step-indicator">
+    <div class="step-dot active" id="s2-dot-1">1</div>
+    <div class="step-label">Observe the Scene</div>
+    <div class="step-sep"></div>
+    <div class="step-dot" id="s2-dot-2">2</div>
+    <div class="step-label">Coaching Challenge</div>
+  </div>
+
+  <div class="screen active" id="s2-screen-1">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">📋 Scenario 2 · Kindergarten Classroom</div>
+        <h2>The One-Way Circle Time</h2>
+        <p>Read the classroom scene and Quality Check analysis below. When you're ready, move on to the coaching challenge.</p>
+        <div class="qc-badge">🔍 Quality Check Focus: Instructional Depth · Higher-Order Questioning</div>
+      </div>
+      <div class="card-body">
+        <div class="scene-block">
+          <div class="scene-label">📽 The Scene</div>
+          It's morning circle in a kindergarten classroom. Mr. Davis holds up a picture of a caterpillar and begins a 12-minute explanation of the life cycle — talking through each stage in detail, occasionally asking, <em>"What comes next?"</em> and <em>"What color is the butterfly?"</em> Children answer in one or two words. When one child says, <em>"My grandma has butterflies in her garden,"</em> Mr. Davis replies, <em>"That's nice — okay, so after the chrysalis stage..."</em> and moves on. By minute eight, several children are lying down or poking their neighbors. Mr. Davis redirects behavior three times before the lesson ends.
+        </div>
+        <div class="qc-note">
+          <div class="qc-note-header">
+            <div class="qc-icon">🔍</div>
+            <div>
+              <strong>Quality Check: What's Missing Here?</strong>
+              <span style="display:block">Focus Area: Higher-Order Questioning &amp; Concept Development</span>
+            </div>
+          </div>
+          <p>High-quality instruction at this level is a <strong>conversation, not a presentation</strong>. Every question Mr. Davis asked had one correct answer — children weren't invited to predict, wonder, theorize, or connect ideas to their own lives. When a child <em>offered</em> a real-world connection, it was dismissed without exploration.</p>
+          <p style="margin-top:10px">Research on early childhood cognition shows that children's thinking develops through dialogue — specifically through questions that have no single right answer. The behavior issues that appeared by minute eight are a symptom, not the root problem. When children aren't cognitively engaged, behavior follows.</p>
+        </div>
+        <button class="next-btn" onclick="goToScreen2(2)">Go to Coaching Challenge <span>→</span></button>
       </div>
     </div>
   </div>
 
-</div>
+  <div class="screen" id="s2-screen-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">🎯 Coaching Challenge · Scenario 2</div>
+        <h2>The One-Way Circle Time — Coaching Conversation</h2>
+        <p>You just observed Mr. Davis. Now it's time to coach. Read your mentee's SELCS profile, then choose your approach.</p>
+      </div>
+      <div class="card-body">
+        <div class="mentee-banner D">
+          <div class="mentee-icon D">🎯</div>
+          <div>
+            <h3>Your Mentee's SELCS Style: The Director (D)</h3>
+            <p>Mr. Davis is confident, results-driven, and action-oriented. He responds well to direct feedback and clear challenges — but can become dismissive if coaching feels vague, overly process-heavy, or like it's wasting his time.</p>
+          </div>
+        </div>
+        <div class="question-label">Your Coaching Question</div>
+        <div class="question-text">You are meeting with Mr. Davis for your post-observation debrief. He is a <strong>Director</strong>. How do you open the conversation in a way that will motivate real change — not just surface compliance?</div>
+        <div class="options">
+          <button class="option-btn" onclick="handleAnswer(2,'A')" data-style="A">
+            <div class="option-letter">A</div>
+            <div>"I want to walk through your circle time data with you — I tracked the number of questions you asked versus the number of child responses that went beyond one word. Then let's look at what the research says about cognitive engagement at this age, and build a systematic plan for your questioning approach."</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(2,'B')" data-style="B">
+            <div class="option-letter">B</div>
+            <div>"Your circle time was really engaging and I could see how much you know about the topic! I was just thinking — what if we experimented with letting the children talk a little more? Like, could you imagine what it would look like if the kids were the ones asking the questions? That could be so exciting!"</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(2,'C')" data-style="C">
+            <div class="option-letter">C</div>
+            <div>"I want to be straight with you — your circle time ran 12 minutes and child engagement dropped significantly by minute eight. The fix is direct: replace closed questions with open ones, and when a child offers a connection, build on it instead of moving past it. Here's a three-question framework to start with tomorrow."</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(2,'D')" data-style="D">
+            <div class="option-letter">D</div>
+            <div>"I noticed something during circle time that I'd love for us to explore together — there were a few moments where children tried to contribute and the conversation moved past them. I just want you to know, whatever you're comfortable sharing about that is totally fine — no pressure at all."</div>
+          </button>
+        </div>
+
+        <div class="feedback-block wrong" id="s2-feedback-A">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>Presenting data and research frameworks is a natural fit for a <strong>Cultivator</strong> mentee — but a <strong>Director</strong> will likely find this approach slow and over-engineered. Directors want to know the bottom line fast. A lengthy analytical process before getting to the action point will feel like a detour to Mr. Davis, and he may mentally check out before you get there.</p>
+          <p>Save the research deep-dive for a Cultivator. Directors need the destination first — then you can briefly explain why.</p>
+          <button class="try-again-btn" onclick="resetQuestion(2)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block wrong" id="s2-feedback-B">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>Enthusiastic, possibility-focused language is exactly what energizes an <strong>Inspirer</strong> — but a <strong>Director</strong> will read it as shallow. Mr. Davis may actually feel talked down to by the cheerleading opener, especially since it starts with praise that doesn't quite fit ("really engaging" when children were lying down by minute eight). Directors respect honesty and efficiency — not spin.</p>
+          <p>Save the vision-painting for an Inspirer. Directors want to know what to change and why it matters for outcomes.</p>
+          <button class="try-again-btn" onclick="resetQuestion(2)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block right" id="s2-feedback-C">
+          <h4>🎉 Excellent Match — You Read Your Mentee!</h4>
+          <p>This approach speaks directly to what a <strong>Director</strong> values most: <em>directness, efficiency, and a clear path to results</em>. Mr. Davis gets the honest assessment without preamble, the specific behavior to change, and a concrete tool to use immediately. No fluff, no detour — just the problem and the solution.</p>
+          <p>Directors respond to being treated as capable of handling real feedback. By being direct, you're actually showing respect. Expect Mr. Davis to engage quickly, push back if he disagrees (that's healthy), and take action before your next visit.</p>
+          <div class="action-steps">
+            <h5>✅ Follow-Up Action Steps for Continued Growth</h5>
+            <ol>
+              <li><strong>Give him the three-question framework immediately.</strong> Directors need a tool they can use right away. Provide a simple swap: one "What is it?" question replaced with one "What do you think will happen?" question per circle. Concrete and fast.</li>
+              <li><strong>Set a measurable challenge.</strong> Directors are motivated by goals. Agree on a specific target: "By our next observation, I want to see at least three open-ended questions in a 10-minute circle — and one child connection followed up rather than moved past."</li>
+              <li><strong>Keep debrief conversations short and action-focused.</strong> A Director's ideal coaching conversation is 15–20 minutes maximum: what happened, what to change, what the goal is. Respect his time and he'll respect the process.</li>
+              <li><strong>Connect improvement to outcomes he cares about.</strong> Directors are motivated by results. Link open-ended questioning to child outcomes he can observe: "Watch what happens to behavior when cognitive engagement goes up — you'll likely see fewer redirections."</li>
+              <li><strong>Celebrate wins directly.</strong> When he hits the target, say so plainly: "You nailed it — I counted four open questions and you picked up on the butterfly connection and ran with it for two minutes. That's the shift." No over-praising, just clear acknowledgment of results.</li>
+            </ol>
+          </div>
+          <div class="complete-banner" id="s2-complete">
+            <h3>Scenario 2 Complete! 🎓</h3>
+            <p>You successfully matched your coaching approach to a Director mentee. Ready to try the next style?</p>
+            <button class="next-scenario-btn" onclick="switchScenario(3)">Try Scenario 3 — Inspirer →</button>
+          </div>
+        </div>
+        <div class="feedback-block wrong" id="s2-feedback-D">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>This gentle, low-pressure opener is perfectly calibrated for a <strong>Sustainer</strong> mentee — but with a <strong>Director</strong>, it will likely produce the opposite of what you intend. Mr. Davis may read the tentative language as a lack of confidence or seriousness on your part. "No pressure at all" signals to a Director that there isn't a real standard to meet.</p>
+          <p>Directors need a mentor who meets them directly and holds the standard clearly. Hedging feels like weakness to this style — not kindness.</p>
+          <button class="try-again-btn" onclick="resetQuestion(2)">↩ Try Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- end scenario-2 -->
+
+
+<!-- ════════════════════════════════════════════════════
+     SCENARIO 3 — INSPIRER MENTEE
+     Scene: Art center — teacher corrects child's work
+     Domain: Emotional Support / Regard for Child Perspective
+     ════════════════════════════════════════════════════ -->
+<div class="scenario-panel" id="scenario-3">
+
+  <div class="step-indicator">
+    <div class="step-dot active" id="s3-dot-1">1</div>
+    <div class="step-label">Observe the Scene</div>
+    <div class="step-sep"></div>
+    <div class="step-dot" id="s3-dot-2">2</div>
+    <div class="step-label">Coaching Challenge</div>
+  </div>
+
+  <div class="screen active" id="s3-screen-1">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">📋 Scenario 3 · Pre-K Classroom</div>
+        <h2>The Purple Sun</h2>
+        <p>Read the classroom scene and Quality Check analysis below. When you're ready, move on to the coaching challenge.</p>
+        <div class="qc-badge">🔍 Quality Check Focus: Emotional Support · Regard for Child Perspective</div>
+      </div>
+      <div class="card-body">
+        <div class="scene-block">
+          <div class="scene-label">📽 The Scene</div>
+          During free choice, four-year-old Amara is painting at the art center. She carefully fills in a large circle with purple paint and announces proudly, <em>"That's my sun!"</em> Her teacher, Ms. Reyes, looks at the painting and says warmly but automatically, <em>"Suns are yellow, remember? Here, let me show you — we can add some yellow."</em> Ms. Reyes picks up a brush, dips it in yellow, and begins adding yellow over the purple. Amara goes quiet, pulls her hands into her lap, and stares at the table. A moment later she says she's done and walks away. The painting sits unfinished at the center.
+        </div>
+        <div class="qc-note">
+          <div class="qc-note-header">
+            <div class="qc-icon">🔍</div>
+            <div>
+              <strong>Quality Check: What's Missing Here?</strong>
+              <span style="display:block">Focus Area: Regard for Child Perspective &amp; Positive Climate</span>
+            </div>
+          </div>
+          <p>Ms. Reyes's correction was well-intentioned — but it communicated something powerful and unintended: <strong>your idea is wrong, and mine is right.</strong> In high-quality early childhood environments, children's creative choices are honored as expressions of their thinking, not errors to fix. Amara's purple sun may represent sunset, imagination, or simply her favorite color — none of which are wrong.</p>
+          <p style="margin-top:10px">When a teacher takes the brush from a child and paints over their work, the message isn't about color theory — it's about ownership. Amara walked away not just from the painting, but from the risk of sharing her ideas. That is the deeper cost of this moment. High-quality interactions ask: <em>"Tell me about your sun"</em> — not <em>"Let me fix it."</em></p>
+        </div>
+        <button class="next-btn" onclick="goToScreen2(3)">Go to Coaching Challenge <span>→</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="s3-screen-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">🎯 Coaching Challenge · Scenario 3</div>
+        <h2>The Purple Sun — Coaching Conversation</h2>
+        <p>You just observed Ms. Reyes. Now it's time to coach. Read your mentee's SELCS profile, then choose your approach.</p>
+      </div>
+      <div class="card-body">
+        <div class="mentee-banner I">
+          <div class="mentee-icon I">✨</div>
+          <div>
+            <h3>Your Mentee's SELCS Style: The Inspirer (I)</h3>
+            <p>Ms. Reyes is warm, enthusiastic, and deeply relationship-oriented. She loves her children and lights up at possibilities. She responds to energy and vision — but can become defensive or deflated if feedback feels like a judgment of her character rather than her practice.</p>
+          </div>
+        </div>
+        <div class="question-label">Your Coaching Question</div>
+        <div class="question-text">You are meeting with Ms. Reyes for your post-observation debrief. She is an <strong>Inspirer</strong>. How do you open the conversation in a way that channels her energy toward growth — rather than making her feel like she failed?</div>
+        <div class="options">
+          <button class="option-btn" onclick="handleAnswer(3,'A')" data-style="A">
+            <div class="option-letter">A</div>
+            <div>"Ms. Reyes, I want to paint a picture with you — imagine a classroom where every child's idea is treated like a treasure. Where a purple sun is the most fascinating thing in the room. You have the warmth and the relationship to create that. Let's talk about one moment today where we can help Amara feel like her ideas are the magic."</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(3,'B')" data-style="B">
+            <div class="option-letter">B</div>
+            <div>"Let me be direct: when you painted over Amara's work, you unintentionally communicated that her idea was wrong. The result was she walked away from the activity entirely. The fix is specific — before you touch any child's creative work, ask one question: 'Tell me about this.' That question changes everything."</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(3,'C')" data-style="C">
+            <div class="option-letter">C</div>
+            <div>"I want to look at the art center moment with you through a research lens. There's strong evidence that correcting children's creative choices reduces their willingness to take creative risks. Let's map out specifically what happened, what Amara's response tells us, and build a precise protocol for creative interactions going forward."</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(3,'D')" data-style="D">
+            <div class="option-letter">D</div>
+            <div>"I could really feel how much you care about Amara learning — your instinct to help was so genuine. I just want to gently explore something with you, only if you're open to it… there was a moment at the art center that I've been sitting with. I wonder if we could talk about what Amara might have been feeling when she walked away?"</div>
+          </button>
+        </div>
+
+        <div class="feedback-block right" id="s3-feedback-A">
+          <h4>🎉 Excellent Match — You Read Your Mentee!</h4>
+          <p>This approach is perfectly tuned for an <strong>Inspirer</strong>. You led with a compelling vision — a classroom where children's ideas are treated like treasures — and you connected it directly to what Ms. Reyes already does well (warmth, relationship). You made the growth feel like an extension of her best self, not a correction of her worst moment.</p>
+          <p>Inspirers don't need to be told what went wrong — they need to be shown what's possible. By anchoring the coaching in a vivid picture of what could be, you've given Ms. Reyes something to move toward rather than away from. Expect her to get excited, contribute her own ideas, and feel energized to try something new.</p>
+          <div class="action-steps">
+            <h5>✅ Follow-Up Action Steps for Continued Growth</h5>
+            <ol>
+              <li><strong>Give her one powerful phrase to practice.</strong> Inspirers love a memorable anchor. Introduce "Tell me about this" as the go-to response before any correction at the art center. Simple, memorable, transformative.</li>
+              <li><strong>Make it a story she can tell.</strong> Ask Ms. Reyes to notice the next moment when a child surprises her with an unexpected creative choice. Ask her to document what she did and what happened — Inspirers grow through narrative and reflection on their own stories.</li>
+              <li><strong>Connect her warmth to a deeper outcome.</strong> Help her see that honoring children's creative choices is an extension of the relationship she's already building — it's not a new skill, it's a deeper expression of who she already is as a teacher.</li>
+              <li><strong>Celebrate with specificity at the next visit.</strong> When you observe her using "Tell me about this" or following a child's lead, name it enthusiastically and specifically: "That moment with Darius — you asked him to tell you about his drawing and he talked for three full minutes. That was his voice taking up space in your classroom."</li>
+              <li><strong>Keep the vision alive.</strong> At every debrief, return briefly to the picture you painted together. "Remember that classroom where every idea is a treasure? You built that today."</li>
+            </ol>
+          </div>
+          <div class="complete-banner" id="s3-complete">
+            <h3>Scenario 3 Complete! 🎓</h3>
+            <p>You successfully matched your coaching approach to an Inspirer mentee. One more to go!</p>
+            <button class="next-scenario-btn" onclick="switchScenario(4)">Try Scenario 4 — Sustainer →</button>
+          </div>
+        </div>
+        <div class="feedback-block wrong" id="s3-feedback-B">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>This crisp, bottom-line approach is ideal for a <strong>Director</strong> — but delivered to an <strong>Inspirer</strong>, it's likely to land as harsh and deflating. Ms. Reyes will hear "you unintentionally communicated that her idea was wrong" and feel personally judged. Inspirers process feedback through the lens of relationship — and this opener hasn't built enough safety for the hard truth yet.</p>
+          <p>The fix you're offering is actually excellent — "Tell me about this" is the right tool. But the Inspirer needs to arrive at that insight through energy and vision, not through a direct accounting of the error.</p>
+          <button class="try-again-btn" onclick="resetQuestion(3)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block wrong" id="s3-feedback-C">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>A research-based analytical framework is deeply motivating for a <strong>Cultivator</strong> — but for an <strong>Inspirer</strong>, it can feel like a lecture. Ms. Reyes experiences the world through emotion and relationship. Opening with "let's look at the research lens" may signal to her that this conversation will be dry and intellectual — and Inspirers disengage when the energy drops.</p>
+          <p>Research can absolutely be part of the conversation, but with an Inspirer it should follow the vision and the story — not lead them.</p>
+          <button class="try-again-btn" onclick="resetQuestion(3)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block wrong" id="s3-feedback-D">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>This gentle, permission-seeking opener is a strong match for a <strong>Sustainer</strong> — but for an <strong>Inspirer</strong>, it may feel underwhelming or even patronizing. Inspirers don't need to be handled carefully — they need to be energized. Phrases like "only if you're open to it" can signal to an Inspirer that there isn't much confidence behind what's coming, which deflates rather than excites.</p>
+          <p>Inspirers want a mentor who brings the same energy they do. Meeting them with tentative language misses the opportunity to match their frequency and channel it toward growth.</p>
+          <button class="try-again-btn" onclick="resetQuestion(3)">↩ Try Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- end scenario-3 -->
+
+
+<!-- ════════════════════════════════════════════════════
+     SCENARIO 4 — SUSTAINER MENTEE
+     Scene: Transition chaos — teacher doesn't redirect
+     Domain: Learning Environment / Behavior Management
+     ════════════════════════════════════════════════════ -->
+<div class="scenario-panel" id="scenario-4">
+
+  <div class="step-indicator">
+    <div class="step-dot active" id="s4-dot-1">1</div>
+    <div class="step-label">Observe the Scene</div>
+    <div class="step-sep"></div>
+    <div class="step-dot" id="s4-dot-2">2</div>
+    <div class="step-label">Coaching Challenge</div>
+  </div>
+
+  <div class="screen active" id="s4-screen-1">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">📋 Scenario 4 · Toddler/Pre-K Classroom</div>
+        <h2>The Transition That Never Landed</h2>
+        <p>Read the classroom scene and Quality Check analysis below. When you're ready, move on to the coaching challenge.</p>
+        <div class="qc-badge">🔍 Quality Check Focus: Learning Environment · Behavior Management &amp; Productive Use of Time</div>
+      </div>
+      <div class="card-body">
+        <div class="scene-block">
+          <div class="scene-label">📽 The Scene</div>
+          It's cleanup time before lunch in a pre-K classroom. Ms. Washington announces, <em>"Okay friends, clean up time!"</em> and begins helping one child at the puzzle table. Around the room, three children keep playing, two are wandering, and one is crying near the block area. Ms. Washington notices but continues helping at the puzzle table, murmuring, <em>"It's okay, it's okay"</em> in a soothing voice when the noise rises. Eight minutes later, the room is still not cleaned up. Ms. Washington has not redirected the wandering children or established any structure for the transition. She looks increasingly stressed but says nothing firm.
+        </div>
+        <div class="qc-note">
+          <div class="qc-note-header">
+            <div class="qc-icon">🔍</div>
+            <div>
+              <strong>Quality Check: What's Missing Here?</strong>
+              <span style="display:block">Focus Area: Behavior Management &amp; Productive Use of Time</span>
+            </div>
+          </div>
+          <p>Ms. Washington clearly cares about her children — her soothing presence shows genuine warmth. But warmth alone doesn't manage transitions. High-quality classroom environments use <strong>proactive, predictable structures</strong> so children know exactly what is expected and when. A transition that takes eight minutes with no clear signal, no consistent routine, and no redirection of off-task behavior represents significant lost learning time — and stress for everyone in the room.</p>
+          <p style="margin-top:10px">The children are not misbehaving — they're responding to the absence of structure. This is a common and important distinction for mentors to help teachers see: <em>behavior is communication</em>. When children wander during transitions, they're often telling us that the transition hasn't been clearly defined for them yet.</p>
+        </div>
+        <button class="next-btn" onclick="goToScreen2(4)">Go to Coaching Challenge <span>→</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="s4-screen-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">🎯 Coaching Challenge · Scenario 4</div>
+        <h2>The Transition That Never Landed — Coaching Conversation</h2>
+        <p>You just observed Ms. Washington. Now it's time to coach. Read your mentee's SELCS profile, then choose your approach.</p>
+      </div>
+      <div class="card-body">
+        <div class="mentee-banner S">
+          <div class="mentee-icon S">🤝</div>
+          <div>
+            <h3>Your Mentee's SELCS Style: The Sustainer (S)</h3>
+            <p>Ms. Washington is warm, empathetic, and deeply loyal to her children and her team. She avoids conflict and may internalize feedback as personal failure. She needs psychological safety before she can hear hard truths — but once she feels safe, she is one of the most committed learners of any style.</p>
+          </div>
+        </div>
+        <div class="question-label">Your Coaching Question</div>
+        <div class="question-text">You are meeting with Ms. Washington for your post-observation debrief. She is a <strong>Sustainer</strong>. How do you open the conversation in a way that honors her strengths while helping her take an honest look at what needs to grow?</div>
+        <div class="options">
+          <button class="option-btn" onclick="handleAnswer(4,'A')" data-style="A">
+            <div class="option-letter">A</div>
+            <div>"I want to be honest with you — the cleanup transition took eight minutes and children were off-task the entire time. That's a classroom management issue we need to address directly. Here's a three-step transition protocol I want you to implement starting tomorrow."</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(4,'B')" data-style="B">
+            <div class="option-letter">B</div>
+            <div>"Oh my goodness, I could feel how much love is in your classroom — your kids clearly adore you! What if we turned cleanup time into this whole big adventure? Like a cleanup song, or a challenge? I can see it now — the most joyful cleanup routine in the whole school! Can you picture it?!"</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(4,'C')" data-style="C">
+            <div class="option-letter">C</div>
+            <div>"The care you have for your children is one of the most powerful things I observed today — it's real and the children feel it. I want to start there, because what I'd like us to look at together builds on exactly that. Can I share something I noticed during the cleanup transition, and can we think through it together?"</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(4,'D')" data-style="D">
+            <div class="option-letter">D</div>
+            <div>"I'd like to approach today's debrief systematically. I have observational notes from the cleanup transition — timestamps, number of children on-task versus off-task at each interval, and the duration. Let's go through the data together and identify the exact points where the transition lost structure, then build a precise protocol from there."</div>
+          </button>
+        </div>
+
+        <div class="feedback-block wrong" id="s4-feedback-A">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>This direct, problem-first approach works well with a <strong>Director</strong> — but for a <strong>Sustainer</strong>, it's likely to cause immediate shutdown. Ms. Washington will hear "classroom management issue" and feel she has failed as a teacher and as a caregiver. Sustainers internalize feedback deeply, and a blunt opener without a relational foundation first will make it nearly impossible for her to stay open to what follows.</p>
+          <p>The protocol you're offering may be exactly right — but the Sustainer needs to feel safe before they can receive it. Leading with the problem skips the essential step of building trust in the moment.</p>
+          <button class="try-again-btn" onclick="resetQuestion(4)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block wrong" id="s4-feedback-B">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>High-energy enthusiasm is energizing for an <strong>Inspirer</strong> — but for a <strong>Sustainer</strong>, it can feel overwhelming or performative. Ms. Washington may appreciate the kindness but feel unseen by the exclamation points. Sustainers process the world quietly and deeply — they need warmth that is <em>calm</em>, not amplified.</p>
+          <p>A cleanup song is also a fine practical idea — but it's a tactic, not a coaching conversation. Sustainers need to feel that their mentor truly sees and understands them before they can trust the direction they're being given.</p>
+          <button class="try-again-btn" onclick="resetQuestion(4)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block right" id="s4-feedback-C">
+          <h4>🎉 Excellent Match — You Read Your Mentee!</h4>
+          <p>This opener is beautifully calibrated for a <strong>Sustainer</strong>. You led with what is genuinely true — her care for children is real and observable — and you named it specifically before introducing anything challenging. By asking permission ("can I share something?") and framing it as a collaborative exploration ("think through it together"), you've signaled that this is a safe conversation, not an evaluation.</p>
+          <p>Sustainers do not resist feedback — they resist feeling alone with it. This opener ensures Ms. Washington knows you are on her side before you ask her to look at something hard. From this foundation, she will be one of the most open and growth-committed mentees you could work with.</p>
+          <div class="action-steps">
+            <h5>✅ Follow-Up Action Steps for Continued Growth</h5>
+            <ol>
+              <li><strong>Co-create the transition structure together.</strong> Don't hand Ms. Washington a protocol — build it with her. Ask: "What do you wish cleanup time looked and felt like?" Let her vision lead. Sustainers commit more deeply to plans they helped design.</li>
+              <li><strong>Normalize the struggle explicitly.</strong> Sustainers often feel alone in their challenges. Tell her directly: "Every teacher I work with has at least one transition that needs attention. This is one of the most common growth areas in early childhood — you are not alone in this."</li>
+              <li><strong>Practice together before the next observation.</strong> Role-play the transition with Ms. Washington in your debrief. Let her practice giving the cleanup signal with a clear, warm voice — and give her positive feedback on what she does well in the role-play itself.</li>
+              <li><strong>Give her a specific, low-stakes first step.</strong> Sustainers are more likely to try something new if it feels manageable. Suggest one small change: a consistent cleanup song or a visual timer. One thing, not five.</li>
+              <li><strong>Check in between observations.</strong> A quick message before your next visit — "How did the cleanup transition go this week?" — goes a long way for a Sustainer. Knowing someone is thinking about them sustains their motivation more than any formal feedback session.</li>
+            </ol>
+          </div>
+          <div class="complete-banner" id="s4-complete">
+            <h3>Scenario 4 Complete! 🎓</h3>
+            <p>You've now coached one of each SELCS style. Ready to go deeper? The next four scenarios put each temperament in a completely new classroom situation.</p>
+            <button class="next-scenario-btn" onclick="switchScenario(5)">Continue to Scenario 5 →</button>
+          </div>
+        </div>
+        <div class="feedback-block wrong" id="s4-feedback-D">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>Timestamps, data, and systematic protocols speak directly to a <strong>Cultivator</strong>'s values — but for a <strong>Sustainer</strong>, opening with observational data before any relational foundation can feel clinical and alarming. Ms. Washington may hear "number of children off-task" and feel surveilled rather than supported.</p>
+          <p>Data can absolutely be part of the conversation with a Sustainer — but it must come after trust is established, not before. Lead with the relationship, then introduce the evidence gently and collaboratively.</p>
+          <button class="try-again-btn" onclick="resetQuestion(4)">↩ Try Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- end scenario-4 -->
+
+
+<!-- ════════════════════════════════════════════════════
+     SCENARIO 5 — DIRECTOR MENTEE (Round 2)
+     Scene: Small group math — teacher rushes, no wait time
+     Domain: Quality of Feedback / Language Modeling
+     Correct: B
+     ════════════════════════════════════════════════════ -->
+<div class="scenario-panel" id="scenario-5">
+
+  <div class="step-indicator">
+    <div class="step-dot active" id="s5-dot-1">1</div>
+    <div class="step-label">Observe the Scene</div>
+    <div class="step-sep"></div>
+    <div class="step-dot" id="s5-dot-2">2</div>
+    <div class="step-label">Coaching Challenge</div>
+  </div>
+
+  <div class="screen active" id="s5-screen-1">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">📋 Scenario 5 · Kindergarten Small Group</div>
+        <h2>The Race to the Answer</h2>
+        <p>Read the classroom scene and Quality Check analysis below. When you're ready, move on to the coaching challenge.</p>
+        <div class="qc-badge">🔍 Quality Check Focus: Quality of Feedback · Language Modeling</div>
+      </div>
+      <div class="card-body">
+        <div class="scene-block">
+          <div class="scene-label">📽 The Scene</div>
+          A kindergarten teacher, Ms. Chen, pulls a small group of four children to the math table to work on counting sets. She holds up a card with seven dots and asks, <em>"How many?"</em> Before any child can respond, she points and rapidly counts aloud: <em>"One, two, three, four, five, six, seven — seven! Good. Next one."</em> She holds up the next card. One child raises her hand eagerly; Ms. Chen calls on her after about two seconds of wait time. The child starts counting slowly — <em>"One... two..."</em> — and Ms. Chen, anticipating she's struggling, supplies: <em>"Five. It's five. Good job, keep going."</em> Over a 12-minute small group, Ms. Chen answers or interrupts 14 of the 18 questions she poses. Children receive the word "good" after nearly every response, regardless of accuracy.
+        </div>
+        <div class="qc-note">
+          <div class="qc-note-header">
+            <div class="qc-icon">🔍</div>
+            <div>
+              <strong>Quality Check: What's Missing Here?</strong>
+              <span style="display:block">Focus Area: Quality of Feedback &amp; Wait Time</span>
+            </div>
+          </div>
+          <p>Small group instruction is one of the most powerful formats in early childhood — but only when children are doing the cognitive work. In this session, Ms. Chen answered her own questions 78% of the time. <strong>Wait time</strong> — the pause between a question and a response — is one of the most researched and underused tools in teaching. Studies consistently show that extending wait time to just three seconds dramatically increases the quality and length of children's responses.</p>
+          <p style="margin-top:10px">The feedback pattern is also a concern: <em>"Good job"</em> without specificity gives children no information about what they did or why it matters. Specific feedback sounds like: <em>"You touched each dot exactly once and didn't skip any — that's called one-to-one correspondence, and it's exactly right."</em> Generic praise tells children they pleased the teacher. Specific feedback tells children what they understand.</p>
+        </div>
+        <button class="next-btn" onclick="goToScreen2(5)">Go to Coaching Challenge <span>→</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="s5-screen-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">🎯 Coaching Challenge · Scenario 5</div>
+        <h2>The Race to the Answer — Coaching Conversation</h2>
+        <p>You just observed Ms. Chen. Now it's time to coach. Read your mentee's SELCS profile, then choose your approach.</p>
+      </div>
+      <div class="card-body">
+        <div class="mentee-banner D">
+          <div class="mentee-icon D">🎯</div>
+          <div>
+            <h3>Your Mentee's SELCS Style: The Director (D)</h3>
+            <p>Ms. Chen is efficient, confident, and results-driven. She runs a tight ship and takes pride in covering content. She's not resistant to feedback — she's resistant to feedback that feels vague, aimless, or like it's telling her something she can't act on immediately.</p>
+          </div>
+        </div>
+        <div class="question-label">Your Coaching Question</div>
+        <div class="question-text">You are meeting with Ms. Chen for your post-observation debrief. She is a <strong>Director</strong>. How do you frame the feedback so she engages with it rather than dismissing it?</div>
+        <div class="options">
+          <button class="option-btn" onclick="handleAnswer(5,'A')" data-style="A">
+            <div class="option-letter">A</div>
+            <div>"I want to explore something gently with you — there were moments during the small group where I noticed children were still thinking when the answer came. I just want to make sure you feel comfortable reflecting on that when you're ready. How did the group feel to you today?"</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(5,'B')" data-style="B">
+            <div class="option-letter">B</div>
+            <div>"I tracked something specific during small group: in 12 minutes, you answered or completed 14 of 18 questions before children had the chance to finish. The research on wait time is clear — three seconds changes outcomes. I want to give you one tool to try tomorrow and a target we can measure at my next visit."</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(5,'C')" data-style="C">
+            <div class="option-letter">C</div>
+            <div>"I am SO excited to talk about what I saw today — because honestly, your small group setup is so intentional and your energy with the kids is electric! What if we took that amazing teaching instinct and channeled it into the wait time research? I can just picture the breakthroughs your kids would have!"</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(5,'D')" data-style="D">
+            <div class="option-letter">D</div>
+            <div>"I'd like to walk through the small group data systematically. I have a tally of your question-answer patterns, a breakdown of feedback type — specific versus generic — and the research framework on wait time and language modeling. Let's map each observation to the corresponding indicator and build your improvement plan from the evidence."</div>
+          </button>
+        </div>
+
+        <div class="feedback-block wrong" id="s5-feedback-A">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>This tentative, feelings-first approach is carefully calibrated for a <strong>Sustainer</strong> — but for a <strong>Director</strong>, it will likely feel evasive. Ms. Chen will hear "when you're ready" and "feel comfortable" and wonder why you're tiptoeing. Directors respect directness. They don't need to be eased into feedback — they need feedback that's honest and actionable.</p>
+          <p>The question "how did the group feel to you?" also hands the conversation over before you've established any shared understanding of what happened. A Director will answer briefly and redirect the conversation away from the hard observation you needed to share.</p>
+          <button class="try-again-btn" onclick="resetQuestion(5)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block right" id="s5-feedback-B">
+          <h4>🎉 Excellent Match — You Read Your Mentee!</h4>
+          <p>This is exactly how to coach a <strong>Director</strong>: lead with data, connect it to research efficiently, and offer a concrete tool with a measurable target. Ms. Chen can respect the "14 of 18" — it's specific and honest. The mention of a tool she can try tomorrow and a metric for the next visit gives her what Directors need most: a clear problem and a clear path to solving it.</p>
+          <p>Notice this approach doesn't soften or editorialize — it trusts Ms. Chen to handle real information like the professional she is. That respect is what builds lasting coaching relationships with Directors.</p>
+          <div class="action-steps">
+            <h5>✅ Follow-Up Action Steps for Continued Growth</h5>
+            <ol>
+              <li><strong>Give her the wait time tool immediately.</strong> Teach the three-second rule: after posing a question, silently count to three before calling on anyone or responding. No preamble needed — just the tool and the reason it works.</li>
+              <li><strong>Set a measurable goal for the next visit.</strong> Agree together: "Next time I observe small group, I want to see you answer fewer than 4 of 18 questions yourself. The children answer the rest." Clear target, observable outcome.</li>
+              <li><strong>Introduce the specific feedback swap.</strong> Replace "good job" with one sentence that names what the child did: "You touched each dot once — that's one-to-one correspondence." Teach her the formula: <em>what they did + what it's called or why it matters</em>. Directors like formulas.</li>
+              <li><strong>Connect outcomes to what she already cares about.</strong> Ms. Chen covers content efficiently — help her see that wait time actually accelerates learning. More child thinking now means less reteaching later. That efficiency argument lands with a Director.</li>
+              <li><strong>Keep the next debrief short and scorecard-driven.</strong> Open by reviewing the target together: "Last time we said fewer than 4 teacher answers. What did you observe in yourself this week?" Let her report on her own data. Directors who self-monitor grow the fastest.</li>
+            </ol>
+          </div>
+          <div class="complete-banner" id="s5-complete">
+            <h3>Scenario 5 Complete! 🎓</h3>
+            <p>A Director in a new context — and you still read the style correctly. Ready for a different challenge?</p>
+            <button class="next-scenario-btn" onclick="switchScenario(6)">Continue to Scenario 6 — Inspirer →</button>
+          </div>
+        </div>
+        <div class="feedback-block wrong" id="s5-feedback-C">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>This enthusiastic, vision-forward energy is a perfect frequency match for an <strong>Inspirer</strong> — but it will likely land flat with a <strong>Director</strong>. Ms. Chen will hear "SO excited," "so intentional," and "I can just picture it" and filter all of it out as filler before the actual feedback arrives. Directors are efficient processors — they skip past the warmup and wait for the point.</p>
+          <p>Enthusiasm isn't wrong with a Director — but it needs to be proportional and followed immediately by substance. If the substance never arrives clearly, Directors lose confidence in their mentor's ability to help them improve.</p>
+          <button class="try-again-btn" onclick="resetQuestion(5)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block wrong" id="s5-feedback-D">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>A systematic data walkthrough with a full research framework feels right at home with a <strong>Cultivator</strong> — but for a <strong>Director</strong>, it's too much process before the point. Ms. Chen will engage initially, but if the conversation becomes a structured mapping exercise before getting to the action step, her attention will drift. Directors want the conclusion first, then the evidence — not the other way around.</p>
+          <p>The data you're describing is genuinely useful — but lead with the bottom line, not the methodology. Save the extended framework walkthrough for a Cultivator who will savor it.</p>
+          <button class="try-again-btn" onclick="resetQuestion(5)">↩ Try Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- end scenario-5 -->
+
+
+<!-- ════════════════════════════════════════════════════
+     SCENARIO 6 — INSPIRER MENTEE (Round 2)
+     Scene: Teacher makes a big spontaneous promise,
+            classroom energy spins out of control
+     Domain: Behavior Management / Productive Use of Time
+     Correct: D
+     ════════════════════════════════════════════════════ -->
+<div class="scenario-panel" id="scenario-6">
+
+  <div class="step-indicator">
+    <div class="step-dot active" id="s6-dot-1">1</div>
+    <div class="step-label">Observe the Scene</div>
+    <div class="step-sep"></div>
+    <div class="step-dot" id="s6-dot-2">2</div>
+    <div class="step-label">Coaching Challenge</div>
+  </div>
+
+  <div class="screen active" id="s6-screen-1">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">📋 Scenario 6 · Pre-K Classroom</div>
+        <h2>The Promise That Took Over</h2>
+        <p>Read the classroom scene and Quality Check analysis below. When you're ready, move on to the coaching challenge.</p>
+        <div class="qc-badge">🔍 Quality Check Focus: Behavior Management · Productive Use of Time</div>
+      </div>
+      <div class="card-body">
+        <div class="scene-block">
+          <div class="scene-label">📽 The Scene</div>
+          During morning meeting, Mr. Holloway — visibly excited about the week's theme — announces spontaneously: <em>"You know what? Today we're going to build the BIGGEST block city this class has ever seen! We're going to make it SO tall it almost touches the ceiling, and then we're going to take pictures and make a whole book about it!"</em> The children erupt with cheering. For the next 25 minutes, Mr. Holloway fields a continuous stream of children telling him their block city ideas, arguing about who gets which blocks, and pulling materials from shelves before any structure has been agreed upon. Mr. Holloway moves from child to child, enthusiastically engaging each one's idea. At the end of free choice, nothing has been built. Three children are crying. The blocks are scattered across the floor. Mr. Holloway looks exhausted and uncertain.
+        </div>
+        <div class="qc-note">
+          <div class="qc-note-header">
+            <div class="qc-icon">🔍</div>
+            <div>
+              <strong>Quality Check: What's Missing Here?</strong>
+              <span style="display:block">Focus Area: Behavior Management &amp; Instructional Format Design</span>
+            </div>
+          </div>
+          <p>Mr. Holloway's enthusiasm is genuine and the children feel it — that relational warmth is a real asset. But enthusiasm without structure is a recipe for chaos in early childhood settings. <strong>Children thrive on predictability.</strong> When the routine is disrupted by a large, open-ended, unstructured invitation, children don't know what the rules are — and behavior follows.</p>
+          <p style="margin-top:10px">The core issue isn't the block city idea — it's the absence of a <em>scaffold</em>. Big, exciting projects need clear entry points: who does what, in what order, with what materials. The mentor's challenge here is to honor Mr. Holloway's creative energy while helping him see that <strong>structure is what makes the big ideas actually work</strong> — not what limits them.</p>
+        </div>
+        <button class="next-btn" onclick="goToScreen2(6)">Go to Coaching Challenge <span>→</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="s6-screen-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">🎯 Coaching Challenge · Scenario 6</div>
+        <h2>The Promise That Took Over — Coaching Conversation</h2>
+        <p>You just observed Mr. Holloway. Now it's time to coach. Read your mentee's SELCS profile, then choose your approach.</p>
+      </div>
+      <div class="card-body">
+        <div class="mentee-banner I">
+          <div class="mentee-icon I">✨</div>
+          <div>
+            <h3>Your Mentee's SELCS Style: The Inspirer (I)</h3>
+            <p>Mr. Holloway is creative, relational, and genuinely joyful in his teaching. He leads with his heart and children adore him. He's also sensitive — if feedback focuses on what went wrong without honoring what drove the moment, he may interpret it as a message that his energy and spontaneity are problems to fix rather than strengths to channel.</p>
+          </div>
+        </div>
+        <div class="question-label">Your Coaching Question</div>
+        <div class="question-text">You are meeting with Mr. Holloway for your post-observation debrief. He is an <strong>Inspirer</strong>. How do you help him understand that structure isn't the enemy of his vision — it's what makes the vision possible?</div>
+        <div class="options">
+          <button class="option-btn" onclick="handleAnswer(6,'A')" data-style="A">
+            <div class="option-letter">A</div>
+            <div>"I want to be honest with you — the block city announcement created 25 minutes of unstructured chaos and nothing got built. Three children were in tears. You need a classroom management protocol before you introduce big projects, and I want to work through it with you today."</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(6,'B')" data-style="B">
+            <div class="option-letter">B</div>
+            <div>"I noticed things got complicated today and I just want you to know — there's no pressure at all to do big projects like that. Maybe we could keep things a little simpler for a while until you feel more confident? What would feel comfortable for you?"</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(6,'C')" data-style="C">
+            <div class="option-letter">C</div>
+            <div>"Let's analyze what happened systematically. I'd like to map out the sequence of events from the announcement to the end of free choice, identify the structural elements that were absent, and build a project launch protocol that accounts for each gap. I have a framework we can work through together."</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(6,'D')" data-style="D">
+            <div class="option-letter">D</div>
+            <div>"The block city idea was genuinely inspired — I could feel the children's excitement from across the room. What I want to explore with you is this: what if the reason it didn't land the way you imagined is because the idea was too big for the container you gave it? Let's talk about how to build a container as big as your vision."</div>
+          </button>
+        </div>
+
+        <div class="feedback-block wrong" id="s6-feedback-A">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>Leading with a damage report — <em>"25 minutes of unstructured chaos," "three children in tears"</em> — is the kind of direct accounting that motivates a <strong>Director</strong>. But for an <strong>Inspirer</strong>, it lands as an attack on the part of himself he values most: his spontaneity and his connection with children. Mr. Holloway already knows something went sideways. He felt it.</p>
+          <p>Starting here, without first honoring the genuine strength behind the impulse, risks making him defensive or deflated before the real coaching conversation can begin. The goal is to channel his energy — not dam it.</p>
+          <button class="try-again-btn" onclick="resetQuestion(6)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block wrong" id="s6-feedback-B">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>This gentle, low-expectation approach is designed for a <strong>Sustainer</strong> who needs psychological safety before receiving challenge. But for an <strong>Inspirer</strong>, suggesting they "keep things simpler" is likely to land as deeply discouraging — even crushing. Mr. Holloway's creative ambition is his identity as a teacher. Asking him to scale it back isn't a coaching strategy; it's asking him to become someone else.</p>
+          <p>The Sustainer needs permission to be cautious. The Inspirer needs permission to dream bigger — with better tools. These are very different needs.</p>
+          <button class="try-again-btn" onclick="resetQuestion(6)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block wrong" id="s6-feedback-C">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>A systematic event sequence map with a structural gap analysis is deeply satisfying to a <strong>Cultivator</strong> — but for an <strong>Inspirer</strong>, it turns a vivid, emotional experience into a dry post-mortem. Mr. Holloway processes through story and feeling, not through frameworks and flowcharts. Asking him to map a sequence will feel like draining all the color out of something he cared about.</p>
+          <p>The protocol you'd build together might be exactly right — but an Inspirer has to arrive at the need for it through excitement about the possibility, not through analysis of the failure.</p>
+          <button class="try-again-btn" onclick="resetQuestion(6)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block right" id="s6-feedback-D">
+          <h4>🎉 Excellent Match — You Read Your Mentee!</h4>
+          <p>This is masterful Inspirer coaching. You named the genuine strength first — the idea was inspired, the children's excitement was real — and then reframed the problem not as "your energy caused chaos" but as "your vision needed a bigger container." That is a <em>growth invitation</em>, not a correction.</p>
+          <p>Inspirers move toward possibility. By framing structure as the thing that makes the big idea actually happen, you've made "let's build a better container" feel exciting rather than limiting. Expect Mr. Holloway to lean in, contribute ideas enthusiastically, and leave the debrief energized rather than deflated.</p>
+          <div class="action-steps">
+            <h5>✅ Follow-Up Action Steps for Continued Growth</h5>
+            <ol>
+              <li><strong>Co-design the "project launch scaffold" together.</strong> Don't hand Mr. Holloway a protocol — build it with him using his language and ideas. Ask: "What would children need to know before diving in?" Let his answers become the framework. He'll own it because he made it.</li>
+              <li><strong>Give the structure a name he loves.</strong> Inspirers are motivated by identity. Help him name his new approach — "The Big Idea Launch" or "The Builder's Brief" — something that feels like an extension of his teaching personality, not a constraint on it.</li>
+              <li><strong>Help him see structure as amplification, not limitation.</strong> Use an analogy he'll connect with: a great concert has a setlist, a soundcheck, and a stage — and that structure is exactly what lets the music be electric. Without it, the music is just noise.</li>
+              <li><strong>Plan the block city together — for real this time.</strong> Use the debrief to actually sketch out how the block city project could work with proper scaffolding. Give him a win: the idea doesn't have to die, it just needs a design. This keeps the energy alive while building the skill.</li>
+              <li><strong>Celebrate the moments he gets it right.</strong> When you next observe him launching a big idea with clear structure, name it specifically and with real warmth: "You gave them a role, a starting point, and a signal — and they built for 20 minutes straight. That was your vision landing."</li>
+            </ol>
+          </div>
+          <div class="complete-banner" id="s6-complete">
+            <h3>Scenario 6 Complete! 🎓</h3>
+            <p>An Inspirer in a new situation — and you found the right frame. One more style to go in this set.</p>
+            <button class="next-scenario-btn" onclick="switchScenario(7)">Continue to Scenario 7 — Sustainer →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- end scenario-6 -->
+
+
+<!-- ════════════════════════════════════════════════════
+     SCENARIO 7 — SUSTAINER MENTEE (Round 2)
+     Scene: Teacher does the work for the child
+            instead of scaffolding
+     Domain: Concept Development / Language Modeling
+     Correct: A
+     ════════════════════════════════════════════════════ -->
+<div class="scenario-panel" id="scenario-7">
+
+  <div class="step-indicator">
+    <div class="step-dot active" id="s7-dot-1">1</div>
+    <div class="step-label">Observe the Scene</div>
+    <div class="step-sep"></div>
+    <div class="step-dot" id="s7-dot-2">2</div>
+    <div class="step-label">Coaching Challenge</div>
+  </div>
+
+  <div class="screen active" id="s7-screen-1">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">📋 Scenario 7 · Pre-K Classroom</div>
+        <h2>The Helpful Hands Problem</h2>
+        <p>Read the classroom scene and Quality Check analysis below. When you're ready, move on to the coaching challenge.</p>
+        <div class="qc-badge">🔍 Quality Check Focus: Concept Development · Language Modeling</div>
+      </div>
+      <div class="card-body">
+        <div class="scene-block">
+          <div class="scene-label">📽 The Scene</div>
+          During a writing activity, four-year-old Jonah approaches Ms. Patel and says, <em>"I don't know how to write my name."</em> Ms. Patel smiles warmly, takes his pencil, writes "JONAH" at the top of his paper, and says, <em>"There you go, sweetheart — now you can copy it."</em> Jonah copies the letters slowly, and Ms. Patel hovers nearby, pointing to each letter in sequence as he works. When he makes his "J" backwards, she gently erases it and redraws it correctly for him. A few minutes later, another child calls out that her puzzle piece doesn't fit. Ms. Patel crosses the room immediately and snaps the piece into place. <em>"There we go!"</em> she says cheerfully, and moves on.
+        </div>
+        <div class="qc-note">
+          <div class="qc-note-header">
+            <div class="qc-icon">🔍</div>
+            <div>
+              <strong>Quality Check: What's Missing Here?</strong>
+              <span style="display:block">Focus Area: Concept Development &amp; Scaffolding vs. Rescuing</span>
+            </div>
+          </div>
+          <p>Ms. Patel's instinct — to relieve children's struggle immediately — comes from genuine care. But there is a crucial distinction between <strong>scaffolding</strong> and <strong>rescuing</strong>. Scaffolding means offering just enough support for a child to take the next step themselves. Rescuing removes the struggle entirely — and in doing so, removes the learning.</p>
+          <p style="margin-top:10px">When Ms. Patel writes Jonah's name for him and corrects his backward J, Jonah never discovers what he's capable of. Vygotsky's Zone of Proximal Development tells us that learning happens <em>at the edge of what children can already do</em> — that edge requires productive struggle, not rescue. The mentor's work here is delicate: helping Ms. Patel see that <em>the most loving thing she can do is sometimes stay her hand</em>.</p>
+        </div>
+        <button class="next-btn" onclick="goToScreen2(7)">Go to Coaching Challenge <span>→</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="s7-screen-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">🎯 Coaching Challenge · Scenario 7</div>
+        <h2>The Helpful Hands Problem — Coaching Conversation</h2>
+        <p>You just observed Ms. Patel. Now it's time to coach. Read your mentee's SELCS profile, then choose your approach.</p>
+      </div>
+      <div class="card-body">
+        <div class="mentee-banner S">
+          <div class="mentee-icon S">🤝</div>
+          <div>
+            <h3>Your Mentee's SELCS Style: The Sustainer (S)</h3>
+            <p>Ms. Patel is nurturing, patient, and utterly devoted to her children's wellbeing. She is the teacher who remembers every child's allergy, every family's story. She also has a strong instinct to protect children from discomfort — which, in this case, is the very thing that needs to grow.</p>
+          </div>
+        </div>
+        <div class="question-label">Your Coaching Question</div>
+        <div class="question-text">You are meeting with Ms. Patel for your post-observation debrief. She is a <strong>Sustainer</strong>. The feedback involves asking her to <em>do less</em> for children — which may feel counterintuitive to someone whose care is expressed through helping. How do you open the conversation?</div>
+        <div class="options">
+          <button class="option-btn" onclick="handleAnswer(7,'A')" data-style="A">
+            <div class="option-letter">A</div>
+            <div>"The thing I noticed most today was how much the children trust you — they come to you immediately when something is hard. That trust is something you've built, and it's real. I want to talk about what we do with it, because I think you have an opportunity to use that trust to help children discover something about themselves. Can I share what I'm seeing?"</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(7,'B')" data-style="B">
+            <div class="option-letter">B</div>
+            <div>"Here's what I tracked today: you intervened in children's tasks 11 times in 20 minutes and completed the task for the child in 8 of those instances. The research on productive struggle is clear — children need to stay in the discomfort to build competence. I want to give you a specific protocol for responding to 'I can't' that you can practice this week."</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(7,'C')" data-style="C">
+            <div class="option-letter">C</div>
+            <div>"I want to start with something that's going to feel exciting — what if your classroom became a place where children surprised themselves every single day? Where kids who say 'I can't' walk away 10 minutes later saying 'I did it'? You are the teacher who could make that happen. Let's talk about how."</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(7,'D')" data-style="D">
+            <div class="option-letter">D</div>
+            <div>"I want to look at today systematically. There's a clear pattern between when children expressed struggle and when you intervened — I'd like to map those moments and analyze each one against a scaffolding framework so we can identify exactly which types of requests warrant support versus which ones children can handle with a prompt."</div>
+          </button>
+        </div>
+
+        <div class="feedback-block right" id="s7-feedback-A">
+          <h4>🎉 Excellent Match — You Read Your Mentee!</h4>
+          <p>This opener is precisely right for a <strong>Sustainer</strong>. You named the genuine strength — the children's trust — and you honored it as something real and earned before introducing any challenge. You framed the growth not as "stop rescuing" but as "use your trust to unlock something bigger in children." That reframe is everything.</p>
+          <p>For Ms. Patel, the hardest thing to hear would be that her care is part of the problem. This approach never says that. It says her care is the foundation — and that there's an even more powerful way to express it. Sustainers can receive hard truths when they arrive inside a relational container that feels safe and true.</p>
+          <div class="action-steps">
+            <h5>✅ Follow-Up Action Steps for Continued Growth</h5>
+            <ol>
+              <li><strong>Teach the scaffolding ladder together.</strong> Instead of a protocol, co-create a "what to try first" sequence: (1) Wait 5 seconds silently. (2) Ask "What have you tried so far?" (3) Offer one hint. (4) Do it together. (5) Do it for them only if all else fails. Practice it out loud together so it becomes muscle memory.</li>
+              <li><strong>Reframe struggle as an act of love.</strong> Help Ms. Patel understand that staying her hand when Jonah's J is backwards is not withholding care — it's the deepest kind of care. "He needs to find out what he can do. You letting him try is how he learns he's capable."</li>
+              <li><strong>Give her a phrase she can say instead of helping.</strong> "What do you think you could try?" is six words that replace the instinct to fix. Practice it until it comes naturally. Sustainers do well with a warm, ready response they can reach for.</li>
+              <li><strong>Start small and celebrate early.</strong> Suggest one area of the day — just arrival puzzles, just the writing table — where Ms. Patel commits to the 5-second wait before intervening. One zone, one practice. Not the whole day. Build from a win.</li>
+              <li><strong>Follow up warmly.</strong> A brief check-in mid-week — "How did the waiting go at the writing table?" — signals that you're alongside her, not watching from above. That sense of accompaniment is how Sustainers stay motivated through the discomfort of growth.</li>
+            </ol>
+          </div>
+          <div class="complete-banner" id="s7-complete">
+            <h3>Scenario 7 Complete! 🎓</h3>
+            <p>A Sustainer in a new and nuanced situation — beautifully handled. One more to go!</p>
+            <button class="next-scenario-btn" onclick="switchScenario(8)">Continue to Scenario 8 — Cultivator →</button>
+          </div>
+        </div>
+        <div class="feedback-block wrong" id="s7-feedback-B">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>Tracking interventions and presenting research protocols is the native language of a <strong>Director</strong> — but for a <strong>Sustainer</strong>, opening with "you intervened 11 times" lands as surveillance, not support. Ms. Patel will hear the numbers and immediately begin to question whether she is a good teacher. That shame response will close the very door you need open.</p>
+          <p>The protocol you're offering may be exactly right — but the Sustainer must feel safe and seen before she can receive it. The data belongs later in the conversation, not at the opening.</p>
+          <button class="try-again-btn" onclick="resetQuestion(7)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block wrong" id="s7-feedback-C">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>This vision-forward, excitement-first opener is a beautiful match for an <strong>Inspirer</strong> — but a <strong>Sustainer</strong> will likely experience it as over-the-top or disconnected from the specific children and moments she cares about. Ms. Patel doesn't need to be inspired by a big abstract picture — she needs to feel that <em>her actual children</em> and <em>her specific situation</em> are understood.</p>
+          <p>Sustainers are moved by the particular, not the general. The Inspirer is energized by the big vision. The Sustainer is moved by a story about one child, one moment, one relationship. Connect to the specific before painting the big picture.</p>
+          <button class="try-again-btn" onclick="resetQuestion(7)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block wrong" id="s7-feedback-D">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>Mapping a pattern against a scaffolding framework is deeply satisfying to a <strong>Cultivator</strong> who wants to understand the system behind the behavior. But for a <strong>Sustainer</strong>, "I'd like to map those moments" can feel like being put under a microscope. Ms. Patel operates from relationship and feeling — an analytical deconstruction of her interactions with children may feel cold and clinical before any trust has been built in the conversation.</p>
+          <p>Analysis has a place with Sustainers — but it must follow a relational foundation, not precede it. Start with connection, then introduce the framework gently.</p>
+          <button class="try-again-btn" onclick="resetQuestion(7)">↩ Try Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- end scenario-7 -->
+
+
+<!-- ════════════════════════════════════════════════════
+     SCENARIO 8 — CULTIVATOR MENTEE (Round 2)
+     Scene: Centers set up identically for weeks —
+            children are bored, teacher doesn't see
+            environment as the issue
+     Domain: Learning Center Design
+     Correct: C
+     ════════════════════════════════════════════════════ -->
+<div class="scenario-panel" id="scenario-8">
+
+  <div class="step-indicator">
+    <div class="step-dot active" id="s8-dot-1">1</div>
+    <div class="step-label">Observe the Scene</div>
+    <div class="step-sep"></div>
+    <div class="step-dot" id="s8-dot-2">2</div>
+    <div class="step-label">Coaching Challenge</div>
+  </div>
+
+  <div class="screen active" id="s8-screen-1">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">📋 Scenario 8 · Pre-K Classroom</div>
+        <h2>The Centers That Never Changed</h2>
+        <p>Read the classroom scene and Quality Check analysis below. When you're ready, move on to the coaching challenge.</p>
+        <div class="qc-badge">🔍 Quality Check Focus: Learning Center Design · Concept Development</div>
+      </div>
+      <div class="card-body">
+        <div class="scene-block">
+          <div class="scene-label">📽 The Scene</div>
+          You are visiting Mr. Kim's pre-K classroom for the third time this month. The centers look exactly as they did on your first visit four weeks ago: the same puzzle at the puzzle table, the same plastic animals in the sensory bin, the same dot markers and pre-printed coloring sheets at the art table. During free choice, you observe that five of the eight children drift from center to center without settling anywhere for more than two minutes. Two children lie on the carpet doing nothing. Mr. Kim circulates, redirecting briefly, but attributes the lack of engagement to the children being "in a mood today." When you ask him about the centers during a brief hallway check-in, he explains that he rotates materials on a set schedule — every six weeks — and that this rotation isn't due for ten more days.
+        </div>
+        <div class="qc-note">
+          <div class="qc-note-header">
+            <div class="qc-icon">🔍</div>
+            <div>
+              <strong>Quality Check: What's Missing Here?</strong>
+              <span style="display:block">Focus Area: Learning Center Design &amp; Environmental Responsiveness</span>
+            </div>
+          </div>
+          <p>Mr. Kim has a system — and that speaks to his Cultivator nature. But systems need to respond to evidence, and the evidence here is clear: children have habituated to these materials and are no longer cognitively engaged by them. High-quality learning environments are <strong>responsive, not just scheduled</strong>. When children stop engaging, that is data — and data should drive change.</p>
+          <p style="margin-top:10px">Research on environmental design in early childhood shows that novelty is a primary driver of inquiry-based behavior. When materials lose their novelty, children lose their curiosity — and off-task behavior fills the gap. The key insight Mr. Kim needs isn't that his system is wrong — it's that <strong>his system needs a new input: child engagement data</strong>. A Cultivator can embrace that upgrade once he sees the logic behind it.</p>
+        </div>
+        <button class="next-btn" onclick="goToScreen2(8)">Go to Coaching Challenge <span>→</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="s8-screen-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="scenario-tag">🎯 Coaching Challenge · Scenario 8</div>
+        <h2>The Centers That Never Changed — Coaching Conversation</h2>
+        <p>You just observed Mr. Kim. Now it's time to coach. Read your mentee's SELCS profile, then choose your approach.</p>
+      </div>
+      <div class="card-body">
+        <div class="mentee-banner C">
+          <div class="mentee-icon C">🔍</div>
+          <div>
+            <h3>Your Mentee's SELCS Style: The Cultivator (C)</h3>
+            <p>Mr. Kim is systematic, principled, and thorough. He takes genuine pride in the logic of his classroom systems. He will not respond well to being told his approach is wrong — but he will respond very well to being shown data that his system has a gap, and being invited to close that gap with a better, more complete version of the same system.</p>
+          </div>
+        </div>
+        <div class="question-label">Your Coaching Question</div>
+        <div class="question-text">You are meeting with Mr. Kim for your post-observation debrief. He is a <strong>Cultivator</strong>. He believes his rotation schedule is working. How do you open the conversation so he can see what you saw — without becoming defensive of his system?</div>
+        <div class="options">
+          <button class="option-btn" onclick="handleAnswer(8,'A')" data-style="A">
+            <div class="option-letter">A</div>
+            <div>"I want to start by saying how much the children love being in your classroom — you've clearly built something special here. I noticed today that some of the children seemed a little restless during centers, and I just wondered, when you're ready, if we might talk a little about what you noticed too?"</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(8,'B')" data-style="B">
+            <div class="option-letter">B</div>
+            <div>"I can feel the care you've put into this classroom — the systems, the organization, the rhythm. What if we dreamed together about what would happen if those centers had a new challenge every single week? I can just picture the kids diving in — new materials, new questions, new discoveries every Monday!"</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(8,'C')" data-style="C">
+            <div class="option-letter">C</div>
+            <div>"I want to share some observational data with you and get your read on it. I tracked child engagement across all four centers during free choice today — time-on-task, transitions between centers, and instances of sustained play. The numbers suggest the materials may have lost their novelty before the rotation schedule kicks in. I'd like to look at the data together and see if your system needs an additional input variable."</div>
+          </button>
+          <button class="option-btn" onclick="handleAnswer(8,'D')" data-style="D">
+            <div class="option-letter">D</div>
+            <div>"I want to be direct with you — the six-week rotation isn't working. Children were disengaged across every center today. You attributed it to their mood, but I observed the same pattern in each of my last three visits. You need to update your centers more frequently, and I want you to build a new plan before I come back."</div>
+          </button>
+        </div>
+
+        <div class="feedback-block wrong" id="s8-feedback-A">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>This warm, permission-seeking opener is thoughtfully designed for a <strong>Sustainer</strong> who needs relational safety before hearing a challenge. But a <strong>Cultivator</strong> like Mr. Kim doesn't need that kind of careful emotional scaffolding — he needs accurate information. Openers like "when you're ready" and "I just wondered" signal to a Cultivator that what follows isn't a serious, evidence-based conversation.</p>
+          <p>Mr. Kim may appreciate the warmth, but he'll also sense that you're tiptoeing around something. Cultivators respect directness as long as it's grounded in logic — and they lose confidence in mentors who seem reluctant to make a clear case.</p>
+          <button class="try-again-btn" onclick="resetQuestion(8)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block wrong" id="s8-feedback-B">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>Vision-painting and enthusiastic possibility language is the native tongue of an <strong>Inspirer</strong> — but Mr. Kim will likely receive it with polite skepticism. "I can just picture" and "new discoveries every Monday" sounds imprecise and emotionally-driven to a Cultivator who has built a deliberate system based on careful reasoning. He may wonder what evidence supports the vision you're describing.</p>
+          <p>The Inspirer is energized by the picture. The Cultivator is convinced by the proof. Lead with data, not dreams — and save the vision language for after the evidence has done its work.</p>
+          <button class="try-again-btn" onclick="resetQuestion(8)">↩ Try Again</button>
+        </div>
+        <div class="feedback-block right" id="s8-feedback-C">
+          <h4>🎉 Excellent Match — You Read Your Mentee!</h4>
+          <p>This is exactly how a Cultivator wants to receive feedback: through <em>data, logic, and a collaborative invitation to improve the system</em>. You didn't tell Mr. Kim his rotation schedule is wrong — you showed him observational evidence and framed the issue as a missing input variable in an otherwise reasonable system. That framing is everything.</p>
+          <p>A Cultivator's identity is tied to the quality of his systems. By treating the problem as a system upgrade rather than a system failure, you've given Mr. Kim a way to grow without having to admit he was wrong. He can be right about systems — and also right about needing a new variable. That's a win he can accept.</p>
+          <div class="action-steps">
+            <h5>✅ Follow-Up Action Steps for Continued Growth</h5>
+            <ol>
+              <li><strong>Walk through the engagement data together.</strong> Present your tally — center transitions, time-on-task, off-task instances — and ask Mr. Kim to analyze it with you: "What do you notice? What does this suggest about the relationship between novelty and engagement?" Let him draw the conclusion. He will.</li>
+              <li><strong>Introduce child engagement as a data source for rotation decisions.</strong> Help Mr. Kim add a new variable to his rotation logic: "Instead of rotating on a fixed schedule, what if you rotated when engagement data tells you it's time? What would that indicator look like?" He'll design a better system than you could assign him.</li>
+              <li><strong>Anchor in research.</strong> Share a brief summary of novelty and inquiry-based behavior research. Cultivators don't need to be convinced by anecdote — they need to see that the pivot is evidence-based. One study or one framework is enough.</li>
+              <li><strong>Agree on a specific, measurable pilot.</strong> Suggest a two-week pilot: add one new provocation to one center each week (a new question card, a new tool, a new loose part) and track engagement before and after. Cultivators love controlled experiments. This is one.</li>
+              <li><strong>Review the data together at the next visit.</strong> Open the debrief by looking at his pilot data: "What did you observe about engagement after you added the new provocation?" Let the evidence speak for itself. When the data confirms what you both predicted, Mr. Kim has built the insight — not received it.</li>
+            </ol>
+          </div>
+          <div class="complete-banner" id="s8-complete">
+            <h3>All 8 Scenarios Complete! 🎓✨</h3>
+            <p>You've now coached all four SELCS temperament styles across two full rounds — each in a different classroom situation, with a different QIF domain, and a different set of stakes. The more fluent you become in reading and responding to each style, the more your coaching will meet each mentee exactly where they are.</p>
+            <button class="next-scenario-btn" onclick="switchScenario(1)">↩ Start Again from Scenario 1</button>
+          </div>
+        </div>
+        <div class="feedback-block wrong" id="s8-feedback-D">
+          <h4>❌ Style Mismatch — Let's Reconsider</h4>
+          <p>Direct, bottom-line feedback with a clear action demand is the coaching language of a <strong>Director</strong> — and Mr. Kim will likely hear this as a frontal attack on a system he has thought carefully about. Saying "the six-week rotation isn't working" without evidence or reasoning will put a Cultivator on the defensive immediately. He'll likely push back, justify his schedule, and become less open rather than more.</p>
+          <p>Cultivators respond to logic, not authority. The conclusion you've reached — that the rotation needs to change — is correct. But a Cultivator needs to arrive there through evidence and analysis, not through being told. The destination is the same; the path must be different.</p>
+          <button class="try-again-btn" onclick="resetQuestion(8)">↩ Try Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- end scenario-8 -->
+
+
+</div><!-- end container -->
 
 <footer>SELCS is the intellectual property of Mentor Success Academy · Developed by Mary Wardlaw &amp; Rebecca Munlyn · All rights reserved</footer>
 
 <script>
-  let answered = false;
-  const correct = 'D';
+  // ── STATE ─────────────────────────────────────────────────────
+  const state = {
+    1: { answered: false, correct: 'D' },
+    2: { answered: false, correct: 'C' },
+    3: { answered: false, correct: 'A' },
+    4: { answered: false, correct: 'C' },
+    5: { answered: false, correct: 'B' },
+    6: { answered: false, correct: 'D' },
+    7: { answered: false, correct: 'A' },
+    8: { answered: false, correct: 'C' },
+  };
+  let currentScenario = 1;
 
-  function goToScreen2() {
-    document.getElementById('screen-1').classList.remove('active');
-    document.getElementById('screen-2').classList.add('active');
-    document.getElementById('dot-1').classList.remove('active');
-    document.getElementById('dot-1').classList.add('done');
-    document.getElementById('dot-1').textContent = '✓';
-    document.getElementById('dot-2').classList.add('active');
-    document.getElementById('progress').style.width = '100%';
+  // ── SCENARIO NAVIGATION ───────────────────────────────────────
+  function switchScenario(n) {
+    document.querySelectorAll('.scenario-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.snav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('scenario-' + n).classList.add('active');
+    document.getElementById('snav-' + n).classList.add('active');
+    currentScenario = n;
+    updateGlobalProgress();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function handleAnswer(style) {
-    if (answered) return;
+  function updateGlobalProgress() {
+    const completed = Object.values(state).filter(s => s.answered).length;
+    document.getElementById('global-progress').style.width = (completed / 8 * 100) + '%';
+  }
 
-    const buttons = document.querySelectorAll('.option-btn');
-    buttons.forEach(btn => {
+  // ── SCREEN NAVIGATION ─────────────────────────────────────────
+  function goToScreen2(n) {
+    document.getElementById('s' + n + '-screen-1').classList.remove('active');
+    document.getElementById('s' + n + '-screen-2').classList.add('active');
+    const dot1 = document.getElementById('s' + n + '-dot-1');
+    const dot2 = document.getElementById('s' + n + '-dot-2');
+    dot1.classList.remove('active'); dot1.classList.add('done'); dot1.textContent = '✓';
+    dot2.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── ANSWER HANDLING ───────────────────────────────────────────
+  function handleAnswer(scenarioNum, style) {
+    if (state[scenarioNum].answered) return;
+    const correct = state[scenarioNum].correct;
+
+    // Disable and style all buttons in this scenario
+    const panel = document.getElementById('scenario-' + scenarioNum);
+    panel.querySelectorAll('.option-btn').forEach(btn => {
       btn.disabled = true;
       const s = btn.getAttribute('data-style');
       if (s === style) {
@@ -516,35 +1334,43 @@
       }
     });
 
-    document.getElementById('feedback-' + style).style.display = 'block';
+    document.getElementById('s' + scenarioNum + '-feedback-' + style).style.display = 'block';
 
     if (style === correct) {
-      answered = true;
+      state[scenarioNum].answered = true;
+      const btn = document.getElementById('snav-' + scenarioNum);
+      const labels = {1:'Cultivator',2:'Director',3:'Inspirer',4:'Sustainer',5:'Director',6:'Inspirer',7:'Sustainer',8:'Cultivator'};
+      const types  = {1:'C',2:'D',3:'I',4:'S',5:'D',6:'I',7:'S',8:'C'};
+      btn.innerHTML = `✓ Scenario ${scenarioNum} <span class="snav-badge ${types[scenarioNum]}">${labels[scenarioNum]}</span>`;
+      document.getElementById('s' + scenarioNum + '-complete').style.display = 'block';
+      updateGlobalProgress();
       launchConfetti();
     }
   }
 
-  function resetQuestion() {
-    answered = false;
-    const buttons = document.querySelectorAll('.option-btn');
-    buttons.forEach(btn => {
+  // ── RESET ─────────────────────────────────────────────────────
+  function resetQuestion(n) {
+    const panel = document.getElementById('scenario-' + n);
+    panel.querySelectorAll('.option-btn').forEach(btn => {
       btn.disabled = false;
       btn.classList.remove('correct-answer', 'wrong-answer', 'dimmed');
     });
     ['A','B','C','D'].forEach(s => {
-      document.getElementById('feedback-' + s).style.display = 'none';
+      const fb = document.getElementById('s' + n + '-feedback-' + s);
+      if (fb) fb.style.display = 'none';
     });
   }
 
+  // ── CONFETTI ─────────────────────────────────────────────────
   function launchConfetti() {
     const canvas = document.getElementById('confetti-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    const colors = ['#4a7c59','#c9953a','#f0c97a','#6fa882','#2980b9','#e67e22','#27ae60','#f4a261'];
-    const pieces = Array.from({ length: 200 }, () => ({
+    const colors = ['#4a7c59','#c9953a','#f0c97a','#6fa882','#2980b9','#e67e22','#27ae60','#f4a261','#c0392b','#8e44ad'];
+    const pieces = Array.from({ length: 220 }, () => ({
       x: Math.random() * canvas.width,
-      y: -10 - Math.random() * 250,
+      y: -10 - Math.random() * 280,
       w: 7 + Math.random() * 9, h: 4 + Math.random() * 5,
       color: colors[Math.floor(Math.random() * colors.length)],
       angle: Math.random() * Math.PI * 2,
@@ -572,7 +1398,7 @@
         ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
         ctx.restore();
       });
-      if (alive && frame < 200) requestAnimationFrame(animate);
+      if (alive && frame < 220) requestAnimationFrame(animate);
       else ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
     animate();

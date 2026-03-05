@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentor Success Academy — Mentor Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: #faf8f3; color: #2c2c2c; min-height: 100vh; display: flex; flex-direction: column; }
+header { background: linear-gradient(135deg, #2c4a35, #4a7c59); color: white; padding: 32px 40px; text-align: center; }
+header .logo { background: #c9953a; color: white; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; width: 56px; height: 56px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+header h1 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 6px; }
+header p { font-size: 14px; opacity: 0.8; }
+.tools { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 760px; margin: 48px auto; padding: 0 24px; }
+.tool-card { background: white; border-radius: 16px; border: 1.5px solid #ddd8cc; box-shadow: 0 4px 20px rgba(0,0,0,0.06); overflow: hidden; text-decoration: none; color: inherit; transition: all 0.2s; display: block; }
+.tool-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+.tool-card-head { padding: 28px 28px 18px; }
+.tool-icon { font-size: 36px; margin-bottom: 14px; }
+.tool-card h2 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 8px; color: #2c2c2c; }
+.tool-card p { font-size: 13.5px; color: #666; line-height: 1.6; }
+.tool-card-foot { padding: 14px 28px; background: #f8f5f0; border-top: 1px solid #eee8dc; font-size: 13px; font-weight: 600; color: #4a7c59; display: flex; align-items: center; gap: 6px; }
+footer { text-align: center; font-size: 11px; color: #aaa; padding: 24px; margin-top: auto; }
+@media (max-width: 600px) { .tools { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">MSA</div>
+  <h1>Mentor Success Academy</h1>
+  <p>SELCS-Aligned Mentor Tools</p>
+</header>
+<div class="tools">
+  <a class="tool-card" href="/training">
+    <div class="tool-card-head">
+      <div class="tool-icon">🎓</div>
+      <h2>SELCS Mentor Training</h2>
+      <p>Scenario-based learning module. Observe a classroom interaction and practice choosing the right coaching approach for your mentee's SELCS temperament style.</p>
+    </div>
+    <div class="tool-card-foot">Open Training Module →</div>
+  </a>
+  <a class="tool-card" href="/qif">
+    <div class="tool-card-head">
+      <div class="tool-icon">🔍</div>
+      <h2>Quality Interaction Framework</h2>
+      <p>Live observation tool. Log positive and negative interactions across domains, auto-score indicators, select feedback and goals, and export a full coaching report.</p>
+    </div>
+    <div class="tool-card-foot">Open Observation Tool →</div>
+  </a>
+</div>
+<footer>© Mentor Success Academy · Developed by Mary Wardlaw & Rebecca Munlyn · All rights reserved</footer>
+</body>
+</html>

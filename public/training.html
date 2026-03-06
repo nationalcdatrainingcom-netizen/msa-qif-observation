@@ -932,19 +932,49 @@ const RINGS_SVG = `<svg width="16" height="16" viewBox="0 0 100 100" fill="none"
 let STATE = {
   name: '',
   selcs: '',
-  completed: [],   // module ids completed
-  current: null,   // current module id
-  screen: 'welcome'
+  completed: [],
+  current: null,
+  screen: 'welcome',
+  userId: null
 };
 
-function loadState() {
-  try {
-    const s = localStorage.getItem('selcs_mentor_v2');
-    if (s) STATE = JSON.parse(s);
-  } catch(e) {}
+// Generate a stable user ID from name+selcs (simple, no login needed)
+function makeUserId(name, selcs) {
+  const clean = (name.trim().toLowerCase().replace(/\s+/g,'_') + '_' + selcs).replace(/[^a-z0-9_]/g,'');
+  return clean;
 }
-function saveState() {
-  try { localStorage.setItem('selcs_mentor_v2', JSON.stringify(STATE)); } catch(e) {}
+
+async function loadState(userId) {
+  try {
+    const res = await fetch('/api/progress/' + userId);
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.completed) {
+        STATE.completed = data.completed;
+        STATE.current = data.current || null;
+      }
+    }
+  } catch(e) {
+    // Fallback to localStorage if server unavailable
+    try {
+      const s = localStorage.getItem('selcs_mentor_' + userId);
+      if (s) { const d = JSON.parse(s); STATE.completed = d.completed || []; }
+    } catch(e2) {}
+  }
+}
+
+async function saveState() {
+  if (!STATE.userId) return;
+  const payload = { completed: STATE.completed, current: STATE.current };
+  try {
+    await fetch('/api/progress/' + STATE.userId, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+  } catch(e) {}
+  // Also save to localStorage as fallback
+  try { localStorage.setItem('selcs_mentor_' + STATE.userId, JSON.stringify(payload)); } catch(e) {}
 }
 
 // ── SCREENS ───────────────────────────────────────────────────
@@ -956,16 +986,22 @@ function showScreen(id) {
 }
 
 // ── WELCOME → DASHBOARD ───────────────────────────────────────
-function startTraining() {
+async function startTraining() {
   const name = document.getElementById('learner-name').value.trim();
   const selcs = document.getElementById('learner-selcs').value;
   const err = document.getElementById('enroll-err');
   if (!name) { err.textContent = 'Please enter your name.'; err.style.display='block'; return; }
   if (!selcs) { err.textContent = 'Please select your SELCS type.'; err.style.display='block'; return; }
   err.style.display = 'none';
+  // Show loading state
+  const btn = document.querySelector('#s-welcome .btn-gold');
+  btn.textContent = 'Loading...'; btn.disabled = true;
   STATE.name = name;
   STATE.selcs = selcs;
-  saveState();
+  STATE.userId = makeUserId(name, selcs);
+  // Load any saved progress from server
+  await loadState(STATE.userId);
+  btn.textContent = 'Begin Training'; btn.disabled = false;
   buildDashboard();
   showScreen('s-dash');
 }
@@ -1125,7 +1161,7 @@ function renderCoachScreen(m, sc) {
           <p>${sc.completeLine}</p>
           <div class="btn-row">
             ${!isLastMod ? `<button class="btn btn-gold" onclick="openModule(${nextId})">Module ${nextId}: ${CURRICULUM[nextId-1].title} &nbsp;&rarr;</button>` : '<button class="btn btn-gold" onclick="showCertificate()">View Your Certificate &nbsp;&rarr;</button>'}
-            <button class="btn btn-outline btn-sm" onclick="buildDashboard();showScreen(\'s-dash\')">Back to Dashboard</button>
+            <button class="btn btn-outline btn-sm" onclick="buildDashboard();showScreen('s-dash')">Back to Dashboard</button>
           </div>
         </div>
       </div>
@@ -1236,12 +1272,7 @@ function launchConfetti() {
 
 // ── INIT ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  loadState();
   _answered = false;
-  if (STATE.name) {
-    document.getElementById('learner-name').value = STATE.name;
-    document.getElementById('learner-selcs').value = STATE.selcs;
-  }
   showScreen('s-welcome');
 });
 

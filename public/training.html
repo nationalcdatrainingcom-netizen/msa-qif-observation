@@ -1036,6 +1036,7 @@ function buildDashboard() {
 
 // ── OPEN MODULE → SCENE SCREEN ────────────────────────────────
 function openModule(id) {
+  _answered = false;
   STATE.current = id;
   saveState();
   const m = CURRICULUM.find(x => x.id === id);

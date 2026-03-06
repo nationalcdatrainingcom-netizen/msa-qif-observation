@@ -946,35 +946,20 @@ function makeUserId(name, selcs) {
 
 async function loadState(userId) {
   try {
-    const res = await fetch('/api/progress/' + userId);
-    if (res.ok) {
-      const data = await res.json();
-      if (data && data.completed) {
-        STATE.completed = data.completed;
-        STATE.current = data.current || null;
-      }
+    const s = localStorage.getItem('selcs_mentor_' + userId);
+    if (s) {
+      const d = JSON.parse(s);
+      STATE.completed = d.completed || [];
+      STATE.current = d.current || null;
     }
-  } catch(e) {
-    // Fallback to localStorage if server unavailable
-    try {
-      const s = localStorage.getItem('selcs_mentor_' + userId);
-      if (s) { const d = JSON.parse(s); STATE.completed = d.completed || []; }
-    } catch(e2) {}
-  }
+  } catch(e) {}
 }
-
 async function saveState() {
   if (!STATE.userId) return;
   const payload = { completed: STATE.completed, current: STATE.current };
   try {
-    await fetch('/api/progress/' + STATE.userId, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify(payload)
-    });
+    localStorage.setItem('selcs_mentor_' + STATE.userId, JSON.stringify(payload));
   } catch(e) {}
-  // Also save to localStorage as fallback
-  try { localStorage.setItem('selcs_mentor_' + STATE.userId, JSON.stringify(payload)); } catch(e) {}
 }
 
 // ── SCREENS ───────────────────────────────────────────────────

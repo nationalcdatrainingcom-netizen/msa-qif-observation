@@ -993,15 +993,13 @@ async function startTraining() {
   if (!name) { err.textContent = 'Please enter your name.'; err.style.display='block'; return; }
   if (!selcs) { err.textContent = 'Please select your SELCS type.'; err.style.display='block'; return; }
   err.style.display = 'none';
-  // Show loading state
-  const btn = document.querySelector('#s-welcome .btn-gold');
-  btn.textContent = 'Loading...'; btn.disabled = true;
+ 
   STATE.name = name;
   STATE.selcs = selcs;
   STATE.userId = makeUserId(name, selcs);
   // Load any saved progress from server
-  await loadState(STATE.userId);
-  btn.textContent = 'Begin Training'; btn.disabled = false;
+  try { await loadState(STATE.userId); } catch(e) {}
+  
   buildDashboard();
   showScreen('s-dash');
 }

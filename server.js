@@ -61,6 +61,16 @@ async function initDB() {
         notes TEXT,
         observed_at TIMESTAMP DEFAULT NOW()
       );
+      CREATE TABLE IF NOT EXISTS mentee_resources (
+        id SERIAL PRIMARY KEY,
+        domain_id TEXT NOT NULL,
+        interaction_type TEXT NOT NULL,
+        week_number INTEGER NOT NULL,
+        title TEXT NOT NULL,
+        filename TEXT NOT NULL,
+        pdf_data BYTEA NOT NULL,
+        uploaded_at TIMESTAMP DEFAULT NOW()
+      );
     `);
     console.log('DB initialized');
   } finally {
@@ -198,8 +208,74 @@ app.post('/api/goals', async (req, res) => {
   res.json(result.rows[0]);
 });
 
+// ── MENTEE RESOURCES ─────────────────────────────────────────────
+
+// List available resources
+app.get('/api/resources', async (req, res) => {
+  try {
+    const result = await pool.query(
+      'SELECT id, domain_id, interaction_type, week_number, title, filename, uploaded_at FROM mentee_resources ORDER BY week_number',
+    );
+    res.json(result.rows);
+  } catch(e) {
+    console.error(e);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Download a resource as PDF
+app.get('/api/resources/:id/pdf', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT filename, pdf_data FROM mentee_resources WHERE id=$1', [req.params.id]);
+    if (result.rows.length === 0) return res.status(404).json({ error: 'Not found' });
+    const row = result.rows[0];
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'inline; filename="' + row.filename + '"');
+    res.send(row.pdf_data);
+  } catch(e) {
+    console.error(e);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Upload a resource PDF (admin only — simple secret header check)
+app.post('/api/resources/upload', async (req, res) => {
+  if (req.headers['x-admin-key'] !== (process.env.ADMIN_KEY || 'msa-admin-2024')) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+  const { domainId, interactionType, weekNumber, title, filename, pdfBase64 } = req.body;
+  if (!domainId || !interactionType || !weekNumber || !title || !filename || !pdfBase64) {
+    return res.status(400).json({ error: 'Missing fields' });
+  }
+  try {
+    const buf = Buffer.from(pdfBase64, 'base64');
+    // Upsert — replace if same week/interaction already exists
+    const existing = await pool.query(
+      'SELECT id FROM mentee_resources WHERE interaction_type=$1 AND week_number=$2',
+      [interactionType, weekNumber]
+    );
+    let result;
+    if (existing.rows.length > 0) {
+      result = await pool.query(
+        'UPDATE mentee_resources SET title=$1, filename=$2, pdf_data=$3, uploaded_at=NOW() WHERE id=$4 RETURNING id',
+        [title, filename, buf, existing.rows[0].id]
+      );
+    } else {
+      result = await pool.query(
+        'INSERT INTO mentee_resources (domain_id, interaction_type, week_number, title, filename, pdf_data) VALUES ($1,$2,$3,$4,$5,$6) RETURNING id',
+        [domainId, interactionType, weekNumber, title, filename, buf]
+      );
+    }
+    res.json({ success: true, id: result.rows[0].id });
+  } catch(e) {
+    console.error(e);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // ── ROUTES ────────────────────────────────────────────────────────
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
+app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'public', 'admin-upload.html')));
 app.get('/qif', (req, res) => res.sendFile(path.join(__dirname, 'public', 'qif.html')));
 app.get('/training', (req, res) => res.sendFile(path.join(__dirname, 'public', 'training.html')));
 

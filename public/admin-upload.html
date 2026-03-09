@@ -2,176 +2,1955 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MSA Resource Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>QIF · Quality Interaction Framework · MSA</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; padding: 20px; background: #faf7f0; color: #1a1a24; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-p { color: #666; font-size: 14px; margin-bottom: 28px; }
-.card { background: white; border: 1px solid #e4ddd0; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #888; display: block; margin-bottom: 6px; margin-top: 14px; }
-input, select { width: 100%; padding: 10px 12px; border: 1.5px solid #e4ddd0; border-radius: 8px; font-family: inherit; font-size: 14px; box-sizing: border-box; background: #faf7f0; }
-input:focus, select:focus { outline: none; border-color: #c9953a; background: white; }
-.btn { width: 100%; padding: 13px; background: #3d6b50; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 18px; font-family: inherit; }
-.btn:hover { background: #5a8f6d; }
-.status { padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; margin-top: 14px; display: none; }
-.status.ok { background: #edf7f1; color: #2d6e45; border: 1px solid #9fd4b0; }
-.status.err { background: #fdf0f0; color: #9b2828; border: 1px solid #f0b8b8; }
-.existing { margin-top: 28px; }
-.existing h2 { font-size: 16px; margin-bottom: 12px; }
-.res-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: white; border: 1px solid #e4ddd0; border-radius: 8px; margin-bottom: 8px; font-size: 13px; }
-.res-row a { color: #c9953a; font-weight: 700; text-decoration: none; }
+:root {
+  --black: #0a0a0f;
+  --gold: #c9953a;
+  --gold-l: #e8b55a;
+  --gold-pale: #fdf6e8;
+  --gold-border: #e8d4a0;
+  --sage: #3d6b50;
+  --sage-l: #5a8f6d;
+  --sage-pale: #eaf3ed;
+  --sage-border: #b0cfb9;
+  --cream: #faf7f0;
+  --warm-white: #fffef9;
+  --text: #1a1a24;
+  --text-mid: #4a4a5a;
+  --text-light: #8a8a9a;
+  --border: #e4ddd0;
+  --border-l: #ede8de;
+  --pos: #2d6e45;
+  --pos-bg: #edf7f1;
+  --pos-border: #9fd4b0;
+  --neg: #9b2828;
+  --neg-bg: #fdf0f0;
+  --neg-border: #f0b8b8;
+  --shadow: 0 2px 20px rgba(10,10,15,0.08);
+  --shadow-lg: 0 8px 48px rgba(10,10,15,0.14);
+  --r: 16px;
+  --r-sm: 10px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ── HEADER ── */
+.app-header {
+  background: var(--black);
+  padding: 0 24px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+.header-brand { display: flex; align-items: center; gap: 12px; }
+.header-logo {
+  background: var(--gold);
+  color: var(--black);
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  font-size: 15px;
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+}
+.header-title { color: white; font-size: 15px; font-weight: 700; letter-spacing: 0.3px; }
+.header-title span { color: var(--gold); }
+.header-user {
+  display: flex; align-items: center; gap: 10px;
+  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+}
+.btn-logout {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.7);
+  padding: 5px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.btn-logout:hover { background: rgba(255,255,255,0.14); color: white; }
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: block; animation: fadeUp 0.3s ease; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── LOGIN SCREEN ── */
+.login-wrap {
+  min-height: calc(100vh - 58px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  background: radial-gradient(ellipse at 30% 20%, rgba(201,149,58,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, rgba(61,107,80,0.08) 0%, transparent 60%),
+              var(--cream);
+}
+.login-card {
+  background: var(--warm-white);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--shadow-lg);
+}
+.login-mark {
+  width: 56px; height: 56px;
+  background: var(--black);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--gold);
+}
+.login-card h2 {
+  font-family: 'Lora', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.login-card p { color: var(--text-mid); font-size: 14px; margin-bottom: 32px; }
+.field-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-light); margin-bottom: 6px; display: block; }
+.field-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--cream);
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 18px;
+}
+.field-input:focus { border-color: var(--gold); background: white; }
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: var(--black);
+  color: white;
+  border: none;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.2s;
+}
+.btn-primary:hover { background: var(--sage); }
+.login-note { font-size: 12px; color: var(--text-light); margin-top: 16px; text-align: center; line-height: 1.6; }
+.error-msg { background: var(--neg-bg); border: 1px solid var(--neg-border); color: var(--neg); padding: 10px 14px; border-radius: var(--r-sm); font-size: 13px; margin-bottom: 16px; display: none; }
+
+/* ── DASHBOARD ── */
+.dashboard-wrap { max-width: 900px; margin: 0 auto; padding: 36px 20px; }
+.dash-greeting {
+  font-family: 'Lora', serif;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.dash-greeting span { color: var(--gold); }
+.dash-sub { color: var(--text-mid); font-size: 14px; margin-bottom: 32px; }
+
+.section-label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-light);
+  margin-bottom: 14px;
+}
+.mentee-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; margin-bottom: 32px; }
+.mentee-card {
+  background: var(--warm-white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.22s;
+  position: relative;
+  overflow: hidden;
+}
+.mentee-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--gold);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.mentee-card:hover { border-color: var(--gold-border); transform: translateY(-2px); box-shadow: var(--shadow); }
+.mentee-card:hover::before { opacity: 1; }
+.mentee-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.mentee-room { font-size: 12px; color: var(--text-light); margin-bottom: 12px; }
+.mentee-progress { display: flex; gap: 6px; flex-wrap: wrap; }
+.progress-pip {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: var(--sage-pale);
+  color: var(--sage);
+  border: 1px solid var(--sage-border);
+}
+.progress-pip.done { background: var(--gold-pale); color: var(--gold); border-color: var(--gold-border); }
+
+.add-mentee-card {
+  background: transparent;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--r);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-light);
+  font-weight: 600;
+  font-size: 14px;
+}
+.add-mentee-card:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-pale); }
+.add-icon { font-size: 20px; }
+
+/* ── ADD MENTEE FORM ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,15,0.5);
+  z-index: 300;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--warm-white);
+  border-radius: 20px;
+  padding: 36px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--shadow-lg);
+  animation: fadeUp 0.25s ease;
+}
+.modal-box h3 { font-family: 'Lora', serif; font-size: 20px; margin-bottom: 6px; }
+.modal-box p { color: var(--text-mid); font-size: 13px; margin-bottom: 24px; }
+.modal-btns { display: flex; gap: 10px; margin-top: 8px; }
+.btn-secondary {
+  flex: 1;
+  padding: 12px;
+  background: var(--cream);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-mid);
+  transition: all 0.2s;
+}
+.btn-secondary:hover { background: var(--border); }
+.btn-primary-sm {
+  flex: 2;
+  padding: 12px;
+  background: var(--sage);
+  color: white;
+  border: none;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary-sm:hover { background: var(--sage-l); }
+
+/* ── MENTEE DETAIL ── */
+.mentee-detail-wrap { max-width: 960px; margin: 0 auto; padding: 28px 20px; }
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-mid);
+  cursor: pointer;
+  padding: 6px 0;
+  margin-bottom: 24px;
+  border: none;
+  background: none;
+  font-family: inherit;
+  transition: color 0.2s;
+}
+.back-btn:hover { color: var(--text); }
+.mentee-detail-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+.mentee-detail-name { font-family: 'Lora', serif; font-size: 28px; font-weight: 600; }
+.mentee-detail-room { color: var(--text-light); font-size: 14px; margin-top: 4px; }
+.week-badge {
+  background: var(--gold-pale);
+  border: 1px solid var(--gold-border);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+/* Interaction type cards */
+.domain-label {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.domain-desc { font-size: 13px; color: var(--text-mid); margin-bottom: 20px; }
+
+.interaction-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 36px; }
+.interaction-card {
+  background: var(--warm-white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 18px;
+  cursor: pointer;
+  transition: all 0.22s;
+  position: relative;
+}
+.interaction-card:hover { border-color: var(--sage-border); transform: translateY(-2px); box-shadow: var(--shadow); }
+.interaction-card.active-week { border-color: var(--sage); background: var(--sage-pale); }
+.interaction-card.complete { border-color: var(--gold-border); background: var(--gold-pale); }
+.int-week-tag {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-light);
+  margin-bottom: 10px;
+}
+.interaction-card.active-week .int-week-tag { color: var(--sage); }
+.interaction-card.complete .int-week-tag { color: var(--gold); }
+.int-name { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.int-days { display: flex; gap: 4px; margin-top: 10px; }
+.day-dot {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--text-light);
+}
+.day-dot.done { background: var(--sage); color: white; }
+.day-dot.report { background: var(--gold); color: white; }
+.day-dot.complete { background: #1a6bbf; color: white; }
+
+/* ── OBSERVATION SCREEN ── */
+.obs-wrap { max-width: 800px; margin: 0 auto; padding: 24px 20px; }
+.obs-header-card {
+  background: var(--warm-white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.obs-title { font-family: 'Lora', serif; font-size: 20px; font-weight: 600; }
+.obs-meta { font-size: 12px; color: var(--text-light); margin-top: 3px; }
+.time-selector { display: flex; gap: 8px; flex-wrap: wrap; }
+.time-chip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text-mid);
+  background: var(--cream);
+  transition: all 0.18s;
+}
+.time-chip.selected { background: var(--black); color: white; border-color: var(--black); }
+.time-chip:hover:not(.selected) { border-color: var(--sage); color: var(--sage); }
+
+/* Tally columns */
+.tally-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+@media (max-width: 600px) { .tally-columns { grid-template-columns: 1fr; } }
+
+.tally-col {
+  background: var(--warm-white);
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+}
+.tally-col.positive { border-color: var(--pos-border); }
+.tally-col.negative { border-color: var(--neg-border); }
+
+.tally-col-head {
+  padding: 12px 18px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tally-col.positive .tally-col-head { background: var(--pos-bg); color: var(--pos); border-bottom: 1px solid var(--pos-border); }
+.tally-col.negative .tally-col-head { background: var(--neg-bg); color: var(--neg); border-bottom: 1px solid var(--neg-border); }
+
+.tally-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-l);
+  gap: 8px;
+}
+.tally-item:last-child { border-bottom: none; }
+.tally-item-label { font-size: 13px; font-weight: 600; flex: 1; line-height: 1.3; }
+.tally-item-label input {
+  border: none;
+  border-bottom: 1px dashed var(--border);
+  background: transparent;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  outline: none;
+  width: 120px;
+}
+.tally-counter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tally-count {
+  min-width: 32px;
+  height: 32px;
+  background: var(--cream);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.tally-col.positive .tally-count { color: var(--pos); background: var(--pos-bg); border-color: var(--pos-border); }
+.tally-col.negative .tally-count { color: var(--neg); background: var(--neg-bg); border-color: var(--neg-border); }
+
+.tally-btn {
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.1s;
+  font-family: inherit;
+}
+.tally-btn:active { transform: scale(0.9); }
+.tally-btn.plus { background: var(--pos-bg); color: var(--pos); border: 1.5px solid var(--pos-border); }
+.tally-col.negative .tally-btn.plus { background: var(--neg-bg); color: var(--neg); border-color: var(--neg-border); }
+.tally-btn.minus { background: var(--cream); color: var(--text-light); border: 1.5px solid var(--border); font-size: 16px; }
+
+.obs-notes {
+  background: var(--warm-white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 18px;
+  margin-bottom: 16px;
+}
+.obs-notes label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-light); display: block; margin-bottom: 8px; }
+.obs-notes textarea {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--cream);
+  resize: vertical;
+  min-height: 80px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.obs-notes textarea:focus { border-color: var(--sage); background: white; }
+
+.save-obs-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--sage);
+  color: white;
+  border: none;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.save-obs-btn:hover { background: var(--sage-l); transform: translateY(-1px); }
+.save-obs-btn:active { transform: scale(0.99); }
+
+/* ── REPORT SCREEN ── */
+.report-wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px; }
+.report-card {
+  background: var(--warm-white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.report-card-head {
+  padding: 18px 22px;
+  background: var(--black);
+  color: white;
+}
+.report-card-head h3 { font-family: 'Lora', serif; font-size: 18px; font-weight: 600; }
+.report-card-head p { font-size: 12px; opacity: 0.6; margin-top: 3px; }
+.report-card-body { padding: 22px; }
+
+.report-highlight {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.highlight-block {
+  flex: 1;
+  min-width: 200px;
+  padding: 16px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid;
+}
+.highlight-block.pos { background: var(--pos-bg); border-color: var(--pos-border); }
+.highlight-block.neg { background: var(--neg-bg); border-color: var(--neg-border); }
+.hl-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+.highlight-block.pos .hl-label { color: var(--pos); }
+.highlight-block.neg .hl-label { color: var(--neg); }
+.hl-item { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+.hl-count { font-size: 24px; font-weight: 800; }
+.highlight-block.pos .hl-count { color: var(--pos); }
+.highlight-block.neg .hl-count { color: var(--neg); }
+.hl-sub { font-size: 12px; color: var(--text-mid); margin-top: 4px; }
+
+.bar-chart { margin: 16px 0; }
+.bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.bar-label { font-size: 12px; font-weight: 600; width: 150px; flex-shrink: 0; text-align: right; color: var(--text-mid); }
+.bar-track { flex: 1; background: var(--border-l); border-radius: 6px; height: 20px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 6px; transition: width 0.6s ease; display: flex; align-items: center; padding-left: 8px; }
+.bar-fill.pos-bar { background: var(--pos); }
+.bar-fill.neg-bar { background: var(--neg); }
+.bar-val { font-size: 11px; font-weight: 800; color: white; }
+.bar-val-out { font-size: 11px; font-weight: 700; color: var(--text-light); margin-left: 6px; }
+
+.goal-section { }
+.goal-section h4 { font-family: 'Lora', serif; font-size: 16px; margin-bottom: 14px; color: var(--text); }
+.goal-suggestions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+.goal-suggestion {
+  padding: 12px 16px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-mid);
+  background: var(--cream);
+  transition: all 0.18s;
+  text-align: left;
+  font-family: inherit;
+  line-height: 1.4;
+}
+.goal-suggestion:hover { border-color: var(--sage); color: var(--sage); background: var(--sage-pale); }
+.goal-suggestion.selected { border-color: var(--sage); background: var(--sage-pale); color: var(--sage); font-weight: 700; }
+.goal-suggestion.selected::before { content: '✓ '; }
+
+.custom-goal-wrap { margin-top: 10px; }
+.custom-goal-wrap textarea {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--cream);
+  resize: vertical;
+  min-height: 70px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.custom-goal-wrap textarea:focus { border-color: var(--sage); background: white; }
+
+.save-report-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: all 0.2s;
+  letter-spacing: 0.2px;
+}
+.save-report-btn:hover { background: var(--gold-l); }
+
+/* saved toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--black);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 999;
+  transition: transform 0.3s ease;
+  white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* util */
+.spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.hidden { display: none !important; }
+
+/* Day nav */
+.day-nav { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.day-nav-btn {
+  flex: 1;
+  min-width: 100px;
+  padding: 10px 8px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid var(--border);
+  background: var(--warm-white);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text-mid);
+  transition: all 0.18s;
+  text-align: center;
+}
+.day-nav-btn:hover { border-color: var(--sage); color: var(--sage); }
+.day-nav-btn.selected { background: var(--sage); color: white; border-color: var(--sage); }
+.day-nav-btn.done { border-color: var(--gold-border); color: var(--gold); background: var(--gold-pale); }
+.day-nav-btn.report-day { border-color: var(--black); color: white; background: var(--black); }
+
+@media print {
+  .app-header, .back-btn, .report-action-bar, .goal-section,
+  .report-card:not(.printable) { display: none !important; }
+  body { background: white; }
+  .report-wrap { padding: 0; }
+}
+.shareable-report { background: var(--warm-white); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin-bottom: 20px; display: none; }
+.shareable-report.visible { display: block; }
+.sr-header { background: var(--black); color: white; padding: 28px 28px 20px; }
+.sr-logo { font-family: 'Lora', serif; font-size: 12px; font-weight: 600; color: var(--gold); letter-spacing: 0.5px; margin-bottom: 10px; }
+.sr-title { font-family: 'Lora', serif; font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+.sr-meta { font-size: 12px; opacity: 0.6; }
+.sr-body { padding: 24px 28px; }
+.sr-section { margin-bottom: 22px; }
+.sr-section-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border-l); }
+.sr-strength { background: var(--pos-bg); border: 1.5px solid var(--pos-border); border-radius: var(--r-sm); padding: 16px; margin-bottom: 10px; }
+.sr-growth { background: var(--neg-bg); border: 1.5px solid var(--neg-border); border-radius: var(--r-sm); padding: 16px; }
+.sr-item-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px; }
+.sr-strength .sr-item-label { color: var(--pos); }
+.sr-growth .sr-item-label { color: var(--neg); }
+.sr-item-value { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+.sr-item-count { font-size: 13px; color: var(--text-mid); }
+.sr-goal-box { background: var(--gold-pale); border: 1.5px solid var(--gold-border); border-radius: var(--r-sm); padding: 18px; }
+.sr-goal-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; color: var(--gold); margin-bottom: 8px; }
+.sr-goal-text { font-size: 15px; font-weight: 600; line-height: 1.5; color: var(--text); }
+.sr-research { background: #f4f0e8; border-left: 3px solid var(--gold); border-radius: 0 var(--r-sm) var(--r-sm) 0; padding: 18px 20px; margin-top: 4px; }
+.sr-research-title { font-family: 'Lora', serif; font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+.sr-research-summary { font-size: 13px; color: var(--text-mid); line-height: 1.6; margin-bottom: 10px; }
+.sr-research-points { list-style: none; padding: 0; margin-bottom: 10px; }
+.sr-research-points li { font-size: 12px; color: var(--text-mid); line-height: 1.6; margin-bottom: 6px; padding-left: 16px; position: relative; }
+.sr-research-points li::before { content: "→"; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+.sr-connection { font-size: 13px; font-style: italic; color: var(--sage); font-weight: 600; line-height: 1.6; }
+.sr-mentor-notes { background: var(--sage-pale); border: 1px solid var(--sage-border); border-radius: var(--r-sm); padding: 14px 16px; font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+.report-action-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.btn-print { flex: 1; padding: 14px; background: var(--black); color: white; border: none; border-radius: var(--r-sm); font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+.btn-print:hover { background: var(--sage); }
+.btn-back-edit { padding: 14px 20px; background: var(--cream); border: 1.5px solid var(--border); border-radius: var(--r-sm); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; color: var(--text-mid); transition: all 0.2s; }
+.btn-back-edit:hover { border-color: var(--sage); color: var(--sage); }
+.btn-dashboard { padding: 14px 20px; background: var(--sage); border: none; border-radius: var(--r-sm); font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; color: white; transition: all 0.2s; }
+.btn-dashboard:hover { background: var(--sage-l); }
+
+/* ── RESOURCES PANEL ── */
+.resources-wrap { max-width: 900px; margin: 0 auto; padding: 36px 20px; }
+.resources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-top: 16px; }
+.resource-card {
+  background: var(--warm-white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px 18px;
+  cursor: pointer;
+  transition: all 0.22s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.resource-card:hover { border-color: var(--gold-border); transform: translateY(-2px); box-shadow: var(--shadow); }
+.resource-icon { font-size: 28px; }
+.resource-week { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-light); }
+.resource-title { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.3; }
+.resource-open { font-size: 12px; font-weight: 700; color: var(--gold); margin-top: 4px; }
+.resource-empty { color: var(--text-light); font-size: 14px; padding: 20px 0; }
+.resources-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+.resources-upload-info { font-size: 12px; color: var(--text-light); font-style: italic; }
+
+
+.domain-tab {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--warm-white);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text-mid);
+  transition: all 0.18s;
+}
+.domain-tab:hover { border-color: var(--sage); color: var(--sage); }
+.domain-tab.active { background: var(--black); color: white; border-color: var(--black); }
+
 </style>
 </head>
 <body>
-<h1>📄 MSA Resource Admin</h1>
-<p>Upload mentee guide PDFs to the database. These will appear in the QIF app under "Mentee Resources".</p>
 
-<div class="card">
-  <label>Admin Key</label>
-  <input type="password" id="admin-key" placeholder="Enter admin key">
+<header class="app-header">
+  <div class="header-brand">
+    <div class="header-logo">M</div>
+    <div>
+      <div class="header-title">Quality Interaction <span>Framework</span></div>
+    </div>
+  </div>
+  <div class="header-user">
+    <span id="header-mentor-name"></span>
+    <button class="btn-logout" onclick="logout()">Sign out</button>
+  </div>
+</header>
 
-  <label>Domain</label>
-  <select id="domain-id" onchange="updateInteractionTypes()">
-    <option value="emotional">Domain 1 — Emotional Climate & Responsiveness</option>
-    <option value="organization">Domain 2 — Classroom Organization</option>
-  </select>
-
-  <label>Interaction Type</label>
-  <select id="interaction-type" onchange="syncWeekAndTitle()">
-    <option value="positive_climate">Week 1 — Positive Climate</option>
-    <option value="teacher_responsiveness">Week 2 — Teacher Responsiveness</option>
-    <option value="child_perspective">Week 3 — Regard for Child Perspective</option>
-    <option value="conflict_as_learning">Week 4 — Conflict as Learning</option>
-  </select>
-
-  <label>Week Number</label>
-  <select id="week-number">
-    <option value="1">Week 1</option>
-    <option value="2">Week 2</option>
-    <option value="3">Week 3</option>
-    <option value="4">Week 4</option>
-  </select>
-
-  <label>Resource Title (shown to mentors)</label>
-  <input type="text" id="res-title" placeholder="e.g. Positive Climate — Mentee Guide">
-
-  <label>PDF File</label>
-  <input type="file" id="pdf-file" accept=".pdf">
-
-  <button class="btn" onclick="uploadResource()">Upload Resource</button>
-  <div class="status" id="status"></div>
+<!-- ══ LOGIN ════════════════════════════════════════════════════ -->
+<div class="screen active" id="screen-login">
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-mark">M</div>
+      <h2>Mentor Sign In</h2>
+      <p>Enter your name and 4-digit PIN. If you're new, this will create your account.</p>
+      <div id="login-error" class="error-msg"></div>
+      <label class="field-label">Your Name</label>
+      <input class="field-input" id="login-name" type="text" placeholder="e.g. Rebecca Munlyn" autocomplete="name">
+      <label class="field-label">PIN (4 digits)</label>
+      <input class="field-input" id="login-pin" type="password" maxlength="4" pattern="[0-9]*" inputmode="numeric" placeholder="••••">
+      <button class="btn-primary" onclick="doLogin()">Continue →</button>
+      <p class="login-note">First time? Entering your name and a PIN will create your account.<br>Remember your PIN — you'll need it each time.</p>
+    </div>
+  </div>
 </div>
 
-<div class="existing">
-  <h2>Existing Resources</h2>
-  <div id="existing-list">Loading…</div>
+<!-- ══ DASHBOARD ══════════════════════════════════════════════════ -->
+<div class="screen" id="screen-dashboard">
+  <div class="dashboard-wrap">
+    <div class="dash-greeting">Welcome, <span id="dash-mentor-name">—</span></div>
+    <div class="dash-sub">Select a mentee to begin or continue an observation.</div>
+    <div class="section-label">Your Mentees</div>
+    <div class="mentee-grid" id="mentee-grid">
+      <!-- populated by JS -->
+    </div>
+  </div>
 </div>
+
+<!-- ══ ADD MENTEE MODAL ═══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-add-mentee">
+  <div class="modal-box">
+    <h3>Add a Mentee</h3>
+    <p>Enter the mentee's name and classroom to begin tracking their growth.</p>
+    <label class="field-label">Mentee Name</label>
+    <input class="field-input" id="new-mentee-name" type="text" placeholder="e.g. Jasmine Carter">
+    <label class="field-label">Classroom / Location</label>
+    <input class="field-input" id="new-mentee-room" type="text" placeholder="e.g. Bluebirds Room">
+    <div class="modal-btns">
+      <button class="btn-secondary" onclick="closeAddMentee()">Cancel</button>
+      <button class="btn-primary-sm" onclick="saveMentee()">Add Mentee</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MENTEE DETAIL ══════════════════════════════════════════════ -->
+<div class="screen" id="screen-mentee">
+  <div class="mentee-detail-wrap">
+    <button class="back-btn" onclick="showDashboard()">← Back to Dashboard</button>
+    <div class="mentee-detail-header">
+      <div>
+        <div class="mentee-detail-name" id="detail-mentee-name">—</div>
+        <div class="mentee-detail-room" id="detail-mentee-room">—</div>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+      <div>
+        <div class="section-label" style="margin-bottom:4px;" id="active-domain-label">Domain 1 — Emotional Climate &amp; Responsiveness</div>
+        <div class="domain-desc" style="margin-bottom:0;">Four weeks of focused daily observation. Each week closes with a coaching report and goal on Day 5.</div>
+      </div>
+      <button class="btn-secondary" style="width:auto;padding:8px 16px;font-size:13px;" onclick="showResources()">📄 Mentee Resources</button>
+    </div>
+    <div class="domain-tabs" id="domain-tabs" style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
+      <button class="domain-tab active" data-domain="0" onclick="switchDomain(0)">Domain 1: Emotional Climate</button>
+      <button class="domain-tab" data-domain="1" onclick="switchDomain(1)">Domain 2: Classroom Organization</button>
+    </div>
+
+    <div class="interaction-grid" id="interaction-grid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ══ OBSERVATION ════════════════════════════════════════════════ -->
+<div class="screen" id="screen-obs">
+  <div class="obs-wrap">
+    <button class="back-btn" id="obs-back-btn">← Back</button>
+
+    <div class="obs-header-card">
+      <div>
+        <div class="obs-title" id="obs-title">—</div>
+        <div class="obs-meta" id="obs-meta">—</div>
+      </div>
+      <div>
+        <div class="section-label" style="margin-bottom:8px;">Time of Day</div>
+        <div class="time-selector" id="time-selector">
+          <button class="time-chip" data-time="early_morning" onclick="selectTime(this)">Early Morning</button>
+          <button class="time-chip" data-time="late_morning" onclick="selectTime(this)">Late Morning</button>
+          <button class="time-chip" data-time="early_afternoon" onclick="selectTime(this)">Early Afternoon</button>
+          <button class="time-chip" data-time="late_afternoon" onclick="selectTime(this)">Late Afternoon</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day navigation -->
+    <div class="day-nav" id="day-nav"></div>
+
+    <!-- Tally grid -->
+    <div class="tally-columns" id="tally-columns">
+      <div class="tally-col positive">
+        <div class="tally-col-head">✦ Positive Interactions</div>
+        <div id="pos-items"></div>
+      </div>
+      <div class="tally-col negative">
+        <div class="tally-col-head">✕ Negative Interactions</div>
+        <div id="neg-items"></div>
+      </div>
+    </div>
+
+    <div class="obs-notes">
+      <label>Observation Notes (optional)</label>
+      <textarea id="obs-notes-text" placeholder="Brief notes about what you observed…"></textarea>
+    </div>
+
+    <button class="save-obs-btn" onclick="saveObservation()">
+      <span id="save-obs-label">Save Observation</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══ DAY 5 REPORT ═══════════════════════════════════════════════ -->
+<div class="screen" id="screen-report">
+  <div class="report-wrap">
+    <button class="back-btn" id="report-back-btn">← Back</button>
+
+    <div class="report-card">
+      <div class="report-card-head">
+        <h3 id="report-title">Week Report</h3>
+        <p id="report-subtitle">Summary from 4 days of observation</p>
+      </div>
+      <div class="report-card-body">
+        <div class="report-highlight" id="report-highlights"></div>
+        <div class="section-label" style="margin-bottom:12px;">All Positive Behaviors</div>
+        <div class="bar-chart" id="pos-bar-chart"></div>
+        <div class="section-label" style="margin-top:18px; margin-bottom:12px;">All Negative Behaviors</div>
+        <div class="bar-chart" id="neg-bar-chart"></div>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <div class="report-card-head">
+        <h3>Set This Week's Goal</h3>
+        <p>Choose one specific behavior for your mentee to mindfully work on this week.</p>
+      </div>
+      <div class="report-card-body">
+        <div class="goal-section">
+          <h4>Suggested Goals</h4>
+          <div class="goal-suggestions" id="goal-suggestions"></div>
+          <div class="custom-goal-wrap">
+            <label class="field-label">Or write a custom goal</label>
+            <textarea id="custom-goal-text" placeholder="Describe the specific behavior you'd like your mentee to focus on…"></textarea>
+          </div>
+          <div class="obs-notes" style="margin-top:16px; margin-bottom:0;">
+            <label>Mentor Notes for this Session</label>
+            <textarea id="mentor-session-notes" placeholder="Notes to share with your mentee, things to remember, follow-up ideas…"></textarea>
+          </div>
+          <button class="save-report-btn" onclick="saveReport()">Save &amp; Share Report ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- ══ SHAREABLE REPORT ══════════════════════════════════════════ -->
+<div class="shareable-report" id="shareable-report">
+  <div class="sr-header">
+    <div class="sr-logo">Mentor Success Academy · Quality Interaction Framework</div>
+    <div class="sr-title" id="sr-title">Week Report</div>
+    <div class="sr-meta" id="sr-meta"></div>
+  </div>
+  <div class="sr-body">
+    <div class="sr-section" id="sr-observations-section">
+      <div class="sr-section-title">Observation Summary — 4 Days</div>
+      <div id="sr-strength"></div>
+      <div id="sr-growth"></div>
+    </div>
+    <div class="sr-section">
+      <div class="sr-section-title">This Week's Goal</div>
+      <div class="sr-goal-box">
+        <div class="sr-goal-label">Your mentor has set this focus for you:</div>
+        <div class="sr-goal-text" id="sr-goal-text"></div>
+      </div>
+    </div>
+    <div class="sr-section" id="sr-research-section">
+      <div class="sr-section-title">The Research Behind This Work</div>
+      <div class="sr-research">
+        <div class="sr-research-title" id="sr-research-title"></div>
+        <div class="sr-research-summary" id="sr-research-summary"></div>
+        <ul class="sr-research-points" id="sr-research-points"></ul>
+        <div class="sr-connection" id="sr-connection"></div>
+      </div>
+    </div>
+    <div class="sr-section" id="sr-notes-section" style="display:none;">
+      <div class="sr-section-title">Mentor Notes</div>
+      <div class="sr-mentor-notes" id="sr-mentor-notes"></div>
+    </div>
+  </div>
+</div>
+<div class="report-action-bar" id="report-action-bar" style="display:none;">
+  <button class="btn-back-edit" onclick="hideShareableReport()">← Edit Goal</button>
+  <button class="btn-print" onclick="window.print()">🖨 Print / Save as PDF</button>
+  <button class="btn-dashboard" onclick="returnToDashboard()">✓ Return to Dashboard</button>
+</div>
+</div>
+
+<!-- ══ RESOURCES ═════════════════════════════════════════════════ -->
+<div class="screen" id="screen-resources">
+  <div class="resources-wrap">
+    <button class="back-btn" id="resources-back-btn">← Back</button>
+    <div class="resources-header">
+      <div>
+        <div class="dash-greeting" style="font-size:22px;">Mentee <span style="color:var(--gold);">Resources</span></div>
+        <div class="dash-sub">Printable weekly guides to share with your mentee on Day 5.</div>
+      </div>
+    </div>
+    <div class="section-label" style="margin-top:24px; margin-bottom:0;" id="resources-domain-label">Domain 1 — Emotional Climate &amp; Responsiveness</div>
+    <div class="resources-grid" id="resources-grid">
+      <div class="resource-empty">Loading resources…</div>
+    </div>
+    <div class="resources-upload-info" style="margin-top:16px;">
+      Resources are added by your MSA administrator. Contact your program coordinator if a document is missing.
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-const DOMAIN_INTERACTIONS = {
-  emotional: [
-    { value: 'positive_climate', label: 'Week 1 — Positive Climate', week: 1, title: 'Positive Climate — Mentee Guide' },
-    { value: 'teacher_responsiveness', label: 'Week 2 — Teacher Responsiveness', week: 2, title: 'Teacher Responsiveness — Mentee Guide' },
-    { value: 'child_perspective', label: 'Week 3 — Regard for Child Perspective', week: 3, title: 'Regard for Child Perspective — Mentee Guide' },
-    { value: 'conflict_as_learning', label: 'Week 4 — Conflict as Learning', week: 4, title: 'Conflict as Learning — Mentee Guide' },
-  ],
-  organization: [
-    { value: 'behavior_management', label: 'Week 1 — Behavior Management', week: 1, title: 'Behavior Management — Mentee Guide' },
-    { value: 'productivity', label: 'Week 2 — Productivity', week: 2, title: 'Productivity — Mentee Guide' },
-    { value: 'instructional_formats', label: 'Week 3 — Instructional Learning Formats', week: 3, title: 'Instructional Learning Formats — Mentee Guide' },
-    { value: 'learning_environment', label: 'Week 4 — Learning Environment & Design', week: 4, title: 'Learning Environment & Design — Mentee Guide' },
+// ════════════════════════════════════════════════════════════════
+// DATA — All Domains
+// ════════════════════════════════════════════════════════════════
+const DOMAINS = [
+{
+  id: 'emotional',
+  name: 'Emotional Climate & Responsiveness',
+  interactionTypes: [
+    {
+      id: 'positive_climate',
+      name: 'Positive Climate',
+      week: 1,
+      icon: '🌤',
+      positiveItems: [
+        { id: 'p1', label: 'Smiles at children' },
+        { id: 'p2', label: 'Laughter / playfulness' },
+        { id: 'p3', label: 'Hugs / physical affection' },
+        { id: 'p4', label: 'Greeting at the door' },
+        { id: 'p5', label: 'Uses child\'s name warmly' },
+        { id: 'p6', label: 'Gets down to child\'s level' },
+        { id: 'p7', label: 'Enthusiastic praise' },
+        { id: 'p8', label: 'Shares a joke or story' },
+        { id: 'p9', label: 'Celebrates child\'s effort' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Yelling at children' },
+        { id: 'n2', label: 'Prolonged crying ignored' },
+        { id: 'n3', label: 'Failing to comfort distress' },
+        { id: 'n4', label: 'Negative words (stop/don\'t)' },
+        { id: 'n5', label: 'Children hitting/fighting' },
+        { id: 'n6', label: 'Sarcasm or dismissiveness' },
+        { id: 'n7', label: 'Ignoring child bids for attention' },
+        { id: 'n8', label: 'Flat or disengaged tone' }
+      ],
+      goalSuggestions: [
+        'Greet each child by name at the door every morning this week.',
+        'Practice getting down to eye level before speaking with any child.',
+        'Set a goal to smile and make eye contact during at least 3 transitions each day.',
+        'Replace one "stop/don\'t" per hour with a positive redirection.',
+        'Find one moment each day to share a laugh or playful exchange with the group.'
+      ]
+    },
+    {
+      id: 'teacher_responsiveness',
+      name: 'Teacher Responsiveness',
+      week: 2,
+      icon: '🤝',
+      positiveItems: [
+        { id: 'p1', label: 'Responds quickly to distress' },
+        { id: 'p2', label: 'Acknowledges child\'s emotion' },
+        { id: 'p3', label: 'Names the feeling aloud' },
+        { id: 'p4', label: 'Offers comfort or support' },
+        { id: 'p5', label: 'Notices subtle cues (body language)' },
+        { id: 'p6', label: 'Validates without over-reacting' },
+        { id: 'p7', label: 'Follows child\'s lead in play' },
+        { id: 'p8', label: 'Adapts tone to child\'s mood' },
+        { id: 'p9', label: 'Checks in proactively' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Ignores child\'s distress signal' },
+        { id: 'n2', label: 'Dismisses or minimizes feelings' },
+        { id: 'n3', label: 'Delayed response (over 2 min)' },
+        { id: 'n4', label: 'Redirects without acknowledging emotion' },
+        { id: 'n5', label: 'Physical unavailability (across room)' },
+        { id: 'n6', label: 'Overreacts to minor frustration' },
+        { id: 'n7', label: 'Interrupts child\'s process' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'Before redirecting any behavior, pause to name the emotion you see first.',
+        'Practice the phrase "I can see you\'re feeling ___ right now" at least twice a day.',
+        'Spend 5 minutes each morning "checking in" with children during arrival.',
+        'This week, follow a child\'s lead in one free play activity each day.',
+        'When a child cries, move within arm\'s reach before speaking.'
+      ]
+    },
+    {
+      id: 'child_perspective',
+      name: 'Regard for Child Perspective',
+      week: 3,
+      icon: '👁',
+      positiveItems: [
+        { id: 'p1', label: 'Asks open-ended questions' },
+        { id: 'p2', label: 'Listens without interrupting' },
+        { id: 'p3', label: 'Incorporates child\'s ideas' },
+        { id: 'p4', label: 'Offers real choices' },
+        { id: 'p5', label: 'Waits for child\'s response' },
+        { id: 'p6', label: 'Validates child\'s opinion' },
+        { id: 'p7', label: 'Follows child\'s curiosity' },
+        { id: 'p8', label: 'Adjusts plan based on child input' },
+        { id: 'p9', label: 'Celebrates creative thinking' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Overrides child\'s choice' },
+        { id: 'n2', label: 'Talks over or interrupts child' },
+        { id: 'n3', label: 'Only yes/no questions asked' },
+        { id: 'n4', label: 'No wait time after questions' },
+        { id: 'n5', label: 'Child ideas dismissed' },
+        { id: 'n6', label: 'Rigid adherence to plan' },
+        { id: 'n7', label: 'Speaks for child instead of to them' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'Rephrase one yes/no question into an open-ended question per activity.',
+        'Practice the "wait" — count 5 seconds silently after asking a question.',
+        'Offer two real choices (both acceptable) instead of a directive, three times a day.',
+        'In one activity daily, let a child\'s idea change the direction of play.',
+        'Write down one thing a child said that surprised you each day this week.'
+      ]
+    },
+    {
+      id: 'conflict_as_learning',
+      name: 'Conflict as Learning',
+      week: 4,
+      icon: '⚖️',
+      positiveItems: [
+        { id: 'p1', label: 'Stays calm during conflict' },
+        { id: 'p2', label: 'Names both children\'s feelings' },
+        { id: 'p3', label: 'Guides problem-solving process' },
+        { id: 'p4', label: 'Asks "what can we do?" questions' },
+        { id: 'p5', label: 'Lets children attempt solution first' },
+        { id: 'p6', label: 'Models negotiation language' },
+        { id: 'p7', label: 'Follows up after resolution' },
+        { id: 'p8', label: 'Frames conflict as learning' },
+        { id: 'p9', label: 'Celebrates peaceful resolution' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Escalates instead of de-escalates' },
+        { id: 'n2', label: 'Takes sides immediately' },
+        { id: 'n3', label: 'Resolves conflict for children' },
+        { id: 'n4', label: 'Uses punishment as first response' },
+        { id: 'n5', label: 'Ignores conflict / hopes it resolves' },
+        { id: 'n6', label: 'Raises voice during conflict' },
+        { id: 'n7', label: 'No follow-up after resolution' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'When conflict happens, take one breath before intervening to set a calm tone.',
+        'Practice naming both children\'s feelings before offering any solution.',
+        'Ask "what\'s a way you could both be happy?" in at least one conflict this week.',
+        'Give children 30 seconds to attempt their own resolution before stepping in.',
+        'After each conflict ends, take 60 seconds to check in with both children.'
+      ]
+    }
   ]
+},
+// ════════════════════════════════════════════════════════════════
+// DOMAIN 2: Classroom Organization
+// ════════════════════════════════════════════════════════════════
+{
+  id: 'organization',
+  name: 'Classroom Organization',
+  interactionTypes: [
+    {
+      id: 'behavior_management',
+      name: 'Behavior Management',
+      week: 5,
+      icon: '🧭',
+      positiveItems: [
+        { id: 'p1', label: 'Proactive redirection before escalation' },
+        { id: 'p2', label: 'Clear, calm behavior expectations stated' },
+        { id: 'p3', label: 'Specific positive behavior acknowledged' },
+        { id: 'p4', label: 'Uses child\'s name calmly in redirection' },
+        { id: 'p5', label: 'Logical consequence given (not punitive)' },
+        { id: 'p6', label: 'Transitions managed with warning/signal' },
+        { id: 'p7', label: 'Consistent follow-through on expectations' },
+        { id: 'p8', label: 'Children reminded of rules positively' },
+        { id: 'p9', label: 'De-escalation used before consequences' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Reactive/punitive response to behavior' },
+        { id: 'n2', label: 'Yelling or sharp tone used' },
+        { id: 'n3', label: 'Inconsistent follow-through' },
+        { id: 'n4', label: 'Blanket reprimand to whole group' },
+        { id: 'n5', label: 'Threat without follow-through' },
+        { id: 'n6', label: 'Transition without warning causes chaos' },
+        { id: 'n7', label: 'Child singled out/shamed publicly' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'Before any redirection this week, take one breath and use the child\'s name calmly.',
+        'Give a 2-minute warning before every transition — use a consistent signal (bell, clap, song).',
+        'Catch one child being good every 15 minutes and name the specific behavior out loud.',
+        'Replace one "don\'t/stop" statement with a positive direction of what TO do.',
+        'Choose one classroom rule and practice stating it positively to children three times today.'
+      ]
+    },
+    {
+      id: 'productivity',
+      name: 'Productivity',
+      week: 6,
+      icon: '⏱',
+      positiveItems: [
+        { id: 'p1', label: 'Smooth, efficient transitions between activities' },
+        { id: 'p2', label: 'Materials prepared and ready before activity' },
+        { id: 'p3', label: 'Minimal wait time for children' },
+        { id: 'p4', label: 'Children engaged throughout activity' },
+        { id: 'p5', label: 'Instructions clear and brief' },
+        { id: 'p6', label: 'Schedule followed with flexibility' },
+        { id: 'p7', label: 'Children know what to do next without asking' },
+        { id: 'p8', label: 'Downtime filled with intentional activity' },
+        { id: 'p9', label: 'Teacher monitors whole room during activity' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Long wait times with nothing to do' },
+        { id: 'n2', label: 'Materials not ready, causing delays' },
+        { id: 'n3', label: 'Children wandering without direction' },
+        { id: 'n4', label: 'Transition takes more than 3 minutes' },
+        { id: 'n5', label: 'Teacher focused on one child, room unmonitored' },
+        { id: 'n6', label: 'Activity ends early with no plan for remaining time' },
+        { id: 'n7', label: 'Repeated instructions needed (children unclear)' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'Prepare all materials for the next activity before the current one ends.',
+        'Practice the "scan" — every 3 minutes, look up and visually check the whole room.',
+        'Time your transitions this week — aim to get all transitions under 2 minutes.',
+        'Create a simple visual schedule children can check themselves when unsure what comes next.',
+        'During any wait time, have a go-to filler (song, finger play, question game) ready to use.'
+      ]
+    },
+    {
+      id: 'instructional_formats',
+      name: 'Instructional Learning Formats',
+      week: 7,
+      icon: '📚',
+      positiveItems: [
+        { id: 'p1', label: 'Variety of learning formats used (whole/small/individual)' },
+        { id: 'p2', label: 'Small group instruction observed' },
+        { id: 'p3', label: 'Hands-on/experiential activity offered' },
+        { id: 'p4', label: 'Format matched to learning goal' },
+        { id: 'p5', label: 'Children actively participating (not passive)' },
+        { id: 'p6', label: 'Materials support the learning format' },
+        { id: 'p7', label: 'Differentiation visible (varied support levels)' },
+        { id: 'p8', label: 'Children given choice of how to engage' },
+        { id: 'p9', label: 'Format shift used to re-engage attention' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Only whole-group instruction used' },
+        { id: 'n2', label: 'Children passive/listening only' },
+        { id: 'n3', label: 'Same format used for all activities' },
+        { id: 'n4', label: 'No differentiation for varied learners' },
+        { id: 'n5', label: 'Materials don\'t match the activity format' },
+        { id: 'n6', label: 'Children disengaged and teacher doesn\'t shift' },
+        { id: 'n7', label: 'Lesson format too long for developmental level' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'This week, plan at least one small group activity each day (3-5 children).',
+        'When you notice children disengaging, shift the format — stand up, move, or switch to hands-on.',
+        'Choose one lesson and add a hands-on component that wasn\'t there before.',
+        'Identify your two strongest learners and two who need extra support — differentiate for both.',
+        'Offer children a choice in one activity daily: how they do it, where they do it, or what they use.'
+      ]
+    },
+    {
+      id: 'learning_environment',
+      name: 'Learning Environment & Design',
+      week: 8,
+      icon: '🏫',
+      positiveItems: [
+        { id: 'p1', label: 'Environment clean, safe, and organized' },
+        { id: 'p2', label: 'Materials accessible at children\'s level' },
+        { id: 'p3', label: 'Centers clearly defined and purposeful' },
+        { id: 'p4', label: 'Children\'s work displayed with care' },
+        { id: 'p5', label: 'Print-rich environment (labels, words visible)' },
+        { id: 'p6', label: 'Cozy/calm space available for regulation' },
+        { id: 'p7', label: 'Materials rotated to maintain interest' },
+        { id: 'p8', label: 'Traffic flow allows movement without conflict' },
+        { id: 'p9', label: 'Environment reflects children\'s cultures/families' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Cluttered or disorganized space' },
+        { id: 'n2', label: 'Materials out of children\'s reach' },
+        { id: 'n3', label: 'No defined learning centers' },
+        { id: 'n4', label: 'No children\'s work displayed' },
+        { id: 'n5', label: 'Environment lacks print/language support' },
+        { id: 'n6', label: 'No calm/regulation space available' },
+        { id: 'n7', label: 'Same materials, never rotated' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'This week, add labels (with pictures) to three areas or containers children use daily.',
+        'Create or designate a small "calm corner" with soft materials and a feelings chart.',
+        'Rotate one center\'s materials this week and observe whether engagement increases.',
+        'Walk your room from a child\'s eye level — can children see and reach what they need?',
+        'Add one item to the environment that reflects a child\'s home culture or family structure.'
+      ]
+    }
+  ]
+}
+];
+
+// Active domain index (0 = Domain 1, 1 = Domain 2)
+let activeDomainIndex = 0;
+function DOMAIN() { return DOMAINS[activeDomainIndex]; }
+
+const RESEARCH = {
+  positive_climate: {
+    why: 'Why Positive Climate Matters',
+    summary: 'Research consistently shows that the emotional tone of a classroom is one of the strongest predictors of child outcomes. When children feel genuinely welcomed, seen, and valued by their teacher, their brains are better regulated and more open to learning.',
+    points: [
+      'Warm, joyful classrooms reduce cortisol and increase capacity for focus and learning risk-taking (Siegel & Bryson, 2011).',
+      'Children who experience frequent positive teacher interactions show stronger language development, social competence, and early literacy by kindergarten (Hamre & Pianta, 2005).',
+      'Positive Climate is among the most powerful CLASS predictors of social-emotional growth across preschool settings (Pianta et al.).',
+      'Secure teacher-child relationships buffer the effects of stress and adversity at home, making the classroom a critical protective factor for at-risk children (Howes et al., 2008).'
+    ],
+    connection: 'Every smile, greeting, and moment of genuine delight communicates: "You are safe here. You matter here." That message shapes how children approach learning for years to come.'
+  },
+  teacher_responsiveness: {
+    why: 'Why Teacher Responsiveness Matters',
+    summary: 'A teacher\'s ability to notice, read, and respond to children\'s cues is one of the most important skills in early childhood. Responsiveness builds the trust that makes everything else possible.',
+    points: [
+      'Responsive caregiving activates the same neural pathways as secure attachment, helping children develop self-regulation (Shonkoff & Phillips, 2000).',
+      'Children whose teachers respond warmly to distress show lower aggression and stronger peer relationships by age 5 (Pianta, 1999).',
+      'The "serve and return" interaction pattern is the primary mechanism through which young brains build neural connections (Harvard Center on the Developing Child, 2015).',
+      'Teachers who tune in to subtle cues catch emotional needs early, before they escalate into behavior challenges.'
+    ],
+    connection: 'When you respond to a child\'s distress, you are building the neural architecture of emotional regulation that will serve that child for life.'
+  },
+  child_perspective: {
+    why: 'Why Regard for Child Perspective Matters',
+    summary: 'When teachers genuinely value children\'s ideas, questions, and choices, they cultivate curiosity, agency, and intrinsic motivation \u2014 the foundations of lifelong learning.',
+    points: [
+      'Children in autonomy-supportive environments show significantly higher intrinsic motivation, creativity, and persistence (Deci & Ryan, Self-Determination Theory).',
+      'Open-ended questioning and wait time develop executive function, vocabulary, and reasoning simultaneously (Dickinson & Tabors, 2001).',
+      'When children\'s ideas shape an activity, engagement and retention increase dramatically compared to fully teacher-directed tasks (Helm & Katz, 2001).',
+      'Regard for Student Perspectives is one of the most predictive CLASS dimensions for higher-order thinking and school readiness (Hamre et al., 2013).'
+    ],
+    connection: 'Every time a teacher follows a child\'s curiosity, they send the message: "Your mind matters. Your ideas have value." That is the seed of a lifelong learner.'
+  },
+  conflict_as_learning: {
+    why: 'Why Conflict as Learning Matters',
+    summary: 'Conflict is not a disruption to learning \u2014 it IS learning. How teachers respond to conflict shapes children\'s capacity for empathy, problem-solving, and emotional regulation.',
+    points: [
+      'Children guided through conflict resolution develop stronger empathy and social problem-solving skills (Denham et al., 2003).',
+      'The prefrontal cortex is shaped heavily by repeated experiences of guided conflict resolution during the early years (Siegel, 2012).',
+      'Calm teachers model co-regulation — they lend their regulated nervous system to the dysregulated child (Porges, Polyvagal Theory).',
+      'Conflict-as-learning programs show 40-60% reductions in aggressive behavior within a single school year (Levin, 2003).'
+    ],
+    connection: 'When you ask "What can we do so you both feel okay?" — you are teaching problem-solving, empathy, and emotional intelligence all at once. That is some of the most important teaching you will ever do.'
+  }
+};
+const DAYS = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5 — Report'];
+const TIME_LABELS = {
+  early_morning: 'Early Morning',
+  late_morning: 'Late Morning',
+  early_afternoon: 'Early Afternoon',
+  late_afternoon: 'Late Afternoon'
 };
 
-function updateInteractionTypes() {
-  const domain = document.getElementById('domain-id').value;
-  const sel = document.getElementById('interaction-type');
-  sel.innerHTML = '';
-  DOMAIN_INTERACTIONS[domain].forEach(function(it) {
-    const opt = document.createElement('option');
-    opt.value = it.value;
-    opt.textContent = it.label;
-    sel.appendChild(opt);
-  });
-  syncWeekAndTitle();
+// ════════════════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════════════════
+let state = {
+  mentorId: null,
+  mentorName: null,
+  mentees: [],
+  currentMentee: null,
+  currentInteraction: null,
+  currentDay: 1,
+  currentTime: null,
+  tallies: {},           // { itemId: count }
+  customLabels: {},      // { itemId: label }
+  allObservations: [],
+  allGoals: []
+};
+
+// ════════════════════════════════════════════════════════════════
+// AUTH
+// ════════════════════════════════════════════════════════════════
+async function doLogin() {
+  const name = document.getElementById('login-name').value.trim();
+  const pin = document.getElementById('login-pin').value.trim();
+  const errEl = document.getElementById('login-error');
+  errEl.style.display = 'none';
+  if (!name || pin.length < 4) { errEl.textContent = 'Please enter your name and a 4-digit PIN.'; errEl.style.display = 'block'; return; }
+  try {
+    const res = await fetch('/api/mentor/login', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ name, pin }) });
+    const data = await res.json();
+    if (!res.ok) { errEl.textContent = data.error || 'Error signing in.'; errEl.style.display = 'block'; return; }
+    state.mentorId = data.mentor.id;
+    state.mentorName = data.mentor.name;
+    document.getElementById('header-mentor-name').textContent = data.mentor.name;
+    await showDashboard();
+  } catch(e) { errEl.textContent = 'Connection error. Please try again.'; errEl.style.display = 'block'; }
 }
 
-function syncWeekAndTitle() {
-  const domain = document.getElementById('domain-id').value;
-  const type = document.getElementById('interaction-type').value;
-  const match = DOMAIN_INTERACTIONS[domain].find(function(it) { return it.value === type; });
-  if (match) {
-    document.getElementById('week-number').value = match.week;
-    document.getElementById('res-title').value = match.title;
+async function logout() {
+  await fetch('/api/mentor/logout', { method: 'POST' });
+  state = { mentorId: null, mentorName: null, mentees: [], currentMentee: null, currentInteraction: null, currentDay: 1, currentTime: null, tallies: {}, customLabels: {}, allObservations: [], allGoals: [] };
+  showScreen('screen-login');
+}
+
+// ════════════════════════════════════════════════════════════════
+// DASHBOARD
+// ════════════════════════════════════════════════════════════════
+async function showDashboard() {
+  showScreen('screen-dashboard');
+  document.getElementById('dash-mentor-name').textContent = state.mentorName;
+  const res = await fetch('/api/mentees');
+  if (res.ok) {
+    state.mentees = await res.json();
+    renderMenteeGrid();
   }
 }
 
-async function uploadResource() {
-  const key = document.getElementById('admin-key').value.trim();
-  const domainId = document.getElementById('domain-id').value;
-  const interactionType = document.getElementById('interaction-type').value;
-  const weekNumber = parseInt(document.getElementById('week-number').value);
-  const title = document.getElementById('res-title').value.trim();
-  const fileInput = document.getElementById('pdf-file');
-  const statusEl = document.getElementById('status');
+function renderMenteeGrid() {
+  const grid = document.getElementById('mentee-grid');
+  grid.innerHTML = '';
+  state.mentees.forEach(function(m, idx) {
+    const pips = DOMAIN().interactionTypes.map(function(it) {
+      return '<span class="progress-pip">Wk ' + it.week + ': ' + it.name.split(' ')[0] + '</span>';
+    }).join('');
+    grid.innerHTML += '<div class="mentee-card" data-mentee="' + idx + '" style="cursor:pointer;">' +
+      '<div class="mentee-name">' + m.name + '</div>' +
+      '<div class="mentee-room">' + (m.classroom || 'No classroom set') + '</div>' +
+      '<div class="mentee-progress">' + pips + '</div></div>';
+  });
+  grid.innerHTML += '<div class="add-mentee-card" id="add-mentee-btn"><span class="add-icon">+</span> Add Mentee</div>';
+  grid.onclick = function(e) {
+    var addBtn = e.target.closest('#add-mentee-btn, .add-mentee-card');
+    if (addBtn) { document.getElementById('modal-add-mentee').classList.add('open'); return; }
+    var card = e.target.closest('[data-mentee]');
+    if (card) {
+      var idx = parseInt(card.getAttribute('data-mentee'));
+      showMenteeDetail(state.mentees[idx]);
+    }
+  };
+}
 
-  if (!key || !title || !fileInput.files[0]) {
-    showStatus('Please fill in all fields and select a PDF.', false);
+function closeAddMentee() {
+  document.getElementById('modal-add-mentee').classList.remove('open');
+  document.getElementById('new-mentee-name').value = '';
+  document.getElementById('new-mentee-room').value = '';
+}
+
+async function saveMentee() {
+  const name = document.getElementById('new-mentee-name').value.trim();
+  const classroom = document.getElementById('new-mentee-room').value.trim();
+  if (!name) return;
+  const res = await fetch('/api/mentees', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ name, classroom }) });
+  if (res.ok) {
+    closeAddMentee();
+    await showDashboard();
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// MENTEE DETAIL
+// ════════════════════════════════════════════════════════════════
+async function showMenteeDetail(mentee) {
+  state.currentMentee = mentee;
+  document.getElementById('detail-mentee-name').textContent = mentee.name;
+  document.getElementById('detail-mentee-room').textContent = mentee.classroom || '';
+
+  // Load observations
+  const obsRes = await fetch(`/api/observations/tally/${mentee.id}`);
+  state.allObservations = obsRes.ok ? await obsRes.json() : [];
+  const goalRes = await fetch(`/api/goals/${mentee.id}`);
+  state.allGoals = goalRes.ok ? await goalRes.json() : [];
+
+  renderInteractionGrid();
+  showScreen('screen-mentee');
+}
+
+function renderInteractionGrid() {
+  const grid = document.getElementById('interaction-grid');
+  grid.innerHTML = '';
+  DOMAIN().interactionTypes.forEach(function(it, index) {
+    const obs = state.allObservations.filter(function(o){ return o.interaction_type === it.id; });
+    const daysLogged = obs.map(function(o){ return o.day_number; });
+    const hasReport = state.allGoals.some(function(g){ return g.interaction_type === it.id; });
+    const dotHtml = [1,2,3,4,5].map(function(d) {
+      let cls = '';
+      if (d === 5 && hasReport) cls = 'complete';
+      else if (d === 5) cls = 'report-day';
+      else if (daysLogged.indexOf(d) > -1) cls = 'done';
+      return '<div class="day-dot ' + cls + '">' + d + '</div>';
+    }).join('');
+    const card = document.createElement('div');
+    card.className = 'interaction-card';
+    card.setAttribute('data-index', index);
+    card.innerHTML = '<div class="int-week-tag">Week ' + it.week + '</div>' +
+      '<div style="font-size:22px;margin-bottom:6px;">' + it.icon + '</div>' +
+      '<div class="int-name">' + it.name + '</div>' +
+      '<div class="int-days">' + dotHtml + '</div>';
+    card.setAttribute('data-index', index);
+    grid.appendChild(card);
+  });
+  grid.onclick = function(e) {
+    var card = e.target.closest('[data-index]');
+    if (card) {
+      var idx = parseInt(card.getAttribute('data-index'));
+      openInteraction(DOMAIN().interactionTypes[idx]);
+    }
+  };
+}
+
+// ════════════════════════════════════════════════════════════════
+// OBSERVATION
+// ════════════════════════════════════════════════════════════════
+function openInteraction(interactionType) {
+  state.currentInteraction = interactionType;
+  state.currentDay = 1;
+  state.tallies = {};
+  state.customLabels = {};
+  state.currentTime = null;
+
+  document.getElementById('obs-back-btn').onclick = () => showMenteeDetail(state.currentMentee);
+
+  renderObsScreen();
+  showScreen('screen-obs');
+}
+
+function renderObsScreen() {
+  const it = state.currentInteraction;
+  document.getElementById('obs-title').textContent = it.name;
+  document.getElementById('obs-meta').textContent = `${state.currentMentee.name} · Week ${it.week} · Domain 1`;
+
+  // Day nav
+  const dayNav = document.getElementById('day-nav');
+  dayNav.innerHTML = '';
+  for (let d = 1; d <= 5; d++) {
+    const obs = state.allObservations.find(o => o.interaction_type === it.id && o.day_number === d);
+    const btn = document.createElement('button');
+    btn.className = 'day-nav-btn';
+    if (d === 5) { btn.textContent = 'Day 5 · Report'; btn.className += ' report-day'; }
+    else { btn.textContent = `Day ${d}`; if (obs) btn.className += ' done'; }
+    if (d === state.currentDay) btn.className += ' selected';
+    const dayNum = d;
+    btn.onclick = () => selectDay(dayNum);
+    dayNav.appendChild(btn);
+  }
+
+  if (state.currentDay === 5) {
+    renderReport();
     return;
   }
 
-  const file = fileInput.files[0];
-  const filename = file.name;
-  const reader = new FileReader();
-  reader.onload = async function(e) {
-    const base64 = e.target.result.split(',')[1];
-    try {
-      const res = await fetch('/api/resources/upload', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'x-admin-key': key },
-        body: JSON.stringify({ domainId, interactionType, weekNumber, title, filename, pdfBase64: base64 })
-      });
-      const data = await res.json();
-      if (res.ok) {
-        showStatus('✓ Uploaded successfully! Resource ID: ' + data.id, true);
-        loadExisting();
-      } else {
-        showStatus('Error: ' + (data.error || 'Upload failed'), false);
-      }
-    } catch(err) {
-      showStatus('Connection error. Please try again.', false);
-    }
+  // Load existing tally for this day if any
+  const existing = state.allObservations.find(o => o.interaction_type === it.id && o.day_number === state.currentDay);
+  if (existing) {
+    state.tallies = existing.tallies || {};
+    state.customLabels = {};
+    document.getElementById('obs-notes-text').value = existing.notes || '';
+    // Restore time chip
+    document.querySelectorAll('.time-chip').forEach(c => {
+      c.classList.toggle('selected', c.dataset.time === existing.time_of_day);
+    });
+    state.currentTime = existing.time_of_day;
+  } else {
+    state.tallies = {};
+    state.customLabels = {};
+    document.getElementById('obs-notes-text').value = '';
+    document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('selected'));
+    state.currentTime = null;
+  }
+
+  renderTallyItems();
+  document.getElementById('tally-columns').style.display = 'grid';
+  var obsNotesEl = document.querySelector('.obs-notes');
+  if (obsNotesEl) obsNotesEl.style.display = 'block';
+  var saveBtn = document.querySelector('.save-obs-btn');
+  if (saveBtn) saveBtn.style.display = 'flex';
+}
+
+function selectDay(d) {
+  state.currentDay = d;
+  renderObsScreen();
+  if (d === 5) showScreen('screen-report');
+}
+
+function selectTime(el) {
+  document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.currentTime = el.dataset.time;
+}
+
+function renderTallyItems() {
+  const it = state.currentInteraction;
+  renderItemList('pos-items', it.positiveItems, true);
+  renderItemList('neg-items', it.negativeItems, false);
+}
+
+function renderItemList(containerId, items, isPos) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  items.forEach(item => {
+    const count = state.tallies[item.id] || 0;
+    const div = document.createElement('div');
+    div.className = 'tally-item';
+    const labelHtml = item.custom
+      ? `<input type="text" value="${state.customLabels[item.id] || ''}" placeholder="Label this…" onchange="setCustomLabel('${item.id}', this.value)">`
+      : item.label;
+    div.innerHTML = `
+      <div class="tally-item-label">${labelHtml}</div>
+      <div class="tally-counter">
+        <button class="tally-btn minus" onclick="adjustTally('${item.id}', -1, ${isPos})">−</button>
+        <div class="tally-count" id="count-${item.id}">${count}</div>
+        <button class="tally-btn plus" onclick="adjustTally('${item.id}', 1, ${isPos})">＋</button>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+function adjustTally(itemId, delta, isPos) {
+  const current = state.tallies[itemId] || 0;
+  const next = Math.max(0, current + delta);
+  state.tallies[itemId] = next;
+  const el = document.getElementById(`count-${itemId}`);
+  if (el) el.textContent = next;
+}
+
+function setCustomLabel(itemId, value) {
+  state.customLabels[itemId] = value;
+}
+
+async function saveObservation() {
+  if (!state.currentTime) { showToast('Please select a time of day first.'); return; }
+  const label = document.getElementById('save-obs-label');
+  label.innerHTML = '<span class="spinner"></span> Saving…';
+  const payload = {
+    menteeId: state.currentMentee.id,
+    domainId: DOMAIN().id,
+    interactionType: state.currentInteraction.id,
+    weekNumber: state.currentInteraction.week,
+    dayNumber: state.currentDay,
+    timeOfDay: state.currentTime,
+    tallies: state.tallies,
+    notes: document.getElementById('obs-notes-text').value
   };
-  reader.readAsDataURL(file);
-}
-
-function showStatus(msg, ok) {
-  const el = document.getElementById('status');
-  el.textContent = msg;
-  el.className = 'status ' + (ok ? 'ok' : 'err');
-  el.style.display = 'block';
-}
-
-async function loadExisting() {
-  const list = document.getElementById('existing-list');
-  try {
-    const res = await fetch('/api/resources');
-    const resources = await res.json();
-    if (resources.length === 0) {
-      list.innerHTML = '<p style="color:#999;font-size:13px;">No resources uploaded yet.</p>';
-      return;
-    }
-    list.innerHTML = resources.map(r =>
-      '<div class="res-row"><span>Week ' + r.week_number + ' — ' + r.title + '</span>' +
-      '<a href="/api/resources/' + r.id + '/pdf" target="_blank">View PDF</a></div>'
-    ).join('');
-  } catch(e) {
-    list.innerHTML = '<p style="color:#999;font-size:13px;">Could not load.</p>';
+  const res = await fetch('/api/observations/tally', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  label.textContent = 'Save Observation';
+  if (res.ok) {
+    // Refresh local observations
+    const obsRes = await fetch(`/api/observations/tally/${state.currentMentee.id}`);
+    state.allObservations = obsRes.ok ? await obsRes.json() : [];
+    renderObsScreen(); // re-render day nav dots
+    showToast('✓ Observation saved!');
+  } else {
+    showToast('Error saving. Please try again.');
   }
 }
 
-loadExisting();
+// ════════════════════════════════════════════════════════════════
+// REPORT (Day 5)
+// ════════════════════════════════════════════════════════════════
+function renderReport() {
+  showScreen('screen-report');
+  const it = state.currentInteraction;
+  document.getElementById('report-title').textContent = `Week ${it.week} Report — ${it.name}`;
+  document.getElementById('report-subtitle').textContent = `${state.currentMentee.name} · 4-Day Observation Summary`;
+  document.getElementById('report-back-btn').onclick = () => { showScreen('screen-obs'); };
+
+  // Aggregate tallies across all 4 days
+  const weekObs = state.allObservations.filter(o => o.interaction_type === it.id && o.day_number <= 4);
+  const posTotals = {};
+  const negTotals = {};
+
+  it.positiveItems.forEach(item => posTotals[item.id] = 0);
+  it.negativeItems.forEach(item => negTotals[item.id] = 0);
+
+  weekObs.forEach(obs => {
+    const t = obs.tallies || {};
+    it.positiveItems.forEach(item => { posTotals[item.id] = (posTotals[item.id] || 0) + (t[item.id] || 0); });
+    it.negativeItems.forEach(item => { negTotals[item.id] = (negTotals[item.id] || 0) + (t[item.id] || 0); });
+  });
+
+  // Find top positive and highest negative
+  const topPos = it.positiveItems.reduce((a, b) => (posTotals[a.id] || 0) >= (posTotals[b.id] || 0) ? a : b);
+  const topNeg = it.negativeItems.reduce((a, b) => (negTotals[a.id] || 0) >= (negTotals[b.id] || 0) ? a : b);
+  const lowestPos = it.positiveItems.reduce((a, b) => (posTotals[a.id] || 0) <= (posTotals[b.id] || 0) ? a : b);
+
+  // Highlights
+  document.getElementById('report-highlights').innerHTML = `
+    <div class="highlight-block pos">
+      <div class="hl-label">Most Observed — Positive</div>
+      <div class="hl-item">${topPos.label.replace('Other:', 'Other')}</div>
+      <div class="hl-count">${posTotals[topPos.id]}</div>
+      <div class="hl-sub">times across 4 days</div>
+    </div>
+    <div class="highlight-block neg">
+      <div class="hl-label">Highest Need for Growth</div>
+      <div class="hl-item">${topNeg.label.replace('Other:', 'Other')}</div>
+      <div class="hl-count">${negTotals[topNeg.id]}</div>
+      <div class="hl-sub">times observed</div>
+    </div>`;
+
+  // Bar charts
+  const posMax = Math.max(1, ...it.positiveItems.map(i => posTotals[i.id] || 0));
+  const negMax = Math.max(1, ...it.negativeItems.map(i => negTotals[i.id] || 0));
+
+  document.getElementById('pos-bar-chart').innerHTML = it.positiveItems.map(item => {
+    const val = posTotals[item.id] || 0;
+    const pct = Math.round((val / posMax) * 100);
+    return `<div class="bar-row">
+      <div class="bar-label">${item.label.replace('Other:', 'Other').slice(0,22)}</div>
+      <div class="bar-track"><div class="bar-fill pos-bar" style="width:${pct}%"><span class="bar-val">${val > 0 ? val : ''}</span></div></div>
+      ${val === 0 ? '<span class="bar-val-out">0</span>' : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('neg-bar-chart').innerHTML = it.negativeItems.map(item => {
+    const val = negTotals[item.id] || 0;
+    const pct = Math.round((val / negMax) * 100);
+    return `<div class="bar-row">
+      <div class="bar-label">${item.label.replace('Other:', 'Other').slice(0,22)}</div>
+      <div class="bar-track"><div class="bar-fill neg-bar" style="width:${pct}%"><span class="bar-val">${val > 0 ? val : ''}</span></div></div>
+      ${val === 0 ? '<span class="bar-val-out">0</span>' : ''}
+    </div>`;
+  }).join('');
+
+  // Goal suggestions
+  const goalsContainer = document.getElementById('goal-suggestions');
+  goalsContainer.innerHTML = it.goalSuggestions.map((g, i) =>
+    `<button class="goal-suggestion" onclick="selectGoal(this, ${i})">${g}</button>`
+  ).join('');
+
+  // Check for existing saved goal
+  const savedGoal = state.allGoals.find(g => g.interaction_type === it.id && g.week_number === it.week);
+  if (savedGoal) {
+    document.getElementById('custom-goal-text').value = savedGoal.chosen_goal || '';
+    document.getElementById('mentor-session-notes').value = savedGoal.mentor_notes || '';
+  } else {
+    document.getElementById('custom-goal-text').value = '';
+    document.getElementById('mentor-session-notes').value = '';
+  }
+}
+
+let selectedGoalIndex = null;
+function selectGoal(el, idx) {
+  document.querySelectorAll('.goal-suggestion').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedGoalIndex = idx;
+  document.getElementById('custom-goal-text').value = state.currentInteraction.goalSuggestions[idx];
+}
+
+async function saveReport() {
+  const chosenGoal = document.getElementById('custom-goal-text').value.trim();
+  const mentorNotes = document.getElementById('mentor-session-notes').value.trim();
+  if (!chosenGoal) { showToast('Please choose or write a goal first.'); return; }
+  const payload = {
+    menteeId: state.currentMentee.id,
+    domainId: DOMAIN().id,
+    interactionType: state.currentInteraction.id,
+    weekNumber: state.currentInteraction.week,
+    chosenGoal,
+    mentorNotes
+  };
+  const res = await fetch('/api/goals', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  if (res.ok) {
+    const goalRes = await fetch('/api/goals/' + state.currentMentee.id);
+    state.allGoals = goalRes.ok ? await goalRes.json() : [];
+    showShareableReport(chosenGoal, mentorNotes);
+  } else {
+    showToast('Error saving. Please try again.');
+  }
+}
+
+function showShareableReport(chosenGoal, mentorNotes) {
+  const it = state.currentInteraction;
+  const research = RESEARCH[it.id];
+
+  // Aggregate totals
+  const weekObs = state.allObservations.filter(function(o){ return o.interaction_type === it.id && o.day_number <= 4; });
+  var posTotals = {}, negTotals = {};
+  it.positiveItems.forEach(function(item){ posTotals[item.id] = 0; });
+  it.negativeItems.forEach(function(item){ negTotals[item.id] = 0; });
+  weekObs.forEach(function(obs) {
+    var t = obs.tallies || {};
+    it.positiveItems.forEach(function(item){ posTotals[item.id] = (posTotals[item.id]||0) + (t[item.id]||0); });
+    it.negativeItems.forEach(function(item){ negTotals[item.id] = (negTotals[item.id]||0) + (t[item.id]||0); });
+  });
+  var topPos = it.positiveItems.reduce(function(a,b){ return (posTotals[a.id]||0) >= (posTotals[b.id]||0) ? a : b; });
+  var topNeg = it.negativeItems.reduce(function(a,b){ return (negTotals[a.id]||0) >= (negTotals[b.id]||0) ? a : b; });
+
+  // Populate report
+  document.getElementById('sr-title').textContent = 'Week ' + it.week + ' Report — ' + it.name;
+  document.getElementById('sr-meta').textContent = state.currentMentee.name + ' · ' + new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+
+  document.getElementById('sr-strength').innerHTML =
+    '<div class="sr-strength"><div class="sr-item-label">Your Strength This Week</div>' +
+    '<div class="sr-item-value">' + topPos.label.replace('Other:','Other') + '</div>' +
+    '<div class="sr-item-count">Observed ' + (posTotals[topPos.id]||0) + ' times across 4 days</div></div>';
+
+  document.getElementById('sr-growth').innerHTML =
+    '<div class="sr-growth"><div class="sr-item-label">Your Growth Opportunity</div>' +
+    '<div class="sr-item-value">' + topNeg.label.replace('Other:','Other') + '</div>' +
+    '<div class="sr-item-count">Observed ' + (negTotals[topNeg.id]||0) + ' times across 4 days</div></div>';
+
+  document.getElementById('sr-goal-text').textContent = chosenGoal;
+
+  if (research) {
+    document.getElementById('sr-research-title').textContent = research.why;
+    document.getElementById('sr-research-summary').textContent = research.summary;
+    document.getElementById('sr-research-points').innerHTML = research.points.map(function(p){
+      return '<li>' + p + '</li>';
+    }).join('');
+    document.getElementById('sr-connection').textContent = research.connection;
+  }
+
+  if (mentorNotes) {
+    document.getElementById('sr-mentor-notes').textContent = mentorNotes;
+    document.getElementById('sr-notes-section').style.display = 'block';
+  } else {
+    document.getElementById('sr-notes-section').style.display = 'none';
+  }
+
+  // Show report, hide goal form
+  document.getElementById('shareable-report').classList.add('visible');
+  document.getElementById('report-action-bar').style.display = 'flex';
+  document.querySelector('.report-card:last-of-type').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function hideShareableReport() {
+  document.getElementById('shareable-report').classList.remove('visible');
+  document.getElementById('report-action-bar').style.display = 'none';
+  document.querySelector('.report-card:last-of-type').style.display = 'block';
+}
+
+async function returnToDashboard() {
+  // Refresh mentee data so day 5 dot updates
+  const obsRes = await fetch('/api/observations/tally/' + state.currentMentee.id);
+  state.allObservations = obsRes.ok ? await obsRes.json() : [];
+  const goalRes = await fetch('/api/goals/' + state.currentMentee.id);
+  state.allGoals = goalRes.ok ? await goalRes.json() : [];
+  // Reset report screen state
+  document.getElementById('shareable-report').classList.remove('visible');
+  document.getElementById('report-action-bar').style.display = 'none';
+  var lastCard = document.querySelector('.report-card:last-of-type');
+  if (lastCard) lastCard.style.display = 'block';
+  showMenteeDetail(state.currentMentee);
+}
+
+// ════════════════════════════════════════════════════════════════
+// DOMAIN SWITCHING
+// ════════════════════════════════════════════════════════════════
+const DOMAIN_LABELS = [
+  'Domain 1 — Emotional Climate & Responsiveness',
+  'Domain 2 — Classroom Organization'
+];
+
+function switchDomain(idx) {
+  activeDomainIndex = idx;
+  document.getElementById('active-domain-label').textContent = DOMAIN_LABELS[idx];
+  document.querySelectorAll('.domain-tab').forEach(function(btn) {
+    btn.classList.toggle('active', parseInt(btn.getAttribute('data-domain')) === idx);
+  });
+  renderInteractionGrid();
+}
+
+// ════════════════════════════════════════════════════════════════
+// RESOURCES
+// ════════════════════════════════════════════════════════════════
+const RESOURCE_ICONS = {
+  positive_climate: '🌤',
+  teacher_responsiveness: '🤝',
+  child_perspective: '👁',
+  conflict_as_learning: '⚖️'
+};
+
+async function showResources() {
+  document.getElementById('resources-back-btn').onclick = function() { showMenteeDetail(state.currentMentee); };
+  showScreen('screen-resources');
+  const grid = document.getElementById('resources-grid');
+  grid.innerHTML = '<div class="resource-empty">Loading…</div>';
+  try {
+    document.getElementById('resources-domain-label').textContent = DOMAIN_LABELS[activeDomainIndex];
+    const res = await fetch('/api/resources?domain=' + DOMAIN().id);
+    const resources = res.ok ? await res.json() : [];
+    if (resources.length === 0) {
+      grid.innerHTML = '<div class="resource-empty">No resources have been uploaded yet. Check back after your first training session.</div>';
+      return;
+    }
+    grid.innerHTML = '';
+    resources.forEach(function(r) {
+      const icon = RESOURCE_ICONS[r.interaction_type] || '📄';
+      const card = document.createElement('div');
+      card.className = 'resource-card';
+      card.innerHTML =
+        '<div class="resource-icon">' + icon + '</div>' +
+        '<div class="resource-week">Week ' + r.week_number + ' · Domain 1</div>' +
+        '<div class="resource-title">' + r.title + '</div>' +
+        '<div class="resource-open">Open PDF →</div>';
+      card.onclick = function() { openResourcePDF(r.id, r.title); };
+      grid.appendChild(card);
+    });
+  } catch(e) {
+    grid.innerHTML = '<div class="resource-empty">Could not load resources. Please check your connection.</div>';
+  }
+}
+
+function openResourcePDF(id, title) {
+  window.open('/api/resources/' + id + '/pdf', '_blank');
+}
+
+// ════════════════════════════════════════════════════════════════
+// UTILS
+// ════════════════════════════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// Check session on load
+(async () => {
+  try {
+    const res = await fetch('/api/mentor/me');
+    if (res.ok) {
+      const data = await res.json();
+      state.mentorId = data.mentorId;
+      state.mentorName = data.mentorName;
+      document.getElementById('header-mentor-name').textContent = data.mentorName;
+      await showDashboard();
+    }
+  } catch(e) { /* stay on login */ }
+})();
+
+document.getElementById('login-pin').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 </script>
 </body>
 </html>

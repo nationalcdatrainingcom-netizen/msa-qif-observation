@@ -32,12 +32,13 @@ input:focus, select:focus { outline: none; border-color: #c9953a; background: wh
   <input type="password" id="admin-key" placeholder="Enter admin key">
 
   <label>Domain</label>
-  <select id="domain-id">
+  <select id="domain-id" onchange="updateInteractionTypes()">
     <option value="emotional">Domain 1 — Emotional Climate & Responsiveness</option>
+    <option value="organization">Domain 2 — Classroom Organization</option>
   </select>
 
   <label>Interaction Type</label>
-  <select id="interaction-type">
+  <select id="interaction-type" onchange="syncWeekAndTitle()">
     <option value="positive_climate">Week 1 — Positive Climate</option>
     <option value="teacher_responsiveness">Week 2 — Teacher Responsiveness</option>
     <option value="child_perspective">Week 3 — Regard for Child Perspective</option>
@@ -68,18 +69,43 @@ input:focus, select:focus { outline: none; border-color: #c9953a; background: wh
 </div>
 
 <script>
-// Auto-sync week number with interaction type
-document.getElementById('interaction-type').addEventListener('change', function() {
-  const map = { positive_climate: '1', teacher_responsiveness: '2', child_perspective: '3', conflict_as_learning: '4' };
-  const titles = {
-    positive_climate: 'Positive Climate — Mentee Guide',
-    teacher_responsiveness: 'Teacher Responsiveness — Mentee Guide',
-    child_perspective: 'Regard for Child Perspective — Mentee Guide',
-    conflict_as_learning: 'Conflict as Learning — Mentee Guide'
-  };
-  document.getElementById('week-number').value = map[this.value] || '1';
-  document.getElementById('res-title').value = titles[this.value] || '';
-});
+const DOMAIN_INTERACTIONS = {
+  emotional: [
+    { value: 'positive_climate', label: 'Week 1 — Positive Climate', week: 1, title: 'Positive Climate — Mentee Guide' },
+    { value: 'teacher_responsiveness', label: 'Week 2 — Teacher Responsiveness', week: 2, title: 'Teacher Responsiveness — Mentee Guide' },
+    { value: 'child_perspective', label: 'Week 3 — Regard for Child Perspective', week: 3, title: 'Regard for Child Perspective — Mentee Guide' },
+    { value: 'conflict_as_learning', label: 'Week 4 — Conflict as Learning', week: 4, title: 'Conflict as Learning — Mentee Guide' },
+  ],
+  organization: [
+    { value: 'behavior_management', label: 'Week 1 — Behavior Management', week: 1, title: 'Behavior Management — Mentee Guide' },
+    { value: 'productivity', label: 'Week 2 — Productivity', week: 2, title: 'Productivity — Mentee Guide' },
+    { value: 'instructional_formats', label: 'Week 3 — Instructional Learning Formats', week: 3, title: 'Instructional Learning Formats — Mentee Guide' },
+    { value: 'learning_environment', label: 'Week 4 — Learning Environment & Design', week: 4, title: 'Learning Environment & Design — Mentee Guide' },
+  ]
+};
+
+function updateInteractionTypes() {
+  const domain = document.getElementById('domain-id').value;
+  const sel = document.getElementById('interaction-type');
+  sel.innerHTML = '';
+  DOMAIN_INTERACTIONS[domain].forEach(function(it) {
+    const opt = document.createElement('option');
+    opt.value = it.value;
+    opt.textContent = it.label;
+    sel.appendChild(opt);
+  });
+  syncWeekAndTitle();
+}
+
+function syncWeekAndTitle() {
+  const domain = document.getElementById('domain-id').value;
+  const type = document.getElementById('interaction-type').value;
+  const match = DOMAIN_INTERACTIONS[domain].find(function(it) { return it.value === type; });
+  if (match) {
+    document.getElementById('week-number').value = match.week;
+    document.getElementById('res-title').value = match.title;
+  }
+}
 
 async function uploadResource() {
   const key = document.getElementById('admin-key').value.trim();

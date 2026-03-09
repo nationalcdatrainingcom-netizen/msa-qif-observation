@@ -1228,8 +1228,10 @@ function renderObsScreen() {
 
   renderTallyItems();
   document.getElementById('tally-columns').style.display = 'grid';
-  document.getElementById('obs-notes').style.display = 'block';
-  document.getElementById('save-obs-btn')?.style && (document.querySelector('.save-obs-btn').style.display = 'flex');
+  var obsNotesEl = document.querySelector('.obs-notes');
+  if (obsNotesEl) obsNotesEl.style.display = 'block';
+  var saveBtn = document.querySelector('.save-obs-btn');
+  if (saveBtn) saveBtn.style.display = 'flex';
 }
 
 function selectDay(d) {

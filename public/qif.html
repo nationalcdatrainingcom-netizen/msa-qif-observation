@@ -1079,24 +1079,25 @@ async function showDashboard() {
 function renderMenteeGrid() {
   const grid = document.getElementById('mentee-grid');
   grid.innerHTML = '';
-  state.mentees.forEach(m => {
-    const card = document.createElement('div');
-    card.className = 'mentee-card';
-    card.onclick = () => showMenteeDetail(m);
-    card.innerHTML = `
-      <div class="mentee-name">${m.name}</div>
-      <div class="mentee-room">${m.classroom || 'No classroom set'}</div>
-      <div class="mentee-progress">
-        ${DOMAIN.interactionTypes.map(it => `<span class="progress-pip">Wk ${it.week}: ${it.name.split(' ')[0]}</span>`).join('')}
-      </div>`;
-    grid.appendChild(card);
+  state.mentees.forEach(function(m, idx) {
+    const pips = DOMAIN.interactionTypes.map(function(it) {
+      return '<span class="progress-pip">Wk ' + it.week + ': ' + it.name.split(' ')[0] + '</span>';
+    }).join('');
+    grid.innerHTML += '<div class="mentee-card" data-mentee="' + idx + '" style="cursor:pointer;">' +
+      '<div class="mentee-name">' + m.name + '</div>' +
+      '<div class="mentee-room">' + (m.classroom || 'No classroom set') + '</div>' +
+      '<div class="mentee-progress">' + pips + '</div></div>';
   });
-  // Add card
-  const addCard = document.createElement('div');
-  addCard.className = 'add-mentee-card';
-  addCard.onclick = () => document.getElementById('modal-add-mentee').classList.add('open');
-  addCard.innerHTML = `<span class="add-icon">＋</span> Add Mentee`;
-  grid.appendChild(addCard);
+  grid.innerHTML += '<div class="add-mentee-card" id="add-mentee-btn"><span class="add-icon">+</span> Add Mentee</div>';
+  grid.onclick = function(e) {
+    var addBtn = e.target.closest('#add-mentee-btn, .add-mentee-card');
+    if (addBtn) { document.getElementById('modal-add-mentee').classList.add('open'); return; }
+    var card = e.target.closest('[data-mentee]');
+    if (card) {
+      var idx = parseInt(card.getAttribute('data-mentee'));
+      showMenteeDetail(state.mentees[idx]);
+    }
+  };
 }
 
 function closeAddMentee() {

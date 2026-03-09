@@ -372,6 +372,7 @@ body {
 }
 .day-dot.done { background: var(--sage); color: white; }
 .day-dot.report { background: var(--gold); color: white; }
+.day-dot.complete { background: #1a6bbf; color: white; }
 
 /* ── OBSERVATION SCREEN ── */
 .obs-wrap { max-width: 800px; margin: 0 auto; padding: 24px 20px; }
@@ -725,6 +726,32 @@ body {
 .btn-print:hover { background: var(--sage); }
 .btn-back-edit { padding: 14px 20px; background: var(--cream); border: 1.5px solid var(--border); border-radius: var(--r-sm); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; color: var(--text-mid); transition: all 0.2s; }
 .btn-back-edit:hover { border-color: var(--sage); color: var(--sage); }
+.btn-dashboard { padding: 14px 20px; background: var(--sage); border: none; border-radius: var(--r-sm); font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; color: white; transition: all 0.2s; }
+.btn-dashboard:hover { background: var(--sage-l); }
+
+/* ── RESOURCES PANEL ── */
+.resources-wrap { max-width: 900px; margin: 0 auto; padding: 36px 20px; }
+.resources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-top: 16px; }
+.resource-card {
+  background: var(--warm-white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px 18px;
+  cursor: pointer;
+  transition: all 0.22s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.resource-card:hover { border-color: var(--gold-border); transform: translateY(-2px); box-shadow: var(--shadow); }
+.resource-icon { font-size: 28px; }
+.resource-week { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-light); }
+.resource-title { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.3; }
+.resource-open { font-size: 12px; font-weight: 700; color: var(--gold); margin-top: 4px; }
+.resource-empty { color: var(--text-light); font-size: 14px; padding: 20px 0; }
+.resources-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+.resources-upload-info { font-size: 12px; color: var(--text-light); font-style: italic; }
+
 </style>
 </head>
 <body>
@@ -799,7 +826,10 @@ body {
       </div>
     </div>
 
-    <div class="section-label" style="margin-bottom:6px;">Domain 1 — Emotional Climate &amp; Responsiveness</div>
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:6px;">
+      <div class="section-label" style="margin-bottom:0;">Domain 1 — Emotional Climate &amp; Responsiveness</div>
+      <button class="btn-secondary" style="width:auto;padding:8px 16px;font-size:13px;" onclick="showResources()">📄 Mentee Resources</button>
+    </div>
     <div class="domain-desc">Four weeks of focused daily observation, one interaction type per week. Each week closes with a coaching report and goal on Day 5.</div>
 
     <div class="interaction-grid" id="interaction-grid">
@@ -935,7 +965,28 @@ body {
 <div class="report-action-bar" id="report-action-bar" style="display:none;">
   <button class="btn-back-edit" onclick="hideShareableReport()">← Edit Goal</button>
   <button class="btn-print" onclick="window.print()">🖨 Print / Save as PDF</button>
+  <button class="btn-dashboard" onclick="returnToDashboard()">✓ Return to Dashboard</button>
 </div>
+</div>
+
+<!-- ══ RESOURCES ═════════════════════════════════════════════════ -->
+<div class="screen" id="screen-resources">
+  <div class="resources-wrap">
+    <button class="back-btn" id="resources-back-btn">← Back</button>
+    <div class="resources-header">
+      <div>
+        <div class="dash-greeting" style="font-size:22px;">Mentee <span style="color:var(--gold);">Resources</span></div>
+        <div class="dash-sub">Printable weekly guides to share with your mentee on Day 5.</div>
+      </div>
+    </div>
+    <div class="section-label" style="margin-top:24px; margin-bottom:0;">Domain 1 — Emotional Climate &amp; Responsiveness</div>
+    <div class="resources-grid" id="resources-grid">
+      <div class="resource-empty">Loading resources…</div>
+    </div>
+    <div class="resources-upload-info" style="margin-top:16px;">
+      Resources are added by your MSA administrator. Contact your program coordinator if a document is missing.
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1267,9 +1318,11 @@ function renderInteractionGrid() {
   DOMAIN.interactionTypes.forEach(function(it, index) {
     const obs = state.allObservations.filter(function(o){ return o.interaction_type === it.id; });
     const daysLogged = obs.map(function(o){ return o.day_number; });
+    const hasReport = state.allGoals.some(function(g){ return g.interaction_type === it.id; });
     const dotHtml = [1,2,3,4,5].map(function(d) {
       let cls = '';
-      if (d === 5) cls = 'report-day';
+      if (d === 5 && hasReport) cls = 'complete';
+      else if (d === 5) cls = 'report-day';
       else if (daysLogged.indexOf(d) > -1) cls = 'done';
       return '<div class="day-dot ' + cls + '">' + d + '</div>';
     }).join('');
@@ -1613,6 +1666,64 @@ function hideShareableReport() {
   document.getElementById('shareable-report').classList.remove('visible');
   document.getElementById('report-action-bar').style.display = 'none';
   document.querySelector('.report-card:last-of-type').style.display = 'block';
+}
+
+async function returnToDashboard() {
+  // Refresh mentee data so day 5 dot updates
+  const obsRes = await fetch('/api/observations/tally/' + state.currentMentee.id);
+  state.allObservations = obsRes.ok ? await obsRes.json() : [];
+  const goalRes = await fetch('/api/goals/' + state.currentMentee.id);
+  state.allGoals = goalRes.ok ? await goalRes.json() : [];
+  // Reset report screen state
+  document.getElementById('shareable-report').classList.remove('visible');
+  document.getElementById('report-action-bar').style.display = 'none';
+  var lastCard = document.querySelector('.report-card:last-of-type');
+  if (lastCard) lastCard.style.display = 'block';
+  showMenteeDetail(state.currentMentee);
+}
+
+// ════════════════════════════════════════════════════════════════
+// RESOURCES
+// ════════════════════════════════════════════════════════════════
+const RESOURCE_ICONS = {
+  positive_climate: '🌤',
+  teacher_responsiveness: '🤝',
+  child_perspective: '👁',
+  conflict_as_learning: '⚖️'
+};
+
+async function showResources() {
+  document.getElementById('resources-back-btn').onclick = function() { showMenteeDetail(state.currentMentee); };
+  showScreen('screen-resources');
+  const grid = document.getElementById('resources-grid');
+  grid.innerHTML = '<div class="resource-empty">Loading…</div>';
+  try {
+    const res = await fetch('/api/resources');
+    const resources = res.ok ? await res.json() : [];
+    if (resources.length === 0) {
+      grid.innerHTML = '<div class="resource-empty">No resources have been uploaded yet. Check back after your first training session.</div>';
+      return;
+    }
+    grid.innerHTML = '';
+    resources.forEach(function(r) {
+      const icon = RESOURCE_ICONS[r.interaction_type] || '📄';
+      const card = document.createElement('div');
+      card.className = 'resource-card';
+      card.innerHTML =
+        '<div class="resource-icon">' + icon + '</div>' +
+        '<div class="resource-week">Week ' + r.week_number + ' · Domain 1</div>' +
+        '<div class="resource-title">' + r.title + '</div>' +
+        '<div class="resource-open">Open PDF →</div>';
+      card.onclick = function() { openResourcePDF(r.id, r.title); };
+      grid.appendChild(card);
+    });
+  } catch(e) {
+    grid.innerHTML = '<div class="resource-empty">Could not load resources. Please check your connection.</div>';
+  }
+}
+
+function openResourcePDF(id, title) {
+  window.open('/api/resources/' + id + '/pdf', '_blank');
 }
 
 // ════════════════════════════════════════════════════════════════

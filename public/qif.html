@@ -2,1025 +2,1455 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QIF — Quality Interaction Framework · MSA</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>QIF · Quality Interaction Framework · MSA</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --sage: #4a7c59; --sage-d: #2c4a35; --sage-l: #6fa882; --sage-pale: #e8f2ec;
-  --gold: #c9953a; --gold-l: #f0c97a; --gold-pale: #fffbf0;
-  --cream: #faf8f3; --white: #ffffff;
-  --charcoal: #2c2c2c; --mid: #5a5a5a; --light: #999;
-  --border: #ddd8cc; --border-l: #eee8dc;
-  --pos: #2a6a3a; --pos-bg: #edf7ef; --pos-border: #a8dbb0;
-  --neg: #a03030; --neg-bg: #fdecea; --neg-border: #f5c6c6;
-  --radius: 14px; --radius-sm: 8px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.07);
-  --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+  --black: #0a0a0f;
+  --gold: #c9953a;
+  --gold-l: #e8b55a;
+  --gold-pale: #fdf6e8;
+  --gold-border: #e8d4a0;
+  --sage: #3d6b50;
+  --sage-l: #5a8f6d;
+  --sage-pale: #eaf3ed;
+  --sage-border: #b0cfb9;
+  --cream: #faf7f0;
+  --warm-white: #fffef9;
+  --text: #1a1a24;
+  --text-mid: #4a4a5a;
+  --text-light: #8a8a9a;
+  --border: #e4ddd0;
+  --border-l: #ede8de;
+  --pos: #2d6e45;
+  --pos-bg: #edf7f1;
+  --pos-border: #9fd4b0;
+  --neg: #9b2828;
+  --neg-bg: #fdf0f0;
+  --neg-border: #f0b8b8;
+  --shadow: 0 2px 20px rgba(10,10,15,0.08);
+  --shadow-lg: 0 8px 48px rgba(10,10,15,0.14);
+  --r: 16px;
+  --r-sm: 10px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); min-height: 100vh; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.5;
+}
 
 /* ── HEADER ── */
-header {
-  background: linear-gradient(135deg, var(--sage-d) 0%, var(--sage) 100%);
-  color: white; padding: 0 32px;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 64px; position: sticky; top: 0; z-index: 100;
-  box-shadow: 0 2px 20px rgba(0,0,0,0.18);
+.app-header {
+  background: var(--black);
+  padding: 0 24px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 200;
 }
-.header-left { display: flex; align-items: center; gap: 14px; }
-.logo { background: var(--gold); color: white; font-family: 'Playfair Display', serif;
-  font-size: 18px; font-weight: 700; width: 40px; height: 40px;
-  border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-header h1 { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; }
-header p { font-size: 11px; opacity: 0.7; margin-top: 1px; }
-.header-right { font-size: 12px; opacity: 0.7; }
+.header-brand { display: flex; align-items: center; gap: 12px; }
+.header-logo {
+  background: var(--gold);
+  color: var(--black);
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  font-size: 15px;
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+}
+.header-title { color: white; font-size: 15px; font-weight: 700; letter-spacing: 0.3px; }
+.header-title span { color: var(--gold); }
+.header-user {
+  display: flex; align-items: center; gap: 10px;
+  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+}
+.btn-logout {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.7);
+  padding: 5px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.btn-logout:hover { background: rgba(255,255,255,0.14); color: white; }
 
 /* ── SCREENS ── */
-.screen { display: none; animation: fadeUp 0.35s ease; }
-.screen.active { display: block; }
-@keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+.screen { display: none; }
+.screen.active { display: block; animation: fadeUp 0.3s ease; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 
-/* ── SETUP SCREEN ── */
-.setup-wrap { max-width: 600px; margin: 0 auto; padding: 48px 24px; }
-.setup-card { background: white; border-radius: var(--radius); border: 1.5px solid var(--border);
-  box-shadow: var(--shadow); overflow: hidden; }
-.setup-head { background: linear-gradient(135deg, var(--sage-d), var(--sage));
-  padding: 28px 32px; color: white; }
-.setup-head h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 6px; }
-.setup-head p { font-size: 13px; opacity: 0.82; line-height: 1.55; }
-.setup-body { padding: 32px; }
-.field { margin-bottom: 22px; }
-.field label { display: block; font-size: 12px; font-weight: 700; color: var(--sage);
-  letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 7px; }
-.field input, .field select {
-  width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
-  font-family: 'DM Sans', sans-serif; font-size: 14.5px; color: var(--charcoal);
-  background: white; transition: border-color 0.2s;
+/* ── LOGIN SCREEN ── */
+.login-wrap {
+  min-height: calc(100vh - 58px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  background: radial-gradient(ellipse at 30% 20%, rgba(201,149,58,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, rgba(61,107,80,0.08) 0%, transparent 60%),
+              var(--cream);
 }
-.field input:focus, .field select:focus { outline: none; border-color: var(--sage-l); }
-.domain-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-.domain-card {
-  border: 2px solid var(--border); border-radius: var(--radius-sm);
-  padding: 14px 12px; cursor: pointer; transition: all 0.2s; text-align: center; background: white;
+.login-card {
+  background: var(--warm-white);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--shadow-lg);
 }
-.domain-card:hover { border-color: var(--sage-l); background: var(--sage-pale); }
-.domain-card.selected { border-color: var(--sage); background: var(--sage-pale); }
-.domain-card .d-icon { font-size: 22px; margin-bottom: 6px; }
-.domain-card .d-name { font-size: 12px; font-weight: 600; color: var(--charcoal); line-height: 1.3; }
-.domain-card.selected .d-name { color: var(--sage); }
-.start-btn {
-  width: 100%; padding: 16px; background: var(--sage); color: white; border: none;
-  border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif;
-  font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 8px;
-  transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
-}
-.start-btn:hover { background: var(--sage-d); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(74,124,89,0.3); }
-.start-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
-
-/* ── OBSERVATION SCREEN ── */
-.obs-layout { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 64px); }
-.obs-sidebar {
-  background: var(--sage-d); color: white; padding: 24px 20px;
-  position: sticky; top: 64px; height: calc(100vh - 64px); overflow-y: auto;
-}
-.obs-sidebar h3 { font-family: 'Playfair Display', serif; font-size: 16px; margin-bottom: 4px; }
-.obs-sidebar .mentee-name { font-size: 13px; opacity: 0.75; margin-bottom: 20px; }
-.cycle-badge {
-  background: var(--gold); color: white; font-size: 11px; font-weight: 700;
-  letter-spacing: 0.07em; text-transform: uppercase; padding: 5px 12px;
-  border-radius: 20px; display: inline-block; margin-bottom: 20px;
-}
-.sidebar-indicator {
-  padding: 10px 12px; border-radius: var(--radius-sm); margin-bottom: 6px;
-  cursor: pointer; transition: all 0.2s; border: 1.5px solid transparent;
-}
-.sidebar-indicator:hover { background: rgba(255,255,255,0.08); }
-.sidebar-indicator.active { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); }
-.sidebar-indicator .ind-name { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
-.sidebar-indicator .ind-tally {
-  display: flex; gap: 6px; align-items: center; font-size: 12px; opacity: 0.8;
-}
-.tally-pos { color: #7deb9a; font-weight: 700; }
-.tally-neg { color: #f4a2a2; font-weight: 700; }
-.tally-score { background: rgba(255,255,255,0.15); padding: 1px 7px; border-radius: 10px; font-size: 11px; font-weight: 600; }
-.sidebar-sep { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 16px 0; }
-.sidebar-domain-score {
-  background: rgba(255,255,255,0.1); border-radius: var(--radius-sm);
-  padding: 12px 14px; margin-bottom: 12px;
-}
-.sidebar-domain-score .ds-label { font-size: 11px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px; }
-.sidebar-domain-score .ds-score { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--gold-l); }
-.sidebar-domain-score .ds-sub { font-size: 11px; opacity: 0.65; }
-.cycle-btn {
-  width: 100%; padding: 12px; border: 1.5px solid rgba(255,255,255,0.3); background: transparent;
-  color: white; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif;
-  font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 8px; transition: all 0.2s;
-}
-.cycle-btn:hover { background: rgba(255,255,255,0.1); }
-.cycle-btn.primary { background: var(--gold); border-color: var(--gold); }
-.cycle-btn.primary:hover { background: #b8842e; }
-
-/* ── MAIN OBSERVATION AREA ── */
-.obs-main { padding: 32px; overflow-y: auto; }
-.obs-header { margin-bottom: 28px; }
-.obs-header h2 { font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 6px; }
-.obs-header p { font-size: 13.5px; color: var(--mid); line-height: 1.55; }
-.indicator-card {
-  background: white; border-radius: var(--radius); border: 1.5px solid var(--border);
-  box-shadow: var(--shadow); margin-bottom: 20px; overflow: hidden;
-  scroll-margin-top: 80px;
-}
-.ind-header { padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--border-l); }
-.ind-header-left h3 { font-size: 16px; font-weight: 600; margin-bottom: 2px; }
-.ind-header-left p { font-size: 12px; color: var(--mid); }
-.ind-score-display {
-  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
-}
-.score-circle {
-  width: 52px; height: 52px; border-radius: 50%;
+.login-mark {
+  width: 56px; height: 56px;
+  background: var(--black);
+  border-radius: 14px;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700;
-  border: 3px solid var(--border); color: var(--light); background: #f8f8f6;
-  transition: all 0.3s;
+  margin-bottom: 24px;
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--gold);
 }
-.score-circle.has-score { border-color: var(--sage); color: var(--sage); background: var(--sage-pale); }
-.ind-body { padding: 18px 22px; }
-.descriptor-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-.descriptor { border-radius: var(--radius-sm); padding: 12px 14px; }
-.descriptor.neg { background: var(--neg-bg); border: 1.5px solid var(--neg-border); }
-.descriptor.pos { background: var(--pos-bg); border: 1.5px solid var(--pos-border); }
-.descriptor .d-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
-.descriptor.neg .d-lbl { color: var(--neg); }
-.descriptor.pos .d-lbl { color: var(--pos); }
-.descriptor p { font-size: 12.5px; line-height: 1.5; color: var(--charcoal); }
-.log-btn-row { display: flex; gap: 10px; margin-bottom: 16px; }
-.log-btn {
-  flex: 1; padding: 12px 16px; border-radius: var(--radius-sm); border: 2px solid;
-  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
-  cursor: pointer; transition: all 0.18s; display: flex; align-items: center; justify-content: center; gap: 7px;
+.login-card h2 {
+  font-family: 'Lora', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
 }
-.log-btn.pos-btn { border-color: var(--pos-border); color: var(--pos); background: var(--pos-bg); }
-.log-btn.pos-btn:hover { background: #d4f0db; border-color: var(--pos); transform: translateY(-1px); }
-.log-btn.neg-btn { border-color: var(--neg-border); color: var(--neg); background: var(--neg-bg); }
-.log-btn.neg-btn:hover { background: #fbd8d8; border-color: var(--neg); transform: translateY(-1px); }
-.interaction-log { margin-top: 4px; }
-.log-label { font-size: 11px; font-weight: 700; color: var(--light); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 8px; }
-.log-entry {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 8px 12px; border-radius: var(--radius-sm); margin-bottom: 5px;
-  font-size: 13px; animation: slideIn 0.2s ease;
+.login-card p { color: var(--text-mid); font-size: 14px; margin-bottom: 32px; }
+.field-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-light); margin-bottom: 6px; display: block; }
+.field-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--cream);
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 18px;
 }
-@keyframes slideIn { from { opacity:0; transform:translateX(-8px); } to { opacity:1; transform:translateX(0); } }
-.log-entry.pos { background: var(--pos-bg); }
-.log-entry.neg { background: var(--neg-bg); }
-.log-entry .le-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 6px; flex-shrink: 0; margin-top: 1px; }
-.log-entry.pos .le-tag { background: #c2eacc; color: var(--pos); }
-.log-entry.neg .le-tag { background: #f8cccc; color: var(--neg); }
-.log-entry .le-note { flex: 1; color: var(--charcoal); line-height: 1.4; }
-.log-entry .le-cycle { font-size: 10px; color: var(--light); flex-shrink: 0; margin-top: 2px; }
-.log-entry .le-del { background: none; border: none; color: var(--light); cursor: pointer; font-size: 14px; padding: 0 2px; line-height: 1; flex-shrink: 0; }
-.log-entry .le-del:hover { color: var(--neg); }
-.empty-log { font-size: 13px; color: var(--light); font-style: italic; padding: 8px 0; }
+.field-input:focus { border-color: var(--gold); background: white; }
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: var(--black);
+  color: white;
+  border: none;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.2s;
+}
+.btn-primary:hover { background: var(--sage); }
+.login-note { font-size: 12px; color: var(--text-light); margin-top: 16px; text-align: center; line-height: 1.6; }
+.error-msg { background: var(--neg-bg); border: 1px solid var(--neg-border); color: var(--neg); padding: 10px 14px; border-radius: var(--r-sm); font-size: 13px; margin-bottom: 16px; display: none; }
 
-/* ── MODAL ── */
-.modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.45);
-  display: none; align-items: center; justify-content: center;
-  z-index: 500; padding: 20px; animation: fadeIn 0.2s ease;
+/* ── DASHBOARD ── */
+.dashboard-wrap { max-width: 900px; margin: 0 auto; padding: 36px 20px; }
+.dash-greeting {
+  font-family: 'Lora', serif;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 4px;
 }
-.modal-overlay.open { display: flex; }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-.modal {
-  background: white; border-radius: var(--radius); max-width: 520px; width: 100%;
-  box-shadow: var(--shadow-lg); animation: scaleIn 0.22s ease;
-}
-@keyframes scaleIn { from { opacity:0; transform:scale(0.94); } to { opacity:1; transform:scale(1); } }
-.modal-head { padding: 22px 24px 16px; border-bottom: 1px solid var(--border-l); }
-.modal-head h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-.modal-head p { font-size: 13px; color: var(--mid); line-height: 1.5; }
-.modal-type-badge {
-  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.07em;
-  text-transform: uppercase; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px;
-}
-.modal-type-badge.pos { background: var(--pos-bg); color: var(--pos); }
-.modal-type-badge.neg { background: var(--neg-bg); color: var(--neg); }
-.modal-descriptor { padding: 12px 16px; margin: 0 24px 4px; border-radius: var(--radius-sm); font-size: 13px; line-height: 1.55; }
-.modal-descriptor.pos { background: var(--pos-bg); color: #1a4a28; }
-.modal-descriptor.neg { background: var(--neg-bg); color: #5a2020; }
-.modal-body { padding: 16px 24px 22px; }
-.modal-body label { display: block; font-size: 12px; font-weight: 700; color: var(--sage); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 8px; }
-.modal-body textarea {
-  width: 100%; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
-  padding: 11px 13px; font-family: 'DM Sans', sans-serif; font-size: 14px;
-  color: var(--charcoal); resize: none; height: 80px; transition: border-color 0.2s;
-}
-.modal-body textarea:focus { outline: none; border-color: var(--sage-l); }
-.modal-body textarea::placeholder { color: #bbb; }
-.modal-btns { display: flex; gap: 10px; margin-top: 14px; }
-.modal-cancel { flex: 1; padding: 11px; border: 1.5px solid var(--border); background: white; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; color: var(--mid); transition: all 0.2s; }
-.modal-cancel:hover { border-color: var(--mid); }
-.modal-confirm { flex: 2; padding: 11px; border: none; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; color: white; transition: all 0.2s; }
-.modal-confirm.pos { background: var(--pos); }
-.modal-confirm.pos:hover { background: #1e5230; }
-.modal-confirm.neg { background: var(--neg); }
-.modal-confirm.neg:hover { background: #7a2020; }
+.dash-greeting span { color: var(--gold); }
+.dash-sub { color: var(--text-mid); font-size: 14px; margin-bottom: 32px; }
 
-/* ── SUMMARY SCREEN ── */
-.summary-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
-.summary-hero { background: linear-gradient(135deg, var(--sage-d), var(--sage)); color: white; border-radius: var(--radius); padding: 32px 36px; margin-bottom: 28px; }
-.summary-hero h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 6px; }
-.summary-hero p { font-size: 13.5px; opacity: 0.8; }
-.score-overview { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 28px; }
-.score-tile { background: white; border: 1.5px solid var(--border); border-radius: var(--radius); padding: 20px 18px; box-shadow: var(--shadow); }
-.score-tile .st-label { font-size: 11px; font-weight: 700; color: var(--mid); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 8px; }
-.score-tile .st-num { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
-.score-tile .st-level { font-size: 13px; font-weight: 600; }
-.score-tile.domain { border-left: 4px solid var(--sage); }
-.score-1-2 .st-num, .score-1-2 .st-level { color: #c0392b; }
-.score-3-4 .st-num, .score-3-4 .st-level { color: #e67e22; }
-.score-5-6 .st-num, .score-5-6 .st-level { color: #27ae60; }
-.score-7 .st-num, .score-7 .st-level { color: var(--sage); }
-
-.summary-section { background: white; border: 1.5px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 20px; overflow: hidden; }
-.ss-head { padding: 18px 24px; border-bottom: 1px solid var(--border-l); display: flex; align-items: center; gap: 12px; }
-.ss-head h3 { font-family: 'Playfair Display', serif; font-size: 18px; }
-.ss-head p { font-size: 12.5px; color: var(--mid); margin-top: 2px; }
-.ss-icon { font-size: 20px; }
-.ss-body { padding: 20px 24px; }
-.indicator-row { display: flex; align-items: center; gap: 14px; padding: 10px 14px; border-radius: var(--radius-sm); margin-bottom: 6px; }
-.indicator-row:nth-child(odd) { background: #f8f6f2; }
-.ir-name { flex: 1; font-size: 14px; font-weight: 500; }
-.ir-tally { font-size: 12.5px; color: var(--mid); }
-.ir-score-badge { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-
-/* Positive feedback choices */
-.choice-card {
-  border: 2px solid var(--border); border-radius: var(--radius-sm);
-  padding: 14px 16px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s;
-  display: flex; gap: 12px; align-items: flex-start;
+.section-label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-light);
+  margin-bottom: 14px;
 }
-.choice-card:hover { border-color: var(--sage-l); background: var(--sage-pale); }
-.choice-card.selected { border-color: var(--sage); background: var(--sage-pale); }
-.choice-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; transition: all 0.2s; }
-.choice-card.selected .choice-check { background: var(--sage); border-color: var(--sage); color: white; font-size: 12px; }
-.choice-card p { font-size: 14px; line-height: 1.55; color: var(--charcoal); }
-.goal-card {
-  border: 2px solid var(--border); border-radius: var(--radius-sm);
-  padding: 14px 16px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s;
-  display: flex; gap: 12px; align-items: flex-start;
-}
-.goal-card:hover { border-color: var(--gold); background: var(--gold-pale); }
-.goal-card.selected { border-color: var(--gold); background: var(--gold-pale); }
-.goal-indicator-tag { font-size: 11px; font-weight: 700; color: var(--mid); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
-.goal-card.priority { border-left: 4px solid #e67e22; }
-.priority-flag { font-size: 10px; font-weight: 700; color: #e67e22; text-transform: uppercase; letter-spacing: 0.06em; }
-
-.obs-target-box {
-  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+.mentee-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; margin-bottom: 32px; }
+.mentee-card {
+  background: var(--warm-white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.22s;
+  position: relative;
   overflow: hidden;
 }
-.obs-target-box textarea {
-  width: 100%; border: none; padding: 14px 16px;
-  font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--charcoal);
-  resize: none; height: 90px; background: var(--gold-pale);
+.mentee-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--gold);
+  opacity: 0;
+  transition: opacity 0.2s;
 }
-.obs-target-box textarea:focus { outline: none; background: #fffef5; }
-.obs-target-hint { padding: 8px 14px; background: var(--gold-pale); border-top: 1px solid #f0d090; font-size: 12px; color: #7a5010; }
+.mentee-card:hover { border-color: var(--gold-border); transform: translateY(-2px); box-shadow: var(--shadow); }
+.mentee-card:hover::before { opacity: 1; }
+.mentee-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.mentee-room { font-size: 12px; color: var(--text-light); margin-bottom: 12px; }
+.mentee-progress { display: flex; gap: 6px; flex-wrap: wrap; }
+.progress-pip {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: var(--sage-pale);
+  color: var(--sage);
+  border: 1px solid var(--sage-border);
+}
+.progress-pip.done { background: var(--gold-pale); color: var(--gold); border-color: var(--gold-border); }
 
-.weekly-watch-list { list-style: none; padding: 0; }
-.weekly-watch-list li {
-  display: flex; gap: 10px; align-items: flex-start;
-  padding: 10px 0; border-bottom: 1px solid var(--border-l); font-size: 14px; line-height: 1.55;
+.add-mentee-card {
+  background: transparent;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--r);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-light);
+  font-weight: 600;
+  font-size: 14px;
 }
-.weekly-watch-list li:last-child { border-bottom: none; }
-.ww-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sage); flex-shrink: 0; margin-top: 6px; }
+.add-mentee-card:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-pale); }
+.add-icon { font-size: 20px; }
 
-.print-btn, .new-btn {
-  padding: 14px 28px; border-radius: var(--radius-sm); border: none;
-  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
-  cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+/* ── ADD MENTEE FORM ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,15,0.5);
+  z-index: 300;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
 }
-.print-btn { background: var(--sage); color: white; }
-.print-btn:hover { background: var(--sage-d); }
-.new-btn { background: white; color: var(--mid); border: 1.5px solid var(--border); }
-.new-btn:hover { border-color: var(--mid); }
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--warm-white);
+  border-radius: 20px;
+  padding: 36px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--shadow-lg);
+  animation: fadeUp 0.25s ease;
+}
+.modal-box h3 { font-family: 'Lora', serif; font-size: 20px; margin-bottom: 6px; }
+.modal-box p { color: var(--text-mid); font-size: 13px; margin-bottom: 24px; }
+.modal-btns { display: flex; gap: 10px; margin-top: 8px; }
+.btn-secondary {
+  flex: 1;
+  padding: 12px;
+  background: var(--cream);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-mid);
+  transition: all 0.2s;
+}
+.btn-secondary:hover { background: var(--border); }
+.btn-primary-sm {
+  flex: 2;
+  padding: 12px;
+  background: var(--sage);
+  color: white;
+  border: none;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary-sm:hover { background: var(--sage-l); }
 
-/* ── PRINT STYLES ── */
-@media print {
-  header, .obs-sidebar, .log-btn-row, .modal-overlay, .print-btn, .new-btn, .choice-card .choice-check, .goal-card { display: none !important; }
-  .screen { display: none !important; }
-  #print-section { display: block !important; }
-  body { background: white; font-size: 11pt; }
-  .print-page { page-break-after: always; padding: 0; }
+/* ── MENTEE DETAIL ── */
+.mentee-detail-wrap { max-width: 960px; margin: 0 auto; padding: 28px 20px; }
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-mid);
+  cursor: pointer;
+  padding: 6px 0;
+  margin-bottom: 24px;
+  border: none;
+  background: none;
+  font-family: inherit;
+  transition: color 0.2s;
 }
-#print-section { display: none; }
+.back-btn:hover { color: var(--text); }
+.mentee-detail-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+.mentee-detail-name { font-family: 'Lora', serif; font-size: 28px; font-weight: 600; }
+.mentee-detail-room { color: var(--text-light); font-size: 14px; margin-top: 4px; }
+.week-badge {
+  background: var(--gold-pale);
+  border: 1px solid var(--gold-border);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
 
-@media (max-width: 768px) {
-  .obs-layout { grid-template-columns: 1fr; }
-  .obs-sidebar { position: relative; top: 0; height: auto; }
-  .domain-grid { grid-template-columns: 1fr; }
-  .descriptor-row { grid-template-columns: 1fr; }
+/* Interaction type cards */
+.domain-label {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
+.domain-desc { font-size: 13px; color: var(--text-mid); margin-bottom: 20px; }
+
+.interaction-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 36px; }
+.interaction-card {
+  background: var(--warm-white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 18px;
+  cursor: pointer;
+  transition: all 0.22s;
+  position: relative;
+}
+.interaction-card:hover { border-color: var(--sage-border); transform: translateY(-2px); box-shadow: var(--shadow); }
+.interaction-card.active-week { border-color: var(--sage); background: var(--sage-pale); }
+.interaction-card.complete { border-color: var(--gold-border); background: var(--gold-pale); }
+.int-week-tag {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-light);
+  margin-bottom: 10px;
+}
+.interaction-card.active-week .int-week-tag { color: var(--sage); }
+.interaction-card.complete .int-week-tag { color: var(--gold); }
+.int-name { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.int-days { display: flex; gap: 4px; margin-top: 10px; }
+.day-dot {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--text-light);
+}
+.day-dot.done { background: var(--sage); color: white; }
+.day-dot.report { background: var(--gold); color: white; }
+
+/* ── OBSERVATION SCREEN ── */
+.obs-wrap { max-width: 800px; margin: 0 auto; padding: 24px 20px; }
+.obs-header-card {
+  background: var(--warm-white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.obs-title { font-family: 'Lora', serif; font-size: 20px; font-weight: 600; }
+.obs-meta { font-size: 12px; color: var(--text-light); margin-top: 3px; }
+.time-selector { display: flex; gap: 8px; flex-wrap: wrap; }
+.time-chip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text-mid);
+  background: var(--cream);
+  transition: all 0.18s;
+}
+.time-chip.selected { background: var(--black); color: white; border-color: var(--black); }
+.time-chip:hover:not(.selected) { border-color: var(--sage); color: var(--sage); }
+
+/* Tally columns */
+.tally-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+@media (max-width: 600px) { .tally-columns { grid-template-columns: 1fr; } }
+
+.tally-col {
+  background: var(--warm-white);
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+}
+.tally-col.positive { border-color: var(--pos-border); }
+.tally-col.negative { border-color: var(--neg-border); }
+
+.tally-col-head {
+  padding: 12px 18px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tally-col.positive .tally-col-head { background: var(--pos-bg); color: var(--pos); border-bottom: 1px solid var(--pos-border); }
+.tally-col.negative .tally-col-head { background: var(--neg-bg); color: var(--neg); border-bottom: 1px solid var(--neg-border); }
+
+.tally-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-l);
+  gap: 8px;
+}
+.tally-item:last-child { border-bottom: none; }
+.tally-item-label { font-size: 13px; font-weight: 600; flex: 1; line-height: 1.3; }
+.tally-item-label input {
+  border: none;
+  border-bottom: 1px dashed var(--border);
+  background: transparent;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  outline: none;
+  width: 120px;
+}
+.tally-counter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tally-count {
+  min-width: 32px;
+  height: 32px;
+  background: var(--cream);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.tally-col.positive .tally-count { color: var(--pos); background: var(--pos-bg); border-color: var(--pos-border); }
+.tally-col.negative .tally-count { color: var(--neg); background: var(--neg-bg); border-color: var(--neg-border); }
+
+.tally-btn {
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.1s;
+  font-family: inherit;
+}
+.tally-btn:active { transform: scale(0.9); }
+.tally-btn.plus { background: var(--pos-bg); color: var(--pos); border: 1.5px solid var(--pos-border); }
+.tally-col.negative .tally-btn.plus { background: var(--neg-bg); color: var(--neg); border-color: var(--neg-border); }
+.tally-btn.minus { background: var(--cream); color: var(--text-light); border: 1.5px solid var(--border); font-size: 16px; }
+
+.obs-notes {
+  background: var(--warm-white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 18px;
+  margin-bottom: 16px;
+}
+.obs-notes label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-light); display: block; margin-bottom: 8px; }
+.obs-notes textarea {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--cream);
+  resize: vertical;
+  min-height: 80px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.obs-notes textarea:focus { border-color: var(--sage); background: white; }
+
+.save-obs-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--sage);
+  color: white;
+  border: none;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.save-obs-btn:hover { background: var(--sage-l); transform: translateY(-1px); }
+.save-obs-btn:active { transform: scale(0.99); }
+
+/* ── REPORT SCREEN ── */
+.report-wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px; }
+.report-card {
+  background: var(--warm-white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.report-card-head {
+  padding: 18px 22px;
+  background: var(--black);
+  color: white;
+}
+.report-card-head h3 { font-family: 'Lora', serif; font-size: 18px; font-weight: 600; }
+.report-card-head p { font-size: 12px; opacity: 0.6; margin-top: 3px; }
+.report-card-body { padding: 22px; }
+
+.report-highlight {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.highlight-block {
+  flex: 1;
+  min-width: 200px;
+  padding: 16px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid;
+}
+.highlight-block.pos { background: var(--pos-bg); border-color: var(--pos-border); }
+.highlight-block.neg { background: var(--neg-bg); border-color: var(--neg-border); }
+.hl-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+.highlight-block.pos .hl-label { color: var(--pos); }
+.highlight-block.neg .hl-label { color: var(--neg); }
+.hl-item { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+.hl-count { font-size: 24px; font-weight: 800; }
+.highlight-block.pos .hl-count { color: var(--pos); }
+.highlight-block.neg .hl-count { color: var(--neg); }
+.hl-sub { font-size: 12px; color: var(--text-mid); margin-top: 4px; }
+
+.bar-chart { margin: 16px 0; }
+.bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.bar-label { font-size: 12px; font-weight: 600; width: 150px; flex-shrink: 0; text-align: right; color: var(--text-mid); }
+.bar-track { flex: 1; background: var(--border-l); border-radius: 6px; height: 20px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 6px; transition: width 0.6s ease; display: flex; align-items: center; padding-left: 8px; }
+.bar-fill.pos-bar { background: var(--pos); }
+.bar-fill.neg-bar { background: var(--neg); }
+.bar-val { font-size: 11px; font-weight: 800; color: white; }
+.bar-val-out { font-size: 11px; font-weight: 700; color: var(--text-light); margin-left: 6px; }
+
+.goal-section { }
+.goal-section h4 { font-family: 'Lora', serif; font-size: 16px; margin-bottom: 14px; color: var(--text); }
+.goal-suggestions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+.goal-suggestion {
+  padding: 12px 16px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-mid);
+  background: var(--cream);
+  transition: all 0.18s;
+  text-align: left;
+  font-family: inherit;
+  line-height: 1.4;
+}
+.goal-suggestion:hover { border-color: var(--sage); color: var(--sage); background: var(--sage-pale); }
+.goal-suggestion.selected { border-color: var(--sage); background: var(--sage-pale); color: var(--sage); font-weight: 700; }
+.goal-suggestion.selected::before { content: '✓ '; }
+
+.custom-goal-wrap { margin-top: 10px; }
+.custom-goal-wrap textarea {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--cream);
+  resize: vertical;
+  min-height: 70px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.custom-goal-wrap textarea:focus { border-color: var(--sage); background: white; }
+
+.save-report-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: all 0.2s;
+  letter-spacing: 0.2px;
+}
+.save-report-btn:hover { background: var(--gold-l); }
+
+/* saved toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--black);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 999;
+  transition: transform 0.3s ease;
+  white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* util */
+.spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.hidden { display: none !important; }
+
+/* Day nav */
+.day-nav { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.day-nav-btn {
+  flex: 1;
+  min-width: 100px;
+  padding: 10px 8px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid var(--border);
+  background: var(--warm-white);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text-mid);
+  transition: all 0.18s;
+  text-align: center;
+}
+.day-nav-btn:hover { border-color: var(--sage); color: var(--sage); }
+.day-nav-btn.selected { background: var(--sage); color: white; border-color: var(--sage); }
+.day-nav-btn.done { border-color: var(--gold-border); color: var(--gold); background: var(--gold-pale); }
+.day-nav-btn.report-day { border-color: var(--black); color: white; background: var(--black); }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-left">
-    <div class="logo">MSA</div>
+<header class="app-header">
+  <div class="header-brand">
+    <div class="header-logo">M</div>
     <div>
-      <h1>Quality Interaction Framework</h1>
-      <p id="header-sub">Mentor Observation Tool</p>
+      <div class="header-title">Quality Interaction <span>Framework</span></div>
     </div>
   </div>
-  <div class="header-right" id="header-session"></div>
+  <div class="header-user">
+    <span id="header-mentor-name"></span>
+    <button class="btn-logout" onclick="logout()">Sign out</button>
+  </div>
 </header>
 
-<!-- ══ SETUP SCREEN ══════════════════════════════════════════════ -->
-<div class="screen active" id="screen-setup">
-  <div class="setup-wrap">
-    <div class="setup-card">
-      <div class="setup-head">
-        <h2>Start a New Observation</h2>
-        <p>Enter session details and select the domain you will be observing today. You will complete two 20-minute cycles per indicator.</p>
-      </div>
-      <div class="setup-body">
-        <div class="field"><label>Mentor Name</label><input type="text" id="mentor-name" placeholder="Your name"></div>
-        <div class="field"><label>Mentee / Teacher Name</label><input type="text" id="mentee-name" placeholder="Teacher being observed"></div>
-        <div class="field"><label>Observation Date</label><input type="date" id="obs-date"></div>
-        <div class="field">
-          <label>Select Observation Domain</label>
-          <div class="domain-grid" id="domain-grid">
-            <div class="domain-card" data-domain="emotional" onclick="selectDomain(this)">
-              <div class="d-icon">🤝</div>
-              <div class="d-name">Emotional Climate &amp; Responsiveness</div>
-            </div>
-            <div class="domain-card" data-domain="environment" onclick="selectDomain(this)">
-              <div class="d-icon">🏫</div>
-              <div class="d-name">Learning Environment &amp; Organization</div>
-            </div>
-            <div class="domain-card" data-domain="instructional" onclick="selectDomain(this)">
-              <div class="d-icon">💬</div>
-              <div class="d-name">Instructional Depth &amp; Language</div>
-            </div>
-          </div>
-        </div>
-        <button class="start-btn" id="start-btn" onclick="startObservation()" disabled>
-          Begin Observation →
-        </button>
-      </div>
+<!-- ══ LOGIN ════════════════════════════════════════════════════ -->
+<div class="screen active" id="screen-login">
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-mark">M</div>
+      <h2>Mentor Sign In</h2>
+      <p>Enter your name and 4-digit PIN. If you're new, this will create your account.</p>
+      <div id="login-error" class="error-msg"></div>
+      <label class="field-label">Your Name</label>
+      <input class="field-input" id="login-name" type="text" placeholder="e.g. Rebecca Munlyn" autocomplete="name">
+      <label class="field-label">PIN (4 digits)</label>
+      <input class="field-input" id="login-pin" type="password" maxlength="4" pattern="[0-9]*" inputmode="numeric" placeholder="••••">
+      <button class="btn-primary" onclick="doLogin()">Continue →</button>
+      <p class="login-note">First time? Entering your name and a PIN will create your account.<br>Remember your PIN — you'll need it each time.</p>
     </div>
   </div>
 </div>
 
-<!-- ══ OBSERVATION SCREEN ═════════════════════════════════════════ -->
+<!-- ══ DASHBOARD ══════════════════════════════════════════════════ -->
+<div class="screen" id="screen-dashboard">
+  <div class="dashboard-wrap">
+    <div class="dash-greeting">Welcome, <span id="dash-mentor-name">—</span></div>
+    <div class="dash-sub">Select a mentee to begin or continue an observation.</div>
+    <div class="section-label">Your Mentees</div>
+    <div class="mentee-grid" id="mentee-grid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ══ ADD MENTEE MODAL ═══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-add-mentee">
+  <div class="modal-box">
+    <h3>Add a Mentee</h3>
+    <p>Enter the mentee's name and classroom to begin tracking their growth.</p>
+    <label class="field-label">Mentee Name</label>
+    <input class="field-input" id="new-mentee-name" type="text" placeholder="e.g. Jasmine Carter">
+    <label class="field-label">Classroom / Location</label>
+    <input class="field-input" id="new-mentee-room" type="text" placeholder="e.g. Bluebirds Room">
+    <div class="modal-btns">
+      <button class="btn-secondary" onclick="closeAddMentee()">Cancel</button>
+      <button class="btn-primary-sm" onclick="saveMentee()">Add Mentee</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MENTEE DETAIL ══════════════════════════════════════════════ -->
+<div class="screen" id="screen-mentee">
+  <div class="mentee-detail-wrap">
+    <button class="back-btn" onclick="showDashboard()">← Back to Dashboard</button>
+    <div class="mentee-detail-header">
+      <div>
+        <div class="mentee-detail-name" id="detail-mentee-name">—</div>
+        <div class="mentee-detail-room" id="detail-mentee-room">—</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-bottom:6px;">Domain 1 — Emotional Climate &amp; Responsiveness</div>
+    <div class="domain-desc">Four weeks of focused daily observation, one interaction type per week. Each week closes with a coaching report and goal on Day 5.</div>
+
+    <div class="interaction-grid" id="interaction-grid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ══ OBSERVATION ════════════════════════════════════════════════ -->
 <div class="screen" id="screen-obs">
-  <div class="obs-layout">
-    <div class="obs-sidebar" id="obs-sidebar">
-      <h3 id="sb-domain-name">Domain</h3>
-      <div class="mentee-name" id="sb-mentee"></div>
-      <div class="cycle-badge" id="sb-cycle">Cycle 1 of 2</div>
-      <div id="sb-indicators"></div>
-      <hr class="sidebar-sep">
-      <div class="sidebar-domain-score">
-        <div class="ds-label">Domain Score</div>
-        <div class="ds-score" id="sb-domain-score">—</div>
-        <div class="ds-sub">avg of all indicators</div>
+  <div class="obs-wrap">
+    <button class="back-btn" id="obs-back-btn">← Back</button>
+
+    <div class="obs-header-card">
+      <div>
+        <div class="obs-title" id="obs-title">—</div>
+        <div class="obs-meta" id="obs-meta">—</div>
       </div>
-      <button class="cycle-btn" id="cycle-next-btn" onclick="advanceCycle()">Complete Cycle 1 →</button>
+      <div>
+        <div class="section-label" style="margin-bottom:8px;">Time of Day</div>
+        <div class="time-selector" id="time-selector">
+          <button class="time-chip" data-time="early_morning" onclick="selectTime(this)">Early Morning</button>
+          <button class="time-chip" data-time="late_morning" onclick="selectTime(this)">Late Morning</button>
+          <button class="time-chip" data-time="early_afternoon" onclick="selectTime(this)">Early Afternoon</button>
+          <button class="time-chip" data-time="late_afternoon" onclick="selectTime(this)">Late Afternoon</button>
+        </div>
+      </div>
     </div>
-    <div class="obs-main" id="obs-main">
-      <div class="obs-header">
-        <h2 id="obs-domain-title">Observation</h2>
-        <p id="obs-domain-sub"></p>
+
+    <!-- Day navigation -->
+    <div class="day-nav" id="day-nav"></div>
+
+    <!-- Tally grid -->
+    <div class="tally-columns" id="tally-columns">
+      <div class="tally-col positive">
+        <div class="tally-col-head">✦ Positive Interactions</div>
+        <div id="pos-items"></div>
       </div>
-      <div id="indicator-cards"></div>
+      <div class="tally-col negative">
+        <div class="tally-col-head">✕ Negative Interactions</div>
+        <div id="neg-items"></div>
+      </div>
+    </div>
+
+    <div class="obs-notes">
+      <label>Observation Notes (optional)</label>
+      <textarea id="obs-notes-text" placeholder="Brief notes about what you observed…"></textarea>
+    </div>
+
+    <button class="save-obs-btn" onclick="saveObservation()">
+      <span id="save-obs-label">Save Observation</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══ DAY 5 REPORT ═══════════════════════════════════════════════ -->
+<div class="screen" id="screen-report">
+  <div class="report-wrap">
+    <button class="back-btn" id="report-back-btn">← Back</button>
+
+    <div class="report-card">
+      <div class="report-card-head">
+        <h3 id="report-title">Week Report</h3>
+        <p id="report-subtitle">Summary from 4 days of observation</p>
+      </div>
+      <div class="report-card-body">
+        <div class="report-highlight" id="report-highlights"></div>
+        <div class="section-label" style="margin-bottom:12px;">All Positive Behaviors</div>
+        <div class="bar-chart" id="pos-bar-chart"></div>
+        <div class="section-label" style="margin-top:18px; margin-bottom:12px;">All Negative Behaviors</div>
+        <div class="bar-chart" id="neg-bar-chart"></div>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <div class="report-card-head">
+        <h3>Set This Week's Goal</h3>
+        <p>Choose one specific behavior for your mentee to mindfully work on this week.</p>
+      </div>
+      <div class="report-card-body">
+        <div class="goal-section">
+          <h4>Suggested Goals</h4>
+          <div class="goal-suggestions" id="goal-suggestions"></div>
+          <div class="custom-goal-wrap">
+            <label class="field-label">Or write a custom goal</label>
+            <textarea id="custom-goal-text" placeholder="Describe the specific behavior you'd like your mentee to focus on…"></textarea>
+          </div>
+          <div class="obs-notes" style="margin-top:16px; margin-bottom:0;">
+            <label>Mentor Notes for this Session</label>
+            <textarea id="mentor-session-notes" placeholder="Notes to share with your mentee, things to remember, follow-up ideas…"></textarea>
+          </div>
+          <button class="save-report-btn" onclick="saveReport()">Save &amp; Share Report ✓</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ══ SUMMARY SCREEN ════════════════════════════════════════════ -->
-<div class="screen" id="screen-summary">
-  <div class="summary-wrap" id="summary-content"></div>
-</div>
-
-<!-- ══ MODAL ═════════════════════════════════════════════════════ -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
-  <div class="modal" id="modal">
-    <div class="modal-head">
-      <div class="modal-type-badge" id="modal-badge">Positive</div>
-      <h3 id="modal-title"></h3>
-      <p id="modal-desc"></p>
-    </div>
-    <div class="modal-descriptor" id="modal-descriptor"></div>
-    <div class="modal-body">
-      <label>Brief note (a few words to help you remember)</label>
-      <textarea id="modal-note" placeholder="e.g. block corner — named both feelings before intervening…" maxlength="120"></textarea>
-      <div class="modal-btns">
-        <button class="modal-cancel" onclick="closeModalBtn()">Cancel</button>
-        <button class="modal-confirm" id="modal-confirm-btn" onclick="confirmLog()">Log Interaction</button>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="toast" id="toast"></div>
 
 <script>
-// ── DATA ──────────────────────────────────────────────────────────
-const QIF_DATA = {
-  domains: [
+// ════════════════════════════════════════════════════════════════
+// DATA — Domain 1: Emotional Climate & Responsiveness
+// ════════════════════════════════════════════════════════════════
+const DOMAIN = {
+  id: 'emotional',
+  name: 'Emotional Climate & Responsiveness',
+  interactionTypes: [
     {
-      id: "emotional", name: "Emotional Climate & Responsiveness", short: "Emotional Climate", icon: "🤝", color: "#4a7c59", colorLight: "#e8f2ec",
-      researchAnchor: "Research consistently shows that children's social-emotional development is among the strongest predictors of long-term academic success. Siegel & Bryson's \"Name It to Tame It\" model demonstrates that naming emotions helps regulate the nervous system. Secure teacher-child attachment reduces cortisol and increases children's ability to take cognitive risks.",
-      coachingFramework: "Lead with curiosity, not correction. Ask the mentee what each child was feeling before offering any analysis. The goal is to help the teacher see children as communicators — not behavior problems to manage. Use the interaction log to anchor specific moments.",
-      indicators: [
-        { id: "positive_climate", name: "Positive Climate",
-          negative: { label: "Neutral or tense", desc: "Warmth is rare or performative. Children don't appear comfortable approaching the teacher. Interactions feel transactional." },
-          positive: { label: "Genuine warmth and joy", desc: "Teacher-child relationships reflect mutual respect and delight. Teacher initiates warm exchanges, uses names with affection, and children clearly feel safe." },
-          positiveFeedback: ["I noticed several moments where you called children by name with real warmth — that builds trust over time.", "The way you got down to eye level during center time showed children you were genuinely interested in them.", "Your classroom had a calm, joyful energy today — children were approaching you freely, and that doesn't happen by accident."],
-          goals: ["Practice one warm, non-instructional exchange per child during arrival or transition each day this week.", "Choose one child who seems withdrawn — make a point of finding one genuine moment of connection per day.", "At the end of each day, name one child you connected with authentically — and one you didn't reach yet."]
-        },
-        { id: "teacher_responsiveness", name: "Teacher Responsiveness",
-          negative: { label: "Reactive to visible distress only", desc: "Teacher responds to crying or escalation but misses subtle cues. Responses are quick, dismissive, or inconsistent." },
-          positive: { label: "Proactive and attuned", desc: "Teacher notices subtle cues — a withdrawn child, frustrated expression — and responds before distress escalates. Children feel genuinely heard." },
-          positiveFeedback: ["I watched you notice a child pulling back at the table before anyone said a word — and you moved toward her. That's attunement.", "When a child got frustrated at the block center, you were there before the tears started. That kind of proactive responsiveness is a real skill.", "You checked in with the quiet child at the art table even though she wasn't making noise — that tells me you're reading the whole room."],
-          goals: ["During free choice tomorrow, do one full scan of the room every 5 minutes — ask yourself: who is struggling quietly?", "Practice naming a subtle cue aloud: 'I can see you're thinking really hard about that' before a child asks for help.", "Identify one child who tends to withdraw. Set an intention to notice and name their emotion once per day this week."]
-        },
-        { id: "child_perspective", name: "Regard for Child Perspective",
-          negative: { label: "Adult-directed solutions", desc: "Teacher solves problems for children without inviting their input. Children's preferences and ideas are not acknowledged or incorporated." },
-          positive: { label: "Child voice is centered", desc: "Teacher actively invites children's ideas, choices, and perspectives — especially during transitions and conflicts. Children have real agency." },
-          positiveFeedback: ["When the group couldn't agree, you turned it back to them: 'What would make this fair for everyone?' — that's child perspective in action.", "I heard you ask 'What do you think we should do?' before offering any solution. That one question teaches problem-solving.", "You let the painting stay unfinished because the child said they weren't done yet. Honoring that sends a powerful message about whose work it is."],
-          goals: ["This week, before offering any solution to a conflict, ask: 'What do you think should happen?' — even if you already know the answer.", "During one small group activity, follow the children's lead entirely for 10 minutes. Document where it goes.", "Add one 'choice point' to your daily routine — a moment where children make a real decision about something that matters to them."]
-        },
-        { id: "conflict_learning", name: "Conflict as Learning",
-          negative: { label: "Authority-based resolution", desc: "Conflicts are ended through teacher authority. The surface problem disappears but children don't practice naming emotions or problem-solving." },
-          positive: { label: "Facilitated problem-solving", desc: "Teacher uses conflict as a vehicle for social-emotional learning — naming all children's emotions, facilitating dialogue, and building problem-solving skills." },
-          positiveFeedback: ["You named both children's feelings before offering any solution — that's the whole emotion-coaching framework right there.", "When the conflict escalated, you slowed it down instead of ending it — and the children actually solved it themselves. That was powerful.", "I heard you ask 'How do you think your friend felt when that happened?' — that question builds empathy faster than any lesson plan."],
-          goals: ["Practice the two-step script this week: (1) Name both children's emotions. (2) Ask 'What could we do so both of you feel okay?' Don't skip step one.", "Let the next conflict run 30 seconds longer than feels comfortable. Notice what the children do when given space.", "After each conflict this week, ask yourself: did both children leave feeling heard? If not — what was missing?"]
-        }
+      id: 'positive_climate',
+      name: 'Positive Climate',
+      week: 1,
+      icon: '🌤',
+      positiveItems: [
+        { id: 'p1', label: 'Smiles at children' },
+        { id: 'p2', label: 'Laughter / playfulness' },
+        { id: 'p3', label: 'Hugs / physical affection' },
+        { id: 'p4', label: 'Greeting at the door' },
+        { id: 'p5', label: 'Uses child\'s name warmly' },
+        { id: 'p6', label: 'Gets down to child\'s level' },
+        { id: 'p7', label: 'Enthusiastic praise' },
+        { id: 'p8', label: 'Shares a joke or story' },
+        { id: 'p9', label: 'Celebrates child\'s effort' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Yelling at children' },
+        { id: 'n2', label: 'Prolonged crying ignored' },
+        { id: 'n3', label: 'Failing to comfort distress' },
+        { id: 'n4', label: 'Negative words (stop/don\'t)' },
+        { id: 'n5', label: 'Children hitting/fighting' },
+        { id: 'n6', label: 'Sarcasm or dismissiveness' },
+        { id: 'n7', label: 'Ignoring child bids for attention' },
+        { id: 'n8', label: 'Flat or disengaged tone' }
+      ],
+      goalSuggestions: [
+        'Greet each child by name at the door every morning this week.',
+        'Practice getting down to eye level before speaking with any child.',
+        'Set a goal to smile and make eye contact during at least 3 transitions each day.',
+        'Replace one "stop/don\'t" per hour with a positive redirection.',
+        'Find one moment each day to share a laugh or playful exchange with the group.'
       ]
     },
     {
-      id: "environment", name: "Learning Environment & Organization", short: "Environment", icon: "🏫", color: "#2980b9", colorLight: "#e8f4fc",
-      researchAnchor: "The NICHD Study of Early Child Care found that time-on-task and classroom organization are among the strongest predictors of kindergarten readiness. Hattie's meta-analysis places classroom management in the top 20 influences on student achievement. Research on executive function shows children's self-regulation improves significantly in structured, predictable environments.",
-      coachingFramework: "Connect environment to opportunity: every minute of lost time is a minute of lost learning. Help your mentee see their classroom through a child's eyes — walk through it together and ask what each space invites a child to do.",
-      indicators: [
-        { id: "behavior_management", name: "Behavior Management",
-          negative: { label: "Reactive and unclear", desc: "Teacher spends significant time redirecting or correcting. Expectations are unclear or inconsistently applied." },
-          positive: { label: "Proactive and consistent", desc: "Clear, positively-stated expectations are in place. Teacher uses proximity, narration, and visual cues proactively — before behavior escalates." },
-          positiveFeedback: ["I noticed you moved to the carpet corner before the transition even started — that proactive positioning prevented several redirections.", "Your expectations are posted at child eye level and you referenced them positively instead of issuing a correction. That's a powerful difference.", "When things got loud, you narrated the behavior you wanted to see rather than correcting what you didn't — and it worked."],
-          goals: ["Each time you feel yourself about to correct a behavior, pause and try a proactive strategy first: proximity, positive narration, or a visual cue.", "Identify the two highest-friction moments in your day. Design one proactive strategy for each and practice it every day this week.", "Review your classroom agreements with children tomorrow morning — not as a reminder after a problem, but as a positive start-of-day ritual."]
-        },
-        { id: "productive_time", name: "Productive Use of Time",
-          negative: { label: "Lost time and long waits", desc: "Transitions are long and chaotic. Children wait with nothing to do. Instruction time is fragmented." },
-          positive: { label: "Smooth, purposeful flow", desc: "Transitions are quick and purposeful. Children move with direction. Very little time is lost. Children are engaged almost immediately." },
-          positiveFeedback: ["Your transition from circle to centers was fast and purposeful — that level of efficiency only happens with real planning.", "When the activity ended early, you had a 'what's next' ready immediately — children never had a moment without something to do.", "Children arrived at centers already knowing what to do. That level of routine takes time to build, and you've built it well."],
-          goals: ["Time your two longest transitions this week. Write down where the time goes. Identify one specific thing to change.", "Design a 'transition bridge' — a short, engaging activity children do while waiting (a rhyme, a riddle, a counting task).", "Create a visual schedule children can reference independently — so they're not waiting on you to tell them what's next."]
-        },
-        { id: "instructional_formats", name: "Instructional Formats",
-          negative: { label: "Passive and uniform", desc: "Activities are largely passive — children listen and wait. Limited choices in how children engage. One format used for most of the day." },
-          positive: { label: "Active and varied", desc: "Instruction includes whole group, small group, individual, and play-based formats matched to content and child need. Children have real choices in how they engage." },
-          positiveFeedback: ["Today I saw whole group, small group, and independent exploration all in one morning — and each one had a clear purpose. That's intentional teaching.", "The small group you pulled during free choice was perfectly sized and clearly planned around a specific skill need.", "You offered children two different ways to show what they learned — that kind of choice honors different learners."],
-          goals: ["Tomorrow, identify one activity that is currently whole-group and redesign it for small group or independent exploration.", "Add one genuine choice point to your instructional day — two different ways to engage with the same content.", "During free choice this week, pull one intentional small group around a skill you've been observing children need. Keep it to 10 minutes, 3–4 children."]
-        },
-        { id: "center_design", name: "Learning Center Design",
-          negative: { label: "Present but not provocative", desc: "Centers are set up but not intentionally designed. Materials are present but not connected to learning goals or designed to provoke curiosity." },
-          positive: { label: "Intentional and inviting", desc: "Centers invite curiosity and problem-solving. Materials connect to current learning. Teacher circulates with purpose and extends children's play with questions." },
-          positiveFeedback: ["The question you posted at the science center generated extended, self-directed learning — one question card, 20 minutes of engagement.", "The writing center had materials connected to your current theme AND open-ended options. Children were writing for real purposes.", "You visited every center during free choice — not to manage behavior but to ask one extending question at each one. That's how centers become learning."],
-          goals: ["Walk through each center today and ask: 'What does this invite a child to do? What question does it make them ask?' Redesign one center based on your answer.", "Add one open-ended question card to your most-used center this week. Observe how children respond.", "Choose one center to visit with a specific extending question prepared. Try it across multiple days and document what you notice."]
-        }
+      id: 'teacher_responsiveness',
+      name: 'Teacher Responsiveness',
+      week: 2,
+      icon: '🤝',
+      positiveItems: [
+        { id: 'p1', label: 'Responds quickly to distress' },
+        { id: 'p2', label: 'Acknowledges child\'s emotion' },
+        { id: 'p3', label: 'Names the feeling aloud' },
+        { id: 'p4', label: 'Offers comfort or support' },
+        { id: 'p5', label: 'Notices subtle cues (body language)' },
+        { id: 'p6', label: 'Validates without over-reacting' },
+        { id: 'p7', label: 'Follows child\'s lead in play' },
+        { id: 'p8', label: 'Adapts tone to child\'s mood' },
+        { id: 'p9', label: 'Checks in proactively' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Ignores child\'s distress signal' },
+        { id: 'n2', label: 'Dismisses or minimizes feelings' },
+        { id: 'n3', label: 'Delayed response (over 2 min)' },
+        { id: 'n4', label: 'Redirects without acknowledging emotion' },
+        { id: 'n5', label: 'Physical unavailability (across room)' },
+        { id: 'n6', label: 'Overreacts to minor frustration' },
+        { id: 'n7', label: 'Interrupts child\'s process' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'Before redirecting any behavior, pause to name the emotion you see first.',
+        'Practice the phrase "I can see you\'re feeling ___ right now" at least twice a day.',
+        'Spend 5 minutes each morning "checking in" with children during arrival.',
+        'This week, follow a child\'s lead in one free play activity each day.',
+        'When a child cries, move within arm\'s reach before speaking.'
       ]
     },
     {
-      id: "instructional", name: "Instructional Depth & Language", short: "Instructional Depth", icon: "💬", color: "#8e44ad", colorLight: "#f3e8fc",
-      researchAnchor: "Hart & Risley established that the quality of language children hear — not just the quantity — is the strongest predictor of vocabulary development and reading readiness. Vygotsky's Zone of Proximal Development demonstrates that learning happens at the edge of what children can already do — requiring teachers to know where that edge is and push just past it.",
-      coachingFramework: "Connect language to learning: the richest learning happens in conversation, not compliance. Help your mentee move from narrating to wondering — from telling to asking. Ask them to recall one moment when a child said something unexpected and walk through what they did with it.",
-      indicators: [
-        { id: "concept_development", name: "Concept Development",
-          negative: { label: "Rote recall and naming", desc: "Activities focus on memorization — children name, repeat, identify — but don't analyze, predict, or create. Concepts are presented, not explored." },
-          positive: { label: "Analysis, prediction, connection", desc: "Activities involve analysis, prediction, comparison, and creativity. Teacher connects concepts to children's real experiences and prior knowledge." },
-          positiveFeedback: ["When you asked 'What do you think will happen?' before the experiment, you shifted the whole lesson from demonstration to inquiry.", "Your connection between the story and a child's real experience made the concept land in a completely different way.", "I heard you ask children to predict AND explain their prediction. That two-step move is exactly how scientific thinking develops."],
-          goals: ["Tomorrow, plan one question that asks children to predict something before an activity begins. Document their predictions and return to them after.", "Choose one concept from this week's theme and find a real-world connection in each child's life. Use that connection when you introduce it.", "Replace one 'What is this called?' question with 'What do you notice about this?' and see where the conversation goes."]
-        },
-        { id: "quality_feedback", name: "Quality of Feedback",
-          negative: { label: "Generic praise", desc: "Feedback is non-specific — 'Good job,' 'Nice work,' 'Great!' Teacher doesn't build on children's ideas or extend thinking in response to what children say." },
-          positive: { label: "Specific, contingent, generative", desc: "Feedback is specific to what the child did and builds on their idea to push thinking further. Children's statements are a starting point, not an ending point." },
-          positiveFeedback: ["When a child made an observation, you responded with 'It IS! I wonder why?' — the difference between closing a conversation and opening one.", "Instead of 'Good counting!' you named what the child did and gave it a concept to attach the skill to. That's rich feedback.", "When a child's project didn't go as planned, you asked what they were going for instead of fixing it or praising it. That honored their thinking."],
-          goals: ["For one full day this week, replace every 'good job' with something specific: name what the child did and what it shows.", "Practice the 'Yes, and...' technique: every time a child shares an idea, respond with 'Yes, and...' to push the idea one step further.", "At the end of each day, recall one moment of feedback you gave — ask yourself: did it close the conversation or open it?"]
-        },
-        { id: "language_modeling", name: "Language Modeling",
-          negative: { label: "Functional but not rich", desc: "Teacher language is adequate but not expansive. Limited use of new vocabulary, complex sentences, or self-talk. Language is mostly directive or managerial." },
-          positive: { label: "Rich, intentional, expansive", desc: "Teacher consistently models rich vocabulary, uses complete sentences, narrates their own thinking aloud, and builds on children's language attempts." },
-          positiveFeedback: ["I heard you use a rich vocabulary word and immediately show what it meant in context — that's exactly how vocabulary develops in early childhood.", "When you narrated your own thinking during an activity, you gave children a model for thinking out loud. That's a sophisticated teaching move.", "Every time a child gave a one-word answer, you expanded it into a full sentence and gave it back to them. That's language scaffolding done well."],
-          goals: ["Choose three rich vocabulary words connected to your current theme. Use each one at least five times today — in context, with meaning.", "During one activity this week, narrate your own thinking out loud: 'I'm noticing... I'm wondering... I think I'll try...'", "Practice the expansion technique: when a child gives a one or two word answer, restate it as a full sentence and add one new piece of information."]
-        },
-        { id: "higher_order", name: "Higher-Order Questioning",
-          negative: { label: "Closed and factual", desc: "Questions are closed and have one correct answer. Children are rarely invited to explain, wonder, predict, or theorize." },
-          positive: { label: "Open-ended and inquiry-based", desc: "Teacher regularly uses open-ended 'big idea' questions: 'What do you think will happen?' 'Why?' 'What if?' 'How do you know?' Children's reasoning is valued." },
-          positiveFeedback: ["You asked one open-ended 'what if' question during story time — and children talked for several minutes straight. One question, no ceiling.", "When a child gave an unexpected answer, you said 'Tell me more about that' instead of correcting. That's psychological safety in a learning conversation.", "I counted multiple 'why' and 'how do you know' questions in your small group today. That's a classroom learning to think, not just to answer."],
-          goals: ["Tomorrow, prepare three open-ended questions before you start your day — one for circle, one for a center, one for a transition. Use them.", "Try the 'wrong answer on purpose' technique: give children an incorrect prediction and see if they'll push back. Watch what happens when they have to convince you.", "Each time you catch yourself about to ask a yes/no question, pause and rephrase it as 'What do you think about...?' or 'Why do you think...?'"]
-        }
+      id: 'child_perspective',
+      name: 'Regard for Child Perspective',
+      week: 3,
+      icon: '👁',
+      positiveItems: [
+        { id: 'p1', label: 'Asks open-ended questions' },
+        { id: 'p2', label: 'Listens without interrupting' },
+        { id: 'p3', label: 'Incorporates child\'s ideas' },
+        { id: 'p4', label: 'Offers real choices' },
+        { id: 'p5', label: 'Waits for child\'s response' },
+        { id: 'p6', label: 'Validates child\'s opinion' },
+        { id: 'p7', label: 'Follows child\'s curiosity' },
+        { id: 'p8', label: 'Adjusts plan based on child input' },
+        { id: 'p9', label: 'Celebrates creative thinking' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Overrides child\'s choice' },
+        { id: 'n2', label: 'Talks over or interrupts child' },
+        { id: 'n3', label: 'Only yes/no questions asked' },
+        { id: 'n4', label: 'No wait time after questions' },
+        { id: 'n5', label: 'Child ideas dismissed' },
+        { id: 'n6', label: 'Rigid adherence to plan' },
+        { id: 'n7', label: 'Speaks for child instead of to them' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'Rephrase one yes/no question into an open-ended question per activity.',
+        'Practice the "wait" — count 5 seconds silently after asking a question.',
+        'Offer two real choices (both acceptable) instead of a directive, three times a day.',
+        'In one activity daily, let a child\'s idea change the direction of play.',
+        'Write down one thing a child said that surprised you each day this week.'
+      ]
+    },
+    {
+      id: 'conflict_as_learning',
+      name: 'Conflict as Learning',
+      week: 4,
+      icon: '⚖️',
+      positiveItems: [
+        { id: 'p1', label: 'Stays calm during conflict' },
+        { id: 'p2', label: 'Names both children\'s feelings' },
+        { id: 'p3', label: 'Guides problem-solving process' },
+        { id: 'p4', label: 'Asks "what can we do?" questions' },
+        { id: 'p5', label: 'Lets children attempt solution first' },
+        { id: 'p6', label: 'Models negotiation language' },
+        { id: 'p7', label: 'Follows up after resolution' },
+        { id: 'p8', label: 'Frames conflict as learning' },
+        { id: 'p9', label: 'Celebrates peaceful resolution' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Escalates instead of de-escalates' },
+        { id: 'n2', label: 'Takes sides immediately' },
+        { id: 'n3', label: 'Resolves conflict for children' },
+        { id: 'n4', label: 'Uses punishment as first response' },
+        { id: 'n5', label: 'Ignores conflict / hopes it resolves' },
+        { id: 'n6', label: 'Raises voice during conflict' },
+        { id: 'n7', label: 'No follow-up after resolution' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'When conflict happens, take one breath before intervening to set a calm tone.',
+        'Practice naming both children\'s feelings before offering any solution.',
+        'Ask "what\'s a way you could both be happy?" in at least one conflict this week.',
+        'Give children 30 seconds to attempt their own resolution before stepping in.',
+        'After each conflict ends, take 60 seconds to check in with both children.'
       ]
     }
   ]
 };
 
-// ── STATE ─────────────────────────────────────────────────────────
-let state = {
-  mentor: '', mentee: '', date: '', domain: null,
-  cycle: 1,
-  logs: {}, // indicatorId -> [{type, note, cycle}]
-  selectedPositives: [],
-  selectedGoal: null,
-  obsTarget: '',
+const DAYS = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5 — Report'];
+const TIME_LABELS = {
+  early_morning: 'Early Morning',
+  late_morning: 'Late Morning',
+  early_afternoon: 'Early Afternoon',
+  late_afternoon: 'Late Afternoon'
 };
 
-// ── SETUP ─────────────────────────────────────────────────────────
-function selectDomain(el) {
-  document.querySelectorAll('.domain-card').forEach(d => d.classList.remove('selected'));
-  el.classList.add('selected');
-  state.domain = el.getAttribute('data-domain');
-  checkSetupReady();
+// ════════════════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════════════════
+let state = {
+  mentorId: null,
+  mentorName: null,
+  mentees: [],
+  currentMentee: null,
+  currentInteraction: null,
+  currentDay: 1,
+  currentTime: null,
+  tallies: {},           // { itemId: count }
+  customLabels: {},      // { itemId: label }
+  allObservations: [],
+  allGoals: []
+};
+
+// ════════════════════════════════════════════════════════════════
+// AUTH
+// ════════════════════════════════════════════════════════════════
+async function doLogin() {
+  const name = document.getElementById('login-name').value.trim();
+  const pin = document.getElementById('login-pin').value.trim();
+  const errEl = document.getElementById('login-error');
+  errEl.style.display = 'none';
+  if (!name || pin.length < 4) { errEl.textContent = 'Please enter your name and a 4-digit PIN.'; errEl.style.display = 'block'; return; }
+  try {
+    const res = await fetch('/api/mentor/login', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ name, pin }) });
+    const data = await res.json();
+    if (!res.ok) { errEl.textContent = data.error || 'Error signing in.'; errEl.style.display = 'block'; return; }
+    state.mentorId = data.mentor.id;
+    state.mentorName = data.mentor.name;
+    document.getElementById('header-mentor-name').textContent = data.mentor.name;
+    await showDashboard();
+  } catch(e) { errEl.textContent = 'Connection error. Please try again.'; errEl.style.display = 'block'; }
 }
-function checkSetupReady() {
-  const ready = document.getElementById('mentor-name').value.trim() &&
-    document.getElementById('mentee-name').value.trim() && state.domain;
-  document.getElementById('start-btn').disabled = !ready;
-}
-document.getElementById('mentor-name').addEventListener('input', checkSetupReady);
-document.getElementById('mentee-name').addEventListener('input', checkSetupReady);
-// Set today's date default
-document.getElementById('obs-date').valueAsDate = new Date();
 
-function startObservation() {
-  state.mentor = document.getElementById('mentor-name').value.trim();
-  state.mentee = document.getElementById('mentee-name').value.trim();
-  state.date = document.getElementById('obs-date').value;
-  state.cycle = 1;
-  state.logs = {};
-  const domain = QIF_DATA.domains.find(d => d.id === state.domain);
-  domain.indicators.forEach(ind => { state.logs[ind.id] = []; });
-  showScreen('screen-obs');
-  buildObsScreen();
+async function logout() {
+  await fetch('/api/mentor/logout', { method: 'POST' });
+  state = { mentorId: null, mentorName: null, mentees: [], currentMentee: null, currentInteraction: null, currentDay: 1, currentTime: null, tallies: {}, customLabels: {}, allObservations: [], allGoals: [] };
+  showScreen('screen-login');
 }
 
-// ── OBSERVATION SCREEN ────────────────────────────────────────────
-function buildObsScreen() {
-  const domain = QIF_DATA.domains.find(d => d.id === state.domain);
-  document.getElementById('header-sub').textContent = `${domain.short} · Cycle ${state.cycle} of 2`;
-  document.getElementById('header-session').textContent = `${state.mentee} · ${formatDate(state.date)}`;
-  document.getElementById('sb-domain-name').textContent = domain.name;
-  document.getElementById('sb-mentee').textContent = `Observing: ${state.mentee}`;
-  document.getElementById('obs-domain-title').textContent = `${domain.icon} ${domain.name}`;
-  document.getElementById('obs-domain-sub').textContent = `Log each observed interaction as positive (+1) or negative (−1). A brief note helps anchor the moment for your debrief. Complete this cycle, then begin Cycle 2.`;
-  document.getElementById('cycle-next-btn').textContent = state.cycle === 1 ? 'Complete Cycle 1 — Begin Cycle 2 →' : 'Complete Observation — View Summary →';
-  document.getElementById('cycle-next-btn').className = 'cycle-btn primary';
-  document.getElementById('sb-cycle').textContent = `Cycle ${state.cycle} of 2`;
+// ════════════════════════════════════════════════════════════════
+// DASHBOARD
+// ════════════════════════════════════════════════════════════════
+async function showDashboard() {
+  showScreen('screen-dashboard');
+  document.getElementById('dash-mentor-name').textContent = state.mentorName;
+  const res = await fetch('/api/mentees');
+  if (res.ok) {
+    state.mentees = await res.json();
+    renderMenteeGrid();
+  }
+}
 
-  // Build sidebar indicators
-  const sbInds = document.getElementById('sb-indicators');
-  sbInds.innerHTML = '';
-  domain.indicators.forEach(ind => {
-    const el = document.createElement('div');
-    el.className = 'sidebar-indicator'; el.id = `sb-ind-${ind.id}`;
-    el.onclick = () => scrollToIndicator(ind.id);
-    el.innerHTML = `<div class="ind-name">${ind.name}</div><div class="ind-tally" id="tally-${ind.id}"><span class="tally-pos">+0</span> <span class="tally-neg">−0</span> <span class="tally-score">Score: —</span></div>`;
-    sbInds.appendChild(el);
-  });
-
-  // Build main indicator cards
-  const main = document.getElementById('indicator-cards');
-  main.innerHTML = '';
-  domain.indicators.forEach(ind => {
+function renderMenteeGrid() {
+  const grid = document.getElementById('mentee-grid');
+  grid.innerHTML = '';
+  state.mentees.forEach(m => {
     const card = document.createElement('div');
-    card.className = 'indicator-card'; card.id = `card-${ind.id}`;
+    card.className = 'mentee-card';
+    card.onclick = () => showMenteeDetail(m);
     card.innerHTML = `
-      <div class="ind-header">
-        <div class="ind-header-left">
-          <h3>${ind.name}</h3>
-          <p>Log interactions below — a brief note helps anchor each moment</p>
-        </div>
-        <div class="ind-score-display">
-          <div class="score-circle" id="sc-${ind.id}">—</div>
-        </div>
-      </div>
-      <div class="ind-body">
-        <div class="descriptor-row">
-          <div class="descriptor neg">
-            <div class="d-lbl">⚠ Needs Growth</div>
-            <p>${ind.negative.desc}</p>
-          </div>
-          <div class="descriptor pos">
-            <div class="d-lbl">✓ Mentor Goal</div>
-            <p>${ind.positive.desc}</p>
-          </div>
-        </div>
-        <div class="log-btn-row">
-          <button class="log-btn pos-btn" onclick="openModal('${ind.id}','pos')">✓ Log Positive Interaction</button>
-          <button class="log-btn neg-btn" onclick="openModal('${ind.id}','neg')">⚠ Log Negative Interaction</button>
-        </div>
-        <div class="interaction-log" id="log-${ind.id}">
-          <div class="log-label">Interaction Log</div>
-          <div class="log-entries" id="entries-${ind.id}"><div class="empty-log">No interactions logged yet for this indicator.</div></div>
-        </div>
+      <div class="mentee-name">${m.name}</div>
+      <div class="mentee-room">${m.classroom || 'No classroom set'}</div>
+      <div class="mentee-progress">
+        ${DOMAIN.interactionTypes.map(it => `<span class="progress-pip">Wk ${it.week}: ${it.name.split(' ')[0]}</span>`).join('')}
       </div>`;
-    main.appendChild(card);
+    grid.appendChild(card);
   });
-  updateAllTallies();
+  // Add card
+  const addCard = document.createElement('div');
+  addCard.className = 'add-mentee-card';
+  addCard.onclick = () => document.getElementById('modal-add-mentee').classList.add('open');
+  addCard.innerHTML = `<span class="add-icon">＋</span> Add Mentee`;
+  grid.appendChild(addCard);
 }
 
-function scrollToIndicator(id) {
-  document.getElementById(`card-${id}`).scrollIntoView({ behavior: 'smooth' });
-  document.querySelectorAll('.sidebar-indicator').forEach(s => s.classList.remove('active'));
-  document.getElementById(`sb-ind-${id}`).classList.add('active');
+function closeAddMentee() {
+  document.getElementById('modal-add-mentee').classList.remove('open');
+  document.getElementById('new-mentee-name').value = '';
+  document.getElementById('new-mentee-room').value = '';
 }
 
-// ── MODAL ─────────────────────────────────────────────────────────
-let modalState = { indId: null, type: null };
-function openModal(indId, type) {
-  const domain = QIF_DATA.domains.find(d => d.id === state.domain);
-  const ind = domain.indicators.find(i => i.id === indId);
-  modalState = { indId, type };
-  document.getElementById('modal-badge').className = `modal-type-badge ${type}`;
-  document.getElementById('modal-badge').textContent = type === 'pos' ? '✓ Positive Interaction' : '⚠ Negative Interaction';
-  document.getElementById('modal-title').textContent = ind.name;
-  document.getElementById('modal-desc').textContent = type === 'pos' ? ind.positive.label : ind.negative.label;
-  const desc = document.getElementById('modal-descriptor');
-  desc.className = `modal-descriptor ${type}`;
-  desc.textContent = type === 'pos' ? ind.positive.desc : ind.negative.desc;
-  document.getElementById('modal-confirm-btn').className = `modal-confirm ${type}`;
-  document.getElementById('modal-note').value = '';
-  document.getElementById('modal-overlay').classList.add('open');
-  setTimeout(() => document.getElementById('modal-note').focus(), 100);
-}
-function closeModal(e) { if (e.target === document.getElementById('modal-overlay')) closeModalBtn(); }
-function closeModalBtn() { document.getElementById('modal-overlay').classList.remove('open'); }
-function confirmLog() {
-  const note = document.getElementById('modal-note').value.trim();
-  state.logs[modalState.indId].push({ type: modalState.type, note, cycle: state.cycle });
-  closeModalBtn();
-  updateEntries(modalState.indId);
-  updateAllTallies();
-}
-
-function updateEntries(indId) {
-  const container = document.getElementById(`entries-${indId}`);
-  const entries = state.logs[indId];
-  if (!entries.length) { container.innerHTML = '<div class="empty-log">No interactions logged yet for this indicator.</div>'; return; }
-  container.innerHTML = entries.map((e, i) => `
-    <div class="log-entry ${e.type}">
-      <span class="le-tag">${e.type === 'pos' ? '+1' : '−1'}</span>
-      <span class="le-note">${e.note || (e.type === 'pos' ? 'Positive interaction' : 'Negative interaction')}</span>
-      <span class="le-cycle">C${e.cycle}</span>
-      <button class="le-del" onclick="deleteEntry('${indId}', ${i})" title="Remove">×</button>
-    </div>`).join('');
-}
-
-function deleteEntry(indId, idx) {
-  state.logs[indId].splice(idx, 1);
-  updateEntries(indId);
-  updateAllTallies();
-}
-
-function calcScore(entries) {
-  if (!entries.length) return null;
-  const net = entries.reduce((s, e) => s + (e.type === 'pos' ? 1 : -1), 0);
-  return Math.max(1, Math.min(7, net));
-}
-
-function updateAllTallies() {
-  const domain = QIF_DATA.domains.find(d => d.id === state.domain);
-  let domainScores = [];
-  domain.indicators.forEach(ind => {
-    const entries = state.logs[ind.id];
-    const pos = entries.filter(e => e.type === 'pos').length;
-    const neg = entries.filter(e => e.type === 'neg').length;
-    const score = calcScore(entries);
-    const tallyEl = document.getElementById(`tally-${ind.id}`);
-    if (tallyEl) tallyEl.innerHTML = `<span class="tally-pos">+${pos}</span> <span class="tally-neg">−${neg}</span> <span class="tally-score">Score: ${score !== null ? score : '—'}</span>`;
-    const sc = document.getElementById(`sc-${ind.id}`);
-    if (sc) { sc.textContent = score !== null ? score : '—'; sc.className = score !== null ? 'score-circle has-score' : 'score-circle'; }
-    if (score !== null) domainScores.push(score);
-  });
-  const dsEl = document.getElementById('sb-domain-score');
-  if (dsEl) {
-    if (domainScores.length) {
-      const avg = Math.round(domainScores.reduce((a,b)=>a+b,0)/domainScores.length * 10) / 10;
-      dsEl.textContent = avg;
-    } else { dsEl.textContent = '—'; }
+async function saveMentee() {
+  const name = document.getElementById('new-mentee-name').value.trim();
+  const classroom = document.getElementById('new-mentee-room').value.trim();
+  if (!name) return;
+  const res = await fetch('/api/mentees', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ name, classroom }) });
+  if (res.ok) {
+    closeAddMentee();
+    await showDashboard();
   }
 }
 
-function advanceCycle() {
-  if (state.cycle === 1) {
-    state.cycle = 2;
-    document.getElementById('sb-cycle').textContent = 'Cycle 2 of 2';
-    document.getElementById('header-sub').textContent = `${QIF_DATA.domains.find(d=>d.id===state.domain).short} · Cycle 2 of 2`;
-    document.getElementById('cycle-next-btn').textContent = 'Complete Observation — View Summary →';
-    // Re-add cycle badge update
-    buildCycleTransitionNote();
+// ════════════════════════════════════════════════════════════════
+// MENTEE DETAIL
+// ════════════════════════════════════════════════════════════════
+async function showMenteeDetail(mentee) {
+  state.currentMentee = mentee;
+  document.getElementById('detail-mentee-name').textContent = mentee.name;
+  document.getElementById('detail-mentee-room').textContent = mentee.classroom || '';
+
+  // Load observations
+  const obsRes = await fetch(`/api/observations/tally/${mentee.id}`);
+  state.allObservations = obsRes.ok ? await obsRes.json() : [];
+  const goalRes = await fetch(`/api/goals/${mentee.id}`);
+  state.allGoals = goalRes.ok ? await goalRes.json() : [];
+
+  renderInteractionGrid();
+  showScreen('screen-mentee');
+}
+
+function renderInteractionGrid() {
+  const grid = document.getElementById('interaction-grid');
+  grid.innerHTML = '';
+  DOMAIN.interactionTypes.forEach(it => {
+    const obs = state.allObservations.filter(o => o.interaction_type === it.id);
+    const daysLogged = obs.map(o => o.day_number);
+    const card = document.createElement('div');
+    card.className = 'interaction-card';
+    card.onclick = () => openInteraction(it);
+
+    const dotHtml = [1,2,3,4,5].map(d => {
+      let cls = '';
+      if (d === 5) cls = 'report-day';
+      else if (daysLogged.includes(d)) cls = 'done';
+      return `<div class="day-dot ${cls}">${d}</div>`;
+    }).join('');
+
+    card.innerHTML = `
+      <div class="int-week-tag">Week ${it.week}</div>
+      <div style="font-size:22px;margin-bottom:6px;">${it.icon}</div>
+      <div class="int-name">${it.name}</div>
+      <div class="int-days">${dotHtml}</div>`;
+    grid.appendChild(card);
+  });
+}
+
+// ════════════════════════════════════════════════════════════════
+// OBSERVATION
+// ════════════════════════════════════════════════════════════════
+function openInteraction(interactionType) {
+  state.currentInteraction = interactionType;
+  state.currentDay = 1;
+  state.tallies = {};
+  state.customLabels = {};
+  state.currentTime = null;
+
+  document.getElementById('obs-back-btn').onclick = () => showMenteeDetail(state.currentMentee);
+
+  renderObsScreen();
+  showScreen('screen-obs');
+}
+
+function renderObsScreen() {
+  const it = state.currentInteraction;
+  document.getElementById('obs-title').textContent = it.name;
+  document.getElementById('obs-meta').textContent = `${state.currentMentee.name} · Week ${it.week} · Domain 1`;
+
+  // Day nav
+  const dayNav = document.getElementById('day-nav');
+  dayNav.innerHTML = '';
+  for (let d = 1; d <= 5; d++) {
+    const obs = state.allObservations.find(o => o.interaction_type === it.id && o.day_number === d);
+    const btn = document.createElement('button');
+    btn.className = 'day-nav-btn';
+    if (d === 5) { btn.textContent = 'Day 5 · Report'; btn.className += ' report-day'; }
+    else { btn.textContent = `Day ${d}`; if (obs) btn.className += ' done'; }
+    if (d === state.currentDay) btn.className += ' selected';
+    const dayNum = d;
+    btn.onclick = () => selectDay(dayNum);
+    dayNav.appendChild(btn);
+  }
+
+  if (state.currentDay === 5) {
+    renderReport();
+    return;
+  }
+
+  // Load existing tally for this day if any
+  const existing = state.allObservations.find(o => o.interaction_type === it.id && o.day_number === state.currentDay);
+  if (existing) {
+    state.tallies = existing.tallies || {};
+    state.customLabels = {};
+    document.getElementById('obs-notes-text').value = existing.notes || '';
+    // Restore time chip
+    document.querySelectorAll('.time-chip').forEach(c => {
+      c.classList.toggle('selected', c.dataset.time === existing.time_of_day);
+    });
+    state.currentTime = existing.time_of_day;
   } else {
-    buildSummary();
-    showScreen('screen-summary');
+    state.tallies = {};
+    state.customLabels = {};
+    document.getElementById('obs-notes-text').value = '';
+    document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('selected'));
+    state.currentTime = null;
+  }
+
+  renderTallyItems();
+  document.getElementById('tally-columns').style.display = 'grid';
+  document.getElementById('obs-notes').style.display = 'block';
+  document.getElementById('save-obs-btn')?.style && (document.querySelector('.save-obs-btn').style.display = 'flex');
+}
+
+function selectDay(d) {
+  state.currentDay = d;
+  renderObsScreen();
+  if (d === 5) showScreen('screen-report');
+}
+
+function selectTime(el) {
+  document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.currentTime = el.dataset.time;
+}
+
+function renderTallyItems() {
+  const it = state.currentInteraction;
+  renderItemList('pos-items', it.positiveItems, true);
+  renderItemList('neg-items', it.negativeItems, false);
+}
+
+function renderItemList(containerId, items, isPos) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  items.forEach(item => {
+    const count = state.tallies[item.id] || 0;
+    const div = document.createElement('div');
+    div.className = 'tally-item';
+    const labelHtml = item.custom
+      ? `<input type="text" value="${state.customLabels[item.id] || ''}" placeholder="Label this…" onchange="setCustomLabel('${item.id}', this.value)">`
+      : item.label;
+    div.innerHTML = `
+      <div class="tally-item-label">${labelHtml}</div>
+      <div class="tally-counter">
+        <button class="tally-btn minus" onclick="adjustTally('${item.id}', -1, ${isPos})">−</button>
+        <div class="tally-count" id="count-${item.id}">${count}</div>
+        <button class="tally-btn plus" onclick="adjustTally('${item.id}', 1, ${isPos})">＋</button>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+function adjustTally(itemId, delta, isPos) {
+  const current = state.tallies[itemId] || 0;
+  const next = Math.max(0, current + delta);
+  state.tallies[itemId] = next;
+  const el = document.getElementById(`count-${itemId}`);
+  if (el) el.textContent = next;
+}
+
+function setCustomLabel(itemId, value) {
+  state.customLabels[itemId] = value;
+}
+
+async function saveObservation() {
+  if (!state.currentTime) { showToast('Please select a time of day first.'); return; }
+  const label = document.getElementById('save-obs-label');
+  label.innerHTML = '<span class="spinner"></span> Saving…';
+  const payload = {
+    menteeId: state.currentMentee.id,
+    domainId: DOMAIN.id,
+    interactionType: state.currentInteraction.id,
+    weekNumber: state.currentInteraction.week,
+    dayNumber: state.currentDay,
+    timeOfDay: state.currentTime,
+    tallies: state.tallies,
+    notes: document.getElementById('obs-notes-text').value
+  };
+  const res = await fetch('/api/observations/tally', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  label.textContent = 'Save Observation';
+  if (res.ok) {
+    // Refresh local observations
+    const obsRes = await fetch(`/api/observations/tally/${state.currentMentee.id}`);
+    state.allObservations = obsRes.ok ? await obsRes.json() : [];
+    renderObsScreen(); // re-render day nav dots
+    showToast('✓ Observation saved!');
+  } else {
+    showToast('Error saving. Please try again.');
   }
 }
 
-function buildCycleTransitionNote() {
-  const main = document.getElementById('obs-main');
-  const note = document.createElement('div');
-  note.style.cssText = 'background:#fff8e8;border:1.5px solid #f0d090;border-radius:12px;padding:16px 20px;margin-bottom:20px;font-size:14px;color:#7a5010;line-height:1.6;animation:fadeUp 0.3s ease';
-  note.innerHTML = '<strong>🔄 Cycle 1 complete.</strong> Continue logging interactions for Cycle 2. All logs from both cycles will be included in your summary.';
-  main.insertBefore(note, main.firstChild.nextSibling);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+// ════════════════════════════════════════════════════════════════
+// REPORT (Day 5)
+// ════════════════════════════════════════════════════════════════
+function renderReport() {
+  showScreen('screen-report');
+  const it = state.currentInteraction;
+  document.getElementById('report-title').textContent = `Week ${it.week} Report — ${it.name}`;
+  document.getElementById('report-subtitle').textContent = `${state.currentMentee.name} · 4-Day Observation Summary`;
+  document.getElementById('report-back-btn').onclick = () => { showScreen('screen-obs'); };
 
-// ── SUMMARY ───────────────────────────────────────────────────────
-function getLevelLabel(score) {
-  if (score <= 2) return { label: 'Emerging', cls: 'score-1-2' };
-  if (score <= 4) return { label: 'Developing', cls: 'score-3-4' };
-  if (score <= 6) return { label: 'Proficient', cls: 'score-5-6' };
-  return { label: 'Exemplary', cls: 'score-7' };
-}
+  // Aggregate tallies across all 4 days
+  const weekObs = state.allObservations.filter(o => o.interaction_type === it.id && o.day_number <= 4);
+  const posTotals = {};
+  const negTotals = {};
 
-function buildSummary() {
-  const domain = QIF_DATA.domains.find(d => d.id === state.domain);
-  const container = document.getElementById('summary-content');
-  
-  // Calculate scores
-  const indScores = {};
-  domain.indicators.forEach(ind => { indScores[ind.id] = calcScore(state.logs[ind.id]); });
-  const scored = Object.values(indScores).filter(s => s !== null);
-  const domainScore = scored.length ? Math.round(scored.reduce((a,b)=>a+b,0)/scored.length * 10) / 10 : null;
+  it.positiveItems.forEach(item => posTotals[item.id] = 0);
+  it.negativeItems.forEach(item => negTotals[item.id] = 0);
 
-  // Sort indicators by score ascending (biggest need first)
-  const sorted = [...domain.indicators].sort((a, b) => {
-    const sa = indScores[a.id] ?? 99; const sb = indScores[b.id] ?? 99;
-    return sa - sb;
+  weekObs.forEach(obs => {
+    const t = obs.tallies || {};
+    it.positiveItems.forEach(item => { posTotals[item.id] = (posTotals[item.id] || 0) + (t[item.id] || 0); });
+    it.negativeItems.forEach(item => { negTotals[item.id] = (negTotals[item.id] || 0) + (t[item.id] || 0); });
   });
 
-  // Generate default obs target from lowest scored indicator
-  const needsIndicator = sorted[0];
-  const defaultTarget = needsIndicator ? needsIndicator.goals[0] : '';
-  if (!state.obsTarget) state.obsTarget = defaultTarget;
+  // Find top positive and highest negative
+  const topPos = it.positiveItems.reduce((a, b) => (posTotals[a.id] || 0) >= (posTotals[b.id] || 0) ? a : b);
+  const topNeg = it.negativeItems.reduce((a, b) => (negTotals[a.id] || 0) >= (negTotals[b.id] || 0) ? a : b);
+  const lowestPos = it.positiveItems.reduce((a, b) => (posTotals[a.id] || 0) <= (posTotals[b.id] || 0) ? a : b);
 
-  let html = `
-    <div class="summary-hero">
-      <h2>Observation Summary</h2>
-      <p>${domain.icon} ${domain.name} &nbsp;·&nbsp; ${state.mentee} &nbsp;·&nbsp; ${formatDate(state.date)} &nbsp;·&nbsp; Mentor: ${state.mentor}</p>
+  // Highlights
+  document.getElementById('report-highlights').innerHTML = `
+    <div class="highlight-block pos">
+      <div class="hl-label">Most Observed — Positive</div>
+      <div class="hl-item">${topPos.label.replace('Other:', 'Other')}</div>
+      <div class="hl-count">${posTotals[topPos.id]}</div>
+      <div class="hl-sub">times across 4 days</div>
     </div>
-
-    <!-- Score overview -->
-    <div class="score-overview">
-      ${domain.indicators.map(ind => {
-        const s = indScores[ind.id];
-        const lv = s !== null ? getLevelLabel(s) : null;
-        const pos = state.logs[ind.id].filter(e=>e.type==='pos').length;
-        const neg = state.logs[ind.id].filter(e=>e.type==='neg').length;
-        return `<div class="score-tile ${lv ? lv.cls : ''}">
-          <div class="st-label">${ind.name}</div>
-          <div class="st-num">${s !== null ? s : '—'}</div>
-          <div class="st-level">${lv ? lv.label : 'Not scored'}</div>
-          <div style="font-size:12px;color:#888;margin-top:4px">+${pos} / −${neg}</div>
-        </div>`;
-      }).join('')}
-      ${domainScore !== null ? `<div class="score-tile domain ${getLevelLabel(Math.round(domainScore)).cls}">
-        <div class="st-label">Domain Score</div>
-        <div class="st-num">${domainScore}</div>
-        <div class="st-level">${getLevelLabel(Math.round(domainScore)).label}</div>
-        <div style="font-size:12px;color:#888;margin-top:4px">avg of all indicators</div>
-      </div>` : ''}
-    </div>
-
-    <!-- Full interaction log -->
-    <div class="summary-section">
-      <div class="ss-head"><div class="ss-icon">📋</div><div><h3>Full Interaction Log</h3><p>All logged interactions across both observation cycles</p></div></div>
-      <div class="ss-body">
-        ${domain.indicators.map(ind => {
-          const entries = state.logs[ind.id];
-          if (!entries.length) return `<div style="margin-bottom:12px"><strong style="font-size:14px">${ind.name}</strong> <span style="color:#bbb;font-size:13px">— no interactions logged</span></div>`;
-          return `<div style="margin-bottom:18px">
-            <div style="font-weight:600;font-size:14px;margin-bottom:8px;color:#2c2c2c">${ind.name}</div>
-            ${entries.map(e => `<div class="log-entry ${e.type}" style="margin-bottom:5px">
-              <span class="le-tag">${e.type==='pos'?'+1':'−1'}</span>
-              <span class="le-note">${e.note||(e.type==='pos'?'Positive interaction':'Negative interaction')}</span>
-              <span class="le-cycle">Cycle ${e.cycle}</span>
-            </div>`).join('')}
-          </div>`;
-        }).join('')}
-      </div>
-    </div>
-
-    <!-- Positive feedback choices -->
-    <div class="summary-section">
-      <div class="ss-head"><div class="ss-icon">🌟</div><div><h3>Choose Your Positive Feedback</h3><p>Select one or two strengths to open your debrief conversation — anchored in what you actually observed</p></div></div>
-      <div class="ss-body">
-        ${domain.indicators.filter(ind => state.logs[ind.id].some(e=>e.type==='pos')).map(ind => `
-          <div style="margin-bottom:18px">
-            <div style="font-size:11px;font-weight:700;color:#888;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:8px">${ind.name}</div>
-            ${ind.positiveFeedback.map((f, fi) => `
-              <div class="choice-card" id="pf-${ind.id}-${fi}" onclick="togglePositive('${ind.id}-${fi}', this)">
-                <div class="choice-check" id="pfc-${ind.id}-${fi}"></div>
-                <p>${f}</p>
-              </div>`).join('')}
-          </div>`).join('')}
-        ${!domain.indicators.some(ind => state.logs[ind.id].some(e=>e.type==='pos')) ? '<p style="color:#bbb;font-style:italic">No positive interactions were logged. Consider what you did observe as a starting point for conversation.</p>' : ''}
-      </div>
-    </div>
-
-    <!-- Goal choices -->
-    <div class="summary-section">
-      <div class="ss-head"><div class="ss-icon">🎯</div><div><h3>Choose a Coaching Goal</h3><p>Suggestions are ranked by observed need — greatest need at the top. Select one goal to focus on this week.</p></div></div>
-      <div class="ss-body">
-        ${sorted.map((ind, rank) => {
-          const s = indScores[ind.id];
-          const isPriority = s !== null && s <= 3;
-          return ind.goals.map((g, gi) => `
-            <div class="goal-card ${isPriority?'priority':''}" id="goal-${ind.id}-${gi}" onclick="selectGoal('${ind.id}-${gi}', this)">
-              <div style="flex:1">
-                ${isPriority && gi===0 ? '<div class="priority-flag">⚡ Highest Need</div>' : ''}
-                <div class="goal-indicator-tag">${ind.name} ${s!==null?`· Score: ${s}`:''}</div>
-                <p style="font-size:14px;line-height:1.55;color:#2c2c2c;margin-top:4px">${g}</p>
-              </div>
-            </div>`).join('');
-        }).join('')}
-      </div>
-    </div>
-
-    <!-- Observation target -->
-    <div class="summary-section">
-      <div class="ss-head"><div class="ss-icon">🔭</div><div><h3>Precise Observation Target</h3><p>What will you be watching for at your next visit? Edit this to be specific and observable.</p></div></div>
-      <div class="ss-body">
-        <div class="obs-target-box">
-          <textarea id="obs-target-input" placeholder="Write a specific, observable behavior to watch for at your next visit…">${state.obsTarget}</textarea>
-          <div class="obs-target-hint">💡 Tip: The more specific, the better. Instead of "be more responsive," try "I will watch to see if you name both children's emotions before offering any solution."</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Weekly watch -->
-    <div class="summary-section">
-      <div class="ss-head"><div class="ss-icon">📅</div><div><h3>What to Watch for This Week</h3><p>Practices to observe informally throughout the week — not a formal evaluation</p></div></div>
-      <div class="ss-body">
-        <ul class="weekly-watch-list">
-          ${sorted.slice(0,3).map(ind => `<li><div class="ww-dot"></div><div><strong>${ind.name}:</strong> ${ind.goals[0]}</div></li>`).join('')}
-          <li><div class="ww-dot"></div><div><strong>General:</strong> Notice one moment each day that surprises you — positive or negative — and jot it down. These unexpected moments often reveal the deepest growth opportunities.</div></li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Action buttons -->
-    <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap">
-      <button class="print-btn" onclick="printSummary()">🖨 Print / Export Coaching Report</button>
-      <button class="new-btn" onclick="startNew()">+ New Observation</button>
+    <div class="highlight-block neg">
+      <div class="hl-label">Highest Need for Growth</div>
+      <div class="hl-item">${topNeg.label.replace('Other:', 'Other')}</div>
+      <div class="hl-count">${negTotals[topNeg.id]}</div>
+      <div class="hl-sub">times observed</div>
     </div>`;
 
-  container.innerHTML = html;
-}
+  // Bar charts
+  const posMax = Math.max(1, ...it.positiveItems.map(i => posTotals[i.id] || 0));
+  const negMax = Math.max(1, ...it.negativeItems.map(i => negTotals[i.id] || 0));
 
-function togglePositive(key, el) {
-  el.classList.toggle('selected');
-  const check = document.getElementById(`pfc-${key}`);
-  if (el.classList.contains('selected')) { check.textContent = '✓'; state.selectedPositives.push(key); }
-  else { check.textContent = ''; state.selectedPositives = state.selectedPositives.filter(k=>k!==key); }
-}
-function selectGoal(key, el) {
-  document.querySelectorAll('.goal-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  state.selectedGoal = key;
-}
+  document.getElementById('pos-bar-chart').innerHTML = it.positiveItems.map(item => {
+    const val = posTotals[item.id] || 0;
+    const pct = Math.round((val / posMax) * 100);
+    return `<div class="bar-row">
+      <div class="bar-label">${item.label.replace('Other:', 'Other').slice(0,22)}</div>
+      <div class="bar-track"><div class="bar-fill pos-bar" style="width:${pct}%"><span class="bar-val">${val > 0 ? val : ''}</span></div></div>
+      ${val === 0 ? '<span class="bar-val-out">0</span>' : ''}
+    </div>`;
+  }).join('');
 
-// ── PRINT ─────────────────────────────────────────────────────────
-function printSummary() {
-  const domain = QIF_DATA.domains.find(d => d.id === state.domain);
-  const indScores = {};
-  domain.indicators.forEach(ind => { indScores[ind.id] = calcScore(state.logs[ind.id]); });
-  const scored = Object.values(indScores).filter(s=>s!==null);
-  const domainScore = scored.length ? Math.round(scored.reduce((a,b)=>a+b,0)/scored.length*10)/10 : null;
-  const obsTarget = document.getElementById('obs-target-input')?.value || state.obsTarget;
-  const sorted = [...domain.indicators].sort((a,b) => (indScores[a.id]??99)-(indScores[b.id]??99));
+  document.getElementById('neg-bar-chart').innerHTML = it.negativeItems.map(item => {
+    const val = negTotals[item.id] || 0;
+    const pct = Math.round((val / negMax) * 100);
+    return `<div class="bar-row">
+      <div class="bar-label">${item.label.replace('Other:', 'Other').slice(0,22)}</div>
+      <div class="bar-track"><div class="bar-fill neg-bar" style="width:${pct}%"><span class="bar-val">${val > 0 ? val : ''}</span></div></div>
+      ${val === 0 ? '<span class="bar-val-out">0</span>' : ''}
+    </div>`;
+  }).join('');
 
-  // Gather selected positives
-  const selectedPF = state.selectedPositives.map(key => {
-    const [indId, fi] = key.split(/-(\d+)$/);
-    const ind = domain.indicators.find(i=>i.id===indId);
-    return ind ? { indName: ind.name, text: ind.positiveFeedback[parseInt(fi)] } : null;
-  }).filter(Boolean);
+  // Goal suggestions
+  const goalsContainer = document.getElementById('goal-suggestions');
+  goalsContainer.innerHTML = it.goalSuggestions.map((g, i) =>
+    `<button class="goal-suggestion" onclick="selectGoal(this, ${i})">${g}</button>`
+  ).join('');
 
-  // Gather selected goal
-  let selectedGoalText = null;
-  if (state.selectedGoal) {
-    const [indId, gi] = state.selectedGoal.split(/-(\d+)$/);
-    const ind = domain.indicators.find(i=>i.id===indId);
-    if (ind) selectedGoalText = { indName: ind.name, text: ind.goals[parseInt(gi)] };
+  // Check for existing saved goal
+  const savedGoal = state.allGoals.find(g => g.interaction_type === it.id && g.week_number === it.week);
+  if (savedGoal) {
+    document.getElementById('custom-goal-text').value = savedGoal.chosen_goal || '';
+    document.getElementById('mentor-session-notes').value = savedGoal.mentor_notes || '';
+  } else {
+    document.getElementById('custom-goal-text').value = '';
+    document.getElementById('mentor-session-notes').value = '';
   }
-
-  const win = window.open('', '_blank');
-  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>QIF Coaching Report — ${state.mentee}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'DM Sans', sans-serif; color: #2c2c2c; max-width: 780px; margin: 0 auto; padding: 40px 32px; font-size: 13pt; }
-    h1 { font-family: 'Playfair Display', serif; font-size: 26pt; color: #4a7c59; margin-bottom: 4px; }
-    h2 { font-family: 'Playfair Display', serif; font-size: 16pt; color: #4a7c59; margin: 28px 0 10px; border-bottom: 2px solid #e8f2ec; padding-bottom: 6px; }
-    h3 { font-size: 13pt; font-weight: 700; margin: 18px 0 6px; color: #2c2c2c; }
-    .meta { font-size: 11pt; color: #666; margin-bottom: 32px; }
-    .meta span { margin-right: 24px; }
-    .score-row { display: flex; flex-wrap: wrap; gap: 16px; margin: 16px 0 24px; }
-    .score-box { border: 2px solid #ddd; border-radius: 10px; padding: 12px 16px; min-width: 130px; }
-    .score-box .s-lbl { font-size: 10pt; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
-    .score-box .s-num { font-family: 'Playfair Display', serif; font-size: 32pt; font-weight: 700; color: #4a7c59; line-height: 1; }
-    .score-box .s-lv { font-size: 11pt; color: #666; }
-    .log-entry { display: flex; gap: 10px; padding: 6px 10px; border-radius: 6px; margin-bottom: 4px; font-size: 11pt; }
-    .log-entry.pos { background: #edf7ef; }
-    .log-entry.neg { background: #fdecea; }
-    .tag { font-size: 9pt; font-weight: 700; padding: 2px 6px; border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
-    .pos .tag { background: #c2eacc; color: #2a6a3a; }
-    .neg .tag { background: #f8cccc; color: #a03030; }
-    .highlight-box { background: #e8f2ec; border-left: 4px solid #4a7c59; border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 10px 0; font-size: 12pt; }
-    .goal-box { background: #fffbf0; border: 2px solid #f0d090; border-radius: 10px; padding: 16px 18px; margin: 10px 0; font-size: 12pt; }
-    .target-box { background: #f0f8f2; border: 2px solid #4a7c59; border-radius: 10px; padding: 16px 18px; margin: 10px 0; font-size: 12pt; }
-    .research-box { background: #f8f5f0; border-left: 4px solid #c9953a; padding: 14px 18px; border-radius: 0 10px 10px 0; font-size: 11pt; font-style: italic; color: #5a3c08; margin: 10px 0; }
-    .framework-box { background: #f4f0fa; border-left: 4px solid #8e44ad; padding: 14px 18px; border-radius: 0 10px 10px 0; font-size: 11pt; color: #3a1a5a; margin: 10px 0; }
-    .weekly-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 12pt; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: #4a7c59; flex-shrink: 0; margin-top: 5px; }
-    footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 10pt; color: #aaa; text-align: center; }
-    @media print { body { padding: 20px; } }
-  </style></head><body>
-  <h1>QIF Coaching Report</h1>
-  <div class="meta">
-    <span><strong>Mentee:</strong> ${state.mentee}</span>
-    <span><strong>Mentor:</strong> ${state.mentor}</span>
-    <span><strong>Date:</strong> ${formatDate(state.date)}</span>
-    <span><strong>Domain:</strong> ${domain.name}</span>
-  </div>
-
-  <h2>Observation Scores</h2>
-  <div class="score-row">
-    ${domain.indicators.map(ind => {
-      const s = indScores[ind.id];
-      const lv = s !== null ? getLevelLabel(s) : null;
-      return `<div class="score-box"><div class="s-lbl">${ind.name}</div><div class="s-num">${s!==null?s:'—'}</div><div class="s-lv">${lv?lv.label:'Not scored'}</div></div>`;
-    }).join('')}
-    ${domainScore !== null ? `<div class="score-box" style="border-color:#4a7c59"><div class="s-lbl">Domain Avg</div><div class="s-num">${domainScore}</div><div class="s-lv">${getLevelLabel(Math.round(domainScore)).label}</div></div>` : ''}
-  </div>
-
-  <h2>Full Interaction Log</h2>
-  ${domain.indicators.map(ind => {
-    const entries = state.logs[ind.id];
-    if (!entries.length) return `<h3>${ind.name}</h3><p style="color:#bbb;font-style:italic">No interactions logged.</p>`;
-    return `<h3>${ind.name} — Score: ${indScores[ind.id]??'—'}</h3>
-    ${entries.map(e=>`<div class="log-entry ${e.type}"><span class="tag">${e.type==='pos'?'+1':'−1'} C${e.cycle}</span><span>${e.note||(e.type==='pos'?'Positive interaction':'Negative interaction')}</span></div>`).join('')}`;
-  }).join('')}
-
-  <h2>Positive Feedback to Share</h2>
-  ${selectedPF.length ? selectedPF.map(pf=>`<div class="highlight-box"><strong>${pf.indName}:</strong> ${pf.text}</div>`).join('') : '<p style="color:#bbb;font-style:italic">No positive feedback selected.</p>'}
-
-  <h2>Coaching Goal for This Week</h2>
-  ${selectedGoalText ? `<div class="goal-box"><strong>${selectedGoalText.indName}:</strong> ${selectedGoalText.text}</div>` : '<p style="color:#bbb;font-style:italic">No goal selected.</p>'}
-
-  <h2>Precise Observation Target</h2>
-  <div class="target-box">${obsTarget || 'Not yet specified.'}</div>
-
-  <h2>What to Watch for This Week</h2>
-  ${sorted.slice(0,3).map(ind=>`<div class="weekly-item"><div class="dot"></div><div><strong>${ind.name}:</strong> ${ind.goals[0]}</div></div>`).join('')}
-  <div class="weekly-item"><div class="dot"></div><div><strong>General:</strong> Notice one surprising moment each day — positive or negative — and document it. These moments often reveal the deepest growth opportunities.</div></div>
-
-  <h2>Research Anchor</h2>
-  <div class="research-box">${domain.researchAnchor}</div>
-
-  <h2>Coaching Framework</h2>
-  <div class="framework-box">${domain.coachingFramework}</div>
-
-  <footer>Quality Interaction Framework · Mentor Success Academy · Developed by Mary Wardlaw & Rebecca Munlyn · For licensed MSA use only</footer>
-  <script>window.onload=()=>window.print();<\/script>
-  </body></html>`);
-  win.document.close();
 }
 
-// ── UTILITIES ─────────────────────────────────────────────────────
+let selectedGoalIndex = null;
+function selectGoal(el, idx) {
+  document.querySelectorAll('.goal-suggestion').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedGoalIndex = idx;
+  document.getElementById('custom-goal-text').value = state.currentInteraction.goalSuggestions[idx];
+}
+
+async function saveReport() {
+  const chosenGoal = document.getElementById('custom-goal-text').value.trim();
+  const mentorNotes = document.getElementById('mentor-session-notes').value.trim();
+  if (!chosenGoal) { showToast('Please choose or write a goal first.'); return; }
+  const payload = {
+    menteeId: state.currentMentee.id,
+    domainId: DOMAIN.id,
+    interactionType: state.currentInteraction.id,
+    weekNumber: state.currentInteraction.week,
+    chosenGoal,
+    mentorNotes
+  };
+  const res = await fetch('/api/goals', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  if (res.ok) {
+    const goalRes = await fetch(`/api/goals/${state.currentMentee.id}`);
+    state.allGoals = goalRes.ok ? await goalRes.json() : [];
+    showToast('✓ Report saved! Ready to share with your mentee.');
+    setTimeout(() => showMenteeDetail(state.currentMentee), 1800);
+  } else {
+    showToast('Error saving. Please try again.');
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// UTILS
+// ════════════════════════════════════════════════════════════════
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
-function formatDate(str) {
-  if (!str) return '';
-  const [y,m,d] = str.split('-');
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  return `${months[parseInt(m)-1]} ${parseInt(d)}, ${y}`;
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
 }
-function startNew() {
-  state = { mentor: '', mentee: '', date: '', domain: null, cycle: 1, logs: {}, selectedPositives: [], selectedGoal: null, obsTarget: '' };
-  document.querySelectorAll('.domain-card').forEach(d => d.classList.remove('selected'));
-  document.getElementById('mentor-name').value = '';
-  document.getElementById('mentee-name').value = '';
-  document.getElementById('start-btn').disabled = true;
-  document.getElementById('obs-date').valueAsDate = new Date();
-  document.getElementById('header-sub').textContent = 'Mentor Observation Tool';
-  document.getElementById('header-session').textContent = '';
-  showScreen('screen-setup');
-}
+
+// Check session on load
+(async () => {
+  try {
+    const res = await fetch('/api/mentor/me');
+    if (res.ok) {
+      const data = await res.json();
+      state.mentorId = data.mentorId;
+      state.mentorName = data.mentorName;
+      document.getElementById('header-mentor-name').textContent = data.mentorName;
+      await showDashboard();
+    }
+  } catch(e) { /* stay on login */ }
+})();
+
+document.getElementById('login-pin').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 </script>
 </body>
 </html>

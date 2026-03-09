@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSA Resource Admin</title>
+<style>
+body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; padding: 20px; background: #faf7f0; color: #1a1a24; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+p { color: #666; font-size: 14px; margin-bottom: 28px; }
+.card { background: white; border: 1px solid #e4ddd0; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #888; display: block; margin-bottom: 6px; margin-top: 14px; }
+input, select { width: 100%; padding: 10px 12px; border: 1.5px solid #e4ddd0; border-radius: 8px; font-family: inherit; font-size: 14px; box-sizing: border-box; background: #faf7f0; }
+input:focus, select:focus { outline: none; border-color: #c9953a; background: white; }
+.btn { width: 100%; padding: 13px; background: #3d6b50; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 18px; font-family: inherit; }
+.btn:hover { background: #5a8f6d; }
+.status { padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; margin-top: 14px; display: none; }
+.status.ok { background: #edf7f1; color: #2d6e45; border: 1px solid #9fd4b0; }
+.status.err { background: #fdf0f0; color: #9b2828; border: 1px solid #f0b8b8; }
+.existing { margin-top: 28px; }
+.existing h2 { font-size: 16px; margin-bottom: 12px; }
+.res-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: white; border: 1px solid #e4ddd0; border-radius: 8px; margin-bottom: 8px; font-size: 13px; }
+.res-row a { color: #c9953a; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<h1>📄 MSA Resource Admin</h1>
+<p>Upload mentee guide PDFs to the database. These will appear in the QIF app under "Mentee Resources".</p>
+
+<div class="card">
+  <label>Admin Key</label>
+  <input type="password" id="admin-key" placeholder="Enter admin key">
+
+  <label>Domain</label>
+  <select id="domain-id">
+    <option value="emotional">Domain 1 — Emotional Climate & Responsiveness</option>
+  </select>
+
+  <label>Interaction Type</label>
+  <select id="interaction-type">
+    <option value="positive_climate">Week 1 — Positive Climate</option>
+    <option value="teacher_responsiveness">Week 2 — Teacher Responsiveness</option>
+    <option value="child_perspective">Week 3 — Regard for Child Perspective</option>
+    <option value="conflict_as_learning">Week 4 — Conflict as Learning</option>
+  </select>
+
+  <label>Week Number</label>
+  <select id="week-number">
+    <option value="1">Week 1</option>
+    <option value="2">Week 2</option>
+    <option value="3">Week 3</option>
+    <option value="4">Week 4</option>
+  </select>
+
+  <label>Resource Title (shown to mentors)</label>
+  <input type="text" id="res-title" placeholder="e.g. Positive Climate — Mentee Guide">
+
+  <label>PDF File</label>
+  <input type="file" id="pdf-file" accept=".pdf">
+
+  <button class="btn" onclick="uploadResource()">Upload Resource</button>
+  <div class="status" id="status"></div>
+</div>
+
+<div class="existing">
+  <h2>Existing Resources</h2>
+  <div id="existing-list">Loading…</div>
+</div>
+
+<script>
+// Auto-sync week number with interaction type
+document.getElementById('interaction-type').addEventListener('change', function() {
+  const map = { positive_climate: '1', teacher_responsiveness: '2', child_perspective: '3', conflict_as_learning: '4' };
+  const titles = {
+    positive_climate: 'Positive Climate — Mentee Guide',
+    teacher_responsiveness: 'Teacher Responsiveness — Mentee Guide',
+    child_perspective: 'Regard for Child Perspective — Mentee Guide',
+    conflict_as_learning: 'Conflict as Learning — Mentee Guide'
+  };
+  document.getElementById('week-number').value = map[this.value] || '1';
+  document.getElementById('res-title').value = titles[this.value] || '';
+});
+
+async function uploadResource() {
+  const key = document.getElementById('admin-key').value.trim();
+  const domainId = document.getElementById('domain-id').value;
+  const interactionType = document.getElementById('interaction-type').value;
+  const weekNumber = parseInt(document.getElementById('week-number').value);
+  const title = document.getElementById('res-title').value.trim();
+  const fileInput = document.getElementById('pdf-file');
+  const statusEl = document.getElementById('status');
+
+  if (!key || !title || !fileInput.files[0]) {
+    showStatus('Please fill in all fields and select a PDF.', false);
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const filename = file.name;
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const base64 = e.target.result.split(',')[1];
+    try {
+      const res = await fetch('/api/resources/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-key': key },
+        body: JSON.stringify({ domainId, interactionType, weekNumber, title, filename, pdfBase64: base64 })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        showStatus('✓ Uploaded successfully! Resource ID: ' + data.id, true);
+        loadExisting();
+      } else {
+        showStatus('Error: ' + (data.error || 'Upload failed'), false);
+      }
+    } catch(err) {
+      showStatus('Connection error. Please try again.', false);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function showStatus(msg, ok) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = 'status ' + (ok ? 'ok' : 'err');
+  el.style.display = 'block';
+}
+
+async function loadExisting() {
+  const list = document.getElementById('existing-list');
+  try {
+    const res = await fetch('/api/resources');
+    const resources = await res.json();
+    if (resources.length === 0) {
+      list.innerHTML = '<p style="color:#999;font-size:13px;">No resources uploaded yet.</p>';
+      return;
+    }
+    list.innerHTML = resources.map(r =>
+      '<div class="res-row"><span>Week ' + r.week_number + ' — ' + r.title + '</span>' +
+      '<a href="/api/resources/' + r.id + '/pdf" target="_blank">View PDF</a></div>'
+    ).join('');
+  } catch(e) {
+    list.innerHTML = '<p style="color:#999;font-size:13px;">Could not load.</p>';
+  }
+}
+
+loadExisting();
+</script>
+</body>
+</html>

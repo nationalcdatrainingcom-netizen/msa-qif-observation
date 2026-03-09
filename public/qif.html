@@ -686,6 +686,45 @@ body {
 .day-nav-btn.selected { background: var(--sage); color: white; border-color: var(--sage); }
 .day-nav-btn.done { border-color: var(--gold-border); color: var(--gold); background: var(--gold-pale); }
 .day-nav-btn.report-day { border-color: var(--black); color: white; background: var(--black); }
+
+@media print {
+  .app-header, .back-btn, .report-action-bar, .goal-section,
+  .report-card:not(.printable) { display: none !important; }
+  body { background: white; }
+  .report-wrap { padding: 0; }
+}
+.shareable-report { background: var(--warm-white); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin-bottom: 20px; display: none; }
+.shareable-report.visible { display: block; }
+.sr-header { background: var(--black); color: white; padding: 28px 28px 20px; }
+.sr-logo { font-family: 'Lora', serif; font-size: 12px; font-weight: 600; color: var(--gold); letter-spacing: 0.5px; margin-bottom: 10px; }
+.sr-title { font-family: 'Lora', serif; font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+.sr-meta { font-size: 12px; opacity: 0.6; }
+.sr-body { padding: 24px 28px; }
+.sr-section { margin-bottom: 22px; }
+.sr-section-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border-l); }
+.sr-strength { background: var(--pos-bg); border: 1.5px solid var(--pos-border); border-radius: var(--r-sm); padding: 16px; margin-bottom: 10px; }
+.sr-growth { background: var(--neg-bg); border: 1.5px solid var(--neg-border); border-radius: var(--r-sm); padding: 16px; }
+.sr-item-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px; }
+.sr-strength .sr-item-label { color: var(--pos); }
+.sr-growth .sr-item-label { color: var(--neg); }
+.sr-item-value { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+.sr-item-count { font-size: 13px; color: var(--text-mid); }
+.sr-goal-box { background: var(--gold-pale); border: 1.5px solid var(--gold-border); border-radius: var(--r-sm); padding: 18px; }
+.sr-goal-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; color: var(--gold); margin-bottom: 8px; }
+.sr-goal-text { font-size: 15px; font-weight: 600; line-height: 1.5; color: var(--text); }
+.sr-research { background: #f4f0e8; border-left: 3px solid var(--gold); border-radius: 0 var(--r-sm) var(--r-sm) 0; padding: 18px 20px; margin-top: 4px; }
+.sr-research-title { font-family: 'Lora', serif; font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+.sr-research-summary { font-size: 13px; color: var(--text-mid); line-height: 1.6; margin-bottom: 10px; }
+.sr-research-points { list-style: none; padding: 0; margin-bottom: 10px; }
+.sr-research-points li { font-size: 12px; color: var(--text-mid); line-height: 1.6; margin-bottom: 6px; padding-left: 16px; position: relative; }
+.sr-research-points li::before { content: "→"; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+.sr-connection { font-size: 13px; font-style: italic; color: var(--sage); font-weight: 600; line-height: 1.6; }
+.sr-mentor-notes { background: var(--sage-pale); border: 1px solid var(--sage-border); border-radius: var(--r-sm); padding: 14px 16px; font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+.report-action-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.btn-print { flex: 1; padding: 14px; background: var(--black); color: white; border: none; border-radius: var(--r-sm); font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+.btn-print:hover { background: var(--sage); }
+.btn-back-edit { padding: 14px 20px; background: var(--cream); border: 1.5px solid var(--border); border-radius: var(--r-sm); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; color: var(--text-mid); transition: all 0.2s; }
+.btn-back-edit:hover { border-color: var(--sage); color: var(--sage); }
 </style>
 </head>
 <body>
@@ -857,6 +896,46 @@ body {
       </div>
     </div>
   </div>
+
+<!-- ══ SHAREABLE REPORT ══════════════════════════════════════════ -->
+<div class="shareable-report" id="shareable-report">
+  <div class="sr-header">
+    <div class="sr-logo">Mentor Success Academy · Quality Interaction Framework</div>
+    <div class="sr-title" id="sr-title">Week Report</div>
+    <div class="sr-meta" id="sr-meta"></div>
+  </div>
+  <div class="sr-body">
+    <div class="sr-section" id="sr-observations-section">
+      <div class="sr-section-title">Observation Summary — 4 Days</div>
+      <div id="sr-strength"></div>
+      <div id="sr-growth"></div>
+    </div>
+    <div class="sr-section">
+      <div class="sr-section-title">This Week's Goal</div>
+      <div class="sr-goal-box">
+        <div class="sr-goal-label">Your mentor has set this focus for you:</div>
+        <div class="sr-goal-text" id="sr-goal-text"></div>
+      </div>
+    </div>
+    <div class="sr-section" id="sr-research-section">
+      <div class="sr-section-title">The Research Behind This Work</div>
+      <div class="sr-research">
+        <div class="sr-research-title" id="sr-research-title"></div>
+        <div class="sr-research-summary" id="sr-research-summary"></div>
+        <ul class="sr-research-points" id="sr-research-points"></ul>
+        <div class="sr-connection" id="sr-connection"></div>
+      </div>
+    </div>
+    <div class="sr-section" id="sr-notes-section" style="display:none;">
+      <div class="sr-section-title">Mentor Notes</div>
+      <div class="sr-mentor-notes" id="sr-mentor-notes"></div>
+    </div>
+  </div>
+</div>
+<div class="report-action-bar" id="report-action-bar" style="display:none;">
+  <button class="btn-back-edit" onclick="hideShareableReport()">← Edit Goal</button>
+  <button class="btn-print" onclick="window.print()">🖨 Print / Save as PDF</button>
+</div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1012,6 +1091,53 @@ const DOMAIN = {
   ]
 };
 
+
+const RESEARCH = {
+  positive_climate: {
+    why: 'Why Positive Climate Matters',
+    summary: 'Research consistently shows that the emotional tone of a classroom is one of the strongest predictors of child outcomes. When children feel genuinely welcomed, seen, and valued by their teacher, their brains are better regulated and more open to learning.',
+    points: [
+      'Warm, joyful classrooms reduce cortisol and increase capacity for focus and learning risk-taking (Siegel & Bryson, 2011).',
+      'Children who experience frequent positive teacher interactions show stronger language development, social competence, and early literacy by kindergarten (Hamre & Pianta, 2005).',
+      'Positive Climate is among the most powerful CLASS predictors of social-emotional growth across preschool settings (Pianta et al.).',
+      'Secure teacher-child relationships buffer the effects of stress and adversity at home, making the classroom a critical protective factor for at-risk children (Howes et al., 2008).'
+    ],
+    connection: 'Every smile, greeting, and moment of genuine delight communicates: "You are safe here. You matter here." That message shapes how children approach learning for years to come.'
+  },
+  teacher_responsiveness: {
+    why: 'Why Teacher Responsiveness Matters',
+    summary: 'A teacher's ability to notice, read, and respond to children's cues is one of the most important skills in early childhood. Responsiveness builds the trust that makes everything else possible.',
+    points: [
+      'Responsive caregiving activates the same neural pathways as secure attachment, helping children develop self-regulation (Shonkoff & Phillips, 2000).',
+      'Children whose teachers respond warmly to distress show lower aggression and stronger peer relationships by age 5 (Pianta, 1999).',
+      'The "serve and return" interaction pattern is the primary mechanism through which young brains build neural connections (Harvard Center on the Developing Child, 2015).',
+      'Teachers who tune in to subtle cues catch emotional needs early, before they escalate into behavior challenges.'
+    ],
+    connection: 'When you respond to a child's distress, you are building the neural architecture of emotional regulation that will serve that child for life.'
+  },
+  child_perspective: {
+    why: 'Why Regard for Child Perspective Matters',
+    summary: 'When teachers genuinely value children's ideas, questions, and choices, they cultivate curiosity, agency, and intrinsic motivation — the foundations of lifelong learning.',
+    points: [
+      'Children in autonomy-supportive environments show significantly higher intrinsic motivation, creativity, and persistence (Deci & Ryan, Self-Determination Theory).',
+      'Open-ended questioning and wait time develop executive function, vocabulary, and reasoning simultaneously (Dickinson & Tabors, 2001).',
+      'When children's ideas shape an activity, engagement and retention increase dramatically compared to fully teacher-directed tasks (Helm & Katz, 2001).',
+      'Regard for Student Perspectives is one of the most predictive CLASS dimensions for higher-order thinking and school readiness (Hamre et al., 2013).'
+    ],
+    connection: 'Every time a teacher follows a child's curiosity, they send the message: "Your mind matters. Your ideas have value." That is the seed of a lifelong learner.'
+  },
+  conflict_as_learning: {
+    why: 'Why Conflict as Learning Matters',
+    summary: 'Conflict is not a disruption to learning — it IS learning. How teachers respond to conflict shapes children's capacity for empathy, problem-solving, and emotional regulation.',
+    points: [
+      'Children guided through conflict resolution develop stronger empathy and social problem-solving skills (Denham et al., 2003).',
+      'The prefrontal cortex is shaped heavily by repeated experiences of guided conflict resolution during the early years (Siegel, 2012).',
+      'Calm teachers model co-regulation — they lend their regulated nervous system to the dysregulated child (Porges, Polyvagal Theory).',
+      'Conflict-as-learning programs show 40-60% reductions in aggressive behavior within a single school year (Levin, 2003).'
+    ],
+    connection: 'When you ask "What can we do so you both feel okay?" — you are teaching problem-solving, empathy, and emotional intelligence all at once. That is some of the most important teaching you will ever do.'
+  }
+};
 const DAYS = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5 — Report'];
 const TIME_LABELS = {
   early_morning: 'Early Morning',
@@ -1419,13 +1545,74 @@ async function saveReport() {
   };
   const res = await fetch('/api/goals', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
   if (res.ok) {
-    const goalRes = await fetch(`/api/goals/${state.currentMentee.id}`);
+    const goalRes = await fetch('/api/goals/' + state.currentMentee.id);
     state.allGoals = goalRes.ok ? await goalRes.json() : [];
-    showToast('✓ Report saved! Ready to share with your mentee.');
-    setTimeout(() => showMenteeDetail(state.currentMentee), 1800);
+    showShareableReport(chosenGoal, mentorNotes);
   } else {
     showToast('Error saving. Please try again.');
   }
+}
+
+function showShareableReport(chosenGoal, mentorNotes) {
+  const it = state.currentInteraction;
+  const research = RESEARCH[it.id];
+
+  // Aggregate totals
+  const weekObs = state.allObservations.filter(function(o){ return o.interaction_type === it.id && o.day_number <= 4; });
+  var posTotals = {}, negTotals = {};
+  it.positiveItems.forEach(function(item){ posTotals[item.id] = 0; });
+  it.negativeItems.forEach(function(item){ negTotals[item.id] = 0; });
+  weekObs.forEach(function(obs) {
+    var t = obs.tallies || {};
+    it.positiveItems.forEach(function(item){ posTotals[item.id] = (posTotals[item.id]||0) + (t[item.id]||0); });
+    it.negativeItems.forEach(function(item){ negTotals[item.id] = (negTotals[item.id]||0) + (t[item.id]||0); });
+  });
+  var topPos = it.positiveItems.reduce(function(a,b){ return (posTotals[a.id]||0) >= (posTotals[b.id]||0) ? a : b; });
+  var topNeg = it.negativeItems.reduce(function(a,b){ return (negTotals[a.id]||0) >= (negTotals[b.id]||0) ? a : b; });
+
+  // Populate report
+  document.getElementById('sr-title').textContent = 'Week ' + it.week + ' Report — ' + it.name;
+  document.getElementById('sr-meta').textContent = state.currentMentee.name + ' · ' + new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+
+  document.getElementById('sr-strength').innerHTML =
+    '<div class="sr-strength"><div class="sr-item-label">Your Strength This Week</div>' +
+    '<div class="sr-item-value">' + topPos.label.replace('Other:','Other') + '</div>' +
+    '<div class="sr-item-count">Observed ' + (posTotals[topPos.id]||0) + ' times across 4 days</div></div>';
+
+  document.getElementById('sr-growth').innerHTML =
+    '<div class="sr-growth"><div class="sr-item-label">Your Growth Opportunity</div>' +
+    '<div class="sr-item-value">' + topNeg.label.replace('Other:','Other') + '</div>' +
+    '<div class="sr-item-count">Observed ' + (negTotals[topNeg.id]||0) + ' times across 4 days</div></div>';
+
+  document.getElementById('sr-goal-text').textContent = chosenGoal;
+
+  if (research) {
+    document.getElementById('sr-research-title').textContent = research.why;
+    document.getElementById('sr-research-summary').textContent = research.summary;
+    document.getElementById('sr-research-points').innerHTML = research.points.map(function(p){
+      return '<li>' + p + '</li>';
+    }).join('');
+    document.getElementById('sr-connection').textContent = research.connection;
+  }
+
+  if (mentorNotes) {
+    document.getElementById('sr-mentor-notes').textContent = mentorNotes;
+    document.getElementById('sr-notes-section').style.display = 'block';
+  } else {
+    document.getElementById('sr-notes-section').style.display = 'none';
+  }
+
+  // Show report, hide goal form
+  document.getElementById('shareable-report').classList.add('visible');
+  document.getElementById('report-action-bar').style.display = 'flex';
+  document.querySelector('.report-card:last-of-type').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function hideShareableReport() {
+  document.getElementById('shareable-report').classList.remove('visible');
+  document.getElementById('report-action-bar').style.display = 'none';
+  document.querySelector('.report-card:last-of-type').style.display = 'block';
 }
 
 // ════════════════════════════════════════════════════════════════

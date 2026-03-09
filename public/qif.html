@@ -1142,7 +1142,6 @@ function renderInteractionGrid() {
     const daysLogged = obs.map(o => o.day_number);
     const card = document.createElement('div');
     card.className = 'interaction-card';
-    card.onclick = () => openInteraction(it);
 
     const dotHtml = [1,2,3,4,5].map(d => {
       let cls = '';
@@ -1156,6 +1155,9 @@ function renderInteractionGrid() {
       <div style="font-size:22px;margin-bottom:6px;">${it.icon}</div>
       <div class="int-name">${it.name}</div>
       <div class="int-days">${dotHtml}</div>`;
+
+    // Assign onclick AFTER innerHTML so it isn't wiped
+    card.onclick = () => openInteraction(it);
     grid.appendChild(card);
   });
 }

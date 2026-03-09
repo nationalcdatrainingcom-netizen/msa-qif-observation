@@ -752,6 +752,22 @@ body {
 .resources-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
 .resources-upload-info { font-size: 12px; color: var(--text-light); font-style: italic; }
 
+
+.domain-tab {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--warm-white);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text-mid);
+  transition: all 0.18s;
+}
+.domain-tab:hover { border-color: var(--sage); color: var(--sage); }
+.domain-tab.active { background: var(--black); color: white; border-color: var(--black); }
+
 </style>
 </head>
 <body>
@@ -826,11 +842,17 @@ body {
       </div>
     </div>
 
-    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:6px;">
-      <div class="section-label" style="margin-bottom:0;">Domain 1 — Emotional Climate &amp; Responsiveness</div>
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+      <div>
+        <div class="section-label" style="margin-bottom:4px;" id="active-domain-label">Domain 1 — Emotional Climate &amp; Responsiveness</div>
+        <div class="domain-desc" style="margin-bottom:0;">Four weeks of focused daily observation. Each week closes with a coaching report and goal on Day 5.</div>
+      </div>
       <button class="btn-secondary" style="width:auto;padding:8px 16px;font-size:13px;" onclick="showResources()">📄 Mentee Resources</button>
     </div>
-    <div class="domain-desc">Four weeks of focused daily observation, one interaction type per week. Each week closes with a coaching report and goal on Day 5.</div>
+    <div class="domain-tabs" id="domain-tabs" style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
+      <button class="domain-tab active" data-domain="0" onclick="switchDomain(0)">Domain 1: Emotional Climate</button>
+      <button class="domain-tab" data-domain="1" onclick="switchDomain(1)">Domain 2: Classroom Organization</button>
+    </div>
 
     <div class="interaction-grid" id="interaction-grid">
       <!-- populated by JS -->
@@ -979,7 +1001,7 @@ body {
         <div class="dash-sub">Printable weekly guides to share with your mentee on Day 5.</div>
       </div>
     </div>
-    <div class="section-label" style="margin-top:24px; margin-bottom:0;">Domain 1 — Emotional Climate &amp; Responsiveness</div>
+    <div class="section-label" style="margin-top:24px; margin-bottom:0;" id="resources-domain-label">Domain 1 — Emotional Climate &amp; Responsiveness</div>
     <div class="resources-grid" id="resources-grid">
       <div class="resource-empty">Loading resources…</div>
     </div>
@@ -993,9 +1015,10 @@ body {
 
 <script>
 // ════════════════════════════════════════════════════════════════
-// DATA — Domain 1: Emotional Climate & Responsiveness
+// DATA — All Domains
 // ════════════════════════════════════════════════════════════════
-const DOMAIN = {
+const DOMAINS = [
+{
   id: 'emotional',
   name: 'Emotional Climate & Responsiveness',
   interactionTypes: [
@@ -1140,8 +1163,161 @@ const DOMAIN = {
       ]
     }
   ]
-};
+},
+// ════════════════════════════════════════════════════════════════
+// DOMAIN 2: Classroom Organization
+// ════════════════════════════════════════════════════════════════
+{
+  id: 'organization',
+  name: 'Classroom Organization',
+  interactionTypes: [
+    {
+      id: 'behavior_management',
+      name: 'Behavior Management',
+      week: 1,
+      icon: '🧭',
+      positiveItems: [
+        { id: 'p1', label: 'Proactive redirection before escalation' },
+        { id: 'p2', label: 'Clear, calm behavior expectations stated' },
+        { id: 'p3', label: 'Specific positive behavior acknowledged' },
+        { id: 'p4', label: 'Uses child\'s name calmly in redirection' },
+        { id: 'p5', label: 'Logical consequence given (not punitive)' },
+        { id: 'p6', label: 'Transitions managed with warning/signal' },
+        { id: 'p7', label: 'Consistent follow-through on expectations' },
+        { id: 'p8', label: 'Children reminded of rules positively' },
+        { id: 'p9', label: 'De-escalation used before consequences' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Reactive/punitive response to behavior' },
+        { id: 'n2', label: 'Yelling or sharp tone used' },
+        { id: 'n3', label: 'Inconsistent follow-through' },
+        { id: 'n4', label: 'Blanket reprimand to whole group' },
+        { id: 'n5', label: 'Threat without follow-through' },
+        { id: 'n6', label: 'Transition without warning causes chaos' },
+        { id: 'n7', label: 'Child singled out/shamed publicly' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'Before any redirection this week, take one breath and use the child\'s name calmly.',
+        'Give a 2-minute warning before every transition — use a consistent signal (bell, clap, song).',
+        'Catch one child being good every 15 minutes and name the specific behavior out loud.',
+        'Replace one "don\'t/stop" statement with a positive direction of what TO do.',
+        'Choose one classroom rule and practice stating it positively to children three times today.'
+      ]
+    },
+    {
+      id: 'productivity',
+      name: 'Productivity',
+      week: 2,
+      icon: '⏱',
+      positiveItems: [
+        { id: 'p1', label: 'Smooth, efficient transitions between activities' },
+        { id: 'p2', label: 'Materials prepared and ready before activity' },
+        { id: 'p3', label: 'Minimal wait time for children' },
+        { id: 'p4', label: 'Children engaged throughout activity' },
+        { id: 'p5', label: 'Instructions clear and brief' },
+        { id: 'p6', label: 'Schedule followed with flexibility' },
+        { id: 'p7', label: 'Children know what to do next without asking' },
+        { id: 'p8', label: 'Downtime filled with intentional activity' },
+        { id: 'p9', label: 'Teacher monitors whole room during activity' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Long wait times with nothing to do' },
+        { id: 'n2', label: 'Materials not ready, causing delays' },
+        { id: 'n3', label: 'Children wandering without direction' },
+        { id: 'n4', label: 'Transition takes more than 3 minutes' },
+        { id: 'n5', label: 'Teacher focused on one child, room unmonitored' },
+        { id: 'n6', label: 'Activity ends early with no plan for remaining time' },
+        { id: 'n7', label: 'Repeated instructions needed (children unclear)' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'Prepare all materials for the next activity before the current one ends.',
+        'Practice the "scan" — every 3 minutes, look up and visually check the whole room.',
+        'Time your transitions this week — aim to get all transitions under 2 minutes.',
+        'Create a simple visual schedule children can check themselves when unsure what comes next.',
+        'During any wait time, have a go-to filler (song, finger play, question game) ready to use.'
+      ]
+    },
+    {
+      id: 'instructional_formats',
+      name: 'Instructional Learning Formats',
+      week: 3,
+      icon: '📚',
+      positiveItems: [
+        { id: 'p1', label: 'Variety of learning formats used (whole/small/individual)' },
+        { id: 'p2', label: 'Small group instruction observed' },
+        { id: 'p3', label: 'Hands-on/experiential activity offered' },
+        { id: 'p4', label: 'Format matched to learning goal' },
+        { id: 'p5', label: 'Children actively participating (not passive)' },
+        { id: 'p6', label: 'Materials support the learning format' },
+        { id: 'p7', label: 'Differentiation visible (varied support levels)' },
+        { id: 'p8', label: 'Children given choice of how to engage' },
+        { id: 'p9', label: 'Format shift used to re-engage attention' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Only whole-group instruction used' },
+        { id: 'n2', label: 'Children passive/listening only' },
+        { id: 'n3', label: 'Same format used for all activities' },
+        { id: 'n4', label: 'No differentiation for varied learners' },
+        { id: 'n5', label: 'Materials don\'t match the activity format' },
+        { id: 'n6', label: 'Children disengaged and teacher doesn\'t shift' },
+        { id: 'n7', label: 'Lesson format too long for developmental level' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'This week, plan at least one small group activity each day (3-5 children).',
+        'When you notice children disengaging, shift the format — stand up, move, or switch to hands-on.',
+        'Choose one lesson and add a hands-on component that wasn\'t there before.',
+        'Identify your two strongest learners and two who need extra support — differentiate for both.',
+        'Offer children a choice in one activity daily: how they do it, where they do it, or what they use.'
+      ]
+    },
+    {
+      id: 'learning_environment',
+      name: 'Learning Environment & Design',
+      week: 4,
+      icon: '🏫',
+      positiveItems: [
+        { id: 'p1', label: 'Environment clean, safe, and organized' },
+        { id: 'p2', label: 'Materials accessible at children\'s level' },
+        { id: 'p3', label: 'Centers clearly defined and purposeful' },
+        { id: 'p4', label: 'Children\'s work displayed with care' },
+        { id: 'p5', label: 'Print-rich environment (labels, words visible)' },
+        { id: 'p6', label: 'Cozy/calm space available for regulation' },
+        { id: 'p7', label: 'Materials rotated to maintain interest' },
+        { id: 'p8', label: 'Traffic flow allows movement without conflict' },
+        { id: 'p9', label: 'Environment reflects children\'s cultures/families' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Cluttered or disorganized space' },
+        { id: 'n2', label: 'Materials out of children\'s reach' },
+        { id: 'n3', label: 'No defined learning centers' },
+        { id: 'n4', label: 'No children\'s work displayed' },
+        { id: 'n5', label: 'Environment lacks print/language support' },
+        { id: 'n6', label: 'No calm/regulation space available' },
+        { id: 'n7', label: 'Same materials, never rotated' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'This week, add labels (with pictures) to three areas or containers children use daily.',
+        'Create or designate a small "calm corner" with soft materials and a feelings chart.',
+        'Rotate one center\'s materials this week and observe whether engagement increases.',
+        'Walk your room from a child\'s eye level — can children see and reach what they need?',
+        'Add one item to the environment that reflects a child\'s home culture or family structure.'
+      ]
+    }
+  ]
+}
+];
 
+// Active domain index (0 = Domain 1, 1 = Domain 2)
+let activeDomainIndex = 0;
+function DOMAIN() { return DOMAINS[activeDomainIndex]; }
 
 const RESEARCH = {
   positive_climate: {
@@ -1257,7 +1433,7 @@ function renderMenteeGrid() {
   const grid = document.getElementById('mentee-grid');
   grid.innerHTML = '';
   state.mentees.forEach(function(m, idx) {
-    const pips = DOMAIN.interactionTypes.map(function(it) {
+    const pips = DOMAIN().interactionTypes.map(function(it) {
       return '<span class="progress-pip">Wk ' + it.week + ': ' + it.name.split(' ')[0] + '</span>';
     }).join('');
     grid.innerHTML += '<div class="mentee-card" data-mentee="' + idx + '" style="cursor:pointer;">' +
@@ -1315,7 +1491,7 @@ async function showMenteeDetail(mentee) {
 function renderInteractionGrid() {
   const grid = document.getElementById('interaction-grid');
   grid.innerHTML = '';
-  DOMAIN.interactionTypes.forEach(function(it, index) {
+  DOMAIN().interactionTypes.forEach(function(it, index) {
     const obs = state.allObservations.filter(function(o){ return o.interaction_type === it.id; });
     const daysLogged = obs.map(function(o){ return o.day_number; });
     const hasReport = state.allGoals.some(function(g){ return g.interaction_type === it.id; });
@@ -1340,7 +1516,7 @@ function renderInteractionGrid() {
     var card = e.target.closest('[data-index]');
     if (card) {
       var idx = parseInt(card.getAttribute('data-index'));
-      openInteraction(DOMAIN.interactionTypes[idx]);
+      openInteraction(DOMAIN().interactionTypes[idx]);
     }
   };
 }
@@ -1470,7 +1646,7 @@ async function saveObservation() {
   label.innerHTML = '<span class="spinner"></span> Saving…';
   const payload = {
     menteeId: state.currentMentee.id,
-    domainId: DOMAIN.id,
+    domainId: DOMAIN().id,
     interactionType: state.currentInteraction.id,
     weekNumber: state.currentInteraction.week,
     dayNumber: state.currentDay,
@@ -1590,7 +1766,7 @@ async function saveReport() {
   if (!chosenGoal) { showToast('Please choose or write a goal first.'); return; }
   const payload = {
     menteeId: state.currentMentee.id,
-    domainId: DOMAIN.id,
+    domainId: DOMAIN().id,
     interactionType: state.currentInteraction.id,
     weekNumber: state.currentInteraction.week,
     chosenGoal,
@@ -1683,6 +1859,23 @@ async function returnToDashboard() {
 }
 
 // ════════════════════════════════════════════════════════════════
+// DOMAIN SWITCHING
+// ════════════════════════════════════════════════════════════════
+const DOMAIN_LABELS = [
+  'Domain 1 — Emotional Climate & Responsiveness',
+  'Domain 2 — Classroom Organization'
+];
+
+function switchDomain(idx) {
+  activeDomainIndex = idx;
+  document.getElementById('active-domain-label').textContent = DOMAIN_LABELS[idx];
+  document.querySelectorAll('.domain-tab').forEach(function(btn) {
+    btn.classList.toggle('active', parseInt(btn.getAttribute('data-domain')) === idx);
+  });
+  renderInteractionGrid();
+}
+
+// ════════════════════════════════════════════════════════════════
 // RESOURCES
 // ════════════════════════════════════════════════════════════════
 const RESOURCE_ICONS = {
@@ -1698,7 +1891,8 @@ async function showResources() {
   const grid = document.getElementById('resources-grid');
   grid.innerHTML = '<div class="resource-empty">Loading…</div>';
   try {
-    const res = await fetch('/api/resources');
+    document.getElementById('resources-domain-label').textContent = DOMAIN_LABELS[activeDomainIndex];
+    const res = await fetch('/api/resources?domain=' + DOMAIN().id);
     const resources = res.ok ? await res.json() : [];
     if (resources.length === 0) {
       grid.innerHTML = '<div class="resource-empty">No resources have been uploaded yet. Check back after your first training session.</div>';

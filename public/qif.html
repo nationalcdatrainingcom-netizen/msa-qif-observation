@@ -1137,29 +1137,32 @@ async function showMenteeDetail(mentee) {
 function renderInteractionGrid() {
   const grid = document.getElementById('interaction-grid');
   grid.innerHTML = '';
-  DOMAIN.interactionTypes.forEach(it => {
-    const obs = state.allObservations.filter(o => o.interaction_type === it.id);
-    const daysLogged = obs.map(o => o.day_number);
-    const card = document.createElement('div');
-    card.className = 'interaction-card';
-
-    const dotHtml = [1,2,3,4,5].map(d => {
+  DOMAIN.interactionTypes.forEach(function(it, index) {
+    const obs = state.allObservations.filter(function(o){ return o.interaction_type === it.id; });
+    const daysLogged = obs.map(function(o){ return o.day_number; });
+    const dotHtml = [1,2,3,4,5].map(function(d) {
       let cls = '';
       if (d === 5) cls = 'report-day';
-      else if (daysLogged.includes(d)) cls = 'done';
-      return `<div class="day-dot ${cls}">${d}</div>`;
+      else if (daysLogged.indexOf(d) > -1) cls = 'done';
+      return '<div class="day-dot ' + cls + '">' + d + '</div>';
     }).join('');
-
-    card.innerHTML = `
-      <div class="int-week-tag">Week ${it.week}</div>
-      <div style="font-size:22px;margin-bottom:6px;">${it.icon}</div>
-      <div class="int-name">${it.name}</div>
-      <div class="int-days">${dotHtml}</div>`;
-
-    // Assign onclick AFTER innerHTML so it isn't wiped
-    card.onclick = () => openInteraction(it);
+    const card = document.createElement('div');
+    card.className = 'interaction-card';
+    card.setAttribute('data-index', index);
+    card.innerHTML = '<div class="int-week-tag">Week ' + it.week + '</div>' +
+      '<div style="font-size:22px;margin-bottom:6px;">' + it.icon + '</div>' +
+      '<div class="int-name">' + it.name + '</div>' +
+      '<div class="int-days">' + dotHtml + '</div>';
+    card.setAttribute('data-index', index);
     grid.appendChild(card);
   });
+  grid.onclick = function(e) {
+    var card = e.target.closest('[data-index]');
+    if (card) {
+      var idx = parseInt(card.getAttribute('data-index'));
+      openInteraction(DOMAIN.interactionTypes[idx]);
+    }
+  };
 }
 
 // ════════════════════════════════════════════════════════════════

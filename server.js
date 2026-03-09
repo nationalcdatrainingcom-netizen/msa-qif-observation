@@ -1,66 +1,211 @@
 const express = require('express');
+const { Pool } = require('pg');
+const session = require('express-session');
 const path = require('path');
-const fs = require('fs');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+// DB
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+});
 
-// ── PROGRESS STORAGE ──────────────────────────────────────────
-// Progress saved to a JSON file on the server.
-// Also saved to localStorage on the device as a fallback.
-const PROGRESS_FILE = path.join(__dirname, 'progress.json');
-
-function readProgress() {
+// Init tables
+async function initDB() {
+  const client = await pool.connect();
   try {
-    if (fs.existsSync(PROGRESS_FILE)) {
-      return JSON.parse(fs.readFileSync(PROGRESS_FILE, 'utf8'));
-    }
-  } catch(e) {}
-  return {};
-}
-
-function writeProgress(data) {
-  try {
-    fs.writeFileSync(PROGRESS_FILE, JSON.stringify(data, null, 2));
-  } catch(e) {
-    console.error('Could not write progress:', e.message);
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS mentors (
+        id SERIAL PRIMARY KEY,
+        name TEXT NOT NULL,
+        pin TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT NOW()
+      );
+      CREATE TABLE IF NOT EXISTS mentees (
+        id SERIAL PRIMARY KEY,
+        mentor_id INTEGER REFERENCES mentors(id),
+        name TEXT NOT NULL,
+        classroom TEXT,
+        created_at TIMESTAMP DEFAULT NOW()
+      );
+      CREATE TABLE IF NOT EXISTS tally_observations (
+        id SERIAL PRIMARY KEY,
+        mentee_id INTEGER REFERENCES mentees(id),
+        domain_id TEXT NOT NULL,
+        interaction_type TEXT NOT NULL,
+        week_number INTEGER NOT NULL,
+        day_number INTEGER NOT NULL,
+        time_of_day TEXT NOT NULL,
+        tallies JSONB NOT NULL DEFAULT '{}',
+        notes TEXT,
+        observed_at TIMESTAMP DEFAULT NOW()
+      );
+      CREATE TABLE IF NOT EXISTS weekly_goals (
+        id SERIAL PRIMARY KEY,
+        mentee_id INTEGER REFERENCES mentees(id),
+        domain_id TEXT NOT NULL,
+        interaction_type TEXT NOT NULL,
+        week_number INTEGER NOT NULL,
+        chosen_goal TEXT,
+        mentor_notes TEXT,
+        created_at TIMESTAMP DEFAULT NOW()
+      );
+      CREATE TABLE IF NOT EXISTS full_observations (
+        id SERIAL PRIMARY KEY,
+        mentee_id INTEGER REFERENCES mentees(id),
+        observation_type TEXT NOT NULL,
+        domain_id TEXT,
+        scores JSONB NOT NULL DEFAULT '{}',
+        notes TEXT,
+        observed_at TIMESTAMP DEFAULT NOW()
+      );
+    `);
+    console.log('DB initialized');
+  } finally {
+    client.release();
   }
 }
 
-// GET progress for a user
-app.get('/api/progress/:userId', (req, res) => {
-  const all = readProgress();
-  const user = all[req.params.userId] || { completed: [], current: null };
-  res.json(user);
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'msa-qif-secret-2024',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 8 * 60 * 60 * 1000 } // 8 hours
+}));
+
+// ── AUTH ──────────────────────────────────────────────────────────
+
+// Register or login mentor
+app.post('/api/mentor/login', async (req, res) => {
+  const { name, pin } = req.body;
+  if (!name || !pin) return res.status(400).json({ error: 'Name and PIN required' });
+  try {
+    let result = await pool.query('SELECT * FROM mentors WHERE LOWER(name) = LOWER($1)', [name]);
+    if (result.rows.length === 0) {
+      // New mentor — register
+      const ins = await pool.query('INSERT INTO mentors (name, pin) VALUES ($1, $2) RETURNING *', [name, pin]);
+      req.session.mentorId = ins.rows[0].id;
+      req.session.mentorName = ins.rows[0].name;
+      return res.json({ success: true, mentor: ins.rows[0], isNew: true });
+    } else {
+      const mentor = result.rows[0];
+      if (mentor.pin !== pin) return res.status(401).json({ error: 'Incorrect PIN' });
+      req.session.mentorId = mentor.id;
+      req.session.mentorName = mentor.name;
+      return res.json({ success: true, mentor, isNew: false });
+    }
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
-// POST (save) progress for a user
-app.post('/api/progress/:userId', (req, res) => {
-  const all = readProgress();
-  all[req.params.userId] = {
-    completed: req.body.completed || [],
-    current: req.body.current || null,
-    lastSaved: new Date().toISOString()
-  };
-  writeProgress(all);
-  res.json({ ok: true });
+app.post('/api/mentor/logout', (req, res) => {
+  req.session.destroy();
+  res.json({ success: true });
 });
 
-// ── ROUTES ────────────────────────────────────────────────────
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+app.get('/api/mentor/me', (req, res) => {
+  if (!req.session.mentorId) return res.status(401).json({ error: 'Not logged in' });
+  res.json({ mentorId: req.session.mentorId, mentorName: req.session.mentorName });
 });
 
-app.get('/training', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'training.html'));
+// ── MENTEES ───────────────────────────────────────────────────────
+
+app.get('/api/mentees', async (req, res) => {
+  if (!req.session.mentorId) return res.status(401).json({ error: 'Not logged in' });
+  const result = await pool.query('SELECT * FROM mentees WHERE mentor_id = $1 ORDER BY name', [req.session.mentorId]);
+  res.json(result.rows);
 });
 
-app.get('/qif', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'qif.html'));
+app.post('/api/mentees', async (req, res) => {
+  if (!req.session.mentorId) return res.status(401).json({ error: 'Not logged in' });
+  const { name, classroom } = req.body;
+  const result = await pool.query(
+    'INSERT INTO mentees (mentor_id, name, classroom) VALUES ($1, $2, $3) RETURNING *',
+    [req.session.mentorId, name, classroom || '']
+  );
+  res.json(result.rows[0]);
 });
 
-app.listen(PORT, () => {
-  console.log(`MSA Mentor App running on port ${PORT}`);
+// ── TALLY OBSERVATIONS ────────────────────────────────────────────
+
+app.get('/api/observations/tally/:menteeId', async (req, res) => {
+  if (!req.session.mentorId) return res.status(401).json({ error: 'Not logged in' });
+  const result = await pool.query(
+    'SELECT * FROM tally_observations WHERE mentee_id = $1 ORDER BY observed_at',
+    [req.params.menteeId]
+  );
+  res.json(result.rows);
+});
+
+app.post('/api/observations/tally', async (req, res) => {
+  if (!req.session.mentorId) return res.status(401).json({ error: 'Not logged in' });
+  const { menteeId, domainId, interactionType, weekNumber, dayNumber, timeOfDay, tallies, notes } = req.body;
+
+  // Check if record exists for this exact slot
+  const existing = await pool.query(
+    'SELECT id FROM tally_observations WHERE mentee_id=$1 AND domain_id=$2 AND interaction_type=$3 AND week_number=$4 AND day_number=$5',
+    [menteeId, domainId, interactionType, weekNumber, dayNumber]
+  );
+
+  let result;
+  if (existing.rows.length > 0) {
+    result = await pool.query(
+      'UPDATE tally_observations SET tallies=$1, notes=$2, time_of_day=$3, observed_at=NOW() WHERE id=$4 RETURNING *',
+      [JSON.stringify(tallies), notes, timeOfDay, existing.rows[0].id]
+    );
+  } else {
+    result = await pool.query(
+      'INSERT INTO tally_observations (mentee_id, domain_id, interaction_type, week_number, day_number, time_of_day, tallies, notes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *',
+      [menteeId, domainId, interactionType, weekNumber, dayNumber, timeOfDay, JSON.stringify(tallies), notes]
+    );
+  }
+  res.json(result.rows[0]);
+});
+
+// ── WEEKLY GOALS ──────────────────────────────────────────────────
+
+app.get('/api/goals/:menteeId', async (req, res) => {
+  if (!req.session.mentorId) return res.status(401).json({ error: 'Not logged in' });
+  const result = await pool.query('SELECT * FROM weekly_goals WHERE mentee_id=$1 ORDER BY created_at', [req.params.menteeId]);
+  res.json(result.rows);
+});
+
+app.post('/api/goals', async (req, res) => {
+  if (!req.session.mentorId) return res.status(401).json({ error: 'Not logged in' });
+  const { menteeId, domainId, interactionType, weekNumber, chosenGoal, mentorNotes } = req.body;
+  const existing = await pool.query(
+    'SELECT id FROM weekly_goals WHERE mentee_id=$1 AND domain_id=$2 AND interaction_type=$3 AND week_number=$4',
+    [menteeId, domainId, interactionType, weekNumber]
+  );
+  let result;
+  if (existing.rows.length > 0) {
+    result = await pool.query(
+      'UPDATE weekly_goals SET chosen_goal=$1, mentor_notes=$2 WHERE id=$3 RETURNING *',
+      [chosenGoal, mentorNotes, existing.rows[0].id]
+    );
+  } else {
+    result = await pool.query(
+      'INSERT INTO weekly_goals (mentee_id, domain_id, interaction_type, week_number, chosen_goal, mentor_notes) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',
+      [menteeId, domainId, interactionType, weekNumber, chosenGoal, mentorNotes]
+    );
+  }
+  res.json(result.rows[0]);
+});
+
+// ── ROUTES ────────────────────────────────────────────────────────
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
+app.get('/qif', (req, res) => res.sendFile(path.join(__dirname, 'public', 'qif.html')));
+app.get('/training', (req, res) => res.sendFile(path.join(__dirname, 'public', 'training.html')));
+
+initDB().then(() => {
+  app.listen(PORT, () => console.log(`MSA QIF v2 running on port ${PORT}`));
+}).catch(e => {
+  console.error('DB init failed:', e);
+  process.exit(1);
 });

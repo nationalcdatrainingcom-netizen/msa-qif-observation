@@ -852,6 +852,7 @@ body {
     <div class="domain-tabs" id="domain-tabs" style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
       <button class="domain-tab active" data-domain="0" onclick="switchDomain(0)">Domain 1: Emotional Climate</button>
       <button class="domain-tab" data-domain="1" onclick="switchDomain(1)">Domain 2: Classroom Organization</button>
+      <button class="domain-tab" data-domain="2" onclick="switchDomain(2)">Domain 3: Instructional Support</button>
     </div>
 
     <div class="interaction-grid" id="interaction-grid">
@@ -1312,10 +1313,159 @@ const DOMAINS = [
       ]
     }
   ]
+},
+// ════════════════════════════════════════════════════════════════
+// DOMAIN 3: Instructional Support
+// ════════════════════════════════════════════════════════════════
+{
+  id: 'instructional',
+  name: 'Instructional Support',
+  interactionTypes: [
+    {
+      id: 'concept_development',
+      name: 'Concept Development',
+      week: 9,
+      icon: '💡',
+      positiveItems: [
+        { id: 'p1', label: 'Connects new concept to prior knowledge' },
+        { id: 'p2', label: 'Uses real-world examples to explain concept' },
+        { id: 'p3', label: 'Encourages children to analyze or compare' },
+        { id: 'p4', label: 'Asks children to predict or hypothesize' },
+        { id: 'p5', label: 'Invites children to explain their thinking' },
+        { id: 'p6', label: 'Builds concept across multiple activities' },
+        { id: 'p7', label: 'Uses creative thinking / what-if questions' },
+        { id: 'p8', label: 'Integrates concept across subject areas' },
+        { id: 'p9', label: 'Children generate their own examples' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Concept presented as fact only, no exploration' },
+        { id: 'n2', label: 'No connection to prior knowledge or experience' },
+        { id: 'n3', label: 'Children passive — no opportunity to apply concept' },
+        { id: 'n4', label: 'Concept addressed once, not revisited or built on' },
+        { id: 'n5', label: 'Teacher explains without asking children to think' },
+        { id: 'n6', label: 'Concept too abstract for developmental level' },
+        { id: 'n7', label: 'No real-world connection offered' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'Before introducing a concept, ask children what they already know — honor every answer.',
+        'Choose one concept this week and return to it in at least three different activities or subject areas.',
+        'Replace one "telling" moment with a "what do you think?" — let children construct the concept.',
+        'After a lesson, ask children to teach the concept to a friend or stuffed animal.',
+        'Add a real object, photo, or hands-on material that makes an abstract concept concrete.'
+      ]
+    },
+    {
+      id: 'quality_feedback',
+      name: 'Quality of Feedback',
+      week: 10,
+      icon: '🔁',
+      positiveItems: [
+        { id: 'p1', label: 'Feedback is specific and descriptive' },
+        { id: 'p2', label: 'Feedback expands on what the child said or did' },
+        { id: 'p3', label: 'Prompts child to try again or go deeper' },
+        { id: 'p4', label: 'Acknowledges effort, not just correctness' },
+        { id: 'p5', label: 'Asks child to explain their reasoning' },
+        { id: 'p6', label: 'Offers scaffold when child is stuck' },
+        { id: 'p7', label: 'Loops back to confirm child understanding' },
+        { id: 'p8', label: 'Connects feedback to a learning goal' },
+        { id: 'p9', label: 'Uses child response to extend the conversation' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Generic praise only ("Good job!" "Nice work!")' },
+        { id: 'n2', label: 'Feedback evaluates correctness only, not thinking' },
+        { id: 'n3', label: 'No follow-up after child responds' },
+        { id: 'n4', label: 'Child error corrected without exploration' },
+        { id: 'n5', label: 'Feedback is vague or unclear' },
+        { id: 'n6', label: 'Child not given another opportunity to try' },
+        { id: 'n7', label: 'Teacher moves on without confirming understanding' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'Replace every "good job" this week with one specific observation: "I noticed you counted each block before you stacked it."',
+        'When a child makes an error, pause before correcting — ask "What made you think that?" first.',
+        'After a child answers, try "Tell me more" or "What makes you think so?" at least five times today.',
+        'Choose one child each day to give extended, looping feedback — go three conversational turns deep.',
+        'When a child gets something right, ask them to explain HOW they figured it out.'
+      ]
+    },
+    {
+      id: 'language_modeling',
+      name: 'Language Modeling',
+      week: 11,
+      icon: '🗣',
+      positiveItems: [
+        { id: 'p1', label: 'Uses rich, varied vocabulary intentionally' },
+        { id: 'p2', label: 'Repeats and extends child language (expansion)' },
+        { id: 'p3', label: 'Narrates own or children\'s actions aloud' },
+        { id: 'p4', label: 'Introduces new word with context and example' },
+        { id: 'p5', label: 'Invites child to repeat or use new word' },
+        { id: 'p6', label: 'Uses complete, grammatically rich sentences' },
+        { id: 'p7', label: 'Reads aloud with expression and word emphasis' },
+        { id: 'p8', label: 'Asks children to describe, compare, or narrate' },
+        { id: 'p9', label: 'Responds to child language with extension, not correction' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Simple or repetitive vocabulary throughout' },
+        { id: 'n2', label: 'Child language not extended or built upon' },
+        { id: 'n3', label: 'Child corrected for grammar without modeling' },
+        { id: 'n4', label: 'No new vocabulary introduced in activity' },
+        { id: 'n5', label: 'Minimal teacher talk — silent or one-word responses' },
+        { id: 'n6', label: 'Children rarely asked to describe or explain' },
+        { id: 'n7', label: 'Read-aloud lacks expression or word exploration' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'Choose three rich vocabulary words before each activity and find a natural moment to use each one.',
+        'When a child says something simple, expand it: "Dog!" → "Yes! That is a fluffy golden retriever!"',
+        'Narrate what you are doing as you do it — model the language of the activity in real time.',
+        'During read-aloud, stop at two words per book and explore them: "What do you think luminous means?"',
+        'Count how many times children describe something today — then double it tomorrow.'
+      ]
+    },
+    {
+      id: 'higher_order_questioning',
+      name: 'Higher-Order Questioning',
+      week: 12,
+      icon: '🧠',
+      positiveItems: [
+        { id: 'p1', label: 'Asks open-ended questions with no single right answer' },
+        { id: 'p2', label: 'Uses analysis questions (compare, sort, classify)' },
+        { id: 'p3', label: 'Uses evaluation questions (which is better? why?)' },
+        { id: 'p4', label: 'Uses synthesis questions (what would happen if?)' },
+        { id: 'p5', label: 'Waits 5+ seconds after asking before responding' },
+        { id: 'p6', label: 'Accepts and builds on unexpected answers' },
+        { id: 'p7', label: 'Asks children to justify or explain their answer' },
+        { id: 'p8', label: 'Sequences questions from simple to complex' },
+        { id: 'p9', label: 'Uses a child\'s answer to generate next question' },
+        { id: 'p10', label: 'Other:', custom: true }
+      ],
+      negativeItems: [
+        { id: 'n1', label: 'Only yes/no or one-word answer questions asked' },
+        { id: 'n2', label: 'Questions have only one correct answer' },
+        { id: 'n3', label: 'Wait time less than 2 seconds' },
+        { id: 'n4', label: 'Unexpected answer dismissed or ignored' },
+        { id: 'n5', label: 'Teacher answers own question without waiting' },
+        { id: 'n6', label: 'Questions stay at recall level only' },
+        { id: 'n7', label: 'Same children called on repeatedly' },
+        { id: 'n8', label: 'Other:', custom: true }
+      ],
+      goalSuggestions: [
+        'Before each group activity, write down two higher-order questions you will ask — plan them in advance.',
+        'Practice the 5-second wait: ask a question, then count silently to five before saying anything else.',
+        'When a child gives an unexpected answer, say "Interesting — tell me more" before moving on.',
+        'Move up Bloom\'s ladder: start with "What do you see?" then "Why do you think that happened?" then "What would you do differently?"',
+        'Call on a child who has not spoken yet today — then build your next question on their answer.'
+      ]
+    }
+  ]
 }
 ];
 
-// Active domain index (0 = Domain 1, 1 = Domain 2)
+// Active domain index (0 = Domain 1, 1 = Domain 2, 2 = Domain 3)
 let activeDomainIndex = 0;
 function DOMAIN() { return DOMAINS[activeDomainIndex]; }
 
@@ -1363,6 +1513,98 @@ const RESEARCH = {
       'Conflict-as-learning programs show 40-60% reductions in aggressive behavior within a single school year (Levin, 2003).'
     ],
     connection: 'When you ask "What can we do so you both feel okay?" — you are teaching problem-solving, empathy, and emotional intelligence all at once. That is some of the most important teaching you will ever do.'
+  },
+
+  // ── Domain 2 Research ──
+  behavior_management: {
+    why: 'Why Behavior Management Matters',
+    summary: 'How a teacher manages behavior shapes not just order in the classroom, but children\'s developing sense of safety, fairness, and self-regulation. Proactive, calm, and consistent management creates the conditions where learning can actually happen.',
+    points: [
+      'Proactive behavior management prevents up to 80% of behavior problems before they occur — the most effective strategies happen before misbehavior, not after (Simonsen et al., 2008).',
+      'Punitive responses to behavior increase aggression and reduce prosocial behavior over time, while logical consequences build intrinsic motivation (Deci & Ryan, 1985).',
+      'Consistent follow-through on expectations is the single most important factor in whether children internalize classroom rules (Marzano, 2003).',
+      'Positive behavioral support strategies reduce referrals by 50% and increase academic engagement significantly in early childhood settings (Horner et al., 2005).'
+    ],
+    connection: 'The goal is not a quiet classroom — it is a classroom where children understand expectations, feel safe within them, and are learning to regulate themselves. That is the foundation for everything else.'
+  },
+  productivity: {
+    why: 'Why Productivity Matters',
+    summary: 'Time is the most precious resource in an early childhood classroom. Every minute of waiting, wandering, or confusion is a minute children are not learning. High-productivity classrooms maximize engaged time without sacrificing joy.',
+    points: [
+      'Children in well-organized, predictable classrooms show higher on-task behavior, better self-regulation, and stronger academic outcomes (Cameron et al., 2005).',
+      'Transition time accounts for up to 20% of the school day in low-quality classrooms — reducing it directly increases learning time (Sainato, 1990).',
+      'Visual schedules and consistent routines reduce anxiety and challenging behavior, especially for children with developmental differences (Hemmeter et al., 2006).',
+      'Teacher proximity and active monitoring during activities is one of the highest-impact low-cost strategies for maintaining engagement (Simonsen et al., 2008).'
+    ],
+    connection: 'A productive classroom is not a rushed one — it is one where children always know what is coming, what is expected, and what to do next. That predictability is itself a form of care.'
+  },
+  instructional_formats: {
+    why: 'Why Instructional Learning Formats Matter',
+    summary: 'Young children learn through doing, moving, talking, and exploring — not through sitting and listening. The format of instruction shapes whether children are truly engaged or merely present.',
+    points: [
+      'Children retain 10% of what they hear, 20% of what they see, and up to 90% of what they do and teach others — active formats dramatically outperform passive ones (Dale, Cone of Experience).',
+      'Small group instruction is the most powerful format for targeting specific learning needs and providing individualized feedback in early childhood (Wasik & Bond, 2001).',
+      'Hands-on, play-based learning produces equivalent or superior academic outcomes compared to direct instruction in preschool, with higher motivation and creativity (Lillard et al., 2013).',
+      'Varied instructional formats throughout the day maintain attention, reduce behavior problems, and support diverse learning styles (Tomlinson, Differentiated Instruction).'
+    ],
+    connection: 'When you move a child from the carpet to a table, from whole group to a partner, from listening to doing — you are not just managing attention. You are honoring how children actually learn.'
+  },
+  learning_environment: {
+    why: 'Why Learning Environment & Design Matters',
+    summary: 'The classroom environment is often called the "third teacher" in Reggio Emilia practice — it teaches constantly, whether intentionally designed or not. A well-designed space communicates belonging, supports independence, and makes learning visible.',
+    points: [
+      'High-quality physical environments predict higher language scores, greater exploration, and more complex play in preschool children (Vandell & Wolfe, 2000).',
+      'Accessible, organized materials increase children\'s independence and reduce teacher-directed transitions by up to 40% (Clayton & Forton, 2001).',
+      'Print-rich environments with labeled, meaningful text accelerate literacy development for all children, especially dual-language learners (Neuman & Dwyer, 2009).',
+      'Calm, defined spaces for self-regulation reduce cortisol and challenging behavior — even brief access to a calm corner improves emotional regulation outcomes (Durlak et al., 2011).'
+    ],
+    connection: 'Walk into a well-designed classroom and you can feel it — the calm, the invitation to explore, the sense that children belong here. That feeling is not accidental. It is built, intention by intention.'
+  },
+
+  // ── Domain 3 Research ──
+  concept_development: {
+    why: 'Why Concept Development Matters',
+    summary: 'Deep learning happens when children do not just receive information but construct understanding through exploration, connection, and application. When teachers guide children to analyze, predict, and connect ideas, they build the cognitive architecture for lifelong thinking.',
+    points: [
+      'Children taught through concept-based instruction show significantly stronger transfer of learning to new situations compared to rote instruction (Erickson, 2008).',
+      'Connecting new concepts to prior knowledge activates existing neural networks and dramatically increases retention (Bransford, Brown & Cocking, 2000).',
+      'When teachers ask children to predict, hypothesize, and explain, they develop executive function alongside content knowledge (Blair & Razza, 2007).',
+      'Concept Development is one of the CLASS Instructional Support dimensions most predictive of long-term academic achievement (Pianta, Hamre & Allen, 2012).'
+    ],
+    connection: 'Every time you ask "What do you think will happen?" instead of simply showing the answer, you are building a thinker — not just a learner of facts.'
+  },
+  quality_feedback: {
+    why: 'Why Quality of Feedback Matters',
+    summary: 'Feedback is not just praise or correction — it is the engine of learning. When feedback is specific, expansive, and responsive to a child\'s actual thinking, it moves children from surface-level performance to deep understanding.',
+    points: [
+      'Specific, descriptive feedback is 3x more effective than generic praise at increasing academic persistence and skill development (Hattie & Timperley, 2007).',
+      'When teachers respond to errors with curiosity rather than correction, children develop a growth mindset and are more likely to attempt difficult tasks (Dweck, 2006).',
+      'Looping feedback — following up a child\'s response with a deeper question — is among the highest-leverage teaching moves in early childhood (Pianta et al., CLASS framework).',
+      'Children who receive process-focused feedback show stronger self-regulation and metacognitive skills by first grade (Stipek et al., 1998).'
+    ],
+    connection: 'The quality of your feedback tells children whether you believe they are capable of going deeper. When you ask "What made you think that?" you are saying: your thinking matters and I want more of it.'
+  },
+  language_modeling: {
+    why: 'Why Language Modeling Matters',
+    summary: 'The words children hear in their earliest years literally build the brain structures they will use to read, write, reason, and communicate for life. A teacher who models rich, varied, contextual language is one of the most powerful literacy interventions that exists.',
+    points: [
+      'Hart & Risley (1995) documented a 30-million-word gap between children from language-rich and language-poor environments by age 3 — teacher language modeling directly closes this gap.',
+      'Vocabulary at age 5 is one of the strongest single predictors of reading comprehension at age 10 (Cunningham & Stanovich, 1997).',
+      'Language expansion — repeating and extending what a child says — accelerates vocabulary and grammar development more effectively than direct instruction (Dickinson & Tabors, 2001).',
+      'Read-alouds with rich vocabulary discussion produce the largest and most durable vocabulary gains of any early childhood intervention (Biemiller & Boote, 2006).'
+    ],
+    connection: 'Every word you choose, every sentence you speak, every time you expand what a child says — you are building a reader, a writer, and a thinker. Language modeling is not a literacy strategy. It is an act of equity.'
+  },
+  higher_order_questioning: {
+    why: 'Why Higher-Order Questioning Matters',
+    summary: 'The questions a teacher asks determine the level of thinking children do. Questions that require only recall produce surface-level understanding. Questions that require analysis, evaluation, and synthesis build the cognitive habits that distinguish lifelong learners.',
+    points: [
+      'Bloom\'s Taxonomy (revised, 2001) shows that analyze, evaluate, and create are where deep learning happens — yet most early childhood teachers operate only at remember and understand.',
+      'Wait time of 5+ seconds after a question increases both the length and quality of children\'s responses, and increases participation from quieter children (Rowe, 1986).',
+      'Children who are regularly asked to justify their answers develop stronger reasoning skills and show higher reading comprehension scores in elementary school (Murphy et al., 2009).',
+      'Higher-order questions are the strongest predictor of language growth in preschool settings, outperforming book reading frequency and vocabulary instruction (Dickinson, 2001).'
+    ],
+    connection: 'The question you ask is an invitation. "What color is it?" invites recall. "Why do you think the caterpillar ate so much?" invites wonder. Wonder is where education begins.'
   }
 };
 const DAYS = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5 — Report'];
@@ -1863,7 +2105,8 @@ async function returnToDashboard() {
 // ════════════════════════════════════════════════════════════════
 const DOMAIN_LABELS = [
   'Domain 1 — Emotional Climate & Responsiveness',
-  'Domain 2 — Classroom Organization'
+  'Domain 2 — Classroom Organization',
+  'Domain 3 — Instructional Support'
 ];
 
 function switchDomain(idx) {

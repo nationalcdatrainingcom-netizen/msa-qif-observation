@@ -21,6 +21,9 @@ input:focus, select:focus { outline: none; border-color: #c9953a; background: wh
 .existing h2 { font-size: 16px; margin-bottom: 12px; }
 .res-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: white; border: 1px solid #e4ddd0; border-radius: 8px; margin-bottom: 8px; font-size: 13px; }
 .res-row a { color: #c9953a; font-weight: 700; text-decoration: none; }
+.res-row .actions { display: flex; gap: 12px; align-items: center; }
+.btn-delete { background: none; border: 1.5px solid #e4ddd0; color: #9b2828; border-radius: 6px; padding: 4px 10px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.15s; }
+.btn-delete:hover { background: #fdf0f0; border-color: #f0b8b8; }
 </style>
 </head>
 <body>
@@ -168,6 +171,27 @@ function showStatus(msg, ok) {
   el.style.display = 'block';
 }
 
+async function deleteResource(id, title) {
+  const key = document.getElementById('admin-key').value.trim();
+  if (!key) { alert('Enter your admin key first.'); return; }
+  if (!confirm('Delete "' + title + '"? This cannot be undone.')) return;
+  try {
+    const res = await fetch('/api/resources/' + id, {
+      method: 'DELETE',
+      headers: { 'x-admin-key': key }
+    });
+    const data = await res.json();
+    if (res.ok) {
+      showStatus('✓ Deleted successfully.', true);
+      loadExisting();
+    } else {
+      showStatus('Error: ' + (data.error || 'Delete failed'), false);
+    }
+  } catch(err) {
+    showStatus('Connection error. Please try again.', false);
+  }
+}
+
 async function loadExisting() {
   const list = document.getElementById('existing-list');
   try {
@@ -178,8 +202,12 @@ async function loadExisting() {
       return;
     }
     list.innerHTML = resources.map(r =>
-      '<div class="res-row"><span>Week ' + r.week_number + ' — ' + r.title + '</span>' +
-      '<a href="/api/resources/' + r.id + '/pdf" target="_blank">View PDF</a></div>'
+      '<div class="res-row">' +
+      '<span>Week ' + r.week_number + ' — ' + r.title + '</span>' +
+      '<div class="actions">' +
+      '<a href="/api/resources/' + r.id + '/pdf" target="_blank">View PDF</a>' +
+      '<button class="btn-delete" onclick="deleteResource(' + r.id + ', \'' + r.title.replace(/'/g, '') + '\')">✕ Delete</button>' +
+      '</div></div>'
     ).join('');
   } catch(e) {
     list.innerHTML = '<p style="color:#999;font-size:13px;">Could not load.</p>';

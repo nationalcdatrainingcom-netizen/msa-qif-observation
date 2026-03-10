@@ -35,6 +35,7 @@ input:focus, select:focus { outline: none; border-color: #c9953a; background: wh
   <select id="domain-id" onchange="updateInteractionTypes()">
     <option value="emotional">Domain 1 — Emotional Climate & Responsiveness</option>
     <option value="organization">Domain 2 — Classroom Organization</option>
+    <option value="instructional">Domain 3 — Instructional Support</option>
   </select>
 
   <label>Interaction Type</label>
@@ -55,6 +56,10 @@ input:focus, select:focus { outline: none; border-color: #c9953a; background: wh
     <option value="6">Week 6</option>
     <option value="7">Week 7</option>
     <option value="8">Week 8</option>
+    <option value="9">Week 9</option>
+    <option value="10">Week 10</option>
+    <option value="11">Week 11</option>
+    <option value="12">Week 12</option>
   </select>
 
   <label>Resource Title (shown to mentors)</label>
@@ -85,6 +90,12 @@ const DOMAIN_INTERACTIONS = {
     { value: 'productivity', label: 'Week 6 — Productivity', week: 6, title: 'Productivity — Mentee Guide' },
     { value: 'instructional_formats', label: 'Week 7 — Instructional Learning Formats', week: 7, title: 'Instructional Learning Formats — Mentee Guide' },
     { value: 'learning_environment', label: 'Week 8 — Learning Environment & Design', week: 8, title: 'Learning Environment & Design — Mentee Guide' },
+  ],
+  instructional: [
+    { value: 'concept_development', label: 'Week 9 — Concept Development', week: 9, title: 'Concept Development — Mentee Guide' },
+    { value: 'quality_feedback', label: 'Week 10 — Quality of Feedback', week: 10, title: 'Quality of Feedback — Mentee Guide' },
+    { value: 'language_modeling', label: 'Week 11 — Language Modeling', week: 11, title: 'Language Modeling — Mentee Guide' },
+    { value: 'higher_order_questioning', label: 'Week 12 — Higher-Order Questioning', week: 12, title: 'Higher-Order Questioning — Mentee Guide' },
   ]
 };
 

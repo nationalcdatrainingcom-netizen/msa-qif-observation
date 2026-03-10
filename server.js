@@ -211,12 +211,18 @@ app.post('/api/goals', async (req, res) => {
 
 // ── MENTEE RESOURCES ─────────────────────────────────────────────
 
-// List available resources
+// List available resources (optional ?domain= filter)
 app.get('/api/resources', async (req, res) => {
   try {
-    const result = await pool.query(
-      'SELECT id, domain_id, interaction_type, week_number, title, filename, uploaded_at FROM mentee_resources ORDER BY week_number',
-    );
+    let query, params;
+    if (req.query.domain) {
+      query = 'SELECT id, domain_id, interaction_type, week_number, title, filename, uploaded_at FROM mentee_resources WHERE domain_id=$1 ORDER BY week_number';
+      params = [req.query.domain];
+    } else {
+      query = 'SELECT id, domain_id, interaction_type, week_number, title, filename, uploaded_at FROM mentee_resources ORDER BY domain_id, week_number';
+      params = [];
+    }
+    const result = await pool.query(query, params);
     res.json(result.rows);
   } catch(e) {
     console.error(e);
@@ -268,6 +274,21 @@ app.post('/api/resources/upload', async (req, res) => {
       );
     }
     res.json({ success: true, id: result.rows[0].id });
+  } catch(e) {
+    console.error(e);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Delete a resource (admin only)
+app.delete('/api/resources/:id', async (req, res) => {
+  if (req.headers['x-admin-key'] !== (process.env.ADMIN_KEY || 'msa-admin-2024')) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+  try {
+    const result = await pool.query('DELETE FROM mentee_resources WHERE id=$1 RETURNING id', [req.params.id]);
+    if (result.rows.length === 0) return res.status(404).json({ error: 'Not found' });
+    res.json({ success: true, deleted: result.rows[0].id });
   } catch(e) {
     console.error(e);
     res.status(500).json({ error: 'Server error' });

@@ -366,21 +366,26 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
 const CURRICULUM = [
 
 // ── MODULE 1 ─────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// MODULE 1 — POSITIVE CLIMATE — COMPLETE (12 scenarios)
+// Replace the entire Module 1 object in your CURRICULUM array
+// with this block. It starts with { id:1 ... and ends with },
+// ═══════════════════════════════════════════════════════════════
+
 {
   id:1, domain:1, domainName:"Emotional Climate & Responsiveness",
   title:"Positive Climate", week:1,
   focus:"Building warm, joyful emotional environments where children thrive.",
   scenarios:[
+
+    // ── C SCENARIO 1 (already in your file — included here for completeness) ──
     {
-      menteeType:"C",
-      menteeLabel:"The Cultivator",
+      menteeType:"C", menteeLabel:"The Cultivator",
       menteeDesc:"Ms. Torres is analytical, principled, and detail-oriented. She takes pride in doing things correctly and can become quietly defensive when feedback feels like a personal judgment rather than a professional discussion.",
-      sceneTitle:"The Conflict at the Block Corner",
-      sceneTag:"Preschool Classroom",
+      sceneTitle:"The Conflict at the Block Corner", sceneTag:"Preschool Classroom",
       focusBadge:"Emotional Support · Teacher Responsiveness",
       scene:"It's free choice time in a preschool classroom. Two children, Marcus and Lily, both reach for the same large red block. Marcus grabs it first; Lily immediately bursts into tears. The teacher, Ms. Torres, walks over briskly and says: <em>\"Marcus, just give it to her — she's crying. You can find another one.\"</em> Marcus reluctantly hands it over, looking frustrated. Ms. Torres pats Lily on the back and walks away. The conflict ends — but Marcus sulks in the corner for the rest of free choice time.",
-      qcTitle:"Quality Check: What's Missing Here?",
-      qcSub:"Focus Area: Teacher Responsiveness & Child Agency",
+      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Teacher Responsiveness & Child Agency",
       qcText1:"High-quality early childhood interactions involve acknowledging <strong>all children's emotions</strong> — not just the loudest ones. Ms. Torres responded to Lily's distress but dismissed Marcus's feelings entirely. Neither child practiced naming emotions, negotiating, or arriving at a solution together.",
       qcText2:"The teacher's role is to <strong>slow down the moment</strong> — name what each child is feeling, and guide them toward their own resolution. This builds the social-emotional skills that last a lifetime. What happened here is a very common pattern: <em>efficiency over depth</em>.",
       coachTitle:"The Block Corner — Coaching Conversation",
@@ -406,10 +411,407 @@ const CURRICULUM = [
         "<strong>Set a precise observation target.</strong> Agree on exactly one observable behavior for next visit — e.g., \"I want to see you name both children's emotions before offering any solution.\"",
         "<strong>Debrief with evidence.</strong> At your follow-up, document what changed with concrete examples. Data-driven feedback is deeply motivating for this temperament."
       ],
-      completeLine:"You matched your coaching approach to a Cultivator mentee. Ready to try a different SELCS style?"
+      completeLine:"You matched your coaching approach to a Cultivator mentee. Ready to try the next scenario?"
+    },
+
+    // ── C SCENARIO 2 ──────────────────────────────────────────
+    {
+      menteeType:"C", menteeLabel:"The Cultivator",
+      menteeDesc:"Ms. Torres is analytical, principled, and detail-oriented. She takes pride in doing things correctly and can become quietly defensive when feedback feels like a personal judgment rather than a professional discussion.",
+      sceneTitle:"The Joke That Landed Wrong", sceneTag:"Pre-K Classroom",
+      focusBadge:"Positive Climate · Relational Joy",
+      scene:"During circle time, a child named Jonah makes a silly face while trying to explain something. Several children laugh. Ms. Torres looks over and says in a neutral, controlled tone: <em>\"Jonah, we're not making faces right now. Let's keep our bodies ready for learning.\"</em> Jonah's face falls. The laughter stops. Ms. Torres continues the lesson efficiently. The rest of circle time proceeds without incident — and without any warmth, spontaneous humor, or moments of shared delight.",
+      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Shared Laughter & Relational Warmth",
+      qcText1:"Positive climate isn't only about managing conflict — it's about <strong>actively cultivating joy</strong>. Jonah's silly face was a moment of genuine, innocent playfulness. Rather than weaving it into the fabric of the community, Ms. Torres redirected it as off-task behavior.",
+      qcText2:"A high-quality positive climate includes <strong>moments of shared laughter and authentic delight</strong> between teachers and children. These are not distractions from learning — they <em>are</em> the relationship that makes learning possible. A teacher who never laughs with children is missing one of the most powerful climate tools available.",
+      coachTitle:"The Joke That Landed Wrong — Coaching Conversation",
+      question:"You're debriefing with Ms. Torres, a <strong>Cultivator</strong>. She felt she handled the moment correctly — Jonah was off-task. How do you help her see that warmth and playfulness are not the same as losing control?",
+      correct:2,
+      options:[
+        "\"Ms. Torres — honestly? That moment with Jonah was a gift and you shut it down. Children need to laugh with their teacher. That's a relationship problem, not a management win.\"",
+        "\"What if your classroom had a \"joy corner\" where silly things are celebrated? Or a class joke of the day? I think you and the kids would just LOVE having a special playful space together!\"",
+        "\"I want to look at that Jonah moment through two lenses: classroom management AND positive climate research. Because I think you were right about one thing and there's a different way to think about another. Can we put both on the table?\"",
+        "\"I noticed the class felt a little serious after that moment. I'm not sure if it's worth exploring, but there might be times when a little playfulness doesn't have to conflict with structure. Just something to think about when you feel ready.\""
+      ],
+      wrongFeedback:[
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"That was a gift and you shut it down\" — this is too blunt and personal for a <strong>Cultivator</strong>. It challenges her professional judgment without offering evidence or analysis, which is exactly the approach that makes Cultivators shut down.", p2:"She needs to examine the evidence before she can revise her conclusion. Start with what the research says about relational warmth, not with a critique of her decision."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"A joy corner and a class joke of the day are enthusiastic <strong>Inspirer</strong> solutions — and they might actually appeal to Ms. Torres someday — but right now they bypass the core issue: she doesn't yet believe that playfulness has professional value.", p2:"Cultivators need the intellectual case made before they're open to the practice change. Give her the research first."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"Just something to think about when you feel ready\" is too passive for a <strong>Cultivator</strong>. She'll interpret this as: my mentor isn't sure this is a real issue. And she'll move on.", p2:"Cultivators want their mentors to have convictions. Be willing to put both perspectives on the table with confidence."}
+      ],
+      matchText:"This is excellent Cultivator coaching. \"Two lenses\" is exactly the right framing — you're not dismissing her management instinct, you're adding a second analytical framework alongside it. That's intellectually honest, and Cultivators respect intellectual honesty.",
+      matchText2:"By acknowledging she was right about something, you earn the credibility to introduce what she's missing. A Cultivator who feels their competence is respected is ready to examine new evidence.",
+      actionSteps:[
+        "<strong>Present the climate research.</strong> Share what positive climate literature says about shared laughter: it builds belonging, reduces anxiety, and increases risk-taking in learning. Give her the data behind the warmth.",
+        "<strong>Distinguish playfulness from chaos.</strong> Help Ms. Torres develop a framework: spontaneous playfulness (brief, teacher-connected, on-topic) vs. derailing behavior (sustained, student-led away from learning). Jonah's moment was the former.",
+        "<strong>Practice a \"laugh and redirect\" response.</strong> Role-play: child makes a face → teacher laughs briefly → \"I love that face, Jonah. We'll definitely come back to that. Now — what were you trying to tell us?\" Efficient AND warm.",
+        "<strong>Track warmth indicators at next observation.</strong> Create a simple tally: shared laugh moments, teacher-initiated humor, physical warmth. Make positive climate measurable for a Cultivator who needs data to trust a new approach.",
+        "<strong>Debrief with an outcome link.</strong> After the next visit, ask: did you notice any difference in how children engaged during the moments of warmth? Connect the relational data to the instructional outcomes she cares about."
+      ],
+      completeLine:"You gave a Cultivator a two-framework analysis — and that's exactly how they grow."
+    },
+
+    // ── C SCENARIO 3 ──────────────────────────────────────────
+    {
+      menteeType:"C", menteeLabel:"The Cultivator",
+      menteeDesc:"Ms. Torres is analytical, principled, and detail-oriented. She takes pride in doing things correctly and can become quietly defensive when feedback feels like a personal judgment rather than a professional discussion.",
+      sceneTitle:"The Morning Nobody Was Greeted", sceneTag:"Kindergarten Classroom",
+      focusBadge:"Positive Climate · Welcoming Rituals",
+      scene:"Children arrive in the morning and hang up their backpacks. Ms. Torres is at her desk reviewing lesson plans. She looks up periodically and says \"Good morning\" to a few children who approach her directly, but most children simply walk past, settle into their seats, or wait at their tables. No greeting ritual exists — no door greeting, no morning handshake, no acknowledgment of each child's arrival. A child named Priya stands near the door for almost two full minutes before quietly finding her seat.",
+      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Individual Recognition & Belonging",
+      qcText1:"The beginning of the school day is one of the most important <strong>climate-building windows</strong> in the entire day. How a child is welcomed communicates: <em>you matter here, I'm glad you came.</em> When children arrive to invisibility, they carry that into the morning's learning.",
+      qcText2:"Research on morning greeting rituals shows measurable impact on <strong>student belonging, engagement, and on-task behavior</strong>. Priya's two-minute wait near the door is not a small moment — it is the daily experience of a child learning whether or not this classroom is a place where she is seen. The cost is invisible to the teacher and significant to the child.",
+      coachTitle:"The Morning Nobody Was Greeted — Coaching Conversation",
+      question:"You're debriefing with Ms. Torres, a <strong>Cultivator</strong>. She explains that she uses arrival time to prepare for the day — it's \"necessary for quality instruction.\" How do you challenge this belief with evidence?",
+      correct:0,
+      options:[
+        "\"I want to test that assumption together. You said greeting takes away from preparation — what if the research showed that a structured 5-minute greeting ritual actually produces better instructional outcomes than the 5 minutes of prep it replaces? Would you be willing to look at that evidence?\"",
+        "\"Oh, but a morning greeting can be SO magical! It sets the whole tone! What if you did a special handshake with every child? Or a 'word of the day' moment? The kids would come in SO excited every single day!\"",
+        "\"I understand — preparation is important, and I don't want to minimize that. Maybe at some point you could find a small way to acknowledge children as they arrive, even informally? Even a smile from across the room can go a long way.\"",
+        "\"I need you to understand that what I observed this morning — Priya waiting by the door — is not okay. Every child deserves to be greeted. Preparation cannot come before children's basic need to be seen.\""
+      ],
+      wrongFeedback:[
+        {h:"Style Mismatch — Let's Reconsider", p1:"This is an <strong>Inspirer's</strong> approach — vivid, enthusiastic, packed with exciting ideas. But Ms. Torres hasn't been convinced that greeting matters yet, so proposing special handshakes and words of the day skips the intellectual case she needs to hear first.", p2:"Build the \"why\" before the \"how.\" Cultivators commit to practices they believe in — not ones that sound fun."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"At some point\" and \"even informally\" and \"maybe\" — this is significantly under-delivering on what Priya's experience warranted. A <strong>Cultivator</strong> will hear this as: my mentor is suggesting something minor and optional.", p2:"Ms. Torres is analytically capable of engaging with strong evidence. Don't pre-soften the case to the point where she doesn't take it seriously."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"I need you to understand\" and \"is not okay\" is the kind of evaluative, authority-based language that triggers a <strong>Cultivator's</strong> defenses immediately. She will feel judged rather than developed, and will spend the debrief arguing her preparation rationale.", p2:"Cultivators yield to evidence, not to authority. Lead with data and a question, not a verdict."}
+      ],
+      matchText:"This is brilliant Cultivator strategy. You didn't argue with her belief — you invited her to test it against evidence. That framing is almost impossible for an analytical thinker to resist.",
+      matchText2:"\"Would you be willing to look at that evidence?\" is a collaborative opening that puts you both in the role of investigators rather than adversaries. A Cultivator who chooses to look at data is already most of the way to changing their practice.",
+      actionSteps:[
+        "<strong>Bring the greeting ritual research.</strong> Share 1-2 specific studies or findings on morning greeting and student outcomes. Cultivators need the citation, not just the claim. Make the evidence concrete and accessible.",
+        "<strong>Redesign arrival together as a systems problem.</strong> Ms. Torres believes greeting conflicts with preparation. Help her design a structure that does both: greeting happens at the door for the first 5 minutes while an assigned task is already on tables. No either/or.",
+        "<strong>Create a door greeting protocol.</strong> Name the specific children who most need individual acknowledgment each morning (including Priya). Build a simple, efficient ritual she can repeat without improvising.",
+        "<strong>Track the outcome data.</strong> For two weeks, have Ms. Torres note which children were greeted at the door and observe their morning engagement. Give her the investigator role — she'll trust her own data.",
+        "<strong>Link greeting to her instructional goals.</strong> Show her that children who arrive feeling seen are more settled, more engaged, and less disruptive during morning instruction. Greeting IS preparation — for the learners."
+      ],
+      completeLine:"You invited a Cultivator to examine her own assumption — and that's the most powerful kind of professional growth."
+    },
+
+    // ── D SCENARIO 1 ──────────────────────────────────────────
+    {
+      menteeType:"D", menteeLabel:"The Director",
+      menteeDesc:"Mr. Hines is confident, direct, and results-oriented. He moves quickly, speaks plainly, and has high expectations for himself and his children. He can dismiss relationship-focused feedback as \"soft\" if it isn't connected to clear outcomes he cares about.",
+      sceneTitle:"The Child Who Stopped Trying", sceneTag:"1st Grade Classroom",
+      focusBadge:"Positive Climate · Encouragement & Risk-Taking",
+      scene:"During a writing activity, a child named Destiny stares at her blank paper for several minutes. Mr. Hines passes her table and says: <em>\"Destiny, you need to start writing. We've talked about this.\"</em> Destiny picks up her pencil and writes one word, then stops. Mr. Hines moves on without further acknowledgment. At the end of the block, Destiny's paper has three words. Mr. Hines collects papers without comment. Destiny does not share her work during the share-out.",
+      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Encouragement & Emotional Safety to Try",
+      qcText1:"Positive climate requires that children feel <strong>safe to attempt hard things</strong>. Destiny's blank paper is not defiance — it's a signal of risk-aversion, possibly rooted in a fear of failure. Mr. Hines's response treated it as a compliance problem, which is the least effective intervention for a child who is afraid.",
+      qcText2:"The <strong>emotional safety to take a risk</strong> — to put words on a page when you're not sure they'll be right — is built through teacher encouragement that is specific, genuine, and low-stakes. \"You need to start writing\" raises the stakes. What Destiny needed was the opposite: <em>the stakes lowered enough to try.</em>",
+      coachTitle:"The Child Who Stopped Trying — Coaching Conversation",
+      question:"You're debriefing with Mr. Hines, a <strong>Director</strong>. He says Destiny is \"just not motivated\" and he's \"tried everything.\" How do you redirect this toward climate as the lever?",
+      correct:3,
+      options:[
+        "\"I can hear how frustrated you are with Destiny. I just want you to know — it's okay that this is hard. Every child is different, and you're clearly trying. Maybe we can think about what's going on for her emotionally?\"",
+        "\"What if you created a special \"Brave Writer\" award for the class? Something that celebrates kids who try even when it's hard? Destiny would see herself as a brave writer and it might totally shift her motivation!\"",
+        "\"Destiny may have some underlying concerns that are making it hard to write. I'd gently suggest considering whether she might need a referral or some additional support outside the classroom.\"",
+        "\"Let's look at what 'I've tried everything' actually means. You gave her a directive — \"you need to start writing.\" I want to show you what the data says about what motivates a child who is risk-averse, because I think the intervention you used may be the one that makes it worse.\""
+      ],
+      wrongFeedback:[
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"It's okay that this is hard\" and \"you're clearly trying\" are <strong>Sustainer</strong>-style emotional support moves — and they'll fall flat with a <strong>Director</strong>. Mr. Hines doesn't need reassurance; he needs a better strategy.", p2:"Lead with data and outcomes. A Director who has \"tried everything\" is ready for a new system — not a pat on the back."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"The Brave Writer award is an enthusiastic <strong>Inspirer</strong>-style idea — and it might have some merit — but it doesn't address the root issue: Mr. Hines doesn't yet understand that his intervention style is part of the problem.", p2:"Give him the analysis first. A Director who understands why his current approach backfires will be far more motivated to try something new."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"Suggesting a referral bypasses the climate issue entirely and may come across as dismissive — implying the problem is Destiny's, not something that happens in the classroom. It also removes Mr. Hines's agency, which frustrates Directors.", p2:"The classroom environment is the intervention available right now. Help him use it."}
+      ],
+      matchText:"This is exactly right for a <strong>Director</strong>. You named his claim — \"I've tried everything\" — and immediately offered to examine what \"tried\" actually looked like. That's a respectful challenge that takes him seriously as a professional.",
+      matchText2:"Connecting his intervention to the data on risk-averse children gives him something actionable to replace his current approach. Directors don't resist change — they resist change without a reason. You gave him the reason.",
+      actionSteps:[
+        "<strong>Reframe the blank paper.</strong> Help Mr. Hines see Destiny's paralysis as fear, not defiance. These require completely different interventions — fear responds to lowered stakes, defiance responds to raised stakes.",
+        "<strong>Teach the low-stakes entry move.</strong> Introduce a specific approach: kneel beside Destiny, lower your voice, and say: \"Just one word — any word. Even a silly one.\" This bypasses the fear response by making the ask tiny.",
+        "<strong>Build in a private encouragement moment.</strong> Before writing time each day, Mr. Hines makes brief private contact with Destiny: \"I'm looking forward to seeing what comes to you today.\" 10 seconds that changes the emotional ante.",
+        "<strong>Track Destiny's output over 2 weeks.</strong> Give Mr. Hines a simple data point to follow: words per session. Connect increases to moments of climate-based encouragement. Directors trust trends in data.",
+        "<strong>Connect climate to productivity.</strong> Frame it explicitly: \"A child who feels safe to try writes more words. More words = more practice = faster growth. Encouragement is a productivity strategy.\""
+      ],
+      completeLine:"You turned a Director's frustration into a diagnostic challenge — and Directors rise to those."
+    },
+
+    // ── D SCENARIO 2 ──────────────────────────────────────────
+    {
+      menteeType:"D", menteeLabel:"The Director",
+      menteeDesc:"Mr. Hines is confident, direct, and results-oriented. He moves quickly, speaks plainly, and has high expectations for himself and his children. He can dismiss relationship-focused feedback as \"soft\" if it isn't connected to clear outcomes he cares about.",
+      sceneTitle:"The Celebration That Never Happened", sceneTag:"2nd Grade Classroom",
+      focusBadge:"Positive Climate · Acknowledgment & Celebration",
+      scene:"Mr. Hines's class has just completed a challenging two-week project. The children worked hard, struggled through difficulties, and produced genuinely impressive work. At the end of the final session, Mr. Hines collects the projects and says: <em>\"Good work this week. We're moving into our next unit tomorrow — make sure you've put all materials away.\"</em> No celebration, no acknowledgment of the effort, no shared moment of pride. Children file out quietly.",
+      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Celebrating Effort & Building Community",
+      qcText1:"Positive climate is built not just in how teachers handle conflict — but in <strong>how they mark achievement</strong>. The end of hard work is a critical community-building moment. When it passes without acknowledgment, children learn that effort is expected but not valued.",
+      qcText2:"Celebration doesn't require a party. It requires a <strong>genuine pause</strong> — a moment where the teacher communicates: <em>what you did mattered, I noticed, and we should mark it.</em> This is one of the highest-yield, lowest-cost climate investments a teacher can make.",
+      coachTitle:"The Celebration That Never Happened — Coaching Conversation",
+      question:"You're debriefing with Mr. Hines, a <strong>Director</strong>. He says acknowledging work completion \"slows momentum\" and he'd rather move straight into the next challenge. How do you make the case for celebration in terms he'll respect?",
+      correct:1,
+      options:[
+        "\"I understand the momentum concern, but I think it's really important that children feel celebrated. They worked so hard! Don't you want them to feel proud of themselves? A little acknowledgment goes such a long way emotionally.\"",
+        "\"I want to make an ROI case to you: the two minutes you spend marking the end of hard work produces measurable returns in motivation and effort on the next challenging task. Can I show you what the research on effort acknowledgment says about performance on subsequent challenges?\"",
+        "\"What if you did a whole class celebration day? You could display the projects, invite families, have the kids share their work — it would be SUCH a powerful community moment and the children would be so proud!\"",
+        "\"There's something worth thinking about here — I noticed children left pretty quietly. I wonder if at some point you might explore what a brief acknowledgment moment could look like. Even a simple \"great work\" could mean more than you know.\""
+      ],
+      wrongFeedback:[
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"Don't you want them to feel proud?\" is an emotional appeal that a <strong>Director</strong> will resist. It frames the issue as a feeling — and Directors are skeptical of feedback framed primarily around feelings.", p2:"The feeling is valid, but it's not the argument that will move Mr. Hines. Connect acknowledgment to outcomes: motivation, subsequent effort, engagement. That's his language."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"A full celebration day with families is a significant undertaking — and an <strong>Inspirer's</strong> answer to a problem Mr. Hines hasn't yet acknowledged. He dismissed a 30-second acknowledgment; a family event is not the next step.", p2:"Start with what's immediately possible and immediately defensible. A two-minute investment with a measurable return is the right first ask."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"Might explore\" and \"at some point\" and \"could mean more than you know\" — this response is so tentative that Mr. Hines will not hear a growth point in it at all. He'll move on.", p2:"Directors need mentors who hold convictions. Make the case clearly and connect it to what he cares about: performance and results."}
+      ],
+      matchText:"\"ROI case\" is a perfect frame for a <strong>Director</strong>. You spoke his language immediately — investment and return. By linking a two-minute practice to measurable outcomes in subsequent performance, you made celebration a professional strategy, not an emotional nicety.",
+      matchText2:"Offering to show him the research treats him as an intellectual peer capable of updating his approach based on evidence. That's the mentoring posture that Directors trust.",
+      actionSteps:[
+        "<strong>Share the effort acknowledgment research.</strong> Bring 1-2 findings on how effort praise (vs. no acknowledgment) affects motivation and persistence on subsequent tasks. Carol Dweck's growth mindset research is a useful anchor.",
+        "<strong>Design a 2-minute close ritual.</strong> Help Mr. Hines build an efficient, repeatable end-of-hard-work ritual: class stands, 30-second share of one thing they're proud of, teacher names one specific thing observed. Done. Efficient AND powerful.",
+        "<strong>Separate momentum from acknowledgment.</strong> Help him see that \"we're done with X, tomorrow we start Y\" and \"that was genuinely hard and you did it\" are not in conflict. You can do both in three sentences.",
+        "<strong>Give him specific language.</strong> Directors want scripts. Offer: \"Before you put materials away — stop for ten seconds. What you did this week was actually hard, and you finished it. That matters.\" That's the whole ritual.",
+        "<strong>Track class energy at the start of the next unit.</strong> Ask Mr. Hines to observe how children enter the next challenge. If the close ritual shifts that energy even slightly, he'll have the data he needs to keep it."
+      ],
+      completeLine:"You made an ROI argument to a Director — and that's exactly the right move."
+    },
+
+    // ── D SCENARIO 3 ──────────────────────────────────────────
+    {
+      menteeType:"D", menteeLabel:"The Director",
+      menteeDesc:"Mr. Hines is confident, direct, and results-oriented. He moves quickly, speaks plainly, and has high expectations for himself and his children. He can dismiss relationship-focused feedback as \"soft\" if it isn't connected to clear outcomes he cares about.",
+      sceneTitle:"The Lunch Table Standoff", sceneTag:"Kindergarten Classroom",
+      focusBadge:"Positive Climate · Warmth During Unstructured Time",
+      scene:"During lunch, children are seated and talking among themselves. Mr. Hines stands near the front of the room, reviewing notes on a clipboard. A group of children near the back are laughing loudly; he looks up and says: <em>\"Voices down at the back table.\"</em> A child near him, Emilio, tries to show Mr. Hines a drawing he made. Mr. Hines glances at it and says: <em>\"That's nice — eat your lunch.\"</em> He returns to his clipboard. Emilio puts the drawing away. The room settles into quiet eating with almost no adult-child interaction for the remaining 12 minutes.",
+      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Warmth in Unstructured Moments",
+      qcText1:"Positive climate is built in unstructured moments as much as during instruction. Lunch, transitions, and free time are when children experience the <strong>relationship outside the lesson</strong> — and that relationship is the foundation that makes instruction possible.",
+      qcText2:"Emilio offered something personal and was turned away in four words. That exchange communicates: <em>I am not interested in you as a person — only as a student.</em> Over hundreds of repetitions, these micro-rejections define a classroom's emotional climate as much as any single conflict. <strong>Brief, genuine human moments cost nothing</strong> and build everything.",
+      coachTitle:"The Lunch Table Standoff — Coaching Conversation",
+      question:"You're debriefing with Mr. Hines, a <strong>Director</strong>. He considers lunch time \"prep time\" since children are managing themselves. How do you reframe unstructured time as a climate investment?",
+      correct:2,
+      options:[
+        "\"Lunch time should really be time for you too! It's so important for teacher wellbeing — and modeling joy at lunch helps children see you as a whole person, not just a teacher. I think some laughter at lunch would do you good!\"",
+        "\"I'd love to see you circulate more at lunch! What if you had a conversation prompt each day — like \"what's your favorite animal?\" — and you made your way around the table? The kids would LOVE it and you'd learn so much about them!\"",
+        "\"I tracked adult-child interaction during lunch: 12 minutes, two exchanges, both redirections. I want to make an argument that those 12 minutes are not prep time — they're the highest-ROI relational investment available to you in the school day. Can I show you why?\"",
+        "\"I understand prep time is important and I don't want to take that away. But Emilio's drawing moment — I just want to gently flag that. He was reaching out and the response might have felt dismissive to him. Something to consider.\""
+      ],
+      wrongFeedback:[
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"It would do you good\" and \"teacher wellbeing\" are not arguments a <strong>Director</strong> will find professionally compelling. He'll hear this as a suggestion about his personal life, not his practice.", p2:"Keep the argument professional and outcome-focused. Directors respond to evidence about student outcomes, not suggestions about their own enjoyment."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"Conversation prompts and circulating around the table are good ideas — but this is an <strong>Inspirer's</strong> enthusiastic implementation before Mr. Hines has bought into the underlying principle. He hasn't agreed that lunch time is a climate investment yet.", p2:"Establish the why first. Once he agrees that the 12 minutes matter, he'll be receptive to how to use them."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"Gently flag\" and \"something to consider\" are too tentative for the data you actually have: 12 minutes, two exchanges, both redirections. That's a significant pattern and a <strong>Director</strong> can handle the clear version of it.", p2:"Also: agreeing that prep time is important without challenging the assumption that lunch = prep is a missed opportunity. Directors respect mentors who push back."}
+      ],
+      matchText:"You led with data — interaction count, time block, type of exchange — and then made the ROI argument. For a <strong>Director</strong>, this is the most credible possible framing: you're not asking him to feel differently, you're asking him to invest 12 minutes more strategically.",
+      matchText2:"\"Highest-ROI relational investment available\" is language that reframes warmth as efficiency — which is exactly how a Director needs to hear it. You didn't ask him to be warmer. You showed him where his current allocation of time is underperforming.",
+      actionSteps:[
+        "<strong>Quantify the relational return.</strong> Help Mr. Hines see that 3-4 genuine personal moments per child per week — accumulated over a school year — builds the trust that makes correction land, engagement rise, and difficult conversations go better.",
+        "<strong>Give him an efficient protocol.</strong> Directors want a system. Propose: during lunch, put down the clipboard for 5 minutes and circulate once around the room. One genuine comment per table. That's the full investment.",
+        "<strong>Replay the Emilio moment.</strong> Walk through the exchange: Emilio offers something personal, teacher dismisses in 4 words. Then build an alternative: \"Is that from this morning? Tell me one thing about it.\" 15 seconds. Entirely different message.",
+        "<strong>Connect relational investment to instructional leverage.</strong> Children who feel personally known by their teacher are more willing to take risks, more responsive to correction, and more persistent in difficulty. Name this explicitly.",
+        "<strong>Set a 3-minute lunch check-in goal.</strong> For the next two weeks, Mr. Hines commits to 3 minutes of clipboard-free circulation during lunch. Track whether he notices shifts in morning engagement or willingness to approach him."
+      ],
+      completeLine:"You gave a Director a 12-minute ROI argument — and that's how you change a practice that logic built."
+    },
+
+    // ── I SCENARIO 1 ──────────────────────────────────────────
+    {
+      menteeType:"I", menteeLabel:"The Inspirer",
+      menteeDesc:"Ms. Vega is warm, expressive, and genuinely beloved by her children. Her enthusiasm is infectious — but it can sometimes mean she treats all children the same, defaulting to high energy even with children who are overwhelmed by it. She hasn't yet learned to modulate her climate approach based on individual child need.",
+      sceneTitle:"Too Much Sunshine", sceneTag:"Pre-K Classroom",
+      focusBadge:"Positive Climate · Reading Individual Children",
+      scene:"Ms. Vega greets children at the door every morning with enormous energy — hugs, high-fives, and exclamations. Most children love it. But a child named Leo arrives each morning with his eyes down and body tense. When Ms. Vega swoops in with her usual: <em>\"LEO! Good MORNING! I am SO happy you're here!\"</em> Leo flinches slightly, ducks under her arm, and makes his way quickly to his cubby without responding. This has happened every morning for three weeks. Ms. Vega hasn't adjusted her approach.",
+      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Differentiated Warmth & Child Cues",
+      qcText1:"Positive climate is not one-size-fits-all. A highly sensitive or introverted child can experience <strong>intense, undifferentiated warmth as overwhelming</strong> — even distressing. Ms. Vega's approach works beautifully for many children, and it works against Leo. The problem isn't her warmth — it's that she hasn't calibrated it.",
+      qcText2:"High-quality teachers read individual children and <strong>modulate their approach accordingly</strong>. For Leo, the ideal morning greeting might be a quiet nod, a soft \"good morning, Leo,\" and space to settle in at his own pace. The goal — that Leo feels welcomed and safe — is the same. The path to it is completely different.",
+      coachTitle:"Too Much Sunshine — Coaching Conversation",
+      question:"You're debriefing with Ms. Vega, an <strong>Inspirer</strong>. She's a little defensive — \"I just love him, I can't help it!\" How do you redirect her love toward what Leo actually needs?",
+      correct:1,
+      options:[
+        "\"The data is clear: Leo flinches and avoids you every morning. That's a signal that your current approach is not working for him. We need to design a completely different greeting protocol for Leo and implement it starting tomorrow.\"",
+        "\"I love that you love him — that's exactly where this starts. And I want to show you something, because I think there's a version of that love that actually reaches Leo. Can we look at what happens in his body when you greet him, and build something that lets your warmth in through a smaller door?\"",
+        "\"What if you and Leo created a special secret greeting just for the two of you? Something quieter and more personal — like a special knock or a little wave? I think he'd feel SO special having something that's just his with you!\"",
+        "\"I understand your instinct to be warm — it's clearly a strength. I just want to gently raise the question of whether Leo might respond differently to a different approach. It's something to consider when you have a chance to reflect on it.\""
+      ],
+      wrongFeedback:[
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"The data is clear\" and \"we need to implement\" is <strong>Director</strong>-style feedback delivered to an <strong>Inspirer</strong> who has just expressed emotional investment. She'll feel her love is being criticized rather than redirected.", p2:"The insight is correct, but the tone will close the conversation before it opens. Lead with her love as the raw material, then help her see how to direct it differently."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"A secret greeting is a fun Inspirer idea — and it might actually be the right eventual solution — but jumping there before Ms. Vega understands <em>why</em> her current approach isn't working means she'll try the special knock with the same high energy and wonder why Leo still flinches.", p2:"Help her see Leo's experience first. The solution will be better when it grows from the insight."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"Gently raise the question\" and \"when you have a chance\" is too soft for three weeks of a daily pattern that is actively distressing a child. An <strong>Inspirer</strong> who receives this level of hedging will not feel the weight of what needs to change.", p2:"Lead with warmth AND clarity. You can honor her love for Leo AND name clearly that his experience of her morning approach is distress, not welcome."}
+      ],
+      matchText:"\"Through a smaller door\" is a beautiful phrase for an <strong>Inspirer</strong> — it doesn't say her warmth is wrong, it says Leo needs a different entrance for it. That framing preserves her identity while opening a genuine change.",
+      matchText2:"Inviting her to look at what happens in Leo's body makes this empathetic and concrete at the same time. Inspirers grow when they feel something — and seeing Leo's flinch through new eyes will move her far more than any data point.",
+      actionSteps:[
+        "<strong>Observe Leo together.</strong> At the next morning greeting, both of you watch what happens in Leo's body: where does the tension begin? When does it ease? This shared observation builds the empathy that motivates change.",
+        "<strong>Design a \"quiet welcome\" for Leo.</strong> Build a low-key greeting ritual together: quiet voice, no touch unless initiated by Leo, soft eye contact, brief acknowledgment: \"Morning, Leo. Glad you're here.\" Then give him space.",
+        "<strong>Frame it as a different love language.</strong> Ms. Vega understands love languages intuitively. Help her see that Leo's love language for morning greeting is quiet acknowledgment — and that speaking his language is actually more loving than defaulting to hers.",
+        "<strong>Watch for the small opening.</strong> Over time, Leo may begin to approach Ms. Vega — a small smile, a brief eye contact, or eventually a word. Help her recognize these as invitations and respond proportionally rather than flooding them.",
+        "<strong>Generalize the principle.</strong> Help Ms. Vega identify 1-2 other children in her classroom who might be overwhelmed by intensity. Build the habit of reading the child before calibrating the warmth."
+      ],
+      completeLine:"You helped an Inspirer channel her love more precisely — and that's a skill that will serve every quiet child she ever teaches."
+    },
+
+    // ── I SCENARIO 2 ──────────────────────────────────────────
+    {
+      menteeType:"I", menteeLabel:"The Inspirer",
+      menteeDesc:"Ms. Vega is warm, expressive, and genuinely beloved by her children. Her enthusiasm is infectious — but it can sometimes mean she treats all children the same, defaulting to high energy even with children who are overwhelmed by it. She hasn't yet learned to modulate her climate approach based on individual child need.",
+      sceneTitle:"The Praise That Lost Its Power", sceneTag:"Kindergarten Classroom",
+      focusBadge:"Positive Climate · Authentic vs. Automatic Praise",
+      scene:"During a 30-minute observation, you track Ms. Vega's verbal praise. She says \"Amazing!\" 11 times, \"I love it!\" 9 times, \"You're SO smart!\" 7 times, and \"Wow!\" 14 times. Every child, every activity, every response receives the same level of effusive praise. When a child gives a wrong answer, Ms. Vega says: <em>\"Ooh, interesting — good try!\"</em> in exactly the same tone she uses for correct answers. Children have stopped looking up when she says \"Amazing.\"",
+      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Meaningful vs. Habitual Praise",
+      qcText1:"When praise is constant and undifferentiated, it <strong>loses its signal value</strong>. Children are remarkably good at detecting when praise is automatic versus genuine. After enough \"Amazings!\" attached to everything — the correct answer, the wrong answer, putting a pencil down — the word becomes meaningless noise.",
+      qcText2:"Authentic praise is <strong>specific, earned, and proportional</strong>. It names what was actually impressive, distinguishes effort from luck, and varies in intensity based on the accomplishment. Habitual praise feels good to deliver but ultimately communicates to children: <em>I'm not really seeing you specifically — I'm just being enthusiastic at everyone.</em>",
+      coachTitle:"The Praise That Lost Its Power — Coaching Conversation",
+      question:"You're debriefing with Ms. Vega, an <strong>Inspirer</strong>. She's surprised by your data — she considers her enthusiasm a core strength. How do you help her see that more specific praise is actually more powerful, not less warm?",
+      correct:0,
+      options:[
+        "\"Your enthusiasm is one of the most genuinely powerful things about you in that classroom. I want to show you some data and then make you an offer: what if we could make your praise even MORE impactful — so that when you say 'amazing,' children actually feel it in their bones? That's what specific praise does.\"",
+        "\"I counted 41 praise events in 30 minutes — that's more than one per minute. The data suggests that at this frequency, praise loses effectiveness. We need to reduce the volume and increase the specificity. I'd like you to try capping yourself at 10 per 30-minute block.\"",
+        "\"I hear you that enthusiasm is your strength! What if we made a list of 20 different specific praise phrases you could rotate through? That way you'd have variety AND keep your energy! I could help you make a beautiful poster for your classroom!\"",
+        "\"I understand enthusiasm is important to you, and I would never want you to lose that. I wonder if there might be times when a more targeted response could be just as meaningful — when you have a chance to think about what specific praise might sound like for you.\""
+      ],
+      wrongFeedback:[
+        {h:"Style Mismatch — Let's Reconsider", p1:"Capping praise at 10 per block is a <strong>Director's</strong> prescription — concrete, measurable, and completely counter to how an <strong>Inspirer</strong> experiences her warmth. She'll feel as if you've told her to stop breathing.", p2:"The principle behind the data is right. But the prescription needs to feel expansive, not restrictive. Help her see that specific praise is MORE — not less."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"A poster of 20 praise phrases is a classic <strong>Inspirer</strong>-to-<strong>Inspirer</strong> move — enthusiastic, visual, and fun. But it doesn't address the deeper pattern: Ms. Vega's praise is automatic, not attentive. Rotating through 20 phrases automatically is still automatic praise.", p2:"The insight needs to come before the tool. Help her feel the difference between automatic and specific praise first."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"When you have a chance to think about it\" is far too passive given the data you have. 41 undifferentiated praise events in 30 minutes is a real pattern with real effects on children — and an <strong>Inspirer</strong> who cares about children can handle the honest version of that.", p2:"Lead with her strength, then make the compelling offer: even MORE impactful. She'll lean toward the upgrade."}
+      ],
+      matchText:"\"Make your praise even MORE impactful\" is exactly the right pitch for an <strong>Inspirer</strong>. You didn't take anything away — you offered an upgrade. And connecting it to children actually feeling it \"in their bones\" speaks directly to her desire to have genuine impact.",
+      matchText2:"This framing preserves her identity as an enthusiastic teacher while opening the door to a fundamentally different practice. She'll hear this as: I can keep being me AND be better. That's an Inspirer's ideal growth conversation.",
+      actionSteps:[
+        "<strong>Show her the data together.</strong> Present the 41-event tally not as a critique but as a fascinating observation: \"What do you notice about this?\" Let her arrive at the signal-loss insight herself.",
+        "<strong>Demonstrate the difference in a role-play.</strong> Be a child. Receive \"Amazing!\" Then receive: \"You added the 'because' — that's the exact word that made your sentence work.\" Ask her which one made her feel more seen. The answer will be immediate.",
+        "<strong>Teach the 3-part specific praise formula.</strong> Name what happened + why it matters + what it tells us about the child: \"You went back and changed your drawing — that's what artists do when they aren't satisfied yet.\" Practice together.",
+        "<strong>Create \"pause before praise\" as a habit.</strong> Before saying anything, one breath — just to ask: what exactly did this child do? That one-second pause transforms automatic into authentic.",
+        "<strong>Track the shift at next observation.</strong> Count specific vs. undifferentiated praise events. Share both numbers. When she sees the ratio shift, she'll feel the difference in the data — and that's deeply motivating for an Inspirer."
+      ],
+      completeLine:"You helped an Inspirer see that precision is power — and her classroom will feel the difference."
+    },
+
+    // ── I SCENARIO 3 ──────────────────────────────────────────
+    {
+      menteeType:"I", menteeLabel:"The Inspirer",
+      menteeDesc:"Ms. Vega is warm, expressive, and genuinely beloved by her children. Her enthusiasm is infectious — but it can sometimes mean she treats all children the same, defaulting to high energy even with children who are overwhelmed by it. She hasn't yet learned to modulate her climate approach based on individual child need.",
+      sceneTitle:"When the Energy Became Anxiety", sceneTag:"Pre-K Classroom",
+      focusBadge:"Positive Climate · Emotional Regulation & Teacher Tone",
+      scene:"It's the last 20 minutes before lunch — a historically difficult transition window. Children are getting hungry and restless. Ms. Vega's volume and enthusiasm escalate as she tries to re-engage the class: <em>\"Okay EVERYONE — who's READY for our last activity?! LET'S GO!\"</em> Several children who were calm become re-stimulated and begin bouncing and talking over each other. A child named Clara starts crying. Two children begin pushing. Ms. Vega redirects with the same high energy: <em>\"Okay, FREEZE! Eyes on me! We are ALMOST THERE!\"</em>",
+      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Co-Regulation & Matching Energy to Need",
+      qcText1:"Positive climate requires that teachers understand their own <strong>role as an emotional regulator</strong> in the room. Ms. Vega's instinct — add energy to re-engage — is the exact opposite of what children needed in this window. When children are dysregulated by hunger and fatigue, the most powerful climate move is <em>lowering the temperature</em>, not raising it.",
+      qcText2:"<strong>Co-regulation</strong> means the teacher's nervous system helps calm children's nervous systems. A low, slow, warm voice at 11:40 AM does more for classroom climate than any activity or transition strategy. Ms. Vega's enthusiasm is a tremendous asset — but she needs to know when to put it away and offer something quieter instead.",
+      coachTitle:"When the Energy Became Anxiety — Coaching Conversation",
+      question:"You're debriefing with Ms. Vega, an <strong>Inspirer</strong>. She's exhausted and says she \"can't figure out that last window.\" How do you help her see that her energy was part of the problem — without making her feel like her enthusiasm is wrong?",
+      correct:3,
+      options:[
+        "\"The data is very clear: you added high energy at exactly the moment children needed low energy, and the result was escalation. You need to build a quiet, low-stimulation protocol for pre-lunch transition and use it consistently.\"",
+        "\"I can see how hard you were trying! What if we created an amazing calming ritual — like a special breathing song or a mindfulness moment? Something that feels as magical as your energy but settles everyone down?\"",
+        "\"I wonder if maybe the last window is just hard for any teacher — some days are just like that. We can definitely think about some strategies when you have bandwidth, but the good news is the rest of the morning was really strong!\"",
+        "\"You asked the exact right question — \"why can't I figure that window out?\" I want to show you something I noticed about your energy and the children's energy in those last 20 minutes. I think you're going to see a pattern, and I think it's going to make the solution feel really obvious.\""
+      ],
+      wrongFeedback:[
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"The data is very clear\" and a prescribed protocol is a <strong>Director's</strong> solution dropped on an <strong>Inspirer</strong> who is already exhausted. It will land as clinical and cold — the opposite of what Ms. Vega needs to open up.", p2:"Inspirers need to discover the pattern themselves. Show it to her; don't pronounce it."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"A calming ritual is a genuinely good idea — but the \"amazing\" framing and the jump to implementation skips the core insight: Ms. Vega doesn't yet know that her OWN energy was the escalating factor. A calming ritual delivered with high enthusiasm will not calm a dysregulated room.", p2:"She needs to see the energy pattern first. Once she understands co-regulation, she'll design the right ritual herself."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"Some days are just like that\" and \"when you have bandwidth\" are reassurances that collide with the growth moment she's offered you. Ms. Vega said \"I can't figure it out\" — that's an invitation to actually help her figure it out.", p2:"Deflecting with \"the rest was strong\" prevents the real learning. She's ready for this insight right now — don't defer it."}
+      ],
+      matchText:"\"I think it's going to make the solution feel really obvious\" is perfect Inspirer language — it builds anticipation and positions the insight as something exciting to discover rather than a failure to acknowledge.",
+      matchText2:"By anchoring on her own question — \"why can't I figure that window out?\" — you made this her inquiry, not your critique. Inspirers are energized by discovery and slightly deflated by being told. Give them the discovery.",
+      actionSteps:[
+        "<strong>Map the energy graph together.</strong> Draw a simple visual: children's energy level and teacher energy level over the last 20 minutes. Let Ms. Vega trace what she observes. The moment she sees the lines move together, she'll have the insight.",
+        "<strong>Introduce co-regulation as a concept.</strong> Name it: \"Your nervous system is the biggest thing in the room. When you go up, they go up. When you come down, they tend to come down.\" This is a revelation for many Inspirers.",
+        "<strong>Practice the pre-lunch voice.</strong> Role-play the transition with a low, slow, warm voice: \"Okay, friends. I can see we're getting ready for lunch. Let's take one breath together and finish this last thing quietly.\" No exclamation points. She'll feel the difference immediately.",
+        "<strong>Build a pre-lunch ritual that is intentionally low-key.</strong> Design together: quiet coloring, calm music, a gentle transition activity that doesn't require high cognitive load. Make it a beautiful, predictable wind-down — not an energetic push to the finish.",
+        "<strong>Give her permission to be quiet.</strong> Ms. Vega may feel that a low-energy version of herself is a lesser version. Help her see that choosing quiet in service of children is one of the most sophisticated teaching moves there is."
+      ],
+      completeLine:"You helped an Inspirer discover co-regulation — and that's a tool she'll carry for her entire career."
+    },
+
+    // ── S SCENARIO 1 ──────────────────────────────────────────
+    {
+      menteeType:"S", menteeLabel:"The Sustainer",
+      menteeDesc:"Ms. Okafor is nurturing, relationship-centered, and deeply committed to individual children. She builds genuine warmth with children she knows well — but she is slower to extend that warmth to children who are harder to connect with, particularly those whose behavior challenges her or whose personalities are more abrasive.",
+      sceneTitle:"The Child She Keeps Correcting", sceneTag:"Preschool Classroom",
+      focusBadge:"Positive Climate · Equity of Warmth",
+      scene:"During a 45-minute observation, you track Ms. Okafor's interactions with each child. She has warm, personal exchanges with 7 of 9 children — remembering details, laughing, using their names affectionately. Her interactions with two children — Dominic and Raya, both of whom have more challenging behaviors — are exclusively directive: <em>\"Dominic, sit down.\" \"Raya, not now.\" \"Dominic, I already told you.\"</em> Neither child receives a single positive, personal, or warm exchange in 45 minutes.",
+      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Equitable Warmth Across All Children",
+      qcText1:"A positive climate requires <strong>equitable warmth</strong> — warmth that is not rationed based on how easy a child is to love. Ms. Okafor's care for most children is genuine and visible. But Dominic and Raya are experiencing a completely different classroom than their peers.",
+      qcText2:"The children who are hardest to connect with are almost always the children who need connection most. <strong>Exclusive directive interaction</strong> — with no warmth, no personal acknowledgment, no genuine moment of seeing — hardens behavior over time rather than softening it. Ms. Okafor is caught in a cycle where difficult behavior produces directive responses, which produces more difficult behavior.",
+      coachTitle:"The Child She Keeps Correcting — Coaching Conversation",
+      question:"You're debriefing with Ms. Okafor, a <strong>Sustainer</strong>. She genuinely loves children. How do you raise the equity of warmth issue in a way that reaches her heart rather than triggering her guilt?",
+      correct:2,
+      options:[
+        "\"I tracked your interactions: 7 of 9 children received warm, personal exchanges. Dominic and Raya received zero positive interactions in 45 minutes — only directives. This is a climate equity issue that we need to address directly and systematically.\"",
+        "\"What if you started a \"warm moment challenge\" where you tried to give every child one genuine personal moment each day? You could keep a little checklist! I think you'd find it SO rewarding — and the trickier kids would probably surprise you!\"",
+        "\"You know what I noticed that I want to show you? The warmth you have for most of these children is extraordinary. And I'm wondering if we could find a way to give Dominic and Raya just a small piece of what you give the others. Because I think you'd be surprised what happens when they get it.\"",
+        "\"I understand Dominic and Raya are challenging — they really are. I want to gently flag that they may be receiving fewer warm moments than the other children. There's no rush, but when you have energy, it might be worth thinking about them a little more intentionally.\""
+      ],
+      wrongFeedback:[
+        {h:"Style Mismatch — Let's Reconsider", p1:"The data is accurate and important — but launching with a climate equity framing and numbers will feel like a formal evaluation to a <strong>Sustainer</strong>. Ms. Okafor will feel judged, not developed.", p2:"Sustainers are motivated by connection and care — not by equity frameworks delivered as diagnoses. Reach her through her love for children, not through her deficit."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"A warmth checklist is an <strong>Inspirer's</strong> upbeat solution — and it might actually appeal to Ms. Okafor eventually. But \"trickier kids\" as framing, without first helping her feel the weight of what Dominic and Raya are experiencing, doesn't land the growth point.", p2:"She needs to feel something about those two children before she's motivated to change her pattern with them."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"No rush\" and \"when you have energy\" and \"gently flag\" significantly understate a pattern that has real impact on two specific children's daily experience of school. A <strong>Sustainer</strong> who genuinely loves children can handle the honest version of this — delivered with care.", p2:"The difference between care and softness: care tells the truth warmly. Softness avoids the truth altogether. Ms. Okafor deserves care, not softness."}
+      ],
+      matchText:"\"I think you'd be surprised what happens when they get it\" is a powerful Sustainer hook — it engages her curiosity about children and her desire for them to flourish. You didn't deliver a verdict; you issued an invitation.",
+      matchText2:"Leading with the warmth she already has — \"extraordinary\" — gave her solid relational ground to stand on before you introduced the gap. She can hear about Dominic and Raya from a place of strength, not shame.",
+      actionSteps:[
+        "<strong>Name Dominic and Raya specifically.</strong> Help Ms. Okafor see them as individuals who are not getting what they need from her — not as \"challenging children\" but as specific children with specific needs for connection.",
+        "<strong>Introduce the 2x10 strategy.</strong> Share research on the 2x10 approach: spend 2 minutes per day for 10 consecutive days in genuine personal conversation with the most challenging child. Document what shifts.",
+        "<strong>Build a \"first thing\" warmth ritual.</strong> Help her design a specific moment of personal connection with Dominic and Raya before any directive. \"Good morning, Dominic — how's your dog?\" before \"sit down.\" The sequence changes everything.",
+        "<strong>Help her find genuine curiosity.</strong> Ask: \"What do you actually know about Dominic outside of his behavior? What do you wonder about him?\" Help her locate the interest that could seed connection.",
+        "<strong>Track the behavior shift.</strong> After two weeks of intentional warmth toward Dominic and Raya, observe and document any change in directive interactions. The behavior data is the evidence that will sustain the change for a Sustainer."
+      ],
+      completeLine:"You reached a Sustainer's heart — and that's exactly where her growth lives."
+    },
+
+    // ── S SCENARIO 2 ──────────────────────────────────────────
+    {
+      menteeType:"S", menteeLabel:"The Sustainer",
+      menteeDesc:"Ms. Okafor is nurturing, relationship-centered, and deeply committed to individual children. She builds genuine warmth with children she knows well — but she is slower to extend that warmth to children who are harder to connect with, particularly those whose behavior challenges her or whose personalities are more abrasive.",
+      sceneTitle:"The Goodbye That Mattered", sceneTag:"Kindergarten Classroom",
+      focusBadge:"Positive Climate · End-of-Day Rituals & Closure",
+      scene:"At the end of the school day, children are lining up to leave. Ms. Okafor is at the door, managing logistics — checking that children have their folders, reminding them about forms. As children file out, she says \"Bye!\" generally, occasionally catching a child by name. Three children leave without any acknowledgment at all. The last child out, a quiet boy named Finn, looks back once at Ms. Okafor as he walks away. She's looking at her folder pile and doesn't see it.",
+      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Intentional Closure & End-of-Day Connection",
+      qcText1:"End-of-day rituals are one of the most undervalued <strong>positive climate investments</strong> available to teachers. How children leave school shapes what they carry home — and what they feel about returning tomorrow. A warm, specific send-off communicates: <em>you matter to this place, and I'll be here when you come back.</em>",
+      qcText2:"Finn looking back as he left and finding Ms. Okafor's attention on a folder is a small moment with accumulating weight. <strong>Unwitnessed departures</strong> — especially for quiet children — reinforce the belief that school is a place where you are managed, not known. The logistical work is real; so is the relational work. Both need to happen at the door.",
+      coachTitle:"The Goodbye That Mattered — Coaching Conversation",
+      question:"You're debriefing with Ms. Okafor, a <strong>Sustainer</strong>. She knows she was distracted at dismissal — she apologizes for it. How do you take this moment of openness and turn it into a lasting structural change?",
+      correct:3,
+      options:[
+        "\"The end-of-day dismissal is a climate gap I need to address with you. I tracked it: 3 children left without acknowledgment, and Finn looked back and didn't find your attention. That's the data. We need to build a dismissal protocol.\"",
+        "\"Dismissal is SO much to manage — I think you're being too hard on yourself! What if you gave every child a high-five at the door? Or a little sticker? Something that makes leaving feel special every single day!\"",
+        "\"I don't think you should worry too much — everyone gets distracted at dismissal. It sounds like overall you had a really warm day. The end of the day is hard, and I think you're being too critical of yourself for one moment.\"",
+        "\"That you noticed it matters. And I want to build on that — not to make you feel bad about today, but because what happens at the door in those last 30 seconds is actually one of the most powerful climate moments in the day. Can we design something together that makes it impossible to lose a child on the way out?\""
+      ],
+      wrongFeedback:[
+        {h:"Style Mismatch — Let's Reconsider", p1:"She opened the door with an apology — which is a moment of vulnerability from a <strong>Sustainer</strong>. Leading with \"I tracked it\" and \"the data\" in response to that vulnerability will close the door she just opened.", p2:"She's already with you emotionally. Use that. Build something together rather than pivoting to a formal assessment."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"You're being too hard on yourself\" and stickers are both deflections that don't honor the real growth moment. Ms. Okafor is ready to learn something — don't let Inspirer-style cheerfulness redirect her away from it.", p2:"The high-five at the door isn't a bad idea, but it needs to grow from understanding why the moment matters, not from a desire to make dismissal \"special\" with props."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"Don't worry too much\" and \"one moment\" are too dismissive. Ms. Okafor opened up; she deserves a mentor who takes her observation seriously and helps her build something from it — not one who lets her off the hook.", p2:"This response wastes a growth moment. She noticed. Meet her there."}
+      ],
+      matchText:"\"That you noticed it matters\" — these are exactly the right first words. You honored her awareness without letting it collapse into self-criticism or being dismissed. Then you immediately turned it forward: not backward into guilt, but forward into building.",
+      matchText2:"\"Make it impossible to lose a child on the way out\" is a warmly framed structural goal that speaks to Ms. Okafor's deepest value: no child should be invisible. She'll be all in.",
+      actionSteps:[
+        "<strong>Design the dismissal ritual together.</strong> The logistics and the warmth can both happen: folders go in the bag before lining up, so that the door moment is purely relational. Remove the logistical distraction from the connection window.",
+        "<strong>Create a name-check habit.</strong> Before the line moves, Ms. Okafor does one mental scan: does every child in line have a name? If someone is missing a goodbye, she finds them before they leave.",
+        "<strong>Give Finn a specific plan.</strong> For the next two weeks, Ms. Okafor makes intentional eye contact with Finn at dismissal — a look back before he walks away. Help her see this as a five-second investment with compounding returns.",
+        "<strong>Build a send-off phrase.</strong> Develop one consistent, warm phrase that she uses every day: \"See you tomorrow — I'm glad you came today.\" Brief, sincere, and repeated. Repetition builds belonging.",
+        "<strong>Reflect at next visit.</strong> Start the next debrief by asking: \"How did dismissal feel this week?\" Making it a regular check-in signals that the relational work at the door is as important as the instructional work during the day."
+      ],
+      completeLine:"You met a Sustainer in her moment of openness and built something lasting from it."
+    },
+
+    // ── S SCENARIO 3 ──────────────────────────────────────────
+    {
+      menteeType:"S", menteeLabel:"The Sustainer",
+      menteeDesc:"Ms. Okafor is nurturing, relationship-centered, and deeply committed to individual children. She builds genuine warmth with children she knows well — but she is slower to extend that warmth to children who are harder to connect with, particularly those whose behavior challenges her or whose personalities are more abrasive.",
+      sceneTitle:"The New Child Nobody Welcomed", sceneTag:"Pre-K Classroom",
+      focusBadge:"Positive Climate · Inclusion & Belonging",
+      scene:"A new child, Amara, has joined the class three days ago. She speaks limited English and tends to stand near the wall during transitions and center time, watching other children but not joining. Ms. Okafor has introduced Amara to the class once on her first day and assigned her a cubby. Since then, she checks in with Amara briefly when she appears distressed — but has made no sustained effort to build her into the social fabric of the class. Amara eats lunch alone. During circle time today, she sits slightly outside the circle.",
+      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Active Inclusion & Belonging-Building",
+      qcText1:"Positive climate for a new child — especially one navigating language barriers — requires <strong>active, sustained inclusion effort</strong>, not just the absence of exclusion. Amara has not been harmed; she has been ignored by the community. That invisibility is its own form of climate failure.",
+      qcText2:"High-quality inclusion goes beyond introduction. It means <strong>engineering belonging</strong> — pairing Amara intentionally with warm peers, creating low-language entry points to activities, positioning her physically inside the community rather than at its edges, and making her feel that this specific classroom was waiting for her. This is intentional, daily work.",
+      coachTitle:"The New Child Nobody Welcomed — Coaching Conversation",
+      question:"You're debriefing with Ms. Okafor, a <strong>Sustainer</strong>. She cares deeply and feels she's done her part — \"I introduced her and I watch out for her.\" How do you help her see that watching out is not the same as welcoming in?",
+      correct:1,
+      options:[
+        "\"I need to share a concern: Amara has been in this class for three days and is eating lunch alone, sitting outside the circle, and has no peer connections. \"Watching out\" is not sufficient for a child navigating language barriers. We need an inclusion plan starting today.\"",
+        "\"I love that you're watching out for her — that protective instinct is real and Amara can feel it. I want to add one question: what does Amara's day look like from inside her experience? Where does she feel like she belongs? Can we trace her day together and find the gaps we can fill?\"",
+        "\"What if Amara had a classroom buddy — a friendly child who speaks her home language, or who's just really warm? Someone who makes it their job to bring her in? I think the right buddy could totally transform her experience here!\"",
+        "\"I hear you — introduction and watchfulness are definitely a start. I wonder if at some point it might be worth thinking about whether Amara is fully integrated yet. Three days is still early and these things take time. I think she'll come around.\""
+      ],
+      wrongFeedback:[
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"I need to share a concern\" and \"not sufficient\" are evaluative frames that will feel like a rebuke to a <strong>Sustainer</strong> who is already doing her best. She'll feel accused rather than guided.", p2:"The urgency is real — Amara is struggling. But a Sustainer who feels judged will spend the debrief defending herself rather than designing a solution. Lead with her care, then deepen it."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"A classroom buddy is a lovely idea — and it might be the right tactic — but jumping to it before Ms. Okafor has traced Amara's experience means she's implementing a solution to a problem she hasn't yet felt the weight of.", p2:"Once Ms. Okafor sees Amara's day from the inside — lunch alone, outside the circle, standing near the wall — she'll design the buddy relationship herself with genuine investment."},
+        {h:"Style Mismatch — Let's Reconsider", p1:"\"She'll come around\" and \"three days is still early\" are false reassurances that let Ms. Okafor off the hook at a moment when Amara needs active intervention. Every day of invisible belonging is a day of its opposite.", p2:"A <strong>Sustainer</strong> who genuinely cares about Amara deserves the honest truth: active inclusion is required right now, not eventually."}
+      ],
+      matchText:"\"What does Amara's day look like from inside her experience?\" is a brilliant Sustainer move. You redirected her from her own perspective (\"I introduced her\") to Amara's perspective — which is the exact lens a Sustainer will respond to most powerfully.",
+      matchText2:"\"Find the gaps we can fill\" is collaborative and action-oriented, without being prescriptive. Ms. Okafor will arrive at the lunch table, the circle position, and the wall-standing herself — and what she discovers herself, she'll own.",
+      actionSteps:[
+        "<strong>Map Amara's day together.</strong> Walk through arrival, circle time, centers, lunch, and dismissal from Amara's perspective: where does she have a place? Where is she peripheral? Make the exclusion visible without making Ms. Okafor feel accused.",
+        "<strong>Design a peer connection plan.</strong> Identify 2 warm, patient children in the class. Build intentional pairing into specific activities where language isn't the primary barrier — blocks, art, dramatic play. Engineer the friendship opportunity.",
+        "<strong>Create a circle inclusion ritual.</strong> Address the physical positioning: Ms. Okafor places herself near Amara during circle time and creates a physical space within the circle for her — a special cushion, her name on a carpet square. Belonging starts with a seat.",
+        "<strong>Build a low-language welcome routine.</strong> Help Ms. Okafor develop daily non-verbal warmth practices for Amara: a smile across the room, a thumbs-up, a hand on her shoulder during transitions. Connection doesn't require words.",
+        "<strong>Check Amara's integration weekly.</strong> Build a brief \"belonging check\" into the mentoring rhythm: Is Amara eating with peers? Is she inside the circle? Is she initiating play? Track the trend — it will show Ms. Okafor the impact of her investment."
+      ],
+      completeLine:"You helped a Sustainer see the world through Amara's eyes — and that's the most powerful thing you could have done."
     }
+
   ]
-},
+}, // end Module 1
 
 // ── MODULE 2 ─────────────────────────────────────────────────
 {

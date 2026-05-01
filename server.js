@@ -504,6 +504,18 @@ app.get('/api/reflections/shared-with-me', requireRole('mentor'), async (req, re
   res.json(result.rows);
 });
 
+// Get reflection content (questions for all weeks, role-filtered)
+app.get('/api/reflections/content', requireAuth, (req, res) => {
+  try {
+    const fs = require('fs');
+    const content = JSON.parse(fs.readFileSync(path.join(__dirname, 'reflection-content.json'), 'utf-8'));
+    res.json(content);
+  } catch (e) {
+    console.error('Failed to load reflection content:', e);
+    res.status(500).json({ error: 'Could not load reflection content' });
+  }
+});
+
 // Mentee view: who is my mentor
 app.get('/api/mentee/my-mentor', requireRole('mentee'), async (req, res) => {
   if (!req.session.mentorUserId) return res.json({ mentor: null });

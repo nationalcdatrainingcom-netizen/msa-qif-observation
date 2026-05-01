@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSA Mentor — Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep: #2c4a35;
+    --green-mid: #4a7c59;
+    --gold: #c9953a;
+    --gold-soft: #e0b870;
+    --cream: #faf8f3;
+    --cream-dark: #f0ebe0;
+    --line: #ddd8cc;
+    --line-soft: #eee8dc;
+    --text: #2c2c2c;
+    --text-soft: #666;
+    --text-muted: #999;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Top bar ── */
+  header {
+    background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%);
+    color: white;
+    padding: 22px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo {
+    background: var(--gold);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    width: 46px;
+    height: 46px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .brand h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .brand .label {
+    font-size: 11px;
+    opacity: 0.75;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .top-right { display: flex; align-items: center; gap: 16px; font-size: 13px; }
+  .top-right a { color: rgba(255,255,255,0.85); text-decoration: none; }
+  .top-right a:hover { color: white; }
+
+  main {
+    flex: 1;
+    padding: 36px 32px;
+    max-width: 1080px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* ── Welcome ── */
+  .welcome {
+    margin-bottom: 32px;
+  }
+  .welcome h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: var(--green-deep);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .welcome p {
+    font-size: 15px;
+    color: var(--text-soft);
+    margin-top: 6px;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  /* ── Tool grid ── */
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    margin-bottom: 40px;
+  }
+  .tool-card {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 16px;
+    padding: 26px 26px 22px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .tool-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle at top right, rgba(201,149,58,0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .tool-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(44,74,53,0.1);
+    border-color: var(--gold-soft);
+  }
+  .tool-icon {
+    font-size: 34px;
+    margin-bottom: 14px;
+    line-height: 1;
+  }
+  .tool-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    color: var(--green-deep);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .tool-card p {
+    font-size: 13.5px;
+    color: var(--text-soft);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .tool-card .open {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line-soft);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green-mid);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .tool-card:hover .open { color: var(--green-deep); }
+
+  /* ── Section heading ── */
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .section-head h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--green-deep);
+  }
+  .section-head .count {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* ── Shared reflections ── */
+  .shared-list {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .shared-row {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+  }
+  .shared-row:last-child { border-bottom: none; }
+  .shared-info { flex: 1; min-width: 0; }
+  .shared-name {
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+  .shared-meta {
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+  .shared-meta .dot { margin: 0 6px; opacity: 0.4; }
+
+  button.ghost {
+    background: transparent;
+    color: var(--text-soft);
+    border: 1px solid var(--line);
+    padding: 8px 14px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    font-family: inherit;
+  }
+  button.ghost:hover { background: var(--cream); color: var(--green-deep); }
+
+  .empty {
+    padding: 36px 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .empty .emoji { font-size: 28px; display: block; margin-bottom: 8px; opacity: 0.6; }
+
+  /* ── Mentee list (small badge area) ── */
+  .mentee-context {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 20px;
+    margin-bottom: 32px;
+    font-size: 13.5px;
+    color: var(--text-soft);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .mentee-context strong { color: var(--text); font-weight: 600; }
+  .mentee-pill {
+    display: inline-block;
+    background: var(--cream-dark);
+    color: var(--green-deep);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 12.5px;
+  }
+
+  /* ── Reflection viewer modal ── */
+  .modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(44,74,53,0.4);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .modal-backdrop.show { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 720px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 12px 60px rgba(0,0,0,0.2);
+  }
+  .modal-head {
+    padding: 22px 26px 16px;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .modal-head h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    color: var(--green-deep);
+  }
+  .modal-close {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1;
+  }
+  .modal-body { padding: 22px 26px; }
+  .modal-foot {
+    padding: 16px 26px 22px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid var(--line-soft);
+  }
+  button.primary {
+    background: var(--green-deep);
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  button.primary:hover { background: var(--green-mid); }
+
+  .response-block {
+    margin-bottom: 16px;
+    padding: 14px 16px;
+    background: var(--cream);
+    border-radius: 8px;
+    border-left: 3px solid var(--gold);
+  }
+  .response-block .q {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green-deep);
+    margin-bottom: 6px;
+  }
+  .response-block .a {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.55;
+    white-space: pre-wrap;
+  }
+  .response-block .a.empty { color: var(--text-muted); font-style: italic; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin: 18px 0 8px;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    padding: 24px;
+    letter-spacing: 0.03em;
+  }
+  footer .divider {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin: 0 8px;
+    vertical-align: middle;
+  }
+
+  @media (max-width: 700px) {
+    main { padding: 24px 18px; }
+    header { padding: 18px 20px; }
+    .tool-grid { grid-template-columns: 1fr; gap: 16px; }
+    .welcome h2 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">MSA</div>
+      <div>
+        <h1>Mentor Tools</h1>
+        <div class="label">Mentor Success Academy</div>
+      </div>
+    </div>
+    <div class="top-right">
+      <span id="user-name"></span>
+      <a href="#" id="logout-link">Sign out</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="welcome">
+      <h2 id="welcome-headline">Welcome</h2>
+      <p>Your mentoring tools are below. Use the LEAP Quiz to find your own natural leadership expression, the training module to practice coaching scenarios, the QIF observation tool when you're in the classroom, and reflections to track your week-by-week journey alongside your mentee.</p>
+    </div>
+
+    <div class="mentee-context" id="mentee-context" style="display:none;">
+      <strong>Mentees:</strong>
+      <span id="mentee-pills"></span>
+    </div>
+
+    <div class="tool-grid">
+      <a class="tool-card" href="https://msa-quiz.onrender.com" target="_blank" rel="noopener">
+        <div class="tool-icon">🧭</div>
+        <h3>LEAP Quiz</h3>
+        <p>Discover your Leadership Expression Assessment Profile — your own natural leadership expression — so you can mentor with self-awareness.</p>
+        <div class="open">Open Quiz →</div>
+      </a>
+
+      <a class="tool-card" href="/training">
+        <div class="tool-icon">🎓</div>
+        <h3>Mentor Training</h3>
+        <p>Scenario-based coaching practice. Observe a classroom interaction and choose the right approach for your mentee's natural leadership expression.</p>
+        <div class="open">Open Training →</div>
+      </a>
+
+      <a class="tool-card" href="/qif">
+        <div class="tool-icon">🔍</div>
+        <h3>QIF Observation Tool</h3>
+        <p>Live observation tool. Log positive and negative interactions across domains, auto-score indicators, and export coaching reports.</p>
+        <div class="open">Open QIF →</div>
+      </a>
+
+      <a class="tool-card" href="/reflections">
+        <div class="tool-icon">📝</div>
+        <h3>My Reflections</h3>
+        <p>Daily and end-of-domain reflections for your own coaching practice. A space to notice growth and name the work ahead.</p>
+        <div class="open">Open Reflections →</div>
+      </a>
+    </div>
+
+    <div class="section-head">
+      <h3>My Mentee's Shared Reflections</h3>
+      <div class="count" id="shared-count"></div>
+    </div>
+    <div class="shared-list" id="shared-list">
+      <div class="empty">Loading…</div>
+    </div>
+  </main>
+
+  <footer>
+    © Mentor Success Academy
+    <span class="divider"></span>
+    Mary Wardlaw &amp; Rebecca Munlyn
+    <span class="divider"></span>
+    All rights reserved
+  </footer>
+
+  <!-- ── Reflection viewer modal ── -->
+  <div class="modal-backdrop" id="modal-reflection">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="refl-title">Shared Reflection</h3>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+      <div class="modal-body" id="refl-body"></div>
+      <div class="modal-foot">
+        <button class="primary" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+let me = null;
+let reflectionContent = null;
+let sharedReflections = [];
+
+// ── Boot ─────────────────────────────────────────────────────────
+async function boot() {
+  try {
+    const r = await fetch('/api/auth/me');
+    if (!r.ok) { window.location.href = '/'; return; }
+    me = await r.json();
+    if (me.role !== 'mentor') { window.location.href = '/'; return; }
+    if (me.must_change_password) { window.location.href = '/change-password'; return; }
+    document.getElementById('user-name').textContent = me.full_name;
+    document.getElementById('welcome-headline').textContent = 'Welcome, ' + firstName(me.full_name) + '.';
+    await Promise.all([loadMentees(), loadSharedReflections(), loadContent()]);
+  } catch (e) {
+    console.error(e);
+    window.location.href = '/';
+  }
+}
+
+document.getElementById('logout-link').addEventListener('click', async (e) => {
+  e.preventDefault();
+  await fetch('/api/auth/logout', { method: 'POST' });
+  window.location.href = '/';
+});
+
+function firstName(full) {
+  if (!full) return '';
+  return full.trim().split(/\s+/)[0];
+}
+
+// ── Mentee context ───────────────────────────────────────────────
+async function loadMentees() {
+  try {
+    const r = await fetch('/api/mentees');
+    const mentees = await r.json();
+    if (mentees.length === 0) {
+      document.getElementById('mentee-context').style.display = 'none';
+      return;
+    }
+    const ctx = document.getElementById('mentee-context');
+    ctx.style.display = 'flex';
+    document.getElementById('mentee-pills').innerHTML = mentees
+      .map(m => `<span class="mentee-pill">${escapeHtml(m.name || m.full_name || '')}</span>`)
+      .join(' ');
+  } catch (e) {
+    document.getElementById('mentee-context').style.display = 'none';
+  }
+}
+
+// ── Shared reflections ───────────────────────────────────────────
+async function loadContent() {
+  try {
+    const r = await fetch('/api/reflections/content');
+    if (r.ok) reflectionContent = await r.json();
+  } catch (e) { /* viewer falls back gracefully */ }
+}
+
+async function loadSharedReflections() {
+  try {
+    const r = await fetch('/api/reflections/shared-with-me');
+    sharedReflections = await r.json();
+    renderShared();
+  } catch (e) {
+    document.getElementById('shared-list').innerHTML = '<div class="empty">Could not load shared reflections.</div>';
+  }
+}
+
+function renderShared() {
+  const list = document.getElementById('shared-list');
+  document.getElementById('shared-count').textContent =
+    sharedReflections.length === 0 ? '' :
+    `${sharedReflections.length} shared`;
+
+  if (sharedReflections.length === 0) {
+    list.innerHTML = `
+      <div class="empty">
+        <span class="emoji">📭</span>
+        Your mentee hasn't shared any reflections yet.<br>
+        When they choose to share one, it will appear here.
+      </div>`;
+    return;
+  }
+
+  list.innerHTML = sharedReflections.map(r => `
+    <div class="shared-row">
+      <div class="shared-info">
+        <div class="shared-name">${escapeHtml(r.mentee_name)}</div>
+        <div class="shared-meta">
+          ${formatType(r.reflection_type)}
+          <span class="dot">·</span>
+          ${r.reflection_type === 'end_of_domain' ? 'Domain ' + r.domain_number : 'Week ' + r.week_number}
+          ${r.reflection_date ? `<span class="dot">·</span> ${r.reflection_date}` : ''}
+          <span class="dot">·</span>
+          Updated ${formatDate(r.updated_at)}
+        </div>
+      </div>
+      <button class="ghost" onclick="viewReflection(${r.id})">Read</button>
+    </div>
+  `).join('');
+}
+
+function viewReflection(id) {
+  const r = sharedReflections.find(x => x.id === id);
+  if (!r) return;
+  document.getElementById('refl-title').textContent =
+    `${r.mentee_name} · ${formatType(r.reflection_type)}` +
+    (r.week_number ? ` · Week ${r.week_number}` : '') +
+    (r.domain_number ? ` · Domain ${r.domain_number}` : '');
+
+  let questions = [];
+  try {
+    if (r.reflection_type === 'weekly') {
+      questions = reflectionContent?.weeks?.[r.week_number]?.weekly?.mentee || [];
+    } else if (r.reflection_type === 'daily') {
+      questions = reflectionContent?.weeks?.[r.week_number]?.daily?.mentee || [];
+    } else if (r.reflection_type === 'end_of_domain') {
+      questions = reflectionContent?.endOfDomain?.[r.domain_number]?.questions?.mentee || [];
+    }
+  } catch (e) { questions = []; }
+
+  const responses = r.responses || {};
+  let html = '';
+  let lastSection = null;
+  questions.forEach(q => {
+    if (q.section && q.section !== lastSection) {
+      html += `<div class="section-label">${escapeHtml(q.section)}</div>`;
+      lastSection = q.section;
+    }
+    const ans = responses[q.id];
+    html += `
+      <div class="response-block">
+        <div class="q">${escapeHtml(q.text)}</div>
+        <div class="a ${ans ? '' : 'empty'}">${ans ? escapeHtml(ans) : '(no response yet)'}</div>
+      </div>
+    `;
+  });
+  if (questions.length === 0) {
+    Object.entries(responses).forEach(([k, v]) => {
+      html += `<div class="response-block"><div class="q">${escapeHtml(k)}</div><div class="a">${escapeHtml(v || '')}</div></div>`;
+    });
+  }
+  document.getElementById('refl-body').innerHTML = html || '<div class="empty">Nothing to display.</div>';
+  document.getElementById('modal-reflection').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modal-reflection').classList.remove('show');
+}
+document.getElementById('modal-reflection').addEventListener('click', (e) => {
+  if (e.target.id === 'modal-reflection') closeModal();
+});
+
+function formatType(t) {
+  return t === 'weekly' ? 'Weekly' : t === 'daily' ? 'Daily' : t === 'end_of_domain' ? 'End-of-Domain' : t;
+}
+function formatDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleDateString(undefined, { month:'short', day:'numeric' });
+}
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSA Reflections</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep: #2c4a35;
+    --green-mid: #4a7c59;
+    --gold: #c9953a;
+    --gold-soft: #e0b870;
+    --cream: #faf8f3;
+    --cream-dark: #f0ebe0;
+    --line: #ddd8cc;
+    --line-soft: #eee8dc;
+    --text: #2c2c2c;
+    --text-soft: #666;
+    --text-muted: #999;
+    --error: #b54545;
+    --error-bg: #fdf3f3;
+    --success: #4a7c59;
+    --success-bg: #f0f7f1;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Top bar ── */
+  header {
+    background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%);
+    color: white;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .logo {
+    background: var(--gold); color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; font-weight: 700;
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .brand h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .brand .label {
+    font-size: 11px; opacity: 0.7;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .top-right { display: flex; align-items: center; gap: 16px; font-size: 13px; }
+  .top-right a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+  }
+  .top-right a:hover { color: white; }
+  .back-link::before { content: '← '; }
+
+  main {
+    flex: 1;
+    padding: 32px;
+    max-width: 920px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* ── Page heading ── */
+  .page-head {
+    margin-bottom: 24px;
+  }
+  .page-head h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--green-deep);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .page-head .subtitle {
+    font-size: 14px;
+    color: var(--text-soft);
+    margin-top: 4px;
+  }
+
+  /* ── Tab strip (reflection type) ── */
+  .type-tabs {
+    display: flex;
+    gap: 4px;
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 5px;
+    margin-bottom: 22px;
+  }
+  .type-tab {
+    flex: 1;
+    padding: 12px 14px;
+    text-align: center;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-soft);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
+    user-select: none;
+  }
+  .type-tab:hover { color: var(--text); }
+  .type-tab.active {
+    background: var(--green-deep);
+    color: white;
+    font-weight: 600;
+  }
+  .type-tab.disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* ── Selectors ── */
+  .selectors {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+  .sel-field { flex: 1; min-width: 180px; }
+  .sel-field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-soft);
+    margin-bottom: 6px;
+  }
+  .sel-field select,
+  .sel-field input[type=date] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    background: var(--cream);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .sel-field select:focus,
+  .sel-field input[type=date]:focus {
+    outline: none;
+    border-color: var(--green-mid);
+    background: white;
+  }
+
+  /* ── Topic banner ── */
+  .topic-banner {
+    background: linear-gradient(135deg, rgba(74,124,89,0.06) 0%, rgba(201,149,58,0.08) 100%);
+    border: 1.5px solid var(--gold-soft);
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin-bottom: 24px;
+  }
+  .topic-banner .domain {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .topic-banner h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--green-deep);
+    font-weight: 600;
+  }
+  .topic-banner .week-label {
+    font-size: 13px;
+    color: var(--text-soft);
+    margin-top: 4px;
+  }
+
+  /* ── Status ribbon ── */
+  .status-ribbon {
+    background: white;
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--text-soft);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .status-ribbon.saved { background: var(--success-bg); border-style: solid; border-color: var(--gold-soft); color: var(--green-deep); }
+  .status-ribbon .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--text-muted); }
+  .status-ribbon.saved .dot { background: var(--success); }
+
+  /* ── Question form ── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin: 28px 0 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  .q-block {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-left: 3px solid var(--gold);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 14px;
+  }
+  .q-block .q-text {
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+  .q-block textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.55;
+    background: var(--cream);
+    color: var(--text);
+    resize: vertical;
+    min-height: 84px;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .q-block textarea:focus {
+    outline: none;
+    border-color: var(--green-mid);
+    background: white;
+  }
+
+  /* ── Share toggle (mentees) ── */
+  .share-toggle {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 24px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .share-toggle.on { border-color: var(--gold); background: var(--success-bg); }
+  .share-toggle .check-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    flex: 1;
+  }
+  .share-toggle input[type=checkbox] {
+    width: 20px; height: 20px;
+    accent-color: var(--green-deep);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .share-toggle .share-text { flex: 1; }
+  .share-toggle .share-title { font-weight: 600; font-size: 14px; color: var(--text); }
+  .share-toggle .share-help { font-size: 12.5px; color: var(--text-soft); margin-top: 2px; line-height: 1.5; }
+
+  /* ── Action buttons ── */
+  .actions {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line-soft);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+  button.primary {
+    background: var(--green-deep);
+    color: white;
+    border: none;
+    padding: 13px 24px;
+    border-radius: 8px;
+    font-size: 14.5px;
+    font-weight: 600;
+    transition: background 0.15s;
+  }
+  button.primary:hover { background: var(--green-mid); }
+  button.primary:disabled { background: var(--text-muted); cursor: wait; }
+  button.ghost {
+    background: transparent;
+    color: var(--text-soft);
+    border: 1px solid var(--line);
+    padding: 11px 16px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+  button.ghost:hover { background: var(--cream-dark); color: var(--text); }
+  .last-saved {
+    margin-left: auto;
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+
+  /* ── Empty / placeholder ── */
+  .empty {
+    background: white;
+    border: 1.5px dashed var(--line);
+    border-radius: 12px;
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--green-deep);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    z-index: 200;
+    display: none;
+    max-width: 400px;
+  }
+  .toast.show { display: block; }
+  .toast.error { background: var(--error); }
+
+  footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    padding: 20px;
+    letter-spacing: 0.03em;
+  }
+
+  @media (max-width: 700px) {
+    main { padding: 22px 16px; }
+    header { padding: 14px 20px; }
+    .selectors { padding: 14px; }
+    .sel-field { min-width: 100%; }
+    .type-tab { padding: 11px 8px; font-size: 12.5px; }
+    .last-saved { width: 100%; margin-left: 0; margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">MSA</div>
+      <div>
+        <h1>Reflections</h1>
+        <div class="label">Mentor Success Academy</div>
+      </div>
+    </div>
+    <div class="top-right">
+      <a href="#" id="back-link" class="back-link">Home</a>
+      <a href="#" id="logout-link">Sign out</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-head">
+      <h2>My Reflections</h2>
+      <div class="subtitle">An invitation to notice, not an evaluation.</div>
+    </div>
+
+    <div class="type-tabs" id="type-tabs">
+      <div class="type-tab" data-type="weekly">Weekly</div>
+      <div class="type-tab" data-type="daily">Daily</div>
+      <div class="type-tab" data-type="end_of_domain">End of Domain</div>
+    </div>
+
+    <div class="selectors" id="selectors">
+      <!-- populated by JS based on type -->
+    </div>
+
+    <div id="topic-banner-container"></div>
+
+    <div class="status-ribbon" id="status-ribbon" style="display:none;">
+      <span class="dot"></span>
+      <span id="status-text"></span>
+    </div>
+
+    <div id="form-container">
+      <div class="empty">Choose a reflection type and week to begin.</div>
+    </div>
+
+    <div id="actions-container"></div>
+  </main>
+
+  <footer>
+    © Mentor Success Academy
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+let me = null;
+let content = null;
+let currentType = null;       // 'weekly' | 'daily' | 'end_of_domain'
+let currentWeek = null;       // 1..12
+let currentDate = null;       // YYYY-MM-DD (daily only)
+let currentDomain = null;     // 1..3 (end_of_domain only)
+let currentReflectionId = null;
+let currentResponses = {};    // { questionId: text }
+let currentShared = false;
+let dirty = false;
+let saving = false;
+
+// ── Boot ─────────────────────────────────────────────────────────
+async function boot() {
+  try {
+    const r = await fetch('/api/auth/me');
+    if (!r.ok) { window.location.href = '/'; return; }
+    me = await r.json();
+    if (me.role !== 'mentor' && me.role !== 'mentee') { window.location.href = '/'; return; }
+    if (me.must_change_password) { window.location.href = '/change-password'; return; }
+
+    document.getElementById('back-link').href = me.role === 'mentor' ? '/mentor' : '/mentee';
+
+    const cr = await fetch('/api/reflections/content');
+    if (!cr.ok) throw new Error('Could not load reflection content');
+    content = await cr.json();
+
+    setupTypeTabs();
+
+    // Default to first available type for this role
+    const defaultType = me.role === 'mentor' ? 'daily' : 'weekly';
+    selectType(defaultType);
+  } catch (e) {
+    console.error(e);
+    document.getElementById('form-container').innerHTML =
+      `<div class="empty">Could not load reflection content. Please refresh and try again.</div>`;
+  }
+}
+
+document.getElementById('logout-link').addEventListener('click', async (e) => {
+  e.preventDefault();
+  await fetch('/api/auth/logout', { method: 'POST' });
+  window.location.href = '/';
+});
+
+// Warn before leaving with unsaved changes
+window.addEventListener('beforeunload', (e) => {
+  if (dirty && !saving) {
+    e.preventDefault();
+    e.returnValue = '';
+  }
+});
+
+// ── Type tabs ────────────────────────────────────────────────────
+function setupTypeTabs() {
+  document.querySelectorAll('.type-tab').forEach(tab => {
+    const type = tab.dataset.type;
+    // Mentors don't have "weekly" — Rebecca's guide places weekly on the mentee.
+    if (me.role === 'mentor' && type === 'weekly') {
+      tab.classList.add('disabled');
+      tab.title = 'Weekly reflections are completed by the mentee.';
+      return;
+    }
+    tab.addEventListener('click', () => selectType(type));
+  });
+}
+
+function selectType(type) {
+  if (dirty && !confirm('You have unsaved changes. Switch reflection types and lose them?')) return;
+  currentType = type;
+  dirty = false;
+  document.querySelectorAll('.type-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.type === type);
+  });
+  buildSelectors();
+}
+
+// ── Selectors ────────────────────────────────────────────────────
+function buildSelectors() {
+  const box = document.getElementById('selectors');
+  if (currentType === 'weekly' || currentType === 'daily') {
+    let weekOpts = '<option value="">— Choose a week —</option>';
+    for (let w = 1; w <= 12; w++) {
+      const topic = content.weeks[w]?.topic || '';
+      weekOpts += `<option value="${w}" ${currentWeek === w ? 'selected' : ''}>Week ${w} — ${escapeHtml(topic)}</option>`;
+    }
+
+    let html = `
+      <div class="sel-field">
+        <label>Week</label>
+        <select id="sel-week" onchange="onWeekChange()">${weekOpts}</select>
+      </div>
+    `;
+    if (currentType === 'daily') {
+      html += `
+        <div class="sel-field">
+          <label>Date</label>
+          <input type="date" id="sel-date" value="${currentDate || todayISO()}" onchange="onDateChange()">
+        </div>
+      `;
+    }
+    box.innerHTML = html;
+  } else if (currentType === 'end_of_domain') {
+    let opts = '<option value="">— Choose a domain —</option>';
+    [1, 2, 3].forEach(d => {
+      const eod = content.endOfDomain[d];
+      const title = eod?.title || `Domain ${d}`;
+      opts += `<option value="${d}" ${currentDomain === d ? 'selected' : ''}>${escapeHtml(title)}</option>`;
+    });
+    box.innerHTML = `
+      <div class="sel-field">
+        <label>Domain</label>
+        <select id="sel-domain" onchange="onDomainChange()">${opts}</select>
+      </div>
+    `;
+  }
+
+  // If we already had a selection in this type, re-render the form
+  if (currentType === 'weekly' && currentWeek) {
+    loadAndRender();
+  } else if (currentType === 'daily' && currentWeek) {
+    loadAndRender();
+  } else if (currentType === 'end_of_domain' && currentDomain) {
+    loadAndRender();
+  } else {
+    document.getElementById('topic-banner-container').innerHTML = '';
+    document.getElementById('status-ribbon').style.display = 'none';
+    document.getElementById('form-container').innerHTML = '<div class="empty">Choose a week to begin.</div>';
+    document.getElementById('actions-container').innerHTML = '';
+  }
+}
+
+function onWeekChange() {
+  const v = parseInt(document.getElementById('sel-week').value);
+  if (!v) return;
+  if (dirty && !confirm('You have unsaved changes. Switch and lose them?')) {
+    document.getElementById('sel-week').value = currentWeek || '';
+    return;
+  }
+  currentWeek = v;
+  dirty = false;
+  if (currentType === 'daily' && !currentDate) currentDate = todayISO();
+  loadAndRender();
+}
+
+function onDateChange() {
+  const v = document.getElementById('sel-date').value;
+  if (!v) return;
+  if (dirty && !confirm('You have unsaved changes. Switch and lose them?')) {
+    document.getElementById('sel-date').value = currentDate || todayISO();
+    return;
+  }
+  currentDate = v;
+  dirty = false;
+  loadAndRender();
+}
+
+function onDomainChange() {
+  const v = parseInt(document.getElementById('sel-domain').value);
+  if (!v) return;
+  if (dirty && !confirm('You have unsaved changes. Switch and lose them?')) {
+    document.getElementById('sel-domain').value = currentDomain || '';
+    return;
+  }
+  currentDomain = v;
+  dirty = false;
+  loadAndRender();
+}
+
+function todayISO() {
+  const d = new Date();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${d.getFullYear()}-${m}-${day}`;
+}
+
+// ── Topic banner ─────────────────────────────────────────────────
+function renderTopicBanner() {
+  const c = document.getElementById('topic-banner-container');
+  if (currentType === 'weekly' || currentType === 'daily') {
+    const wk = content.weeks[currentWeek];
+    if (!wk) { c.innerHTML = ''; return; }
+    const domain = content.domains.find(d => d.number === wk.domain);
+    c.innerHTML = `
+      <div class="topic-banner">
+        <div class="domain">Domain ${wk.domain} · ${escapeHtml(domain?.title || '')}</div>
+        <h3>${escapeHtml(wk.topic)}</h3>
+        <div class="week-label">Week ${currentWeek}${currentType === 'daily' && currentDate ? ' · ' + formatDateNice(currentDate) : ''}</div>
+      </div>
+    `;
+  } else if (currentType === 'end_of_domain') {
+    const eod = content.endOfDomain[currentDomain];
+    if (!eod) { c.innerHTML = ''; return; }
+    c.innerHTML = `
+      <div class="topic-banner">
+        <div class="domain">End-of-Domain Reflection</div>
+        <h3>${escapeHtml(eod.title)}</h3>
+        <div class="week-label">Completed after Week ${eod.afterWeek}</div>
+      </div>
+    `;
+  } else {
+    c.innerHTML = '';
+  }
+}
+
+function formatDateNice(iso) {
+  if (!iso) return '';
+  const d = new Date(iso + 'T00:00:00');
+  return d.toLocaleDateString(undefined, { weekday:'long', month:'long', day:'numeric' });
+}
+
+// ── Load existing reflection + render form ───────────────────────
+async function loadAndRender() {
+  renderTopicBanner();
+  document.getElementById('form-container').innerHTML = '<div class="empty">Loading…</div>';
+  document.getElementById('actions-container').innerHTML = '';
+  document.getElementById('status-ribbon').style.display = 'none';
+
+  // Build query
+  let url = '/api/reflections/mine?type=' + encodeURIComponent(currentType);
+  if (currentType === 'weekly' || currentType === 'daily') {
+    url += '&week=' + currentWeek;
+    if (currentType === 'daily') url += '&date=' + currentDate;
+  }
+  // For end_of_domain we filter client-side since the server doesn't accept domain query param
+  try {
+    const r = await fetch(url);
+    let rows = await r.json();
+    if (currentType === 'end_of_domain') {
+      rows = rows.filter(x => x.domain_number === currentDomain);
+    }
+    const existing = rows[0];
+    if (existing) {
+      currentReflectionId = existing.id;
+      currentResponses = existing.responses || {};
+      currentShared = !!existing.shared_with_mentor;
+      showStatus('saved', `Last saved ${formatDateTime(existing.updated_at)}.`);
+    } else {
+      currentReflectionId = null;
+      currentResponses = {};
+      currentShared = false;
+      document.getElementById('status-ribbon').style.display = 'none';
+    }
+    renderForm();
+    dirty = false;
+  } catch (e) {
+    document.getElementById('form-container').innerHTML = '<div class="empty">Could not load this reflection. Please try again.</div>';
+  }
+}
+
+function showStatus(kind, text) {
+  const el = document.getElementById('status-ribbon');
+  el.className = 'status-ribbon ' + (kind || '');
+  document.getElementById('status-text').textContent = text;
+  el.style.display = 'flex';
+}
+
+function formatDateTime(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleString(undefined, { month:'short', day:'numeric', hour:'numeric', minute:'2-digit' });
+}
+
+// ── Form rendering ───────────────────────────────────────────────
+function getQuestions() {
+  if (currentType === 'weekly') {
+    // Weekly: mentee only (per Rebecca's guide).
+    return content.weeks[currentWeek]?.weekly?.[me.role] || [];
+  }
+  if (currentType === 'daily') {
+    return content.weeks[currentWeek]?.daily?.[me.role] || [];
+  }
+  if (currentType === 'end_of_domain') {
+    return content.endOfDomain[currentDomain]?.questions?.[me.role] || [];
+  }
+  return [];
+}
+
+function renderForm() {
+  const questions = getQuestions();
+  const container = document.getElementById('form-container');
+
+  if (questions.length === 0) {
+    container.innerHTML = `<div class="empty">No questions defined for this reflection yet.</div>`;
+    document.getElementById('actions-container').innerHTML = '';
+    return;
+  }
+
+  let html = '';
+  let lastSection = null;
+  questions.forEach(q => {
+    if (q.section && q.section !== lastSection) {
+      html += `<div class="section-label">${escapeHtml(q.section)}</div>`;
+      lastSection = q.section;
+    }
+    const val = currentResponses[q.id] || '';
+    html += `
+      <div class="q-block">
+        <div class="q-text">${escapeHtml(q.text)}</div>
+        <textarea data-qid="${escapeHtml(q.id)}" placeholder="Your response…">${escapeHtml(val)}</textarea>
+      </div>
+    `;
+  });
+
+  // Share toggle for mentees only
+  if (me.role === 'mentee') {
+    html += `
+      <div class="share-toggle ${currentShared ? 'on' : ''}" id="share-toggle">
+        <label class="check-wrap">
+          <input type="checkbox" id="share-checkbox" ${currentShared ? 'checked' : ''}>
+          <div class="share-text">
+            <div class="share-title">Share this reflection with my mentor</div>
+            <div class="share-help">Optional. You can change this any time. Your reflection is private to you and the program admins by default.</div>
+          </div>
+        </label>
+      </div>
+    `;
+  }
+
+  container.innerHTML = html;
+
+  // Wire up textarea changes
+  container.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      currentResponses[ta.dataset.qid] = ta.value;
+      dirty = true;
+    });
+  });
+
+  // Wire up share toggle
+  if (me.role === 'mentee') {
+    document.getElementById('share-checkbox').addEventListener('change', (e) => {
+      currentShared = e.target.checked;
+      document.getElementById('share-toggle').classList.toggle('on', currentShared);
+      dirty = true;
+    });
+  }
+
+  renderActions();
+}
+
+function renderActions() {
+  document.getElementById('actions-container').innerHTML = `
+    <div class="actions">
+      <button class="primary" id="save-btn" onclick="save()">Save Reflection</button>
+      <button class="ghost" onclick="loadAndRender()">Discard Changes</button>
+      <span class="last-saved" id="last-saved-inline"></span>
+    </div>
+  `;
+}
+
+// ── Save ─────────────────────────────────────────────────────────
+async function save() {
+  if (saving) return;
+  const btn = document.getElementById('save-btn');
+  saving = true;
+  btn.disabled = true;
+  btn.textContent = 'Saving…';
+
+  try {
+    const body = {
+      reflectionType: currentType,
+      weekNumber: currentWeek || null,
+      domainNumber: currentDomain || null,
+      reflectionDate: currentType === 'daily' ? currentDate : null,
+      responses: currentResponses,
+      sharedWithMentor: me.role === 'mentee' ? currentShared : false
+    };
+    const r = await fetch('/api/reflections', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Save failed');
+    currentReflectionId = data.id;
+    dirty = false;
+    showStatus('saved', `Saved ${formatDateTime(data.updated_at)}.`);
+    toast('Reflection saved.');
+  } catch (e) {
+    toast(e.message, true);
+  } finally {
+    saving = false;
+    btn.disabled = false;
+    btn.textContent = 'Save Reflection';
+  }
+}
+
+// ── Toast ────────────────────────────────────────────────────────
+let toastTimer;
+function toast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.toggle('error', !!isError);
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ── Utility ──────────────────────────────────────────────────────
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+boot();
+</script>
+</body>
+</html>

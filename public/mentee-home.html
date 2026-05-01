@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSA Mentee — Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep: #2c4a35;
+    --green-mid: #4a7c59;
+    --gold: #c9953a;
+    --gold-soft: #e0b870;
+    --cream: #faf8f3;
+    --cream-dark: #f0ebe0;
+    --line: #ddd8cc;
+    --line-soft: #eee8dc;
+    --text: #2c2c2c;
+    --text-soft: #666;
+    --text-muted: #999;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Top bar ── */
+  header {
+    background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%);
+    color: white;
+    padding: 22px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo {
+    background: var(--gold);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    width: 46px;
+    height: 46px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .brand h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .brand .label {
+    font-size: 11px;
+    opacity: 0.75;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .top-right { display: flex; align-items: center; gap: 16px; font-size: 13px; }
+  .top-right a { color: rgba(255,255,255,0.85); text-decoration: none; }
+  .top-right a:hover { color: white; }
+
+  main {
+    flex: 1;
+    padding: 36px 32px;
+    max-width: 880px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* ── Welcome ── */
+  .welcome {
+    margin-bottom: 28px;
+  }
+  .welcome h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: var(--green-deep);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .welcome p {
+    font-size: 15px;
+    color: var(--text-soft);
+    margin-top: 6px;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  /* ── Mentor context ── */
+  .mentor-context {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 22px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .mentor-context .label-tiny {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+  .mentor-context .name {
+    font-weight: 600;
+    color: var(--green-deep);
+    font-size: 15px;
+  }
+  .mentor-context .email {
+    color: var(--text-soft);
+    font-size: 13px;
+  }
+  .mentor-context.empty-state {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 13.5px;
+    justify-content: center;
+  }
+
+  /* ── Tool grid ── */
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    margin-bottom: 36px;
+  }
+  .tool-card {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 16px;
+    padding: 28px 26px 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .tool-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at top right, rgba(201,149,58,0.1), transparent 70%);
+    pointer-events: none;
+  }
+  .tool-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(44,74,53,0.1);
+    border-color: var(--gold-soft);
+  }
+  .tool-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+    line-height: 1;
+  }
+  .tool-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--green-deep);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .tool-card p {
+    font-size: 13.5px;
+    color: var(--text-soft);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .tool-card .open {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line-soft);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green-mid);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .tool-card:hover .open { color: var(--green-deep); }
+
+  /* ── Encouragement card ── */
+  .encouragement {
+    background: linear-gradient(135deg, rgba(74,124,89,0.04) 0%, rgba(201,149,58,0.06) 100%);
+    border: 1.5px solid var(--gold-soft);
+    border-radius: 14px;
+    padding: 24px 28px;
+    text-align: center;
+  }
+  .encouragement h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--green-deep);
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  .encouragement p {
+    font-size: 13.5px;
+    color: var(--text-soft);
+    line-height: 1.65;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    padding: 24px;
+    letter-spacing: 0.03em;
+  }
+  footer .divider {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin: 0 8px;
+    vertical-align: middle;
+  }
+
+  @media (max-width: 700px) {
+    main { padding: 24px 18px; }
+    header { padding: 18px 20px; }
+    .tool-grid { grid-template-columns: 1fr; gap: 16px; }
+    .welcome h2 { font-size: 24px; }
+    .mentor-context { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">MSA</div>
+      <div>
+        <h1>Mentee Tools</h1>
+        <div class="label">Mentor Success Academy</div>
+      </div>
+    </div>
+    <div class="top-right">
+      <span id="user-name"></span>
+      <a href="#" id="logout-link">Sign out</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="welcome">
+      <h2 id="welcome-headline">Welcome</h2>
+      <p>Two tools to support your 12-week journey: take the LEAP Quiz to discover your natural leadership expression, and use the reflections space to capture what you're noticing as you grow.</p>
+    </div>
+
+    <div class="mentor-context" id="mentor-context">
+      <div class="label-tiny">Loading…</div>
+    </div>
+
+    <div class="tool-grid">
+      <a class="tool-card" href="https://selcs-quiz.onrender.com/" target="_blank" rel="noopener">
+        <div class="tool-icon">🧭</div>
+        <h3>LEAP Quiz</h3>
+        <p>The Leadership Expression Assessment Profile. A short series of questions to identify your own natural leadership expression — a starting point for your growth.</p>
+        <div class="open">Open Quiz →</div>
+      </a>
+
+      <a class="tool-card" href="/reflections">
+        <div class="tool-icon">📝</div>
+        <h3>My Reflections</h3>
+        <p>Weekly, daily, and end-of-domain reflections. A space to notice what's shifting in your classroom and capture what you want to bring to your mentor.</p>
+        <div class="open">Open Reflections →</div>
+      </a>
+    </div>
+
+    <div class="encouragement">
+      <h4>"These reflections are not evaluations — they are invitations."</h4>
+      <p>Answer honestly. Sit with discomfort. Celebrate growth. Trust the process.</p>
+    </div>
+  </main>
+
+  <footer>
+    © Mentor Success Academy
+    <span class="divider"></span>
+    Mary Wardlaw &amp; Rebecca Munlyn
+    <span class="divider"></span>
+    All rights reserved
+  </footer>
+
+<script>
+let me = null;
+
+async function boot() {
+  try {
+    const r = await fetch('/api/auth/me');
+    if (!r.ok) { window.location.href = '/'; return; }
+    me = await r.json();
+    if (me.role !== 'mentee') { window.location.href = '/'; return; }
+    if (me.must_change_password) { window.location.href = '/change-password'; return; }
+    document.getElementById('user-name').textContent = me.full_name;
+    document.getElementById('welcome-headline').textContent = 'Welcome, ' + firstName(me.full_name) + '.';
+    await loadMentor();
+  } catch (e) {
+    console.error(e);
+    window.location.href = '/';
+  }
+}
+
+document.getElementById('logout-link').addEventListener('click', async (e) => {
+  e.preventDefault();
+  await fetch('/api/auth/logout', { method: 'POST' });
+  window.location.href = '/';
+});
+
+function firstName(full) {
+  if (!full) return '';
+  return full.trim().split(/\s+/)[0];
+}
+
+async function loadMentor() {
+  const ctx = document.getElementById('mentor-context');
+  try {
+    const r = await fetch('/api/mentee/my-mentor');
+    const data = await r.json();
+    if (!data.mentor) {
+      ctx.classList.add('empty-state');
+      ctx.innerHTML = `<div>You haven't been paired with a mentor yet. Your program director will assign one shortly.</div>`;
+      return;
+    }
+    ctx.classList.remove('empty-state');
+    ctx.innerHTML = `
+      <div>
+        <div class="label-tiny">Your mentor</div>
+        <div class="name">${escapeHtml(data.mentor.full_name)}</div>
+      </div>
+      <div class="email">${escapeHtml(data.mentor.email)}</div>
+    `;
+  } catch (e) {
+    ctx.classList.add('empty-state');
+    ctx.innerHTML = `<div>Could not load mentor information.</div>`;
+  }
+}
+
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+boot();
+</script>
+</body>
+</html>

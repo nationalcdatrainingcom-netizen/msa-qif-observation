@@ -3,51 +3,323 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mentor Success Academy — Mentor Tools</title>
+<title>Mentor Success Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'DM Sans', sans-serif; background: #faf8f3; color: #2c2c2c; min-height: 100vh; display: flex; flex-direction: column; }
-header { background: linear-gradient(135deg, #2c4a35, #4a7c59); color: white; padding: 32px 40px; text-align: center; }
-header .logo { background: #c9953a; color: white; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; width: 56px; height: 56px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
-header h1 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 6px; }
-header p { font-size: 14px; opacity: 0.8; }
-.tools { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 760px; margin: 48px auto; padding: 0 24px; }
-.tool-card { background: white; border-radius: 16px; border: 1.5px solid #ddd8cc; box-shadow: 0 4px 20px rgba(0,0,0,0.06); overflow: hidden; text-decoration: none; color: inherit; transition: all 0.2s; display: block; }
-.tool-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
-.tool-card-head { padding: 28px 28px 18px; }
-.tool-icon { font-size: 36px; margin-bottom: 14px; }
-.tool-card h2 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 8px; color: #2c2c2c; }
-.tool-card p { font-size: 13.5px; color: #666; line-height: 1.6; }
-.tool-card-foot { padding: 14px 28px; background: #f8f5f0; border-top: 1px solid #eee8dc; font-size: 13px; font-weight: 600; color: #4a7c59; display: flex; align-items: center; gap: 6px; }
-footer { text-align: center; font-size: 11px; color: #aaa; padding: 24px; margin-top: auto; }
-@media (max-width: 600px) { .tools { grid-template-columns: 1fr; } }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep: #2c4a35;
+    --green-mid: #4a7c59;
+    --gold: #c9953a;
+    --gold-soft: #e0b870;
+    --cream: #faf8f3;
+    --cream-dark: #f0ebe0;
+    --line: #ddd8cc;
+    --line-soft: #eee8dc;
+    --text: #2c2c2c;
+    --text-soft: #666;
+    --text-muted: #999;
+    --error: #b54545;
+    --error-bg: #fdf3f3;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(201, 149, 58, 0.06) 0%, transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(74, 124, 89, 0.07) 0%, transparent 45%);
+  }
+
+  .wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 20px;
+    border: 1.5px solid var(--line);
+    box-shadow: 0 8px 40px rgba(44, 74, 53, 0.08);
+    width: 100%;
+    max-width: 440px;
+    overflow: hidden;
+  }
+
+  .card-head {
+    background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%);
+    color: white;
+    padding: 40px 36px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-head::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -20%;
+    width: 60%;
+    height: 160%;
+    background: radial-gradient(circle, rgba(201, 149, 58, 0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .logo {
+    background: var(--gold);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 4px 16px rgba(201, 149, 58, 0.4);
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+    position: relative;
+    z-index: 1;
+  }
+
+  .subtitle {
+    font-size: 13.5px;
+    opacity: 0.85;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    position: relative;
+    z-index: 1;
+  }
+
+  .card-body {
+    padding: 36px;
+  }
+
+  .field {
+    margin-bottom: 18px;
+  }
+
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-soft);
+    margin-bottom: 8px;
+  }
+
+  input[type=email],
+  input[type=password] {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--text);
+    background: var(--cream);
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  }
+
+  input[type=email]:focus,
+  input[type=password]:focus {
+    outline: none;
+    border-color: var(--green-mid);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.12);
+  }
+
+  button.primary {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: var(--green-deep);
+    color: white;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.15s, transform 0.05s;
+  }
+
+  button.primary:hover { background: var(--green-mid); }
+  button.primary:active { transform: translateY(1px); }
+  button.primary:disabled { background: var(--text-muted); cursor: wait; }
+
+  .error {
+    background: var(--error-bg);
+    border: 1px solid #f0d4d4;
+    color: var(--error);
+    padding: 11px 14px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    margin-bottom: 16px;
+    display: none;
+  }
+
+  .error.show { display: block; }
+
+  .help {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .help strong { color: var(--text-soft); font-weight: 600; }
+
+  footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    padding: 24px;
+    letter-spacing: 0.03em;
+  }
+
+  footer .divider {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin: 0 8px;
+    vertical-align: middle;
+  }
 </style>
 </head>
 <body>
-<header>
-  <div class="logo">MSA</div>
-  <h1>Mentor Success Academy</h1>
-  <p>SELCS-Aligned Mentor Tools</p>
-</header>
-<div class="tools">
-  <a class="tool-card" href="/training">
-    <div class="tool-card-head">
-      <div class="tool-icon">🎓</div>
-      <h2>SELCS Mentor Training</h2>
-      <p>Scenario-based learning module. Observe a classroom interaction and practice choosing the right coaching approach for your mentee's SELCS temperament style.</p>
+  <div class="wrap">
+    <div class="card">
+      <div class="card-head">
+        <div class="logo">MSA</div>
+        <h1>Mentor Success Academy</h1>
+        <div class="subtitle">A LEAP-aligned mentoring platform</div>
+      </div>
+      <div class="card-body">
+        <div id="error" class="error"></div>
+        <form id="login-form">
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="username" autofocus>
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="primary" id="submit-btn">Sign In</button>
+        </form>
+        <div class="help">
+          <strong>First time signing in?</strong><br>
+          Use the temporary password from your program director.<br>
+          You'll be asked to set a new one.
+        </div>
+      </div>
     </div>
-    <div class="tool-card-foot">Open Training Module →</div>
-  </a>
-  <a class="tool-card" href="/qif">
-    <div class="tool-card-head">
-      <div class="tool-icon">🔍</div>
-      <h2>Quality Interaction Framework</h2>
-      <p>Live observation tool. Log positive and negative interactions across domains, auto-score indicators, select feedback and goals, and export a full coaching report.</p>
-    </div>
-    <div class="tool-card-foot">Open Observation Tool →</div>
-  </a>
-</div>
-<footer>© Mentor Success Academy · Developed by Mary Wardlaw & Rebecca Munlyn · All rights reserved</footer>
+  </div>
+  <footer>
+    © Mentor Success Academy
+    <span class="divider"></span>
+    Mary Wardlaw &amp; Rebecca Munlyn
+    <span class="divider"></span>
+    All rights reserved
+  </footer>
+
+<script>
+const form = document.getElementById('login-form');
+const errorBox = document.getElementById('error');
+const submitBtn = document.getElementById('submit-btn');
+
+function showError(msg) {
+  errorBox.textContent = msg;
+  errorBox.classList.add('show');
+}
+function clearError() {
+  errorBox.classList.remove('show');
+}
+
+// If already logged in, jump to the right place
+async function checkExistingSession() {
+  try {
+    const r = await fetch('/api/auth/me');
+    if (r.ok) {
+      const me = await r.json();
+      routeByRole(me.role, me.must_change_password);
+    }
+  } catch (e) { /* not logged in, stay here */ }
+}
+
+function routeByRole(role, mustChange) {
+  if (mustChange) {
+    window.location.href = '/change-password';
+    return;
+  }
+  switch (role) {
+    case 'admin':            window.location.href = '/admin'; break;
+    case 'program_director': window.location.href = '/director'; break;
+    case 'mentor':           window.location.href = '/mentor'; break;
+    case 'mentee':           window.location.href = '/mentee'; break;
+    default:                 showError('Unknown account type — contact your program director.');
+  }
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  clearError();
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Signing in…';
+
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+
+  try {
+    const r = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await r.json();
+    if (!r.ok) {
+      showError(data.error || 'Sign-in failed. Check your email and password.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Sign In';
+      return;
+    }
+    routeByRole(data.user.role, data.user.mustChangePassword);
+  } catch (err) {
+    showError('Network error. Please try again.');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Sign In';
+  }
+});
+
+checkExistingSession();
+</script>
 </body>
 </html>

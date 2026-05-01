@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSA Program Director</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep: #2c4a35;
+    --green-mid: #4a7c59;
+    --gold: #c9953a;
+    --gold-soft: #e0b870;
+    --cream: #faf8f3;
+    --cream-dark: #f0ebe0;
+    --line: #ddd8cc;
+    --line-soft: #eee8dc;
+    --text: #2c2c2c;
+    --text-soft: #666;
+    --text-muted: #999;
+    --error: #b54545;
+    --error-bg: #fdf3f3;
+    --success: #4a7c59;
+    --success-bg: #f0f7f1;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── Top bar ── */
+  header {
+    background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%);
+    color: white;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo {
+    background: var(--gold);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .brand h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .brand .label {
+    font-size: 11px;
+    opacity: 0.7;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .top-right { display: flex; align-items: center; gap: 16px; font-size: 13px; }
+  .top-right a { color: rgba(255,255,255,0.85); text-decoration: none; }
+  .top-right a:hover { color: white; }
+
+  main { padding: 32px; max-width: 1200px; margin: 0 auto; }
+
+  /* ── Center summary ── */
+  .center-summary {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .center-summary h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--green-deep);
+    margin-bottom: 4px;
+  }
+  .center-summary .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+  .seat-stats { display: flex; gap: 28px; }
+  .seat-stat {
+    text-align: center;
+    padding: 0 16px;
+    border-left: 1px solid var(--line-soft);
+  }
+  .seat-stat:first-child { border-left: none; padding-left: 0; }
+  .seat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .seat-num .total { color: var(--text-muted); font-size: 18px; }
+  .seat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-soft);
+    margin-top: 2px;
+  }
+
+  /* ── Section heading ── */
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .section-head h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--green-deep);
+  }
+
+  /* ── Buttons ── */
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+  button.primary {
+    background: var(--green-deep);
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.15s;
+  }
+  button.primary:hover { background: var(--green-mid); }
+  button.primary:disabled { background: var(--text-muted); cursor: not-allowed; }
+  button.ghost {
+    background: transparent;
+    color: var(--text-soft);
+    border: 1px solid var(--line);
+    padding: 6px 11px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    transition: background 0.15s;
+  }
+  button.ghost:hover { background: var(--cream); color: var(--text); }
+  button.danger {
+    background: transparent;
+    color: var(--error);
+    border: 1px solid #f0d4d4;
+    padding: 6px 11px;
+    border-radius: 6px;
+    font-size: 12.5px;
+  }
+  button.danger:hover { background: var(--error-bg); }
+
+  /* ── Pair list ── */
+  .pair-list {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .pair-row {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    gap: 18px;
+    padding: 16px 20px;
+    align-items: center;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .pair-row:last-child { border-bottom: none; }
+  .pair-row.head {
+    background: var(--cream-dark);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-soft);
+  }
+  .person {
+    display: flex;
+    flex-direction: column;
+  }
+  .person-name { font-weight: 500; font-size: 14px; }
+  .person-email { font-size: 12.5px; color: var(--text-muted); }
+  .person.unpaired { color: var(--text-muted); font-style: italic; font-size: 13px; }
+  .pair-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+  .empty {
+    padding: 40px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  /* ── Modal ── */
+  .modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(44,74,53,0.4);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .modal-backdrop.show { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 12px 60px rgba(0,0,0,0.2);
+  }
+  .modal-head {
+    padding: 22px 26px 16px;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .modal-head h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    color: var(--green-deep);
+  }
+  .modal-close {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1;
+  }
+  .modal-body { padding: 22px 26px; }
+  .modal-foot {
+    padding: 16px 26px 22px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  /* ── Forms ── */
+  .field { margin-bottom: 16px; }
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-soft);
+    margin-bottom: 6px;
+  }
+  input[type=text],
+  input[type=email] {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    background: var(--cream);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  input:focus { outline: none; border-color: var(--green-mid); background: white; }
+
+  .pair-form-section {
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    background: var(--cream);
+    border-left: 3px solid var(--gold);
+  }
+  .pair-form-section h4 {
+    font-size: 13px;
+    color: var(--green-deep);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+  }
+
+  .help-note {
+    font-size: 12.5px;
+    color: var(--text-soft);
+    margin-top: -4px;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── Temp password reveal ── */
+  .password-reveal {
+    background: var(--success-bg);
+    border: 1.5px solid var(--success);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+  }
+  .password-reveal .label-tiny {
+    font-size: 10.5px;
+    color: var(--success);
+    margin-bottom: 4px;
+    letter-spacing: 0.06em;
+  }
+  .password-reveal .who {
+    font-size: 13px;
+    color: var(--text-soft);
+    margin-bottom: 4px;
+  }
+  .password-reveal .value {
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--green-deep);
+    user-select: all;
+  }
+
+  .reuse-note {
+    background: #fef9e7;
+    border: 1px solid #f0e1a8;
+    color: #7a5a10;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    margin: 10px 0;
+  }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--green-deep);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    z-index: 200;
+    display: none;
+    max-width: 400px;
+  }
+  .toast.show { display: block; }
+  .toast.error { background: var(--error); }
+
+  @media (max-width: 700px) {
+    main { padding: 20px 16px; }
+    header { padding: 14px 18px; }
+    .center-summary { flex-direction: column; align-items: flex-start; }
+    .seat-stats { width: 100%; justify-content: space-around; }
+    .pair-row { grid-template-columns: 1fr; gap: 8px; }
+    .pair-row.head { display: none; }
+    .pair-actions { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">MSA</div>
+      <div>
+        <h1>Program Director</h1>
+        <div class="label">Mentor Success Academy</div>
+      </div>
+    </div>
+    <div class="top-right">
+      <span id="user-name"></span>
+      <a href="#" id="logout-link">Sign out</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="center-summary" id="center-summary">
+      <div>
+        <div class="label">Center</div>
+        <h2 id="center-name">Loading…</h2>
+      </div>
+      <div class="seat-stats">
+        <div class="seat-stat">
+          <div class="seat-num"><span id="mentor-used">0</span><span class="total">/<span id="mentor-total">0</span></span></div>
+          <div class="seat-label">Mentor Seats</div>
+        </div>
+        <div class="seat-stat">
+          <div class="seat-num"><span id="mentee-used">0</span><span class="total">/<span id="mentee-total">0</span></span></div>
+          <div class="seat-label">Mentee Seats</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h3>Mentor &amp; Mentee Pairs</h3>
+      <button class="primary" onclick="openAddPair()" id="add-pair-btn">+ Add Pair</button>
+    </div>
+
+    <div class="pair-list" id="pair-list">
+      <div class="empty">Loading…</div>
+    </div>
+  </main>
+
+  <!-- ── Add Pair Modal ── -->
+  <div class="modal-backdrop" id="modal-add-pair">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>Add Mentor/Mentee Pair</h3>
+        <button class="modal-close" onclick="closeModal('modal-add-pair')">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="help-note">Each mentee is paired with one mentor. If the mentor's email already exists in your center, you'll add a new mentee under that existing mentor instead of creating a duplicate.</p>
+
+        <div class="pair-form-section">
+          <h4>Mentor</h4>
+          <div class="field">
+            <label>Mentor's Full Name</label>
+            <input type="text" id="ap-mentor-name" placeholder="First Last">
+          </div>
+          <div class="field">
+            <label>Mentor's Email</label>
+            <input type="email" id="ap-mentor-email" placeholder="mentor@example.com">
+          </div>
+        </div>
+
+        <div class="pair-form-section">
+          <h4>Mentee</h4>
+          <div class="field">
+            <label>Mentee's Full Name</label>
+            <input type="text" id="ap-mentee-name" placeholder="First Last">
+          </div>
+          <div class="field">
+            <label>Mentee's Email</label>
+            <input type="email" id="ap-mentee-email" placeholder="mentee@example.com">
+          </div>
+        </div>
+
+        <div id="ap-result"></div>
+      </div>
+      <div class="modal-foot">
+        <button class="ghost" onclick="closeModal('modal-add-pair')">Cancel</button>
+        <button class="primary" onclick="submitAddPair()" id="ap-submit">Create Pair</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+let me = null;
+let centerData = null;
+
+// ── Boot ─────────────────────────────────────────────────────────
+async function boot() {
+  try {
+    const r = await fetch('/api/auth/me');
+    if (!r.ok) { window.location.href = '/'; return; }
+    me = await r.json();
+    if (me.role !== 'program_director') { window.location.href = '/'; return; }
+    if (me.must_change_password) { window.location.href = '/change-password'; return; }
+    document.getElementById('user-name').textContent = me.full_name;
+    await loadCenter();
+  } catch (e) {
+    console.error(e);
+    window.location.href = '/';
+  }
+}
+
+document.getElementById('logout-link').addEventListener('click', async (e) => {
+  e.preventDefault();
+  await fetch('/api/auth/logout', { method: 'POST' });
+  window.location.href = '/';
+});
+
+// ── Load center ──────────────────────────────────────────────────
+async function loadCenter() {
+  try {
+    const r = await fetch('/api/director/center');
+    if (!r.ok) throw new Error('Could not load your center');
+    centerData = await r.json();
+    document.getElementById('center-name').textContent = centerData.center.name;
+    document.getElementById('mentor-total').textContent = centerData.center.mentor_seats;
+    document.getElementById('mentee-total').textContent = centerData.center.mentee_seats;
+    document.getElementById('mentor-used').textContent = centerData.mentorSeatsUsed;
+    document.getElementById('mentee-used').textContent = centerData.menteeSeatsUsed;
+    renderPairs();
+    updateAddButton();
+  } catch (e) {
+    document.getElementById('center-name').textContent = 'Error loading center';
+    toast(e.message, true);
+  }
+}
+
+function updateAddButton() {
+  const btn = document.getElementById('add-pair-btn');
+  const menteeRoom = centerData.menteeSeatsUsed < centerData.center.mentee_seats;
+  const mentorRoom = centerData.mentorSeatsUsed < centerData.center.mentor_seats;
+  // Adding a pair always adds a mentee; mentor is only required if not reusing existing
+  if (!menteeRoom) {
+    btn.disabled = true;
+    btn.textContent = 'No mentee seats left';
+  } else if (!mentorRoom && centerData.mentors.length === 0) {
+    btn.disabled = true;
+    btn.textContent = 'No mentor seats left';
+  } else {
+    btn.disabled = false;
+    btn.textContent = '+ Add Pair';
+  }
+}
+
+function renderPairs() {
+  const list = document.getElementById('pair-list');
+  // Build display rows: one per mentee. Show their mentor on the same row.
+  if (centerData.mentees.length === 0 && centerData.mentors.length === 0) {
+    list.innerHTML = '<div class="empty">No pairs yet. Click <strong>+ Add Pair</strong> to create the first one.</div>';
+    return;
+  }
+
+  let rowsHtml = `
+    <div class="pair-row head">
+      <div>Mentor</div>
+      <div>Mentee</div>
+      <div></div>
+    </div>
+  `;
+
+  // First show all mentees with their mentors
+  centerData.mentees.forEach(mentee => {
+    const mentor = centerData.mentors.find(m => m.id === mentee.mentor_user_id);
+    rowsHtml += `
+      <div class="pair-row">
+        <div>
+          ${mentor ? `
+            <div class="person">
+              <div class="person-name">${escapeHtml(mentor.full_name)}</div>
+              <div class="person-email">${escapeHtml(mentor.email)}</div>
+            </div>
+          ` : '<div class="person unpaired">— No mentor —</div>'}
+        </div>
+        <div>
+          <div class="person">
+            <div class="person-name">${escapeHtml(mentee.full_name)}</div>
+            <div class="person-email">${escapeHtml(mentee.email)}</div>
+          </div>
+        </div>
+        <div class="pair-actions">
+          <button class="ghost" onclick="resetPwd(${mentee.id}, '${escapeHtml(mentee.full_name)}')">Reset Pwd</button>
+          <button class="danger" onclick="removeUser(${mentee.id}, '${escapeHtml(mentee.full_name)}')">Remove</button>
+        </div>
+      </div>
+    `;
+  });
+
+  // Then show any mentors who currently have no mentees
+  const mentorIdsWithMentees = new Set(centerData.mentees.map(m => m.mentor_user_id));
+  centerData.mentors.filter(m => !mentorIdsWithMentees.has(m.id)).forEach(mentor => {
+    rowsHtml += `
+      <div class="pair-row">
+        <div>
+          <div class="person">
+            <div class="person-name">${escapeHtml(mentor.full_name)}</div>
+            <div class="person-email">${escapeHtml(mentor.email)}</div>
+          </div>
+        </div>
+        <div><div class="person unpaired">— Awaiting mentee —</div></div>
+        <div class="pair-actions">
+          <button class="ghost" onclick="resetPwd(${mentor.id}, '${escapeHtml(mentor.full_name)}')">Reset Pwd</button>
+          <button class="danger" onclick="removeUser(${mentor.id}, '${escapeHtml(mentor.full_name)}')">Remove</button>
+        </div>
+      </div>
+    `;
+  });
+
+  list.innerHTML = rowsHtml;
+}
+
+// ── Add pair ─────────────────────────────────────────────────────
+function openAddPair() {
+  document.getElementById('ap-mentor-name').value = '';
+  document.getElementById('ap-mentor-email').value = '';
+  document.getElementById('ap-mentee-name').value = '';
+  document.getElementById('ap-mentee-email').value = '';
+  document.getElementById('ap-result').innerHTML = '';
+  const btn = document.getElementById('ap-submit');
+  btn.disabled = false;
+  btn.textContent = 'Create Pair';
+  openModal('modal-add-pair');
+}
+
+async function submitAddPair() {
+  const body = {
+    mentorName: document.getElementById('ap-mentor-name').value.trim(),
+    mentorEmail: document.getElementById('ap-mentor-email').value.trim(),
+    menteeName: document.getElementById('ap-mentee-name').value.trim(),
+    menteeEmail: document.getElementById('ap-mentee-email').value.trim()
+  };
+  if (!body.mentorName || !body.mentorEmail || !body.menteeName || !body.menteeEmail) {
+    toast('All four fields are required.', true);
+    return;
+  }
+  const btn = document.getElementById('ap-submit');
+  btn.disabled = true;
+  btn.textContent = 'Creating…';
+  try {
+    const r = await fetch('/api/director/pairs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Could not create pair');
+
+    let html = '';
+    if (data.mentor.isNew) {
+      html += `
+        <div class="password-reveal">
+          <div class="label-tiny">NEW MENTOR · TEMP PASSWORD</div>
+          <div class="who"><strong>${escapeHtml(data.mentor.fullName)}</strong> · ${escapeHtml(data.mentor.email)}</div>
+          <div class="value">${escapeHtml(data.mentor.tempPassword)}</div>
+        </div>
+      `;
+    } else {
+      html += `<div class="reuse-note">Existing mentor reused: <strong>${escapeHtml(data.mentor.fullName)}</strong>. They keep their current password.</div>`;
+    }
+    html += `
+      <div class="password-reveal">
+        <div class="label-tiny">NEW MENTEE · TEMP PASSWORD</div>
+        <div class="who"><strong>${escapeHtml(data.mentee.fullName)}</strong> · ${escapeHtml(data.mentee.email)}</div>
+        <div class="value">${escapeHtml(data.mentee.tempPassword)}</div>
+      </div>
+    `;
+    html += `<div class="help-note" style="margin-top:14px;">Share these temporary passwords with each person. They'll be asked to set a new password on first sign-in.</div>`;
+    document.getElementById('ap-result').innerHTML = html;
+    btn.textContent = 'Done';
+    btn.disabled = true;
+    await loadCenter();
+  } catch (e) {
+    toast(e.message, true);
+    btn.disabled = false;
+    btn.textContent = 'Create Pair';
+  }
+}
+
+// ── Reset password ───────────────────────────────────────────────
+async function resetPwd(userId, userName) {
+  if (!confirm(`Reset password for ${userName}? They'll be asked to set a new one on next sign-in.`)) return;
+  try {
+    const r = await fetch(`/api/director/users/${userId}/reset-password`, { method: 'POST' });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Reset failed');
+    alert(`New temporary password for ${userName}:\n\n${data.tempPassword}\n\nShare it securely. They'll be asked to change it on next sign-in.`);
+  } catch (e) {
+    toast(e.message, true);
+  }
+}
+
+// ── Remove user ──────────────────────────────────────────────────
+async function removeUser(userId, userName) {
+  if (!confirm(`Remove ${userName} from the program?\n\nThis frees up the seat. Their reflections and history are kept in the database for the admins.`)) return;
+  try {
+    const r = await fetch(`/api/director/users/${userId}`, { method: 'DELETE' });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Could not remove');
+    toast(`${userName} removed.`);
+    await loadCenter();
+  } catch (e) {
+    toast(e.message, true);
+  }
+}
+
+// ── Modal helpers ────────────────────────────────────────────────
+function openModal(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+document.querySelectorAll('.modal-backdrop').forEach(m => {
+  m.addEventListener('click', (e) => { if (e.target === m) m.classList.remove('show'); });
+});
+
+// ── Toast ────────────────────────────────────────────────────────
+let toastTimer;
+function toast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.toggle('error', !!isError);
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+// ── Utility ──────────────────────────────────────────────────────
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+boot();
+</script>
+</body>
+</html>

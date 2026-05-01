@@ -82,6 +82,22 @@ async function initDB() {
       console.log(`Bootstrap admin created: ${bootstrapEmail} / ${bootstrapPassword}`);
     }
 
+    // ── One-time: ensure Rebecca's admin account exists ───────────
+    // This block runs every startup but only inserts if the row is missing.
+    // Once Rebecca has signed in and changed her password, this becomes a no-op.
+    const rebeccaEmail = 'rebecca@inspiredgrowthllc.com';
+    const rebeccaCheck = await client.query('SELECT id FROM users WHERE LOWER(email)=LOWER($1)', [rebeccaEmail]);
+    if (rebeccaCheck.rows.length === 0) {
+      const rebeccaTempPassword = 'msa-inspired-2026';
+      const rebeccaHash = await bcrypt.hash(rebeccaTempPassword, 10);
+      await client.query(
+        `INSERT INTO users (email, password_hash, role, full_name, must_change_password, active)
+         VALUES ($1, $2, 'admin', 'Rebecca Munlyn', TRUE, TRUE)`,
+        [rebeccaEmail, rebeccaHash]
+      );
+      console.log(`Rebecca's admin account created: ${rebeccaEmail} / ${rebeccaTempPassword}`);
+    }
+
     console.log('DB initialized');
   } finally {
     client.release();

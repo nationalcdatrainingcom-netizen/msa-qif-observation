@@ -400,6 +400,24 @@ app.delete('/api/director/users/:id', requireRole('program_director'), async (re
 
 // ── REFLECTIONS ───────────────────────────────────────────────────
 
+// Get question definitions for a reflection type (for rendering the form)
+app.get('/api/reflections/questions', requireAuth, async (req, res) => {
+  const { type, role, week, domain } = req.query;
+  if (!type || !role) return res.status(400).json({ error: 'type and role required' });
+  let q = 'SELECT * FROM reflection_questions WHERE reflection_type=$1 AND role=$2';
+  const params = [type, role];
+  if (week) { q += ` AND week_number=$${params.length+1}`; params.push(parseInt(week)); }
+  if (domain) { q += ` AND domain_number=$${params.length+1}`; params.push(parseInt(domain)); }
+  q += ' ORDER BY question_order';
+  try {
+    const result = await pool.query(q, params);
+    res.json(result.rows);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // Get my reflections (with optional filters)
 app.get('/api/reflections/mine', requireAuth, async (req, res) => {
   const { type, week, date } = req.query;

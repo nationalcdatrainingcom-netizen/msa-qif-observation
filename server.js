@@ -123,9 +123,29 @@ function requireAuth(req, res, next) {
 function requireRole(...roles) {
   return (req, res, next) => {
     if (!req.session.userId) return res.status(401).json({ error: 'Not logged in' });
-    if (!roles.includes(req.session.role)) return res.status(403).json({ error: 'Forbidden' });
+    // Admin impersonation: when admin has actAsCenterId set and the
+    // requested role is program_director, treat admin as the director.
+    const effectiveRole = (req.session.role === 'admin' && req.session.actAsCenterId)
+      ? 'program_director'
+      : req.session.role;
+    if (!roles.includes(effectiveRole)) return res.status(403).json({ error: 'Forbidden' });
+    // Stash the effective center for downstream handlers
+    req.effectiveCenterId = (req.session.role === 'admin' && req.session.actAsCenterId)
+      ? req.session.actAsCenterId
+      : req.session.centerId;
+    req.effectiveRole = effectiveRole;
+    req.isImpersonating = !!(req.session.role === 'admin' && req.session.actAsCenterId);
     next();
   };
+}
+
+// Allow admin OR director (with optional center scope check)
+function requireAdminOrDirector(req, res, next) {
+  if (!req.session.userId) return res.status(401).json({ error: 'Not logged in' });
+  if (req.session.role !== 'admin' && req.session.role !== 'program_director') {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+  next();
 }
 
 // Generate readable temp password (e.g. "msa-river-4827")
@@ -276,6 +296,171 @@ app.get('/api/admin/reflections', requireRole('admin'), async (req, res) => {
     ORDER BY r.updated_at DESC
   `);
   res.json(result.rows);
+});
+
+// ──────────────────────────────────────────────────────────────────
+// LEAP QUIZ INTEGRATION
+// Pulls profile labels from the LEAP Quiz app via the bulk lookup
+// endpoint. URL is configurable via env so we can rename later.
+// ──────────────────────────────────────────────────────────────────
+const LEAP_QUIZ_URL = process.env.LEAP_QUIZ_URL || 'https://selcs-quiz.onrender.com';
+
+async function fetchLeapProfiles(emails) {
+  if (!emails || emails.length === 0) return {};
+  try {
+    const r = await fetch(`${LEAP_QUIZ_URL}/api/lookup`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ emails })
+    });
+    if (!r.ok) {
+      console.warn('LEAP lookup failed:', r.status);
+      return {};
+    }
+    const data = await r.json();
+    return data.lookup || {};
+  } catch (e) {
+    console.warn('LEAP lookup error:', e.message);
+    return {};
+  }
+}
+
+// ──────────────────────────────────────────────────────────────────
+// CENTER DETAIL — used by both admin (read-only) and director (edit).
+// Returns center info, all mentors/mentees with their LEAP profiles,
+// and the current pairings. The same endpoint serves both roles
+// because the FRONTEND decides whether to render edit controls.
+// ──────────────────────────────────────────────────────────────────
+app.get('/api/center/:id/detail', requireAdminOrDirector, async (req, res) => {
+  const centerId = parseInt(req.params.id);
+  if (!centerId) return res.status(400).json({ error: 'Invalid center id' });
+
+  // Scope check: directors can only view their own center
+  if (req.session.role === 'program_director' && req.session.centerId !== centerId) {
+    return res.status(403).json({ error: 'You can only view your own center' });
+  }
+
+  try {
+    const center = await pool.query('SELECT * FROM centers WHERE id=$1', [centerId]);
+    if (center.rows.length === 0) return res.status(404).json({ error: 'Center not found' });
+
+    const directors = await pool.query(
+      `SELECT id, full_name, email FROM users
+       WHERE center_id=$1 AND role='program_director' AND active=TRUE
+       ORDER BY full_name`, [centerId]);
+
+    const mentors = await pool.query(
+      `SELECT id, full_name, email, must_change_password, created_at FROM users
+       WHERE center_id=$1 AND role='mentor' AND active=TRUE
+       ORDER BY full_name`, [centerId]);
+
+    const mentees = await pool.query(
+      `SELECT m.id, m.full_name, m.email, m.must_change_password, m.created_at,
+              m.mentor_user_id, mentor.full_name as mentor_name
+       FROM users m
+       LEFT JOIN users mentor ON m.mentor_user_id = mentor.id
+       WHERE m.center_id=$1 AND m.role='mentee' AND m.active=TRUE
+       ORDER BY m.full_name`, [centerId]);
+
+    // ── Pull LEAP profiles for everyone in one call ──
+    const allEmails = [
+      ...mentors.rows.map(u => u.email),
+      ...mentees.rows.map(u => u.email)
+    ];
+    const leapProfiles = await fetchLeapProfiles(allEmails);
+
+    // Attach LEAP to each user
+    const attachLeap = (u) => ({
+      ...u,
+      leap: leapProfiles[u.email.toLowerCase()] || { found: false }
+    });
+
+    // Build pairings: each mentor with their mentees
+    const pairings = mentors.rows.map(m => ({
+      mentor: attachLeap(m),
+      mentees: mentees.rows
+        .filter(me => me.mentor_user_id === m.id)
+        .map(attachLeap)
+    }));
+
+    // Unpaired mentees
+    const unpairedMentees = mentees.rows
+      .filter(me => !me.mentor_user_id)
+      .map(attachLeap);
+
+    // ── Center health summary ──
+    const totalMentors = mentors.rows.length;
+    const totalMentees = mentees.rows.length;
+    const pairedMentees = mentees.rows.filter(me => me.mentor_user_id).length;
+    const leapCompleteMentors = mentors.rows.filter(m => leapProfiles[m.email.toLowerCase()] && leapProfiles[m.email.toLowerCase()].found).length;
+    const leapCompleteMentees = mentees.rows.filter(m => leapProfiles[m.email.toLowerCase()] && leapProfiles[m.email.toLowerCase()].found).length;
+
+    // Reflection counts for this center
+    const reflStats = await pool.query(`
+      SELECT COUNT(*) FILTER (WHERE r.reflection_type='weekly') as weekly_count,
+             COUNT(*) FILTER (WHERE r.reflection_type='daily') as daily_count,
+             COUNT(*) FILTER (WHERE r.reflection_type='end_of_domain') as end_count,
+             COUNT(DISTINCT r.user_id) as users_with_reflections
+      FROM reflections r
+      JOIN users u ON r.user_id = u.id
+      WHERE u.center_id = $1
+    `, [centerId]);
+
+    const health = {
+      totalMentors,
+      totalMentees,
+      mentorSeats: center.rows[0].mentor_seats,
+      menteeSeats: center.rows[0].mentee_seats,
+      pairedMentees,
+      unpairedMentees: totalMentees - pairedMentees,
+      leapCompleteMentors,
+      leapCompleteMentees,
+      leapPendingMentors: totalMentors - leapCompleteMentors,
+      leapPendingMentees: totalMentees - leapCompleteMentees,
+      reflections: reflStats.rows[0]
+    };
+
+    res.json({
+      center: center.rows[0],
+      directors: directors.rows,
+      pairings,
+      unpairedMentees,
+      health,
+      viewerRole: req.session.role,
+      isImpersonating: !!(req.session.role === 'admin' && req.session.actAsCenterId === centerId)
+    });
+  } catch (e) {
+    console.error('Center detail error:', e);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// ──────────────────────────────────────────────────────────────────
+// ADMIN IMPERSONATION ("Act as Director" toggle)
+// Admin can toggle on impersonation for a specific center; this lets
+// them use director endpoints to make changes on the director's behalf.
+// ──────────────────────────────────────────────────────────────────
+app.post('/api/admin/act-as-director', requireRole('admin'), async (req, res) => {
+  const { centerId } = req.body;
+  if (!centerId) return res.status(400).json({ error: 'centerId required' });
+  const c = await pool.query('SELECT id FROM centers WHERE id=$1', [centerId]);
+  if (c.rows.length === 0) return res.status(404).json({ error: 'Center not found' });
+  req.session.actAsCenterId = parseInt(centerId);
+  res.json({ success: true, actAsCenterId: req.session.actAsCenterId });
+});
+
+app.post('/api/admin/stop-acting', requireAuth, async (req, res) => {
+  if (req.session.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+  delete req.session.actAsCenterId;
+  res.json({ success: true });
+});
+
+app.get('/api/admin/impersonation-status', requireAuth, (req, res) => {
+  res.json({
+    role: req.session.role,
+    actAsCenterId: req.session.actAsCenterId || null,
+    isImpersonating: !!(req.session.role === 'admin' && req.session.actAsCenterId)
+  });
 });
 
 // Admin: paired view — see mentor and mentee reflections side by side
@@ -701,6 +886,7 @@ app.delete('/api/resources/:id', async (req, res) => {
 // ── PAGE ROUTES ───────────────────────────────────────────────────
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
 app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'public', 'admin.html')));
+app.get('/admin/center/:id', (req, res) => res.sendFile(path.join(__dirname, 'public', 'center-detail.html')));
 app.get('/director', (req, res) => res.sendFile(path.join(__dirname, 'public', 'director.html')));
 app.get('/mentor', (req, res) => res.sendFile(path.join(__dirname, 'public', 'mentor-home.html')));
 app.get('/mentee', (req, res) => res.sendFile(path.join(__dirname, 'public', 'mentee-home.html')));

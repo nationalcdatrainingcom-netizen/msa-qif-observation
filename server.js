@@ -131,7 +131,10 @@ app.use(session({
   cookie: {
     maxAge: 8 * 60 * 60 * 1000, // 8 hours
     httpOnly: true,
-    sameSite: 'lax',
+    // SameSite=None is required so the session cookie is sent when this app
+    // is embedded as an iframe inside the MSA Hub (different origin).
+    // SameSite=None mandates Secure=true, which Render provides via HTTPS.
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     secure: process.env.NODE_ENV === 'production'
   }
 }));

@@ -176,9 +176,24 @@
     border: 1.5px solid var(--line);
     border-radius: 14px;
     padding: 22px;
-    transition: box-shadow 0.15s, border-color 0.15s;
+    transition: box-shadow 0.15s, border-color 0.15s, transform 0.1s;
+    cursor: pointer;
+    position: relative;
   }
-  .center-card:hover { box-shadow: 0 4px 20px rgba(44,74,53,0.08); border-color: var(--gold-soft); }
+  .center-card:hover { box-shadow: 0 6px 24px rgba(44,74,53,0.1); border-color: var(--gold-soft); transform: translateY(-1px); }
+  .center-card:hover .open-hint { opacity: 1; }
+  .center-card .open-hint {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    transition: opacity 0.15s;
+  }
   .center-card h3 {
     font-family: 'Playfair Display', serif;
     font-size: 18px;
@@ -626,7 +641,8 @@ function renderCenters() {
     return;
   }
   grid.innerHTML = allCenters.map(c => `
-    <div class="center-card">
+    <div class="center-card" onclick="openCenter(${c.id})">
+      <div class="open-hint">Open →</div>
       <h3>${escapeHtml(c.name)}</h3>
       <div class="stats">
         <div class="stat">
@@ -645,12 +661,16 @@ function renderCenters() {
               <div class="pd-name">${escapeHtml(d.name)}</div>
               <div class="pd-email">${escapeHtml(d.email)}</div>
             </div>
-            <button class="ghost" onclick="resetDirectorPwd(${c.id}, ${d.id}, '${escapeHtml(d.name)}')">Reset Pwd</button>
+            <button class="ghost" onclick="event.stopPropagation(); resetDirectorPwd(${c.id}, ${d.id}, '${escapeHtml(d.name)}')">Reset Pwd</button>
           </div>
         `).join('') || '<div class="pd-email" style="padding:6px 0;">No director assigned</div>'}
       </div>
     </div>
   `).join('');
+}
+
+function openCenter(id) {
+  window.location.href = '/admin/center/' + id;
 }
 
 function openCreateCenter() {

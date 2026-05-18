@@ -620,19 +620,19 @@ function renderPair(p) {
   if (p.mentees.length === 0) {
     html += '<div class="no-mentees">No mentees assigned to this mentor yet.</div>';
   } else {
-    p.mentees.forEach(me => {
-      const obs = me.observations ? me.observations.weeksObserved : 0;
+    p.mentees.forEach(mentee => {
+      const obs = mentee.observations ? mentee.observations.weeksObserved : 0;
       const obsPct = Math.round((obs / 12) * 100);
-      const menteeWeekly = me.reflections ? me.reflections.weeklyCount : 0;
+      const menteeWeekly = mentee.reflections ? mentee.reflections.weeklyCount : 0;
       html += '<div class="mentee-row mentee-detail">';
       html += '<div class="mentee-top">';
-      html += '<div><span class="m-name">' + esc(me.full_name) + '</span> · <span class="m-email">' + esc(me.email) + '</span></div>';
-      html += '<div>' + leapTag(me.leap) + '</div>';
+      html += '<div><span class="m-name">' + esc(mentee.full_name) + '</span> · <span class="m-email">' + esc(mentee.email) + '</span></div>';
+      html += '<div>' + leapTag(mentee.leap) + '</div>';
       html += '</div>';
       html += '<div class="metric-row mentee-metrics">';
       html += metricChip('Observations', obs + '/12', obsPct >= 100 ? 'good' : (obs === 0 ? 'pending' : 'progress'));
       html += metricChip('Weekly Reflections', menteeWeekly, menteeWeekly > 0 ? 'progress' : 'pending');
-      html += metricChip('Met This Week', meetingLabel(me.lastMeeting), meetingTone(me.lastMeeting));
+      html += metricChip('Met This Week', meetingLabel(mentee.lastMeeting), meetingTone(mentee.lastMeeting));
       html += '</div>';
       html += '</div>';
     });
@@ -688,22 +688,36 @@ async function startActing() {
   try {
     const r = await fetch('/api/admin/act-as-director', {
       method: 'POST',
+      credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ centerId })
     });
     if (r.ok) {
       isImpersonating = true;
       updateImpersonationUI();
+    } else {
+      const errText = await r.text();
+      console.error('act-as-director failed:', r.status, errText);
+      alert('Could not enable Act as Director (status ' + r.status + '). Check the browser console.');
     }
-  } catch (e) { console.error(e); }
+  } catch (e) {
+    console.error(e);
+    alert('Network error trying to switch modes.');
+  }
 }
 
 async function stopActing() {
   try {
-    const r = await fetch('/api/admin/stop-acting', { method: 'POST' });
+    const r = await fetch('/api/admin/stop-acting', {
+      method: 'POST',
+      credentials: 'same-origin'
+    });
     if (r.ok) {
       isImpersonating = false;
       updateImpersonationUI();
+    } else {
+      const errText = await r.text();
+      console.error('stop-acting failed:', r.status, errText);
     }
   } catch (e) { console.error(e); }
 }

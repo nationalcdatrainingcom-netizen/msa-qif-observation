@@ -57,6 +57,18 @@ async function initDB() {
 
       CREATE INDEX IF NOT EXISTS idx_reflections_user ON reflections(user_id);
       CREATE INDEX IF NOT EXISTS idx_reflections_lookup ON reflections(user_id, reflection_type, week_number, reflection_date);
+
+      CREATE TABLE IF NOT EXISTS training_progress (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        completed_modules INTEGER[] NOT NULL DEFAULT '{}',
+        current_module INTEGER,
+        scenario_idx INTEGER DEFAULT 0,
+        updated_at TIMESTAMP DEFAULT NOW(),
+        UNIQUE(user_id)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_training_progress_user ON training_progress(user_id);
     `);
 
     // ── Migrate legacy mentees table to reference users.id ────────
@@ -237,7 +249,14 @@ app.get('/api/admin/centers', requireRole('admin'), async (req, res) => {
          FROM users u WHERE u.center_id=c.id AND u.role='program_director' AND u.active=TRUE) as directors
     FROM centers c ORDER BY c.name
   `);
-  res.json(result.rows);
+  // Flag empty centers so the admin UI can gray them out
+  const rows = result.rows.map(c => ({
+    ...c,
+    mentor_count: parseInt(c.mentor_count) || 0,
+    mentee_count: parseInt(c.mentee_count) || 0,
+    is_empty: (parseInt(c.mentor_count) || 0) === 0 && (parseInt(c.mentee_count) || 0) === 0
+  }));
+  res.json(rows);
 });
 
 app.post('/api/admin/centers', requireRole('admin'), async (req, res) => {
@@ -375,18 +394,124 @@ app.get('/api/center/:id/detail', requireAdminOrDirector, async (req, res) => {
       leap: leapProfiles[u.email.toLowerCase()] || { found: false }
     });
 
+    // ── Per-user training progress (mentors only) ──
+    const mentorIds = mentors.rows.map(m => m.id);
+    let trainingByUser = {};
+    if (mentorIds.length > 0) {
+      const trainingResult = await pool.query(
+        `SELECT user_id, completed_modules, current_module, updated_at
+         FROM training_progress WHERE user_id = ANY($1::int[])`,
+        [mentorIds]
+      );
+      trainingResult.rows.forEach(t => {
+        trainingByUser[t.user_id] = {
+          completedCount: (t.completed_modules || []).length,
+          completedModules: t.completed_modules || [],
+          currentModule: t.current_module,
+          updatedAt: t.updated_at
+        };
+      });
+    }
+
+    // ── Per-mentee observations count (distinct weeks observed) ──
+    const menteeIds = mentees.rows.map(m => m.id);
+    let observationsByMentee = {};
+    if (menteeIds.length > 0) {
+      try {
+        const obsResult = await pool.query(
+          `SELECT mentee_id,
+                  COUNT(DISTINCT week_number) as weeks_observed,
+                  MAX(week_number) as latest_week,
+                  MAX(observed_at) as last_observation
+           FROM tally_observations
+           WHERE mentee_id = ANY($1::int[])
+           GROUP BY mentee_id`,
+          [menteeIds]
+        );
+        obsResult.rows.forEach(o => {
+          observationsByMentee[o.mentee_id] = {
+            weeksObserved: parseInt(o.weeks_observed) || 0,
+            latestWeek: o.latest_week,
+            lastObservation: o.last_observation
+          };
+        });
+      } catch (e) {
+        // tally_observations table may not exist in some environments — fail gracefully
+        console.warn('Observations count query failed:', e.message);
+      }
+    }
+
+    // ── Reflection counts and recent meeting status per user ──
+    const allUserIds = [...mentorIds, ...menteeIds];
+    let reflectionsByUser = {};
+    let lastMeetingByUser = {};
+    if (allUserIds.length > 0) {
+      const reflResult = await pool.query(
+        `SELECT user_id,
+                COUNT(*) FILTER (WHERE reflection_type='weekly') as weekly_count,
+                COUNT(*) FILTER (WHERE reflection_type='daily') as daily_count,
+                COUNT(*) FILTER (WHERE reflection_type='end_of_domain') as end_count,
+                MAX(updated_at) as last_reflection
+         FROM reflections
+         WHERE user_id = ANY($1::int[])
+         GROUP BY user_id`,
+        [allUserIds]
+      );
+      reflResult.rows.forEach(r => {
+        reflectionsByUser[r.user_id] = {
+          weeklyCount: parseInt(r.weekly_count) || 0,
+          dailyCount: parseInt(r.daily_count) || 0,
+          endCount: parseInt(r.end_count) || 0,
+          lastReflection: r.last_reflection
+        };
+      });
+
+      // Most recent weekly reflection answer to the meeting question per user
+      const meetingResult = await pool.query(
+        `SELECT DISTINCT ON (user_id) user_id, week_number, responses, updated_at
+         FROM reflections
+         WHERE user_id = ANY($1::int[])
+           AND reflection_type = 'weekly'
+           AND responses ? 'meeting_check'
+         ORDER BY user_id, updated_at DESC`,
+        [allUserIds]
+      );
+      meetingResult.rows.forEach(m => {
+        const ans = m.responses && m.responses.meeting_check;
+        lastMeetingByUser[m.user_id] = {
+          answer: ans || null,
+          week: m.week_number,
+          answeredAt: m.updated_at
+        };
+      });
+    }
+
+    // Attach training + reflections + meeting to mentor; observations + reflections + meeting to mentee
+    const attachMentor = (u) => ({
+      ...attachLeap(u),
+      training: trainingByUser[u.id] || { completedCount: 0, completedModules: [], currentModule: null, updatedAt: null },
+      reflections: reflectionsByUser[u.id] || { weeklyCount: 0, dailyCount: 0, endCount: 0, lastReflection: null },
+      lastMeeting: lastMeetingByUser[u.id] || null
+    });
+    const attachMentee = (u) => ({
+      ...attachLeap(u),
+      observations: observationsByMentee[u.id] || { weeksObserved: 0, latestWeek: null, lastObservation: null },
+      reflections: reflectionsByUser[u.id] || { weeklyCount: 0, dailyCount: 0, endCount: 0, lastReflection: null },
+      lastMeeting: lastMeetingByUser[u.id] || null
+    });
+
     // Build pairings: each mentor with their mentees
     const pairings = mentors.rows.map(m => ({
-      mentor: attachLeap(m),
+      mentor: attachMentor(m),
       mentees: mentees.rows
         .filter(me => me.mentor_user_id === m.id)
-        .map(attachLeap)
+        .map(attachMentee)
     }));
 
     // Unpaired mentees
     const unpairedMentees = mentees.rows
       .filter(me => !me.mentor_user_id)
-      .map(attachLeap);
+      .map(attachMentee);
 
     // ── Center health summary ──
     const totalMentors = mentors.rows.length;
@@ -417,7 +542,8 @@ app.get('/api/center/:id/detail', requireAdminOrDirector, async (req, res) => {
       leapCompleteMentees,
       leapPendingMentors: totalMentors - leapCompleteMentors,
       leapPendingMentees: totalMentees - leapCompleteMentees,
-      reflections: reflStats.rows[0]
+      reflections: reflStats.rows[0],
+      isEmpty: totalMentors === 0 && totalMentees === 0
     };
 
     res.json({
@@ -765,6 +891,50 @@ app.post('/api/mentees', requireRole('mentor'), async (req, res) => {
     [req.session.userId, name, classroom || '']
   );
   res.json(result.rows[0]);
+});
+
+// ──────────────────────────────────────────────────────────────────
+// TRAINING PROGRESS — server-side so mentors can access on any device.
+// The training.html page POSTs completed module IDs here so they sync
+// across phone/tablet/laptop and so directors can see progress.
+// ──────────────────────────────────────────────────────────────────
+app.get('/api/training/progress', requireAuth, async (req, res) => {
+  const result = await pool.query(
+    'SELECT completed_modules, current_module, scenario_idx, updated_at FROM training_progress WHERE user_id=$1',
+    [req.session.userId]
+  );
+  if (result.rows.length === 0) {
+    return res.json({ completed: [], current: null, scenarioIdx: 0, updated_at: null });
+  }
+  const row = result.rows[0];
+  res.json({
+    completed: row.completed_modules || [],
+    current: row.current_module,
+    scenarioIdx: row.scenario_idx || 0,
+    updated_at: row.updated_at
+  });
+});
+
+app.post('/api/training/progress', requireAuth, async (req, res) => {
+  const { completed, current, scenarioIdx } = req.body;
+  if (!Array.isArray(completed)) return res.status(400).json({ error: 'completed array required' });
+  // Sanitize: only positive integers
+  const clean = completed.filter(n => Number.isInteger(n) && n > 0 && n <= 100);
+  try {
+    await pool.query(`
+      INSERT INTO training_progress (user_id, completed_modules, current_module, scenario_idx, updated_at)
+      VALUES ($1, $2, $3, $4, NOW())
+      ON CONFLICT (user_id) DO UPDATE
+      SET completed_modules = EXCLUDED.completed_modules,
+          current_module = EXCLUDED.current_module,
+          scenario_idx = EXCLUDED.scenario_idx,
+          updated_at = NOW()
+    `, [req.session.userId, clean, current || null, scenarioIdx || 0]);
+    res.json({ success: true, completed: clean });
+  } catch (e) {
+    console.error('Training progress save error:', e);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
 // Tally observations

@@ -370,21 +370,62 @@ function makeUserId(name, selcs) {
 }
 
 async function loadState(userId) {
+  // 1) Try the server first (works on any device)
+  let serverLoaded = false;
   try {
-    const s = localStorage.getItem('selcs_mentor_' + userId);
-    if (s) {
-      const d = JSON.parse(s);
-      STATE.completed = d.completed || [];
+    const r = await fetch('/api/training/progress', { credentials: 'same-origin' });
+    if (r.ok) {
+      const d = await r.json();
+      STATE.completed = Array.isArray(d.completed) ? d.completed : [];
       STATE.current = d.current || null;
       STATE.scenarioIdx = d.scenarioIdx || 0;
+      serverLoaded = true;
     }
-  } catch(e) {}
+  } catch(e) { /* fall through to localStorage */ }
+
+  // 2) Fall back to (or merge with) localStorage if server gave nothing
+  if (!serverLoaded || STATE.completed.length === 0) {
+    try {
+      const s = localStorage.getItem('selcs_mentor_' + userId);
+      if (s) {
+        const d = JSON.parse(s);
+        const localCompleted = d.completed || [];
+        // Union: any module marked complete locally OR on server stays complete
+        const merged = Array.from(new Set([...(STATE.completed || []), ...localCompleted]));
+        STATE.completed = merged;
+        if (!STATE.current) STATE.current = d.current || null;
+        if (!STATE.scenarioIdx) STATE.scenarioIdx = d.scenarioIdx || 0;
+        // Push the merged state back to the server so future loads work everywhere
+        if (serverLoaded && localCompleted.length > 0) {
+          syncToServer();
+        }
+      }
+    } catch(e) {}
+  }
+}
+
+async function syncToServer() {
+  try {
+    await fetch('/api/training/progress', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        completed: STATE.completed,
+        current: STATE.current,
+        scenarioIdx: STATE.scenarioIdx || 0
+      })
+    });
+  } catch(e) { /* offline — localStorage still has the data */ }
 }
 
 async function saveState() {
   if (!STATE.userId) return;
   const payload = { completed: STATE.completed, current: STATE.current, scenarioIdx: STATE.scenarioIdx || 0 };
+  // Always write to localStorage (works offline, fast)
   try { localStorage.setItem('selcs_mentor_' + STATE.userId, JSON.stringify(payload)); } catch(e) {}
+  // Also push to the server so it syncs across devices
+  syncToServer();
 }
 
 // ═══════════════════════════════════════════════════════════════

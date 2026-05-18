@@ -1025,7 +1025,7 @@ const DOMAINS = [
   interactionTypes: [
     {
       id: 'positive_climate',
-      name: 'Positive Climate',
+      name: 'Warmth & Connection',
       week: 1,
       icon: '🌤',
       positiveItems: [
@@ -1174,7 +1174,7 @@ const DOMAINS = [
   interactionTypes: [
     {
       id: 'behavior_management',
-      name: 'Behavior Management',
+      name: 'Proactive Classroom Guidance',
       week: 5,
       icon: '🧭',
       positiveItems: [
@@ -1209,7 +1209,7 @@ const DOMAINS = [
     },
     {
       id: 'productivity',
-      name: 'Productivity',
+      name: 'Maximizing Learning Time',
       week: 6,
       icon: '⏱',
       positiveItems: [
@@ -1244,7 +1244,7 @@ const DOMAINS = [
     },
     {
       id: 'instructional_formats',
-      name: 'Instructional Learning Formats',
+      name: 'Engaging Activities',
       week: 7,
       icon: '📚',
       positiveItems: [
@@ -1323,7 +1323,7 @@ const DOMAINS = [
   interactionTypes: [
     {
       id: 'concept_development',
-      name: 'Concept Development',
+      name: 'Connections & Reasoning',
       week: 9,
       icon: '💡',
       positiveItems: [
@@ -1358,7 +1358,7 @@ const DOMAINS = [
     },
     {
       id: 'quality_feedback',
-      name: 'Quality of Feedback',
+      name: 'Responsive Feedback',
       week: 10,
       icon: '🔁',
       positiveItems: [
@@ -1393,7 +1393,7 @@ const DOMAINS = [
     },
     {
       id: 'language_modeling',
-      name: 'Language Modeling',
+      name: 'Conversation & Vocabulary',
       week: 11,
       icon: '🗣',
       positiveItems: [
@@ -1471,12 +1471,12 @@ function DOMAIN() { return DOMAINS[activeDomainIndex]; }
 
 const RESEARCH = {
   positive_climate: {
-    why: 'Why Positive Climate Matters',
+    why: 'Why Warmth & Connection Matters',
     summary: 'Research consistently shows that the emotional tone of a classroom is one of the strongest predictors of child outcomes. When children feel genuinely welcomed, seen, and valued by their teacher, their brains are better regulated and more open to learning.',
     points: [
       'Warm, joyful classrooms reduce cortisol and increase capacity for focus and learning risk-taking (Siegel & Bryson, 2011).',
       'Children who experience frequent positive teacher interactions show stronger language development, social competence, and early literacy by kindergarten (Hamre & Pianta, 2005).',
-      'Positive Climate is among the most powerful CLASS predictors of social-emotional growth across preschool settings (Pianta et al.).',
+      'Warmth and connection are among the most powerful CLASS predictors of social-emotional growth across preschool settings (Pianta et al.).',
       'Secure teacher-child relationships buffer the effects of stress and adversity at home, making the classroom a critical protective factor for at-risk children (Howes et al., 2008).'
     ],
     connection: 'Every smile, greeting, and moment of genuine delight communicates: "You are safe here. You matter here." That message shapes how children approach learning for years to come.'
@@ -1517,7 +1517,7 @@ const RESEARCH = {
 
   // ── Domain 2 Research ──
   behavior_management: {
-    why: 'Why Behavior Management Matters',
+    why: 'Why Proactive Classroom Guidance Matters',
     summary: 'How a teacher manages behavior shapes not just order in the classroom, but children\'s developing sense of safety, fairness, and self-regulation. Proactive, calm, and consistent management creates the conditions where learning can actually happen.',
     points: [
       'Proactive behavior management prevents up to 80% of behavior problems before they occur — the most effective strategies happen before misbehavior, not after (Simonsen et al., 2008).',
@@ -1528,7 +1528,7 @@ const RESEARCH = {
     connection: 'The goal is not a quiet classroom — it is a classroom where children understand expectations, feel safe within them, and are learning to regulate themselves. That is the foundation for everything else.'
   },
   productivity: {
-    why: 'Why Productivity Matters',
+    why: 'Why Maximizing Learning Time Matters',
     summary: 'Time is the most precious resource in an early childhood classroom. Every minute of waiting, wandering, or confusion is a minute children are not learning. High-productivity classrooms maximize engaged time without sacrificing joy.',
     points: [
       'Children in well-organized, predictable classrooms show higher on-task behavior, better self-regulation, and stronger academic outcomes (Cameron et al., 2005).',
@@ -1539,7 +1539,7 @@ const RESEARCH = {
     connection: 'A productive classroom is not a rushed one — it is one where children always know what is coming, what is expected, and what to do next. That predictability is itself a form of care.'
   },
   instructional_formats: {
-    why: 'Why Instructional Learning Formats Matter',
+    why: 'Why Engaging Activities Matter',
     summary: 'Young children learn through doing, moving, talking, and exploring — not through sitting and listening. The format of instruction shapes whether children are truly engaged or merely present.',
     points: [
       'Children retain 10% of what they hear, 20% of what they see, and up to 90% of what they do and teach others — active formats dramatically outperform passive ones (Dale, Cone of Experience).',
@@ -1563,18 +1563,18 @@ const RESEARCH = {
 
   // ── Domain 3 Research ──
   concept_development: {
-    why: 'Why Concept Development Matters',
+    why: 'Why Connections & Reasoning Matter',
     summary: 'Deep learning happens when children do not just receive information but construct understanding through exploration, connection, and application. When teachers guide children to analyze, predict, and connect ideas, they build the cognitive architecture for lifelong thinking.',
     points: [
       'Children taught through concept-based instruction show significantly stronger transfer of learning to new situations compared to rote instruction (Erickson, 2008).',
       'Connecting new concepts to prior knowledge activates existing neural networks and dramatically increases retention (Bransford, Brown & Cocking, 2000).',
       'When teachers ask children to predict, hypothesize, and explain, they develop executive function alongside content knowledge (Blair & Razza, 2007).',
-      'Concept Development is one of the CLASS Instructional Support dimensions most predictive of long-term academic achievement (Pianta, Hamre & Allen, 2012).'
+      'Connections and reasoning skills (one of the CLASS Instructional Support dimensions) are among the most predictive of long-term academic achievement (Pianta, Hamre & Allen, 2012).'
     ],
     connection: 'Every time you ask "What do you think will happen?" instead of simply showing the answer, you are building a thinker — not just a learner of facts.'
   },
   quality_feedback: {
-    why: 'Why Quality of Feedback Matters',
+    why: 'Why Responsive Feedback Matters',
     summary: 'Feedback is not just praise or correction — it is the engine of learning. When feedback is specific, expansive, and responsive to a child\'s actual thinking, it moves children from surface-level performance to deep understanding.',
     points: [
       'Specific, descriptive feedback is 3x more effective than generic praise at increasing academic persistence and skill development (Hattie & Timperley, 2007).',
@@ -1585,7 +1585,7 @@ const RESEARCH = {
     connection: 'The quality of your feedback tells children whether you believe they are capable of going deeper. When you ask "What made you think that?" you are saying: your thinking matters and I want more of it.'
   },
   language_modeling: {
-    why: 'Why Language Modeling Matters',
+    why: 'Why Conversation & Vocabulary Matter',
     summary: 'The words children hear in their earliest years literally build the brain structures they will use to read, write, reason, and communicate for life. A teacher who models rich, varied, contextual language is one of the most powerful literacy interventions that exists.',
     points: [
       'Hart & Risley (1995) documented a 30-million-word gap between children from language-rich and language-poor environments by age 3 — teacher language modeling directly closes this gap.',

@@ -1,80 +1,247 @@
 {
   "_meta": {
     "version": "1.0",
-    "lastUpdated": "2026-05-01",
-    "notes": "Weeks 1 and 2 use Rebecca's exact wording from the Inspired Growth Mentor Training Curriculum 12-Week Reflection Guide. Weeks 3-12 use placeholder questions following Rebecca's structural template. Update these as Rebecca finalizes her guide."
+    "lastUpdated": "2026-05-18",
+    "notes": "Weeks 1 and 2 use Rebecca's exact wording from the Inspired Growth Mentor Training Curriculum 12-Week Reflection Guide. Weeks 3-12 use placeholder questions following Rebecca's structural template. Update these as Rebecca finalizes her guide. Topic labels aligned to MSA framework (distinct from CLASS terminology) — May 2026."
   },
   "domains": [
-    { "number": 1, "title": "Emotional Climate & Responsiveness", "weeks": [1, 2, 3, 4] },
-    { "number": 2, "title": "Learning Environment & Organization", "weeks": [5, 6, 7, 8] },
-    { "number": 3, "title": "Instructional Depth & Language", "weeks": [9, 10, 11, 12] }
+    {
+      "number": 1,
+      "title": "Emotional Climate & Responsiveness",
+      "weeks": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Learning Environment & Organization",
+      "weeks": [
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Instructional Depth & Language",
+      "weeks": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
   ],
   "weeks": {
     "1": {
-      "topic": "Positive Climate",
+      "topic": "Warmth & Connection",
       "domain": 1,
       "weekly": {
         "mentee": [
-          { "id": "prev_1", "section": "Previous Week Recap", "text": "This is your first week — take a moment to describe what brought you to this mentoring journey. What are you hoping to walk away with by the end of Week 12?" },
-          { "id": "prev_2", "section": "Previous Week Recap", "text": "What is one area of your teaching you feel proud of right now, and one area you are genuinely curious about improving?" },
-          { "id": "strat_1", "section": "Strategies Used & Outcomes", "text": "Describe a specific moment this week when you felt genuine warmth and connection with a child or group of children. What did that look like? What made it possible?" },
-          { "id": "strat_2", "section": "Strategies Used & Outcomes", "text": "What intentional strategies did you try to create or sustain a positive emotional climate in your classroom this week? What was the outcome?" },
-          { "id": "strat_3", "section": "Strategies Used & Outcomes", "text": "Was there a moment when the emotional tone in your classroom shifted — positively or negatively? What do you think caused that shift?" },
-          { "id": "goal_1", "section": "Goals for the Week Ahead", "text": "Based on what you explored this week around Positive Climate, identify one specific, observable goal for your classroom environment next week." },
-          { "id": "goal_2", "section": "Goals for the Week Ahead", "text": "What is one thing you want to be more intentional about when greeting or connecting with children in the days ahead?" },
-          { "id": "data_1", "section": "Data, Assessment & Progress", "text": "On a scale of 1–5, how would you rate the overall positive climate in your classroom this week? What evidence supports your rating?" },
-          { "id": "data_2", "section": "Data, Assessment & Progress", "text": "Did you observe any children who seemed disconnected or disengaged from the emotional tone of the room? What might that be telling you?" }
+          {
+            "id": "prev_1",
+            "section": "Previous Week Recap",
+            "text": "This is your first week — take a moment to describe what brought you to this mentoring journey. What are you hoping to walk away with by the end of Week 12?"
+          },
+          {
+            "id": "prev_2",
+            "section": "Previous Week Recap",
+            "text": "What is one area of your teaching you feel proud of right now, and one area you are genuinely curious about improving?"
+          },
+          {
+            "id": "strat_1",
+            "section": "Strategies Used & Outcomes",
+            "text": "Describe a specific moment this week when you felt genuine warmth and connection with a child or group of children. What did that look like? What made it possible?"
+          },
+          {
+            "id": "strat_2",
+            "section": "Strategies Used & Outcomes",
+            "text": "What intentional strategies did you try to create or sustain a positive emotional climate in your classroom this week? What was the outcome?"
+          },
+          {
+            "id": "strat_3",
+            "section": "Strategies Used & Outcomes",
+            "text": "Was there a moment when the emotional tone in your classroom shifted — positively or negatively? What do you think caused that shift?"
+          },
+          {
+            "id": "goal_1",
+            "section": "Goals for the Week Ahead",
+            "text": "Based on what you explored this week around Positive Climate, identify one specific, observable goal for your classroom environment next week."
+          },
+          {
+            "id": "goal_2",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one thing you want to be more intentional about when greeting or connecting with children in the days ahead?"
+          },
+          {
+            "id": "data_1",
+            "section": "Data, Assessment & Progress",
+            "text": "On a scale of 1–5, how would you rate the overall positive climate in your classroom this week? What evidence supports your rating?"
+          },
+          {
+            "id": "data_2",
+            "section": "Data, Assessment & Progress",
+            "text": "Did you observe any children who seemed disconnected or disengaged from the emotional tone of the room? What might that be telling you?"
+          }
         ]
       },
       "daily": {
         "mentee": [
-          { "id": "d1", "text": "Today's focus area was Positive Climate. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic." },
-          { "id": "d2", "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?" },
-          { "id": "d3", "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?" },
-          { "id": "d4", "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?" },
-          { "id": "d5", "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?" },
-          { "id": "bridge", "section": "Bridge to Weekly Reflection", "text": "Key moment or observation to carry into weekly reflection:" }
+          {
+            "id": "d1",
+            "text": "Today's focus area was Positive Climate. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+          },
+          {
+            "id": "d2",
+            "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?"
+          },
+          {
+            "id": "d3",
+            "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?"
+          },
+          {
+            "id": "d4",
+            "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?"
+          },
+          {
+            "id": "d5",
+            "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?"
+          },
+          {
+            "id": "bridge",
+            "section": "Bridge to Weekly Reflection",
+            "text": "Key moment or observation to carry into weekly reflection:"
+          }
         ],
         "mentor": [
-          { "id": "m1", "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Positive Climate?" },
-          { "id": "m2", "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?" },
-          { "id": "m3", "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?" },
-          { "id": "m4", "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?" },
-          { "id": "m5", "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?" }
+          {
+            "id": "m1",
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Positive Climate?"
+          },
+          {
+            "id": "m2",
+            "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?"
+          },
+          {
+            "id": "m3",
+            "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?"
+          },
+          {
+            "id": "m4",
+            "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?"
+          },
+          {
+            "id": "m5",
+            "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?"
+          }
         ]
       }
     },
     "2": {
-      "topic": "Teacher Sensitivity",
+      "topic": "Teacher Responsiveness",
       "domain": 1,
       "weekly": {
         "mentee": [
-          { "id": "prev_1", "section": "Previous Week Recap", "text": "Last week you focused on Positive Climate. Looking back, what was your biggest takeaway about the emotional tone in your classroom?" },
-          { "id": "prev_2", "section": "Previous Week Recap", "text": "Did you follow through on your goal from Week 1? What happened — and if you didn't fully meet it, what got in the way?" },
-          { "id": "strat_1", "section": "Strategies Used & Outcomes", "text": "Describe a moment this week when you noticed a child's unspoken need — academic, emotional, or social — and were able to respond to it. What cues did you pick up on?" },
-          { "id": "strat_2", "section": "Strategies Used & Outcomes", "text": "What is one situation where you feel like your sensitivity response was effective? What made it work?" },
-          { "id": "strat_3", "section": "Strategies Used & Outcomes", "text": "Were there moments this week where you noticed a need but were unable to respond the way you would have liked? What got in the way?" },
-          { "id": "goal_1", "section": "Goals for the Week Ahead", "text": "Identify one specific child in your classroom whose emotional or academic needs you want to be more attentive to next week. What will you watch for?" },
-          { "id": "goal_2", "section": "Goals for the Week Ahead", "text": "What one small practice will you add or strengthen this week to increase your attunement with your children?" },
-          { "id": "data_1", "section": "Data, Assessment & Progress", "text": "How would you describe your current level of observational awareness in the classroom — what are you getting better at noticing?" },
-          { "id": "data_2", "section": "Data, Assessment & Progress", "text": "What patterns are you beginning to see in how children signal their needs, and how are you tracking or remembering those signals?" }
+          {
+            "id": "prev_1",
+            "section": "Previous Week Recap",
+            "text": "Last week you focused on Positive Climate. Looking back, what was your biggest takeaway about the emotional tone in your classroom?"
+          },
+          {
+            "id": "prev_2",
+            "section": "Previous Week Recap",
+            "text": "Did you follow through on your goal from Week 1? What happened — and if you didn't fully meet it, what got in the way?"
+          },
+          {
+            "id": "strat_1",
+            "section": "Strategies Used & Outcomes",
+            "text": "Describe a moment this week when you noticed a child's unspoken need — academic, emotional, or social — and were able to respond to it. What cues did you pick up on?"
+          },
+          {
+            "id": "strat_2",
+            "section": "Strategies Used & Outcomes",
+            "text": "What is one situation where you feel like your sensitivity response was effective? What made it work?"
+          },
+          {
+            "id": "strat_3",
+            "section": "Strategies Used & Outcomes",
+            "text": "Were there moments this week where you noticed a need but were unable to respond the way you would have liked? What got in the way?"
+          },
+          {
+            "id": "goal_1",
+            "section": "Goals for the Week Ahead",
+            "text": "Identify one specific child in your classroom whose emotional or academic needs you want to be more attentive to next week. What will you watch for?"
+          },
+          {
+            "id": "goal_2",
+            "section": "Goals for the Week Ahead",
+            "text": "What one small practice will you add or strengthen this week to increase your attunement with your children?"
+          },
+          {
+            "id": "data_1",
+            "section": "Data, Assessment & Progress",
+            "text": "How would you describe your current level of observational awareness in the classroom — what are you getting better at noticing?"
+          },
+          {
+            "id": "data_2",
+            "section": "Data, Assessment & Progress",
+            "text": "What patterns are you beginning to see in how children signal their needs, and how are you tracking or remembering those signals?"
+          }
         ]
       },
       "daily": {
         "mentee": [
-          { "id": "d1", "text": "Today's focus area was Teacher Sensitivity. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic." },
-          { "id": "d2", "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?" },
-          { "id": "d3", "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?" },
-          { "id": "d4", "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?" },
-          { "id": "d5", "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?" },
-          { "id": "bridge", "section": "Bridge to Weekly Reflection", "text": "Key moment or observation to carry into weekly reflection:" }
+          {
+            "id": "d1",
+            "text": "Today's focus area was Teacher Sensitivity. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+          },
+          {
+            "id": "d2",
+            "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?"
+          },
+          {
+            "id": "d3",
+            "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?"
+          },
+          {
+            "id": "d4",
+            "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?"
+          },
+          {
+            "id": "d5",
+            "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?"
+          },
+          {
+            "id": "bridge",
+            "section": "Bridge to Weekly Reflection",
+            "text": "Key moment or observation to carry into weekly reflection:"
+          }
         ],
         "mentor": [
-          { "id": "m1", "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Teacher Sensitivity?" },
-          { "id": "m2", "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?" },
-          { "id": "m3", "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?" },
-          { "id": "m4", "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?" },
-          { "id": "m5", "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?" }
+          {
+            "id": "m1",
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Teacher Sensitivity?"
+          },
+          {
+            "id": "m2",
+            "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?"
+          },
+          {
+            "id": "m3",
+            "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?"
+          },
+          {
+            "id": "m4",
+            "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?"
+          },
+          {
+            "id": "m5",
+            "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?"
+          }
         ]
       }
     },
@@ -84,312 +251,942 @@
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
         "mentee": [
-          { "id": "prev_1", "section": "Previous Week Recap", "text": "Last week you focused on Teacher Sensitivity. What was your biggest takeaway about reading children's cues?" },
-          { "id": "prev_2", "section": "Previous Week Recap", "text": "Did you follow through on your goal from Week 2? What happened — and if you didn't fully meet it, what got in the way?" },
-          { "id": "strat_1", "section": "Strategies Used & Outcomes", "text": "Describe a moment this week when you intentionally followed a child's lead, interest, or perspective. What did that look like?" },
-          { "id": "strat_2", "section": "Strategies Used & Outcomes", "text": "When did you offer children meaningful choice or autonomy this week? What was the outcome?" },
-          { "id": "strat_3", "section": "Strategies Used & Outcomes", "text": "Were there moments this week when an adult agenda overrode a child's perspective? What might you have done differently?" },
-          { "id": "goal_1", "section": "Goals for the Week Ahead", "text": "Identify one specific way you will invite more child voice or choice into your classroom next week." },
-          { "id": "goal_2", "section": "Goals for the Week Ahead", "text": "What is one transition or routine you want to redesign with children's perspectives in mind?" },
-          { "id": "data_1", "section": "Data, Assessment & Progress", "text": "On a scale of 1–5, how often this week did children's interests visibly shape your classroom activities? What evidence supports your rating?" },
-          { "id": "data_2", "section": "Data, Assessment & Progress", "text": "Which child or children in your classroom feel most heard right now? Which feel least heard? What does that tell you?" }
+          {
+            "id": "prev_1",
+            "section": "Previous Week Recap",
+            "text": "Last week you focused on Teacher Sensitivity. What was your biggest takeaway about reading children's cues?"
+          },
+          {
+            "id": "prev_2",
+            "section": "Previous Week Recap",
+            "text": "Did you follow through on your goal from Week 2? What happened — and if you didn't fully meet it, what got in the way?"
+          },
+          {
+            "id": "strat_1",
+            "section": "Strategies Used & Outcomes",
+            "text": "Describe a moment this week when you intentionally followed a child's lead, interest, or perspective. What did that look like?"
+          },
+          {
+            "id": "strat_2",
+            "section": "Strategies Used & Outcomes",
+            "text": "When did you offer children meaningful choice or autonomy this week? What was the outcome?"
+          },
+          {
+            "id": "strat_3",
+            "section": "Strategies Used & Outcomes",
+            "text": "Were there moments this week when an adult agenda overrode a child's perspective? What might you have done differently?"
+          },
+          {
+            "id": "goal_1",
+            "section": "Goals for the Week Ahead",
+            "text": "Identify one specific way you will invite more child voice or choice into your classroom next week."
+          },
+          {
+            "id": "goal_2",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one transition or routine you want to redesign with children's perspectives in mind?"
+          },
+          {
+            "id": "data_1",
+            "section": "Data, Assessment & Progress",
+            "text": "On a scale of 1–5, how often this week did children's interests visibly shape your classroom activities? What evidence supports your rating?"
+          },
+          {
+            "id": "data_2",
+            "section": "Data, Assessment & Progress",
+            "text": "Which child or children in your classroom feel most heard right now? Which feel least heard? What does that tell you?"
+          }
         ]
       },
       "daily": {
         "mentee": [
-          { "id": "d1", "text": "Today's focus area was Regard for Child Perspective. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic." },
-          { "id": "d2", "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?" },
-          { "id": "d3", "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?" },
-          { "id": "d4", "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?" },
-          { "id": "d5", "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?" },
-          { "id": "bridge", "section": "Bridge to Weekly Reflection", "text": "Key moment or observation to carry into weekly reflection:" }
+          {
+            "id": "d1",
+            "text": "Today's focus area was Regard for Child Perspective. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+          },
+          {
+            "id": "d2",
+            "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?"
+          },
+          {
+            "id": "d3",
+            "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?"
+          },
+          {
+            "id": "d4",
+            "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?"
+          },
+          {
+            "id": "d5",
+            "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?"
+          },
+          {
+            "id": "bridge",
+            "section": "Bridge to Weekly Reflection",
+            "text": "Key moment or observation to carry into weekly reflection:"
+          }
         ],
         "mentor": [
-          { "id": "m1", "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Regard for Child Perspective?" },
-          { "id": "m2", "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?" },
-          { "id": "m3", "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?" },
-          { "id": "m4", "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?" },
-          { "id": "m5", "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?" }
+          {
+            "id": "m1",
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Regard for Child Perspective?"
+          },
+          {
+            "id": "m2",
+            "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?"
+          },
+          {
+            "id": "m3",
+            "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?"
+          },
+          {
+            "id": "m4",
+            "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?"
+          },
+          {
+            "id": "m5",
+            "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?"
+          }
         ]
       }
     },
     "4": {
-      "topic": "Negative Climate (Absence of)",
+      "topic": "Conflict as Learning",
       "domain": 1,
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
         "mentee": [
-          { "id": "prev_1", "section": "Previous Week Recap", "text": "Last week you focused on Regard for Child Perspective. What was your biggest takeaway about honoring children's voice and choice?" },
-          { "id": "prev_2", "section": "Previous Week Recap", "text": "Did you follow through on your goal from Week 3? What happened — and if you didn't fully meet it, what got in the way?" },
-          { "id": "strat_1", "section": "Strategies Used & Outcomes", "text": "Describe a moment this week when tension, frustration, or sarcasm could have crept in but didn't. How did you keep it out?" },
-          { "id": "strat_2", "section": "Strategies Used & Outcomes", "text": "When you noticed your own irritation rising this week, what did you do to manage it before it shaped your tone with children?" },
-          { "id": "strat_3", "section": "Strategies Used & Outcomes", "text": "Was there a moment this week when negativity entered the room — yours or someone else's? How was it handled?" },
-          { "id": "goal_1", "section": "Goals for the Week Ahead", "text": "What is one specific trigger or stress point in your day that you want to manage differently next week?" },
-          { "id": "goal_2", "section": "Goals for the Week Ahead", "text": "What is one practice you will use this week to reset your emotional state before entering a difficult moment?" },
-          { "id": "data_1", "section": "Data, Assessment & Progress", "text": "On a scale of 1–5, how would you rate the absence of negativity in your classroom this week? What evidence supports your rating?" },
-          { "id": "data_2", "section": "Data, Assessment & Progress", "text": "What are the times of day, transitions, or situations when negativity is most likely to appear in your classroom? What patterns do you see?" }
+          {
+            "id": "prev_1",
+            "section": "Previous Week Recap",
+            "text": "Last week you focused on Regard for Child Perspective. What was your biggest takeaway about honoring children's voice and choice?"
+          },
+          {
+            "id": "prev_2",
+            "section": "Previous Week Recap",
+            "text": "Did you follow through on your goal from Week 3? What happened — and if you didn't fully meet it, what got in the way?"
+          },
+          {
+            "id": "strat_1",
+            "section": "Strategies Used & Outcomes",
+            "text": "Describe a moment this week when tension, frustration, or sarcasm could have crept in but didn't. How did you keep it out?"
+          },
+          {
+            "id": "strat_2",
+            "section": "Strategies Used & Outcomes",
+            "text": "When you noticed your own irritation rising this week, what did you do to manage it before it shaped your tone with children?"
+          },
+          {
+            "id": "strat_3",
+            "section": "Strategies Used & Outcomes",
+            "text": "Was there a moment this week when negativity entered the room — yours or someone else's? How was it handled?"
+          },
+          {
+            "id": "goal_1",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one specific trigger or stress point in your day that you want to manage differently next week?"
+          },
+          {
+            "id": "goal_2",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one practice you will use this week to reset your emotional state before entering a difficult moment?"
+          },
+          {
+            "id": "data_1",
+            "section": "Data, Assessment & Progress",
+            "text": "On a scale of 1–5, how would you rate the absence of negativity in your classroom this week? What evidence supports your rating?"
+          },
+          {
+            "id": "data_2",
+            "section": "Data, Assessment & Progress",
+            "text": "What are the times of day, transitions, or situations when negativity is most likely to appear in your classroom? What patterns do you see?"
+          }
         ]
       },
       "daily": {
         "mentee": [
-          { "id": "d1", "text": "Today's focus area was Negative Climate (Absence of). In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic." },
-          { "id": "d2", "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?" },
-          { "id": "d3", "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?" },
-          { "id": "d4", "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?" },
-          { "id": "d5", "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?" },
-          { "id": "bridge", "section": "Bridge to Weekly Reflection", "text": "Key moment or observation to carry into weekly reflection:" }
+          {
+            "id": "d1",
+            "text": "Today's focus area was Negative Climate (Absence of). In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+          },
+          {
+            "id": "d2",
+            "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?"
+          },
+          {
+            "id": "d3",
+            "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?"
+          },
+          {
+            "id": "d4",
+            "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?"
+          },
+          {
+            "id": "d5",
+            "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?"
+          },
+          {
+            "id": "bridge",
+            "section": "Bridge to Weekly Reflection",
+            "text": "Key moment or observation to carry into weekly reflection:"
+          }
         ],
         "mentor": [
-          { "id": "m1", "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Negative Climate (Absence of)?" },
-          { "id": "m2", "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?" },
-          { "id": "m3", "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?" },
-          { "id": "m4", "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?" },
-          { "id": "m5", "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?" }
+          {
+            "id": "m1",
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Negative Climate (Absence of)?"
+          },
+          {
+            "id": "m2",
+            "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?"
+          },
+          {
+            "id": "m3",
+            "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?"
+          },
+          {
+            "id": "m4",
+            "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?"
+          },
+          {
+            "id": "m5",
+            "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?"
+          }
         ]
       }
     },
     "5": {
-      "topic": "Behavior Management",
+      "topic": "Proactive Classroom Guidance",
       "domain": 2,
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
         "mentee": [
-          { "id": "prev_1", "section": "Previous Week Recap", "text": "We've just finished Domain 1 — Emotional Climate & Responsiveness. What is the most important thing you are taking from that domain into Domain 2?" },
-          { "id": "prev_2", "section": "Previous Week Recap", "text": "How did your end-of-domain reflection shape your goals or focus for this week?" },
-          { "id": "strat_1", "section": "Strategies Used & Outcomes", "text": "Describe a behavior management moment this week where your proactive approach prevented a problem before it escalated." },
-          { "id": "strat_2", "section": "Strategies Used & Outcomes", "text": "What clear expectations, routines, or signals did children respond to well this week? What made them effective?" },
-          { "id": "strat_3", "section": "Strategies Used & Outcomes", "text": "Were there behavior moments this week where you reacted instead of responded? What got in the way of staying proactive?" },
-          { "id": "goal_1", "section": "Goals for the Week Ahead", "text": "What is one expectation, routine, or transition you want to teach or re-teach next week?" },
-          { "id": "goal_2", "section": "Goals for the Week Ahead", "text": "Which child's behavior pattern do you want to look at more closely with curiosity rather than correction next week?" },
-          { "id": "data_1", "section": "Data, Assessment & Progress", "text": "On a scale of 1–5, how proactive (vs. reactive) was your behavior management this week? What evidence supports your rating?" },
-          { "id": "data_2", "section": "Data, Assessment & Progress", "text": "What times of day or activities required the most behavior management this week? What does the pattern suggest about your environment or schedule?" }
+          {
+            "id": "prev_1",
+            "section": "Previous Week Recap",
+            "text": "We've just finished Domain 1 — Emotional Climate & Responsiveness. What is the most important thing you are taking from that domain into Domain 2?"
+          },
+          {
+            "id": "prev_2",
+            "section": "Previous Week Recap",
+            "text": "How did your end-of-domain reflection shape your goals or focus for this week?"
+          },
+          {
+            "id": "strat_1",
+            "section": "Strategies Used & Outcomes",
+            "text": "Describe a behavior management moment this week where your proactive approach prevented a problem before it escalated."
+          },
+          {
+            "id": "strat_2",
+            "section": "Strategies Used & Outcomes",
+            "text": "What clear expectations, routines, or signals did children respond to well this week? What made them effective?"
+          },
+          {
+            "id": "strat_3",
+            "section": "Strategies Used & Outcomes",
+            "text": "Were there behavior moments this week where you reacted instead of responded? What got in the way of staying proactive?"
+          },
+          {
+            "id": "goal_1",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one expectation, routine, or transition you want to teach or re-teach next week?"
+          },
+          {
+            "id": "goal_2",
+            "section": "Goals for the Week Ahead",
+            "text": "Which child's behavior pattern do you want to look at more closely with curiosity rather than correction next week?"
+          },
+          {
+            "id": "data_1",
+            "section": "Data, Assessment & Progress",
+            "text": "On a scale of 1–5, how proactive (vs. reactive) was your behavior management this week? What evidence supports your rating?"
+          },
+          {
+            "id": "data_2",
+            "section": "Data, Assessment & Progress",
+            "text": "What times of day or activities required the most behavior management this week? What does the pattern suggest about your environment or schedule?"
+          }
         ]
       },
       "daily": {
         "mentee": [
-          { "id": "d1", "text": "Today's focus area was Behavior Management. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic." },
-          { "id": "d2", "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?" },
-          { "id": "d3", "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?" },
-          { "id": "d4", "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?" },
-          { "id": "d5", "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?" },
-          { "id": "bridge", "section": "Bridge to Weekly Reflection", "text": "Key moment or observation to carry into weekly reflection:" }
+          {
+            "id": "d1",
+            "text": "Today's focus area was Behavior Management. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+          },
+          {
+            "id": "d2",
+            "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?"
+          },
+          {
+            "id": "d3",
+            "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?"
+          },
+          {
+            "id": "d4",
+            "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?"
+          },
+          {
+            "id": "d5",
+            "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?"
+          },
+          {
+            "id": "bridge",
+            "section": "Bridge to Weekly Reflection",
+            "text": "Key moment or observation to carry into weekly reflection:"
+          }
         ],
         "mentor": [
-          { "id": "m1", "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Behavior Management?" },
-          { "id": "m2", "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?" },
-          { "id": "m3", "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?" },
-          { "id": "m4", "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?" },
-          { "id": "m5", "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?" }
+          {
+            "id": "m1",
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Behavior Management?"
+          },
+          {
+            "id": "m2",
+            "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?"
+          },
+          {
+            "id": "m3",
+            "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?"
+          },
+          {
+            "id": "m4",
+            "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?"
+          },
+          {
+            "id": "m5",
+            "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?"
+          }
         ]
       }
     },
     "6": {
-      "topic": "Productivity",
+      "topic": "Maximizing Learning Time",
       "domain": 2,
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
         "mentee": [
-          { "id": "prev_1", "section": "Previous Week Recap", "text": "Last week you focused on Behavior Management. What was your biggest takeaway about being proactive rather than reactive?" },
-          { "id": "prev_2", "section": "Previous Week Recap", "text": "Did you follow through on your goal from Week 5? What happened — and if you didn't fully meet it, what got in the way?" },
-          { "id": "strat_1", "section": "Strategies Used & Outcomes", "text": "Describe a transition or routine this week that ran smoothly. What made it work?" },
-          { "id": "strat_2", "section": "Strategies Used & Outcomes", "text": "Where did you reduce wait time or wasted time in your day this week? What was the impact on children?" },
-          { "id": "strat_3", "section": "Strategies Used & Outcomes", "text": "What part of your day still feels chaotic or low-productivity? What specifically is getting in the way?" },
-          { "id": "goal_1", "section": "Goals for the Week Ahead", "text": "What is one transition or routine you will redesign or tighten next week?" },
-          { "id": "goal_2", "section": "Goals for the Week Ahead", "text": "What is one materials or preparation change that would reduce downtime next week?" },
-          { "id": "data_1", "section": "Data, Assessment & Progress", "text": "On a scale of 1–5, how productive was your classroom time this week? What evidence supports your rating?" },
-          { "id": "data_2", "section": "Data, Assessment & Progress", "text": "Roughly how much of the day this week felt like meaningful learning vs. transitions or waiting? What's one number you'd like to move?" }
+          {
+            "id": "prev_1",
+            "section": "Previous Week Recap",
+            "text": "Last week you focused on Behavior Management. What was your biggest takeaway about being proactive rather than reactive?"
+          },
+          {
+            "id": "prev_2",
+            "section": "Previous Week Recap",
+            "text": "Did you follow through on your goal from Week 5? What happened — and if you didn't fully meet it, what got in the way?"
+          },
+          {
+            "id": "strat_1",
+            "section": "Strategies Used & Outcomes",
+            "text": "Describe a transition or routine this week that ran smoothly. What made it work?"
+          },
+          {
+            "id": "strat_2",
+            "section": "Strategies Used & Outcomes",
+            "text": "Where did you reduce wait time or wasted time in your day this week? What was the impact on children?"
+          },
+          {
+            "id": "strat_3",
+            "section": "Strategies Used & Outcomes",
+            "text": "What part of your day still feels chaotic or low-productivity? What specifically is getting in the way?"
+          },
+          {
+            "id": "goal_1",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one transition or routine you will redesign or tighten next week?"
+          },
+          {
+            "id": "goal_2",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one materials or preparation change that would reduce downtime next week?"
+          },
+          {
+            "id": "data_1",
+            "section": "Data, Assessment & Progress",
+            "text": "On a scale of 1–5, how productive was your classroom time this week? What evidence supports your rating?"
+          },
+          {
+            "id": "data_2",
+            "section": "Data, Assessment & Progress",
+            "text": "Roughly how much of the day this week felt like meaningful learning vs. transitions or waiting? What's one number you'd like to move?"
+          }
         ]
       },
       "daily": {
         "mentee": [
-          { "id": "d1", "text": "Today's focus area was Productivity. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic." },
-          { "id": "d2", "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?" },
-          { "id": "d3", "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?" },
-          { "id": "d4", "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?" },
-          { "id": "d5", "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?" },
-          { "id": "bridge", "section": "Bridge to Weekly Reflection", "text": "Key moment or observation to carry into weekly reflection:" }
+          {
+            "id": "d1",
+            "text": "Today's focus area was Productivity. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+          },
+          {
+            "id": "d2",
+            "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?"
+          },
+          {
+            "id": "d3",
+            "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?"
+          },
+          {
+            "id": "d4",
+            "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?"
+          },
+          {
+            "id": "d5",
+            "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?"
+          },
+          {
+            "id": "bridge",
+            "section": "Bridge to Weekly Reflection",
+            "text": "Key moment or observation to carry into weekly reflection:"
+          }
         ],
         "mentor": [
-          { "id": "m1", "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Productivity?" },
-          { "id": "m2", "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?" },
-          { "id": "m3", "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?" },
-          { "id": "m4", "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?" },
-          { "id": "m5", "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?" }
+          {
+            "id": "m1",
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Productivity?"
+          },
+          {
+            "id": "m2",
+            "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?"
+          },
+          {
+            "id": "m3",
+            "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?"
+          },
+          {
+            "id": "m4",
+            "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?"
+          },
+          {
+            "id": "m5",
+            "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?"
+          }
         ]
       }
     },
     "7": {
-      "topic": "Instructional Learning Formats",
+      "topic": "Engaging Activities",
       "domain": 2,
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
         "mentee": [
-          { "id": "prev_1", "section": "Previous Week Recap", "text": "Last week you focused on Productivity. What was your biggest takeaway about how time and routines shape children's learning?" },
-          { "id": "prev_2", "section": "Previous Week Recap", "text": "Did you follow through on your goal from Week 6? What happened — and if you didn't fully meet it, what got in the way?" },
-          { "id": "strat_1", "section": "Strategies Used & Outcomes", "text": "Describe a learning activity this week that fully engaged your children. What about the format made it work?" },
-          { "id": "strat_2", "section": "Strategies Used & Outcomes", "text": "When did you vary your delivery this week — using materials, movement, modeling, or open-ended exploration? What was the impact?" },
-          { "id": "strat_3", "section": "Strategies Used & Outcomes", "text": "Was there an activity this week that fell flat? What about the format do you think contributed to that?" },
-          { "id": "goal_1", "section": "Goals for the Week Ahead", "text": "What is one new instructional format or delivery method you want to try next week?" },
-          { "id": "goal_2", "section": "Goals for the Week Ahead", "text": "What is one activity in your existing schedule you want to redesign for higher engagement?" },
-          { "id": "data_1", "section": "Data, Assessment & Progress", "text": "On a scale of 1–5, how engaged were your children during planned learning activities this week? What evidence supports your rating?" },
-          { "id": "data_2", "section": "Data, Assessment & Progress", "text": "Which children are hardest for you to engage during structured learning? What does the pattern suggest about format or interest?" }
+          {
+            "id": "prev_1",
+            "section": "Previous Week Recap",
+            "text": "Last week you focused on Productivity. What was your biggest takeaway about how time and routines shape children's learning?"
+          },
+          {
+            "id": "prev_2",
+            "section": "Previous Week Recap",
+            "text": "Did you follow through on your goal from Week 6? What happened — and if you didn't fully meet it, what got in the way?"
+          },
+          {
+            "id": "strat_1",
+            "section": "Strategies Used & Outcomes",
+            "text": "Describe a learning activity this week that fully engaged your children. What about the format made it work?"
+          },
+          {
+            "id": "strat_2",
+            "section": "Strategies Used & Outcomes",
+            "text": "When did you vary your delivery this week — using materials, movement, modeling, or open-ended exploration? What was the impact?"
+          },
+          {
+            "id": "strat_3",
+            "section": "Strategies Used & Outcomes",
+            "text": "Was there an activity this week that fell flat? What about the format do you think contributed to that?"
+          },
+          {
+            "id": "goal_1",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one new instructional format or delivery method you want to try next week?"
+          },
+          {
+            "id": "goal_2",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one activity in your existing schedule you want to redesign for higher engagement?"
+          },
+          {
+            "id": "data_1",
+            "section": "Data, Assessment & Progress",
+            "text": "On a scale of 1–5, how engaged were your children during planned learning activities this week? What evidence supports your rating?"
+          },
+          {
+            "id": "data_2",
+            "section": "Data, Assessment & Progress",
+            "text": "Which children are hardest for you to engage during structured learning? What does the pattern suggest about format or interest?"
+          }
         ]
       },
       "daily": {
         "mentee": [
-          { "id": "d1", "text": "Today's focus area was Instructional Learning Formats. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic." },
-          { "id": "d2", "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?" },
-          { "id": "d3", "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?" },
-          { "id": "d4", "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?" },
-          { "id": "d5", "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?" },
-          { "id": "bridge", "section": "Bridge to Weekly Reflection", "text": "Key moment or observation to carry into weekly reflection:" }
+          {
+            "id": "d1",
+            "text": "Today's focus area was Instructional Learning Formats. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+          },
+          {
+            "id": "d2",
+            "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?"
+          },
+          {
+            "id": "d3",
+            "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?"
+          },
+          {
+            "id": "d4",
+            "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?"
+          },
+          {
+            "id": "d5",
+            "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?"
+          },
+          {
+            "id": "bridge",
+            "section": "Bridge to Weekly Reflection",
+            "text": "Key moment or observation to carry into weekly reflection:"
+          }
         ],
         "mentor": [
-          { "id": "m1", "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Instructional Learning Formats?" },
-          { "id": "m2", "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?" },
-          { "id": "m3", "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?" },
-          { "id": "m4", "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?" },
-          { "id": "m5", "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?" }
+          {
+            "id": "m1",
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Instructional Learning Formats?"
+          },
+          {
+            "id": "m2",
+            "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?"
+          },
+          {
+            "id": "m3",
+            "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?"
+          },
+          {
+            "id": "m4",
+            "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?"
+          },
+          {
+            "id": "m5",
+            "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?"
+          }
         ]
       }
     },
     "8": {
-      "topic": "Learning Environment Design",
+      "topic": "Learning Environment & Design",
       "domain": 2,
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
         "mentee": [
-          { "id": "prev_1", "section": "Previous Week Recap", "text": "Last week you focused on Instructional Learning Formats. What was your biggest takeaway about engaging children through varied delivery?" },
-          { "id": "prev_2", "section": "Previous Week Recap", "text": "Did you follow through on your goal from Week 7? What happened — and if you didn't fully meet it, what got in the way?" },
-          { "id": "strat_1", "section": "Strategies Used & Outcomes", "text": "Describe one change you made to your physical classroom environment this week. What did children do differently because of it?" },
-          { "id": "strat_2", "section": "Strategies Used & Outcomes", "text": "Which learning area or center is functioning best in your room right now? What makes it work?" },
-          { "id": "strat_3", "section": "Strategies Used & Outcomes", "text": "Which area of your classroom is underused or causes friction? What might the environment be telling you?" },
-          { "id": "goal_1", "section": "Goals for the Week Ahead", "text": "What is one specific change you will make to your physical environment, materials, or visuals next week?" },
-          { "id": "goal_2", "section": "Goals for the Week Ahead", "text": "How will you involve children in noticing or shaping the environment next week?" },
-          { "id": "data_1", "section": "Data, Assessment & Progress", "text": "On a scale of 1–5, how well does your environment currently invite the kind of learning you want? What evidence supports your rating?" },
-          { "id": "data_2", "section": "Data, Assessment & Progress", "text": "Which children gravitate toward which areas of your classroom? What does that tell you about both them and the design?" }
+          {
+            "id": "prev_1",
+            "section": "Previous Week Recap",
+            "text": "Last week you focused on Instructional Learning Formats. What was your biggest takeaway about engaging children through varied delivery?"
+          },
+          {
+            "id": "prev_2",
+            "section": "Previous Week Recap",
+            "text": "Did you follow through on your goal from Week 7? What happened — and if you didn't fully meet it, what got in the way?"
+          },
+          {
+            "id": "strat_1",
+            "section": "Strategies Used & Outcomes",
+            "text": "Describe one change you made to your physical classroom environment this week. What did children do differently because of it?"
+          },
+          {
+            "id": "strat_2",
+            "section": "Strategies Used & Outcomes",
+            "text": "Which learning area or center is functioning best in your room right now? What makes it work?"
+          },
+          {
+            "id": "strat_3",
+            "section": "Strategies Used & Outcomes",
+            "text": "Which area of your classroom is underused or causes friction? What might the environment be telling you?"
+          },
+          {
+            "id": "goal_1",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one specific change you will make to your physical environment, materials, or visuals next week?"
+          },
+          {
+            "id": "goal_2",
+            "section": "Goals for the Week Ahead",
+            "text": "How will you involve children in noticing or shaping the environment next week?"
+          },
+          {
+            "id": "data_1",
+            "section": "Data, Assessment & Progress",
+            "text": "On a scale of 1–5, how well does your environment currently invite the kind of learning you want? What evidence supports your rating?"
+          },
+          {
+            "id": "data_2",
+            "section": "Data, Assessment & Progress",
+            "text": "Which children gravitate toward which areas of your classroom? What does that tell you about both them and the design?"
+          }
         ]
       },
       "daily": {
         "mentee": [
-          { "id": "d1", "text": "Today's focus area was Learning Environment Design. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic." },
-          { "id": "d2", "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?" },
-          { "id": "d3", "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?" },
-          { "id": "d4", "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?" },
-          { "id": "d5", "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?" },
-          { "id": "bridge", "section": "Bridge to Weekly Reflection", "text": "Key moment or observation to carry into weekly reflection:" }
+          {
+            "id": "d1",
+            "text": "Today's focus area was Learning Environment Design. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+          },
+          {
+            "id": "d2",
+            "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?"
+          },
+          {
+            "id": "d3",
+            "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?"
+          },
+          {
+            "id": "d4",
+            "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?"
+          },
+          {
+            "id": "d5",
+            "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?"
+          },
+          {
+            "id": "bridge",
+            "section": "Bridge to Weekly Reflection",
+            "text": "Key moment or observation to carry into weekly reflection:"
+          }
         ],
         "mentor": [
-          { "id": "m1", "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Learning Environment Design?" },
-          { "id": "m2", "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?" },
-          { "id": "m3", "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?" },
-          { "id": "m4", "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?" },
-          { "id": "m5", "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?" }
+          {
+            "id": "m1",
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Learning Environment Design?"
+          },
+          {
+            "id": "m2",
+            "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?"
+          },
+          {
+            "id": "m3",
+            "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?"
+          },
+          {
+            "id": "m4",
+            "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?"
+          },
+          {
+            "id": "m5",
+            "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?"
+          }
         ]
       }
     },
     "9": {
-      "topic": "Concept Development",
+      "topic": "Connections & Reasoning",
       "domain": 3,
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
         "mentee": [
-          { "id": "prev_1", "section": "Previous Week Recap", "text": "We've just finished Domain 2 — Learning Environment & Organization. What is the most important thing you are taking into Domain 3?" },
-          { "id": "prev_2", "section": "Previous Week Recap", "text": "How did your end-of-domain reflection shape your goals or focus for this week?" },
-          { "id": "strat_1", "section": "Strategies Used & Outcomes", "text": "Describe a moment this week when you helped children make a real connection — across activities, to prior learning, or to their own lives." },
-          { "id": "strat_2", "section": "Strategies Used & Outcomes", "text": "When did you push children's thinking beyond memorization or recall this week? What did that look like?" },
-          { "id": "strat_3", "section": "Strategies Used & Outcomes", "text": "Were there moments this week when you missed a chance to deepen children's thinking? What got in the way?" },
-          { "id": "goal_1", "section": "Goals for the Week Ahead", "text": "What is one concept or idea you want to develop more deeply with children next week, and how?" },
-          { "id": "goal_2", "section": "Goals for the Week Ahead", "text": "What is one phrase or question you want to use more often to invite analysis or prediction next week?" },
-          { "id": "data_1", "section": "Data, Assessment & Progress", "text": "On a scale of 1–5, how often did your interactions this week move children beyond surface-level recall? What evidence supports your rating?" },
-          { "id": "data_2", "section": "Data, Assessment & Progress", "text": "Which children are showing the most growth in their thinking? Which are not yet — what might they need?" }
+          {
+            "id": "prev_1",
+            "section": "Previous Week Recap",
+            "text": "We've just finished Domain 2 — Learning Environment & Organization. What is the most important thing you are taking into Domain 3?"
+          },
+          {
+            "id": "prev_2",
+            "section": "Previous Week Recap",
+            "text": "How did your end-of-domain reflection shape your goals or focus for this week?"
+          },
+          {
+            "id": "strat_1",
+            "section": "Strategies Used & Outcomes",
+            "text": "Describe a moment this week when you helped children make a real connection — across activities, to prior learning, or to their own lives."
+          },
+          {
+            "id": "strat_2",
+            "section": "Strategies Used & Outcomes",
+            "text": "When did you push children's thinking beyond memorization or recall this week? What did that look like?"
+          },
+          {
+            "id": "strat_3",
+            "section": "Strategies Used & Outcomes",
+            "text": "Were there moments this week when you missed a chance to deepen children's thinking? What got in the way?"
+          },
+          {
+            "id": "goal_1",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one concept or idea you want to develop more deeply with children next week, and how?"
+          },
+          {
+            "id": "goal_2",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one phrase or question you want to use more often to invite analysis or prediction next week?"
+          },
+          {
+            "id": "data_1",
+            "section": "Data, Assessment & Progress",
+            "text": "On a scale of 1–5, how often did your interactions this week move children beyond surface-level recall? What evidence supports your rating?"
+          },
+          {
+            "id": "data_2",
+            "section": "Data, Assessment & Progress",
+            "text": "Which children are showing the most growth in their thinking? Which are not yet — what might they need?"
+          }
         ]
       },
       "daily": {
         "mentee": [
-          { "id": "d1", "text": "Today's focus area was Concept Development. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic." },
-          { "id": "d2", "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?" },
-          { "id": "d3", "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?" },
-          { "id": "d4", "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?" },
-          { "id": "d5", "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?" },
-          { "id": "bridge", "section": "Bridge to Weekly Reflection", "text": "Key moment or observation to carry into weekly reflection:" }
+          {
+            "id": "d1",
+            "text": "Today's focus area was Concept Development. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+          },
+          {
+            "id": "d2",
+            "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?"
+          },
+          {
+            "id": "d3",
+            "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?"
+          },
+          {
+            "id": "d4",
+            "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?"
+          },
+          {
+            "id": "d5",
+            "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?"
+          },
+          {
+            "id": "bridge",
+            "section": "Bridge to Weekly Reflection",
+            "text": "Key moment or observation to carry into weekly reflection:"
+          }
         ],
         "mentor": [
-          { "id": "m1", "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Concept Development?" },
-          { "id": "m2", "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?" },
-          { "id": "m3", "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?" },
-          { "id": "m4", "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?" },
-          { "id": "m5", "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?" }
+          {
+            "id": "m1",
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Concept Development?"
+          },
+          {
+            "id": "m2",
+            "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?"
+          },
+          {
+            "id": "m3",
+            "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?"
+          },
+          {
+            "id": "m4",
+            "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?"
+          },
+          {
+            "id": "m5",
+            "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?"
+          }
         ]
       }
     },
     "10": {
-      "topic": "Quality of Feedback",
+      "topic": "Responsive Feedback",
       "domain": 3,
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
         "mentee": [
-          { "id": "prev_1", "section": "Previous Week Recap", "text": "Last week you focused on Concept Development. What was your biggest takeaway about deepening children's thinking?" },
-          { "id": "prev_2", "section": "Previous Week Recap", "text": "Did you follow through on your goal from Week 9? What happened — and if you didn't fully meet it, what got in the way?" },
-          { "id": "strat_1", "section": "Strategies Used & Outcomes", "text": "Describe a feedback moment this week that pushed a child's learning forward — beyond 'good job' or correction." },
-          { "id": "strat_2", "section": "Strategies Used & Outcomes", "text": "When did you sit with a child's incorrect answer or struggle long enough to help them work through it? What happened?" },
-          { "id": "strat_3", "section": "Strategies Used & Outcomes", "text": "Were there moments this week when you defaulted to evaluative or surface feedback when you could have gone deeper? What got in the way?" },
-          { "id": "goal_1", "section": "Goals for the Week Ahead", "text": "What is one specific phrase or feedback move you will use more often next week?" },
-          { "id": "goal_2", "section": "Goals for the Week Ahead", "text": "Which child's learning would benefit most from a different kind of feedback from you next week? What kind?" },
-          { "id": "data_1", "section": "Data, Assessment & Progress", "text": "On a scale of 1–5, how would you rate the depth of your feedback to children this week? What evidence supports your rating?" },
-          { "id": "data_2", "section": "Data, Assessment & Progress", "text": "What is your default feedback move when you're tired or rushed? What pattern do you notice?" }
+          {
+            "id": "prev_1",
+            "section": "Previous Week Recap",
+            "text": "Last week you focused on Concept Development. What was your biggest takeaway about deepening children's thinking?"
+          },
+          {
+            "id": "prev_2",
+            "section": "Previous Week Recap",
+            "text": "Did you follow through on your goal from Week 9? What happened — and if you didn't fully meet it, what got in the way?"
+          },
+          {
+            "id": "strat_1",
+            "section": "Strategies Used & Outcomes",
+            "text": "Describe a feedback moment this week that pushed a child's learning forward — beyond 'good job' or correction."
+          },
+          {
+            "id": "strat_2",
+            "section": "Strategies Used & Outcomes",
+            "text": "When did you sit with a child's incorrect answer or struggle long enough to help them work through it? What happened?"
+          },
+          {
+            "id": "strat_3",
+            "section": "Strategies Used & Outcomes",
+            "text": "Were there moments this week when you defaulted to evaluative or surface feedback when you could have gone deeper? What got in the way?"
+          },
+          {
+            "id": "goal_1",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one specific phrase or feedback move you will use more often next week?"
+          },
+          {
+            "id": "goal_2",
+            "section": "Goals for the Week Ahead",
+            "text": "Which child's learning would benefit most from a different kind of feedback from you next week? What kind?"
+          },
+          {
+            "id": "data_1",
+            "section": "Data, Assessment & Progress",
+            "text": "On a scale of 1–5, how would you rate the depth of your feedback to children this week? What evidence supports your rating?"
+          },
+          {
+            "id": "data_2",
+            "section": "Data, Assessment & Progress",
+            "text": "What is your default feedback move when you're tired or rushed? What pattern do you notice?"
+          }
         ]
       },
       "daily": {
         "mentee": [
-          { "id": "d1", "text": "Today's focus area was Quality of Feedback. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic." },
-          { "id": "d2", "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?" },
-          { "id": "d3", "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?" },
-          { "id": "d4", "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?" },
-          { "id": "d5", "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?" },
-          { "id": "bridge", "section": "Bridge to Weekly Reflection", "text": "Key moment or observation to carry into weekly reflection:" }
+          {
+            "id": "d1",
+            "text": "Today's focus area was Quality of Feedback. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+          },
+          {
+            "id": "d2",
+            "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?"
+          },
+          {
+            "id": "d3",
+            "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?"
+          },
+          {
+            "id": "d4",
+            "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?"
+          },
+          {
+            "id": "d5",
+            "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?"
+          },
+          {
+            "id": "bridge",
+            "section": "Bridge to Weekly Reflection",
+            "text": "Key moment or observation to carry into weekly reflection:"
+          }
         ],
         "mentor": [
-          { "id": "m1", "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Quality of Feedback?" },
-          { "id": "m2", "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?" },
-          { "id": "m3", "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?" },
-          { "id": "m4", "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?" },
-          { "id": "m5", "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?" }
+          {
+            "id": "m1",
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Quality of Feedback?"
+          },
+          {
+            "id": "m2",
+            "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?"
+          },
+          {
+            "id": "m3",
+            "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?"
+          },
+          {
+            "id": "m4",
+            "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?"
+          },
+          {
+            "id": "m5",
+            "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?"
+          }
         ]
       }
     },
     "11": {
-      "topic": "Language Modeling",
+      "topic": "Conversation & Vocabulary",
       "domain": 3,
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
         "mentee": [
-          { "id": "prev_1", "section": "Previous Week Recap", "text": "Last week you focused on Quality of Feedback. What was your biggest takeaway about how your responses shape children's learning?" },
-          { "id": "prev_2", "section": "Previous Week Recap", "text": "Did you follow through on your goal from Week 10? What happened — and if you didn't fully meet it, what got in the way?" },
-          { "id": "strat_1", "section": "Strategies Used & Outcomes", "text": "Describe a moment this week when you intentionally extended a child's language — repeating, expanding, or introducing a new word." },
-          { "id": "strat_2", "section": "Strategies Used & Outcomes", "text": "When did you have a real back-and-forth conversation with a child this week — multiple turns, on a topic they cared about?" },
-          { "id": "strat_3", "section": "Strategies Used & Outcomes", "text": "Were there moments this week when you ended a conversation early or asked too many closed questions? What got in the way?" },
-          { "id": "goal_1", "section": "Goals for the Week Ahead", "text": "What is one new vocabulary word, phrase, or self-talk practice you will use more often next week?" },
-          { "id": "goal_2", "section": "Goals for the Week Ahead", "text": "Which child do you want to have a longer conversation with next week, and what topic might draw them in?" },
-          { "id": "data_1", "section": "Data, Assessment & Progress", "text": "On a scale of 1–5, how rich was the language environment in your classroom this week? What evidence supports your rating?" },
-          { "id": "data_2", "section": "Data, Assessment & Progress", "text": "Which children dominate language interactions in your room, and which rarely speak? What does that pattern suggest?" }
+          {
+            "id": "prev_1",
+            "section": "Previous Week Recap",
+            "text": "Last week you focused on Quality of Feedback. What was your biggest takeaway about how your responses shape children's learning?"
+          },
+          {
+            "id": "prev_2",
+            "section": "Previous Week Recap",
+            "text": "Did you follow through on your goal from Week 10? What happened — and if you didn't fully meet it, what got in the way?"
+          },
+          {
+            "id": "strat_1",
+            "section": "Strategies Used & Outcomes",
+            "text": "Describe a moment this week when you intentionally extended a child's language — repeating, expanding, or introducing a new word."
+          },
+          {
+            "id": "strat_2",
+            "section": "Strategies Used & Outcomes",
+            "text": "When did you have a real back-and-forth conversation with a child this week — multiple turns, on a topic they cared about?"
+          },
+          {
+            "id": "strat_3",
+            "section": "Strategies Used & Outcomes",
+            "text": "Were there moments this week when you ended a conversation early or asked too many closed questions? What got in the way?"
+          },
+          {
+            "id": "goal_1",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one new vocabulary word, phrase, or self-talk practice you will use more often next week?"
+          },
+          {
+            "id": "goal_2",
+            "section": "Goals for the Week Ahead",
+            "text": "Which child do you want to have a longer conversation with next week, and what topic might draw them in?"
+          },
+          {
+            "id": "data_1",
+            "section": "Data, Assessment & Progress",
+            "text": "On a scale of 1–5, how rich was the language environment in your classroom this week? What evidence supports your rating?"
+          },
+          {
+            "id": "data_2",
+            "section": "Data, Assessment & Progress",
+            "text": "Which children dominate language interactions in your room, and which rarely speak? What does that pattern suggest?"
+          }
         ]
       },
       "daily": {
         "mentee": [
-          { "id": "d1", "text": "Today's focus area was Language Modeling. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic." },
-          { "id": "d2", "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?" },
-          { "id": "d3", "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?" },
-          { "id": "d4", "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?" },
-          { "id": "d5", "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?" },
-          { "id": "bridge", "section": "Bridge to Weekly Reflection", "text": "Key moment or observation to carry into weekly reflection:" }
+          {
+            "id": "d1",
+            "text": "Today's focus area was Language Modeling. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+          },
+          {
+            "id": "d2",
+            "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?"
+          },
+          {
+            "id": "d3",
+            "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?"
+          },
+          {
+            "id": "d4",
+            "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?"
+          },
+          {
+            "id": "d5",
+            "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?"
+          },
+          {
+            "id": "bridge",
+            "section": "Bridge to Weekly Reflection",
+            "text": "Key moment or observation to carry into weekly reflection:"
+          }
         ],
         "mentor": [
-          { "id": "m1", "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Language Modeling?" },
-          { "id": "m2", "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?" },
-          { "id": "m3", "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?" },
-          { "id": "m4", "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?" },
-          { "id": "m5", "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?" }
+          {
+            "id": "m1",
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Language Modeling?"
+          },
+          {
+            "id": "m2",
+            "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?"
+          },
+          {
+            "id": "m3",
+            "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?"
+          },
+          {
+            "id": "m4",
+            "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?"
+          },
+          {
+            "id": "m5",
+            "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?"
+          }
         ]
       }
     },
@@ -399,32 +1196,102 @@
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
         "mentee": [
-          { "id": "prev_1", "section": "Previous Week Recap", "text": "Last week you focused on Language Modeling. What was your biggest takeaway about how language fuels children's thinking?" },
-          { "id": "prev_2", "section": "Previous Week Recap", "text": "Did you follow through on your goal from Week 11? What happened — and if you didn't fully meet it, what got in the way?" },
-          { "id": "strat_1", "section": "Strategies Used & Outcomes", "text": "Describe a moment this week when you asked a question that genuinely surprised you with a child's answer." },
-          { "id": "strat_2", "section": "Strategies Used & Outcomes", "text": "When did you ask a 'what if,' 'why do you think,' or 'how would you' question this week? What did children do with it?" },
-          { "id": "strat_3", "section": "Strategies Used & Outcomes", "text": "Were there moments this week when you defaulted to yes/no or recall questions when you could have opened things up? What got in the way?" },
-          { "id": "goal_1", "section": "Goals for the Week Ahead", "text": "Looking back across all 12 weeks — what is the one practice you most want to keep building beyond this program?" },
-          { "id": "goal_2", "section": "Goals for the Week Ahead", "text": "What is one specific question stem you want to use more often as you continue your teaching practice?" },
-          { "id": "data_1", "section": "Data, Assessment & Progress", "text": "On a scale of 1–5, how often did you ask higher-order questions this week? What evidence supports your rating?" },
-          { "id": "data_2", "section": "Data, Assessment & Progress", "text": "Which child has surprised you most across these 12 weeks with the depth of their thinking? What do you think made the difference?" }
+          {
+            "id": "prev_1",
+            "section": "Previous Week Recap",
+            "text": "Last week you focused on Language Modeling. What was your biggest takeaway about how language fuels children's thinking?"
+          },
+          {
+            "id": "prev_2",
+            "section": "Previous Week Recap",
+            "text": "Did you follow through on your goal from Week 11? What happened — and if you didn't fully meet it, what got in the way?"
+          },
+          {
+            "id": "strat_1",
+            "section": "Strategies Used & Outcomes",
+            "text": "Describe a moment this week when you asked a question that genuinely surprised you with a child's answer."
+          },
+          {
+            "id": "strat_2",
+            "section": "Strategies Used & Outcomes",
+            "text": "When did you ask a 'what if,' 'why do you think,' or 'how would you' question this week? What did children do with it?"
+          },
+          {
+            "id": "strat_3",
+            "section": "Strategies Used & Outcomes",
+            "text": "Were there moments this week when you defaulted to yes/no or recall questions when you could have opened things up? What got in the way?"
+          },
+          {
+            "id": "goal_1",
+            "section": "Goals for the Week Ahead",
+            "text": "Looking back across all 12 weeks — what is the one practice you most want to keep building beyond this program?"
+          },
+          {
+            "id": "goal_2",
+            "section": "Goals for the Week Ahead",
+            "text": "What is one specific question stem you want to use more often as you continue your teaching practice?"
+          },
+          {
+            "id": "data_1",
+            "section": "Data, Assessment & Progress",
+            "text": "On a scale of 1–5, how often did you ask higher-order questions this week? What evidence supports your rating?"
+          },
+          {
+            "id": "data_2",
+            "section": "Data, Assessment & Progress",
+            "text": "Which child has surprised you most across these 12 weeks with the depth of their thinking? What do you think made the difference?"
+          }
         ]
       },
       "daily": {
         "mentee": [
-          { "id": "d1", "text": "Today's focus area was Higher-Order Questioning. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic." },
-          { "id": "d2", "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?" },
-          { "id": "d3", "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?" },
-          { "id": "d4", "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?" },
-          { "id": "d5", "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?" },
-          { "id": "bridge", "section": "Bridge to Weekly Reflection", "text": "Key moment or observation to carry into weekly reflection:" }
+          {
+            "id": "d1",
+            "text": "Today's focus area was Higher-Order Questioning. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+          },
+          {
+            "id": "d2",
+            "text": "What is one thing you tried today that was intentional or new? What was the immediate outcome?"
+          },
+          {
+            "id": "d3",
+            "text": "Is there a child, interaction, or pattern from today that you want to bring to your next mentor conversation? Why does it stand out?"
+          },
+          {
+            "id": "d4",
+            "text": "On a scale of 1–5, how present and effective did you feel today? What influenced that number most?"
+          },
+          {
+            "id": "d5",
+            "text": "What is one thing you will do differently or build on tomorrow based on what you observed or experienced today?"
+          },
+          {
+            "id": "bridge",
+            "section": "Bridge to Weekly Reflection",
+            "text": "Key moment or observation to carry into weekly reflection:"
+          }
         ],
         "mentor": [
-          { "id": "m1", "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Higher-Order Questioning?" },
-          { "id": "m2", "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?" },
-          { "id": "m3", "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?" },
-          { "id": "m4", "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?" },
-          { "id": "m5", "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?" }
+          {
+            "id": "m1",
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Higher-Order Questioning?"
+          },
+          {
+            "id": "m2",
+            "text": "What is one area where your mentee needs additional support, modeling, or a different approach in the days ahead?"
+          },
+          {
+            "id": "m3",
+            "text": "How effectively did you facilitate today's coaching conversation? Was there a moment where you could have asked a better question or listened more deeply?"
+          },
+          {
+            "id": "m4",
+            "text": "What is one specific strategy or resource you want to bring to your next session based on what you observed today?"
+          },
+          {
+            "id": "m5",
+            "text": "On a scale of 1–5, how would you rate the quality of today's mentoring interaction? What contributed to that rating?"
+          }
         ]
       }
     }
@@ -437,20 +1304,56 @@
       "_placeholder": "Awaiting Rebecca's final wording for end-of-domain reflections.",
       "questions": {
         "mentee": [
-          { "id": "eod1_1", "text": "Looking back across the four weeks of Domain 1, what is the single most important shift you have made in your classroom?" },
-          { "id": "eod1_2", "text": "Which week's topic — Positive Climate, Teacher Sensitivity, Regard for Child Perspective, or Negative Climate — challenged you most, and what did the struggle teach you?" },
-          { "id": "eod1_3", "text": "What evidence do you have that the emotional climate in your classroom is different now than it was four weeks ago?" },
-          { "id": "eod1_4", "text": "How has your relationship with your mentor supported your growth in this domain? What would make it stronger going into Domain 2?" },
-          { "id": "eod1_5", "text": "On a scale of 1–5, how would you rate the quality and effectiveness of the mentoring program so far? What is contributing to that rating?" },
-          { "id": "eod1_6", "text": "What is one piece of honest feedback — about the program, the curriculum, or the experience — you want to share before Domain 2 begins?" }
+          {
+            "id": "eod1_1",
+            "text": "Looking back across the four weeks of Domain 1, what is the single most important shift you have made in your classroom?"
+          },
+          {
+            "id": "eod1_2",
+            "text": "Which week's topic — Positive Climate, Teacher Sensitivity, Regard for Child Perspective, or Negative Climate — challenged you most, and what did the struggle teach you?"
+          },
+          {
+            "id": "eod1_3",
+            "text": "What evidence do you have that the emotional climate in your classroom is different now than it was four weeks ago?"
+          },
+          {
+            "id": "eod1_4",
+            "text": "How has your relationship with your mentor supported your growth in this domain? What would make it stronger going into Domain 2?"
+          },
+          {
+            "id": "eod1_5",
+            "text": "On a scale of 1–5, how would you rate the quality and effectiveness of the mentoring program so far? What is contributing to that rating?"
+          },
+          {
+            "id": "eod1_6",
+            "text": "What is one piece of honest feedback — about the program, the curriculum, or the experience — you want to share before Domain 2 begins?"
+          }
         ],
         "mentor": [
-          { "id": "eod1_1", "text": "Looking back across the four weeks of Domain 1, what is the single most important shift you have observed in your mentee?" },
-          { "id": "eod1_2", "text": "Which week's topic produced the most growth, and which exposed the deepest area for continued work?" },
-          { "id": "eod1_3", "text": "What evidence do you have that this mentee's classroom emotional climate has changed over these four weeks?" },
-          { "id": "eod1_4", "text": "How has your coaching approach evolved across this domain? Where do you want to grow as a mentor in Domain 2?" },
-          { "id": "eod1_5", "text": "On a scale of 1–5, how would you rate the quality and effectiveness of the mentoring relationship so far? What is contributing to that rating?" },
-          { "id": "eod1_6", "text": "What is one piece of honest feedback — about the program, the curriculum, or the experience — you want to share before Domain 2 begins?" }
+          {
+            "id": "eod1_1",
+            "text": "Looking back across the four weeks of Domain 1, what is the single most important shift you have observed in your mentee?"
+          },
+          {
+            "id": "eod1_2",
+            "text": "Which week's topic produced the most growth, and which exposed the deepest area for continued work?"
+          },
+          {
+            "id": "eod1_3",
+            "text": "What evidence do you have that this mentee's classroom emotional climate has changed over these four weeks?"
+          },
+          {
+            "id": "eod1_4",
+            "text": "How has your coaching approach evolved across this domain? Where do you want to grow as a mentor in Domain 2?"
+          },
+          {
+            "id": "eod1_5",
+            "text": "On a scale of 1–5, how would you rate the quality and effectiveness of the mentoring relationship so far? What is contributing to that rating?"
+          },
+          {
+            "id": "eod1_6",
+            "text": "What is one piece of honest feedback — about the program, the curriculum, or the experience — you want to share before Domain 2 begins?"
+          }
         ]
       }
     },
@@ -461,20 +1364,56 @@
       "_placeholder": "Awaiting Rebecca's final wording.",
       "questions": {
         "mentee": [
-          { "id": "eod2_1", "text": "Looking back across Domain 2 — Behavior Management, Productivity, Instructional Learning Formats, and Learning Environment Design — what is the single most important shift you have made in how your classroom runs?" },
-          { "id": "eod2_2", "text": "Which week's topic challenged you most, and what did the struggle teach you?" },
-          { "id": "eod2_3", "text": "What evidence do you have that your classroom is more organized, productive, or engaging now than it was four weeks ago?" },
-          { "id": "eod2_4", "text": "How has your relationship with your mentor supported your growth in this domain? What would make it stronger going into Domain 3?" },
-          { "id": "eod2_5", "text": "On a scale of 1–5, how would you rate the quality and effectiveness of the mentoring program in this domain? What is contributing to that rating?" },
-          { "id": "eod2_6", "text": "What is one piece of honest feedback you want to share before Domain 3 begins?" }
+          {
+            "id": "eod2_1",
+            "text": "Looking back across Domain 2 — Behavior Management, Productivity, Instructional Learning Formats, and Learning Environment Design — what is the single most important shift you have made in how your classroom runs?"
+          },
+          {
+            "id": "eod2_2",
+            "text": "Which week's topic challenged you most, and what did the struggle teach you?"
+          },
+          {
+            "id": "eod2_3",
+            "text": "What evidence do you have that your classroom is more organized, productive, or engaging now than it was four weeks ago?"
+          },
+          {
+            "id": "eod2_4",
+            "text": "How has your relationship with your mentor supported your growth in this domain? What would make it stronger going into Domain 3?"
+          },
+          {
+            "id": "eod2_5",
+            "text": "On a scale of 1–5, how would you rate the quality and effectiveness of the mentoring program in this domain? What is contributing to that rating?"
+          },
+          {
+            "id": "eod2_6",
+            "text": "What is one piece of honest feedback you want to share before Domain 3 begins?"
+          }
         ],
         "mentor": [
-          { "id": "eod2_1", "text": "Looking back across Domain 2, what is the single most important shift you have observed in your mentee's classroom organization?" },
-          { "id": "eod2_2", "text": "Which week produced the most growth, and which exposed the deepest area for continued work?" },
-          { "id": "eod2_3", "text": "What evidence do you have that this mentee's environment, routines, or instructional approach has changed over these four weeks?" },
-          { "id": "eod2_4", "text": "How has your coaching approach evolved across this domain? Where do you want to grow as a mentor in Domain 3?" },
-          { "id": "eod2_5", "text": "On a scale of 1–5, how would you rate the quality and effectiveness of the mentoring relationship in this domain? What is contributing to that rating?" },
-          { "id": "eod2_6", "text": "What is one piece of honest feedback you want to share before Domain 3 begins?" }
+          {
+            "id": "eod2_1",
+            "text": "Looking back across Domain 2, what is the single most important shift you have observed in your mentee's classroom organization?"
+          },
+          {
+            "id": "eod2_2",
+            "text": "Which week produced the most growth, and which exposed the deepest area for continued work?"
+          },
+          {
+            "id": "eod2_3",
+            "text": "What evidence do you have that this mentee's environment, routines, or instructional approach has changed over these four weeks?"
+          },
+          {
+            "id": "eod2_4",
+            "text": "How has your coaching approach evolved across this domain? Where do you want to grow as a mentor in Domain 3?"
+          },
+          {
+            "id": "eod2_5",
+            "text": "On a scale of 1–5, how would you rate the quality and effectiveness of the mentoring relationship in this domain? What is contributing to that rating?"
+          },
+          {
+            "id": "eod2_6",
+            "text": "What is one piece of honest feedback you want to share before Domain 3 begins?"
+          }
         ]
       }
     },
@@ -485,22 +1424,64 @@
       "_placeholder": "Awaiting Rebecca's final wording.",
       "questions": {
         "mentee": [
-          { "id": "eod3_1", "text": "We have reached the end of all three domains and the full 12-week program. Looking across the entire journey, what is the single most important shift you have made as a teacher?" },
-          { "id": "eod3_2", "text": "Of the twelve weekly topics — across all three domains — which one transformed your practice most, and why?" },
-          { "id": "eod3_3", "text": "What evidence do you have that your classroom is fundamentally different now than it was twelve weeks ago — for you and for the children?" },
-          { "id": "eod3_4", "text": "Looking back across the full mentoring relationship, what made it work? What would have made it even more powerful?" },
-          { "id": "eod3_5", "text": "On a scale of 1–5, how would you rate the overall quality and effectiveness of the entire mentoring program? What is contributing to that rating?" },
-          { "id": "eod3_6", "text": "What practice from this program will you carry forward beyond Week 12? What is your plan for sustaining your growth?" },
-          { "id": "eod3_7", "text": "What is one piece of honest feedback — about the program, the curriculum, or the experience — that you want Inspired Growth and the program leaders to know?" }
+          {
+            "id": "eod3_1",
+            "text": "We have reached the end of all three domains and the full 12-week program. Looking across the entire journey, what is the single most important shift you have made as a teacher?"
+          },
+          {
+            "id": "eod3_2",
+            "text": "Of the twelve weekly topics — across all three domains — which one transformed your practice most, and why?"
+          },
+          {
+            "id": "eod3_3",
+            "text": "What evidence do you have that your classroom is fundamentally different now than it was twelve weeks ago — for you and for the children?"
+          },
+          {
+            "id": "eod3_4",
+            "text": "Looking back across the full mentoring relationship, what made it work? What would have made it even more powerful?"
+          },
+          {
+            "id": "eod3_5",
+            "text": "On a scale of 1–5, how would you rate the overall quality and effectiveness of the entire mentoring program? What is contributing to that rating?"
+          },
+          {
+            "id": "eod3_6",
+            "text": "What practice from this program will you carry forward beyond Week 12? What is your plan for sustaining your growth?"
+          },
+          {
+            "id": "eod3_7",
+            "text": "What is one piece of honest feedback — about the program, the curriculum, or the experience — that you want Inspired Growth and the program leaders to know?"
+          }
         ],
         "mentor": [
-          { "id": "eod3_1", "text": "Looking across the full 12-week journey, what is the single most important transformation you have observed in your mentee?" },
-          { "id": "eod3_2", "text": "Of the twelve weekly topics, which one produced the most growth in your mentee, and which still represents a frontier?" },
-          { "id": "eod3_3", "text": "What evidence do you have that this mentee's practice is fundamentally different now than it was twelve weeks ago?" },
-          { "id": "eod3_4", "text": "Looking back across the full mentoring relationship, what made your coaching effective? What would have made it stronger?" },
-          { "id": "eod3_5", "text": "On a scale of 1–5, how would you rate the overall quality and effectiveness of the mentoring relationship across all 12 weeks? What is contributing to that rating?" },
-          { "id": "eod3_6", "text": "What did you learn about yourself as a mentor through this program? What will you carry forward into your next mentoring relationship?" },
-          { "id": "eod3_7", "text": "What is one piece of honest feedback — about the program, the curriculum, or the experience — that you want Inspired Growth and the program leaders to know?" }
+          {
+            "id": "eod3_1",
+            "text": "Looking across the full 12-week journey, what is the single most important transformation you have observed in your mentee?"
+          },
+          {
+            "id": "eod3_2",
+            "text": "Of the twelve weekly topics, which one produced the most growth in your mentee, and which still represents a frontier?"
+          },
+          {
+            "id": "eod3_3",
+            "text": "What evidence do you have that this mentee's practice is fundamentally different now than it was twelve weeks ago?"
+          },
+          {
+            "id": "eod3_4",
+            "text": "Looking back across the full mentoring relationship, what made your coaching effective? What would have made it stronger?"
+          },
+          {
+            "id": "eod3_5",
+            "text": "On a scale of 1–5, how would you rate the overall quality and effectiveness of the mentoring relationship across all 12 weeks? What is contributing to that rating?"
+          },
+          {
+            "id": "eod3_6",
+            "text": "What did you learn about yourself as a mentor through this program? What will you carry forward into your next mentoring relationship?"
+          },
+          {
+            "id": "eod3_7",
+            "text": "What is one piece of honest feedback — about the program, the curriculum, or the experience — that you want Inspired Growth and the program leaders to know?"
+          }
         ]
       }
     }

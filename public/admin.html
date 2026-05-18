@@ -251,6 +251,34 @@
     overflow: hidden;
     background: white;
   }
+  .sort-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 9px;
+    padding: 0 12px;
+    height: 40px;
+  }
+  .sort-wrap .sort-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+  .sort-wrap select {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 13.5px;
+    color: var(--text);
+    font-weight: 500;
+    cursor: pointer;
+    padding: 4px 4px 4px 0;
+    outline: none;
+  }
   .vt-btn {
     background: white;
     border: none;
@@ -276,12 +304,16 @@
   .center-list .cl-head,
   .center-list .cl-row {
     display: grid;
-    grid-template-columns: 2fr 1.5fr 1fr 1fr 90px;
+    grid-template-columns: 2fr 1.5fr 1fr 1fr 110px;
     gap: 12px;
     align-items: center;
     padding: 12px 18px;
     font-size: 13.5px;
   }
+  .center-list .cl-head {
+    cursor: default;
+  }
+  .center-list .cl-head > div { font-size: 11px; }
   .center-list .cl-head {
     background: var(--cream-dark);
     font-size: 11px;
@@ -291,6 +323,21 @@
     color: var(--text-muted);
     border-bottom: 1.5px solid var(--line);
   }
+  .center-list .cl-head .cl-sort {
+    cursor: pointer;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.1s;
+  }
+  .center-list .cl-head .cl-sort:hover { color: var(--green-deep); }
+  .center-list .cl-head .cl-sort.active { color: var(--green-deep); }
+  .center-list .cl-head .cl-sort .arrow {
+    font-size: 9px;
+    opacity: 0.4;
+  }
+  .center-list .cl-head .cl-sort.active .arrow { opacity: 1; color: var(--gold); }
   .center-list .cl-row {
     border-bottom: 1px solid var(--line-soft);
     cursor: pointer;
@@ -613,6 +660,19 @@
         <div class="search-wrap">
           <input type="text" id="centers-search" placeholder="Search centers by name…" oninput="renderCenters()">
         </div>
+        <div class="sort-wrap" id="sort-wrap">
+          <label class="sort-label">Sort:</label>
+          <select id="centers-sort" onchange="onSortChange()">
+            <option value="name-asc">Name (A–Z)</option>
+            <option value="name-desc">Name (Z–A)</option>
+            <option value="status-active">Status (Active first)</option>
+            <option value="status-empty">Status (Not started first)</option>
+            <option value="mentor-desc">Most mentors first</option>
+            <option value="mentor-asc">Fewest mentors first</option>
+            <option value="mentee-desc">Most mentees first</option>
+            <option value="mentee-asc">Fewest mentees first</option>
+          </select>
+        </div>
         <div class="view-toggle">
           <button class="vt-btn active" id="vt-cards" onclick="setViewMode('cards')" title="Card view">▦ Cards</button>
           <button class="vt-btn" id="vt-list" onclick="setViewMode('list')" title="List view">≡ List</button>
@@ -775,6 +835,7 @@ async function loadCenters() {
 }
 
 let viewMode = 'cards';
+let sortMode = 'name-asc'; // matches default <option>
 
 function setViewMode(mode) {
   viewMode = mode;
@@ -792,11 +853,69 @@ function setViewMode(mode) {
   renderCenters();
 }
 
+function onSortChange() {
+  const sel = document.getElementById('centers-sort');
+  sortMode = sel.value;
+  renderCenters();
+}
+
+// Programmatic sort change (used when clicking column headers in list view)
+function setSort(mode) {
+  sortMode = mode;
+  const sel = document.getElementById('centers-sort');
+  // If the mode matches a dropdown option, sync it; otherwise add temporarily
+  if (sel) {
+    let found = false;
+    for (let i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].value === mode) { sel.selectedIndex = i; found = true; break; }
+    }
+    if (!found) {
+      // Fall back to leaving the dropdown alone — column click drives it
+      sel.selectedIndex = -1;
+    }
+  }
+  renderCenters();
+}
+
+// Click handler for list-view column headers: toggle asc/desc on the chosen field
+function clickSort(field) {
+  // Current direction inferred from sortMode
+  const parts = sortMode.split('-');
+  const currentField = parts[0];
+  const currentDir = parts[1];
+  let newDir = 'asc';
+  if (currentField === field) {
+    newDir = (currentDir === 'asc') ? 'desc' : 'asc';
+  }
+  // Map field shorthand to full sort modes
+  if (field === 'name') setSort('name-' + newDir);
+  else if (field === 'mentor') setSort('mentor-' + (newDir === 'asc' ? 'asc' : 'desc'));
+  else if (field === 'mentee') setSort('mentee-' + (newDir === 'asc' ? 'asc' : 'desc'));
+  else if (field === 'status') setSort(newDir === 'asc' ? 'status-active' : 'status-empty');
+}
+
+function sortCenters(list) {
+  const arr = list.slice(); // don't mutate
+  const cmpName = (a, b) => (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' });
+  switch (sortMode) {
+    case 'name-asc':       arr.sort(cmpName); break;
+    case 'name-desc':      arr.sort((a, b) => cmpName(b, a)); break;
+    case 'status-active':  arr.sort((a, b) => (a.is_empty - b.is_empty) || cmpName(a, b)); break;
+    case 'status-empty':   arr.sort((a, b) => (b.is_empty - a.is_empty) || cmpName(a, b)); break;
+    case 'mentor-desc':    arr.sort((a, b) => (b.mentor_count - a.mentor_count) || cmpName(a, b)); break;
+    case 'mentor-asc':     arr.sort((a, b) => (a.mentor_count - b.mentor_count) || cmpName(a, b)); break;
+    case 'mentee-desc':    arr.sort((a, b) => (b.mentee_count - a.mentee_count) || cmpName(a, b)); break;
+    case 'mentee-asc':     arr.sort((a, b) => (a.mentee_count - b.mentee_count) || cmpName(a, b)); break;
+    default:               arr.sort(cmpName);
+  }
+  return arr;
+}
+
 function getFilteredCenters() {
   const searchEl = document.getElementById('centers-search');
   const q = searchEl ? searchEl.value.trim().toLowerCase() : '';
-  if (!q) return allCenters;
-  return allCenters.filter(c => (c.name || '').toLowerCase().includes(q));
+  let list = q ? allCenters.filter(c => (c.name || '').toLowerCase().includes(q)) : allCenters;
+  return sortCenters(list);
 }
 
 function renderCenters() {
@@ -850,13 +969,32 @@ function renderCentersCards(list) {
 }
 
 function renderCentersList(list) {
+  // Figure out the active sort for showing arrows
+  const parts = sortMode.split('-');
+  const sortField = parts[0];
+  const sortDir = parts[1];
+  const arrow = (field) => {
+    let isActive = false;
+    let dirArrow = '';
+    if (field === 'status') {
+      if (sortField === 'status') {
+        isActive = true;
+        dirArrow = (sortMode === 'status-active') ? '▲' : '▼';
+      }
+    } else if (sortField === field) {
+      isActive = true;
+      dirArrow = (sortDir === 'asc') ? '▲' : '▼';
+    }
+    return `<span class="cl-sort ${isActive ? 'active' : ''}" onclick="clickSort('${field}')">{HEADER} <span class="arrow">${dirArrow || '↕'}</span></span>`;
+  };
+
   let html = '<div class="center-list">';
   html += '<div class="cl-head">' +
-    '<div>Center</div>' +
+    '<div>' + arrow('name').replace('{HEADER}', 'Center') + '</div>' +
     '<div>Director(s)</div>' +
-    '<div>Mentors</div>' +
-    '<div>Mentees</div>' +
-    '<div></div>' +
+    '<div>' + arrow('mentor').replace('{HEADER}', 'Mentors') + '</div>' +
+    '<div>' + arrow('mentee').replace('{HEADER}', 'Mentees') + '</div>' +
+    '<div>' + arrow('status').replace('{HEADER}', 'Status') + '</div>' +
     '</div>';
   list.forEach(c => {
     const dirs = (c.directors || []).map(d => escapeHtml(d.name)).join(', ') || '<span style="color:var(--text-muted)">— none —</span>';
@@ -867,12 +1005,11 @@ function renderCentersList(list) {
       <div class="cl-row ${c.is_empty ? 'is-empty' : ''}" onclick="openCenter(${c.id})">
         <div>
           <div class="cl-name">${escapeHtml(c.name)}</div>
-          ${status}
         </div>
         <div class="cl-director">${dirs}</div>
         <div>${c.mentor_count}/${c.mentor_seats}</div>
         <div>${c.mentee_count}/${c.mentee_seats}</div>
-        <div class="cl-open">Open →</div>
+        <div>${status}</div>
       </div>
     `;
   });

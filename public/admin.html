@@ -194,6 +194,137 @@
     opacity: 0.5;
     transition: opacity 0.15s;
   }
+
+  /* ── Empty / not-yet-started center styling ── */
+  .center-card.is-empty {
+    background: #f4f1ea;
+    border-color: #ddd;
+    opacity: 0.85;
+  }
+  .center-card.is-empty h3 { color: var(--text-soft); }
+  .center-card.is-empty .stat-num { color: var(--text-muted); }
+  .center-card.is-empty::after {
+    content: 'Not yet started';
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    font-size: 10.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.7);
+    padding: 3px 8px;
+    border-radius: 10px;
+  }
+  .center-card.is-empty:hover .open-hint { opacity: 0; }
+
+  /* ── Toolbar with search + view toggle ── */
+  .centers-toolbar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .search-wrap { flex: 1; min-width: 220px; }
+  .search-wrap input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 14px;
+    background: white;
+    color: var(--text);
+  }
+  .search-wrap input:focus {
+    outline: none;
+    border-color: var(--green-mid);
+    box-shadow: 0 0 0 3px rgba(74,124,89,0.1);
+  }
+  .view-toggle {
+    display: flex;
+    gap: 0;
+    border: 1.5px solid var(--line);
+    border-radius: 9px;
+    overflow: hidden;
+    background: white;
+  }
+  .vt-btn {
+    background: white;
+    border: none;
+    padding: 9px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-soft);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .vt-btn + .vt-btn { border-left: 1.5px solid var(--line); }
+  .vt-btn:hover { background: var(--cream); }
+  .vt-btn.active { background: var(--green-deep); color: white; }
+
+  /* ── List view (table-like) ── */
+  .center-list {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .center-list .cl-head,
+  .center-list .cl-row {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr 1fr 90px;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 18px;
+    font-size: 13.5px;
+  }
+  .center-list .cl-head {
+    background: var(--cream-dark);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    border-bottom: 1.5px solid var(--line);
+  }
+  .center-list .cl-row {
+    border-bottom: 1px solid var(--line-soft);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .center-list .cl-row:last-child { border-bottom: none; }
+  .center-list .cl-row:hover { background: var(--cream); }
+  .center-list .cl-row.is-empty { background: #f6f3eb; color: var(--text-soft); }
+  .center-list .cl-row.is-empty:hover { background: #ede9dd; }
+  .center-list .cl-name { font-weight: 600; color: var(--green-deep); }
+  .center-list .cl-row.is-empty .cl-name { color: var(--text-soft); }
+  .center-list .cl-director { color: var(--text-soft); }
+  .center-list .cl-status {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .center-list .cl-status.active { background: var(--success-bg); color: var(--success); }
+  .center-list .cl-status.empty { background: #e7e2d3; color: var(--text-muted); }
+  .center-list .cl-open {
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 12px;
+    text-align: right;
+  }
+  @media (max-width: 780px) {
+    .center-list .cl-head { display: none; }
+    .center-list .cl-row { grid-template-columns: 1fr; gap: 4px; }
+    .center-list .cl-row .cl-open { text-align: left; }
+  }
   .center-card h3 {
     font-family: 'Playfair Display', serif;
     font-size: 18px;
@@ -478,6 +609,15 @@
         <h2>Centers &amp; Program Directors</h2>
         <button class="primary" onclick="openCreateCenter()">+ New Center</button>
       </div>
+      <div class="centers-toolbar">
+        <div class="search-wrap">
+          <input type="text" id="centers-search" placeholder="Search centers by name…" oninput="renderCenters()">
+        </div>
+        <div class="view-toggle">
+          <button class="vt-btn active" id="vt-cards" onclick="setViewMode('cards')" title="Card view">▦ Cards</button>
+          <button class="vt-btn" id="vt-list" onclick="setViewMode('list')" title="List view">≡ List</button>
+        </div>
+      </div>
       <div id="centers-grid" class="center-grid">
         <div class="empty">Loading centers…</div>
       </div>
@@ -634,15 +774,55 @@ async function loadCenters() {
   }
 }
 
+let viewMode = 'cards';
+
+function setViewMode(mode) {
+  viewMode = mode;
+  document.getElementById('vt-cards').classList.toggle('active', mode === 'cards');
+  document.getElementById('vt-list').classList.toggle('active', mode === 'list');
+  // Toggle container class to swap layout
+  const grid = document.getElementById('centers-grid');
+  if (mode === 'cards') {
+    grid.classList.add('center-grid');
+    grid.classList.remove('center-list-wrap');
+  } else {
+    grid.classList.remove('center-grid');
+    grid.classList.add('center-list-wrap');
+  }
+  renderCenters();
+}
+
+function getFilteredCenters() {
+  const searchEl = document.getElementById('centers-search');
+  const q = searchEl ? searchEl.value.trim().toLowerCase() : '';
+  if (!q) return allCenters;
+  return allCenters.filter(c => (c.name || '').toLowerCase().includes(q));
+}
+
 function renderCenters() {
   const grid = document.getElementById('centers-grid');
+  const list = getFilteredCenters();
+
   if (allCenters.length === 0) {
     grid.innerHTML = '<div class="empty">No centers yet. Click <strong>+ New Center</strong> to get started.</div>';
     return;
   }
-  grid.innerHTML = allCenters.map(c => `
-    <div class="center-card" onclick="openCenter(${c.id})">
-      <div class="open-hint">Open →</div>
+  if (list.length === 0) {
+    grid.innerHTML = '<div class="empty">No centers match your search.</div>';
+    return;
+  }
+
+  if (viewMode === 'list') {
+    grid.innerHTML = renderCentersList(list);
+  } else {
+    grid.innerHTML = renderCentersCards(list);
+  }
+}
+
+function renderCentersCards(list) {
+  return list.map(c => `
+    <div class="center-card ${c.is_empty ? 'is-empty' : ''}" onclick="openCenter(${c.id})">
+      ${!c.is_empty ? '<div class="open-hint">Open →</div>' : ''}
       <h3>${escapeHtml(c.name)}</h3>
       <div class="stats">
         <div class="stat">
@@ -667,6 +847,37 @@ function renderCenters() {
       </div>
     </div>
   `).join('');
+}
+
+function renderCentersList(list) {
+  let html = '<div class="center-list">';
+  html += '<div class="cl-head">' +
+    '<div>Center</div>' +
+    '<div>Director(s)</div>' +
+    '<div>Mentors</div>' +
+    '<div>Mentees</div>' +
+    '<div></div>' +
+    '</div>';
+  list.forEach(c => {
+    const dirs = (c.directors || []).map(d => escapeHtml(d.name)).join(', ') || '<span style="color:var(--text-muted)">— none —</span>';
+    const status = c.is_empty
+      ? '<span class="cl-status empty">Not started</span>'
+      : '<span class="cl-status active">Active</span>';
+    html += `
+      <div class="cl-row ${c.is_empty ? 'is-empty' : ''}" onclick="openCenter(${c.id})">
+        <div>
+          <div class="cl-name">${escapeHtml(c.name)}</div>
+          ${status}
+        </div>
+        <div class="cl-director">${dirs}</div>
+        <div>${c.mentor_count}/${c.mentor_seats}</div>
+        <div>${c.mentee_count}/${c.mentee_seats}</div>
+        <div class="cl-open">Open →</div>
+      </div>
+    `;
+  });
+  html += '</div>';
+  return html;
 }
 
 function openCenter(id) {

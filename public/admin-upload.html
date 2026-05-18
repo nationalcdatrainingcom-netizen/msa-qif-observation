@@ -3,218 +3,1106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MSA Resource Admin</title>
+<title>MSA Admin Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; padding: 20px; background: #faf7f0; color: #1a1a24; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-p { color: #666; font-size: 14px; margin-bottom: 28px; }
-.card { background: white; border: 1px solid #e4ddd0; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #888; display: block; margin-bottom: 6px; margin-top: 14px; }
-input, select { width: 100%; padding: 10px 12px; border: 1.5px solid #e4ddd0; border-radius: 8px; font-family: inherit; font-size: 14px; box-sizing: border-box; background: #faf7f0; }
-input:focus, select:focus { outline: none; border-color: #c9953a; background: white; }
-.btn { width: 100%; padding: 13px; background: #3d6b50; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 18px; font-family: inherit; }
-.btn:hover { background: #5a8f6d; }
-.status { padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; margin-top: 14px; display: none; }
-.status.ok { background: #edf7f1; color: #2d6e45; border: 1px solid #9fd4b0; }
-.status.err { background: #fdf0f0; color: #9b2828; border: 1px solid #f0b8b8; }
-.existing { margin-top: 28px; }
-.existing h2 { font-size: 16px; margin-bottom: 12px; }
-.res-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: white; border: 1px solid #e4ddd0; border-radius: 8px; margin-bottom: 8px; font-size: 13px; }
-.res-row a { color: #c9953a; font-weight: 700; text-decoration: none; }
-.res-row .actions { display: flex; gap: 12px; align-items: center; }
-.btn-delete { background: none; border: 1.5px solid #e4ddd0; color: #9b2828; border-radius: 6px; padding: 4px 10px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.15s; }
-.btn-delete:hover { background: #fdf0f0; border-color: #f0b8b8; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep: #2c4a35;
+    --green-mid: #4a7c59;
+    --gold: #c9953a;
+    --gold-soft: #e0b870;
+    --cream: #faf8f3;
+    --cream-dark: #f0ebe0;
+    --line: #ddd8cc;
+    --line-soft: #eee8dc;
+    --text: #2c2c2c;
+    --text-soft: #666;
+    --text-muted: #999;
+    --error: #b54545;
+    --error-bg: #fdf3f3;
+    --success: #4a7c59;
+    --success-bg: #f0f7f1;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── Top bar ── */
+  header {
+    background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%);
+    color: white;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo {
+    background: var(--gold);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .brand h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .brand .label {
+    font-size: 11px;
+    opacity: 0.7;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .top-right { display: flex; align-items: center; gap: 16px; font-size: 13px; }
+  .top-right a { color: rgba(255,255,255,0.85); text-decoration: none; }
+  .top-right a:hover { color: white; }
+
+  /* ── Tabs ── */
+  .tabs {
+    background: white;
+    border-bottom: 1px solid var(--line);
+    padding: 0 32px;
+    display: flex;
+    gap: 4px;
+  }
+  .tab {
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-soft);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active {
+    color: var(--green-deep);
+    border-bottom-color: var(--gold);
+    font-weight: 600;
+  }
+
+  main { padding: 32px; max-width: 1280px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── Section heading ── */
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .section-head h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--green-deep);
+  }
+  .section-head .meta {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* ── Buttons ── */
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+  button.primary {
+    background: var(--green-deep);
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.15s;
+  }
+  button.primary:hover { background: var(--green-mid); }
+  button.secondary {
+    background: white;
+    color: var(--green-deep);
+    border: 1.5px solid var(--green-deep);
+    padding: 8px 14px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.15s;
+  }
+  button.secondary:hover { background: var(--cream-dark); }
+  button.ghost {
+    background: transparent;
+    color: var(--text-soft);
+    border: 1px solid var(--line);
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    transition: background 0.15s;
+  }
+  button.ghost:hover { background: var(--cream); color: var(--text); }
+
+  /* ── Cards & lists ── */
+  .center-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+  }
+  .center-card {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 22px;
+    transition: box-shadow 0.15s, border-color 0.15s, transform 0.1s;
+    cursor: pointer;
+    position: relative;
+  }
+  .center-card:hover { box-shadow: 0 6px 24px rgba(44,74,53,0.1); border-color: var(--gold-soft); transform: translateY(-1px); }
+  .center-card:hover .open-hint { opacity: 1; }
+  .center-card .open-hint {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    transition: opacity 0.15s;
+  }
+
+  /* ── Empty / not-yet-started center styling ── */
+  .center-card.is-empty {
+    background: #f4f1ea;
+    border-color: #ddd;
+    opacity: 0.85;
+  }
+  .center-card.is-empty h3 { color: var(--text-soft); }
+  .center-card.is-empty .stat-num { color: var(--text-muted); }
+  .center-card.is-empty::after {
+    content: 'Not yet started';
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    font-size: 10.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.7);
+    padding: 3px 8px;
+    border-radius: 10px;
+  }
+  .center-card.is-empty:hover .open-hint { opacity: 0; }
+
+  /* ── Toolbar with search + view toggle ── */
+  .centers-toolbar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .search-wrap { flex: 1; min-width: 220px; }
+  .search-wrap input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 14px;
+    background: white;
+    color: var(--text);
+  }
+  .search-wrap input:focus {
+    outline: none;
+    border-color: var(--green-mid);
+    box-shadow: 0 0 0 3px rgba(74,124,89,0.1);
+  }
+  .view-toggle {
+    display: flex;
+    gap: 0;
+    border: 1.5px solid var(--line);
+    border-radius: 9px;
+    overflow: hidden;
+    background: white;
+  }
+  .vt-btn {
+    background: white;
+    border: none;
+    padding: 9px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-soft);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .vt-btn + .vt-btn { border-left: 1.5px solid var(--line); }
+  .vt-btn:hover { background: var(--cream); }
+  .vt-btn.active { background: var(--green-deep); color: white; }
+
+  /* ── List view (table-like) ── */
+  .center-list {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .center-list .cl-head,
+  .center-list .cl-row {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr 1fr 90px;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 18px;
+    font-size: 13.5px;
+  }
+  .center-list .cl-head {
+    background: var(--cream-dark);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    border-bottom: 1.5px solid var(--line);
+  }
+  .center-list .cl-row {
+    border-bottom: 1px solid var(--line-soft);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .center-list .cl-row:last-child { border-bottom: none; }
+  .center-list .cl-row:hover { background: var(--cream); }
+  .center-list .cl-row.is-empty { background: #f6f3eb; color: var(--text-soft); }
+  .center-list .cl-row.is-empty:hover { background: #ede9dd; }
+  .center-list .cl-name { font-weight: 600; color: var(--green-deep); }
+  .center-list .cl-row.is-empty .cl-name { color: var(--text-soft); }
+  .center-list .cl-director { color: var(--text-soft); }
+  .center-list .cl-status {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .center-list .cl-status.active { background: var(--success-bg); color: var(--success); }
+  .center-list .cl-status.empty { background: #e7e2d3; color: var(--text-muted); }
+  .center-list .cl-open {
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 12px;
+    text-align: right;
+  }
+  @media (max-width: 780px) {
+    .center-list .cl-head { display: none; }
+    .center-list .cl-row { grid-template-columns: 1fr; gap: 4px; }
+    .center-list .cl-row .cl-open { text-align: left; }
+  }
+  .center-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--green-deep);
+    margin-bottom: 12px;
+  }
+  .center-card .stats {
+    display: flex;
+    gap: 18px;
+    margin: 12px 0;
+    padding: 12px 0;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .stat { text-align: center; flex: 1; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--gold); font-weight: 700; }
+  .stat-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 2px; }
+
+  .director-list {
+    margin-top: 12px;
+    font-size: 13px;
+  }
+  .director-list .pd {
+    padding: 6px 0;
+    color: var(--text-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+  .director-list .pd-name { font-weight: 500; color: var(--text); }
+  .director-list .pd-email { font-size: 12px; color: var(--text-muted); }
+
+  .center-card-actions { display: flex; gap: 8px; margin-top: 14px; }
+
+  /* ── Modal ── */
+  .modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(44,74,53,0.4);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .modal-backdrop.show { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 540px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 12px 60px rgba(0,0,0,0.2);
+  }
+  .modal-head {
+    padding: 22px 26px 16px;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .modal-head h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    color: var(--green-deep);
+  }
+  .modal-close {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1;
+  }
+  .modal-body { padding: 22px 26px; }
+  .modal-foot {
+    padding: 16px 26px 22px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  /* ── Forms ── */
+  .field { margin-bottom: 16px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-soft);
+    margin-bottom: 6px;
+  }
+  input[type=text],
+  input[type=email],
+  input[type=number] {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    background: var(--cream);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  input:focus { outline: none; border-color: var(--green-mid); background: white; }
+
+  /* ── Reflections list ── */
+  .reflection-filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .reflection-filters select {
+    padding: 9px 12px;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13.5px;
+    background: white;
+    cursor: pointer;
+  }
+
+  .reflection-table {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .refl-row {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1fr 1fr 0.8fr 0.6fr;
+    gap: 12px;
+    padding: 14px 18px;
+    align-items: center;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 13.5px;
+  }
+  .refl-row:last-child { border-bottom: none; }
+  .refl-row.head {
+    background: var(--cream-dark);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-soft);
+  }
+  .refl-row .name { font-weight: 500; }
+  .refl-row .role-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .role-mentor { background: rgba(74,124,89,0.15); color: var(--green-deep); }
+  .role-mentee { background: rgba(201,149,58,0.15); color: #8a6620; }
+
+  .refl-row .type-badge {
+    font-size: 11.5px;
+    color: var(--text-soft);
+  }
+
+  .empty {
+    padding: 40px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  /* ── Reflection viewer modal ── */
+  .response-block {
+    margin-bottom: 18px;
+    padding: 14px 16px;
+    background: var(--cream);
+    border-radius: 8px;
+    border-left: 3px solid var(--gold);
+  }
+  .response-block .q {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green-deep);
+    margin-bottom: 6px;
+  }
+  .response-block .a {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.55;
+    white-space: pre-wrap;
+  }
+  .response-block .a.empty { color: var(--text-muted); font-style: italic; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin: 18px 0 8px;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--green-deep);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    z-index: 200;
+    display: none;
+    max-width: 400px;
+  }
+  .toast.show { display: block; }
+  .toast.error { background: var(--error); }
+
+  /* ── Temp password reveal ── */
+  .password-reveal {
+    background: var(--success-bg);
+    border: 1.5px solid var(--success);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+  }
+  .password-reveal .label { font-size: 11px; color: var(--success); margin-bottom: 4px; }
+  .password-reveal .value {
+    font-family: 'Courier New', monospace;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--green-deep);
+    user-select: all;
+  }
+  .password-reveal .note {
+    font-size: 12px;
+    color: var(--text-soft);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 700px) {
+    main { padding: 20px 16px; }
+    .center-grid { grid-template-columns: 1fr; }
+    .field-row { grid-template-columns: 1fr; }
+    .refl-row { grid-template-columns: 1fr; gap: 4px; padding: 14px; }
+    .refl-row.head { display: none; }
+  }
 </style>
 </head>
 <body>
-<h1>📄 MSA Resource Admin</h1>
-<p>Upload mentee guide PDFs to the database. These will appear in the QIF app under "Mentee Resources".</p>
+  <header>
+    <div class="brand">
+      <div class="logo">MSA</div>
+      <div>
+        <h1>Admin Console</h1>
+        <div class="label">Mentor Success Academy</div>
+      </div>
+    </div>
+    <div class="top-right">
+      <span id="user-name"></span>
+      <a href="#" id="logout-link">Sign out</a>
+    </div>
+  </header>
 
-<div class="card">
-  <label>Admin Key</label>
-  <input type="password" id="admin-key" placeholder="Enter admin key">
+  <nav class="tabs">
+    <div class="tab active" data-panel="centers">Centers &amp; Directors</div>
+    <div class="tab" data-panel="reflections">All Reflections</div>
+  </nav>
 
-  <label>Domain</label>
-  <select id="domain-id" onchange="updateInteractionTypes()">
-    <option value="emotional">Domain 1 — Emotional Climate & Responsiveness</option>
-    <option value="organization">Domain 2 — Classroom Organization</option>
-    <option value="instructional">Domain 3 — Instructional Support</option>
-  </select>
+  <main>
+    <!-- ── Centers Panel ── -->
+    <div class="panel active" id="panel-centers">
+      <div class="section-head">
+        <h2>Centers &amp; Program Directors</h2>
+        <button class="primary" onclick="openCreateCenter()">+ New Center</button>
+      </div>
+      <div class="centers-toolbar">
+        <div class="search-wrap">
+          <input type="text" id="centers-search" placeholder="Search centers by name…" oninput="renderCenters()">
+        </div>
+        <div class="view-toggle">
+          <button class="vt-btn active" id="vt-cards" onclick="setViewMode('cards')" title="Card view">▦ Cards</button>
+          <button class="vt-btn" id="vt-list" onclick="setViewMode('list')" title="List view">≡ List</button>
+        </div>
+      </div>
+      <div id="centers-grid" class="center-grid">
+        <div class="empty">Loading centers…</div>
+      </div>
+    </div>
 
-  <label>Interaction Type</label>
-  <select id="interaction-type" onchange="syncWeekAndTitle()">
-    <option value="positive_climate">Week 1 — Positive Climate</option>
-    <option value="teacher_responsiveness">Week 2 — Teacher Responsiveness</option>
-    <option value="child_perspective">Week 3 — Regard for Child Perspective</option>
-    <option value="conflict_as_learning">Week 4 — Conflict as Learning</option>
-  </select>
+    <!-- ── Reflections Panel ── -->
+    <div class="panel" id="panel-reflections">
+      <div class="section-head">
+        <h2>All Reflections</h2>
+        <div class="meta" id="refl-count"></div>
+      </div>
+      <div class="reflection-filters">
+        <select id="filter-center"><option value="">All centers</option></select>
+        <select id="filter-role">
+          <option value="">All roles</option>
+          <option value="mentor">Mentors only</option>
+          <option value="mentee">Mentees only</option>
+        </select>
+        <select id="filter-type">
+          <option value="">All types</option>
+          <option value="weekly">Weekly</option>
+          <option value="daily">Daily</option>
+          <option value="end_of_domain">End of Domain</option>
+        </select>
+        <select id="filter-week">
+          <option value="">All weeks</option>
+        </select>
+      </div>
+      <div class="reflection-table">
+        <div class="refl-row head">
+          <div>Person</div>
+          <div>Center</div>
+          <div>Type</div>
+          <div>Week / Domain</div>
+          <div>Updated</div>
+          <div></div>
+        </div>
+        <div id="refl-rows"><div class="empty">Loading reflections…</div></div>
+      </div>
+    </div>
+  </main>
 
-  <label>Week Number</label>
-  <select id="week-number">
-    <option value="1">Week 1</option>
-    <option value="2">Week 2</option>
-    <option value="3">Week 3</option>
-    <option value="4">Week 4</option>
-    <option value="5">Week 5</option>
-    <option value="6">Week 6</option>
-    <option value="7">Week 7</option>
-    <option value="8">Week 8</option>
-    <option value="9">Week 9</option>
-    <option value="10">Week 10</option>
-    <option value="11">Week 11</option>
-    <option value="12">Week 12</option>
-  </select>
+  <!-- ── Create Center Modal ── -->
+  <div class="modal-backdrop" id="modal-create-center">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>New Center</h3>
+        <button class="modal-close" onclick="closeModal('modal-create-center')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="field">
+          <label>Center Name</label>
+          <input type="text" id="cc-name" placeholder="e.g. Sunrise Learning Center">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Mentor Seats</label>
+            <input type="number" id="cc-mentor-seats" min="0" value="5">
+          </div>
+          <div class="field">
+            <label>Mentee Seats</label>
+            <input type="number" id="cc-mentee-seats" min="0" value="5">
+          </div>
+        </div>
+        <hr style="border:none; border-top:1px solid var(--line-soft); margin:18px 0;">
+        <div class="field">
+          <label>Program Director Name</label>
+          <input type="text" id="cc-pd-name">
+        </div>
+        <div class="field">
+          <label>Program Director Email</label>
+          <input type="email" id="cc-pd-email">
+        </div>
+        <div id="cc-result"></div>
+      </div>
+      <div class="modal-foot">
+        <button class="ghost" onclick="closeModal('modal-create-center')">Cancel</button>
+        <button class="primary" onclick="submitCreateCenter()" id="cc-submit">Create Center</button>
+      </div>
+    </div>
+  </div>
 
-  <label>Resource Title (shown to mentors)</label>
-  <input type="text" id="res-title" placeholder="e.g. Positive Climate — Mentee Guide">
+  <!-- ── Reflection Viewer Modal ── -->
+  <div class="modal-backdrop" id="modal-reflection">
+    <div class="modal" style="max-width: 720px;">
+      <div class="modal-head">
+        <h3 id="refl-title">Reflection</h3>
+        <button class="modal-close" onclick="closeModal('modal-reflection')">×</button>
+      </div>
+      <div class="modal-body" id="refl-body"></div>
+      <div class="modal-foot">
+        <button class="primary" onclick="closeModal('modal-reflection')">Close</button>
+      </div>
+    </div>
+  </div>
 
-  <label>PDF File</label>
-  <input type="file" id="pdf-file" accept=".pdf">
-
-  <button class="btn" onclick="uploadResource()">Upload Resource</button>
-  <div class="status" id="status"></div>
-</div>
-
-<div class="existing">
-  <h2>Existing Resources</h2>
-  <div id="existing-list">Loading…</div>
-</div>
+  <div class="toast" id="toast"></div>
 
 <script>
-const DOMAIN_INTERACTIONS = {
-  emotional: [
-    { value: 'positive_climate', label: 'Week 1 — Positive Climate', week: 1, title: 'Positive Climate — Mentee Guide' },
-    { value: 'teacher_responsiveness', label: 'Week 2 — Teacher Responsiveness', week: 2, title: 'Teacher Responsiveness — Mentee Guide' },
-    { value: 'child_perspective', label: 'Week 3 — Regard for Child Perspective', week: 3, title: 'Regard for Child Perspective — Mentee Guide' },
-    { value: 'conflict_as_learning', label: 'Week 4 — Conflict as Learning', week: 4, title: 'Conflict as Learning — Mentee Guide' },
-  ],
-  organization: [
-    { value: 'behavior_management', label: 'Week 5 — Behavior Management', week: 5, title: 'Behavior Management — Mentee Guide' },
-    { value: 'productivity', label: 'Week 6 — Productivity', week: 6, title: 'Productivity — Mentee Guide' },
-    { value: 'instructional_formats', label: 'Week 7 — Instructional Learning Formats', week: 7, title: 'Instructional Learning Formats — Mentee Guide' },
-    { value: 'learning_environment', label: 'Week 8 — Learning Environment & Design', week: 8, title: 'Learning Environment & Design — Mentee Guide' },
-  ],
-  instructional: [
-    { value: 'concept_development', label: 'Week 9 — Concept Development', week: 9, title: 'Concept Development — Mentee Guide' },
-    { value: 'quality_feedback', label: 'Week 10 — Quality of Feedback', week: 10, title: 'Quality of Feedback — Mentee Guide' },
-    { value: 'language_modeling', label: 'Week 11 — Language Modeling', week: 11, title: 'Language Modeling — Mentee Guide' },
-    { value: 'higher_order_questioning', label: 'Week 12 — Higher-Order Questioning', week: 12, title: 'Higher-Order Questioning — Mentee Guide' },
-  ]
-};
+let me = null;
+let allCenters = [];
+let allReflections = [];
+let reflectionContent = null;
 
-function updateInteractionTypes() {
-  const domain = document.getElementById('domain-id').value;
-  const sel = document.getElementById('interaction-type');
-  sel.innerHTML = '';
-  DOMAIN_INTERACTIONS[domain].forEach(function(it) {
-    const opt = document.createElement('option');
-    opt.value = it.value;
-    opt.textContent = it.label;
-    sel.appendChild(opt);
-  });
-  syncWeekAndTitle();
-}
-
-function syncWeekAndTitle() {
-  const domain = document.getElementById('domain-id').value;
-  const type = document.getElementById('interaction-type').value;
-  const match = DOMAIN_INTERACTIONS[domain].find(function(it) { return it.value === type; });
-  if (match) {
-    document.getElementById('week-number').value = match.week;
-    document.getElementById('res-title').value = match.title;
+// ── Boot ─────────────────────────────────────────────────────────
+async function boot() {
+  try {
+    const r = await fetch('/api/auth/me');
+    if (!r.ok) { window.location.href = '/'; return; }
+    me = await r.json();
+    if (me.role !== 'admin') { window.location.href = '/'; return; }
+    if (me.must_change_password) { window.location.href = '/change-password'; return; }
+    document.getElementById('user-name').textContent = me.full_name;
+    setupTabs();
+    await loadCenters();
+    populateWeekFilter();
+  } catch (e) {
+    console.error(e);
+    window.location.href = '/';
   }
 }
 
-async function uploadResource() {
-  const key = document.getElementById('admin-key').value.trim();
-  const domainId = document.getElementById('domain-id').value;
-  const interactionType = document.getElementById('interaction-type').value;
-  const weekNumber = parseInt(document.getElementById('week-number').value);
-  const title = document.getElementById('res-title').value.trim();
-  const fileInput = document.getElementById('pdf-file');
-  const statusEl = document.getElementById('status');
+document.getElementById('logout-link').addEventListener('click', async (e) => {
+  e.preventDefault();
+  await fetch('/api/auth/logout', { method: 'POST' });
+  window.location.href = '/';
+});
 
-  if (!key || !title || !fileInput.files[0]) {
-    showStatus('Please fill in all fields and select a PDF.', false);
+// ── Tabs ─────────────────────────────────────────────────────────
+function setupTabs() {
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', async () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const panel = tab.dataset.panel;
+      document.getElementById('panel-' + panel).classList.add('active');
+      if (panel === 'reflections' && allReflections.length === 0) {
+        await loadReflections();
+      }
+    });
+  });
+}
+
+// ── Centers ──────────────────────────────────────────────────────
+async function loadCenters() {
+  try {
+    const r = await fetch('/api/admin/centers');
+    allCenters = await r.json();
+    renderCenters();
+    populateCenterFilter();
+  } catch (e) {
+    document.getElementById('centers-grid').innerHTML = '<div class="empty">Could not load centers.</div>';
+  }
+}
+
+let viewMode = 'cards';
+
+function setViewMode(mode) {
+  viewMode = mode;
+  document.getElementById('vt-cards').classList.toggle('active', mode === 'cards');
+  document.getElementById('vt-list').classList.toggle('active', mode === 'list');
+  // Toggle container class to swap layout
+  const grid = document.getElementById('centers-grid');
+  if (mode === 'cards') {
+    grid.classList.add('center-grid');
+    grid.classList.remove('center-list-wrap');
+  } else {
+    grid.classList.remove('center-grid');
+    grid.classList.add('center-list-wrap');
+  }
+  renderCenters();
+}
+
+function getFilteredCenters() {
+  const searchEl = document.getElementById('centers-search');
+  const q = searchEl ? searchEl.value.trim().toLowerCase() : '';
+  if (!q) return allCenters;
+  return allCenters.filter(c => (c.name || '').toLowerCase().includes(q));
+}
+
+function renderCenters() {
+  const grid = document.getElementById('centers-grid');
+  const list = getFilteredCenters();
+
+  if (allCenters.length === 0) {
+    grid.innerHTML = '<div class="empty">No centers yet. Click <strong>+ New Center</strong> to get started.</div>';
+    return;
+  }
+  if (list.length === 0) {
+    grid.innerHTML = '<div class="empty">No centers match your search.</div>';
     return;
   }
 
-  const file = fileInput.files[0];
-  const filename = file.name;
-  const reader = new FileReader();
-  reader.onload = async function(e) {
-    const base64 = e.target.result.split(',')[1];
-    try {
-      const res = await fetch('/api/resources/upload', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'x-admin-key': key },
-        body: JSON.stringify({ domainId, interactionType, weekNumber, title, filename, pdfBase64: base64 })
-      });
-      const data = await res.json();
-      if (res.ok) {
-        showStatus('✓ Uploaded successfully! Resource ID: ' + data.id, true);
-        loadExisting();
-      } else {
-        showStatus('Error: ' + (data.error || 'Upload failed'), false);
-      }
-    } catch(err) {
-      showStatus('Connection error. Please try again.', false);
-    }
+  if (viewMode === 'list') {
+    grid.innerHTML = renderCentersList(list);
+  } else {
+    grid.innerHTML = renderCentersCards(list);
+  }
+}
+
+function renderCentersCards(list) {
+  return list.map(c => `
+    <div class="center-card ${c.is_empty ? 'is-empty' : ''}" onclick="openCenter(${c.id})">
+      ${!c.is_empty ? '<div class="open-hint">Open →</div>' : ''}
+      <h3>${escapeHtml(c.name)}</h3>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">${c.mentor_count}/${c.mentor_seats}</div>
+          <div class="stat-label">Mentors</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">${c.mentee_count}/${c.mentee_seats}</div>
+          <div class="stat-label">Mentees</div>
+        </div>
+      </div>
+      <div class="director-list">
+        ${(c.directors || []).map(d => `
+          <div class="pd">
+            <div>
+              <div class="pd-name">${escapeHtml(d.name)}</div>
+              <div class="pd-email">${escapeHtml(d.email)}</div>
+            </div>
+            <button class="ghost" onclick="event.stopPropagation(); resetDirectorPwd(${c.id}, ${d.id}, '${escapeHtml(d.name)}')">Reset Pwd</button>
+          </div>
+        `).join('') || '<div class="pd-email" style="padding:6px 0;">No director assigned</div>'}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderCentersList(list) {
+  let html = '<div class="center-list">';
+  html += '<div class="cl-head">' +
+    '<div>Center</div>' +
+    '<div>Director(s)</div>' +
+    '<div>Mentors</div>' +
+    '<div>Mentees</div>' +
+    '<div></div>' +
+    '</div>';
+  list.forEach(c => {
+    const dirs = (c.directors || []).map(d => escapeHtml(d.name)).join(', ') || '<span style="color:var(--text-muted)">— none —</span>';
+    const status = c.is_empty
+      ? '<span class="cl-status empty">Not started</span>'
+      : '<span class="cl-status active">Active</span>';
+    html += `
+      <div class="cl-row ${c.is_empty ? 'is-empty' : ''}" onclick="openCenter(${c.id})">
+        <div>
+          <div class="cl-name">${escapeHtml(c.name)}</div>
+          ${status}
+        </div>
+        <div class="cl-director">${dirs}</div>
+        <div>${c.mentor_count}/${c.mentor_seats}</div>
+        <div>${c.mentee_count}/${c.mentee_seats}</div>
+        <div class="cl-open">Open →</div>
+      </div>
+    `;
+  });
+  html += '</div>';
+  return html;
+}
+
+function openCenter(id) {
+  window.location.href = '/admin/center/' + id;
+}
+
+function openCreateCenter() {
+  document.getElementById('cc-name').value = '';
+  document.getElementById('cc-mentor-seats').value = '5';
+  document.getElementById('cc-mentee-seats').value = '5';
+  document.getElementById('cc-pd-name').value = '';
+  document.getElementById('cc-pd-email').value = '';
+  document.getElementById('cc-result').innerHTML = '';
+  document.getElementById('cc-submit').disabled = false;
+  document.getElementById('cc-submit').textContent = 'Create Center';
+  openModal('modal-create-center');
+}
+
+async function submitCreateCenter() {
+  const body = {
+    name: document.getElementById('cc-name').value.trim(),
+    mentorSeats: parseInt(document.getElementById('cc-mentor-seats').value) || 0,
+    menteeSeats: parseInt(document.getElementById('cc-mentee-seats').value) || 0,
+    directorName: document.getElementById('cc-pd-name').value.trim(),
+    directorEmail: document.getElementById('cc-pd-email').value.trim()
   };
-  reader.readAsDataURL(file);
-}
-
-function showStatus(msg, ok) {
-  const el = document.getElementById('status');
-  el.textContent = msg;
-  el.className = 'status ' + (ok ? 'ok' : 'err');
-  el.style.display = 'block';
-}
-
-async function deleteResource(id, title) {
-  const key = document.getElementById('admin-key').value.trim();
-  if (!key) { alert('Enter your admin key first.'); return; }
-  if (!confirm('Delete "' + title + '"? This cannot be undone.')) return;
+  if (!body.name || !body.directorName || !body.directorEmail) {
+    toast('Center name, director name, and email all required.', true);
+    return;
+  }
+  const btn = document.getElementById('cc-submit');
+  btn.disabled = true;
+  btn.textContent = 'Creating…';
   try {
-    const res = await fetch('/api/resources/' + id, {
-      method: 'DELETE',
-      headers: { 'x-admin-key': key }
+    const r = await fetch('/api/admin/centers', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
     });
-    const data = await res.json();
-    if (res.ok) {
-      showStatus('✓ Deleted successfully.', true);
-      loadExisting();
-    } else {
-      showStatus('Error: ' + (data.error || 'Delete failed'), false);
-    }
-  } catch(err) {
-    showStatus('Connection error. Please try again.', false);
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Could not create center');
+    document.getElementById('cc-result').innerHTML = `
+      <div class="password-reveal">
+        <div class="label">CENTER CREATED · DIRECTOR TEMP PASSWORD</div>
+        <div class="value">${escapeHtml(data.tempPassword)}</div>
+        <div class="note">Share this with <strong>${escapeHtml(data.director.full_name)}</strong> (${escapeHtml(data.director.email)}).
+          They will be asked to change it on first sign-in.</div>
+      </div>
+    `;
+    btn.textContent = 'Done';
+    btn.disabled = true;
+    await loadCenters();
+  } catch (e) {
+    toast(e.message, true);
+    btn.disabled = false;
+    btn.textContent = 'Create Center';
   }
 }
 
-async function loadExisting() {
-  const list = document.getElementById('existing-list');
+async function resetDirectorPwd(centerId, directorId, directorName) {
+  if (!confirm(`Reset password for ${directorName}? They'll be asked to set a new one on next sign-in.`)) return;
   try {
-    const res = await fetch('/api/resources');
-    const resources = await res.json();
-    if (resources.length === 0) {
-      list.innerHTML = '<p style="color:#999;font-size:13px;">No resources uploaded yet.</p>';
-      return;
-    }
-    list.innerHTML = resources.map(r =>
-      '<div class="res-row">' +
-      '<span>Week ' + r.week_number + ' — ' + r.title + '</span>' +
-      '<div class="actions">' +
-      '<a href="/api/resources/' + r.id + '/pdf" target="_blank">View PDF</a>' +
-      '<button class="btn-delete" onclick="deleteResource(' + r.id + ', \'' + r.title.replace(/'/g, '') + '\')">✕ Delete</button>' +
-      '</div></div>'
-    ).join('');
-  } catch(e) {
-    list.innerHTML = '<p style="color:#999;font-size:13px;">Could not load.</p>';
+    const r = await fetch(`/api/admin/centers/${centerId}/reset-director-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ directorId })
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Reset failed');
+    alert(`New temporary password for ${directorName}:\n\n${data.tempPassword}\n\nShare it securely. They'll be asked to change it on next sign-in.`);
+  } catch (e) {
+    toast(e.message, true);
   }
 }
 
-loadExisting();
+// ── Reflections ──────────────────────────────────────────────────
+async function loadReflections() {
+  try {
+    if (!reflectionContent) {
+      const cr = await fetch('/api/reflections/content');
+      reflectionContent = await cr.json();
+    }
+    const r = await fetch('/api/admin/reflections');
+    allReflections = await r.json();
+    renderReflections();
+  } catch (e) {
+    document.getElementById('refl-rows').innerHTML = '<div class="empty">Could not load reflections.</div>';
+  }
+}
+
+function populateCenterFilter() {
+  const sel = document.getElementById('filter-center');
+  sel.innerHTML = '<option value="">All centers</option>' +
+    allCenters.map(c => `<option value="${c.name}">${escapeHtml(c.name)}</option>`).join('');
+}
+
+function populateWeekFilter() {
+  const sel = document.getElementById('filter-week');
+  let opts = '<option value="">All weeks</option>';
+  for (let i = 1; i <= 12; i++) opts += `<option value="${i}">Week ${i}</option>`;
+  sel.innerHTML = opts;
+}
+
+['filter-center','filter-role','filter-type','filter-week'].forEach(id => {
+  document.getElementById(id).addEventListener('change', renderReflections);
+});
+
+function renderReflections() {
+  const center = document.getElementById('filter-center').value;
+  const role = document.getElementById('filter-role').value;
+  const type = document.getElementById('filter-type').value;
+  const week = document.getElementById('filter-week').value;
+
+  const filtered = allReflections.filter(r => {
+    if (center && r.center_name !== center) return false;
+    if (role && r.user_role !== role) return false;
+    if (type && r.reflection_type !== type) return false;
+    if (week && String(r.week_number) !== week) return false;
+    return true;
+  });
+
+  document.getElementById('refl-count').textContent =
+    `${filtered.length} reflection${filtered.length === 1 ? '' : 's'}`;
+
+  const rows = document.getElementById('refl-rows');
+  if (filtered.length === 0) {
+    rows.innerHTML = '<div class="empty">No reflections match these filters.</div>';
+    return;
+  }
+  rows.innerHTML = filtered.map(r => `
+    <div class="refl-row">
+      <div class="name">
+        ${escapeHtml(r.user_name)}
+        <span class="role-badge role-${r.user_role}">${r.user_role}</span>
+      </div>
+      <div>${escapeHtml(r.center_name || '—')}</div>
+      <div class="type-badge">${formatType(r.reflection_type)}</div>
+      <div>${r.reflection_type === 'end_of_domain' ? 'Domain ' + r.domain_number : (r.week_number ? 'Week ' + r.week_number : '—')}${r.reflection_date ? ' · ' + r.reflection_date : ''}</div>
+      <div class="type-badge">${formatDate(r.updated_at)}</div>
+      <div><button class="ghost" onclick="viewReflection(${r.id})">View</button></div>
+    </div>
+  `).join('');
+}
+
+function formatType(t) {
+  return t === 'weekly' ? 'Weekly' : t === 'daily' ? 'Daily' : t === 'end_of_domain' ? 'End-of-Domain' : t;
+}
+function formatDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleDateString(undefined, { month:'short', day:'numeric', year:'numeric' });
+}
+
+function viewReflection(id) {
+  const r = allReflections.find(x => x.id === id);
+  if (!r) return;
+  document.getElementById('refl-title').textContent =
+    `${r.user_name} · ${formatType(r.reflection_type)}` +
+    (r.week_number ? ` · Week ${r.week_number}` : '') +
+    (r.domain_number ? ` · Domain ${r.domain_number}` : '') +
+    (r.reflection_date ? ` · ${r.reflection_date}` : '');
+
+  // Look up the question wording from reflection-content
+  let questions = [];
+  try {
+    if (r.reflection_type === 'weekly') {
+      questions = reflectionContent.weeks[r.week_number]?.weekly?.[r.user_role] || [];
+    } else if (r.reflection_type === 'daily') {
+      questions = reflectionContent.weeks[r.week_number]?.daily?.[r.user_role] || [];
+    } else if (r.reflection_type === 'end_of_domain') {
+      questions = reflectionContent.endOfDomain[r.domain_number]?.questions?.[r.user_role] || [];
+    }
+  } catch (e) { questions = []; }
+
+  const responses = r.responses || {};
+  let html = '';
+  let lastSection = null;
+  questions.forEach(q => {
+    if (q.section && q.section !== lastSection) {
+      html += `<div class="section-label">${escapeHtml(q.section)}</div>`;
+      lastSection = q.section;
+    }
+    const ans = responses[q.id];
+    html += `
+      <div class="response-block">
+        <div class="q">${escapeHtml(q.text)}</div>
+        <div class="a ${ans ? '' : 'empty'}">${ans ? escapeHtml(ans) : '(no response)'}</div>
+      </div>
+    `;
+  });
+  if (questions.length === 0) {
+    // Fallback — just show the raw responses
+    Object.entries(responses).forEach(([k, v]) => {
+      html += `<div class="response-block"><div class="q">${escapeHtml(k)}</div><div class="a">${escapeHtml(v || '')}</div></div>`;
+    });
+  }
+  document.getElementById('refl-body').innerHTML = html || '<div class="empty">No content to display.</div>';
+  openModal('modal-reflection');
+}
+
+// ── Modal helpers ────────────────────────────────────────────────
+function openModal(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+document.querySelectorAll('.modal-backdrop').forEach(m => {
+  m.addEventListener('click', (e) => { if (e.target === m) m.classList.remove('show'); });
+});
+
+// ── Toast ────────────────────────────────────────────────────────
+let toastTimer;
+function toast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.toggle('error', !!isError);
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+// ── Utility ──────────────────────────────────────────────────────
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+boot();
 </script>
 </body>
 </html>

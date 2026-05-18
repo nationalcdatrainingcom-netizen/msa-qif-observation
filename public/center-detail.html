@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Center Detail — MSA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep: #2c4a35;
+    --green-mid: #4a7c59;
+    --gold: #c9953a;
+    --gold-soft: #e0b870;
+    --cream: #faf8f3;
+    --cream-dark: #f0ebe0;
+    --line: #ddd8cc;
+    --line-soft: #eee8dc;
+    --text: #2c2c2c;
+    --text-soft: #666;
+    --text-muted: #999;
+    --amber: #b8860b;
+    --amber-bg: #fdf6e3;
+    --error: #b54545;
+    --success: #4a7c59;
+    --success-bg: #f0f7f1;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── Top bar ── */
+  header {
+    background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%);
+    color: white;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .logo {
+    background: var(--gold);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .brand h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .brand .label {
+    font-size: 11px;
+    opacity: 0.7;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .top-right { display: flex; align-items: center; gap: 16px; font-size: 13px; }
+  .top-right a { color: rgba(255,255,255,0.85); text-decoration: none; }
+  .top-right a:hover { color: white; }
+
+  /* ── Impersonation banner ── */
+  .impersonation-bar {
+    background: var(--amber-bg);
+    border-bottom: 2px solid var(--amber);
+    padding: 12px 32px;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13.5px;
+    color: var(--amber);
+  }
+  .impersonation-bar.show { display: flex; }
+  .impersonation-bar strong { color: var(--green-deep); }
+
+  main { padding: 28px 32px 40px; max-width: 1200px; margin: 0 auto; }
+
+  /* ── Breadcrumb / back ── */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-soft);
+    text-decoration: none;
+    margin-bottom: 18px;
+  }
+  .back-link:hover { color: var(--green-deep); }
+
+  /* ── Page title row ── */
+  .title-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 4px;
+  }
+  .title-row h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--green-deep);
+    font-weight: 600;
+  }
+  .center-meta {
+    font-size: 13.5px;
+    color: var(--text-soft);
+    margin-top: 4px;
+  }
+
+  /* ── Mode badge ── */
+  .mode-badge {
+    display: inline-block;
+    padding: 4px 11px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  .mode-badge.readonly { background: var(--cream-dark); color: var(--text-soft); }
+  .mode-badge.editing { background: var(--amber); color: white; }
+
+  /* ── Toggle switch ── */
+  .toggle-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 11px;
+    padding: 12px 18px;
+  }
+  .toggle-wrap.hidden { display: none; }
+  .toggle-wrap .toggle-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .toggle-wrap .toggle-sub {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+  .switch {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: var(--line);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+  .switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.15s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  .switch.on { background: var(--amber); }
+  .switch.on::after { transform: translateX(20px); }
+
+  /* ── Health summary ── */
+  .health-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin-top: 22px;
+    margin-bottom: 28px;
+  }
+  .health-card {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .health-card .h-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .health-card .h-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--green-deep);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .health-card .h-sub {
+    font-size: 12px;
+    color: var(--text-soft);
+    margin-top: 4px;
+  }
+  .health-card.warn { border-color: var(--amber); background: var(--amber-bg); }
+  .health-card.warn .h-value { color: var(--amber); }
+
+  /* ── Section ── */
+  .section {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+  }
+  .section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--green-deep);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .section .section-sub {
+    font-size: 13px;
+    color: var(--text-soft);
+    margin-bottom: 16px;
+  }
+
+  /* ── Pair row ── */
+  .pair {
+    border: 1px solid var(--line-soft);
+    border-radius: 11px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    background: var(--cream);
+  }
+  .pair:last-child { margin-bottom: 0; }
+  .pair-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .pair-head .mentor-name {
+    font-weight: 600;
+    color: var(--green-deep);
+    font-size: 15px;
+  }
+  .pair-head .mentor-email {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+  .leap-tag {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 10px;
+    font-size: 11.5px;
+    font-weight: 600;
+    background: var(--success-bg);
+    color: var(--success);
+    margin-left: 8px;
+  }
+  .leap-tag.pending { background: var(--cream-dark); color: var(--text-muted); font-weight: 500; }
+
+  .mentee-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: white;
+    border: 1px solid var(--line-soft);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    font-size: 13.5px;
+  }
+  .mentee-row:last-child { margin-bottom: 0; }
+  .mentee-row .m-name { font-weight: 500; }
+  .mentee-row .m-email { color: var(--text-muted); font-size: 12px; }
+  .pair .no-mentees {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 8px 12px;
+  }
+
+  /* ── Unpaired section ── */
+  .unpaired-list .mentee-row {
+    background: var(--amber-bg);
+    border-color: var(--amber);
+  }
+
+  /* ── Empty / loading ── */
+  .empty {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-style: italic;
+  }
+  .loading {
+    text-align: center;
+    padding: 60px;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 700px) {
+    header { padding: 14px 18px; }
+    main { padding: 20px 16px; }
+    .title-row { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">MSA</div>
+      <div>
+        <h1 id="center-title">Loading…</h1>
+        <div class="label" id="role-label">Director View</div>
+      </div>
+    </div>
+    <div class="top-right">
+      <span id="user-name"></span>
+      <a href="#" id="back-home">Home</a>
+      <a href="#" id="logout-link">Sign out</a>
+    </div>
+  </header>
+
+  <div class="impersonation-bar" id="imp-bar">
+    <div>
+      <strong>Acting as Program Director.</strong>
+      Changes you make here will be saved as if the director made them.
+    </div>
+    <button class="switch on" id="imp-stop" title="Stop acting as director"></button>
+  </div>
+
+  <main>
+    <a href="#" class="back-link" id="back-link">← Back</a>
+
+    <div class="title-row">
+      <div>
+        <h2>
+          <span id="center-name-display">…</span>
+          <span class="mode-badge readonly" id="mode-badge">Read Only</span>
+        </h2>
+        <div class="center-meta" id="center-meta"></div>
+      </div>
+      <div class="toggle-wrap hidden" id="toggle-wrap">
+        <div>
+          <div class="toggle-label">Act as Director</div>
+          <div class="toggle-sub">Toggle on to make changes for this center</div>
+        </div>
+        <div class="switch" id="act-toggle"></div>
+      </div>
+    </div>
+
+    <div id="page-body">
+      <div class="loading">Loading center details…</div>
+    </div>
+  </main>
+
+<script>
+let me = null;
+let centerId = null;
+let centerData = null;
+let isImpersonating = false;
+
+// Get center id from URL like /admin/center/5
+function parseCenterId() {
+  const parts = window.location.pathname.split('/');
+  const idx = parts.indexOf('center');
+  if (idx >= 0 && parts[idx + 1]) return parseInt(parts[idx + 1]);
+  return null;
+}
+
+async function boot() {
+  centerId = parseCenterId();
+  if (!centerId) {
+    document.getElementById('page-body').innerHTML = '<div class="empty">Missing center ID in URL.</div>';
+    return;
+  }
+
+  // Who am I?
+  try {
+    const r = await fetch('/api/auth/me');
+    if (!r.ok) { window.location.href = '/'; return; }
+    me = await r.json();
+    if (me.must_change_password) { window.location.href = '/change-password'; return; }
+    if (me.role !== 'admin' && me.role !== 'program_director') {
+      window.location.href = '/';
+      return;
+    }
+    document.getElementById('user-name').textContent = me.full_name;
+
+    // Back-home link
+    document.getElementById('back-home').href = me.role === 'admin' ? '/admin' : '/director';
+    document.getElementById('back-link').href = me.role === 'admin' ? '/admin' : '/director';
+    document.getElementById('back-link').textContent = me.role === 'admin' ? '← Back to Admin Console' : '← Back to Dashboard';
+
+    // Role label
+    document.getElementById('role-label').textContent =
+      me.role === 'admin' ? 'Admin · Center Detail' : 'Program Director';
+
+    // Show toggle only for admin
+    if (me.role === 'admin') {
+      document.getElementById('toggle-wrap').classList.remove('hidden');
+    }
+
+    // Check current impersonation status
+    const ir = await fetch('/api/admin/impersonation-status');
+    const imp = await ir.json();
+    isImpersonating = !!(imp.isImpersonating && imp.actAsCenterId === centerId);
+    updateImpersonationUI();
+
+    await loadCenter();
+  } catch (e) {
+    console.error(e);
+    document.getElementById('page-body').innerHTML = '<div class="empty">Something went wrong loading this center.</div>';
+  }
+}
+
+function updateImpersonationUI() {
+  const bar = document.getElementById('imp-bar');
+  const badge = document.getElementById('mode-badge');
+  const toggle = document.getElementById('act-toggle');
+
+  if (me && me.role === 'admin') {
+    if (isImpersonating) {
+      bar.classList.add('show');
+      badge.textContent = 'Editing as Director';
+      badge.className = 'mode-badge editing';
+      toggle.classList.add('on');
+    } else {
+      bar.classList.remove('show');
+      badge.textContent = 'Read Only';
+      badge.className = 'mode-badge readonly';
+      toggle.classList.remove('on');
+    }
+  } else {
+    // Program director — always editable, hide the badge
+    badge.style.display = 'none';
+    bar.classList.remove('show');
+  }
+}
+
+async function loadCenter() {
+  try {
+    const r = await fetch('/api/center/' + centerId + '/detail');
+    if (!r.ok) {
+      const err = await r.json();
+      document.getElementById('page-body').innerHTML =
+        '<div class="empty">' + (err.error || 'Could not load center') + '</div>';
+      return;
+    }
+    centerData = await r.json();
+    render();
+  } catch (e) {
+    console.error(e);
+    document.getElementById('page-body').innerHTML = '<div class="empty">Could not load center details.</div>';
+  }
+}
+
+function render() {
+  const c = centerData.center;
+  const h = centerData.health;
+  document.getElementById('center-title').textContent = c.name;
+  document.getElementById('center-name-display').textContent = c.name;
+
+  const dirs = (centerData.directors || []).map(d => d.full_name).join(', ') || 'No director assigned';
+  document.getElementById('center-meta').textContent = 'Director: ' + dirs;
+
+  let html = '';
+
+  // ── Health summary ──
+  html += '<div class="health-grid">';
+  html += healthCard('Active Pairs', countPairs(), h.totalMentees + ' mentees', false);
+  html += healthCard('Mentors', h.totalMentors + '/' + h.mentorSeats, 'of seat capacity', false);
+  html += healthCard('Mentees', h.totalMentees + '/' + h.menteeSeats, 'of seat capacity', false);
+  html += healthCard('Unpaired Mentees', h.unpairedMentees, h.unpairedMentees > 0 ? 'awaiting mentor assignment' : 'all assigned', h.unpairedMentees > 0);
+  html += healthCard('LEAP Completed', (h.leapCompleteMentors + h.leapCompleteMentees) + '/' + (h.totalMentors + h.totalMentees),
+    (h.leapPendingMentors + h.leapPendingMentees) + ' still pending',
+    (h.leapPendingMentors + h.leapPendingMentees) > 0);
+  html += healthCard('Reflections', h.reflections.weekly_count + ' weekly',
+    h.reflections.users_with_reflections + ' people active', false);
+  html += '</div>';
+
+  // ── Pairings section ──
+  html += '<div class="section">';
+  html += '<h3>Mentor–Mentee Pairs</h3>';
+  html += '<div class="section-sub">Each mentor with their assigned mentees and LEAP profiles.</div>';
+
+  if (centerData.pairings.length === 0) {
+    html += '<div class="empty">No mentors added yet.</div>';
+  } else {
+    centerData.pairings.forEach(p => {
+      html += renderPair(p);
+    });
+  }
+  html += '</div>';
+
+  // ── Unpaired mentees ──
+  if (centerData.unpairedMentees && centerData.unpairedMentees.length > 0) {
+    html += '<div class="section">';
+    html += '<h3>Unpaired Mentees</h3>';
+    html += '<div class="section-sub">These mentees haven\'t been assigned to a mentor yet.</div>';
+    html += '<div class="unpaired-list">';
+    centerData.unpairedMentees.forEach(m => {
+      html += '<div class="mentee-row">';
+      html += '<div><span class="m-name">' + esc(m.full_name) + '</span> · <span class="m-email">' + esc(m.email) + '</span></div>';
+      html += '<div>' + leapTag(m.leap) + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+    html += '</div>';
+  }
+
+  document.getElementById('page-body').innerHTML = html;
+}
+
+function countPairs() {
+  let n = 0;
+  centerData.pairings.forEach(p => { if (p.mentees.length > 0) n++; });
+  return n;
+}
+
+function healthCard(label, value, sub, warn) {
+  return '<div class="health-card' + (warn ? ' warn' : '') + '">' +
+    '<div class="h-label">' + esc(label) + '</div>' +
+    '<div class="h-value">' + esc(String(value)) + '</div>' +
+    '<div class="h-sub">' + esc(sub) + '</div>' +
+    '</div>';
+}
+
+function renderPair(p) {
+  let html = '<div class="pair">';
+  html += '<div class="pair-head">';
+  html += '<div>';
+  html += '<div class="mentor-name">' + esc(p.mentor.full_name) + leapTag(p.mentor.leap) + '</div>';
+  html += '<div class="mentor-email">' + esc(p.mentor.email) + '</div>';
+  html += '</div>';
+  html += '<div style="font-size:12px; color: var(--text-muted);">' +
+    p.mentees.length + ' mentee' + (p.mentees.length === 1 ? '' : 's') + '</div>';
+  html += '</div>';
+
+  if (p.mentees.length === 0) {
+    html += '<div class="no-mentees">No mentees assigned to this mentor yet.</div>';
+  } else {
+    p.mentees.forEach(m => {
+      html += '<div class="mentee-row">';
+      html += '<div><span class="m-name">' + esc(m.full_name) + '</span> · <span class="m-email">' + esc(m.email) + '</span></div>';
+      html += '<div>' + leapTag(m.leap) + '</div>';
+      html += '</div>';
+    });
+  }
+  html += '</div>';
+  return html;
+}
+
+function leapTag(leap) {
+  if (!leap || !leap.found) {
+    return '<span class="leap-tag pending">LEAP: not yet taken</span>';
+  }
+  return '<span class="leap-tag">' + esc(leap.profileLabel || leap.primary || 'Completed') + '</span>';
+}
+
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+// ── Toggle handlers ──
+document.getElementById('act-toggle').addEventListener('click', async () => {
+  if (me.role !== 'admin') return;
+  if (isImpersonating) {
+    await stopActing();
+  } else {
+    await startActing();
+  }
+});
+
+document.getElementById('imp-stop').addEventListener('click', stopActing);
+
+async function startActing() {
+  try {
+    const r = await fetch('/api/admin/act-as-director', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ centerId })
+    });
+    if (r.ok) {
+      isImpersonating = true;
+      updateImpersonationUI();
+    }
+  } catch (e) { console.error(e); }
+}
+
+async function stopActing() {
+  try {
+    const r = await fetch('/api/admin/stop-acting', { method: 'POST' });
+    if (r.ok) {
+      isImpersonating = false;
+      updateImpersonationUI();
+    }
+  } catch (e) { console.error(e); }
+}
+
+document.getElementById('logout-link').addEventListener('click', async (e) => {
+  e.preventDefault();
+  await fetch('/api/auth/logout', { method: 'POST' });
+  window.location.href = '/';
+});
+
+boot();
+</script>
+</body>
+</html>

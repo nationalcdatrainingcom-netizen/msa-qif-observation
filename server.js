@@ -116,6 +116,9 @@ async function initDB() {
   }
 }
 
+// Trust Render's proxy so secure cookies + correct protocol detection work
+app.set('trust proxy', 1);
+
 // ── Middleware ────────────────────────────────────────────────────
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
@@ -124,7 +127,13 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'msa-platform-secret-2026',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 8 * 60 * 60 * 1000 } // 8 hours
+  proxy: true,
+  cookie: {
+    maxAge: 8 * 60 * 60 * 1000, // 8 hours
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production'
+  }
 }));
 
 // Auth guards
@@ -566,19 +575,45 @@ app.get('/api/center/:id/detail', requireAdminOrDirector, async (req, res) => {
 // Admin can toggle on impersonation for a specific center; this lets
 // them use director endpoints to make changes on the director's behalf.
 // ──────────────────────────────────────────────────────────────────
-app.post('/api/admin/act-as-director', requireRole('admin'), async (req, res) => {
+app.post('/api/admin/act-as-director', requireAuth, async (req, res) => {
+  // Debug log — appears in Render logs so we can see what's happening
+  console.log('[act-as-director] sessionUserId=', req.session.userId,
+              'role=', req.session.role,
+              'body=', JSON.stringify(req.body));
+  if (req.session.role !== 'admin') {
+    return res.status(403).json({ error: 'Admin only', currentRole: req.session.role });
+  }
   const { centerId } = req.body;
   if (!centerId) return res.status(400).json({ error: 'centerId required' });
-  const c = await pool.query('SELECT id FROM centers WHERE id=$1', [centerId]);
-  if (c.rows.length === 0) return res.status(404).json({ error: 'Center not found' });
-  req.session.actAsCenterId = parseInt(centerId);
-  res.json({ success: true, actAsCenterId: req.session.actAsCenterId });
+  try {
+    const c = await pool.query('SELECT id FROM centers WHERE id=$1', [centerId]);
+    if (c.rows.length === 0) return res.status(404).json({ error: 'Center not found' });
+    req.session.actAsCenterId = parseInt(centerId);
+    // Force the session to save before responding (avoids race where the
+    // browser-side next request might race the session-write).
+    req.session.save(err => {
+      if (err) {
+        console.error('Session save error:', err);
+        return res.status(500).json({ error: 'Session save failed' });
+      }
+      res.json({ success: true, actAsCenterId: req.session.actAsCenterId });
+    });
+  } catch (e) {
+    console.error('act-as-director error:', e);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
 app.post('/api/admin/stop-acting', requireAuth, async (req, res) => {
   if (req.session.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
   delete req.session.actAsCenterId;
-  res.json({ success: true });
+  req.session.save(err => {
+    if (err) {
+      console.error('Session save error:', err);
+      return res.status(500).json({ error: 'Session save failed' });
+    }
+    res.json({ success: true });
+  });
 });
 
 app.get('/api/admin/impersonation-status', requireAuth, (req, res) => {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SELCS Mentor Training — Mentor Success Academy</title>
+<title>MSA LEAP Training — Mentor Success Academy</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -236,9 +236,9 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
 
 <div id="s-welcome" class="screen active">
   <div class="w-badge">Mentor Success Academy</div>
-  <h1 class="w-title">SELCS Mentor <em>Training</em></h1>
+  <h1 class="w-title">MSA LEAP <em>Training</em></h1>
   <p class="w-sub">12-Module Professional Development Program</p>
-  <p class="w-desc">Develop your capacity to coach teachers across all four SELCS natural leadership expression types &mdash; meeting each mentee where they are, adapting your approach, and building the kind of trust that produces lasting growth.</p>
+  <p class="w-desc">Develop your capacity to coach teachers across all four natural leadership expressions &mdash; meeting each mentee where they are, adapting your approach, and building the kind of trust that produces lasting growth.</p>
   <div class="domain-chips">
     <span class="d-chip">Emotional Climate</span>
     <span class="d-chip">Classroom Organization</span>
@@ -248,7 +248,7 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
     <div id="enroll-err" class="alert alert-err" style="display:none;"></div>
     <label for="learner-name">Your Name</label>
     <input type="text" id="learner-name" placeholder="Enter your full name">
-    <label for="learner-selcs">Your SELCS Type</label>
+    <label for="learner-selcs">Your Natural Leadership Expression</label>
     <select id="learner-selcs">
       <option value="">Select your type&hellip;</option>
       <option value="D">D &mdash; The Driver</option>
@@ -271,13 +271,13 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
     </div>
     <div class="learner-name">
       <strong id="dash-learner-name"></strong>
-      SELCS Mentor Training
+      MSA LEAP Training
     </div>
   </div>
   <div class="dash-body">
     <div class="dash-welcome">
       <h2>Your Learning Journey</h2>
-      <p>Complete all 12 modules across 3 domains to earn your SELCS Mentor Training certificate.</p>
+      <p>Complete all 12 modules across 3 domains to earn your MSA LEAP Training certificate.</p>
     </div>
     <div class="prog-bar-wrap">
       <div class="prog-stat">
@@ -315,7 +315,7 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
     <div class="certificate">
       <div class="cert-academy">Mentor Success Academy</div>
       <div class="cert-title">Certificate of Completion</div>
-      <div class="cert-subtitle">SELCS Mentor Training Program</div>
+      <div class="cert-subtitle">MSA LEAP Training Program</div>
       <div class="cert-bar"></div>
       <div class="cert-presented">This certifies that</div>
       <div class="cert-name" id="cert-name-display"></div>
@@ -405,7 +405,7 @@ async function startTraining() {
   const selcs = document.getElementById('learner-selcs').value;
   const err = document.getElementById('enroll-err');
   if (!name) { err.textContent = 'Please enter your name.'; err.style.display='block'; return; }
-  if (!selcs) { err.textContent = 'Please select your SELCS type.'; err.style.display='block'; return; }
+  if (!selcs) { err.textContent = 'Please select your natural leadership expression.'; err.style.display='block'; return; }
   err.style.display = 'none';
   STATE.name = name;
   STATE.selcs = selcs;
@@ -573,14 +573,14 @@ function renderCoachScreen(m, sc) {
     <div class="card-head head-coach">
       <div class="tag">${RINGS_SVG}&nbsp; Coaching Challenge &middot; Scenario ${pos + 1} of ${total}</div>
       <h1>${sc.coachTitle}</h1>
-      <p class="sub">You just observed the classroom. Now it&rsquo;s time to coach. Read your mentee&rsquo;s SELCS profile, then choose your approach.</p>
+      <p class="sub">You just observed the classroom. Now it&rsquo;s time to coach. Read your mentee&rsquo;s natural leadership expression profile, then choose your approach.</p>
     </div>
     <div class="card-body">
       <div class="coach-body">
         <div class="mentee-card">
           <div class="mentee-ico">&#128269;</div>
           <div>
-            <div class="mentee-t">Your Mentee&rsquo;s SELCS Style: ${sc.menteeLabel} (${sc.menteeType})</div>
+            <div class="mentee-t">Your Mentee&rsquo;s Natural Leadership Expression: ${sc.menteeLabel} (${sc.menteeType})</div>
             <div class="mentee-d">${sc.menteeDesc}</div>
           </div>
         </div>

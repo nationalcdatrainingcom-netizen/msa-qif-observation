@@ -265,6 +265,51 @@
     background: white;
   }
 
+  /* ── Meeting check-in (weekly) ── */
+  .q-block.meeting-check {
+    background: var(--cream-dark);
+    border: 1.5px solid var(--gold-soft);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 24px 0 16px;
+  }
+  .q-block.meeting-check .section-label {
+    color: var(--gold);
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+  .meeting-radio-row {
+    display: flex;
+    gap: 14px;
+    margin-top: 12px;
+  }
+  .meeting-radio {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .meeting-radio:has(input:checked) {
+    border-color: var(--green-deep);
+    background: var(--success-bg);
+    color: var(--green-deep);
+  }
+  .meeting-radio input[type=radio] {
+    width: 18px; height: 18px;
+    accent-color: var(--green-deep);
+    cursor: pointer;
+  }
+
   /* ── Share toggle (mentees) ── */
   .share-toggle {
     background: white;
@@ -493,12 +538,9 @@ window.addEventListener('beforeunload', (e) => {
 function setupTypeTabs() {
   document.querySelectorAll('.type-tab').forEach(tab => {
     const type = tab.dataset.type;
-    // Mentors don't have "weekly" — Rebecca's guide places weekly on the mentee.
-    if (me.role === 'mentor' && type === 'weekly') {
-      tab.classList.add('disabled');
-      tab.title = 'Weekly reflections are completed by the mentee.';
-      return;
-    }
+    // Note: weekly is available for both mentors and mentees.
+    // Mentees answer Rebecca's reflection questions plus the meeting-check;
+    // mentors answer only the meeting-check (added below).
     tab.addEventListener('click', () => selectType(type));
   });
 }
@@ -718,13 +760,25 @@ function renderForm() {
   const questions = getQuestions();
   const container = document.getElementById('form-container');
 
-  if (questions.length === 0) {
+  // For mentors on weekly: there are no Rebecca-authored questions,
+  // but we still want to render the form so they can answer the
+  // meeting-check question below.
+  const isMentorWeekly = (me.role === 'mentor' && currentType === 'weekly');
+
+  if (questions.length === 0 && !isMentorWeekly) {
     container.innerHTML = `<div class="empty">No questions defined for this reflection yet.</div>`;
     document.getElementById('actions-container').innerHTML = '';
     return;
   }
 
   let html = '';
+
+  // Intro for mentors on weekly (since there are no other questions)
+  if (isMentorWeekly && questions.length === 0) {
+    html += `<div class="section-label" style="margin-bottom:6px;">Weekly Check-In</div>`;
+    html += `<p style="font-size:13px; color:var(--text-soft); margin-bottom:14px; line-height:1.55;">A quick check-in to confirm you and your mentee are meeting consistently. This helps your program director track the rhythm of your work together.</p>`;
+  }
+
   let lastSection = null;
   questions.forEach(q => {
     if (q.section && q.section !== lastSection) {
@@ -739,6 +793,28 @@ function renderForm() {
       </div>
     `;
   });
+
+  // ── Meeting check-in question (weekly only, both mentor and mentee) ──
+  if (currentType === 'weekly') {
+    const mc = currentResponses['meeting_check'] || '';
+    const otherRole = me.role === 'mentor' ? 'mentee' : 'mentor';
+    html += `
+      <div class="q-block meeting-check">
+        <div class="section-label" style="margin-top:8px;">Weekly Meeting Check-In</div>
+        <div class="q-text">Did you meet with your ${otherRole} for a minimum of 30 minutes within the last 7 days?</div>
+        <div class="meeting-radio-row">
+          <label class="meeting-radio">
+            <input type="radio" name="meeting_check" value="yes" ${mc === 'yes' ? 'checked' : ''}>
+            <span>Yes</span>
+          </label>
+          <label class="meeting-radio">
+            <input type="radio" name="meeting_check" value="no" ${mc === 'no' ? 'checked' : ''}>
+            <span>No</span>
+          </label>
+        </div>
+      </div>
+    `;
+  }
 
   // Share toggle for mentees only
   if (me.role === 'mentee') {
@@ -764,6 +840,16 @@ function renderForm() {
       dirty = true;
     });
   });
+
+  // Wire up meeting-check radios (weekly only)
+  if (currentType === 'weekly') {
+    container.querySelectorAll('input[name="meeting_check"]').forEach(rb => {
+      rb.addEventListener('change', () => {
+        currentResponses['meeting_check'] = rb.value;
+        dirty = true;
+      });
+    });
+  }
 
   // Wire up share toggle
   if (me.role === 'mentee') {

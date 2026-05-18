@@ -306,6 +306,52 @@
     border-color: var(--amber);
   }
 
+  /* ── Metric chips on each pair ── */
+  .metric-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0 12px;
+  }
+  .metric-chip {
+    flex: 1;
+    min-width: 110px;
+    background: white;
+    border: 1px solid var(--line-soft);
+    border-radius: 8px;
+    padding: 8px 12px;
+  }
+  .metric-chip .mc-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .metric-chip .mc-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .metric-chip.good { background: var(--success-bg); border-color: var(--success); }
+  .metric-chip.good .mc-value { color: var(--success); }
+  .metric-chip.progress { background: #fefaf0; border-color: var(--gold-soft); }
+  .metric-chip.progress .mc-value { color: var(--gold); }
+  .metric-chip.warn { background: var(--amber-bg); border-color: var(--amber); }
+  .metric-chip.warn .mc-value { color: var(--amber); }
+  .metric-chip.pending .mc-value { color: var(--text-muted); font-weight: 500; }
+
+  /* ── Detailed mentee row ── */
+  .mentee-detail { flex-direction: column; align-items: stretch; padding: 12px; }
+  .mentee-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .mentee-metrics { margin: 4px 0 0; }
+
   /* ── Empty / loading ── */
   .empty {
     text-align: center;
@@ -549,28 +595,69 @@ function healthCard(label, value, sub, warn) {
 }
 
 function renderPair(p) {
+  const m = p.mentor;
+  const trainCount = m.training ? m.training.completedCount : 0;
+  const trainPct = Math.round((trainCount / 12) * 100);
+  const weeklyReflCount = m.reflections ? m.reflections.weeklyCount : 0;
+
   let html = '<div class="pair">';
   html += '<div class="pair-head">';
   html += '<div>';
-  html += '<div class="mentor-name">' + esc(p.mentor.full_name) + leapTag(p.mentor.leap) + '</div>';
-  html += '<div class="mentor-email">' + esc(p.mentor.email) + '</div>';
+  html += '<div class="mentor-name">' + esc(m.full_name) + leapTag(m.leap) + '</div>';
+  html += '<div class="mentor-email">' + esc(m.email) + '</div>';
   html += '</div>';
   html += '<div style="font-size:12px; color: var(--text-muted);">' +
     p.mentees.length + ' mentee' + (p.mentees.length === 1 ? '' : 's') + '</div>';
   html += '</div>';
 
+  // ── Mentor metrics row ──
+  html += '<div class="metric-row">';
+  html += metricChip('Modules', trainCount + '/12', trainPct >= 100 ? 'good' : (trainCount === 0 ? 'pending' : 'progress'));
+  html += metricChip('Weekly Reflections', weeklyReflCount, weeklyReflCount > 0 ? 'progress' : 'pending');
+  html += metricChip('Met This Week', meetingLabel(m.lastMeeting), meetingTone(m.lastMeeting));
+  html += '</div>';
+
   if (p.mentees.length === 0) {
     html += '<div class="no-mentees">No mentees assigned to this mentor yet.</div>';
   } else {
-    p.mentees.forEach(m => {
-      html += '<div class="mentee-row">';
-      html += '<div><span class="m-name">' + esc(m.full_name) + '</span> · <span class="m-email">' + esc(m.email) + '</span></div>';
-      html += '<div>' + leapTag(m.leap) + '</div>';
+    p.mentees.forEach(me => {
+      const obs = me.observations ? me.observations.weeksObserved : 0;
+      const obsPct = Math.round((obs / 12) * 100);
+      const menteeWeekly = me.reflections ? me.reflections.weeklyCount : 0;
+      html += '<div class="mentee-row mentee-detail">';
+      html += '<div class="mentee-top">';
+      html += '<div><span class="m-name">' + esc(me.full_name) + '</span> · <span class="m-email">' + esc(me.email) + '</span></div>';
+      html += '<div>' + leapTag(me.leap) + '</div>';
+      html += '</div>';
+      html += '<div class="metric-row mentee-metrics">';
+      html += metricChip('Observations', obs + '/12', obsPct >= 100 ? 'good' : (obs === 0 ? 'pending' : 'progress'));
+      html += metricChip('Weekly Reflections', menteeWeekly, menteeWeekly > 0 ? 'progress' : 'pending');
+      html += metricChip('Met This Week', meetingLabel(me.lastMeeting), meetingTone(me.lastMeeting));
+      html += '</div>';
       html += '</div>';
     });
   }
   html += '</div>';
   return html;
+}
+
+function metricChip(label, value, tone) {
+  return '<div class="metric-chip ' + (tone || '') + '">' +
+    '<div class="mc-label">' + esc(label) + '</div>' +
+    '<div class="mc-value">' + esc(String(value)) + '</div>' +
+    '</div>';
+}
+
+function meetingLabel(lm) {
+  if (!lm || !lm.answer) return 'Not answered';
+  if (lm.answer === 'yes') return 'Yes · wk ' + (lm.week || '?');
+  return 'No · wk ' + (lm.week || '?');
+}
+
+function meetingTone(lm) {
+  if (!lm || !lm.answer) return 'pending';
+  if (lm.answer === 'yes') return 'good';
+  return 'warn';
 }
 
 function leapTag(leap) {

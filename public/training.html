@@ -4390,8 +4390,7 @@ const CURRICULUM = [
   ]
 }, // end Module 6
 
-{// MODULE 7 — Instructional Learning Formats (Domain 2: Classroom Organization)
-// Replace the existing id:7 module object in public/training.html, brace to brace, including the trailing comma.
+{
 {
   id:7, domain:2, domainName:"Classroom Organization",
   title:"Instructional Learning Formats", week:7,
@@ -5032,48 +5031,606 @@ const CURRICULUM = [
     }
   ]
 },
+
 {
   id:9, domain:3, domainName:"Instructional Support",
-  title:"Connections & Reasoning", week:9,
+  title:"Concept Development", week:9,
   focus:"Moving children from rote facts to deep understanding through analysis and inquiry.",
   scenarios:[
-    {
-      menteeType:"D", menteeLabel:"The Driver",
-      menteeDesc:"Ms. Rivera is a strong, efficient teacher who delivers content clearly and moves through curriculum at pace. She measures success by coverage — did the children learn the material? She's skeptical of open-ended inquiry because it feels unpredictable and \"wastes time.\"",
-      sceneTitle:"The Fact That Stayed a Fact", sceneTag:"2nd Grade Classroom",
-      focusBadge:"Concept Development · Higher-Order Thinking",
-      scene:"Ms. Rivera is teaching a science unit on weather. She delivers a crisp, accurate lesson: clouds form when water vapor condenses, there are different types of clouds, here is the vocabulary. Children repeat definitions back correctly. When one child asks, <em>\"But why does it rain MORE in some places?\"</em> Ms. Rivera says: <em>\"That's a great question — we'll get to that next week.\"</em> The lesson ends. Children can name cloud types correctly. None have been asked to apply, analyze, or wonder.",
-      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Analysis, Inference, and Conceptual Depth",
-      qcText1:"Concept development moves children from <strong>knowing to understanding</strong> — from recalling facts to analyzing relationships, making predictions, and connecting ideas to their own experience. Ms. Rivera's lesson produced accurate recall but no conceptual depth.",
-      qcText2:"The child who asked about regional rainfall variation was offering a gift: a <strong>genuine wondering</strong>. That question was a doorway to analysis, geography, climate, and cause-and-effect. Instead, it was scheduled for next week. High-quality concept development means <em>following the wondering into the thinking</em> — even if it interrupts the plan.",
-      coachTitle:"The Fact That Stayed a Fact — Coaching Conversation",
-      question:"You're debriefing with Ms. Rivera, a <strong>Driver</strong>. She tells you, \"They all got it — they could name every cloud type.\" How do you introduce the concept of depth over coverage?",
-      correct:0,
-      options:[
-        "\"They absolutely got it — the recall was solid. Now I want to add one question to that: what did they do with it? I want to show you the moment when a child offered you a doorway to something deeper, and we missed it. That's the piece I want to build with you.\"",
-        "\"I totally agree they got the cloud types! What if we added some WONDER time to the lesson? Like a wonder wall where they write questions? I think the kids would love it and it would add so much richness!\"",
-        "\"I noticed that there wasn't much opportunity for children to analyze or apply the concepts today. It might be worth considering whether coverage is the primary measure of success, or whether depth of understanding is also important.\"",
-        "\"I hear you that coverage went well. I do want to be honest — I'm concerned that the lesson was primarily recall-based. The research on concept development is clear that children need analysis and application, not just memorization. We need to address this.\""
-      ],
-      wrongFeedback:[
-        {h:"Style Mismatch — Let's Reconsider", p1:"Enthusiastic additions like a \"wonder wall\" are an <strong>Inspirer's</strong> move — and while the idea has merit, Ms. Rivera will hear it as a suggestion to add something extra to an already-efficient lesson plan. It doesn't address her underlying belief that coverage equals success.", p2:"The goal is to shift her mental model of what learning means, not to add activities. This approach goes around the belief rather than through it."},
-        {h:"Style Mismatch — Let's Reconsider", p1:"For a <strong>Driver</strong>, \"it might be worth considering\" sounds noncommittal and weak. Directors lose respect for mentors who hedge when they have something important to say. This approach is better suited to a <strong>Sustainer</strong> mentee who needs more gentleness.", p2:"Ms. Rivera can handle directness. Give her the clear case, not the tentative one."},
-        {h:"Style Mismatch — Let's Reconsider", p1:"Starting with \"I'm concerned\" and \"we need to address this\" without first meeting her where she is will put a <strong>Driver</strong> on the defensive. She'll feel she's being evaluated rather than developed.", p2:"The critique is valid — but a Driver needs to feel respected before receiving it. Acknowledge the real success first, then redirect to the deeper question."}
-      ],
-      matchText:"This is excellent Driver coaching. You validated the real success — the recall was solid — and then immediately redirected to a higher-order question: <em>what did they do with it?</em> That framing doesn't dismiss her success; it extends it.",
-      matchText2:"Pointing to the specific child's question as \"a doorway we missed\" is precise, data-grounded feedback that a Driver can engage with directly. You gave her something concrete to work with, not a vague mandate to \"go deeper.\"",
-      actionSteps:[
-        "<strong>Replay the wondering moment.</strong> Bring her back to the child's question about regional rainfall. Walk through: what could have happened if you followed that thread for 5 minutes? Model the analysis conversation.",
-        "<strong>Introduce the recall vs. understanding distinction.</strong> Help her articulate the difference: recall = \"Can they name it?\" understanding = \"Can they use it to think about something new?\"",
-        "<strong>Build 'depth questions' into the lesson plan.</strong> For each upcoming lesson, help her identify 2 questions that ask children to analyze, connect, or predict — not just recall. These are planned in advance, not improvised.",
-        "<strong>Give her permission to follow the wondering.</strong> Ms. Rivera needs to hear that a child's genuine question is more valuable than the next slide. Reframe spontaneous inquiry as a feature, not a risk.",
-        "<strong>Observe with a concept-depth lens.</strong> At the next visit, track the ratio of recall-level to analysis-level exchanges in the room. Share the data."
-      ],
-      completeLine:"You shifted a Driver's definition of success — from coverage to depth. That's a significant move."
-    }
+// ── SCENARIO 1 · Driver Mentee ───────────────────────────────
+{
+  menteeType:"D",
+  menteeLabel:"The Driver",
+  menteeDesc:"Mr. Beaumont is confident, direct, and results-oriented. He runs efficient, well-paced lessons and checks for understanding constantly — usually with quick, closed questions that have one right answer. He sees rapid recall as proof that learning happened. He responds best to feedback that is honest, efficient, and tied to measurable outcomes, and he can dismiss feedback that feels soft or theoretical. Once he sees a concrete return, he changes fast.",
+  sceneTitle:"The Pumpkin That Floated", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Analysis and Reasoning",
+  scene:"Mr. Beaumont's small group sits around a tub of water and a pumpkin for a fall science lesson. He moves briskly: <em>\"What color is the pumpkin? Orange. How many stems? One. Is it big or small? Big.\"</em> The children answer in chorus. He drops the pumpkin in, and it bobs to the surface. Oscar (4 years, 4 months) sits straight up: <em>\"Whoa — why didn't it sink? It's so heavy!\"</em> Mr. Beaumont smiles: <em>\"Good question — we'll learn about that another day. Now, what shape is it? Round!\"</em> Oscar stares at the floating pumpkin for the rest of the lesson and doesn't answer another question.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Analysis and Reasoning — Why and How Questions",
+  qcText1:"Concept Development asks whether teachers help children <strong>think, not just recall</strong>. Mr. Beaumont asked eight questions in four minutes, and every one had a single, one-word answer. Children can answer \"orange\" and \"round\" without reasoning about anything. The lesson looked productive, but it stayed at the level of naming.",
+  qcText2:"Then Oscar handed him the best moment of the lesson: a genuine why question, sparked by a surprising result. <strong>A child's own \"why\" is the richest entry point for analysis and reasoning</strong> — \"What do you think? What else could we test?\" would have turned a color quiz into an investigation. Instead, the question was postponed, and Oscar's curiosity had nowhere to go.",
+  coachTitle:"The Pumpkin That Floated — Coaching Conversation",
+  question:"You're debriefing with Mr. Beaumont, a <strong>Driver</strong>. He's pleased: \"They knew every answer.\" Which coaching approach is most likely to land and produce a real change in practice?",
+  correct:1,
+  options:[
+    "\"The children clearly enjoyed your lesson, and you kept it moving so well. I wonder if Oscar might have loved exploring his question a little. What do you think about maybe leaving more room for their ideas?\"",
+    "\"I tallied your questions: eight in four minutes, and all eight had one-word answers — color, count, shape. Then Oscar asked the only why question of the lesson, and it was postponed. That was your highest-value moment. One follow-up — 'What do you think? What should we test next?' — turns a recall check into reasoning. Want to aim for three open questions per group next time?\"",
+    "\"Can we wonder together about something? Picture Oscar's face when the pumpkin floated. What do you think was happening in his head right then?\"",
+    "\"There's a strong research base on open-ended questioning and children's reasoning. I'll send you a summary — take a look when you have time, and we'll discuss it next visit.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Sustainer's Natural Move — Too Cushioned for a Driver", p1:"Opening with praise and floating a gentle \"I wonder\" is a <strong>Sustainer mentor's</strong> natural instinct. It protects the relationship and gives sensitive mentees room to hear hard feedback.", p2:"Mr. Beaumont will hear it as optional. \"Maybe leaving more room\" gives him no target and no reason tied to results. Drivers act on clear observations and measurable goals, not soft suggestions."},
+    {h:"This Is an Inspirer's Natural Move — Too Roundabout for a Driver", p1:"Inviting him to imagine Oscar's inner experience is an <strong>Inspirer mentor's</strong> natural approach — collaborative, vivid, and discovery-based.", p2:"For a Driver, it reads as indirect. He'll wonder why you're asking him to guess instead of telling him what you saw. Give him the numbers and the missed moment plainly, then let him solve it."},
+    {h:"This Is a Cultivator's Natural Move — Too Deferred for a Driver", p1:"Sending research to review later is a <strong>Cultivator mentor's</strong> instinct — thorough, evidence-based, and respectful of processing time.", p2:"\"When you have time\" means never for Mr. Beaumont. He needs the observation and the fix in the room, today. The research can follow as backup once he's already bought in."}
+  ],
+  matchText:"This works for a <strong>Driver mentee</strong> because it leads with data he can't argue with — eight questions, eight one-word answers — and names Oscar's question as his \"highest-value moment,\" which is outcomes language he respects.",
+  matchText2:"Notice that you also gave him a precise target: three open questions per group. Drivers don't need to be convinced that reasoning matters in the abstract. They need a clear metric, a concrete example, and a reason to believe it improves results.",
+  actionSteps:[
+    "<strong>Script the pumpkin moment again.</strong> Rewrite it together: \"Why do you think it floated? What else could we try in the water?\" Show him it takes under a minute.",
+    "<strong>Teach the open-question starters.</strong> Give him a short list — Why do you think…? How could we find out? What would happen if…? — to keep on a card at the science table.",
+    "<strong>Track the ratio.</strong> Next visit, count his closed and open questions. Set a goal together for at least three open questions per small group.",
+    "<strong>Turn children's questions into the lesson.</strong> When a child asks why, he answers with \"What do you think?\" first. Drivers like a simple, repeatable rule.",
+    "<strong>Review the data together.</strong> Share the before-and-after counts at your next debrief. Drivers stay motivated by progress they can measure."
+  ],
+  completeLine:"You showed a Driver that one why question beats eight right answers. That's the language he acts on."
+},
+
+// ── SCENARIO 2 · Driver-Inspirer Mentee ──────────────────────
+{
+  menteeType:"DI",
+  menteeLabel:"The Driver-Inspirer",
+  menteeDesc:"Ms. Holloway is a force of nature — energetic, bold, and deeply loved by her children and families. Her projects are ambitious and exciting, and she loves a beautiful finished product to share with families. Her challenge: she moves so fast toward the result that she does the planning and designing herself, and children end up following her model instead of creating their own. She receives feedback best when it honors her energy and connects directly to the outcomes she's already chasing.",
+  sceneTitle:"Twenty Identical Bird Feeders", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Creating — Children's Own Plans",
+  scene:"Ms. Holloway has a table set up with pinecones, peanut butter, and birdseed, and a finished sample feeder hanging above it. <em>\"Friends, we're making bird feeders just like this one — peanut butter first, then roll it in seeds!\"</em> Leilani (4 years, 9 months) holds up an empty milk carton from the recycling bin: <em>\"Can I make a bird house feeder? With a door so the birds can go inside and eat?\"</em> Ms. Holloway laughs warmly: <em>\"Love it, but today we're all doing pinecones! They'll look so beautiful hanging together.\"</em> Leilani sets down the carton and rolls her pinecone in seeds. By the end, twenty identical feeders hang on the fence.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Creating — Planning and Producing Children's Own Ideas",
+  qcText1:"Concept Development includes <strong>creating</strong>: children brainstorming, planning, and producing their own ideas. Leilani had done exactly that. She saw a problem — where will the birds eat? — imagined a design, chose her material, and described how it would work. That's planning and problem-solving at a high level for a four-year-old.",
+  qcText2:"Ms. Holloway's project was lively and successful as a craft, but <strong>when every child follows the same model, there's very little thinking left for children to do</strong>. The finished products were uniform because the ideas all came from the teacher. Offering the pinecone as one option — and asking Leilani, \"What will you need? How will the birds get in?\" — would have kept the joy and added real concept development.",
+  coachTitle:"Twenty Identical Bird Feeders — Coaching Conversation",
+  question:"You're debriefing with Ms. Holloway, a <strong>Driver-Inspirer</strong>. She's thrilled: \"Did you see the fence? Parents are going to love it!\" Which approach reaches her?",
+  correct:3,
+  options:[
+    "\"Twenty children produced twenty identical feeders. That's a craft, not concept development. Next time, drop the sample and let children design their own.\"",
+    "\"The feeders were adorable, and the children had so much fun with you. I just wonder if some of them might have liked a chance to do their own thing? Maybe think about that.\"",
+    "\"Before our next visit, could you list the thinking skills each project targets and note where children make their own decisions? Then we can review the pattern together.\"",
+    "\"That fence is a showstopper — nobody launches a project like you. Now picture something even more impressive to families: Leilani's idea. She wanted to build a bird house feeder from a milk carton, with a door so birds could go inside. That's a four-year-old designing a solution. What if the pinecone were one option, and children like Leilani planned their own? You'd hang up twenty ideas instead of one — and families would see how their children think.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Efficient, but It Misses the Inspirer", p1:"Naming the gap bluntly is the natural move of a mentor with a strong <strong>Driver</strong> expression. It's clear and accurate, and it speaks to half of Ms. Holloway.", p2:"It ignores the other half. Calling her joyful project \"just a craft\" feels like an attack on what she's proudest of. A Driver-Inspirer will defend the fence instead of hearing Leilani's idea. Honor the energy first, then aim it."},
+    {h:"This Is a Sustainer's Natural Move — Too Vague to Move Her", p1:"Affirming the fun and gently wondering about \"their own thing\" is a <strong>Sustainer mentor's</strong> instinct — caring and careful not to bruise.", p2:"Ms. Holloway will hear this as a nice thought with no stakes. She needs a specific child, a specific missed idea, and a bigger result to chase. General wondering can't compete with a fence full of feeders."},
+    {h:"This Is a Cultivator's Natural Move — Too Much Paperwork for Her Pace", p1:"Asking her to map thinking skills and decision points is a <strong>Cultivator mentor's</strong> instinct — systematic and thorough.", p2:"For a Driver-Inspirer, this feels like homework that drains her energy. She'll either skip it or complete it without reflection. Show her Leilani's idea first; the analysis can come later, once she's excited about the change."}
+  ],
+  matchText:"This works for a <strong>Driver-Inspirer</strong> because it starts with genuine celebration — \"a showstopper\" — and then offers her something \"even more impressive.\" That speaks to both expressions: the Inspirer hears excitement, the Driver hears a bigger payoff with families.",
+  matchText2:"The reframe \"twenty ideas instead of one\" is the key. You didn't ask her to give up her big, beautiful projects. You showed her how to make them showcase children's thinking. A Driver-Inspirer will take that challenge because it makes her results even stronger.",
+  actionSteps:[
+    "<strong>Offer options, not a single model.</strong> For the next project, she sets out a sample and two or three alternative materials, and invites children to plan their own version.",
+    "<strong>Add a thirty-second planning moment.</strong> Before children start, she asks each one, \"What are you going to make? What will you need?\" Their answers become part of the display.",
+    "<strong>Follow up with Leilani.</strong> Encourage her to offer Leilani the milk carton this week and ask her to explain her design. Let Ms. Holloway see what one child's plan looks like.",
+    "<strong>Showcase the thinking for families.</strong> Next to each project, post the child's own words about their plan. Families will see ideas, not just products.",
+    "<strong>Celebrate the first varied display.</strong> When she hangs a set of different creations, name what you see. Driver-Inspirers repeat what gets recognized."
+  ],
+  completeLine:"You didn't ask a Driver-Inspirer to shrink her projects — you showed her how to fill them with children's ideas. That's the work."
+},
+
+// ── SCENARIO 3 · Driver-Sustainer Mentee ─────────────────────
+{
+  menteeType:"DS",
+  menteeLabel:"The Driver-Sustainer",
+  menteeDesc:"Mr. Osei is a principled, protective leader who pushes for results while genuinely caring about every child in his room. He plans his units carefully and moves through them in order, one topic at a time. His challenge: when he's focused on covering the plan, his Driver side can treat children's connections to earlier learning as detours rather than breakthroughs. He receives feedback best when it honors both his care for children and his commitment to excellence, and when it names one concrete way to serve both at once.",
+  sceneTitle:"Plants Drink the Rain", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Integration — Linking Concepts",
+  scene:"It's week one of Mr. Osei's weather unit, and he's showing the group a picture of a rainstorm. <em>\"Rain comes from clouds. When clouds get heavy with water, it falls down.\"</em> Musa (4 years, 6 months) raises his hand high: <em>\"Our bean plants need rain! Remember? We gave them water and they got taller!\"</em> Last month the class grew beans on the windowsill. Mr. Osei nods kindly: <em>\"That was our plant unit, buddy. Today we're learning about weather.\"</em> He turns to the next picture. Musa looks over at the empty windowsill and doesn't raise his hand again.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Integration — Connecting New Learning to Prior Learning",
+  qcText1:"Integration is one of the most powerful parts of Concept Development: <strong>helping children connect concepts to one another and to what they've already learned</strong>. Musa did the integrating himself. He linked the water cycle to plant growth, pulled in a shared class experience, and reasoned about cause and effect — rain helps plants grow.",
+  qcText2:"Mr. Osei treated that link as off-topic because it belonged to a different unit. But <strong>children don't learn in units; they build a connected web of understanding</strong>. A thirty-second response — \"Yes! Where did our bean plants get their water? What would happen to plants outside if it never rained?\" — would have strengthened both concepts and shown every child that connecting ideas is what good thinkers do.",
+  coachTitle:"Plants Drink the Rain — Coaching Conversation",
+  question:"Mr. Osei asks you directly: \"Should I have let him go off-topic like that?\" He is a <strong>Driver-Sustainer</strong> — results-focused, protective of his children, and eager to get it right. Which response serves him best?",
+  correct:0,
+  options:[
+    "\"You were protecting your plan because you care about them learning the weather concepts well — that's the right instinct. Here's the thing: Musa wasn't going off-topic. He connected rain to the beans you grew last month. That's integration, one of the highest-level thinking moves in Concept Development. Next time, try one bridge question — 'Where did our beans get their water? What happens to plants outside when it rains?' — then go back to your plan. It takes thirty seconds and deepens both units.\"",
+    "\"Oh, what if you built a whole 'rain and plants' song? The kids would love it, and Musa would be so proud his idea became a song!\"",
+    "\"There's good research on how integrated curriculum strengthens retention in early childhood. I'll send you an article, and we can talk through how to restructure your units.\"",
+    "\"Yes. You shut down the best thinking in the room. Stop treating your units as separate boxes.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Adds Energy but Skips the Answer", p1:"Turning Musa's idea into a song is an <strong>Inspirer mentor's</strong> natural move. Inspirers bring energy and imagination to a problem, and with many mentees that's a real asset.", p2:"It doesn't answer Mr. Osei's direct question, and it gives him no concrete way to handle the next connection. A Driver-Sustainer wants to know what went wrong and exactly what to do instead, not a fun add-on."},
+    {h:"This Is a Cultivator's Natural Move — Right Content, Wrong Timing", p1:"Sending research on integrated curriculum is a <strong>Cultivator mentor's</strong> instinct. The evidence is sound, and Cultivators trust good information to change practice.", p2:"Mr. Osei asked a direct question in the moment. He needs a clear answer and a simple move he can use tomorrow, and \"restructure your units\" will feel like a verdict on all his planning. Give him the bridge question first."},
+    {h:"This Is a Driver's Natural Move — Accurate, but It Wounds the Sustainer", p1:"A blunt \"yes, you shut it down\" is the natural move of a mentor with a strong <strong>Driver</strong> expression: fast and correct.", p2:"Mr. Osei's Sustainer side cares deeply about Musa. Hearing only the verdict, he'll feel he failed a child, and a Driver-Sustainer under that pressure tends to get rigid rather than reflective. He needs his care named before the correction, and a specific replacement move after it."}
+  ],
+  matchText:"This works for a <strong>Driver-Sustainer</strong> because it honors both sides of him in order. First, his care: protecting the plan \"because you care about them learning.\" Then his drive: a precise reframe — Musa was integrating, not wandering — and a thirty-second move that serves his plan instead of derailing it.",
+  matchText2:"The phrase \"then go back to your plan\" matters. You didn't ask him to abandon his structure. You showed him that a bridge question strengthens both units. A Driver-Sustainer can embrace that because he keeps his excellence and gains a way to honor children's thinking.",
+  actionSteps:[
+    "<strong>Script the bridge question together.</strong> Write out the Musa moment and the thirty-second response. Let him practice it so it feels natural.",
+    "<strong>Add a \"connections\" line to his unit plans.</strong> For each new unit, he lists two or three earlier units children might connect to, with a bridge question for each.",
+    "<strong>Name integration when it happens.</strong> Teach him to say, \"You connected two ideas — that's great thinking!\" so children learn that linking ideas is valued.",
+    "<strong>Revisit the beans.</strong> Suggest he bring one bean plant to circle during the weather unit and ask, \"What does this plant need from the weather?\"",
+    "<strong>Observe and debrief quickly.</strong> Watch for a child's connection at your next visit and debrief right after. A Driver-Sustainer wants fast feedback — and reassurance the change is working."
+  ],
+  completeLine:"You honored a Driver-Sustainer's care and handed him a precise tool. That's how he grows."
+},
+
+// ── SCENARIO 4 · Driver-Cultivator Mentee ────────────────────
+{
+  menteeType:"DC",
+  menteeLabel:"The Driver-Cultivator",
+  menteeDesc:"Ms. Reeves is a strategic, high-standards teacher who plans meticulously and executes decisively. Her lessons use precise vocabulary and carefully sequenced materials, and she wants every child to master the target concept. Her challenge: she keeps learning inside the lesson plan and misses chances to connect concepts to children's real lives — the connections that make ideas meaningful. She receives feedback best when it is specific, evidence-based, and names both the gap in her system and the precise intervention that closes it.",
+  sceneTitle:"Grandma's Measuring Cup", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Connections to the Real World",
+  scene:"Ms. Reeves is leading a measurement lesson at the sensory table with a set of labeled cups: <em>\"This is one cup. This is half a cup. Two halves make one whole.\"</em> Beatriz (4 years, 11 months) lights up: <em>\"My abuela has a cup like that! We use it to make arroz, and she puts two big ones of water!\"</em> Ms. Reeves responds, <em>\"That's nice. Now, how many halves make one whole?\"</em> Beatriz answers \"Two\" quietly. For the rest of the lesson she fills and dumps the cups without talking.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Connections to the Real World — Linking Concepts to Children's Lives",
+  qcText1:"Concept Development asks whether teachers <strong>connect concepts to children's real-world experiences</strong>. Beatriz made that connection on her own — a measuring cup, a real recipe, a real ratio of water to rice. She was showing that measurement already has meaning in her life.",
+  qcText2:"Ms. Reeves returned to the target question, and Beatriz gave the right answer — but her engagement dropped. <strong>Accuracy on a scripted question isn't the same as understanding a concept deeply.</strong> Asking, \"How many cups of water does your abuela use? Why does rice need water measured?\" would have tied the lesson to real life and likely strengthened the very concept Ms. Reeves was teaching.",
+  coachTitle:"Grandma's Measuring Cup — Coaching Conversation",
+  question:"You're debriefing with Ms. Reeves, a <strong>Driver-Cultivator</strong>. She notes that \"every child answered the target question correctly.\" Which approach will move her?",
+  correct:2,
+  options:[
+    "\"Beatriz's story about her abuela was the sweetest thing! You should just let the kids talk about their families more — they love sharing.\"",
+    "\"I could tell Beatriz felt a little brushed off when she shared about her grandma. Maybe next time you could let her tell her story? It seemed important to her.\"",
+    "\"Let's look at the evidence. Beatriz brought a real-world connection — her abuela's measuring cup and a real water-to-rice ratio. Your response went back to the script, and she answered correctly but stopped talking for the rest of the lesson. Your target is understanding measurement, and her connection was the strongest evidence of meaning in the room. The gap is that your plan doesn't include a real-world bridge. Want to build one into each lesson? For example: 'Where have you seen a measuring cup at home?'\"",
+    "\"You missed a real-world connection. Build family examples into your measurement lessons from now on.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Enthusiasm Without Evidence", p1:"Celebrating the story and urging more family talk is an <strong>Inspirer mentor's</strong> natural move — warm, optimistic, and child-centered.", p2:"For a Driver-Cultivator, \"they love sharing\" sounds like opinion, not evidence of learning. She needs to see how the connection serves her target concept, not just that it's enjoyable."},
+    {h:"This Is a Sustainer's Natural Move — Feelings Where She Needs Facts", p1:"Focusing on how Beatriz felt is a <strong>Sustainer mentor's</strong> instinct — relationally attuned and gentle.", p2:"Ms. Reeves will find this unpersuasive. A child's feelings, on their own, won't compete with a data point showing correct answers. She needs an analysis that connects real-world links to deeper understanding, plus a planned intervention."},
+    {h:"This Is a Driver's Natural Move — A Directive Without the Mechanism", p1:"A crisp \"build it in from now on\" is the natural move of a mentor with a strong <strong>Driver</strong> expression — decisive and outcome-focused.", p2:"It speaks to her Driver side but skips what her Cultivator side needs: why real-world connections matter for the concept and how to plan them. Without the reasoning, she'll comply mechanically or not at all."}
+  ],
+  matchText:"This works for a <strong>Driver-Cultivator</strong> because it's built like an analysis: the evidence (Beatriz's connection, the correct answer, the silence that followed), her stated target (understanding measurement), and a precise diagnosis — \"your plan doesn't include a real-world bridge.\"",
+  matchText2:"Then you invited her to design the fix, with one example to start. Her Driver side wants to own the solution; her Cultivator side wants it well reasoned. A Driver-Cultivator will likely return with a better system than you proposed — and that's the goal.",
+  actionSteps:[
+    "<strong>Add a real-world bridge to her lesson template.</strong> For every concept, she writes one question that links it to home or community life.",
+    "<strong>Revisit Beatriz's connection.</strong> Suggest she invite Beatriz to show the class how her abuela measures water for rice, using the classroom cups.",
+    "<strong>Invite families into the concept.</strong> A quick note home — \"Where do you measure things at home?\" — gives her a bank of real-world examples to use.",
+    "<strong>Look past correct answers.</strong> Help her add one question per lesson that asks children to explain or apply, not just recall: \"When would you need half a cup?\"",
+    "<strong>Review her plans together.</strong> Look at next week's lessons and identify the real-world bridge in each one. Let her lead; she'll find more than you expect."
+  ],
+  completeLine:"You gave a Driver-Cultivator evidence, a diagnosis, and a system to build. That's exactly what she needed."
+},
+
+// ── SCENARIO 5 · Inspirer Mentee ─────────────────────────────
+{
+  menteeType:"I",
+  menteeLabel:"The Inspirer",
+  menteeDesc:"Ms. Reyes is warm, expressive, and genuinely beloved by the families and children in her program. Her activities are joyful, and children light up around her. Her challenge: she responds to children's discoveries with enthusiasm instead of curiosity — \"Wow! Amazing!\" — and moves on before children have a chance to explain their thinking. She receives feedback best when her strengths are genuinely honored first, and growth is framed as an expansion of what she already does well.",
+  sceneTitle:"Wow, It Floated!", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Analysis and Reasoning — Asking Why",
+  scene:"Ms. Reyes has a sink-or-float tub out with a basket of objects: a rock, a cork, a spoon, a sponge, and a big wooden block. Arjun (4 years, 3 months) drops in the block, expecting it to sink, and gasps when it floats. <em>\"Ms. Reyes! The BIG one floated, but the little rock sank!\"</em> Ms. Reyes claps: <em>\"Wow! Amazing, Arjun! You're a scientist!\"</em> She turns to hand a sponge to another child. Arjun drops the rock in again, then the block, then looks around for someone to tell. No one asks him anything more.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Analysis and Reasoning — Following Children's Discoveries With Why",
+  qcText1:"Arjun noticed something genuinely surprising: <strong>size didn't predict floating</strong>. That's a real scientific puzzle, and he was ready to reason about it. Concept Development asks teachers to meet discoveries like this with why and how questions — \"Why do you think the big one floated? What's different about the block and the rock?\"",
+  qcText2:"Ms. Reyes's praise was warm and genuine, but <strong>enthusiasm alone closed the conversation instead of opening it</strong>. \"You're a scientist!\" tells Arjun he did something good; it doesn't invite him to think like a scientist. Her warmth is a real strength. The growth edge is pairing it with one curious question that keeps a child's thinking going.",
+  coachTitle:"Wow, It Floated! — Coaching Conversation",
+  question:"You're debriefing with Ms. Reyes, an <strong>Inspirer</strong>. She's delighted: \"Arjun was so excited — I love those moments!\" Which approach will land?",
+  correct:2,
+  options:[
+    "\"You praised him but didn't ask him a single question. That's a missed opportunity. When a child discovers something, you need to ask why.\"",
+    "\"You're so good at making kids feel special. Maybe next time you could just ask a little more? Only if it feels natural, of course.\"",
+    "\"I love those moments too — and you create so many of them. Here's what I noticed: Arjun discovered that the big block floated and the small rock sank. That's a real science puzzle, and he was bursting to figure it out. What if you kept your 'Wow!' and added one curious question — 'Why do you think the big one floated?' Your excitement plus his thinking? That's when a scientist is born.\"",
+    "\"There's research on process praise versus open-ended questioning in early science. I'd like you to read a short summary and consider how it applies to your sensory activities.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Blunt for an Inspirer", p1:"Naming the gap plainly is a <strong>Driver mentor's</strong> instinct: clear, efficient, and technically accurate.", p2:"Ms. Reyes will hear \"you did it wrong\" about a moment she treasured. Inspirers can deflate when feedback lands as a rule without recognition. She'll comply on the surface but won't carry the insight into her practice."},
+    {h:"This Is a Sustainer's Natural Move — So Gentle the Point Disappears", p1:"Affirming her and softening the ask is a <strong>Sustainer mentor's</strong> natural move — caring and protective of her feelings.", p2:"\"Only if it feels natural\" makes the change optional and gives her nothing concrete to try. She needs to see what Arjun was ready for and a joyful way to add it."},
+    {h:"This Is a Cultivator's Natural Move — Theory Before Connection", p1:"Assigning a research summary on praise and questioning is a <strong>Cultivator mentor's</strong> instinct — thorough and principled.", p2:"For an Inspirer, it feels like homework instead of connection. The research is sound, but it won't move her until she feels Arjun's moment. Lead with him, and the principle will follow."}
+  ],
+  matchText:"This works for an <strong>Inspirer</strong> because it shares her joy — \"I love those moments too\" — and names her gift for creating them. Then it shows her Arjun's puzzle as something exciting, not a mistake she made.",
+  matchText2:"The key is \"keep your 'Wow!' and add one curious question.\" You didn't ask her to tone down her warmth; you expanded it. \"Your excitement plus his thinking\" is a growth she'll embrace because it's more of what she loves, not less.",
+  actionSteps:[
+    "<strong>Pair every \"Wow!\" with a \"Why?\"</strong> Help her build the habit: celebrate first, then ask one curious question.",
+    "<strong>Give her question starters.</strong> Keep a short list at the science table: Why do you think…? What's different about…? What will happen if…?",
+    "<strong>Replay the Arjun moment.</strong> Role-play it with her: \"Wow! Why do you think the big one floated?\" Let her feel how natural it sounds in her voice.",
+    "<strong>Add a prediction step.</strong> Before children test an object, she asks, \"Will it sink or float? Why?\" Predictions build reasoning and her enthusiasm makes them fun.",
+    "<strong>Watch a question land.</strong> At your next visit, point out a moment when her question sparked a child's explanation. Inspirers learn best from moments they can feel."
+  ],
+  completeLine:"You showed an Inspirer that one curious question can turn delight into discovery. That's the work."
+},
+
+// ── SCENARIO 6 · Inspirer-Driver Mentee ──────────────────────
+{
+  menteeType:"ID",
+  menteeLabel:"The Inspirer-Driver",
+  menteeDesc:"Mr. Castillo is magnetic, persuasive, and absolutely committed to results. His group discussions are lively, and children love bouncing ideas around with him. His challenge: he runs brainstorms at his own speed, often answering his own questions or steering toward the idea he already had in mind. He receives feedback best when it is both energetically engaging and immediately connected to real outcomes — he needs to feel it and be given something specific to do with it.",
+  sceneTitle:"The Hamster Castle", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Creating — Brainstorming and Planning",
+  scene:"Mr. Castillo gathers the group around the class hamster's cage: <em>\"Team, Peanut needs something new to play in. What could we build him?\"</em> Sadie (4 years, 7 months) calls out, <em>\"A tunnel! From the paper towel rolls! He could go through it!\"</em> Mr. Castillo lights up: <em>\"Ooh, even better — let's build him a CASTLE! With towers and a drawbridge!\"</em> The group cheers. He sketches the castle on chart paper, assigns jobs, and they get to work. Sadie cuts the cardboard where he points. When another child asks where the tunnel goes, Sadie shrugs: <em>\"We're doing a castle.\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Creating — Children Generating and Developing Their Own Ideas",
+  qcText1:"Brainstorming and planning are core to the <strong>creating</strong> part of Concept Development. Sadie offered a complete idea: a tunnel, a material to make it from, and a reason — the hamster could go through it. That's a child thinking like a designer.",
+  qcText2:"Mr. Castillo's energy made the project exciting, but <strong>\"even better\" replaced the child's idea with the teacher's</strong>. After that, children were executing his plan instead of developing their own. Asking, \"How would the tunnel work? How long should it be? What else could Peanut need?\" — and recording several children's ideas — would have kept the energy and the children's thinking at the center.",
+  coachTitle:"The Hamster Castle — Coaching Conversation",
+  question:"You're debriefing with Mr. Castillo, an <strong>Inspirer-Driver</strong>. He's proud: \"Did you see how excited they were? We built a whole castle!\" Which approach will actually land?",
+  correct:0,
+  options:[
+    "\"That was electric — nobody gets kids that fired up like you. Now let's make that energy even more powerful. Sadie gave you a full design: a tunnel, made from paper towel rolls, so Peanut could run through it. You said 'even better' and swapped in your castle, and after that the kids were building your plan. What if next time you wrote down three kids' ideas first and asked, 'How would that work?' Same excitement — and you'd have a room full of designers instead of builders.\"",
+    "\"It was fun, and the kids really love you. I just wonder if Sadie felt a little disappointed that her idea didn't get used? Maybe be a bit more careful with that.\"",
+    "\"Let's look at your planning process. Could you document how you run brainstorms — who contributes, how ideas are chosen, and how the final plan is decided? Then we'll analyze it together.\"",
+    "\"You took over the brainstorm. Next time, use the kids' ideas instead of yours.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Sustainer's Natural Move — It Asks Him to Shrink", p1:"Focusing on Sadie's disappointment and asking him to \"be careful\" is a <strong>Sustainer mentor's</strong> instinct — gentle and attentive to feelings.", p2:"Mr. Castillo will wave it off with a laugh — \"She loved the castle!\" — and he may be right. The issue isn't her feelings; it's that her thinking got replaced. He needs his energy honored and a specific move that keeps children's ideas in the lead."},
+    {h:"This Is a Cultivator's Natural Move — Documentation Over Momentum", p1:"Asking him to document and analyze his brainstorm process is a <strong>Cultivator mentor's</strong> natural move — systematic and evidence-oriented.", p2:"For an Inspirer-Driver, this turns a vivid moment into paperwork, and he'll lose interest fast. He needs the insight tied to what just happened and a quick fix he can use tomorrow."},
+    {h:"This Is a Driver's Natural Move — Correct, but He'll Charm Past It", p1:"A blunt \"you took over\" is a <strong>Driver mentor's</strong> instinct — direct and results-focused, and it speaks to his Driver side.", p2:"Without the energy and the specifics, Mr. Castillo will argue that the kids loved it and move on. His charm will carry him right past the point. He needs to feel the moment and get a concrete, exciting alternative."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Driver</strong> because it matches his energy — \"electric\" — and immediately turns toward a bigger result: \"even more powerful.\" Sadie's idea is described precisely, so he can see exactly what happened when \"even better\" replaced it.",
+  matchText2:"Then you gave him a specific, fast move — write down three kids' ideas and ask \"How would that work?\" — plus a vision he'll want: \"a room full of designers instead of builders.\" He keeps the excitement he loves and gets a stronger outcome.",
+  actionSteps:[
+    "<strong>Capture ideas before choosing.</strong> In every brainstorm, he writes down at least three children's ideas on chart paper before any decision.",
+    "<strong>Replace \"even better\" with \"tell me more.\"</strong> When a child offers an idea, he asks, \"How would that work?\" or \"What would you need?\" before adding his own.",
+    "<strong>Build Sadie's tunnel.</strong> Suggest he invite Sadie to design a tunnel addition to the castle this week, with her explaining the plan to the group.",
+    "<strong>Let children vote or combine.</strong> Help him practice letting the group choose or combine ideas — \"Can the tunnel lead to the castle?\" — so the plan belongs to them.",
+    "<strong>Sit in as his signal.</strong> During his next brainstorm, give him a thumbs-up each time he records a child's idea before adding his own. He'll enjoy the game — and the habit will stick."
+  ],
+  completeLine:"You matched an Inspirer-Driver's energy and handed the ideas back to the children. He'll run with that."
+},
+
+// ── SCENARIO 7 · Inspirer-Sustainer Mentee ───────────────────
+{
+  menteeType:"IS",
+  menteeLabel:"The Inspirer-Sustainer",
+  menteeDesc:"Ms. Fontaine is warm-hearted, joyful, and deeply invested in every child and family she serves. Her classroom feels like belonging — every child's idea is welcomed. Her challenge: she's so committed to keeping everyone feeling successful that she treats every answer as equally right and avoids testing ideas, so children rarely get to find out what actually happens or why. She receives feedback best when she feels completely safe in the relationship, and when growth is framed as deepening her impact on the children she loves — not as a failure of her warmth.",
+  sceneTitle:"Everybody's Right About the Ice", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Analysis and Reasoning — Prediction and Testing",
+  scene:"Ms. Fontaine holds up two ice cubes at circle time: <em>\"If we put one ice cube in the sunny window and one in the shady cubby, which one will melt first?\"</em> Children call out answers. Kenji (4 years, 2 months) says firmly, <em>\"The shady one! Because shade is cozy and warm, like a blanket.\"</em> Ms. Fontaine beams: <em>\"What a great idea, Kenji! Everybody has such good ideas! You're all right!\"</em> She puts the ice cubes back in the freezer and moves on to the calendar. Kenji leans to a friend and whispers, <em>\"I was right.\"</em> No one ever checks.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Analysis and Reasoning — Predicting, Testing, and Explaining",
+  qcText1:"Ms. Fontaine set up a genuinely rich question. Prediction is a key part of <strong>analysis and reasoning</strong>, and Kenji didn't just predict — he gave a reason: shade is cozy and warm, like a blanket. That's real reasoning based on his experience, even though it's likely to be proven wrong.",
+  qcText2:"But predictions only build understanding when children get to <strong>test them and compare the result to what they thought</strong>. By declaring every answer right and skipping the test, Ms. Fontaine left Kenji with a misconception he now feels confident about. Setting the cubes out and asking, \"What happened? Why do you think so?\" would have let Kenji revise his thinking safely — which is exactly how young scientists grow.",
+  coachTitle:"Everybody's Right About the Ice — Coaching Conversation",
+  question:"Ms. Fontaine says quietly, \"I don't like telling a child they're wrong. It can crush them.\" She is an <strong>Inspirer-Sustainer</strong> — joyful, relational, and protective of every child's feelings. Which approach will help her grow?",
+  correct:3,
+  options:[
+    "\"Kenji's answer was incorrect, and now he believes something false. You have a responsibility to teach accurate concepts.\"",
+    "\"Let's review the science standards for this age group and plan a sequence of prediction-and-test activities for the unit. A clear plan will make it easier to follow through.\"",
+    "\"I love how every child feels celebrated in your room! What if you made the ice experiment into a big show — a melting race with music? The kids would go wild!\"",
+    "\"I love that no child in your room ever feels crushed — that safety is a gift. Can I share what I noticed about Kenji? He gave a real reason: shade is cozy and warm, like a blanket. That's beautiful thinking. But he whispered, 'I was right' — and now he believes it. What if you set the cubes out and let the ice tell him? Then you ask, 'What happened? Why do you think so?' He wouldn't hear 'you're wrong.' He'd get to discover something new, with you right beside him.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Correct, but It Breaks Her Sense of Safety", p1:"Stating the facts and her responsibility plainly is a <strong>Driver mentor's</strong> instinct — direct and standards-focused.", p2:"For an Inspirer-Sustainer, \"you have a responsibility\" lands as a judgment of her competence and her warmth. She'll feel ashamed rather than equipped, and she may avoid testing ideas even more. She needs safety first and a way to see testing as kindness."},
+    {h:"This Is a Cultivator's Natural Move — A Plan Without the Why", p1:"Mapping standards and planning a sequence is a <strong>Cultivator mentor's</strong> natural move — organized and thorough.", p2:"Ms. Fontaine's barrier isn't planning; it's emotional. A sequence of activities won't overcome her fear of a child feeling wrong. She needs to see, through Kenji, that testing ideas is a gentle gift rather than a correction."},
+    {h:"This Is an Inspirer's Natural Move — More Fun, Same Avoidance", p1:"A melting race with music is the natural move of a mentor with a strong <strong>Inspirer</strong> expression — joyful and energizing.", p2:"It speaks to her Inspirer side but never addresses the real pattern: she avoids letting children find out whether their ideas were right. Kenji would still leave with a misconception — just a louder one."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Sustainer</strong> because it begins by honoring what she values most — no child ever feels crushed — and names it as a gift. Then it shows her Kenji's thinking with admiration: \"That's beautiful thinking.\"",
+  matchText2:"The turning point is \"let the ice tell him.\" It removes her from the role of the person who says \"you're wrong.\" The materials show the result, and she gets to be the warm guide asking, \"What happened? Why?\" She can protect his feelings and his learning at the same time.",
+  actionSteps:[
+    "<strong>Run the ice experiment this week.</strong> Help her set out the cubes and plan her words: \"Let's find out! What do you notice? Why do you think that happened?\"",
+    "<strong>Celebrate changing your mind.</strong> Give her language that honors revision: \"Scientists change their ideas when they learn something new. You just did that!\"",
+    "<strong>Praise the reasoning, not the answer.</strong> Practice responses like, \"You had a reason for your idea — that's great thinking,\" so every child feels valued whether or not the prediction holds.",
+    "<strong>Make testing routine.</strong> Encourage her to follow every prediction question with a real test, so finding out becomes a normal, safe part of her room.",
+    "<strong>Show her Kenji's face.</strong> When he sees the result, help Ms. Fontaine notice his reaction. An Inspirer-Sustainer who sees a child delighted by discovery will test the next idea on her own."
+  ],
+  completeLine:"You helped an Inspirer-Sustainer see that finding out is a gift, not a correction. That changes her whole practice."
+},
+
+// ── SCENARIO 8 · Inspirer-Cultivator Mentee ──────────────────
+{
+  menteeType:"IC",
+  menteeLabel:"The Inspirer-Cultivator",
+  menteeDesc:"Ms. Park is a creative, intellectually curious teacher who brings both warmth and analytical depth to her practice. She knows a great deal about the topics she teaches and loves sharing it. Her challenge: when a child raises a great question, she often answers it herself — thoroughly and enthusiastically — instead of guiding the child to reason it out. She receives feedback best when it engages both her intellectual curiosity and her relational energy, and when the path forward is both exciting and structured.",
+  sceneTitle:"Eight Legs or Six?", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Analysis and Reasoning — Comparing and Classifying",
+  scene:"During an insect unit, Imani (4 years, 10 months) is at the science table with a magnifier, a plastic ant, and a plastic spider. She counts the spider's legs, then the ant's, and calls out, <em>\"Ms. Park! The spider has more legs! Is a spider a bug?\"</em> Ms. Park comes over, delighted: <em>\"Great question! Actually, a spider isn't an insect. It's an arachnid. Insects have six legs and three body parts, and arachnids have eight legs and two body parts. Scorpions and ticks are arachnids too!\"</em> Imani nods, puts down the magnifier, and moves to the art table.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Analysis and Reasoning — Guiding Children to Compare and Classify",
+  qcText1:"Imani was doing real analysis: <strong>observing, counting, comparing, and asking a classification question</strong>. She had already noticed the key difference on her own. Concept Development asks teachers to build on that moment — \"What else is different? What do you think makes something an insect?\" — so the child does the reasoning.",
+  qcText2:"Ms. Park's answer was accurate, rich, and enthusiastic, but <strong>when the teacher supplies the conclusion, the child's reasoning ends</strong>. Imani had the evidence right in her hands. Guiding her to count body parts and compare would have let her discover the rule herself, and the vocabulary \"arachnid\" would have landed as a label for something she figured out.",
+  coachTitle:"Eight Legs or Six? — Coaching Conversation",
+  question:"Ms. Park asks eagerly, \"Wasn't that a great question? I love when they ask about classification!\" She is an <strong>Inspirer-Cultivator</strong> — curious, creative, and energized by ideas. Which approach will help her most?",
+  correct:1,
+  options:[
+    "\"It was a great question, but you answered it for her. Stop giving children the answer and ask them to figure it out.\"",
+    "\"It was a fantastic question — and she was already halfway to the answer. Here's the puzzle I think you'll love: Imani had counted the legs and noticed the difference herself. What if, instead of answering, you'd handed the conclusion back to her? 'What else is different? Count the body parts. What do you think makes something an insect?' She might have discovered the rule on her own — and then 'arachnid' becomes her discovery's name. How do you think she'd have answered?\"",
+    "\"Your knowledge is so impressive, and the children love learning from you. I'm sure Imani will remember what you told her. Maybe just check in with her tomorrow to see what she recalls.\"",
+    "\"Let's analyze this systematically. Could you log each child question this week, your response, and whether the child or you did the reasoning? Then we'll calculate the ratio.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Clear, but It Deflates Her", p1:"A direct \"stop giving the answer\" is a <strong>Driver mentor's</strong> instinct — efficient and outcome-oriented.", p2:"Ms. Park loves ideas and loves sharing them. A blunt directive feels dismissive of her knowledge, and an Inspirer-Cultivator who feels her thinking wasn't valued can pull back. She needs her curiosity engaged before she'll change."},
+    {h:"This Is a Sustainer's Natural Move — Reassurance That Skips the Growth", p1:"Praising her knowledge and reassuring her is a <strong>Sustainer mentor's</strong> natural move — warm and protective.", p2:"It reinforces the exact pattern she needs to grow past. Checking whether Imani recalls a fact measures memory, not reasoning. Ms. Park needs to see what Imani could have discovered on her own."},
+    {h:"This Is a Cultivator's Natural Move — Analysis Without the Spark", p1:"A question log with ratios is the natural move of a mentor with a strong <strong>Cultivator</strong> expression, and it speaks to half of Ms. Park.", p2:"It misses her Inspirer half entirely. The task is heavy and joyless and turns an exciting teaching idea into a compliance exercise. She'll engage more deeply when the analysis feels like a fascinating puzzle."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Cultivator</strong> because it shares her excitement — \"a fantastic question\" — and then offers a puzzle: Imani was \"already halfway to the answer.\" Her Cultivator side wants to analyze it; her Inspirer side gets excited about what the child could have discovered.",
+  matchText2:"The reframe \"arachnid becomes her discovery's name\" keeps Ms. Park's rich knowledge in the picture. You didn't ask her to stop sharing vocabulary; you showed her where it lands best — after the child reasons. And ending with \"How do you think she'd have answered?\" invites her into the thinking.",
+  actionSteps:[
+    "<strong>Hand the question back first.</strong> When a child asks a great question, she responds with \"What do you think?\" or \"What do you notice?\" before sharing what she knows.",
+    "<strong>Guide with the materials.</strong> Help her plan prompts that point children to evidence: \"Count the body parts. Compare the legs. What's the same? What's different?\"",
+    "<strong>Save vocabulary for after the discovery.</strong> Once a child figures out a pattern, she names it: \"You found the rule! Scientists call animals like spiders arachnids.\"",
+    "<strong>Revisit Imani's question.</strong> Suggest she bring the ant and spider back to Imani this week and ask, \"What makes these two different?\"",
+    "<strong>Celebrate the discovery together.</strong> When a child reasons their way to a rule, name it for Ms. Park. An Inspirer-Cultivator who sees the child's thinking will want to create that moment again."
+  ],
+  completeLine:"You helped an Inspirer-Cultivator turn her knowledge into children's discoveries. That's the work."
+},
+
+// ── SCENARIO 9 · Sustainer Mentee ────────────────────────────
+{
+  menteeType:"S",
+  menteeLabel:"The Sustainer",
+  menteeDesc:"Ms. Okafor is nurturing, relationship-centered, and deeply committed to the children in her care. She builds genuine warmth with children she knows well, but she is slower to engage with children whose behaviors challenge her. Her challenge: when those children offer ideas, she tends to give a brief, polite acknowledgment and move on, missing chances to build their thinking. She receives feedback best when her care for children is honored first, and when growth is framed through the lens of a specific child's experience rather than a general critique of her practice.",
+  sceneTitle:"My Dad Fixes Cars", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Connections to the Real World",
+  scene:"Ms. Okafor is reading a book about community helpers at circle time. When she turns to a page showing a mechanic, Declan (4 years, 8 months) — who has had a hard few weeks and was redirected twice this morning — shouts, <em>\"My dad fixes cars! He has a big lift that makes the car go UP!\"</em> Ms. Okafor nods: <em>\"That's nice, Declan. Let's keep our voices down.\"</em> A few pages later, Lucia says softly, <em>\"My grandma is a nurse,\"</em> and Ms. Okafor lights up: <em>\"Oh, how wonderful! What does she do to help people?\"</em> Declan pulls his knees up and doesn't speak again during circle.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Connections to the Real World — Building on Every Child's Experience",
+  qcText1:"Concept Development includes <strong>connecting concepts to children's real-world experiences</strong>. Declan brought a vivid, specific connection: his dad's job, a real tool, and how it works. That was a perfect chance to explore how mechanics help the community — \"Why does the car need to go up? Who does your dad help?\"",
+  qcText2:"The contrast with Lucia is the heart of the moment. <strong>Both children offered real-world connections; only one had her thinking extended.</strong> Declan's connection got a reminder about his voice. For a child already struggling, that difference sends a message about whose ideas are worth building on. Ms. Okafor's warmth is real. The growth edge is extending it — and her questions — to every child.",
+  coachTitle:"My Dad Fixes Cars — Coaching Conversation",
+  question:"You're debriefing with Ms. Okafor, a <strong>Sustainer</strong>. She says, \"Circle went well. Declan was a little loud, but he settled.\" Which approach will help her grow?",
+  correct:0,
+  options:[
+    "\"I could see how much the children love circle with you — Lucia's face when you asked about her grandma was so sweet. Can I tell you what I saw from Declan's side? He shared about his dad fixing cars on a big lift — he was so proud. He got a reminder about his voice, and a few pages later he watched Lucia get your wonderful question. After that, he pulled his knees up and went quiet. I wonder what Declan would have told you if he'd gotten a question too.\"",
+    "\"You asked Lucia a follow-up question and gave Declan a behavior reminder. That's inconsistent. Every child's connection deserves the same response.\"",
+    "\"What if you made a 'Family Jobs Week'? Kids could bring in pictures of their parents' work — Declan could bring a picture of the lift! It would be so fun!\"",
+    "\"Let's track your follow-up questions across all children for a week and look at the distribution. Research shows teachers often extend some children's thinking more than others.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Abrupt for a Sustainer", p1:"Naming the inconsistency directly is a <strong>Driver mentor's</strong> instinct — clear, fair, and efficient.", p2:"For Ms. Okafor, \"inconsistent\" sounds like an accusation of unfairness toward a child. A Sustainer who feels judged may become defensive or withdraw. She needs to see Declan's experience first; then the pattern will matter to her."},
+    {h:"This Is an Inspirer's Natural Move — Adds a Project Instead of the Insight", p1:"A Family Jobs Week is an <strong>Inspirer mentor's</strong> natural suggestion — creative, upbeat, and community-building.", p2:"It's a lovely idea, but it skips what Ms. Okafor most needs to see: that Declan's connection was brushed aside while Lucia's was extended. Without that insight, the same pattern will play out during Family Jobs Week."},
+    {h:"This Is a Cultivator's Natural Move — Evidence Without the Child", p1:"Tracking follow-up questions across children is a <strong>Cultivator mentor's</strong> instinct — principled and evidence-based.", p2:"The data would be useful, but a distribution chart won't reach a Sustainer the way one child's story will. Ms. Okafor changes when she sees a specific child she cares about. Lead with Declan."}
+  ],
+  matchText:"This works for a <strong>Sustainer</strong> because it starts where her heart is — the warmth children feel at her circle — and then invites her to see the moment \"from Declan's side.\" The contrast with Lucia is shown gently, through what Declan saw and felt.",
+  matchText2:"The closing question — \"I wonder what Declan would have told you\" — is the key. It doesn't accuse; it invites her curiosity about a child she may have been avoiding. A Sustainer who genuinely cares about children will want to find out.",
+  actionSteps:[
+    "<strong>Ask Declan about his dad this week.</strong> Encourage her to find a quiet moment and ask, \"Tell me about the lift. Why do cars need to go up?\" Let her hear his answer.",
+    "<strong>Separate the idea from the volume.</strong> Help her practice responding to the idea first and the voice second: \"Your dad fixes cars? Tell us how the lift works — in your inside voice.\"",
+    "<strong>Give every connection a question.</strong> Build the habit of one follow-up question for each real-world connection a child shares, especially from children who challenge her.",
+    "<strong>Invite Declan to be the expert.</strong> Suggest she ask Declan to \"teach\" the group about car repair during the community helpers unit.",
+    "<strong>Help her see the change in Declan.</strong> When Declan responds to her question, point out how he engages. A Sustainer who sees a struggling child open up will keep choosing connection."
+  ],
+  completeLine:"You helped a Sustainer see every child's idea as worth building on. Declan will feel the difference."
+},
+
+// ── SCENARIO 10 · Sustainer-Driver Mentee ────────────────────
+{
+  menteeType:"SD",
+  menteeLabel:"The Sustainer-Driver",
+  menteeDesc:"Mr. James is a steady, principled teacher who holds high expectations while genuinely protecting the emotional wellbeing of his children. He's calm, capable, and quick to fix problems. His challenge: when something goes wrong during the day, his Driver side solves it immediately and efficiently — and children miss the chance to think the problem through themselves. He receives feedback best when his care for children is acknowledged first, followed by clear, specific, actionable guidance.",
+  sceneTitle:"Not Enough Crackers", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Analysis and Reasoning — Problem-Solving",
+  scene:"At snack, Noor (4 years, 5 months) is passing out crackers to her table of six. She gives two to each friend, then looks at the empty basket and at the last two children with nothing. <em>\"Uh-oh. There's not enough!\"</em> she says. The children look at Mr. James. He's already up: <em>\"No problem, I'll grab more.\"</em> He returns with a handful, sets two in front of each remaining child, and says, <em>\"There we go. All fixed.\"</em> Noor looks at the basket, then at the crackers, and quietly starts eating.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Analysis and Reasoning — Letting Children Solve Real Problems",
+  qcText1:"Noor had just run into a real math problem: <strong>six children, two crackers each, and not enough in the basket</strong>. That's a genuine opportunity for analysis and reasoning — counting, predicting, and figuring out how many more are needed. Everyday problems like this are some of the richest moments for Concept Development because they matter to children.",
+  qcText2:"Mr. James solved it kindly and efficiently, but <strong>when the teacher solves the problem, the children don't have to think</strong>. \"How many more do we need? How could we figure it out?\" would have taken one extra minute and turned snack into a real problem-solving lesson. His calm competence is a strength. The growth edge is recognizing when a problem is a gift to hand back.",
+  coachTitle:"Not Enough Crackers — Coaching Conversation",
+  question:"You're debriefing with Mr. James, a <strong>Sustainer-Driver</strong>. He says, \"Snack was fine — we had a small cracker shortage, but I took care of it.\" Which approach will help him?",
+  correct:2,
+  options:[
+    "\"What if you made snack a daily math game? Kids could count crackers, sort them, make patterns — it would be so fun!\"",
+    "\"There's research on embedding math problem-solving in daily routines. I can send you some articles about math at mealtimes.\"",
+    "\"You clearly care about every child getting their snack — no one was left out, and you stayed calm. Here's what I noticed: Noor was passing out crackers and discovered the problem herself — six kids, two each, not enough. That was a real math problem, and she was right in the middle of it. Next time, try handing it back: 'How many more do we need? How can we figure it out?' Then let the table count it out. It adds about a minute, and it turns snack into a lesson.\"",
+    "\"You solved a problem the children should have solved. Stop fixing everything for them.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Adds Games but Misses the Moment", p1:"Turning snack into a daily math game is an <strong>Inspirer mentor's</strong> natural move — lively and creative.", p2:"It skips what Mr. James needs to see: the real problem Noor discovered and how he took it from her. A pre-planned game isn't the same as letting children solve genuine problems. He needs the specific moment and a clear rule for handling the next one."},
+    {h:"This Is a Cultivator's Natural Move — Right Evidence, Wrong Entry Point", p1:"Offering research on math during routines is a <strong>Cultivator mentor's</strong> instinct — careful and evidence-based.", p2:"For a Sustainer-Driver, articles about mealtimes feel abstract. He'll be persuaded by what Noor did at his table today, delivered with respect for his care and followed by a concrete action."},
+    {h:"This Is a Driver's Natural Move — Correct, but It Skips His Care", p1:"\"Stop fixing everything\" is the natural move of a mentor with a strong <strong>Driver</strong> expression — blunt and quick.", p2:"Mr. James's Sustainer side needs to hear that his instinct to make sure no child went without was good. Without that, he'll feel judged and defend his choice. He fixed it because he cares. Start there."}
+  ],
+  matchText:"This works for a <strong>Sustainer-Driver</strong> because it acknowledges his care first — \"no one was left out, and you stayed calm\" — and then gives him clear evidence: Noor discovered the problem, and it was a real math problem.",
+  matchText2:"Then you gave him exactly what his Driver side wants: a specific script (\"How many more do we need?\") and a clear cost (\"about a minute\"). He keeps his calm, caring approach. He just hands the thinking back to the children first.",
+  actionSteps:[
+    "<strong>Script the hand-back.</strong> Practice the words together: \"Uh-oh, there's a problem! How many more do we need? How can we find out?\"",
+    "<strong>Notice everyday problems.</strong> Help him list common problems in his day — too few chairs, spilled paint, a missing puzzle piece — that children could reason through.",
+    "<strong>Use a \"problem pause.\"</strong> When something goes wrong, he waits five seconds before fixing it, to see whether a child will start solving it.",
+    "<strong>Let Noor finish the job.</strong> Suggest he give Noor the snack helper role again and let her figure out how many crackers the table needs.",
+    "<strong>Reinforce his consistency.</strong> Over the next two weeks, notice when he hands a problem back instead of fixing it. Name those moments — steady feedback reinforces steady practice."
+  ],
+  completeLine:"You helped a Sustainer-Driver see problems as gifts to hand back. That's steady growth."
+},
+
+// ── SCENARIO 11 · Sustainer-Inspirer Mentee ──────────────────
+{
+  menteeType:"SI",
+  menteeLabel:"The Sustainer-Inspirer",
+  menteeDesc:"Ms. Duvall is the warmest person in every room she enters. Children and families feel instantly welcomed, and her classroom hums with friendly energy. Her challenge: she's so committed to keeping everything harmonious that she sets up play and activities herself and gently steers children back to familiar plans, avoiding the disruption that comes with children's new ideas. She receives feedback best in the context of deep trust, and when growth is framed through her love for the children she serves.",
+  sceneTitle:"The Vet Clinic That Never Opened", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Creating — Children Planning Their Own Play",
+  scene:"Ms. Duvall's dramatic play area has been a pretend restaurant for a month, set up exactly the way she arranged it. Thandi (4 years, 11 months) comes to her holding a stuffed dog with a bandage around its paw: <em>\"Can we make it an animal doctor? We need a table for the sick animals, and a place where they wait, and I can be the doctor!\"</em> Ms. Duvall hugs her: <em>\"That's such a sweet idea, honey! But everyone loves the restaurant so much. Why don't you make your doggy some soup?\"</em> Thandi sets the dog on a chair in the restaurant, stirs an empty pot for a moment, and wanders off.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Creating — Planning and Producing Children's Own Ideas",
+  qcText1:"Thandi had done something remarkable: she <strong>planned a whole new play space</strong> — a table for sick animals, a waiting area, and her own role. That's the creating part of Concept Development: brainstorming, planning, and producing original ideas.",
+  qcText2:"Ms. Duvall's response was loving, but it protected the familiar setup at the cost of Thandi's thinking. <strong>Keeping things harmonious meant a child's plan never got to happen.</strong> Asking, \"What would the animal doctor need? Where could it go? Who could help you set it up?\" would have kept her warmth and turned Thandi's idea into a planning project for the whole group.",
+  coachTitle:"The Vet Clinic That Never Opened — Coaching Conversation",
+  question:"You're debriefing with Ms. Duvall, a <strong>Sustainer-Inspirer</strong>. She says fondly, \"Thandi always has the cutest ideas.\" Which approach will help her grow?",
+  correct:1,
+  options:[
+    "\"You redirected a child's original idea to protect your setup. That's the opposite of Concept Development. Let children change the play area.\"",
+    "\"She really does — and she trusts you enough to bring them to you. I want to share something I noticed because I know how much you love her. Thandi didn't just have a cute idea. She had a plan: a table for sick animals, a waiting area, and a doctor. That's a four-year-old designing something. When it didn't happen, she wandered off. What if you sat with her tomorrow and asked, 'What would the animal doctor need?' and helped her build it — with you right there beside her? She'd feel your love and see her plan come to life.\"",
+    "\"Let's set up a rotation schedule for dramatic play themes, with a sign-up sheet where children can propose new ideas. That way changes happen in an organized way.\"",
+    "\"What if you threw a big grand-opening party for a new vet clinic? Balloons, a ribbon-cutting — the whole class would be so excited!\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — It Feels Like an Accusation", p1:"Naming the gap directly is a <strong>Driver mentor's</strong> instinct — efficient, clear, and focused on standards.", p2:"For a Sustainer-Inspirer, \"the opposite of Concept Development\" stings deeply and suggests her warmth is the problem. She'll hear criticism rather than opportunity. She needs to see that she can support Thandi's plan through her warmth."},
+    {h:"This Is a Cultivator's Natural Move — A System Before a Reason", p1:"A rotation schedule with a sign-up sheet is a <strong>Cultivator mentor's</strong> natural move — organized and thorough.", p2:"But a system won't move Ms. Duvall until she sees why Thandi's idea mattered. Her barrier is emotional: a desire to keep everything harmonious. Show her Thandi's plan first; then a system will support what she already wants to do."},
+    {h:"This Is an Inspirer's Natural Move — Turns Her Plan Into a Party", p1:"A grand-opening celebration is the natural move of a mentor with a strong <strong>Inspirer</strong> expression — joyful and energizing.", p2:"It speaks to Ms. Duvall's Inspirer side but skips the thinking. The value of Thandi's idea is in her planning, not in the celebration. A party led by the teacher would once again put the adult in charge of the plan."}
+  ],
+  matchText:"This works for a <strong>Sustainer-Inspirer</strong> because it begins with trust and affection — Thandi \"trusts you enough to bring them to you.\" The observation is offered \"because I know how much you love her,\" which keeps the relationship at the center.",
+  matchText2:"The reframe from \"cute idea\" to \"a plan\" helps Ms. Duvall see Thandi's thinking. And the suggestion keeps her warmth in the picture: \"with you right there beside her.\" She doesn't have to choose between harmony and children's ideas. She can support both.",
+  actionSteps:[
+    "<strong>Plan the vet clinic with Thandi.</strong> Encourage her to sit with Thandi and ask, \"What will the animal doctor need?\" Write down Thandi's list together.",
+    "<strong>Invite others into the plan.</strong> Help her ask the group, \"Thandi has an idea for a new play space. Who wants to help plan it?\"",
+    "<strong>Practice \"tell me more.\"</strong> When a child brings an idea, she responds with a question before a redirect: \"What would that look like? What would you need?\"",
+    "<strong>Let change be gradual.</strong> Suggest adding the vet clinic next to the restaurant, so the familiar space stays while the new idea grows.",
+    "<strong>Share what happens next.</strong> After the clinic opens, ask Ms. Duvall how Thandi responded. A Sustainer-Inspirer who sees a child light up at her own plan will welcome the next idea."
+  ],
+  completeLine:"You helped a Sustainer-Inspirer see that supporting a child's plan is an act of love. That's the heart of mentoring."
+},
+
+// ── SCENARIO 12 · Sustainer-Cultivator Mentee ────────────────
+{
+  menteeType:"SC",
+  menteeLabel:"The Sustainer-Cultivator",
+  menteeDesc:"Ms. Winters is a thoughtful, quietly powerful teacher who observes everything and processes deeply. She keeps detailed notes on children's questions and interests and plans future lessons around them. Her challenge: she saves children's in-the-moment curiosity for a later, carefully prepared lesson, and the moment of genuine interest passes. She receives feedback best in quiet, unhurried conversations that honor both her emotional attunement and her intellectual depth.",
+  sceneTitle:"The Shadow Was Short at Lunch", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Integration — Building on Children's Observations",
+  scene:"On the playground late in the afternoon, Elias (4 years, 1 month) stands still and stares at the ground: <em>\"Ms. Winters! My shadow is so long now! At lunch it was tiny!\"</em> He stretches his arms and watches his shadow stretch too. Ms. Winters smiles and nods, then pulls a small notebook from her pocket and writes: <em>\"Elias — shadows, length change. Plan shadow unit?\"</em> She tells him, <em>\"That's so interesting, Elias,\"</em> and turns back to watch the slide. Elias jumps on his shadow a few times, then runs off to the sandbox.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Integration — Connecting Children's Observations to Concepts in the Moment",
+  qcText1:"Elias made a sophisticated observation: <strong>his shadow's length had changed across the day</strong>. He compared two moments in time and noticed a pattern. That's exactly the kind of thinking Concept Development aims to build, and it was happening spontaneously, in the real world.",
+  qcText2:"Ms. Winters recognized its value — her note proves it. But <strong>saving the idea for a future unit let the moment pass</strong>. A question right then — \"Why do you think it changed? Where's the sun now? Where was it at lunch?\" — would have connected his observation to the sun's movement while his curiosity was at its peak. Her notes are a strength; the growth edge is acting on curiosity when it appears.",
+  coachTitle:"The Shadow Was Short at Lunch — Coaching Conversation",
+  question:"You're debriefing with Ms. Winters, a <strong>Sustainer-Cultivator</strong>. She shows you her note and says softly, \"I want to plan a proper shadow unit for next month.\" Which approach will help her?",
+  correct:3,
+  options:[
+    "\"Next month is too late. Elias was curious right then. Ask him about it in the moment instead of writing it down.\"",
+    "\"Ooh, a shadow unit! You could do shadow puppets, a shadow dance party, trace everyone's shadows in chalk — the kids would love it!\"",
+    "\"That's a great plan. Before you build it, let's research the key concepts and standards for light and shadow so the unit is thorough. Then you can decide when to launch it.\"",
+    "\"Your note shows you caught exactly what mattered — Elias noticed his shadow changed length across the day. That's real thinking. And the unit will be wonderful. Here's one thing to add: the richest moment was right there, when Elias was stretching his arms and staring. What if you'd asked one question then — 'Why do you think it's longer now? Where's the sun?' You'd still plan your unit, and you'd already have Elias's first idea to build it on.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Pressure Without Understanding", p1:"A crisp \"next month is too late\" is a <strong>Driver mentor's</strong> instinct — decisive and action-focused.", p2:"A Sustainer-Cultivator will feel her careful noticing was treated as a failing. The directive may get compliance, but it dismisses her planning, which is a real strength. She needs her insight honored and a way to act in the moment that fits how she thinks."},
+    {h:"This Is an Inspirer's Natural Move — New Ideas Instead of the Insight", p1:"Proposing lots of fun shadow activities is an <strong>Inspirer mentor's</strong> natural move — creative and energizing.", p2:"It feeds her plan-for-later pattern with even more to plan, and it misses the real point: Elias's curiosity was ready right then. She needs help acting on curiosity in the moment, not a longer list of activities."},
+    {h:"This Is a Cultivator's Natural Move — More Preparation for a Preparer", p1:"Researching standards before launching is the natural move of a mentor with a strong <strong>Cultivator</strong> expression, and it speaks to half of Ms. Winters.", p2:"It reinforces the exact pattern keeping the moment from happening: waiting until the preparation is complete. Another round of research means Elias's question sits in a notebook even longer."}
+  ],
+  matchText:"This works for a <strong>Sustainer-Cultivator</strong> because it honors her observation — \"you caught exactly what mattered\" — and affirms her unit plan. It doesn't ask her to give up her careful preparation.",
+  matchText2:"Instead, it adds one small in-the-moment move and shows how it strengthens her plan: \"you'd already have Elias's first idea to build it on.\" That's a reframe her Cultivator side appreciates, and one gentle question is a step her Sustainer side can take.",
+  actionSteps:[
+    "<strong>Keep a pocket question ready.</strong> Give her one all-purpose question for spontaneous discoveries: \"Why do you think that happened?\" She asks it before writing her note.",
+    "<strong>Go back to Elias tomorrow.</strong> Suggest she take Elias outside at lunch and ask him to look at his shadow again. \"What do you notice now?\"",
+    "<strong>Add children's ideas to her notes.</strong> Along with the observation, she records the child's explanation. Those ideas become the starting point for her unit.",
+    "<strong>Let the unit start with a question.</strong> When she launches shadows, she opens with Elias's discovery and the group's theories.",
+    "<strong>Honor the follow-through.</strong> At your next debrief, ask what Elias said when she asked him why. Acknowledge that she acted in the moment — that's the growth."
+  ],
+  completeLine:"You helped a Sustainer-Cultivator turn a note into a conversation. That's a breakthrough for her."
+},
+
+// ── SCENARIO 13 · Cultivator Mentee ──────────────────────────
+{
+  menteeType:"C",
+  menteeLabel:"The Cultivator",
+  menteeDesc:"Ms. Tran is analytical, principled, and detail-oriented. Her lessons are precise and clearly structured, with specific criteria for what children should do. Her challenge: when a child approaches a task in an unexpected but logical way, she tends to correct it back to her criteria and misses the child's reasoning. She can become quietly defensive when feedback feels like a personal judgment rather than a professional discussion. She receives feedback best when it is structured, evidence-based, and framed as a problem to analyze and solve together — not a verdict to receive.",
+  sceneTitle:"Things That Roll", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Analysis and Reasoning — Children's Classification Rules",
+  scene:"Ms. Tran's small group is sorting a basket of objects into two hoops. <em>\"Today we're sorting by color — red things here, blue things there.\"</em> Rosie (4 years, 6 months) puts a red ball, a blue marble, and a red button in one hoop, and a red block, a blue cup, and a blue crayon in the other. Ms. Tran leans in: <em>\"Rosie, look — the marble is blue. It goes in the blue hoop.\"</em> Rosie frowns: <em>\"But these ones roll.\"</em> Ms. Tran moves the marble: <em>\"We're sorting by color today.\"</em> Rosie re-sorts everything by color, correctly, and asks if she can go to the art table.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Analysis and Reasoning — Recognizing and Extending Children's Reasoning",
+  qcText1:"Rosie wasn't making a mistake. She was <strong>sorting by a rule of her own: things that roll and things that don't</strong>. That's a more sophisticated attribute than color — it requires testing or reasoning about how objects behave. Concept Development values exactly this kind of classification and reasoning.",
+  qcText2:"When Ms. Tran corrected Rosie back to color, <strong>she traded a child's higher-level reasoning for compliance with the task</strong>. Asking \"Tell me your rule. How did you decide?\" would have revealed Rosie's thinking and invited the group to test it. Ms. Tran's structure is a strength; the growth edge is recognizing when a child's \"wrong\" answer is actually deeper thinking.",
+  coachTitle:"Things That Roll — Coaching Conversation",
+  question:"You're debriefing with Ms. Tran, a <strong>Cultivator</strong>. She says, \"Rosie needed a little help, but she sorted correctly in the end.\" Which approach will help her?",
+  correct:2,
+  options:[
+    "\"Rosie wasn't wrong — you were. She was sorting by a better rule, and you shut it down.\"",
+    "\"Rosie is such a creative thinker! I bet if you just let her do her own thing, she'd come up with all kinds of amazing ideas.\"",
+    "\"Let's look at what Rosie did more closely. Her first sort had a ball, a marble, and a button in one hoop — and a block, a cup, and a crayon in the other. When you redirected her, she said, 'But these ones roll.' So she had a consistent rule — rolling versus not rolling — and it's actually a more complex attribute than color. Here's a question worth analyzing: was the goal sorting by color, or sorting by an attribute and explaining the rule? If it's the second, how could you check for a child's rule before correcting?\"",
+    "\"I know you worked hard on that lesson, and you care so much about doing things right. Maybe just relax a little and let the kids explore?\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — A Verdict She Will Resist", p1:"A direct \"you were wrong\" is a <strong>Driver mentor's</strong> natural move — blunt and efficient.", p2:"It will feel like a personal judgment to Ms. Tran, and Cultivators often respond to that with quiet defensiveness. She needs to examine the evidence and reach the conclusion herself."},
+    {h:"This Is an Inspirer's Natural Move — Encouragement Without the Analysis", p1:"Celebrating Rosie's creativity is an <strong>Inspirer mentor's</strong> instinct — warm and motivating.", p2:"\"Let her do her own thing\" sounds like abandoning structure, which Ms. Tran won't accept. She needs to see that Rosie's rule was logical and rigorous, not just creative."},
+    {h:"This Is a Sustainer's Natural Move — Soothing Where She Wants Substance", p1:"Reassuring her and suggesting she \"relax\" is a <strong>Sustainer mentor's</strong> instinct — gentle and supportive.", p2:"Ms. Tran isn't stressed; she's principled. Telling her to relax may feel condescending. She'll respect a careful look at the evidence far more than comfort."}
+  ],
+  matchText:"This works for a <strong>Cultivator</strong> because it lays out the evidence precisely — the exact objects in each hoop and Rosie's words — and lets the pattern speak for itself. The conclusion that Rosie had a consistent, more complex rule comes from the data, not from your opinion.",
+  matchText2:"The question \"was the goal sorting by color, or sorting by an attribute and explaining the rule?\" invites her to re-examine her own objective. You didn't dismiss her lesson; you engaged her analytical mind. That's a problem a Cultivator will want to solve.",
+  actionSteps:[
+    "<strong>Ask for the rule before correcting.</strong> When a child's sort looks unexpected, she asks, \"Tell me your rule. How did you decide?\" before redirecting.",
+    "<strong>Revise the objective.</strong> Help her reframe sorting lessons as \"sort by an attribute and explain your rule,\" with color as one possibility.",
+    "<strong>Test Rosie's rule with the group.</strong> Suggest she bring the basket back and ask, \"Rosie sorted by things that roll. How can we check?\"",
+    "<strong>Add a \"mystery sort.\"</strong> She sorts objects by a hidden rule and has children guess it. It builds reasoning and gives her structure she'll like.",
+    "<strong>Review her notes together.</strong> Ask her to record the rules children invent over a week. A Cultivator who analyzes her own evidence owns the conclusion."
+  ],
+  completeLine:"You gave a Cultivator a problem worth analyzing. She'll solve it better than anyone."
+},
+
+// ── SCENARIO 14 · Cultivator-Driver Mentee ───────────────────
+{
+  menteeType:"CD",
+  menteeLabel:"The Cultivator-Driver",
+  menteeDesc:"Ms. Chen is a meticulous, ambitious teacher who builds precise systems and drives them toward strong outcomes. She tracks math skills carefully and runs efficient, well-organized small groups. Her challenge: she focuses on whether answers are correct and moves quickly, rarely asking children how they got their answers — so she misses both their reasoning and useful data. She receives feedback best when it is specific, data-grounded, and framed around the gap between her intended outcome and the outcome she is actually producing.",
+  sceneTitle:"I Counted by Twos", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Analysis and Reasoning — Explaining Strategies",
+  scene:"Ms. Chen's math group is counting bear counters. She sets out a pile and asks, <em>\"How many bears?\"</em> Omari (5 years) quickly slides them into pairs and says, <em>\"Twelve!\"</em> Ms. Chen marks her checklist: <em>\"Correct. Next.\"</em> Omari raises his hand: <em>\"I counted by twos! Two, four, six—\"</em> Ms. Chen nods, <em>\"Good,\"</em> and sets a new pile in front of the next child. Omari lowers his hand and pushes his bears into a single line.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Analysis and Reasoning — Asking Children How They Know",
+  qcText1:"Omari did more than count correctly. He <strong>chose a strategy — grouping by twos — and was ready to explain it</strong>. That's reasoning at a high level for a five-year-old, and it's exactly what Concept Development asks teachers to draw out: \"How did you figure that out? Is there another way?\"",
+  qcText2:"Ms. Chen's checklist captured \"correct,\" but <strong>it missed the most important data in the room: how Omari was thinking</strong>. A child who counts by twos and a child who counts by ones may both get twelve, but they're at very different places. Asking children to explain would give her better data and build every child's reasoning at the same time.",
+  coachTitle:"I Counted by Twos — Coaching Conversation",
+  question:"You're debriefing with Ms. Chen, a <strong>Cultivator-Driver</strong>. She shows you her checklist: \"Every child counted to twelve correctly.\" Which approach will help her?",
+  correct:0,
+  options:[
+    "\"Your checklist is precise, and it shows every child reached the correct total. Here's a gap in the data, though: Omari counted by twos and tried to tell you — that's a strategy, not just an answer. Your checklist records him the same as a child who counted by ones. If your goal is to know where each child is in number sense, 'correct' isn't enough. What if you added one question per child — 'How did you figure it out?' — and a column for strategy? You'd get richer data and stronger reasoning at the same time.\"",
+    "\"Omari was so proud of counting by twos! You should let the kids share their fun counting tricks — they'd love it.\"",
+    "\"I could see Omari wanted to share, and he seemed a little let down. Maybe give children a bit more time to talk during group?\"",
+    "\"You cut Omari off. Ask children how they got their answers.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Fun Without the Data", p1:"Celebrating Omari and suggesting fun counting tricks is an <strong>Inspirer mentor's</strong> natural move — energetic and child-friendly.", p2:"For Ms. Chen, \"fun tricks\" sounds like a distraction from her goals. She needs to see how asking about strategies produces better data on number sense."},
+    {h:"This Is a Sustainer's Natural Move — Warmth Without a Plan", p1:"Focusing on Omari's feelings and suggesting more talk time is a <strong>Sustainer mentor's</strong> instinct — caring and attuned.", p2:"Ms. Chen can lose sight of the child behind the data, so empathy matters. But \"a bit more time\" gives her nothing she can build into her system. She needs a data-based reason and a structured change."},
+    {h:"This Is a Driver's Natural Move — Direction Without the Analysis", p1:"A crisp directive is the natural move of a mentor with a strong <strong>Driver</strong> expression, and it speaks to Ms. Chen's efficiency.", p2:"It skips the analysis her Cultivator side needs. Without seeing the gap in her data, she'll treat the question as optional. Show her what her checklist misses, and she'll want to fix it."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Driver</strong> because it honors her system and then identifies a precise gap: \"Your checklist records him the same as a child who counted by ones.\" That's language she respects — an accuracy problem in her own data.",
+  matchText2:"The solution fits her perfectly: one question and one new column. You didn't ask her to slow down or abandon her system; you showed her how to make it more accurate. \"Richer data and stronger reasoning at the same time\" connects the change directly to her goals.",
+  actionSteps:[
+    "<strong>Add a strategy column.</strong> Help her update her checklist to record how each child solved the problem: counted by ones, grouped, recognized the amount, and so on.",
+    "<strong>Ask \"How did you figure it out?\"</strong> After every correct answer, she asks one child to explain. Over the week, every child gets a turn.",
+    "<strong>Invite comparison.</strong> Teach her to ask, \"Did anyone count a different way?\" so children compare strategies and learn from each other.",
+    "<strong>Let Omari teach.</strong> Suggest she ask Omari to show the group how he counted by twos. It extends his thinking and models strategies for others.",
+    "<strong>Reconnect the data to the child.</strong> Ask her to describe what Omari's strategy tells her about his number sense. It builds the habit of seeing the child behind the checklist."
+  ],
+  completeLine:"You showed a Cultivator-Driver that 'how' is better data than 'correct.' She'll build a better system from here."
+},
+
+// ── SCENARIO 15 · Cultivator-Inspirer Mentee ─────────────────
+{
+  menteeType:"CI",
+  menteeLabel:"The Cultivator-Inspirer",
+  menteeDesc:"Mr. Flores is a creative, intellectually rich teacher who brings both deep analysis and social warmth to his practice. He loves big ideas and explains them with contagious enthusiasm. His challenge: he can become so absorbed in the concept as he understands it that he skips past children's own real-world experiences — the very connections that would make his big ideas meaningful to them. He receives feedback best when his intellectual investment is honored first, and growth is framed as making his depth more accessible — not asking him to simplify or sacrifice rigor.",
+  sceneTitle:"Leaves on My Trampoline", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Connections to the Real World",
+  scene:"Mr. Flores is holding a globe and a flashlight at circle time, explaining seasons: <em>\"The Earth is tilted, so as it travels around the sun, different parts get more light. When our part tilts away, the days get shorter and colder — that's fall!\"</em> Luca (4 years, 9 months) bursts in: <em>\"The leaves are falling on my trampoline! My dad has to sweep them off every day!\"</em> Mr. Flores smiles, <em>\"Exactly — fall!\"</em> and tilts the globe again: <em>\"Now watch what happens to the North Pole.\"</em> Luca looks at the globe for a moment, then starts poking the child next to him.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Connections to the Real World — Grounding Big Ideas in Children's Lives",
+  qcText1:"Mr. Flores's explanation was accurate and ambitious, but the Earth's tilt is <strong>abstract and hard for four-year-olds to connect to</strong>. Luca offered exactly what the lesson needed: a real, daily experience of fall — leaves on his trampoline, his dad sweeping every day. That's a concrete anchor for the concept of seasonal change.",
+  qcText2:"\"Exactly — fall!\" acknowledged the connection but didn't build on it. <strong>The child's lived experience was the bridge to the big idea, and the lesson walked past it.</strong> Asking, \"Why do you think the leaves are falling now? What else changes outside in fall?\" would have grounded the concept in what children already know, and made the globe demonstration meaningful.",
+  coachTitle:"Leaves on My Trampoline — Coaching Conversation",
+  question:"You're debriefing with Mr. Flores, a <strong>Cultivator-Inspirer</strong>. He's energized: \"I love teaching the real science behind the seasons!\" Which approach will help him?",
+  correct:1,
+  options:[
+    "\"The Earth's tilt is too abstract for four-year-olds. Drop the globe and talk about leaves and weather instead.\"",
+    "\"Your seasons lesson is genuinely rich — real science, not just 'fall has leaves.' Here's a design challenge I think you'll enjoy: how do you get the tilt into their world? Luca handed you the answer — leaves falling on his trampoline every day. What if that were your starting point? 'Why are the leaves falling now? What else changes outside?' Then the globe explains what they've already noticed. Same rigor — built on their own evidence.\"",
+    "\"I could see how much you love this topic. Maybe just check in with the kids a little more to make sure they're following?\"",
+    "\"What if you made it more exciting — have the kids be the planets and walk around a pretend sun? That would keep them hooked!\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — It Dismisses His Thinking", p1:"A direct \"drop the globe\" is a <strong>Driver mentor's</strong> instinct — efficient and outcome-focused.", p2:"Mr. Flores will hear that his rigor is the problem. A Cultivator-Inspirer asked to abandon the real science may feel his depth isn't valued. He needs to see how to connect his ideas to children's lives, not how to give them up."},
+    {h:"This Is a Sustainer's Natural Move — Too Soft to Change the Pattern", p1:"Appreciating his passion and suggesting he \"check in\" is a <strong>Sustainer mentor's</strong> instinct — warm and gentle.", p2:"It doesn't touch the real issue: he skipped past a child's real-world connection. Checking in won't help if he still moves past what children offer. He needs a clear reframe of where his lesson begins."},
+    {h:"This Is an Inspirer's Natural Move — More Performance, Same Problem", p1:"Having children act out planets is the natural move of a mentor with a strong <strong>Inspirer</strong> expression — and it speaks to Mr. Flores's own Inspirer side.", p2:"But it's still an abstract model disconnected from children's experience. Luca's trampoline would still be ignored. The fix isn't a more exciting demonstration; it's starting from what children already know."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Inspirer</strong> because it honors his intellectual investment first — \"real science\" — and then frames the change as a design challenge worthy of his mind: getting the tilt \"into their world.\"",
+  matchText2:"You showed him that Luca already provided the bridge. \"The globe explains what they've already noticed\" keeps his rigor fully intact and gives it a foundation children can stand on. \"Same rigor — built on their own evidence\" is language a Cultivator-Inspirer will embrace.",
+  actionSteps:[
+    "<strong>Start with children's evidence.</strong> Help him open each big-idea lesson with, \"What have you noticed outside lately?\" and build from their answers.",
+    "<strong>Go back to Luca's trampoline.</strong> Suggest he ask Luca to tell the group about the leaves and use it to launch the next seasons discussion.",
+    "<strong>Collect real-world observations.</strong> A class \"fall noticing\" chart — leaves, jackets, darker mornings — gives him concrete anchors for his explanations.",
+    "<strong>Save the model for after the connection.</strong> The globe and flashlight become the answer to a question children already care about: \"Why is this happening?\"",
+    "<strong>Let him walk you through the week.</strong> Ask him to show you where children's own observations will enter each lesson. Cultivator-Inspirers love explaining their thinking, and it helps him see the plan the way children will experience it."
+  ],
+  completeLine:"You helped a Cultivator-Inspirer connect his big ideas to children's lives. That's powerful teaching."
+},
+
+// ── SCENARIO 16 · Cultivator-Sustainer Mentee ────────────────
+{
+  menteeType:"CS",
+  menteeLabel:"The Cultivator-Sustainer",
+  menteeDesc:"Ms. Patel is a thoughtful, quietly perceptive teacher who combines deep analytical observation with genuine empathy. She asks good questions and notices every child's response. Her challenge: when a child gives an unexpected answer, she worries about putting them on the spot, so she accepts it quietly and moves on instead of asking the follow-up question that would draw out their reasoning. She receives feedback best in quiet, respectful, unhurried conversations that treat her as the intelligent, caring professional she is.",
+  sceneTitle:"The Bear Will Share", sceneTag:"Pre-K Classroom",
+  focusBadge:"Concept Development · Analysis and Reasoning — Following Up on Predictions",
+  scene:"Ms. Patel is reading a picture book about a bear who finds a big pile of berries. She pauses before turning the page: <em>\"What do you think the bear will do next?\"</em> Most children say, <em>\"Eat them all!\"</em> Hazel (4 years, 4 months) says quietly, <em>\"He'll give some to the bird. Because the bird was hungry on the other page.\"</em> Ms. Patel smiles softly at Hazel, says <em>\"Okay,\"</em> and turns the page. The bear eats all the berries. Hazel reaches over, flips the book back to the bird page, and stares at it until Ms. Patel gently turns it forward again.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Analysis and Reasoning — Drawing Out Children's Explanations",
+  qcText1:"Hazel's prediction was different from the group's, and it was <strong>grounded in evidence from the story</strong>: she remembered the hungry bird from an earlier page and reasoned about the bear's choice. That's integration and reasoning — connecting parts of the story to predict an outcome.",
+  qcText2:"Ms. Patel noticed it — her soft smile shows that — but \"Okay\" let the reasoning pass without being explored or honored. <strong>A child's evidence-based prediction deserves a follow-up question:</strong> \"What made you think of the bird?\" That question would have shown Hazel that her thinking matters and invited the whole group to look back at the story for evidence.",
+  coachTitle:"The Bear Will Share — Coaching Conversation",
+  question:"You're debriefing with Ms. Patel, a <strong>Cultivator-Sustainer</strong>. She says quietly, \"I noticed Hazel's answer. I didn't want to put her on the spot.\" Which approach will help her?",
+  correct:3,
+  options:[
+    "\"You should have asked her why. Accepting her answer with 'okay' wasted a great teaching moment.\"",
+    "\"Let's make it exciting! Next time, have Hazel stand up and share her prediction with the whole class — she'll feel like a star!\"",
+    "\"That's so thoughtful of you to protect her. Maybe that was the right call — she's a quiet child, and she might have felt uncomfortable.\"",
+    "\"You noticed it — and that matters. Let's look at what Hazel actually did. She remembered the hungry bird from an earlier page and used it to predict what the bear would do. That's reasoning from evidence, the kind of thinking we're hoping for. And afterward she flipped back to the bird page and stared at it. What if a follow-up question isn't putting her on the spot, but showing her that her thinking matters? Something quiet and warm: 'What made you think of the bird?' You'd learn how she reasoned — and so would the other children.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Harsh for Her Careful Nature", p1:"A direct \"you should have asked why\" is a <strong>Driver mentor's</strong> instinct — decisive and outcome-focused.", p2:"Ms. Patel will feel judged for a choice she made carefully and with good intentions. A Cultivator-Sustainer under that kind of pressure often withdraws further. She needs her thinking respected and a gentle, clear way forward."},
+    {h:"This Is an Inspirer's Natural Move — Too Much Spotlight for a Quiet Child", p1:"Putting Hazel center stage is an <strong>Inspirer mentor's</strong> natural suggestion — enthusiastic and celebratory.", p2:"It confirms Ms. Patel's worry: that following up means putting a quiet child on the spot. She'll reject the idea, and rightly so. She needs a follow-up that is quiet and warm, not a performance."},
+    {h:"This Is a Sustainer's Natural Move — Reassurance That Extends the Pattern", p1:"Affirming her protectiveness is a <strong>Sustainer mentor's</strong> instinct — patient and kind.", p2:"It feels supportive but confirms the hesitation that's holding her back. Ms. Patel would leave believing silence was the kind choice, and Hazel's reasoning would keep going unheard."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Sustainer</strong> because it affirms what she did well — \"you noticed it\" — and then lays out Hazel's reasoning as evidence: the bird, the prediction, the page she flipped back to afterward.",
+  matchText2:"The reframe that frees her is that a follow-up question \"isn't putting her on the spot, but showing her that her thinking matters.\" Her Sustainer side can accept that because it's kind. Her Cultivator side can accept it because it reveals how Hazel reasoned. And the suggested question is quiet and warm — a step that fits who she is.",
+  actionSteps:[
+    "<strong>Script a gentle follow-up.</strong> Help her practice a soft, curious tone: \"What made you think of that?\" Let her hear how warm it can sound.",
+    "<strong>Go back to Hazel.</strong> Suggest she revisit the bird page with Hazel one-on-one and ask about her prediction. Many quiet children open up in a smaller setting.",
+    "<strong>Invite evidence from the book.</strong> After a prediction, she asks the group, \"What in the story gave you that idea?\" so children learn to reason from what they've read.",
+    "<strong>Honor different predictions.</strong> Give her language like, \"Hazel had a different idea. Let's see what happens.\" It values reasoning even when the story goes another way.",
+    "<strong>Record the responses.</strong> Ask her to note how children explain their predictions for a week. That evidence will build her confidence to ask sooner."
+  ],
+  completeLine:"You helped a Cultivator-Sustainer see a follow-up question as an act of respect. That's thoughtful mentoring."
+}
+
   ]
 },
-{
   id:10, domain:3, domainName:"Instructional Support",
   title:"Responsive Feedback", week:10,
   focus:"Giving children feedback that advances their thinking — not just evaluates it.",

@@ -7390,49 +7390,1206 @@ const CURRICULUM = [
 
   ]
 },
+// MODULE 12 — Higher-Order Questioning (Domain 3: Instructional Support)
+// Replace the existing id:12 module object in public/training.html, brace to brace. This is the last module, so it ends with } and no comma.
 {
   id:12, domain:3, domainName:"Instructional Support",
   title:"Higher-Order Questioning", week:12,
   focus:"Moving from recall questions to analysis, inference, and evaluation.",
   scenarios:[
-    {
-      menteeType:"I", menteeLabel:"The Inspirer",
-      menteeDesc:"Ms. Davis is magnetic, joyful, and children love participating in her discussions. She generates tremendous energy and engagement. The challenge: her questions are almost always open-ended in spirit but closed in structure — she asks questions she already knows the answers to, and fills the silence herself before children have time to think.",
-      sceneTitle:"The Questions That Answered Themselves", sceneTag:"Kindergarten Classroom",
-      focusBadge:"Higher-Order Questioning · Wait Time & Depth",
-      scene:"Ms. Davis is leading a lively discussion after a read-aloud. She asks: <em>\"What do you think the character was feeling?\"</em> Two hands go up. She calls on one child, who says \"sad.\" Ms. Davis responds: <em>\"YES! Sad! Because she lost her friend, right? She was SO sad. And what else do you think she felt? Scared? Maybe a little scared?\"</em> The children enthusiastically agree. Ms. Davis continues: <em>\"Right! Sad and scared. Okay — what do you think she'll do next? I think she'll go look for her friend, don't you?\"</em> Children nod.",
-      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Wait Time, Uptake, and Authentic Questions",
-      qcText1:"Ms. Davis is asking questions, but she is also answering them. The sequence demonstrates two common patterns: <strong>leading questions</strong> (\"Scared? Maybe a little scared?\") and <strong>teacher takeover</strong> (supplying the answer when the pause gets uncomfortable). Children are participating enthusiastically — but they're mostly agreeing with the teacher, not generating their own thinking.",
-      qcText2:"<strong>Higher-order questioning</strong> requires three commitments: (1) asking questions the teacher genuinely doesn't know the answer to, (2) <em>waiting</em> after asking, and (3) <em>taking up</em> what children say rather than redirecting to the intended answer. The goal is to <strong>follow the child's thinking</strong> wherever it leads — not to confirm what the teacher already knows.",
-      coachTitle:"The Questions That Answered Themselves — Coaching Conversation",
-      question:"You're debriefing with Ms. Davis, an <strong>Inspirer</strong>. She's excited about how engaged the class was — \"They were so INTO it!\" How do you help her see that engagement and deep thinking are not always the same thing?",
-      correct:2,
-      options:[
-        "\"I want to be direct with you: the discussion was teacher-led throughout. You answered most of your own questions. The children were agreeing with you, not thinking for themselves. We need to restructure how you run discussions.\"",
-        "\"They WERE so into it — that energy is your gift! What if we added some 'turn and talk' time so more children can share? I think it would make the discussion even more explosive! And maybe some sentence starters for the kids?\"",
-        "\"That energy was completely real. Can I show you something that I noticed underneath it? I want to play two exchanges side by side — one from today, and one I want to build with you. I think you're going to see something that's going to change how you hear your own questions.\"",
-        "\"The discussion was very lively. I do want to gently explore whether the children had the opportunity to generate their own thinking, or whether the discussion was perhaps guided a bit more than intended. Something to reflect on.\""
-      ],
-      wrongFeedback:[
-        {h:"Style Mismatch — Let's Reconsider", p1:"\"I want to be direct\" and \"we need to restructure\" will land hard for an <strong>Inspirer</strong> who just experienced what felt like a successful lesson. Without first honoring the real energy she created, this will produce defensiveness, not reflection.", p2:"The feedback is accurate. But an Inspirer who feels attacked will protect herself — and then the growth conversation is over. Honor the energy, then complicate it."},
-        {h:"Style Mismatch — Let's Reconsider", p1:"Turn-and-talk and sentence starters are both good ideas — but they don't address the root problem: Ms. Davis is answering her own questions. Adding more structures to a teacher-led discussion may just produce more efficient teacher-led discussion.", p2:"The Inspirer's enthusiasm has collided with the Inspirer mentor's enthusiasm. Step back from the exciting additions and go to the specific moment."},
-        {h:"Style Mismatch — Let's Reconsider", p1:"\"Gently explore\" and \"perhaps guided a bit more than intended\" and \"something to reflect on\" — all three hedges in one response. This is far too soft for what was actually observed, and an <strong>Inspirer</strong> will not slow down enough to catch the growth point you're trying to make.", p2:"Inspirers need clear, specific, emotionally engaging feedback. Give her something vivid to respond to."}
-      ],
-      matchText:"This is exactly right for an <strong>Inspirer</strong>. You honored what was real — the energy — and then offered something intriguing: \"I want to show you something underneath it.\" That's an Inspirer's language: discovery, underneath, hidden layers.",
-      matchText2:"\"Play two exchanges side by side\" is brilliant — it makes the comparison visual and immediate, which is how Inspirers process best. And \"I think you're going to see something\" builds anticipation rather than dread. She'll lean in, not away.",
-      actionSteps:[
-        "<strong>Build the comparison together.</strong> Reconstruct the \"Scared? Maybe scared?\" exchange verbatim. Then co-construct what the same exchange would look like with a genuine wait, no leading, and uptake of the child's actual response.",
-        "<strong>Introduce the 5-second wait.</strong> Help Ms. Davis practice the physical experience of waiting after asking a question. It will feel uncomfortable at first. Name that. Normalize it. The discomfort is the point.",
-        "<strong>Teach the 'uptake' move.</strong> Instead of evaluating what a child says (\"YES! Sad!\"), she takes it up: \"You said sad — tell me more about that.\" This single move transforms a discussion.",
-        "<strong>Create 'I don't know' questions.</strong> For the next read-aloud, help her identify 2 questions she genuinely doesn't know the answer to — questions where any answer is valid. Practice sitting with the uncertainty.",
-        "<strong>Observe with a talk-turn ratio.</strong> At next visit, track teacher talk vs. student talk in discussion segments. Share the ratio at debrief. Inspirers often don't realize how much airtime they're taking."
-      ],
-      completeLine:"You helped an Inspirer slow down enough to see what was happening underneath the energy. That's some of the most important mentoring work there is."
-    }
-  ]
+// ── SCENARIO 1 · Driver Mentee ───────────────────────────────
+{
+  menteeType:"D",
+  menteeLabel:"The Driver",
+  menteeDesc:"Mr. Beaumont is confident, direct, and results-oriented. He wants his children thinking at a high level and isn't afraid to ask big questions. His challenge: he jumps straight to the hardest question without building up to it, and when children go quiet, he answers it himself and concludes they \"aren't ready.\" He responds best to feedback that is honest, efficient, and tied to measurable outcomes, and he can dismiss feedback that feels soft or theoretical. Once he sees a concrete return, he changes fast.",
+  sceneTitle:"Why Do Leaves Change Color?", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Building From Simple to Complex",
+  scene:"Mr. Beaumont gathers his group around a basket of fall leaves and opens with his big question: <em>\"Why do leaves change color in the fall?\"</em> Silence. Ivy (4 years, 6 months) looks at the basket, then at her shoes. He waits three seconds and answers it himself: <em>\"Because the days get shorter and the trees stop making green. Okay, let's go to centers.\"</em> Afterward, he tells his co-teacher, <em>\"They're not ready for that level yet.\"</em> At the science table later, Ivy lines up the leaves from green to yellow to red and says to a friend, <em>\"This one is turning.\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Sequencing Questions — Building a Ladder to Higher-Order Thinking",
+  qcText1:"Higher-order questions work best when <strong>teachers build a ladder to them</strong>. Start with what children can observe (\"What colors do you see?\"), move to comparing (\"How is this leaf different from that one?\"), then to predicting or explaining (\"What do you think is happening to this leaf?\"). Each step gives children something to stand on before the big question.",
+  qcText2:"Mr. Beaumont's big question was worthwhile, but <strong>asked cold, it left children with no place to start</strong>. Ivy's leaf line proves she was ready to think about change: she ordered the leaves and noticed one \"turning.\" The children weren't unready. The question needed a ladder.",
+  coachTitle:"Why Do Leaves Change Color? — Coaching Conversation",
+  question:"You're debriefing with Mr. Beaumont, a <strong>Driver</strong>. He says, \"I asked a real thinking question, and nobody could answer. They're not ready for that level.\" Which coaching approach is most likely to land and produce a real change in practice?",
+  correct:1,
+  options:[
+    "\"I love that you're aiming high — it's clear you believe in them. I wonder if maybe the question felt a little hard for them? Maybe try something a bit easier next time.\"",
+    "\"Here's the evidence that they are ready: twenty minutes later, Ivy lined the leaves up from green to red on her own and told a friend, 'This one is turning.' That's the exact thinking your question was aiming at. The gap wasn't the children — it was the ladder. You went from zero to 'why' in one step. Try three rungs next time: 'What colors do you see?' then 'How is this one different from that one?' then 'What do you think is happening to it?' Then your big question. Let's count how many children answer the top rung.\"",
+    "\"Let's imagine it from Ivy's side. How do you think it felt to be asked that question with nothing to hold onto?\"",
+    "\"There's good research on question sequencing and cognitive load in young children. I'll send you an article when you have time.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Sustainer's Natural Move — Too Cushioned for a Driver", p1:"Affirming his high expectations and suggesting an easier question is a <strong>Sustainer mentor's</strong> natural instinct. It protects the relationship and softens the feedback.", p2:"It also confirms his wrong conclusion — that the children can't handle hard questions. Mr. Beaumont doesn't need easier questions; he needs a better path to the hard ones. A Driver will respect evidence that his high bar is achievable."},
+    {h:"This Is an Inspirer's Natural Move — Too Roundabout for a Driver", p1:"Inviting him to imagine Ivy's feelings is an <strong>Inspirer mentor's</strong> natural approach — empathetic and reflective.", p2:"For a Driver, it reads as indirect. He's drawn a conclusion about readiness, and only evidence will change it. Show him what Ivy did later, and he'll revise his thinking fast."},
+    {h:"This Is a Cultivator's Natural Move — Too Deferred for a Driver", p1:"Sending research on sequencing is a <strong>Cultivator mentor's</strong> instinct — thorough and evidence-based.", p2:"\"When you have time\" means never for Mr. Beaumont. He needs evidence from his own classroom and a concrete ladder he can use tomorrow."}
+  ],
+  matchText:"This works for a <strong>Driver mentee</strong> because it directly challenges his conclusion with evidence from his own room: Ivy ordering the leaves and naming the change. Drivers respect data that proves them wrong more than reassurance that agrees with them.",
+  matchText2:"Then you gave him a precise tool — a three-rung ladder — and a way to measure success: how many children answer the top rung. He keeps his ambitious questions and gets a method to reach them.",
+  actionSteps:[
+    "<strong>Build the leaf ladder together.</strong> Write out observe, compare, explain, then the big question. Show him how the ladder leads to his goal.",
+    "<strong>Plan one ladder per week.</strong> For each big question he wants to ask, he writes two or three simpler steps leading up to it.",
+    "<strong>Try it with the same group.</strong> Suggest he return to the leaf basket and use the ladder with Ivy's group.",
+    "<strong>Count answers at the top.</strong> Track how many children answer the final question after the ladder, compared with today's silence.",
+    "<strong>Review the data together.</strong> Share the before-and-after results. Drivers stay motivated by progress they can measure."
+  ],
+  completeLine:"You showed a Driver that children are ready for big questions — they just need a ladder. That's the language he acts on."
+},
+
+// ── SCENARIO 2 · Driver-Inspirer Mentee ──────────────────────
+{
+  menteeType:"DI",
+  menteeLabel:"The Driver-Inspirer",
+  menteeDesc:"Ms. Holloway is a force of nature — energetic, bold, and deeply loved by her children and families. She loves asking the group questions and gets big, excited answers. Her challenge: many of her \"open\" questions actually have one answer she's looking for, and she moves past creative answers until someone says the one in her head. She receives feedback best when it honors her energy and connects directly to the outcomes she's already chasing.",
+  sceneTitle:"Guess What I'm Thinking", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Genuinely Open Questions",
+  scene:"After reading a caterpillar book, Ms. Holloway asks with great excitement: <em>\"What do you think the caterpillar will turn into?\"</em> Luz (4 years, 8 months) shouts, <em>\"A dragon with sparkly wings that can fly to the moon!\"</em> Ms. Holloway laughs: <em>\"Nooo, silly! Who knows the REAL answer?\"</em> Another child says, <em>\"A bug?\"</em> <em>\"Close! Who else?\"</em> Finally someone says <em>\"Butterfly!\"</em> <em>\"YES! A butterfly!\"</em> Luz stops raising her hand.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Open Questions — Asking Questions That Welcome Many Answers",
+  qcText1:"A higher-order question invites children to <strong>imagine, reason, or create</strong> — not to guess the answer the teacher has in mind. \"What do you think it will turn into?\" sounds open, but when only one answer is accepted, it becomes a guessing game. Children quickly learn that thinking creatively is risky.",
+  qcText2:"Luz's dragon was an imaginative, detailed answer to an open question. <strong>\"Nooo, silly!\" taught her that her thinking wasn't what the teacher wanted</strong>. Ms. Holloway could have kept the science accurate and still honored the thinking: \"A dragon with wings! What makes you think it will have wings? Let's read and find out what really happens.\" Or she could ask a question with many possible answers: \"If you could turn into something, what would you choose?\"",
+  coachTitle:"Guess What I'm Thinking — Coaching Conversation",
+  question:"You're debriefing with Ms. Holloway, a <strong>Driver-Inspirer</strong>. She says, \"They got to the right answer — butterfly!\" Which approach reaches her?",
+  correct:3,
+  options:[
+    "\"That wasn't an open question. You only accepted one answer and shut down Luz. Stop asking fake open questions.\"",
+    "\"The kids were so excited during the story. Maybe just be a little gentler with answers that aren't quite right? Luz seemed a little sad.\"",
+    "\"Before our next visit, could you write down your questions for one day and mark which ones have one right answer and which have many?\"",
+    "\"They did — and you get more hands up than anyone. Here's how to get even bigger thinking from them: Luz gave you a dragon with sparkly wings that flies to the moon. That's a four-year-old imagining a whole creature — and after 'Nooo, silly,' she stopped raising her hand. What if you'd said, 'Wings! What makes you think it'll have wings? Let's find out!' She'd stay in, and you'd still land on butterfly. Or try a question with no wrong answer: 'If you could change into anything, what would it be?' Imagine the answers you'd get.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Efficient, but It Misses the Inspirer", p1:"Naming the \"fake open question\" bluntly is the natural move of a mentor with a strong <strong>Driver</strong> expression. It's clear and accurate, and it speaks to half of Ms. Holloway.", p2:"It ignores the other half. \"Stop asking fake questions\" will sting a teacher who's proud of her lively discussions. A Driver-Inspirer will defend her circle instead of hearing Luz's story."},
+    {h:"This Is a Sustainer's Natural Move — Too Vague to Move Her", p1:"Asking her to be gentler with Luz is a <strong>Sustainer mentor's</strong> instinct — caring and careful.", p2:"It focuses on tone, but the real issue is the question itself. Ms. Holloway needs a way to honor creative answers and ask truly open questions, not just a softer \"no.\""},
+    {h:"This Is a Cultivator's Natural Move — Too Much Paperwork for Her Pace", p1:"Recording and sorting her questions is a <strong>Cultivator mentor's</strong> instinct — systematic and thorough.", p2:"For a Driver-Inspirer, it feels like tedious homework. She'll skip it or do it without reflection. Show her Luz's dragon first, and she'll want to change on her own."}
+  ],
+  matchText:"This works for a <strong>Driver-Inspirer</strong> because it opens by agreeing with her strength — \"more hands up than anyone\" — and then offers \"even bigger thinking.\" That speaks to both her enthusiasm and her drive for results.",
+  matchText2:"The two alternatives — probe the dragon and still reach butterfly, or ask a question with no wrong answer — let her keep the accurate science and her energy. \"Imagine the answers you'd get\" gives her an exciting reason to try.",
+  actionSteps:[
+    "<strong>Ask \"what makes you think that?\"</strong> When a child gives an unexpected answer, she asks for their reasoning before moving on.",
+    "<strong>Add one no-wrong-answer question per book.</strong> Help her plan questions like \"If you were the caterpillar, what would you want to become?\"",
+    "<strong>Go back to Luz.</strong> Suggest she invite Luz to draw her moon dragon and tell the group about it.",
+    "<strong>Separate facts from imagination.</strong> Help her say, \"In real life, caterpillars turn into butterflies. In your imagination, it could be anything!\"",
+    "<strong>Celebrate the wildest answers.</strong> When she gets creative answers to a truly open question, point them out. Driver-Inspirers repeat what gets results."
+  ],
+  completeLine:"You didn't ask a Driver-Inspirer to lower her energy — you opened her questions wide. That's the work."
+},
+
+// ── SCENARIO 3 · Driver-Sustainer Mentee ─────────────────────
+{
+  menteeType:"DS",
+  menteeLabel:"The Driver-Sustainer",
+  menteeDesc:"Mr. Osei is a principled, protective leader who pushes for results while genuinely caring about every child in his room. He asks rich questions during group time. His challenge: he directs his hardest questions to the few children who answer confidently and protects quieter children by asking them only easy ones, so some children rarely get the chance to think deeply out loud. He receives feedback best when it honors both his care for children and his commitment to excellence, and when it names one concrete way to serve both at once.",
+  sceneTitle:"The Easy Question for Kaito", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Every Child Gets Hard Questions",
+  scene:"During a small group about a picture of a busy city street, Mr. Osei asks three confident talkers: <em>\"What would happen if all the traffic lights stopped working?\"</em> <em>\"How is a city different from where we live?\"</em> They answer eagerly. Then he turns to Kaito (4 years, 3 months), who rarely speaks in groups: <em>\"Kaito, what color is the bus?\"</em> Kaito says, <em>\"Yellow.\"</em> <em>\"Good job!\"</em> Later, at the block area, Kaito builds a street with a stoplight and tells a friend, <em>\"If the light breaks, the cars crash, so the police have to come.\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Distributing Questions — Offering Higher-Order Questions to Every Child",
+  qcText1:"Higher-order questions shouldn't be reserved for children who answer quickly. <strong>Every child benefits from being asked to reason, predict, and explain</strong>. Quieter children may need more wait time, a partner to talk with first, or a question tied to something they're doing, but they can think just as deeply.",
+  qcText2:"Mr. Osei gave Kaito an easy question to protect him, but <strong>it also kept him from the thinking the others got to do</strong>. In the block area, Kaito answered the very question Mr. Osei had asked the group — what happens if traffic lights stop working — with cause-and-effect reasoning. He was ready for the hard question.",
+  coachTitle:"The Easy Question for Kaito — Coaching Conversation",
+  question:"Mr. Osei asks you directly: \"Should I push Kaito with harder questions? I don't want to put him on the spot.\" He is a <strong>Driver-Sustainer</strong> — results-focused, protective of his children, and eager to get it right. Which response serves him best?",
+  correct:0,
+  options:[
+    "\"Protecting him is exactly the right instinct — you don't want him to feel embarrassed. Here's what I saw later, though: in the block area, Kaito built a street with a stoplight and told a friend, 'If the light breaks, the cars crash, so the police have to come.' That's the answer to your traffic-light question — full cause-and-effect reasoning. He's ready. The trick is to give him the hard question in a safer way: ask it while he's building, or let him tell a partner first. Try it twice this week and we'll see what he says.\"",
+    "\"What if you made a fun 'Question Hot Seat' game where every child gets a turn? Kaito would love being in the spotlight!\"",
+    "\"There's research on teacher expectations and how the questions we ask different children affect their learning. I'll send you an article.\"",
+    "\"Yes. Giving him only easy questions holds him back. Ask him the same questions as everyone else.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Too Much Spotlight", p1:"A \"hot seat\" game is an <strong>Inspirer mentor's</strong> natural move — lively and fun.", p2:"For a quiet child like Kaito, a spotlight game is exactly what Mr. Osei is trying to avoid. It doesn't answer his real question: how to ask hard questions without putting Kaito on the spot."},
+    {h:"This Is a Cultivator's Natural Move — Right Content, Wrong Timing", p1:"Offering research on teacher expectations is a <strong>Cultivator mentor's</strong> instinct. The evidence is relevant, and Cultivators trust good information.", p2:"Mr. Osei asked a direct question in the moment. He needs a clear answer and a practical strategy he can use this week. The research can come later."},
+    {h:"This Is a Driver's Natural Move — Accurate, but It Wounds the Sustainer", p1:"A blunt \"yes, you're holding him back\" is the natural move of a mentor with a strong <strong>Driver</strong> expression: fast and correct.", p2:"Mr. Osei's Sustainer side cares deeply about protecting Kaito. Telling him he's holding Kaito back will make him feel he harmed a child. He needs his care affirmed and a way to challenge Kaito safely."}
+  ],
+  matchText:"This works for a <strong>Driver-Sustainer</strong> because it affirms his protective instinct first — \"exactly the right instinct.\" Then it gives him evidence he didn't see: Kaito answering the traffic-light question on his own, with real cause-and-effect reasoning.",
+  matchText2:"The solution respects both sides of him: ask hard questions in safer ways — during play or after partner talk. His Sustainer side keeps Kaito comfortable; his Driver side gets a specific strategy and a measurable test: \"Try it twice this week.\"",
+  actionSteps:[
+    "<strong>Ask during play.</strong> Encourage him to ask quieter children higher-order questions while they're building or drawing, not only in the group.",
+    "<strong>Use turn-and-talk.</strong> Before calling on anyone, children tell a partner their answer. Quiet children get to rehearse.",
+    "<strong>Go back to Kaito's street.</strong> Suggest he ask Kaito, \"What would happen if your stoplight stopped working?\" while he builds.",
+    "<strong>Track who gets the hard questions.</strong> Help him note which children he asks higher-order questions during group time.",
+    "<strong>Observe and debrief quickly.</strong> Watch his next group and debrief right after. A Driver-Sustainer wants fast feedback — and reassurance that the change is working."
+  ],
+  completeLine:"You honored a Driver-Sustainer's care and showed him how to challenge every child safely. That's how he grows."
+},
+
+// ── SCENARIO 4 · Driver-Cultivator Mentee ────────────────────
+{
+  menteeType:"DC",
+  menteeLabel:"The Driver-Cultivator",
+  menteeDesc:"Ms. Reeves is a strategic, high-standards teacher who plans meticulously and executes decisively. Her lesson plans include objectives, materials, vocabulary, and a written list of questions. Her challenge: when you look closely, nearly all her planned questions ask children to name, count, or recall — so her careful planning builds in low-level thinking. She receives feedback best when it is specific, evidence-based, and names both the gap in her system and the precise intervention that closes it.",
+  sceneTitle:"Eight Planned Questions", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Planning Higher-Order Questions",
+  scene:"Ms. Reeves's lesson plan for a read-aloud of The Three Little Pigs lists eight questions: <em>\"What was the first house made of? What was the second? The third? How many pigs? Who blew the houses down? What did the wolf say? Which house was strongest? What did the pigs do at the end?\"</em> She asks all eight, and children answer quickly and correctly. Esme (4 years, 10 months) raises her hand at the end: <em>\"Why didn't the first pig use bricks?\"</em> Ms. Reeves says, <em>\"Good question, but we're done with the story,\"</em> and moves to the next activity.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Planning Questions — Building Higher-Order Thinking Into the Lesson Plan",
+  qcText1:"Ms. Reeves's planning is thorough, but <strong>all eight questions asked children to recall details from the story</strong>. Higher-order questions ask children to think beyond the text: <em>\"Why do you think the first pig built with straw? If you were a pig, what would you build your house with, and why? What else could the pigs have done to stop the wolf?\"</em>",
+  qcText2:"The richest question of the lesson came from a child: <strong>Esme asked why the first pig didn't use bricks</strong> — a question about choices, reasons, and consequences. Ms. Reeves's plan had no room for it. Building two or three higher-order questions into every lesson plan would bring that kind of thinking into the lesson by design, not by accident.",
+  coachTitle:"Eight Planned Questions — Coaching Conversation",
+  question:"You're debriefing with Ms. Reeves, a <strong>Driver-Cultivator</strong>. She says, \"Children answered every planned question correctly.\" Which approach will move her?",
+  correct:2,
+  options:[
+    "\"Esme's question was the best part of the story! You should just let the kids ask their own questions and follow their curiosity.\"",
+    "\"I could tell Esme was curious, and she seemed a little disappointed when you moved on. Maybe give children more time for their questions?\"",
+    "\"Let's look at the evidence. Your plan had eight questions, and all eight asked children to recall a detail — first house, second house, how many pigs. Children answered all eight correctly, which tells us the questions weren't challenging. Then Esme asked, 'Why didn't the first pig use bricks?' — the highest-level question of the lesson, and it came from a child. Your planning system is strong, but it doesn't include a check for question level. Want to build one? For example, a template with at least two 'why' or 'what if' questions per lesson.\"",
+    "\"Your questions were all recall. Plan better questions.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Enthusiasm Without Structure", p1:"Suggesting she follow children's curiosity is an <strong>Inspirer mentor's</strong> natural move — energetic and child-centered.", p2:"For a Driver-Cultivator, \"let the kids ask their own questions\" sounds unplanned. She'll dismiss it. She needs a structured way to raise the level of her planned questions."},
+    {h:"This Is a Sustainer's Natural Move — Feelings Where She Needs Facts", p1:"Focusing on Esme's disappointment is a <strong>Sustainer mentor's</strong> instinct — attentive and caring.", p2:"Ms. Reeves will find this unpersuasive. Esme's feelings won't compete with a lesson where every child answered correctly. She needs evidence that her questions were too easy."},
+    {h:"This Is a Driver's Natural Move — A Directive Without the Mechanism", p1:"A crisp \"plan better questions\" is the natural move of a mentor with a strong <strong>Driver</strong> expression — decisive and outcome-focused.", p2:"It speaks to her Driver side but skips what her Cultivator side needs: what makes a question higher-order and a system for planning them."}
+  ],
+  matchText:"This works for a <strong>Driver-Cultivator</strong> because it's built like an analysis: eight recall questions, eight correct answers, and the insight that correct answers mean the questions weren't challenging. Esme's question provides the contrast.",
+  matchText2:"The proposed template gives her structure and a clear standard: at least two \"why\" or \"what if\" questions per lesson. Her Driver side gets a better outcome; her Cultivator side gets a well-reasoned system.",
+  actionSteps:[
+    "<strong>Label her questions.</strong> Help her mark each planned question as recall or higher-order.",
+    "<strong>Add two higher-order questions per lesson.</strong> Build them into her template: one \"why,\" one \"what if.\"",
+    "<strong>Leave room for children's questions.</strong> Add a line to her plan: \"Child questions — explore one.\"",
+    "<strong>Go back to Esme's question.</strong> Suggest she revisit the story and ask the group, \"Why didn't the first pig use bricks?\"",
+    "<strong>Review the results together.</strong> Compare children's answers to recall and higher-order questions. Let her analyze the difference; she'll see the value herself."
+  ],
+  completeLine:"You gave a Driver-Cultivator evidence, a diagnosis, and a system to build. That's exactly what she needed."
+},
+
+// ── SCENARIO 5 · Inspirer Mentee ─────────────────────────────
+{
+  menteeType:"I",
+  menteeLabel:"The Inspirer",
+  menteeDesc:"Ms. Reyes is warm, expressive, and genuinely beloved by the families and children in her program. She loves looking at children's work with them and always has something encouraging to say. Her challenge: her questions about children's work stay at \"Do you like it?\" or \"Is it done?\" — she rarely asks questions that invite children to reflect on, evaluate, or explain their own choices. She receives feedback best when her strengths are genuinely honored first, and growth is framed as an expansion of what she already does well.",
+  sceneTitle:"Do You Like It?", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Evaluative and Reflective Questions",
+  scene:"Levi (4 years, 9 months) has built a marble run from cardboard tubes taped to the wall. The marble gets stuck at the second tube every time. He moves the tube, tries again, moves it again, and finally the marble rolls all the way down. Ms. Reyes rushes over: <em>\"Levi, that's amazing! Do you like it?\"</em> <em>\"Yeah.\"</em> <em>\"Is it done?\"</em> <em>\"Yeah.\"</em> <em>\"Yay! Good job!\"</em> She moves on. Levi drops the marble through a few more times, then leaves.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Evaluative Questions — Inviting Children to Reflect on Their Own Work",
+  qcText1:"Evaluative and reflective questions ask children to <strong>think about their own choices and judge what worked</strong>: <em>\"What part was the trickiest? What did you change to make the marble go all the way? If you built another one, what would you do differently?\"</em> These questions build problem-solving and self-awareness.",
+  qcText2:"Levi had just solved a real engineering problem through repeated testing. <strong>\"Do you like it?\" and \"Is it done?\" could only be answered with \"yeah\"</strong>, so the thinking behind his success was never put into words. Ms. Reyes's enthusiasm is a strength; paired with one reflective question, it would help Levi recognize and describe his own problem-solving.",
+  coachTitle:"Do You Like It? — Coaching Conversation",
+  question:"You're debriefing with Ms. Reyes, an <strong>Inspirer</strong>. She beams: \"Levi's marble run was incredible!\" Which approach will land?",
+  correct:2,
+  options:[
+    "\"Your questions only got 'yeah' as an answer. You need to ask reflective questions that make children think about their work.\"",
+    "\"You're so encouraging with your kids. Maybe just try a different question sometimes, if you want to?\"",
+    "\"It really was — and your excitement made him feel like an engineer. Here's what made it even more incredible: the marble got stuck at the second tube, and Levi moved it over and over until it rolled all the way down. That's real problem-solving. Your questions — 'Do you like it?' and 'Is it done?' — got 'Yeah' and 'Yeah.' What if you asked, 'What was the trickiest part? What did you change to make it work?' You'd hear him tell the whole story of how he solved it — and he'd hear himself describe it too.\"",
+    "\"There's research on metacognition and how reflective questions help young children understand their own thinking. I'd suggest reading a summary.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Blunt for an Inspirer", p1:"Stating the problem and the fix plainly is a <strong>Driver mentor's</strong> instinct: clear and efficient.", p2:"Ms. Reyes will hear \"you need to\" as criticism of a moment she loved. Inspirers can deflate when feedback lands as a correction without recognition. She'll feel judged rather than inspired."},
+    {h:"This Is a Sustainer's Natural Move — So Gentle the Point Disappears", p1:"Affirming her and softening the suggestion is a <strong>Sustainer mentor's</strong> natural move — caring and protective.", p2:"\"If you want to\" makes the change optional, and \"a different question\" gives her nothing concrete. She needs to see Levi's problem-solving and the questions that would bring it out."},
+    {h:"This Is a Cultivator's Natural Move — Theory Before Connection", p1:"Assigning research on metacognition is a <strong>Cultivator mentor's</strong> instinct — thorough and principled.", p2:"For an Inspirer, it feels like homework instead of connection. She'll understand the idea best through Levi's marble run. Lead with the child."}
+  ],
+  matchText:"This works for an <strong>Inspirer</strong> because it shares her excitement — \"It really was\" — and credits her with making Levi feel like an engineer. Then it tells the story of his problem-solving, which she missed, in a way that makes it even more exciting.",
+  matchText2:"The two reflective questions are concrete and easy to try, and \"You'd hear him tell the whole story\" gives her a joyful reason to ask them. She doesn't have to be less enthusiastic; she just adds a question that invites Levi to share his thinking.",
+  actionSteps:[
+    "<strong>Learn three reflection questions.</strong> Give her: \"What was the trickiest part?\" \"What did you change?\" \"What would you do next time?\"",
+    "<strong>Pair excitement with one question.</strong> Help her keep \"That's amazing!\" and add one reflective question after it.",
+    "<strong>Go back to Levi's marble run.</strong> Suggest she ask Levi to show her how he got the marble unstuck.",
+    "<strong>Ask about process, not just product.</strong> Encourage her to ask how children made things, not only whether they're finished.",
+    "<strong>Hear the story together.</strong> On your next visit, point out a moment when a reflective question led to a child's long explanation. Inspirers learn best from moments they can feel."
+  ],
+  completeLine:"You showed an Inspirer how to turn celebration into reflection. That's the work."
+},
+
+// ── SCENARIO 6 · Inspirer-Driver Mentee ──────────────────────
+{
+  menteeType:"ID",
+  menteeLabel:"The Inspirer-Driver",
+  menteeDesc:"Mr. Castillo is magnetic, persuasive, and absolutely committed to results. He asks good questions to the group and gets lots of answers. His challenge: every answer comes back to him — he responds to each child, then calls on the next — so children never respond to each other's ideas, and discussions stay a series of separate answers instead of a real exchange of thinking. He receives feedback best when it is both energetically engaging and immediately connected to real outcomes — he needs to feel it and be given something specific to do with it.",
+  sceneTitle:"Every Answer Comes Back to Him", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Children Building on Each Other's Ideas",
+  scene:"At circle, Mr. Castillo shows a picture of a playground covered in snow: <em>\"How could we still play outside if it snowed this much?\"</em> Marisol (4 years, 6 months) says, <em>\"We could make a snow fort!\"</em> <em>\"Great idea!\"</em> He points to the next child: <em>\"We could wear boots.\"</em> <em>\"Smart!\"</em> Another: <em>\"We could slide down the hill on our coats!\"</em> <em>\"Awesome!\"</em> Marisol whispers to her neighbor, <em>\"We could slide INTO the fort,\"</em> but Mr. Castillo has already moved to the next hand.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Discussion — Helping Children Respond to Each Other",
+  qcText1:"Mr. Castillo asked a strong, open question. But higher-order thinking deepens when <strong>children build on each other's ideas</strong> — agreeing, adding on, combining, or disagreeing. Prompts like <em>\"Who can add to Marisol's idea?\"</em> or <em>\"How could the fort and the sliding hill work together?\"</em> turn a list of answers into a real discussion.",
+  qcText2:"Every answer went to Mr. Castillo and ended there. <strong>Marisol was already combining two ideas — sliding into the fort — but the discussion format gave her no place to say it</strong>. With a few connecting prompts, Mr. Castillo could keep his lively pace and help children think together instead of one at a time.",
+  coachTitle:"Every Answer Comes Back to Him — Coaching Conversation",
+  question:"You're debriefing with Mr. Castillo, an <strong>Inspirer-Driver</strong>. He says, \"So many ideas — every kid had something to say!\" Which approach will actually land?",
+  correct:0,
+  options:[
+    "\"Nobody gets ideas flowing like you — that question was great. Now let's make those ideas crash into each other. Marisol whispered to her neighbor, 'We could slide INTO the fort' — she was combining two ideas from the group. But every answer came back to you and stopped. What if, after a few answers, you asked, 'Who can add to Marisol's fort idea?' or 'How could the fort and the sliding hill work together?' Same energy — but now they're building a plan together.\"",
+    "\"The kids really enjoyed circle. I noticed Marisol seemed to want to say more. Maybe slow down a little to let children finish their ideas?\"",
+    "\"Could you record your next discussion and map who responds to whom? Then we can analyze how often children respond to each other.\"",
+    "\"Your discussion was just a list of answers. Get the kids to respond to each other.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Sustainer's Natural Move — It Asks Him to Shrink", p1:"Asking him to slow down for Marisol is a <strong>Sustainer mentor's</strong> instinct — gentle and attentive.", p2:"Mr. Castillo will hear it as a request to lower his energy. The problem isn't his pace; it's the pattern of every answer going back to him. He needs a way to keep the energy and connect children's ideas."},
+    {h:"This Is a Cultivator's Natural Move — Documentation Over Momentum", p1:"Mapping who responds to whom is a <strong>Cultivator mentor's</strong> natural move — systematic and evidence-oriented.", p2:"For an Inspirer-Driver, it turns a lively discussion into paperwork, and he'll lose interest. He needs Marisol's story and a quick prompt he can use tomorrow."},
+    {h:"This Is a Driver's Natural Move — Correct, but He'll Charm Past It", p1:"A crisp \"get kids to respond to each other\" is a <strong>Driver mentor's</strong> instinct — direct and results-focused.", p2:"Without energy and an example, he'll treat it as a vague suggestion and keep his format. He needs to see what Marisol was doing and a specific prompt to try."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Driver</strong> because it celebrates his strength — \"Nobody gets ideas flowing like you\" — and then offers a bigger payoff: making ideas \"crash into each other.\" Marisol's whisper shows him exactly what's possible.",
+  matchText2:"The connecting prompts are specific and quick, and \"now they're building a plan together\" gives his Driver side a clear outcome. He keeps his energy and lively pace while turning answers into a real discussion.",
+  actionSteps:[
+    "<strong>Learn two connecting prompts.</strong> Give him \"Who can add to that?\" and \"Does anyone have a different idea?\"",
+    "<strong>Combine ideas out loud.</strong> Encourage him to ask, \"How could these two ideas work together?\"",
+    "<strong>Go back to Marisol.</strong> Suggest he invite Marisol to share her fort-and-slide idea at the next circle and ask others to add on.",
+    "<strong>Let children talk to each other.</strong> Help him practice looking at the group instead of the speaker, so children respond to one another.",
+    "<strong>Sit in as his signal.</strong> During his next discussion, give him a thumbs-up each time a child builds on another child's idea. He'll enjoy the game — and the habit will stick."
+  ],
+  completeLine:"You matched an Inspirer-Driver's energy and turned his circle into a real discussion. He'll run with that."
+},
+
+// ── SCENARIO 7 · Inspirer-Sustainer Mentee ───────────────────
+{
+  menteeType:"IS",
+  menteeLabel:"The Inspirer-Sustainer",
+  menteeDesc:"Ms. Fontaine is warm-hearted, joyful, and deeply invested in every child and family she serves. When children argue, she steps in quickly to restore peace. Her challenge: she solves social problems for children instead of asking the questions that would help them think through the problem, consider each other's feelings, and find solutions themselves. She receives feedback best when she feels completely safe in the relationship, and when growth is framed as deepening her impact on the children she loves — not as a failure of her warmth.",
+  sceneTitle:"One Swing, Two Children", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Questions in Social Problem-Solving",
+  scene:"On the playground, Dante (4 years, 7 months) and Leo (4 years, 4 months) both grab the only tire swing at the same moment. <em>\"I had it first!\"</em> <em>\"No, I did!\"</em> Ms. Fontaine hurries over: <em>\"Okay, sweethearts, no fighting. Dante, you go first for five minutes, then Leo. Leo, come help me with the sandbox.\"</em> Leo follows her, looking back at the swing. Two days later, the same two boys have the same argument over the same swing.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Higher-Order Questions in Social Moments — Helping Children Solve Problems",
+  qcText1:"Social conflicts are rich opportunities for higher-order thinking. Questions like <em>\"What's the problem? How do you think Leo feels? What could we do so you both get a turn? What would happen if…?\"</em> ask children to <strong>take another's perspective, generate solutions, and evaluate them</strong>.",
+  qcText2:"Ms. Fontaine's solution was fair and restored peace quickly. But <strong>because she did the thinking, the boys didn't learn how to solve the problem</strong> — and two days later, they had the same argument. Asking questions would take a few more minutes, but it would give the boys skills they could use without her.",
+  coachTitle:"One Swing, Two Children — Coaching Conversation",
+  question:"Ms. Fontaine says, \"I just want them to be happy and not fight.\" She is an <strong>Inspirer-Sustainer</strong> — joyful, relational, and deeply protective of children's feelings. Which approach will help her grow?",
+  correct:3,
+  options:[
+    "\"You solved their problem for them. They need to learn to solve conflicts themselves. Stop stepping in with solutions.\"",
+    "\"Let's create a conflict-resolution script with steps and questions for every type of playground problem. Having it written down will make it easier.\"",
+    "\"What if you made a fun 'Swing Party' with a big timer and a turn-taking song? The kids would love it!\"",
+    "\"You care so much about them being happy together — that's why you ran over so quickly. Can I share what I noticed? Two days later, Dante and Leo had the exact same argument over the same swing. Your solution was fair, but they didn't get to build it themselves, so they couldn't use it the next time. What if you stayed with them and asked, 'What's the problem? How does Leo feel? What could we do so you both get a turn?' They'd find a solution with your help — and they'd be able to use it again, even when you're not right there.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Correct, but It Breaks Her Sense of Safety", p1:"Naming the problem and prescribing the fix is a <strong>Driver mentor's</strong> instinct — direct and standards-focused.", p2:"For an Inspirer-Sustainer, \"stop stepping in\" feels like criticism of her caring response. She'll feel ashamed rather than equipped. She needs to see how questions can still keep children safe and happy."},
+    {h:"This Is a Cultivator's Natural Move — Scripts Without the Why", p1:"A conflict-resolution script is a <strong>Cultivator mentor's</strong> natural move — organized and thorough.", p2:"A script won't change Ms. Fontaine's practice until she sees why her quick solutions aren't lasting. Her barrier is emotional: she wants conflict to end fast. Lead with Dante and Leo."},
+    {h:"This Is an Inspirer's Natural Move — A Fun Fix Instead of Thinking", p1:"A swing party with a timer and song is the natural move of a mentor with a strong <strong>Inspirer</strong> expression — joyful and energizing.", p2:"It's another adult-created solution. The boys still wouldn't learn to think through a problem, and the next conflict would need another rescue."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Sustainer</strong> because it begins by honoring her care — \"that's why you ran over so quickly.\" Then it shows her the evidence that her fair solution didn't last: the same argument two days later.",
+  matchText2:"The reframe \"they'd be able to use it again, even when you're not right there\" shows her that asking questions is a deeper form of care. She stays close and supportive, but the boys do the thinking. That respects both her values and their growth.",
+  actionSteps:[
+    "<strong>Practice problem-solving questions.</strong> Help her rehearse: \"What's the problem? How does he feel? What could we do?\"",
+    "<strong>Stay close while children think.</strong> Encourage her to remain beside the children, offering warmth and support as they come up with ideas.",
+    "<strong>Try one solution together.</strong> Help her guide children to choose an idea, try it, and check whether it worked.",
+    "<strong>Go back to Dante and Leo.</strong> Suggest she revisit the swing problem with them and ask what they could do next time.",
+    "<strong>Name her success out loud.</strong> When children solve a problem with her questions, tell her what you saw. An Inspirer-Sustainer needs to see that the relationship grew stronger."
+  ],
+  completeLine:"You helped an Inspirer-Sustainer see that questions can bring lasting peace. That changes her whole practice."
+},
+
+// ── SCENARIO 8 · Inspirer-Cultivator Mentee ──────────────────
+{
+  menteeType:"IC",
+  menteeLabel:"The Inspirer-Cultivator",
+  menteeDesc:"Ms. Park is a creative, intellectually curious teacher who brings both warmth and analytical depth to her practice. She keeps a \"We Wonder\" chart where she writes down children's questions. Her challenge: the chart grows longer and longer, but the questions are rarely investigated, so children's curiosity gets recorded instead of explored. She receives feedback best when it engages both her intellectual curiosity and her relational energy, and when the path forward is both exciting and structured.",
+  sceneTitle:"The Wonder Wall", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Following Through on Children's Questions",
+  scene:"Ms. Park's \"We Wonder\" chart is covered with children's questions in her neat handwriting: <em>\"Why do worms come out when it rains? How do birds know where to fly? Where does the sun go at night?\"</em> Tamsin (4 years, 5 months) stands in front of the chart and points to her own question from three weeks ago: <em>\"Why do worms come out when it rains?\"</em> She asks, <em>\"When are we going to find out?\"</em> Ms. Park smiles: <em>\"Soon! Great question!\"</em> Tamsin looks at the chart, then walks away. Today Ms. Park adds two more questions to the bottom.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Children's Questions — Turning Wonderings Into Investigations",
+  qcText1:"Inviting children's questions is a powerful way to build higher-order thinking. But the thinking really happens when <strong>children help investigate their own questions</strong>: predicting, observing, testing, and finding answers. A question like Tamsin's could lead to a rainy-day worm hunt, a book, or a simple experiment.",
+  qcText2:"Ms. Park's chart shows she values children's curiosity, but <strong>writing questions down is only the first step</strong>. Tamsin has waited three weeks to find out about worms, and her \"When are we going to find out?\" shows she's still curious — and starting to wonder whether her question matters. Choosing one question each week to investigate would turn the wall into real learning.",
+  coachTitle:"The Wonder Wall — Coaching Conversation",
+  question:"Ms. Park says eagerly, \"I love our Wonder Wall — look how curious they are!\" She is an <strong>Inspirer-Cultivator</strong> — curious, creative, and energized by ideas. Which approach will help her most?",
+  correct:1,
+  options:[
+    "\"The chart is full of questions no one has answered. Pick one and investigate it.\"",
+    "\"They are incredibly curious — that wall is proof of the culture you've built. Here's a puzzle: Tamsin pointed to her worm question from three weeks ago and asked, 'When are we going to find out?' The wall is great at collecting questions; the next step is answering them together. What if you picked one question each week and turned it into an investigation? Worms and rain would be perfect: predict, go outside after the next rain, count worms, read a book. Which question do you think would make the best first investigation?\"",
+    "\"Your chart is so lovely, and the kids feel heard. I'm sure they understand you'll get to their questions eventually.\"",
+    "\"Let's analyze the chart. Categorize each question by topic and difficulty, then create a schedule for investigating them over the year.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Clear, but It Deflates Her", p1:"A direct \"pick one and investigate it\" is a <strong>Driver mentor's</strong> instinct — efficient and outcome-oriented.", p2:"It misses what Ms. Park has done well and makes the chart sound like a failure. An Inspirer-Cultivator who feels her idea was dismissed may pull back. She needs her curiosity engaged in the next step."},
+    {h:"This Is a Sustainer's Natural Move — Reassurance That Skips the Growth", p1:"Reassuring her that children will wait is a <strong>Sustainer mentor's</strong> natural move — warm and protective.", p2:"It overlooks Tamsin's question: \"When are we going to find out?\" Children are waiting, and their curiosity may fade. Ms. Park needs to see that investigating questions is the next step."},
+    {h:"This Is a Cultivator's Natural Move — Analysis Without the Spark", p1:"A full categorization and yearly schedule is the natural move of a mentor with a strong <strong>Cultivator</strong> expression, and it speaks to half of Ms. Park.", p2:"It adds more planning to a wall that already has too much waiting. It misses her Inspirer half and delays the exciting part: investigating a question now."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Cultivator</strong> because it honors what she built — \"proof of the culture you've built\" — and then offers a puzzle: the wall collects questions but doesn't answer them. Tamsin's question makes the gap personal.",
+  matchText2:"The one-question-per-week plan gives her structure, and the worm investigation gives her an exciting place to start. Asking her which question would be best invites both sides of her into planning the next step.",
+  actionSteps:[
+    "<strong>Choose one question each week.</strong> Help her pick a question from the wall and plan a simple investigation.",
+    "<strong>Start with the worms.</strong> Suggest a rainy-day worm hunt with predictions, counting, and a book about earthworms.",
+    "<strong>Invite children to plan.</strong> Ask, \"How could we find out?\" and let children suggest ways to investigate.",
+    "<strong>Show what was learned.</strong> Add a \"We Found Out\" section beside each investigated question.",
+    "<strong>Celebrate Tamsin's answer.</strong> When the worm investigation happens, point out Tamsin's reaction. An Inspirer-Cultivator who sees that payoff will investigate the next question too."
+  ],
+  completeLine:"You helped an Inspirer-Cultivator turn her Wonder Wall into real discovery. That's the work."
+},
+
+// ── SCENARIO 9 · Sustainer Mentee ────────────────────────────
+{
+  menteeType:"S",
+  menteeLabel:"The Sustainer",
+  menteeDesc:"Ms. Okafor is nurturing, relationship-centered, and deeply committed to the children in her care. She asks thoughtful questions of children she feels close to. Her challenge: with children whose behavior challenges her, her questions become rhetorical reminders — \"Do we kick?\" — instead of real questions that could help them think through what's happening. She receives feedback best when her care for children is honored first, and when growth is framed through the lens of a specific child's experience rather than a general critique of her practice.",
+  sceneTitle:"Do We Kick Sand?", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Real Questions in Hard Moments",
+  scene:"In the sandbox, Cruz (4 years, 8 months) has been building a sandcastle for fifteen minutes. Each time he adds a tower, the side crumbles. On the third collapse, he kicks the castle apart. Ms. Okafor walks over: <em>\"Cruz. Do we kick sand?\"</em> <em>\"No.\"</em> <em>\"Are we being safe?\"</em> <em>\"No.\"</em> <em>\"Then let's find another place to play.\"</em> Cruz goes to the swings. Later, another child's castle collapses, and Ms. Okafor kneels beside her: <em>\"Oh no! What do you think made it fall? How could we make it stronger?\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Real Questions — Using Higher-Order Questions With Every Child",
+  qcText1:"Rhetorical questions like <strong>\"Do we kick sand?\" aren't real questions</strong> — the answer is known, and the child's job is simply to agree. Real questions invite thinking: <em>\"You worked so hard on that castle. What made it keep falling? What could help the towers stay up?\"</em> Those questions address the frustration behind the behavior and turn it into problem-solving.",
+  qcText2:"Cruz's kick came after three collapses — he was frustrated, not just misbehaving. <strong>Ms. Okafor asked another child exactly the right questions about a falling castle</strong>, but Cruz got only rhetorical ones. The same curious questions could have helped him solve the castle problem and learn a better way to handle frustration.",
+  coachTitle:"Do We Kick Sand? — Coaching Conversation",
+  question:"You're debriefing with Ms. Okafor, a <strong>Sustainer</strong>. She says, \"Cruz kicked sand again, so I had to move him.\" Which approach will help her grow?",
+  correct:0,
+  options:[
+    "\"Keeping everyone safe matters, and you handled it calmly. Can I tell you what I saw from Cruz's side? He'd worked on that castle for fifteen minutes, and it fell three times before he kicked it. Later, when another child's castle fell, you knelt down and asked, 'What made it fall? How could we make it stronger?' — such wonderful questions. I wonder what Cruz would have figured out if he'd gotten those same questions before the third collapse.\"",
+    "\"You asked Cruz rhetorical questions and gave another child real ones. That's inconsistent. Ask every child real questions.\"",
+    "\"What if you made a special 'Castle Builder' role for Cruz? He could teach other kids how to build — he'd feel so proud!\"",
+    "\"Let's track the kinds of questions you ask different children for a week. Research shows teachers often ask different questions of children with challenging behavior.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Abrupt for a Sustainer", p1:"Naming the inconsistency directly is a <strong>Driver mentor's</strong> instinct — clear and fair.", p2:"For Ms. Okafor, \"inconsistent\" sounds like an accusation that she treats Cruz unfairly. A Sustainer who feels judged may become defensive. She needs to see Cruz's frustration first."},
+    {h:"This Is an Inspirer's Natural Move — A Role Instead of the Real Fix", p1:"A special \"Castle Builder\" role is an <strong>Inspirer mentor's</strong> natural suggestion — upbeat and encouraging.", p2:"Cruz's castle kept collapsing; he isn't ready to teach others yet. The idea skips what Ms. Okafor needs to see: Cruz needed real questions to solve his problem, just like the other child."},
+    {h:"This Is a Cultivator's Natural Move — Evidence Without the Child", p1:"Tracking questions across children is a <strong>Cultivator mentor's</strong> instinct — principled and evidence-based.", p2:"The data would be useful, but a chart won't reach a Sustainer the way one child's story will. Ms. Okafor changes when she sees a specific child she cares about. Lead with Cruz."}
+  ],
+  matchText:"This works for a <strong>Sustainer</strong> because it begins by acknowledging her calm response and then invites her to see the moment \"from Cruz's side\": fifteen minutes of work and three collapses before the kick. His behavior becomes understandable.",
+  matchText2:"The comparison is gentle: she already asks wonderful questions — \"such wonderful questions.\" The closing wonder lets her see that Cruz needed those same questions too, without accusing her of unfairness.",
+  actionSteps:[
+    "<strong>Replace rhetorical questions.</strong> Help her practice turning \"Do we kick?\" into \"What happened? What could you try instead?\"",
+    "<strong>Notice frustration early.</strong> Encourage her to watch for repeated failures and step in with a problem-solving question before frustration peaks.",
+    "<strong>Go back to Cruz's castle.</strong> Suggest she build with Cruz tomorrow and ask, \"What could help the towers stay up?\"",
+    "<strong>Address safety and thinking together.</strong> Help her keep safety clear while still asking real questions: \"Sand stays in the sandbox. What made you so frustrated?\"",
+    "<strong>Help her see Cruz succeed.</strong> When Cruz solves a building problem, point it out. A Sustainer who sees a struggling child think it through will keep asking him real questions."
+  ],
+  completeLine:"You helped a Sustainer see that every child deserves real questions. Cruz will feel the difference."
+},
+
+// ── SCENARIO 10 · Sustainer-Driver Mentee ────────────────────
+{
+  menteeType:"SD",
+  menteeLabel:"The Sustainer-Driver",
+  menteeDesc:"Mr. James is a steady, principled teacher who holds high expectations while genuinely protecting the emotional wellbeing of his children. He asks good problem-solving questions. His challenge: he calls on the first hand that goes up, so the fastest answer ends the thinking and slower, more careful thinkers rarely get to work through the problem. He receives feedback best when his care for children is acknowledged first, followed by clear, specific, actionable guidance.",
+  sceneTitle:"The First Hand Up", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Think Time for Hard Questions",
+  scene:"A ball has rolled under the heavy shelf in the block area. Mr. James gathers the group: <em>\"Here's a problem. How could we get the ball out without moving the shelf?\"</em> Immediately, one child's hand shoots up: <em>\"Use a stick!\"</em> <em>\"Great idea!\"</em> Mr. James grabs a yardstick and slides the ball out. Gideon (4 years, 10 months), who had been lying on his stomach peering under the shelf, sits up and says, <em>\"We could blow on it really hard, or tie a string on a car and—\"</em> But the group is already moving on.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Think Time — Giving Every Child Time to Work Through Hard Questions",
+  qcText1:"Higher-order questions need <strong>think time</strong>. When a teacher calls on the first hand, the fastest idea ends the problem-solving for everyone. Waiting — or asking children to show a thumbs-up when they have an idea, or share with a partner first — lets more children develop their thinking.",
+  qcText2:"Mr. James asked an excellent problem-solving question, but <strong>the first answer ended the thinking in seconds</strong>. Gideon was still investigating — lying on the floor, looking under the shelf — and was developing more creative solutions. A longer pause and a question like \"What other ideas do you have?\" would have given the group several strategies to compare and test.",
+  coachTitle:"The First Hand Up — Coaching Conversation",
+  question:"You're debriefing with Mr. James, a <strong>Sustainer-Driver</strong>. He says, \"We solved the problem quickly. The stick worked.\" Which approach will help him?",
+  correct:2,
+  options:[
+    "\"What if you made a whole 'Problem of the Day' game with prizes for the most creative solutions? The kids would love it!\"",
+    "\"There's research on wait time and how it increases the quality and number of children's answers. I can send you some articles.\"",
+    "\"That was a great problem to pose — real, and something every child could picture. You kept everyone calm and got the ball back. Here's what I noticed: Gideon was on his stomach looking under the shelf, and he was coming up with more ideas — blowing on it, tying a string to a car. The first hand answered, and the thinking stopped. Next time, try 'Show me a thumbs-up when you have an idea,' wait until several thumbs are up, then collect three ideas before testing one. It adds about a minute and gives kids like Gideon time to think.\"",
+    "\"You called on the first hand. Wait longer before taking answers.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Adds a Game but Misses the Point", p1:"A \"Problem of the Day\" game with prizes is an <strong>Inspirer mentor's</strong> natural move — lively and creative.", p2:"It doesn't address what Mr. James needs to change: how quickly he takes answers. Prizes could even speed children up. He needs a clear way to create think time."},
+    {h:"This Is a Cultivator's Natural Move — Right Evidence, Wrong Entry Point", p1:"Offering research on wait time is a <strong>Cultivator mentor's</strong> instinct — careful and evidence-based.", p2:"For a Sustainer-Driver, articles feel abstract. He'll be persuaded by Gideon lying on the floor with more ideas, delivered with respect and followed by a concrete action."},
+    {h:"This Is a Driver's Natural Move — Correct, but It Skips His Care", p1:"A crisp \"wait longer\" is the natural move of a mentor with a strong <strong>Driver</strong> expression — accurate and quick.", p2:"Mr. James's Sustainer side needs to hear that his problem and his calm leadership were strong. Without that, he'll feel judged. Start with what he did well."}
+  ],
+  matchText:"This works for a <strong>Sustainer-Driver</strong> because it acknowledges what he did well — a great problem and a calm group. Then it shows him Gideon, still investigating and developing ideas, when the thinking stopped.",
+  matchText2:"The thumbs-up strategy and \"collect three ideas\" rule give his Driver side a clear, practical routine. \"It adds about a minute\" addresses his concern about time. He keeps his calm structure and gives more children room to think.",
+  actionSteps:[
+    "<strong>Use thumbs-up thinking.</strong> Help him practice asking children to show a thumbs-up when they have an idea, instead of raising hands.",
+    "<strong>Collect three ideas.</strong> Encourage him to gather several solutions before choosing one to test.",
+    "<strong>Test more than one idea.</strong> When possible, let children try different solutions and compare which works best.",
+    "<strong>Go back to Gideon.</strong> Suggest he ask Gideon to share his string-and-car idea and try it with a toy.",
+    "<strong>Reinforce his consistency.</strong> Over the next two weeks, notice when he waits for several ideas. Name those moments — steady feedback reinforces steady practice."
+  ],
+  completeLine:"You helped a Sustainer-Driver give every child time to think. That's steady growth."
+},
+
+// ── SCENARIO 11 · Sustainer-Inspirer Mentee ──────────────────
+{
+  menteeType:"SI",
+  menteeLabel:"The Sustainer-Inspirer",
+  menteeDesc:"Ms. Duvall is the warmest person in every room she enters. Her story times are cozy and full of affection. Her challenge: her questions about stories stay close to feelings about the book — \"Did you like it?\" \"Wasn't that sweet?\" — and she rarely asks children to imagine alternatives, predict consequences, or put themselves in a character's place. She receives feedback best in the context of deep trust, and when growth is framed through her love for the children she serves.",
+  sceneTitle:"Did You Like the Story?", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Imagining and Hypothetical Questions",
+  scene:"Ms. Duvall finishes reading a book about a bear who shares his honey with a lonely rabbit. She hugs the book to her chest: <em>\"Wasn't that sweet? Did you like it?\"</em> The children say, <em>\"Yes!\"</em> <em>\"I loved it too!\"</em> Willa (4 years, 3 months) says, <em>\"What if the bear didn't share?\"</em> Ms. Duvall smiles: <em>\"Oh, but he did, sweetie! He was a kind bear.\"</em> She closes the book and starts a song.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Hypothetical Questions — Inviting Children to Imagine 'What If'",
+  qcText1:"Hypothetical questions ask children to <strong>imagine alternatives and reason about consequences</strong>: <em>\"What if the bear hadn't shared? How would the rabbit feel? What would you have done if you were the bear?\"</em> These questions build perspective-taking, reasoning, and imagination — and stories are the perfect setting for them.",
+  qcText2:"Ms. Duvall's warm questions helped children enjoy the book, but <strong>\"Did you like it?\" only invites \"yes\"</strong>. Willa asked the richest question of the day — a genuine \"what if\" — and it was gently closed with the story's facts. Welcoming her question to the group would have led to a thoughtful conversation about kindness, choices, and feelings.",
+  coachTitle:"Did You Like the Story? — Coaching Conversation",
+  question:"You're debriefing with Ms. Duvall, a <strong>Sustainer-Inspirer</strong>. She says softly, \"It's such a lovely book about kindness.\" Which approach will help her grow?",
+  correct:1,
+  options:[
+    "\"Your questions only asked children whether they liked the book. Ask questions that make them think.\"",
+    "\"It really is — and you read it with so much love that the children felt the kindness. I want to share something I noticed because I know how much you want them to understand kindness. Willa asked, 'What if the bear didn't share?' That's a beautiful question about kindness. What if you'd asked the whole group? 'What if the bear didn't share? How would the rabbit feel? What would you do if you were the bear?' The children would really think about what kindness means — and Willa would know her question mattered.\"",
+    "\"Let's create a list of higher-order questions for each book in your library, organized by type: prediction, perspective, and hypothetical.\"",
+    "\"What if you acted out the story with puppets? The kids would love being the bear and the rabbit!\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — It Feels Like an Accusation", p1:"Naming the gap directly is a <strong>Driver mentor's</strong> instinct — efficient and clear.", p2:"For a Sustainer-Inspirer, \"ask questions that make them think\" suggests her loving story time lacked value. She'll feel criticized. She needs to see how deeper questions can serve her goal of teaching kindness."},
+    {h:"This Is a Cultivator's Natural Move — A System Before a Reason", p1:"A categorized question list for every book is a <strong>Cultivator mentor's</strong> natural move — organized and thorough.", p2:"A list won't move Ms. Duvall until she sees why \"what if\" questions matter. Her barrier is a preference for keeping story time sweet. Start with Willa's question."},
+    {h:"This Is an Inspirer's Natural Move — More Fun, Same Questions", p1:"Puppets are the natural move of a mentor with a strong <strong>Inspirer</strong> expression — joyful and engaging.", p2:"Acting out the story could be wonderful, but it doesn't change the questions she asks. Children might retell the same story without imagining alternatives. Ms. Duvall needs to see the value of \"what if.\""}
+  ],
+  matchText:"This works for a <strong>Sustainer-Inspirer</strong> because it begins by honoring her loving reading and connects the feedback to her own goal: helping children understand kindness. The observation is offered with trust and care.",
+  matchText2:"Willa's question becomes the bridge. By inviting the group to explore \"What if the bear didn't share?\", Ms. Duvall can teach kindness more deeply. \"Willa would know her question mattered\" speaks directly to her care for each child.",
+  actionSteps:[
+    "<strong>Add one \"what if\" question per story.</strong> Help her plan a hypothetical question for each read-aloud.",
+    "<strong>Invite children's \"what ifs.\"</strong> Encourage her to welcome children's questions and ask the group to think about them.",
+    "<strong>Use perspective questions.</strong> Give her examples: \"How would the rabbit feel?\" \"What would you do if you were the bear?\"",
+    "<strong>Go back to Willa's question.</strong> Suggest she reread the book and ask the group Willa's question.",
+    "<strong>Share what happens next.</strong> After the discussion, ask Ms. Duvall what children said about kindness. A Sustainer-Inspirer who hears children's thoughtful answers will ask again."
+  ],
+  completeLine:"You helped a Sustainer-Inspirer use deeper questions to teach kindness. That's the heart of mentoring."
+},
+
+// ── SCENARIO 12 · Sustainer-Cultivator Mentee ────────────────
+{
+  menteeType:"SC",
+  menteeLabel:"The Sustainer-Cultivator",
+  menteeDesc:"Ms. Winters is a thoughtful, quietly powerful teacher who observes everything and processes deeply. She writes beautiful question sequences in her planning notebook. Her challenge: in the moment, she worries her planned questions might not fit, so she falls back on safe, simple questions and the thoughtful sequence stays in the notebook. She receives feedback best in quiet, unhurried conversations that honor both her emotional attunement and her intellectual depth.",
+  sceneTitle:"The Questions in the Notebook", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Using the Question Plan",
+  scene:"Ms. Winters's planning notebook shows a carefully written sequence for her science group on melting: <em>\"1. What do you notice about the ice? 2. What do you think will happen in the sun? 3. Why do you think that? 4. What could we do to make it melt faster? 5. How could we keep it frozen?\"</em> During the group, Zuri (4 years, 7 months) watches the ice drip and says, <em>\"It's crying!\"</em> Ms. Winters asks, <em>\"Is it cold?\"</em> <em>\"Yes.\"</em> <em>\"Is it wet?\"</em> <em>\"Yes.\"</em> The group ends. The notebook stays closed on her lap.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Planned Questions — Using a Thoughtful Sequence in the Moment",
+  qcText1:"Ms. Winters's planned sequence was excellent: <strong>it moved from observing to predicting, explaining, and solving problems</strong>. Zuri's comment, \"It's crying!\", was the perfect doorway into it: \"Crying! What do you think is happening to the ice? What would make it cry faster?\"",
+  qcText2:"Instead, <strong>the questions she asked in the moment were yes-or-no questions</strong>, and the group ended without reaching the higher-order thinking she'd planned. Her preparation was strong; the missing step was trusting her plan and using it when the moment arrived.",
+  coachTitle:"The Questions in the Notebook — Coaching Conversation",
+  question:"You're debriefing with Ms. Winters, a <strong>Sustainer-Cultivator</strong>. She says quietly, \"I had questions planned, but it didn't feel like the right moment.\" Which approach will help her?",
+  correct:3,
+  options:[
+    "\"Your questions were all yes-or-no, even though you'd planned great ones. Use your plan.\"",
+    "\"Ooh, what if you did a big ice experiment with colored water, salt, and flashlights? The kids would be amazed!\"",
+    "\"Let's revise your question plans so they're more flexible — maybe write several versions of each question for different situations.\"",
+    "\"Your question sequence is excellent — observe, predict, explain, solve. It's exactly what that group needed. And I think the right moment did come: Zuri said, 'It's crying!' That was your doorway. What if you'd said, 'Crying! What do you think is happening to the ice?' That's question one and two together, in her words. Next time, try keeping the notebook open and choosing just one planned question to ask. Then notice what happens.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Pressure Without Understanding", p1:"A crisp \"use your plan\" is a <strong>Driver mentor's</strong> instinct — direct and action-focused.", p2:"A Sustainer-Cultivator will feel her careful judgment in the moment was dismissed. She needs to see when the right moment was and a small, manageable step toward using her plan."},
+    {h:"This Is an Inspirer's Natural Move — A Bigger Activity Instead of the Insight", p1:"An exciting ice experiment is an <strong>Inspirer mentor's</strong> natural move — creative and energizing.", p2:"The activity isn't the problem; her questions are. A bigger experiment won't help if she still asks yes-or-no questions. She needs help using her planned sequence."},
+    {h:"This Is a Cultivator's Natural Move — More Planning for a Planner", p1:"Revising plans for flexibility is the natural move of a mentor with a strong <strong>Cultivator</strong> expression, and it speaks to half of Ms. Winters.", p2:"Her plan was already excellent. More versions would add to her uncertainty about which to use. She needs confidence to use the plan she has."}
+  ],
+  matchText:"This works for a <strong>Sustainer-Cultivator</strong> because it honors her planning — \"excellent\" — and gently reframes her uncertainty: \"I think the right moment did come.\" Zuri's comment shows her exactly where her plan fit.",
+  matchText2:"The next step is small and specific: keep the notebook open and choose just one planned question. \"Then notice what happens\" turns the change into an observation, which fits how she learns and reduces the pressure to be perfect.",
+  actionSteps:[
+    "<strong>Keep the plan visible.</strong> Encourage her to keep her question sequence open during small groups.",
+    "<strong>Use one planned question.</strong> Start with just one higher-order question per group.",
+    "<strong>Connect to children's words.</strong> Help her practice linking planned questions to what children say: \"Crying? What's happening to the ice?\"",
+    "<strong>Go back to the ice.</strong> Suggest she repeat the melting activity with Zuri's group and use her planned questions.",
+    "<strong>Honor the follow-through.</strong> At your next debrief, ask what children said when she used a planned question. Acknowledge that she trusted her plan — that's the growth."
+  ],
+  completeLine:"You helped a Sustainer-Cultivator bring her thoughtful questions out of the notebook. That's a breakthrough for her."
+},
+
+// ── SCENARIO 13 · Cultivator Mentee ──────────────────────────
+{
+  menteeType:"C",
+  menteeLabel:"The Cultivator",
+  menteeDesc:"Ms. Tran is analytical, principled, and detail-oriented. Her math groups are precise and well organized. Her challenge: her questions nearly always have exactly one correct answer — \"What is two plus three?\" — so children practice accuracy but rarely get to explore multiple solutions or explain different strategies. She can become quietly defensive when feedback feels like a personal judgment rather than a professional discussion. She receives feedback best when it is structured, evidence-based, and framed as a problem to analyze and solve together — not a verdict to receive.",
+  sceneTitle:"How Many Ways Make Five?", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Questions With Many Right Answers",
+  scene:"Ms. Tran's math group is working with counting bears. She asks: <em>\"What is two plus three?\"</em> <em>\"Five!\"</em> <em>\"Correct. What is four plus one?\"</em> <em>\"Five!\"</em> <em>\"Correct.\"</em> Ada (4 years, 11 months) has quietly arranged her bears into groups: three and two, four and one, and five and zero. She says, <em>\"Look, there are lots of ways to make five!\"</em> Ms. Tran nods: <em>\"Yes. Now, what is one plus three?\"</em> Ada pushes her bears back into one pile.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Divergent Questions — Asking Questions With More Than One Answer",
+  qcText1:"Many higher-order questions have <strong>more than one correct answer</strong>: <em>\"How many ways can you make five? Which way do you think is easiest? How do you know you found them all?\"</em> These questions invite children to explore, compare strategies, and explain their reasoning.",
+  qcText2:"Ms. Tran's questions built accurate addition, but <strong>each one had a single answer</strong>. Ada discovered on her own that five can be made many ways — a higher-level idea than any question asked. Following her lead would have deepened the whole group's understanding of number relationships.",
+  coachTitle:"How Many Ways Make Five? — Coaching Conversation",
+  question:"You're debriefing with Ms. Tran, a <strong>Cultivator</strong>. She says, \"Every child answered correctly. The group mastered combinations to five.\" Which approach will help her?",
+  correct:2,
+  options:[
+    "\"Your questions only had one answer. Ada was ahead of you, and you missed it.\"",
+    "\"Ada is so clever! I bet if you let the kids explore more freely, they'd discover all kinds of math ideas.\"",
+    "\"Their answers were accurate — no question. Let's look at what Ada did, though. While the group answered one fact at a time, she arranged her bears into three-and-two, four-and-one, and five-and-zero and said, 'There are lots of ways to make five!' She was working on the relationship between combinations, not just individual facts. So here's a question worth analyzing: what would the group learn if you asked, 'How many ways can you make five?' Could you test that question next time and record how many combinations children find and how they explain them?\"",
+    "\"I know you care about accuracy. Maybe just relax a little and let them play with the bears?\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — A Verdict She Will Resist", p1:"A direct \"Ada was ahead of you\" is a <strong>Driver mentor's</strong> natural move — blunt and efficient.", p2:"It will feel like a personal criticism, and Cultivators often respond to that with quiet defensiveness. She needs to analyze the evidence and draw the conclusion herself."},
+    {h:"This Is an Inspirer's Natural Move — Encouragement Without the Analysis", p1:"Suggesting free exploration is an <strong>Inspirer mentor's</strong> instinct — warm and optimistic.", p2:"To Ms. Tran, \"explore more freely\" sounds unstructured. She needs to see that divergent questions can be precise, mathematical, and measurable."},
+    {h:"This Is a Sustainer's Natural Move — Soothing Where She Wants Substance", p1:"Suggesting she \"relax\" is a <strong>Sustainer mentor's</strong> instinct — gentle and supportive.", p2:"Ms. Tran isn't stressed; she's principled. Telling her to relax may feel condescending. She'll respect a careful analysis of Ada's thinking far more than comfort."}
+  ],
+  matchText:"This works for a <strong>Cultivator</strong> because it validates her accuracy goal first and then presents Ada's work precisely — the three combinations and her exact words. The evidence shows a higher level of mathematical thinking.",
+  matchText2:"The question \"what would the group learn if you asked…?\" engages her analytical mind, and the proposal to test and record children's combinations gives her a structured experiment. She keeps her precision and adds depth.",
+  actionSteps:[
+    "<strong>Ask one divergent question per group.</strong> Help her plan questions like \"How many ways can you make five?\"",
+    "<strong>Record the combinations.</strong> Encourage her to chart the ways children find, so the group can compare.",
+    "<strong>Ask how they know.</strong> Help her follow up with, \"How do you know you found them all?\"",
+    "<strong>Go back to Ada's discovery.</strong> Suggest she invite Ada to show the group her ways to make five.",
+    "<strong>Review her notes together.</strong> Ask her to compare children's thinking on single-answer and many-answer questions. A Cultivator who analyzes her own evidence owns the conclusion."
+  ],
+  completeLine:"You gave a Cultivator a problem worth analyzing. She'll solve it better than anyone."
+},
+
+// ── SCENARIO 14 · Cultivator-Driver Mentee ───────────────────
+{
+  menteeType:"CD",
+  menteeLabel:"The Cultivator-Driver",
+  menteeDesc:"Ms. Chen is a meticulous, ambitious teacher who builds precise systems and drives them toward strong outcomes. Her science lessons have clear objectives and carefully chosen materials. Her challenge: she asks children to identify and label things one at a time instead of asking comparison questions that would help them notice similarities, differences, and patterns. She receives feedback best when it is specific, data-grounded, and framed around the gap between her intended outcome and the outcome she is actually producing.",
+  sceneTitle:"Two Leaves, Separately", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Comparison Questions",
+  scene:"Ms. Chen's science objective reads: <em>\"Children will describe characteristics of leaves.\"</em> She holds up a maple leaf: <em>\"What color is this leaf? What shape?\"</em> Then an oak leaf: <em>\"What color is this leaf? What shape?\"</em> Children answer each question. Emil (4 years, 6 months) picks up both leaves, holds them side by side, and says, <em>\"This one is pointy and this one is wiggly!\"</em> Ms. Chen responds, <em>\"Good. Now let's look at the pine needle,\"</em> and holds up the next item. Emil sets the leaves down.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Comparison Questions — Asking Children How Things Are Alike and Different",
+  qcText1:"Comparison questions ask children to <strong>examine two or more things together and describe similarities and differences</strong>: <em>\"How are these leaves the same? How are they different? Which one feels smoother?\"</em> Comparing requires closer observation and more complex language than labeling one object at a time.",
+  qcText2:"Ms. Chen's questions matched her objective, but <strong>asking about each leaf separately kept the thinking at the level of labeling</strong>. Emil compared the two leaves on his own — \"pointy\" and \"wiggly\" — which was exactly the kind of description her objective was aiming for. A comparison question would have pushed the whole group to that level.",
+  coachTitle:"Two Leaves, Separately — Coaching Conversation",
+  question:"You're debriefing with Ms. Chen, a <strong>Cultivator-Driver</strong>. She says, \"Every child described the color and shape of each leaf. Objective met.\" Which approach will help her?",
+  correct:0,
+  options:[
+    "\"Your objective was clear, and children did name colors and shapes. Here's what the data shows, though: the richest description came from Emil — he held the leaves side by side and said, 'This one is pointy and this one is wiggly.' Your separate questions got single-word answers; his comparison got detailed characteristics. If your goal is describing characteristics, comparison questions may produce stronger results. What if you asked, 'How are these two leaves the same and different?' and recorded how many characteristics children name?\"",
+    "\"Emil is such a sweet observer! You should let the kids explore the leaves on their own and see what they notice.\"",
+    "\"I could see Emil wanted to share more about his leaves. Maybe let children talk a little longer before moving on?\"",
+    "\"Asking about each leaf separately is too basic. Ask comparison questions.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Exploration Without the Data", p1:"Suggesting open exploration is an <strong>Inspirer mentor's</strong> natural move — curious and child-centered.", p2:"For Ms. Chen, open exploration sounds hard to measure against her objective. She needs evidence that comparison questions produce richer descriptions and a clear way to use them."},
+    {h:"This Is a Sustainer's Natural Move — Warmth Without a Plan", p1:"Suggesting more talking time for Emil is a <strong>Sustainer mentor's</strong> instinct — caring and attuned.", p2:"Ms. Chen can lose sight of the child behind the data, so attention to Emil matters. But \"talk a little longer\" doesn't give her a strategy for raising the level of her questions."},
+    {h:"This Is a Driver's Natural Move — Direction Without the Analysis", p1:"A crisp \"ask comparison questions\" is the natural move of a mentor with a strong <strong>Driver</strong> expression, and it speaks to Ms. Chen's efficiency.", p2:"It skips the analysis her Cultivator side needs. Without seeing how comparison questions produce better outcomes, she'll view her current approach as successful."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Driver</strong> because it starts with her objective and then presents new evidence: Emil's comparison produced richer descriptions than her separate questions. The feedback connects directly to the outcome she already values.",
+  matchText2:"The suggestion to test comparison questions and count the characteristics children name gives her a measurable way to evaluate the change. You didn't dismiss her objective; you showed her a better path to meeting it.",
+  actionSteps:[
+    "<strong>Pair materials for comparison.</strong> Help her present two objects at a time: two leaves, two rocks, two shells.",
+    "<strong>Use \"same and different.\"</strong> Give her a simple question frame: \"How are these the same? How are they different?\"",
+    "<strong>Count characteristics.</strong> Encourage her to track how many characteristics children name when comparing.",
+    "<strong>Go back to Emil's leaves.</strong> Suggest she ask Emil to explain more about \"pointy\" and \"wiggly\" and invite others to compare.",
+    "<strong>Reconnect the data to the child.</strong> Ask her to describe what Emil noticed when comparing. It builds the habit of seeing the child behind the checklist."
+  ],
+  completeLine:"You showed a Cultivator-Driver that comparison questions produce richer thinking. She'll build a better system from here."
+},
+
+// ── SCENARIO 15 · Cultivator-Inspirer Mentee ─────────────────
+{
+  menteeType:"CI",
+  menteeLabel:"The Cultivator-Inspirer",
+  menteeDesc:"Mr. Flores is a creative, intellectually rich teacher who brings both deep analysis and social warmth to his practice. He asks wonderful questions. His challenge: he often answers his own questions a moment later — his enthusiasm for the answer gets ahead of the children's thinking — so his questions become rhetorical and children learn to wait for him to explain. He receives feedback best when his intellectual investment is honored first, and growth is framed as making his depth more accessible — not asking him to simplify or sacrifice rigor.",
+  sceneTitle:"He Answered His Own Question", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Leaving Questions for Children to Answer",
+  scene:"Mr. Flores holds up a jar with a sprouting bean inside: <em>\"Why do you think the roots grow down and the stem grows up?\"</em> Soraya (4 years, 4 months) leans forward, opening her mouth to answer. Mr. Flores continues immediately: <em>\"It's because of gravity! The roots sense gravity and grow toward it, and the stem grows toward the light. Isn't that amazing?\"</em> Soraya closes her mouth. A few minutes later, he asks, <em>\"What do you think will happen if we turn the jar sideways?\"</em> The children look at him and wait.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Real Questions — Giving Children the Chance to Answer",
+  qcText1:"Mr. Flores asked two excellent higher-order questions — one explaining a pattern and one predicting a change. But <strong>a question only builds thinking if children get to answer it</strong>. When the teacher answers his own question, it becomes an introduction to his explanation.",
+  qcText2:"Soraya was ready to answer the first question, and <strong>by the second question, the children had learned to wait for Mr. Flores</strong>. Pausing and inviting their ideas — then sharing the science afterward — would let them reason first and make his explanation more meaningful. His rich knowledge would land as the answer to their thinking instead of a replacement for it.",
+  coachTitle:"He Answered His Own Question — Coaching Conversation",
+  question:"You're debriefing with Mr. Flores, a <strong>Cultivator-Inspirer</strong>. He says, \"I asked two great thinking questions today!\" Which approach will help him?",
+  correct:1,
+  options:[
+    "\"You answered your own question before anyone could try. Stop doing that.\"",
+    "\"You did — both were genuinely high-level: explaining a pattern and predicting a change. Here's the design challenge: they only work if the children get to answer them. Soraya leaned in and opened her mouth to answer the first one, and you gave the answer before she could. By the second question, everyone was waiting for you to explain. What if you asked, paused, and collected three of their theories first? Then gravity becomes the answer to their ideas. Same great science — and they'd do the thinking first.\"",
+    "\"I could see how much you love science. Maybe just check whether children want to answer before you explain?\"",
+    "\"What if you turned the bean jar into a big class experiment with lots of plants? The kids would love it!\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — It Dismisses His Thinking", p1:"A blunt \"stop doing that\" is a <strong>Driver mentor's</strong> instinct — efficient and outcome-focused.", p2:"Mr. Flores will hear it as criticism of his enthusiasm and knowledge. A Cultivator-Inspirer who feels his depth is being dismissed may resist. He needs to see how waiting makes his explanations more powerful."},
+    {h:"This Is a Sustainer's Natural Move — Too Soft to Change the Pattern", p1:"Suggesting he \"check\" before explaining is a <strong>Sustainer mentor's</strong> instinct — warm and gentle.", p2:"It's too vague to change the habit. He needs a clear routine — ask, pause, collect theories, then explain — that keeps his enthusiasm in check without dampening it."},
+    {h:"This Is an Inspirer's Natural Move — More Activity, Same Pattern", p1:"A bigger class experiment is the natural move of a mentor with a strong <strong>Inspirer</strong> expression — and it speaks to Mr. Flores's own Inspirer side.", p2:"A larger experiment could be wonderful, but if he still answers his own questions, children won't do the thinking. The change needs to happen in how he asks."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Inspirer</strong> because it honors his questions — \"genuinely high-level\" — and then frames the change as a design challenge: making sure the questions do their job.",
+  matchText2:"Soraya leaning in shows him what he missed, and \"gravity becomes the answer to their ideas\" shows that his knowledge stays central. You didn't ask him to hold back the science; you asked him to let children reason first.",
+  actionSteps:[
+    "<strong>Ask, pause, collect.</strong> Help him practice a routine: ask the question, wait, gather three children's ideas, then explain.",
+    "<strong>Write down their theories.</strong> Encourage him to record children's ideas before sharing the science.",
+    "<strong>Test the prediction.</strong> Suggest he turn the bean jar sideways and let children observe what happens over several days.",
+    "<strong>Go back to Soraya.</strong> Suggest he ask Soraya what she was going to say about the roots and stem.",
+    "<strong>Let him walk you through his plan.</strong> Ask him to show you where he'll pause for children's ideas in his next lesson. Cultivator-Inspirers love explaining their thinking, and it helps him see the lesson the way children will experience it."
+  ],
+  completeLine:"You helped a Cultivator-Inspirer let children answer his great questions. That's powerful teaching."
+},
+
+// ── SCENARIO 16 · Cultivator-Sustainer Mentee ────────────────
+{
+  menteeType:"CS",
+  menteeLabel:"The Cultivator-Sustainer",
+  menteeDesc:"Ms. Patel is a thoughtful, quietly perceptive teacher who combines deep analytical observation with genuine empathy. She is endlessly curious herself. Her challenge: she asks children questions but rarely invites them to ask their own, so children observe new things silently instead of learning that wondering and questioning are part of thinking. She receives feedback best in quiet, respectful, unhurried conversations that treat her as the intelligent, caring professional she is.",
+  sceneTitle:"The New Snail", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Inviting Children's Own Questions",
+  scene:"A class snail arrives in a glass tank. The children crowd around, watching it slide across the glass. Benji (4 years, 5 months) presses his nose to the tank and stares at the snail's eyes on long stalks. Ms. Patel watches the group quietly and writes in her notebook: <em>\"Children very interested in snail. Watching closely for 10 minutes.\"</em> She hands out magnifiers and says softly, <em>\"Take a look.\"</em> The children look silently for several minutes, then drift away. Benji stays longest, then returns to the blocks.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Children's Questions — Inviting Children to Wonder Aloud",
+  qcText1:"Higher-order thinking includes <strong>children learning to ask their own questions</strong>. A simple prompt — <em>\"What do you wonder about our snail?\"</em> — invites children to put their curiosity into words: \"Why are its eyes on sticks? Where does it sleep? What does it eat?\" Those questions can then guide observation and investigation.",
+  qcText2:"Ms. Patel noticed how interested the children were, and <strong>Benji's close study of the eye stalks showed a real question forming</strong>. But without an invitation to wonder aloud, the children's curiosity stayed silent and faded. Asking for their questions would have given Ms. Patel rich insight into their thinking and a plan for what to explore next.",
+  coachTitle:"The New Snail — Coaching Conversation",
+  question:"You're debriefing with Ms. Patel, a <strong>Cultivator-Sustainer</strong>. She says quietly, \"They were so absorbed. I didn't want to interrupt their observing.\" Which approach will help her?",
+  correct:3,
+  options:[
+    "\"You should have asked them questions. They just stared at the snail for ten minutes and then left.\"",
+    "\"What if you did a big snail celebration with snail crafts and snail songs? The kids would be so excited!\"",
+    "\"You're right — sometimes silent observation is best. They'll ask questions when they're ready.\"",
+    "\"Your notes captured it well — ten minutes of close watching. And Benji studied those eyes on stalks longer than anyone. I wonder if a question was forming. What if, after they'd watched for a while, you asked quietly, 'What do you wonder about our snail?' It doesn't interrupt observing; it gives their curiosity words. You could write their questions down, and you'd have their next investigation — chosen by them. What do you think Benji might have asked?\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Harsh for Her Careful Nature", p1:"A direct \"you should have asked\" is a <strong>Driver mentor's</strong> instinct — decisive and outcome-focused.", p2:"Ms. Patel will feel her careful choice was dismissed. A Cultivator-Sustainer under that kind of pressure often withdraws further. She needs her reasoning respected and a gentle, clear way to invite children's questions."},
+    {h:"This Is an Inspirer's Natural Move — Excitement Instead of Inquiry", p1:"A snail celebration is an <strong>Inspirer mentor's</strong> natural suggestion — joyful and energizing.", p2:"It adds activities but doesn't invite children to wonder or question. The children might enjoy it without putting their curiosity into words. Ms. Patel needs a simple invitation to ask questions."},
+    {h:"This Is a Sustainer's Natural Move — Reassurance That Extends the Pattern", p1:"Affirming silent observation is a <strong>Sustainer mentor's</strong> instinct — patient and kind.", p2:"It confirms the hesitation that's holding her back. The children's interest faded without being put into words. Ms. Patel would leave believing waiting was enough, and the chance to invite their questions would keep passing by."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Sustainer</strong> because it affirms her careful notes and gently draws her attention to Benji's close study — evidence that a question was forming.",
+  matchText2:"The prompt — \"What do you wonder about our snail?\" — is quiet and respectful, and the reframe \"It doesn't interrupt observing; it gives their curiosity words\" addresses her concern. Ending with \"What do you think Benji might have asked?\" engages her curiosity and invites her to imagine the next step.",
+  actionSteps:[
+    "<strong>Use \"What do you wonder?\"</strong> Help her practice asking children to share their questions after a period of observation.",
+    "<strong>Record children's questions.</strong> Encourage her to write down each question in the child's own words.",
+    "<strong>Choose one to investigate.</strong> Help her pick a child's question and plan a simple way to explore it.",
+    "<strong>Go back to Benji and the snail.</strong> Suggest she sit with Benji at the tank and ask what he wonders about the snail's eyes.",
+    "<strong>Record the response.</strong> Ask her to note the questions children ask over a week. That evidence will build her confidence to invite wondering."
+  ],
+  completeLine:"You helped a Cultivator-Sustainer invite children's wondering into words. That's thoughtful mentoring."
 }
 
+  ]
+}
+{
+  id:12, domain:3, domainName:"Instructional Support",
+  title:"Higher-Order Questioning", week:12,
+  focus:"Moving from recall questions to analysis, inference, and evaluation.",
+  scenarios:[
+// ── SCENARIO 1 · Driver Mentee ───────────────────────────────
+{
+  menteeType:"D",
+  menteeLabel:"The Driver",
+  menteeDesc:"Mr. Beaumont is confident, direct, and results-oriented. He wants his children thinking at a high level and isn't afraid to ask big questions. His challenge: he jumps straight to the hardest question without building up to it, and when children go quiet, he answers it himself and concludes they \"aren't ready.\" He responds best to feedback that is honest, efficient, and tied to measurable outcomes, and he can dismiss feedback that feels soft or theoretical. Once he sees a concrete return, he changes fast.",
+  sceneTitle:"Why Do Leaves Change Color?", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Building From Simple to Complex",
+  scene:"Mr. Beaumont gathers his group around a basket of fall leaves and opens with his big question: <em>\"Why do leaves change color in the fall?\"</em> Silence. Ivy (4 years, 6 months) looks at the basket, then at her shoes. He waits three seconds and answers it himself: <em>\"Because the days get shorter and the trees stop making green. Okay, let's go to centers.\"</em> Afterward, he tells his co-teacher, <em>\"They're not ready for that level yet.\"</em> At the science table later, Ivy lines up the leaves from green to yellow to red and says to a friend, <em>\"This one is turning.\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Sequencing Questions — Building a Ladder to Higher-Order Thinking",
+  qcText1:"Higher-order questions work best when <strong>teachers build a ladder to them</strong>. Start with what children can observe (\"What colors do you see?\"), move to comparing (\"How is this leaf different from that one?\"), then to predicting or explaining (\"What do you think is happening to this leaf?\"). Each step gives children something to stand on before the big question.",
+  qcText2:"Mr. Beaumont's big question was worthwhile, but <strong>asked cold, it left children with no place to start</strong>. Ivy's leaf line proves she was ready to think about change: she ordered the leaves and noticed one \"turning.\" The children weren't unready. The question needed a ladder.",
+  coachTitle:"Why Do Leaves Change Color? — Coaching Conversation",
+  question:"You're debriefing with Mr. Beaumont, a <strong>Driver</strong>. He says, \"I asked a real thinking question, and nobody could answer. They're not ready for that level.\" Which coaching approach is most likely to land and produce a real change in practice?",
+  correct:1,
+  options:[
+    "\"I love that you're aiming high — it's clear you believe in them. I wonder if maybe the question felt a little hard for them? Maybe try something a bit easier next time.\"",
+    "\"Here's the evidence that they are ready: twenty minutes later, Ivy lined the leaves up from green to red on her own and told a friend, 'This one is turning.' That's the exact thinking your question was aiming at. The gap wasn't the children — it was the ladder. You went from zero to 'why' in one step. Try three rungs next time: 'What colors do you see?' then 'How is this one different from that one?' then 'What do you think is happening to it?' Then your big question. Let's count how many children answer the top rung.\"",
+    "\"Let's imagine it from Ivy's side. How do you think it felt to be asked that question with nothing to hold onto?\"",
+    "\"There's good research on question sequencing and cognitive load in young children. I'll send you an article when you have time.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Sustainer's Natural Move — Too Cushioned for a Driver", p1:"Affirming his high expectations and suggesting an easier question is a <strong>Sustainer mentor's</strong> natural instinct. It protects the relationship and softens the feedback.", p2:"It also confirms his wrong conclusion — that the children can't handle hard questions. Mr. Beaumont doesn't need easier questions; he needs a better path to the hard ones. A Driver will respect evidence that his high bar is achievable."},
+    {h:"This Is an Inspirer's Natural Move — Too Roundabout for a Driver", p1:"Inviting him to imagine Ivy's feelings is an <strong>Inspirer mentor's</strong> natural approach — empathetic and reflective.", p2:"For a Driver, it reads as indirect. He's drawn a conclusion about readiness, and only evidence will change it. Show him what Ivy did later, and he'll revise his thinking fast."},
+    {h:"This Is a Cultivator's Natural Move — Too Deferred for a Driver", p1:"Sending research on sequencing is a <strong>Cultivator mentor's</strong> instinct — thorough and evidence-based.", p2:"\"When you have time\" means never for Mr. Beaumont. He needs evidence from his own classroom and a concrete ladder he can use tomorrow."}
+  ],
+  matchText:"This works for a <strong>Driver mentee</strong> because it directly challenges his conclusion with evidence from his own room: Ivy ordering the leaves and naming the change. Drivers respect data that proves them wrong more than reassurance that agrees with them.",
+  matchText2:"Then you gave him a precise tool — a three-rung ladder — and a way to measure success: how many children answer the top rung. He keeps his ambitious questions and gets a method to reach them.",
+  actionSteps:[
+    "<strong>Build the leaf ladder together.</strong> Write out observe, compare, explain, then the big question. Show him how the ladder leads to his goal.",
+    "<strong>Plan one ladder per week.</strong> For each big question he wants to ask, he writes two or three simpler steps leading up to it.",
+    "<strong>Try it with the same group.</strong> Suggest he return to the leaf basket and use the ladder with Ivy's group.",
+    "<strong>Count answers at the top.</strong> Track how many children answer the final question after the ladder, compared with today's silence.",
+    "<strong>Review the data together.</strong> Share the before-and-after results. Drivers stay motivated by progress they can measure."
+  ],
+  completeLine:"You showed a Driver that children are ready for big questions — they just need a ladder. That's the language he acts on."
+},
 
+// ── SCENARIO 2 · Driver-Inspirer Mentee ──────────────────────
+{
+  menteeType:"DI",
+  menteeLabel:"The Driver-Inspirer",
+  menteeDesc:"Ms. Holloway is a force of nature — energetic, bold, and deeply loved by her children and families. She loves asking the group questions and gets big, excited answers. Her challenge: many of her \"open\" questions actually have one answer she's looking for, and she moves past creative answers until someone says the one in her head. She receives feedback best when it honors her energy and connects directly to the outcomes she's already chasing.",
+  sceneTitle:"Guess What I'm Thinking", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Genuinely Open Questions",
+  scene:"After reading a caterpillar book, Ms. Holloway asks with great excitement: <em>\"What do you think the caterpillar will turn into?\"</em> Luz (4 years, 8 months) shouts, <em>\"A dragon with sparkly wings that can fly to the moon!\"</em> Ms. Holloway laughs: <em>\"Nooo, silly! Who knows the REAL answer?\"</em> Another child says, <em>\"A bug?\"</em> <em>\"Close! Who else?\"</em> Finally someone says <em>\"Butterfly!\"</em> <em>\"YES! A butterfly!\"</em> Luz stops raising her hand.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Open Questions — Asking Questions That Welcome Many Answers",
+  qcText1:"A higher-order question invites children to <strong>imagine, reason, or create</strong> — not to guess the answer the teacher has in mind. \"What do you think it will turn into?\" sounds open, but when only one answer is accepted, it becomes a guessing game. Children quickly learn that thinking creatively is risky.",
+  qcText2:"Luz's dragon was an imaginative, detailed answer to an open question. <strong>\"Nooo, silly!\" taught her that her thinking wasn't what the teacher wanted</strong>. Ms. Holloway could have kept the science accurate and still honored the thinking: \"A dragon with wings! What makes you think it will have wings? Let's read and find out what really happens.\" Or she could ask a question with many possible answers: \"If you could turn into something, what would you choose?\"",
+  coachTitle:"Guess What I'm Thinking — Coaching Conversation",
+  question:"You're debriefing with Ms. Holloway, a <strong>Driver-Inspirer</strong>. She says, \"They got to the right answer — butterfly!\" Which approach reaches her?",
+  correct:3,
+  options:[
+    "\"That wasn't an open question. You only accepted one answer and shut down Luz. Stop asking fake open questions.\"",
+    "\"The kids were so excited during the story. Maybe just be a little gentler with answers that aren't quite right? Luz seemed a little sad.\"",
+    "\"Before our next visit, could you write down your questions for one day and mark which ones have one right answer and which have many?\"",
+    "\"They did — and you get more hands up than anyone. Here's how to get even bigger thinking from them: Luz gave you a dragon with sparkly wings that flies to the moon. That's a four-year-old imagining a whole creature — and after 'Nooo, silly,' she stopped raising her hand. What if you'd said, 'Wings! What makes you think it'll have wings? Let's find out!' She'd stay in, and you'd still land on butterfly. Or try a question with no wrong answer: 'If you could change into anything, what would it be?' Imagine the answers you'd get.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Efficient, but It Misses the Inspirer", p1:"Naming the \"fake open question\" bluntly is the natural move of a mentor with a strong <strong>Driver</strong> expression. It's clear and accurate, and it speaks to half of Ms. Holloway.", p2:"It ignores the other half. \"Stop asking fake questions\" will sting a teacher who's proud of her lively discussions. A Driver-Inspirer will defend her circle instead of hearing Luz's story."},
+    {h:"This Is a Sustainer's Natural Move — Too Vague to Move Her", p1:"Asking her to be gentler with Luz is a <strong>Sustainer mentor's</strong> instinct — caring and careful.", p2:"It focuses on tone, but the real issue is the question itself. Ms. Holloway needs a way to honor creative answers and ask truly open questions, not just a softer \"no.\""},
+    {h:"This Is a Cultivator's Natural Move — Too Much Paperwork for Her Pace", p1:"Recording and sorting her questions is a <strong>Cultivator mentor's</strong> instinct — systematic and thorough.", p2:"For a Driver-Inspirer, it feels like tedious homework. She'll skip it or do it without reflection. Show her Luz's dragon first, and she'll want to change on her own."}
+  ],
+  matchText:"This works for a <strong>Driver-Inspirer</strong> because it opens by agreeing with her strength — \"more hands up than anyone\" — and then offers \"even bigger thinking.\" That speaks to both her enthusiasm and her drive for results.",
+  matchText2:"The two alternatives — probe the dragon and still reach butterfly, or ask a question with no wrong answer — let her keep the accurate science and her energy. \"Imagine the answers you'd get\" gives her an exciting reason to try.",
+  actionSteps:[
+    "<strong>Ask \"what makes you think that?\"</strong> When a child gives an unexpected answer, she asks for their reasoning before moving on.",
+    "<strong>Add one no-wrong-answer question per book.</strong> Help her plan questions like \"If you were the caterpillar, what would you want to become?\"",
+    "<strong>Go back to Luz.</strong> Suggest she invite Luz to draw her moon dragon and tell the group about it.",
+    "<strong>Separate facts from imagination.</strong> Help her say, \"In real life, caterpillars turn into butterflies. In your imagination, it could be anything!\"",
+    "<strong>Celebrate the wildest answers.</strong> When she gets creative answers to a truly open question, point them out. Driver-Inspirers repeat what gets results."
+  ],
+  completeLine:"You didn't ask a Driver-Inspirer to lower her energy — you opened her questions wide. That's the work."
+},
+
+// ── SCENARIO 3 · Driver-Sustainer Mentee ─────────────────────
+{
+  menteeType:"DS",
+  menteeLabel:"The Driver-Sustainer",
+  menteeDesc:"Mr. Osei is a principled, protective leader who pushes for results while genuinely caring about every child in his room. He asks rich questions during group time. His challenge: he directs his hardest questions to the few children who answer confidently and protects quieter children by asking them only easy ones, so some children rarely get the chance to think deeply out loud. He receives feedback best when it honors both his care for children and his commitment to excellence, and when it names one concrete way to serve both at once.",
+  sceneTitle:"The Easy Question for Kaito", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Every Child Gets Hard Questions",
+  scene:"During a small group about a picture of a busy city street, Mr. Osei asks three confident talkers: <em>\"What would happen if all the traffic lights stopped working?\"</em> <em>\"How is a city different from where we live?\"</em> They answer eagerly. Then he turns to Kaito (4 years, 3 months), who rarely speaks in groups: <em>\"Kaito, what color is the bus?\"</em> Kaito says, <em>\"Yellow.\"</em> <em>\"Good job!\"</em> Later, at the block area, Kaito builds a street with a stoplight and tells a friend, <em>\"If the light breaks, the cars crash, so the police have to come.\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Distributing Questions — Offering Higher-Order Questions to Every Child",
+  qcText1:"Higher-order questions shouldn't be reserved for children who answer quickly. <strong>Every child benefits from being asked to reason, predict, and explain</strong>. Quieter children may need more wait time, a partner to talk with first, or a question tied to something they're doing, but they can think just as deeply.",
+  qcText2:"Mr. Osei gave Kaito an easy question to protect him, but <strong>it also kept him from the thinking the others got to do</strong>. In the block area, Kaito answered the very question Mr. Osei had asked the group — what happens if traffic lights stop working — with cause-and-effect reasoning. He was ready for the hard question.",
+  coachTitle:"The Easy Question for Kaito — Coaching Conversation",
+  question:"Mr. Osei asks you directly: \"Should I push Kaito with harder questions? I don't want to put him on the spot.\" He is a <strong>Driver-Sustainer</strong> — results-focused, protective of his children, and eager to get it right. Which response serves him best?",
+  correct:0,
+  options:[
+    "\"Protecting him is exactly the right instinct — you don't want him to feel embarrassed. Here's what I saw later, though: in the block area, Kaito built a street with a stoplight and told a friend, 'If the light breaks, the cars crash, so the police have to come.' That's the answer to your traffic-light question — full cause-and-effect reasoning. He's ready. The trick is to give him the hard question in a safer way: ask it while he's building, or let him tell a partner first. Try it twice this week and we'll see what he says.\"",
+    "\"What if you made a fun 'Question Hot Seat' game where every child gets a turn? Kaito would love being in the spotlight!\"",
+    "\"There's research on teacher expectations and how the questions we ask different children affect their learning. I'll send you an article.\"",
+    "\"Yes. Giving him only easy questions holds him back. Ask him the same questions as everyone else.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Too Much Spotlight", p1:"A \"hot seat\" game is an <strong>Inspirer mentor's</strong> natural move — lively and fun.", p2:"For a quiet child like Kaito, a spotlight game is exactly what Mr. Osei is trying to avoid. It doesn't answer his real question: how to ask hard questions without putting Kaito on the spot."},
+    {h:"This Is a Cultivator's Natural Move — Right Content, Wrong Timing", p1:"Offering research on teacher expectations is a <strong>Cultivator mentor's</strong> instinct. The evidence is relevant, and Cultivators trust good information.", p2:"Mr. Osei asked a direct question in the moment. He needs a clear answer and a practical strategy he can use this week. The research can come later."},
+    {h:"This Is a Driver's Natural Move — Accurate, but It Wounds the Sustainer", p1:"A blunt \"yes, you're holding him back\" is the natural move of a mentor with a strong <strong>Driver</strong> expression: fast and correct.", p2:"Mr. Osei's Sustainer side cares deeply about protecting Kaito. Telling him he's holding Kaito back will make him feel he harmed a child. He needs his care affirmed and a way to challenge Kaito safely."}
+  ],
+  matchText:"This works for a <strong>Driver-Sustainer</strong> because it affirms his protective instinct first — \"exactly the right instinct.\" Then it gives him evidence he didn't see: Kaito answering the traffic-light question on his own, with real cause-and-effect reasoning.",
+  matchText2:"The solution respects both sides of him: ask hard questions in safer ways — during play or after partner talk. His Sustainer side keeps Kaito comfortable; his Driver side gets a specific strategy and a measurable test: \"Try it twice this week.\"",
+  actionSteps:[
+    "<strong>Ask during play.</strong> Encourage him to ask quieter children higher-order questions while they're building or drawing, not only in the group.",
+    "<strong>Use turn-and-talk.</strong> Before calling on anyone, children tell a partner their answer. Quiet children get to rehearse.",
+    "<strong>Go back to Kaito's street.</strong> Suggest he ask Kaito, \"What would happen if your stoplight stopped working?\" while he builds.",
+    "<strong>Track who gets the hard questions.</strong> Help him note which children he asks higher-order questions during group time.",
+    "<strong>Observe and debrief quickly.</strong> Watch his next group and debrief right after. A Driver-Sustainer wants fast feedback — and reassurance that the change is working."
+  ],
+  completeLine:"You honored a Driver-Sustainer's care and showed him how to challenge every child safely. That's how he grows."
+},
+
+// ── SCENARIO 4 · Driver-Cultivator Mentee ────────────────────
+{
+  menteeType:"DC",
+  menteeLabel:"The Driver-Cultivator",
+  menteeDesc:"Ms. Reeves is a strategic, high-standards teacher who plans meticulously and executes decisively. Her lesson plans include objectives, materials, vocabulary, and a written list of questions. Her challenge: when you look closely, nearly all her planned questions ask children to name, count, or recall — so her careful planning builds in low-level thinking. She receives feedback best when it is specific, evidence-based, and names both the gap in her system and the precise intervention that closes it.",
+  sceneTitle:"Eight Planned Questions", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Planning Higher-Order Questions",
+  scene:"Ms. Reeves's lesson plan for a read-aloud of The Three Little Pigs lists eight questions: <em>\"What was the first house made of? What was the second? The third? How many pigs? Who blew the houses down? What did the wolf say? Which house was strongest? What did the pigs do at the end?\"</em> She asks all eight, and children answer quickly and correctly. Esme (4 years, 10 months) raises her hand at the end: <em>\"Why didn't the first pig use bricks?\"</em> Ms. Reeves says, <em>\"Good question, but we're done with the story,\"</em> and moves to the next activity.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Planning Questions — Building Higher-Order Thinking Into the Lesson Plan",
+  qcText1:"Ms. Reeves's planning is thorough, but <strong>all eight questions asked children to recall details from the story</strong>. Higher-order questions ask children to think beyond the text: <em>\"Why do you think the first pig built with straw? If you were a pig, what would you build your house with, and why? What else could the pigs have done to stop the wolf?\"</em>",
+  qcText2:"The richest question of the lesson came from a child: <strong>Esme asked why the first pig didn't use bricks</strong> — a question about choices, reasons, and consequences. Ms. Reeves's plan had no room for it. Building two or three higher-order questions into every lesson plan would bring that kind of thinking into the lesson by design, not by accident.",
+  coachTitle:"Eight Planned Questions — Coaching Conversation",
+  question:"You're debriefing with Ms. Reeves, a <strong>Driver-Cultivator</strong>. She says, \"Children answered every planned question correctly.\" Which approach will move her?",
+  correct:2,
+  options:[
+    "\"Esme's question was the best part of the story! You should just let the kids ask their own questions and follow their curiosity.\"",
+    "\"I could tell Esme was curious, and she seemed a little disappointed when you moved on. Maybe give children more time for their questions?\"",
+    "\"Let's look at the evidence. Your plan had eight questions, and all eight asked children to recall a detail — first house, second house, how many pigs. Children answered all eight correctly, which tells us the questions weren't challenging. Then Esme asked, 'Why didn't the first pig use bricks?' — the highest-level question of the lesson, and it came from a child. Your planning system is strong, but it doesn't include a check for question level. Want to build one? For example, a template with at least two 'why' or 'what if' questions per lesson.\"",
+    "\"Your questions were all recall. Plan better questions.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Enthusiasm Without Structure", p1:"Suggesting she follow children's curiosity is an <strong>Inspirer mentor's</strong> natural move — energetic and child-centered.", p2:"For a Driver-Cultivator, \"let the kids ask their own questions\" sounds unplanned. She'll dismiss it. She needs a structured way to raise the level of her planned questions."},
+    {h:"This Is a Sustainer's Natural Move — Feelings Where She Needs Facts", p1:"Focusing on Esme's disappointment is a <strong>Sustainer mentor's</strong> instinct — attentive and caring.", p2:"Ms. Reeves will find this unpersuasive. Esme's feelings won't compete with a lesson where every child answered correctly. She needs evidence that her questions were too easy."},
+    {h:"This Is a Driver's Natural Move — A Directive Without the Mechanism", p1:"A crisp \"plan better questions\" is the natural move of a mentor with a strong <strong>Driver</strong> expression — decisive and outcome-focused.", p2:"It speaks to her Driver side but skips what her Cultivator side needs: what makes a question higher-order and a system for planning them."}
+  ],
+  matchText:"This works for a <strong>Driver-Cultivator</strong> because it's built like an analysis: eight recall questions, eight correct answers, and the insight that correct answers mean the questions weren't challenging. Esme's question provides the contrast.",
+  matchText2:"The proposed template gives her structure and a clear standard: at least two \"why\" or \"what if\" questions per lesson. Her Driver side gets a better outcome; her Cultivator side gets a well-reasoned system.",
+  actionSteps:[
+    "<strong>Label her questions.</strong> Help her mark each planned question as recall or higher-order.",
+    "<strong>Add two higher-order questions per lesson.</strong> Build them into her template: one \"why,\" one \"what if.\"",
+    "<strong>Leave room for children's questions.</strong> Add a line to her plan: \"Child questions — explore one.\"",
+    "<strong>Go back to Esme's question.</strong> Suggest she revisit the story and ask the group, \"Why didn't the first pig use bricks?\"",
+    "<strong>Review the results together.</strong> Compare children's answers to recall and higher-order questions. Let her analyze the difference; she'll see the value herself."
+  ],
+  completeLine:"You gave a Driver-Cultivator evidence, a diagnosis, and a system to build. That's exactly what she needed."
+},
+
+// ── SCENARIO 5 · Inspirer Mentee ─────────────────────────────
+{
+  menteeType:"I",
+  menteeLabel:"The Inspirer",
+  menteeDesc:"Ms. Reyes is warm, expressive, and genuinely beloved by the families and children in her program. She loves looking at children's work with them and always has something encouraging to say. Her challenge: her questions about children's work stay at \"Do you like it?\" or \"Is it done?\" — she rarely asks questions that invite children to reflect on, evaluate, or explain their own choices. She receives feedback best when her strengths are genuinely honored first, and growth is framed as an expansion of what she already does well.",
+  sceneTitle:"Do You Like It?", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Evaluative and Reflective Questions",
+  scene:"Levi (4 years, 9 months) has built a marble run from cardboard tubes taped to the wall. The marble gets stuck at the second tube every time. He moves the tube, tries again, moves it again, and finally the marble rolls all the way down. Ms. Reyes rushes over: <em>\"Levi, that's amazing! Do you like it?\"</em> <em>\"Yeah.\"</em> <em>\"Is it done?\"</em> <em>\"Yeah.\"</em> <em>\"Yay! Good job!\"</em> She moves on. Levi drops the marble through a few more times, then leaves.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Evaluative Questions — Inviting Children to Reflect on Their Own Work",
+  qcText1:"Evaluative and reflective questions ask children to <strong>think about their own choices and judge what worked</strong>: <em>\"What part was the trickiest? What did you change to make the marble go all the way? If you built another one, what would you do differently?\"</em> These questions build problem-solving and self-awareness.",
+  qcText2:"Levi had just solved a real engineering problem through repeated testing. <strong>\"Do you like it?\" and \"Is it done?\" could only be answered with \"yeah\"</strong>, so the thinking behind his success was never put into words. Ms. Reyes's enthusiasm is a strength; paired with one reflective question, it would help Levi recognize and describe his own problem-solving.",
+  coachTitle:"Do You Like It? — Coaching Conversation",
+  question:"You're debriefing with Ms. Reyes, an <strong>Inspirer</strong>. She beams: \"Levi's marble run was incredible!\" Which approach will land?",
+  correct:2,
+  options:[
+    "\"Your questions only got 'yeah' as an answer. You need to ask reflective questions that make children think about their work.\"",
+    "\"You're so encouraging with your kids. Maybe just try a different question sometimes, if you want to?\"",
+    "\"It really was — and your excitement made him feel like an engineer. Here's what made it even more incredible: the marble got stuck at the second tube, and Levi moved it over and over until it rolled all the way down. That's real problem-solving. Your questions — 'Do you like it?' and 'Is it done?' — got 'Yeah' and 'Yeah.' What if you asked, 'What was the trickiest part? What did you change to make it work?' You'd hear him tell the whole story of how he solved it — and he'd hear himself describe it too.\"",
+    "\"There's research on metacognition and how reflective questions help young children understand their own thinking. I'd suggest reading a summary.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Blunt for an Inspirer", p1:"Stating the problem and the fix plainly is a <strong>Driver mentor's</strong> instinct: clear and efficient.", p2:"Ms. Reyes will hear \"you need to\" as criticism of a moment she loved. Inspirers can deflate when feedback lands as a correction without recognition. She'll feel judged rather than inspired."},
+    {h:"This Is a Sustainer's Natural Move — So Gentle the Point Disappears", p1:"Affirming her and softening the suggestion is a <strong>Sustainer mentor's</strong> natural move — caring and protective.", p2:"\"If you want to\" makes the change optional, and \"a different question\" gives her nothing concrete. She needs to see Levi's problem-solving and the questions that would bring it out."},
+    {h:"This Is a Cultivator's Natural Move — Theory Before Connection", p1:"Assigning research on metacognition is a <strong>Cultivator mentor's</strong> instinct — thorough and principled.", p2:"For an Inspirer, it feels like homework instead of connection. She'll understand the idea best through Levi's marble run. Lead with the child."}
+  ],
+  matchText:"This works for an <strong>Inspirer</strong> because it shares her excitement — \"It really was\" — and credits her with making Levi feel like an engineer. Then it tells the story of his problem-solving, which she missed, in a way that makes it even more exciting.",
+  matchText2:"The two reflective questions are concrete and easy to try, and \"You'd hear him tell the whole story\" gives her a joyful reason to ask them. She doesn't have to be less enthusiastic; she just adds a question that invites Levi to share his thinking.",
+  actionSteps:[
+    "<strong>Learn three reflection questions.</strong> Give her: \"What was the trickiest part?\" \"What did you change?\" \"What would you do next time?\"",
+    "<strong>Pair excitement with one question.</strong> Help her keep \"That's amazing!\" and add one reflective question after it.",
+    "<strong>Go back to Levi's marble run.</strong> Suggest she ask Levi to show her how he got the marble unstuck.",
+    "<strong>Ask about process, not just product.</strong> Encourage her to ask how children made things, not only whether they're finished.",
+    "<strong>Hear the story together.</strong> On your next visit, point out a moment when a reflective question led to a child's long explanation. Inspirers learn best from moments they can feel."
+  ],
+  completeLine:"You showed an Inspirer how to turn celebration into reflection. That's the work."
+},
+
+// ── SCENARIO 6 · Inspirer-Driver Mentee ──────────────────────
+{
+  menteeType:"ID",
+  menteeLabel:"The Inspirer-Driver",
+  menteeDesc:"Mr. Castillo is magnetic, persuasive, and absolutely committed to results. He asks good questions to the group and gets lots of answers. His challenge: every answer comes back to him — he responds to each child, then calls on the next — so children never respond to each other's ideas, and discussions stay a series of separate answers instead of a real exchange of thinking. He receives feedback best when it is both energetically engaging and immediately connected to real outcomes — he needs to feel it and be given something specific to do with it.",
+  sceneTitle:"Every Answer Comes Back to Him", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Children Building on Each Other's Ideas",
+  scene:"At circle, Mr. Castillo shows a picture of a playground covered in snow: <em>\"How could we still play outside if it snowed this much?\"</em> Marisol (4 years, 6 months) says, <em>\"We could make a snow fort!\"</em> <em>\"Great idea!\"</em> He points to the next child: <em>\"We could wear boots.\"</em> <em>\"Smart!\"</em> Another: <em>\"We could slide down the hill on our coats!\"</em> <em>\"Awesome!\"</em> Marisol whispers to her neighbor, <em>\"We could slide INTO the fort,\"</em> but Mr. Castillo has already moved to the next hand.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Discussion — Helping Children Respond to Each Other",
+  qcText1:"Mr. Castillo asked a strong, open question. But higher-order thinking deepens when <strong>children build on each other's ideas</strong> — agreeing, adding on, combining, or disagreeing. Prompts like <em>\"Who can add to Marisol's idea?\"</em> or <em>\"How could the fort and the sliding hill work together?\"</em> turn a list of answers into a real discussion.",
+  qcText2:"Every answer went to Mr. Castillo and ended there. <strong>Marisol was already combining two ideas — sliding into the fort — but the discussion format gave her no place to say it</strong>. With a few connecting prompts, Mr. Castillo could keep his lively pace and help children think together instead of one at a time.",
+  coachTitle:"Every Answer Comes Back to Him — Coaching Conversation",
+  question:"You're debriefing with Mr. Castillo, an <strong>Inspirer-Driver</strong>. He says, \"So many ideas — every kid had something to say!\" Which approach will actually land?",
+  correct:0,
+  options:[
+    "\"Nobody gets ideas flowing like you — that question was great. Now let's make those ideas crash into each other. Marisol whispered to her neighbor, 'We could slide INTO the fort' — she was combining two ideas from the group. But every answer came back to you and stopped. What if, after a few answers, you asked, 'Who can add to Marisol's fort idea?' or 'How could the fort and the sliding hill work together?' Same energy — but now they're building a plan together.\"",
+    "\"The kids really enjoyed circle. I noticed Marisol seemed to want to say more. Maybe slow down a little to let children finish their ideas?\"",
+    "\"Could you record your next discussion and map who responds to whom? Then we can analyze how often children respond to each other.\"",
+    "\"Your discussion was just a list of answers. Get the kids to respond to each other.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Sustainer's Natural Move — It Asks Him to Shrink", p1:"Asking him to slow down for Marisol is a <strong>Sustainer mentor's</strong> instinct — gentle and attentive.", p2:"Mr. Castillo will hear it as a request to lower his energy. The problem isn't his pace; it's the pattern of every answer going back to him. He needs a way to keep the energy and connect children's ideas."},
+    {h:"This Is a Cultivator's Natural Move — Documentation Over Momentum", p1:"Mapping who responds to whom is a <strong>Cultivator mentor's</strong> natural move — systematic and evidence-oriented.", p2:"For an Inspirer-Driver, it turns a lively discussion into paperwork, and he'll lose interest. He needs Marisol's story and a quick prompt he can use tomorrow."},
+    {h:"This Is a Driver's Natural Move — Correct, but He'll Charm Past It", p1:"A crisp \"get kids to respond to each other\" is a <strong>Driver mentor's</strong> instinct — direct and results-focused.", p2:"Without energy and an example, he'll treat it as a vague suggestion and keep his format. He needs to see what Marisol was doing and a specific prompt to try."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Driver</strong> because it celebrates his strength — \"Nobody gets ideas flowing like you\" — and then offers a bigger payoff: making ideas \"crash into each other.\" Marisol's whisper shows him exactly what's possible.",
+  matchText2:"The connecting prompts are specific and quick, and \"now they're building a plan together\" gives his Driver side a clear outcome. He keeps his energy and lively pace while turning answers into a real discussion.",
+  actionSteps:[
+    "<strong>Learn two connecting prompts.</strong> Give him \"Who can add to that?\" and \"Does anyone have a different idea?\"",
+    "<strong>Combine ideas out loud.</strong> Encourage him to ask, \"How could these two ideas work together?\"",
+    "<strong>Go back to Marisol.</strong> Suggest he invite Marisol to share her fort-and-slide idea at the next circle and ask others to add on.",
+    "<strong>Let children talk to each other.</strong> Help him practice looking at the group instead of the speaker, so children respond to one another.",
+    "<strong>Sit in as his signal.</strong> During his next discussion, give him a thumbs-up each time a child builds on another child's idea. He'll enjoy the game — and the habit will stick."
+  ],
+  completeLine:"You matched an Inspirer-Driver's energy and turned his circle into a real discussion. He'll run with that."
+},
+
+// ── SCENARIO 7 · Inspirer-Sustainer Mentee ───────────────────
+{
+  menteeType:"IS",
+  menteeLabel:"The Inspirer-Sustainer",
+  menteeDesc:"Ms. Fontaine is warm-hearted, joyful, and deeply invested in every child and family she serves. When children argue, she steps in quickly to restore peace. Her challenge: she solves social problems for children instead of asking the questions that would help them think through the problem, consider each other's feelings, and find solutions themselves. She receives feedback best when she feels completely safe in the relationship, and when growth is framed as deepening her impact on the children she loves — not as a failure of her warmth.",
+  sceneTitle:"One Swing, Two Children", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Questions in Social Problem-Solving",
+  scene:"On the playground, Dante (4 years, 7 months) and Leo (4 years, 4 months) both grab the only tire swing at the same moment. <em>\"I had it first!\"</em> <em>\"No, I did!\"</em> Ms. Fontaine hurries over: <em>\"Okay, sweethearts, no fighting. Dante, you go first for five minutes, then Leo. Leo, come help me with the sandbox.\"</em> Leo follows her, looking back at the swing. Two days later, the same two boys have the same argument over the same swing.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Higher-Order Questions in Social Moments — Helping Children Solve Problems",
+  qcText1:"Social conflicts are rich opportunities for higher-order thinking. Questions like <em>\"What's the problem? How do you think Leo feels? What could we do so you both get a turn? What would happen if…?\"</em> ask children to <strong>take another's perspective, generate solutions, and evaluate them</strong>.",
+  qcText2:"Ms. Fontaine's solution was fair and restored peace quickly. But <strong>because she did the thinking, the boys didn't learn how to solve the problem</strong> — and two days later, they had the same argument. Asking questions would take a few more minutes, but it would give the boys skills they could use without her.",
+  coachTitle:"One Swing, Two Children — Coaching Conversation",
+  question:"Ms. Fontaine says, \"I just want them to be happy and not fight.\" She is an <strong>Inspirer-Sustainer</strong> — joyful, relational, and deeply protective of children's feelings. Which approach will help her grow?",
+  correct:3,
+  options:[
+    "\"You solved their problem for them. They need to learn to solve conflicts themselves. Stop stepping in with solutions.\"",
+    "\"Let's create a conflict-resolution script with steps and questions for every type of playground problem. Having it written down will make it easier.\"",
+    "\"What if you made a fun 'Swing Party' with a big timer and a turn-taking song? The kids would love it!\"",
+    "\"You care so much about them being happy together — that's why you ran over so quickly. Can I share what I noticed? Two days later, Dante and Leo had the exact same argument over the same swing. Your solution was fair, but they didn't get to build it themselves, so they couldn't use it the next time. What if you stayed with them and asked, 'What's the problem? How does Leo feel? What could we do so you both get a turn?' They'd find a solution with your help — and they'd be able to use it again, even when you're not right there.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Correct, but It Breaks Her Sense of Safety", p1:"Naming the problem and prescribing the fix is a <strong>Driver mentor's</strong> instinct — direct and standards-focused.", p2:"For an Inspirer-Sustainer, \"stop stepping in\" feels like criticism of her caring response. She'll feel ashamed rather than equipped. She needs to see how questions can still keep children safe and happy."},
+    {h:"This Is a Cultivator's Natural Move — Scripts Without the Why", p1:"A conflict-resolution script is a <strong>Cultivator mentor's</strong> natural move — organized and thorough.", p2:"A script won't change Ms. Fontaine's practice until she sees why her quick solutions aren't lasting. Her barrier is emotional: she wants conflict to end fast. Lead with Dante and Leo."},
+    {h:"This Is an Inspirer's Natural Move — A Fun Fix Instead of Thinking", p1:"A swing party with a timer and song is the natural move of a mentor with a strong <strong>Inspirer</strong> expression — joyful and energizing.", p2:"It's another adult-created solution. The boys still wouldn't learn to think through a problem, and the next conflict would need another rescue."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Sustainer</strong> because it begins by honoring her care — \"that's why you ran over so quickly.\" Then it shows her the evidence that her fair solution didn't last: the same argument two days later.",
+  matchText2:"The reframe \"they'd be able to use it again, even when you're not right there\" shows her that asking questions is a deeper form of care. She stays close and supportive, but the boys do the thinking. That respects both her values and their growth.",
+  actionSteps:[
+    "<strong>Practice problem-solving questions.</strong> Help her rehearse: \"What's the problem? How does he feel? What could we do?\"",
+    "<strong>Stay close while children think.</strong> Encourage her to remain beside the children, offering warmth and support as they come up with ideas.",
+    "<strong>Try one solution together.</strong> Help her guide children to choose an idea, try it, and check whether it worked.",
+    "<strong>Go back to Dante and Leo.</strong> Suggest she revisit the swing problem with them and ask what they could do next time.",
+    "<strong>Name her success out loud.</strong> When children solve a problem with her questions, tell her what you saw. An Inspirer-Sustainer needs to see that the relationship grew stronger."
+  ],
+  completeLine:"You helped an Inspirer-Sustainer see that questions can bring lasting peace. That changes her whole practice."
+},
+
+// ── SCENARIO 8 · Inspirer-Cultivator Mentee ──────────────────
+{
+  menteeType:"IC",
+  menteeLabel:"The Inspirer-Cultivator",
+  menteeDesc:"Ms. Park is a creative, intellectually curious teacher who brings both warmth and analytical depth to her practice. She keeps a \"We Wonder\" chart where she writes down children's questions. Her challenge: the chart grows longer and longer, but the questions are rarely investigated, so children's curiosity gets recorded instead of explored. She receives feedback best when it engages both her intellectual curiosity and her relational energy, and when the path forward is both exciting and structured.",
+  sceneTitle:"The Wonder Wall", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Following Through on Children's Questions",
+  scene:"Ms. Park's \"We Wonder\" chart is covered with children's questions in her neat handwriting: <em>\"Why do worms come out when it rains? How do birds know where to fly? Where does the sun go at night?\"</em> Tamsin (4 years, 5 months) stands in front of the chart and points to her own question from three weeks ago: <em>\"Why do worms come out when it rains?\"</em> She asks, <em>\"When are we going to find out?\"</em> Ms. Park smiles: <em>\"Soon! Great question!\"</em> Tamsin looks at the chart, then walks away. Today Ms. Park adds two more questions to the bottom.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Children's Questions — Turning Wonderings Into Investigations",
+  qcText1:"Inviting children's questions is a powerful way to build higher-order thinking. But the thinking really happens when <strong>children help investigate their own questions</strong>: predicting, observing, testing, and finding answers. A question like Tamsin's could lead to a rainy-day worm hunt, a book, or a simple experiment.",
+  qcText2:"Ms. Park's chart shows she values children's curiosity, but <strong>writing questions down is only the first step</strong>. Tamsin has waited three weeks to find out about worms, and her \"When are we going to find out?\" shows she's still curious — and starting to wonder whether her question matters. Choosing one question each week to investigate would turn the wall into real learning.",
+  coachTitle:"The Wonder Wall — Coaching Conversation",
+  question:"Ms. Park says eagerly, \"I love our Wonder Wall — look how curious they are!\" She is an <strong>Inspirer-Cultivator</strong> — curious, creative, and energized by ideas. Which approach will help her most?",
+  correct:1,
+  options:[
+    "\"The chart is full of questions no one has answered. Pick one and investigate it.\"",
+    "\"They are incredibly curious — that wall is proof of the culture you've built. Here's a puzzle: Tamsin pointed to her worm question from three weeks ago and asked, 'When are we going to find out?' The wall is great at collecting questions; the next step is answering them together. What if you picked one question each week and turned it into an investigation? Worms and rain would be perfect: predict, go outside after the next rain, count worms, read a book. Which question do you think would make the best first investigation?\"",
+    "\"Your chart is so lovely, and the kids feel heard. I'm sure they understand you'll get to their questions eventually.\"",
+    "\"Let's analyze the chart. Categorize each question by topic and difficulty, then create a schedule for investigating them over the year.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Clear, but It Deflates Her", p1:"A direct \"pick one and investigate it\" is a <strong>Driver mentor's</strong> instinct — efficient and outcome-oriented.", p2:"It misses what Ms. Park has done well and makes the chart sound like a failure. An Inspirer-Cultivator who feels her idea was dismissed may pull back. She needs her curiosity engaged in the next step."},
+    {h:"This Is a Sustainer's Natural Move — Reassurance That Skips the Growth", p1:"Reassuring her that children will wait is a <strong>Sustainer mentor's</strong> natural move — warm and protective.", p2:"It overlooks Tamsin's question: \"When are we going to find out?\" Children are waiting, and their curiosity may fade. Ms. Park needs to see that investigating questions is the next step."},
+    {h:"This Is a Cultivator's Natural Move — Analysis Without the Spark", p1:"A full categorization and yearly schedule is the natural move of a mentor with a strong <strong>Cultivator</strong> expression, and it speaks to half of Ms. Park.", p2:"It adds more planning to a wall that already has too much waiting. It misses her Inspirer half and delays the exciting part: investigating a question now."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Cultivator</strong> because it honors what she built — \"proof of the culture you've built\" — and then offers a puzzle: the wall collects questions but doesn't answer them. Tamsin's question makes the gap personal.",
+  matchText2:"The one-question-per-week plan gives her structure, and the worm investigation gives her an exciting place to start. Asking her which question would be best invites both sides of her into planning the next step.",
+  actionSteps:[
+    "<strong>Choose one question each week.</strong> Help her pick a question from the wall and plan a simple investigation.",
+    "<strong>Start with the worms.</strong> Suggest a rainy-day worm hunt with predictions, counting, and a book about earthworms.",
+    "<strong>Invite children to plan.</strong> Ask, \"How could we find out?\" and let children suggest ways to investigate.",
+    "<strong>Show what was learned.</strong> Add a \"We Found Out\" section beside each investigated question.",
+    "<strong>Celebrate Tamsin's answer.</strong> When the worm investigation happens, point out Tamsin's reaction. An Inspirer-Cultivator who sees that payoff will investigate the next question too."
+  ],
+  completeLine:"You helped an Inspirer-Cultivator turn her Wonder Wall into real discovery. That's the work."
+},
+
+// ── SCENARIO 9 · Sustainer Mentee ────────────────────────────
+{
+  menteeType:"S",
+  menteeLabel:"The Sustainer",
+  menteeDesc:"Ms. Okafor is nurturing, relationship-centered, and deeply committed to the children in her care. She asks thoughtful questions of children she feels close to. Her challenge: with children whose behavior challenges her, her questions become rhetorical reminders — \"Do we kick?\" — instead of real questions that could help them think through what's happening. She receives feedback best when her care for children is honored first, and when growth is framed through the lens of a specific child's experience rather than a general critique of her practice.",
+  sceneTitle:"Do We Kick Sand?", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Real Questions in Hard Moments",
+  scene:"In the sandbox, Cruz (4 years, 8 months) has been building a sandcastle for fifteen minutes. Each time he adds a tower, the side crumbles. On the third collapse, he kicks the castle apart. Ms. Okafor walks over: <em>\"Cruz. Do we kick sand?\"</em> <em>\"No.\"</em> <em>\"Are we being safe?\"</em> <em>\"No.\"</em> <em>\"Then let's find another place to play.\"</em> Cruz goes to the swings. Later, another child's castle collapses, and Ms. Okafor kneels beside her: <em>\"Oh no! What do you think made it fall? How could we make it stronger?\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Real Questions — Using Higher-Order Questions With Every Child",
+  qcText1:"Rhetorical questions like <strong>\"Do we kick sand?\" aren't real questions</strong> — the answer is known, and the child's job is simply to agree. Real questions invite thinking: <em>\"You worked so hard on that castle. What made it keep falling? What could help the towers stay up?\"</em> Those questions address the frustration behind the behavior and turn it into problem-solving.",
+  qcText2:"Cruz's kick came after three collapses — he was frustrated, not just misbehaving. <strong>Ms. Okafor asked another child exactly the right questions about a falling castle</strong>, but Cruz got only rhetorical ones. The same curious questions could have helped him solve the castle problem and learn a better way to handle frustration.",
+  coachTitle:"Do We Kick Sand? — Coaching Conversation",
+  question:"You're debriefing with Ms. Okafor, a <strong>Sustainer</strong>. She says, \"Cruz kicked sand again, so I had to move him.\" Which approach will help her grow?",
+  correct:0,
+  options:[
+    "\"Keeping everyone safe matters, and you handled it calmly. Can I tell you what I saw from Cruz's side? He'd worked on that castle for fifteen minutes, and it fell three times before he kicked it. Later, when another child's castle fell, you knelt down and asked, 'What made it fall? How could we make it stronger?' — such wonderful questions. I wonder what Cruz would have figured out if he'd gotten those same questions before the third collapse.\"",
+    "\"You asked Cruz rhetorical questions and gave another child real ones. That's inconsistent. Ask every child real questions.\"",
+    "\"What if you made a special 'Castle Builder' role for Cruz? He could teach other kids how to build — he'd feel so proud!\"",
+    "\"Let's track the kinds of questions you ask different children for a week. Research shows teachers often ask different questions of children with challenging behavior.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Abrupt for a Sustainer", p1:"Naming the inconsistency directly is a <strong>Driver mentor's</strong> instinct — clear and fair.", p2:"For Ms. Okafor, \"inconsistent\" sounds like an accusation that she treats Cruz unfairly. A Sustainer who feels judged may become defensive. She needs to see Cruz's frustration first."},
+    {h:"This Is an Inspirer's Natural Move — A Role Instead of the Real Fix", p1:"A special \"Castle Builder\" role is an <strong>Inspirer mentor's</strong> natural suggestion — upbeat and encouraging.", p2:"Cruz's castle kept collapsing; he isn't ready to teach others yet. The idea skips what Ms. Okafor needs to see: Cruz needed real questions to solve his problem, just like the other child."},
+    {h:"This Is a Cultivator's Natural Move — Evidence Without the Child", p1:"Tracking questions across children is a <strong>Cultivator mentor's</strong> instinct — principled and evidence-based.", p2:"The data would be useful, but a chart won't reach a Sustainer the way one child's story will. Ms. Okafor changes when she sees a specific child she cares about. Lead with Cruz."}
+  ],
+  matchText:"This works for a <strong>Sustainer</strong> because it begins by acknowledging her calm response and then invites her to see the moment \"from Cruz's side\": fifteen minutes of work and three collapses before the kick. His behavior becomes understandable.",
+  matchText2:"The comparison is gentle: she already asks wonderful questions — \"such wonderful questions.\" The closing wonder lets her see that Cruz needed those same questions too, without accusing her of unfairness.",
+  actionSteps:[
+    "<strong>Replace rhetorical questions.</strong> Help her practice turning \"Do we kick?\" into \"What happened? What could you try instead?\"",
+    "<strong>Notice frustration early.</strong> Encourage her to watch for repeated failures and step in with a problem-solving question before frustration peaks.",
+    "<strong>Go back to Cruz's castle.</strong> Suggest she build with Cruz tomorrow and ask, \"What could help the towers stay up?\"",
+    "<strong>Address safety and thinking together.</strong> Help her keep safety clear while still asking real questions: \"Sand stays in the sandbox. What made you so frustrated?\"",
+    "<strong>Help her see Cruz succeed.</strong> When Cruz solves a building problem, point it out. A Sustainer who sees a struggling child think it through will keep asking him real questions."
+  ],
+  completeLine:"You helped a Sustainer see that every child deserves real questions. Cruz will feel the difference."
+},
+
+// ── SCENARIO 10 · Sustainer-Driver Mentee ────────────────────
+{
+  menteeType:"SD",
+  menteeLabel:"The Sustainer-Driver",
+  menteeDesc:"Mr. James is a steady, principled teacher who holds high expectations while genuinely protecting the emotional wellbeing of his children. He asks good problem-solving questions. His challenge: he calls on the first hand that goes up, so the fastest answer ends the thinking and slower, more careful thinkers rarely get to work through the problem. He receives feedback best when his care for children is acknowledged first, followed by clear, specific, actionable guidance.",
+  sceneTitle:"The First Hand Up", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Think Time for Hard Questions",
+  scene:"A ball has rolled under the heavy shelf in the block area. Mr. James gathers the group: <em>\"Here's a problem. How could we get the ball out without moving the shelf?\"</em> Immediately, one child's hand shoots up: <em>\"Use a stick!\"</em> <em>\"Great idea!\"</em> Mr. James grabs a yardstick and slides the ball out. Gideon (4 years, 10 months), who had been lying on his stomach peering under the shelf, sits up and says, <em>\"We could blow on it really hard, or tie a string on a car and—\"</em> But the group is already moving on.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Think Time — Giving Every Child Time to Work Through Hard Questions",
+  qcText1:"Higher-order questions need <strong>think time</strong>. When a teacher calls on the first hand, the fastest idea ends the problem-solving for everyone. Waiting — or asking children to show a thumbs-up when they have an idea, or share with a partner first — lets more children develop their thinking.",
+  qcText2:"Mr. James asked an excellent problem-solving question, but <strong>the first answer ended the thinking in seconds</strong>. Gideon was still investigating — lying on the floor, looking under the shelf — and was developing more creative solutions. A longer pause and a question like \"What other ideas do you have?\" would have given the group several strategies to compare and test.",
+  coachTitle:"The First Hand Up — Coaching Conversation",
+  question:"You're debriefing with Mr. James, a <strong>Sustainer-Driver</strong>. He says, \"We solved the problem quickly. The stick worked.\" Which approach will help him?",
+  correct:2,
+  options:[
+    "\"What if you made a whole 'Problem of the Day' game with prizes for the most creative solutions? The kids would love it!\"",
+    "\"There's research on wait time and how it increases the quality and number of children's answers. I can send you some articles.\"",
+    "\"That was a great problem to pose — real, and something every child could picture. You kept everyone calm and got the ball back. Here's what I noticed: Gideon was on his stomach looking under the shelf, and he was coming up with more ideas — blowing on it, tying a string to a car. The first hand answered, and the thinking stopped. Next time, try 'Show me a thumbs-up when you have an idea,' wait until several thumbs are up, then collect three ideas before testing one. It adds about a minute and gives kids like Gideon time to think.\"",
+    "\"You called on the first hand. Wait longer before taking answers.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Adds a Game but Misses the Point", p1:"A \"Problem of the Day\" game with prizes is an <strong>Inspirer mentor's</strong> natural move — lively and creative.", p2:"It doesn't address what Mr. James needs to change: how quickly he takes answers. Prizes could even speed children up. He needs a clear way to create think time."},
+    {h:"This Is a Cultivator's Natural Move — Right Evidence, Wrong Entry Point", p1:"Offering research on wait time is a <strong>Cultivator mentor's</strong> instinct — careful and evidence-based.", p2:"For a Sustainer-Driver, articles feel abstract. He'll be persuaded by Gideon lying on the floor with more ideas, delivered with respect and followed by a concrete action."},
+    {h:"This Is a Driver's Natural Move — Correct, but It Skips His Care", p1:"A crisp \"wait longer\" is the natural move of a mentor with a strong <strong>Driver</strong> expression — accurate and quick.", p2:"Mr. James's Sustainer side needs to hear that his problem and his calm leadership were strong. Without that, he'll feel judged. Start with what he did well."}
+  ],
+  matchText:"This works for a <strong>Sustainer-Driver</strong> because it acknowledges what he did well — a great problem and a calm group. Then it shows him Gideon, still investigating and developing ideas, when the thinking stopped.",
+  matchText2:"The thumbs-up strategy and \"collect three ideas\" rule give his Driver side a clear, practical routine. \"It adds about a minute\" addresses his concern about time. He keeps his calm structure and gives more children room to think.",
+  actionSteps:[
+    "<strong>Use thumbs-up thinking.</strong> Help him practice asking children to show a thumbs-up when they have an idea, instead of raising hands.",
+    "<strong>Collect three ideas.</strong> Encourage him to gather several solutions before choosing one to test.",
+    "<strong>Test more than one idea.</strong> When possible, let children try different solutions and compare which works best.",
+    "<strong>Go back to Gideon.</strong> Suggest he ask Gideon to share his string-and-car idea and try it with a toy.",
+    "<strong>Reinforce his consistency.</strong> Over the next two weeks, notice when he waits for several ideas. Name those moments — steady feedback reinforces steady practice."
+  ],
+  completeLine:"You helped a Sustainer-Driver give every child time to think. That's steady growth."
+},
+
+// ── SCENARIO 11 · Sustainer-Inspirer Mentee ──────────────────
+{
+  menteeType:"SI",
+  menteeLabel:"The Sustainer-Inspirer",
+  menteeDesc:"Ms. Duvall is the warmest person in every room she enters. Her story times are cozy and full of affection. Her challenge: her questions about stories stay close to feelings about the book — \"Did you like it?\" \"Wasn't that sweet?\" — and she rarely asks children to imagine alternatives, predict consequences, or put themselves in a character's place. She receives feedback best in the context of deep trust, and when growth is framed through her love for the children she serves.",
+  sceneTitle:"Did You Like the Story?", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Imagining and Hypothetical Questions",
+  scene:"Ms. Duvall finishes reading a book about a bear who shares his honey with a lonely rabbit. She hugs the book to her chest: <em>\"Wasn't that sweet? Did you like it?\"</em> The children say, <em>\"Yes!\"</em> <em>\"I loved it too!\"</em> Willa (4 years, 3 months) says, <em>\"What if the bear didn't share?\"</em> Ms. Duvall smiles: <em>\"Oh, but he did, sweetie! He was a kind bear.\"</em> She closes the book and starts a song.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Hypothetical Questions — Inviting Children to Imagine 'What If'",
+  qcText1:"Hypothetical questions ask children to <strong>imagine alternatives and reason about consequences</strong>: <em>\"What if the bear hadn't shared? How would the rabbit feel? What would you have done if you were the bear?\"</em> These questions build perspective-taking, reasoning, and imagination — and stories are the perfect setting for them.",
+  qcText2:"Ms. Duvall's warm questions helped children enjoy the book, but <strong>\"Did you like it?\" only invites \"yes\"</strong>. Willa asked the richest question of the day — a genuine \"what if\" — and it was gently closed with the story's facts. Welcoming her question to the group would have led to a thoughtful conversation about kindness, choices, and feelings.",
+  coachTitle:"Did You Like the Story? — Coaching Conversation",
+  question:"You're debriefing with Ms. Duvall, a <strong>Sustainer-Inspirer</strong>. She says softly, \"It's such a lovely book about kindness.\" Which approach will help her grow?",
+  correct:1,
+  options:[
+    "\"Your questions only asked children whether they liked the book. Ask questions that make them think.\"",
+    "\"It really is — and you read it with so much love that the children felt the kindness. I want to share something I noticed because I know how much you want them to understand kindness. Willa asked, 'What if the bear didn't share?' That's a beautiful question about kindness. What if you'd asked the whole group? 'What if the bear didn't share? How would the rabbit feel? What would you do if you were the bear?' The children would really think about what kindness means — and Willa would know her question mattered.\"",
+    "\"Let's create a list of higher-order questions for each book in your library, organized by type: prediction, perspective, and hypothetical.\"",
+    "\"What if you acted out the story with puppets? The kids would love being the bear and the rabbit!\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — It Feels Like an Accusation", p1:"Naming the gap directly is a <strong>Driver mentor's</strong> instinct — efficient and clear.", p2:"For a Sustainer-Inspirer, \"ask questions that make them think\" suggests her loving story time lacked value. She'll feel criticized. She needs to see how deeper questions can serve her goal of teaching kindness."},
+    {h:"This Is a Cultivator's Natural Move — A System Before a Reason", p1:"A categorized question list for every book is a <strong>Cultivator mentor's</strong> natural move — organized and thorough.", p2:"A list won't move Ms. Duvall until she sees why \"what if\" questions matter. Her barrier is a preference for keeping story time sweet. Start with Willa's question."},
+    {h:"This Is an Inspirer's Natural Move — More Fun, Same Questions", p1:"Puppets are the natural move of a mentor with a strong <strong>Inspirer</strong> expression — joyful and engaging.", p2:"Acting out the story could be wonderful, but it doesn't change the questions she asks. Children might retell the same story without imagining alternatives. Ms. Duvall needs to see the value of \"what if.\""}
+  ],
+  matchText:"This works for a <strong>Sustainer-Inspirer</strong> because it begins by honoring her loving reading and connects the feedback to her own goal: helping children understand kindness. The observation is offered with trust and care.",
+  matchText2:"Willa's question becomes the bridge. By inviting the group to explore \"What if the bear didn't share?\", Ms. Duvall can teach kindness more deeply. \"Willa would know her question mattered\" speaks directly to her care for each child.",
+  actionSteps:[
+    "<strong>Add one \"what if\" question per story.</strong> Help her plan a hypothetical question for each read-aloud.",
+    "<strong>Invite children's \"what ifs.\"</strong> Encourage her to welcome children's questions and ask the group to think about them.",
+    "<strong>Use perspective questions.</strong> Give her examples: \"How would the rabbit feel?\" \"What would you do if you were the bear?\"",
+    "<strong>Go back to Willa's question.</strong> Suggest she reread the book and ask the group Willa's question.",
+    "<strong>Share what happens next.</strong> After the discussion, ask Ms. Duvall what children said about kindness. A Sustainer-Inspirer who hears children's thoughtful answers will ask again."
+  ],
+  completeLine:"You helped a Sustainer-Inspirer use deeper questions to teach kindness. That's the heart of mentoring."
+},
+
+// ── SCENARIO 12 · Sustainer-Cultivator Mentee ────────────────
+{
+  menteeType:"SC",
+  menteeLabel:"The Sustainer-Cultivator",
+  menteeDesc:"Ms. Winters is a thoughtful, quietly powerful teacher who observes everything and processes deeply. She writes beautiful question sequences in her planning notebook. Her challenge: in the moment, she worries her planned questions might not fit, so she falls back on safe, simple questions and the thoughtful sequence stays in the notebook. She receives feedback best in quiet, unhurried conversations that honor both her emotional attunement and her intellectual depth.",
+  sceneTitle:"The Questions in the Notebook", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Using the Question Plan",
+  scene:"Ms. Winters's planning notebook shows a carefully written sequence for her science group on melting: <em>\"1. What do you notice about the ice? 2. What do you think will happen in the sun? 3. Why do you think that? 4. What could we do to make it melt faster? 5. How could we keep it frozen?\"</em> During the group, Zuri (4 years, 7 months) watches the ice drip and says, <em>\"It's crying!\"</em> Ms. Winters asks, <em>\"Is it cold?\"</em> <em>\"Yes.\"</em> <em>\"Is it wet?\"</em> <em>\"Yes.\"</em> The group ends. The notebook stays closed on her lap.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Planned Questions — Using a Thoughtful Sequence in the Moment",
+  qcText1:"Ms. Winters's planned sequence was excellent: <strong>it moved from observing to predicting, explaining, and solving problems</strong>. Zuri's comment, \"It's crying!\", was the perfect doorway into it: \"Crying! What do you think is happening to the ice? What would make it cry faster?\"",
+  qcText2:"Instead, <strong>the questions she asked in the moment were yes-or-no questions</strong>, and the group ended without reaching the higher-order thinking she'd planned. Her preparation was strong; the missing step was trusting her plan and using it when the moment arrived.",
+  coachTitle:"The Questions in the Notebook — Coaching Conversation",
+  question:"You're debriefing with Ms. Winters, a <strong>Sustainer-Cultivator</strong>. She says quietly, \"I had questions planned, but it didn't feel like the right moment.\" Which approach will help her?",
+  correct:3,
+  options:[
+    "\"Your questions were all yes-or-no, even though you'd planned great ones. Use your plan.\"",
+    "\"Ooh, what if you did a big ice experiment with colored water, salt, and flashlights? The kids would be amazed!\"",
+    "\"Let's revise your question plans so they're more flexible — maybe write several versions of each question for different situations.\"",
+    "\"Your question sequence is excellent — observe, predict, explain, solve. It's exactly what that group needed. And I think the right moment did come: Zuri said, 'It's crying!' That was your doorway. What if you'd said, 'Crying! What do you think is happening to the ice?' That's question one and two together, in her words. Next time, try keeping the notebook open and choosing just one planned question to ask. Then notice what happens.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Pressure Without Understanding", p1:"A crisp \"use your plan\" is a <strong>Driver mentor's</strong> instinct — direct and action-focused.", p2:"A Sustainer-Cultivator will feel her careful judgment in the moment was dismissed. She needs to see when the right moment was and a small, manageable step toward using her plan."},
+    {h:"This Is an Inspirer's Natural Move — A Bigger Activity Instead of the Insight", p1:"An exciting ice experiment is an <strong>Inspirer mentor's</strong> natural move — creative and energizing.", p2:"The activity isn't the problem; her questions are. A bigger experiment won't help if she still asks yes-or-no questions. She needs help using her planned sequence."},
+    {h:"This Is a Cultivator's Natural Move — More Planning for a Planner", p1:"Revising plans for flexibility is the natural move of a mentor with a strong <strong>Cultivator</strong> expression, and it speaks to half of Ms. Winters.", p2:"Her plan was already excellent. More versions would add to her uncertainty about which to use. She needs confidence to use the plan she has."}
+  ],
+  matchText:"This works for a <strong>Sustainer-Cultivator</strong> because it honors her planning — \"excellent\" — and gently reframes her uncertainty: \"I think the right moment did come.\" Zuri's comment shows her exactly where her plan fit.",
+  matchText2:"The next step is small and specific: keep the notebook open and choose just one planned question. \"Then notice what happens\" turns the change into an observation, which fits how she learns and reduces the pressure to be perfect.",
+  actionSteps:[
+    "<strong>Keep the plan visible.</strong> Encourage her to keep her question sequence open during small groups.",
+    "<strong>Use one planned question.</strong> Start with just one higher-order question per group.",
+    "<strong>Connect to children's words.</strong> Help her practice linking planned questions to what children say: \"Crying? What's happening to the ice?\"",
+    "<strong>Go back to the ice.</strong> Suggest she repeat the melting activity with Zuri's group and use her planned questions.",
+    "<strong>Honor the follow-through.</strong> At your next debrief, ask what children said when she used a planned question. Acknowledge that she trusted her plan — that's the growth."
+  ],
+  completeLine:"You helped a Sustainer-Cultivator bring her thoughtful questions out of the notebook. That's a breakthrough for her."
+},
+
+// ── SCENARIO 13 · Cultivator Mentee ──────────────────────────
+{
+  menteeType:"C",
+  menteeLabel:"The Cultivator",
+  menteeDesc:"Ms. Tran is analytical, principled, and detail-oriented. Her math groups are precise and well organized. Her challenge: her questions nearly always have exactly one correct answer — \"What is two plus three?\" — so children practice accuracy but rarely get to explore multiple solutions or explain different strategies. She can become quietly defensive when feedback feels like a personal judgment rather than a professional discussion. She receives feedback best when it is structured, evidence-based, and framed as a problem to analyze and solve together — not a verdict to receive.",
+  sceneTitle:"How Many Ways Make Five?", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Questions With Many Right Answers",
+  scene:"Ms. Tran's math group is working with counting bears. She asks: <em>\"What is two plus three?\"</em> <em>\"Five!\"</em> <em>\"Correct. What is four plus one?\"</em> <em>\"Five!\"</em> <em>\"Correct.\"</em> Ada (4 years, 11 months) has quietly arranged her bears into groups: three and two, four and one, and five and zero. She says, <em>\"Look, there are lots of ways to make five!\"</em> Ms. Tran nods: <em>\"Yes. Now, what is one plus three?\"</em> Ada pushes her bears back into one pile.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Divergent Questions — Asking Questions With More Than One Answer",
+  qcText1:"Many higher-order questions have <strong>more than one correct answer</strong>: <em>\"How many ways can you make five? Which way do you think is easiest? How do you know you found them all?\"</em> These questions invite children to explore, compare strategies, and explain their reasoning.",
+  qcText2:"Ms. Tran's questions built accurate addition, but <strong>each one had a single answer</strong>. Ada discovered on her own that five can be made many ways — a higher-level idea than any question asked. Following her lead would have deepened the whole group's understanding of number relationships.",
+  coachTitle:"How Many Ways Make Five? — Coaching Conversation",
+  question:"You're debriefing with Ms. Tran, a <strong>Cultivator</strong>. She says, \"Every child answered correctly. The group mastered combinations to five.\" Which approach will help her?",
+  correct:2,
+  options:[
+    "\"Your questions only had one answer. Ada was ahead of you, and you missed it.\"",
+    "\"Ada is so clever! I bet if you let the kids explore more freely, they'd discover all kinds of math ideas.\"",
+    "\"Their answers were accurate — no question. Let's look at what Ada did, though. While the group answered one fact at a time, she arranged her bears into three-and-two, four-and-one, and five-and-zero and said, 'There are lots of ways to make five!' She was working on the relationship between combinations, not just individual facts. So here's a question worth analyzing: what would the group learn if you asked, 'How many ways can you make five?' Could you test that question next time and record how many combinations children find and how they explain them?\"",
+    "\"I know you care about accuracy. Maybe just relax a little and let them play with the bears?\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — A Verdict She Will Resist", p1:"A direct \"Ada was ahead of you\" is a <strong>Driver mentor's</strong> natural move — blunt and efficient.", p2:"It will feel like a personal criticism, and Cultivators often respond to that with quiet defensiveness. She needs to analyze the evidence and draw the conclusion herself."},
+    {h:"This Is an Inspirer's Natural Move — Encouragement Without the Analysis", p1:"Suggesting free exploration is an <strong>Inspirer mentor's</strong> instinct — warm and optimistic.", p2:"To Ms. Tran, \"explore more freely\" sounds unstructured. She needs to see that divergent questions can be precise, mathematical, and measurable."},
+    {h:"This Is a Sustainer's Natural Move — Soothing Where She Wants Substance", p1:"Suggesting she \"relax\" is a <strong>Sustainer mentor's</strong> instinct — gentle and supportive.", p2:"Ms. Tran isn't stressed; she's principled. Telling her to relax may feel condescending. She'll respect a careful analysis of Ada's thinking far more than comfort."}
+  ],
+  matchText:"This works for a <strong>Cultivator</strong> because it validates her accuracy goal first and then presents Ada's work precisely — the three combinations and her exact words. The evidence shows a higher level of mathematical thinking.",
+  matchText2:"The question \"what would the group learn if you asked…?\" engages her analytical mind, and the proposal to test and record children's combinations gives her a structured experiment. She keeps her precision and adds depth.",
+  actionSteps:[
+    "<strong>Ask one divergent question per group.</strong> Help her plan questions like \"How many ways can you make five?\"",
+    "<strong>Record the combinations.</strong> Encourage her to chart the ways children find, so the group can compare.",
+    "<strong>Ask how they know.</strong> Help her follow up with, \"How do you know you found them all?\"",
+    "<strong>Go back to Ada's discovery.</strong> Suggest she invite Ada to show the group her ways to make five.",
+    "<strong>Review her notes together.</strong> Ask her to compare children's thinking on single-answer and many-answer questions. A Cultivator who analyzes her own evidence owns the conclusion."
+  ],
+  completeLine:"You gave a Cultivator a problem worth analyzing. She'll solve it better than anyone."
+},
+
+// ── SCENARIO 14 · Cultivator-Driver Mentee ───────────────────
+{
+  menteeType:"CD",
+  menteeLabel:"The Cultivator-Driver",
+  menteeDesc:"Ms. Chen is a meticulous, ambitious teacher who builds precise systems and drives them toward strong outcomes. Her science lessons have clear objectives and carefully chosen materials. Her challenge: she asks children to identify and label things one at a time instead of asking comparison questions that would help them notice similarities, differences, and patterns. She receives feedback best when it is specific, data-grounded, and framed around the gap between her intended outcome and the outcome she is actually producing.",
+  sceneTitle:"Two Leaves, Separately", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Comparison Questions",
+  scene:"Ms. Chen's science objective reads: <em>\"Children will describe characteristics of leaves.\"</em> She holds up a maple leaf: <em>\"What color is this leaf? What shape?\"</em> Then an oak leaf: <em>\"What color is this leaf? What shape?\"</em> Children answer each question. Emil (4 years, 6 months) picks up both leaves, holds them side by side, and says, <em>\"This one is pointy and this one is wiggly!\"</em> Ms. Chen responds, <em>\"Good. Now let's look at the pine needle,\"</em> and holds up the next item. Emil sets the leaves down.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Comparison Questions — Asking Children How Things Are Alike and Different",
+  qcText1:"Comparison questions ask children to <strong>examine two or more things together and describe similarities and differences</strong>: <em>\"How are these leaves the same? How are they different? Which one feels smoother?\"</em> Comparing requires closer observation and more complex language than labeling one object at a time.",
+  qcText2:"Ms. Chen's questions matched her objective, but <strong>asking about each leaf separately kept the thinking at the level of labeling</strong>. Emil compared the two leaves on his own — \"pointy\" and \"wiggly\" — which was exactly the kind of description her objective was aiming for. A comparison question would have pushed the whole group to that level.",
+  coachTitle:"Two Leaves, Separately — Coaching Conversation",
+  question:"You're debriefing with Ms. Chen, a <strong>Cultivator-Driver</strong>. She says, \"Every child described the color and shape of each leaf. Objective met.\" Which approach will help her?",
+  correct:0,
+  options:[
+    "\"Your objective was clear, and children did name colors and shapes. Here's what the data shows, though: the richest description came from Emil — he held the leaves side by side and said, 'This one is pointy and this one is wiggly.' Your separate questions got single-word answers; his comparison got detailed characteristics. If your goal is describing characteristics, comparison questions may produce stronger results. What if you asked, 'How are these two leaves the same and different?' and recorded how many characteristics children name?\"",
+    "\"Emil is such a sweet observer! You should let the kids explore the leaves on their own and see what they notice.\"",
+    "\"I could see Emil wanted to share more about his leaves. Maybe let children talk a little longer before moving on?\"",
+    "\"Asking about each leaf separately is too basic. Ask comparison questions.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Exploration Without the Data", p1:"Suggesting open exploration is an <strong>Inspirer mentor's</strong> natural move — curious and child-centered.", p2:"For Ms. Chen, open exploration sounds hard to measure against her objective. She needs evidence that comparison questions produce richer descriptions and a clear way to use them."},
+    {h:"This Is a Sustainer's Natural Move — Warmth Without a Plan", p1:"Suggesting more talking time for Emil is a <strong>Sustainer mentor's</strong> instinct — caring and attuned.", p2:"Ms. Chen can lose sight of the child behind the data, so attention to Emil matters. But \"talk a little longer\" doesn't give her a strategy for raising the level of her questions."},
+    {h:"This Is a Driver's Natural Move — Direction Without the Analysis", p1:"A crisp \"ask comparison questions\" is the natural move of a mentor with a strong <strong>Driver</strong> expression, and it speaks to Ms. Chen's efficiency.", p2:"It skips the analysis her Cultivator side needs. Without seeing how comparison questions produce better outcomes, she'll view her current approach as successful."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Driver</strong> because it starts with her objective and then presents new evidence: Emil's comparison produced richer descriptions than her separate questions. The feedback connects directly to the outcome she already values.",
+  matchText2:"The suggestion to test comparison questions and count the characteristics children name gives her a measurable way to evaluate the change. You didn't dismiss her objective; you showed her a better path to meeting it.",
+  actionSteps:[
+    "<strong>Pair materials for comparison.</strong> Help her present two objects at a time: two leaves, two rocks, two shells.",
+    "<strong>Use \"same and different.\"</strong> Give her a simple question frame: \"How are these the same? How are they different?\"",
+    "<strong>Count characteristics.</strong> Encourage her to track how many characteristics children name when comparing.",
+    "<strong>Go back to Emil's leaves.</strong> Suggest she ask Emil to explain more about \"pointy\" and \"wiggly\" and invite others to compare.",
+    "<strong>Reconnect the data to the child.</strong> Ask her to describe what Emil noticed when comparing. It builds the habit of seeing the child behind the checklist."
+  ],
+  completeLine:"You showed a Cultivator-Driver that comparison questions produce richer thinking. She'll build a better system from here."
+},
+
+// ── SCENARIO 15 · Cultivator-Inspirer Mentee ─────────────────
+{
+  menteeType:"CI",
+  menteeLabel:"The Cultivator-Inspirer",
+  menteeDesc:"Mr. Flores is a creative, intellectually rich teacher who brings both deep analysis and social warmth to his practice. He asks wonderful questions. His challenge: he often answers his own questions a moment later — his enthusiasm for the answer gets ahead of the children's thinking — so his questions become rhetorical and children learn to wait for him to explain. He receives feedback best when his intellectual investment is honored first, and growth is framed as making his depth more accessible — not asking him to simplify or sacrifice rigor.",
+  sceneTitle:"He Answered His Own Question", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Leaving Questions for Children to Answer",
+  scene:"Mr. Flores holds up a jar with a sprouting bean inside: <em>\"Why do you think the roots grow down and the stem grows up?\"</em> Soraya (4 years, 4 months) leans forward, opening her mouth to answer. Mr. Flores continues immediately: <em>\"It's because of gravity! The roots sense gravity and grow toward it, and the stem grows toward the light. Isn't that amazing?\"</em> Soraya closes her mouth. A few minutes later, he asks, <em>\"What do you think will happen if we turn the jar sideways?\"</em> The children look at him and wait.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Real Questions — Giving Children the Chance to Answer",
+  qcText1:"Mr. Flores asked two excellent higher-order questions — one explaining a pattern and one predicting a change. But <strong>a question only builds thinking if children get to answer it</strong>. When the teacher answers his own question, it becomes an introduction to his explanation.",
+  qcText2:"Soraya was ready to answer the first question, and <strong>by the second question, the children had learned to wait for Mr. Flores</strong>. Pausing and inviting their ideas — then sharing the science afterward — would let them reason first and make his explanation more meaningful. His rich knowledge would land as the answer to their thinking instead of a replacement for it.",
+  coachTitle:"He Answered His Own Question — Coaching Conversation",
+  question:"You're debriefing with Mr. Flores, a <strong>Cultivator-Inspirer</strong>. He says, \"I asked two great thinking questions today!\" Which approach will help him?",
+  correct:1,
+  options:[
+    "\"You answered your own question before anyone could try. Stop doing that.\"",
+    "\"You did — both were genuinely high-level: explaining a pattern and predicting a change. Here's the design challenge: they only work if the children get to answer them. Soraya leaned in and opened her mouth to answer the first one, and you gave the answer before she could. By the second question, everyone was waiting for you to explain. What if you asked, paused, and collected three of their theories first? Then gravity becomes the answer to their ideas. Same great science — and they'd do the thinking first.\"",
+    "\"I could see how much you love science. Maybe just check whether children want to answer before you explain?\"",
+    "\"What if you turned the bean jar into a big class experiment with lots of plants? The kids would love it!\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — It Dismisses His Thinking", p1:"A blunt \"stop doing that\" is a <strong>Driver mentor's</strong> instinct — efficient and outcome-focused.", p2:"Mr. Flores will hear it as criticism of his enthusiasm and knowledge. A Cultivator-Inspirer who feels his depth is being dismissed may resist. He needs to see how waiting makes his explanations more powerful."},
+    {h:"This Is a Sustainer's Natural Move — Too Soft to Change the Pattern", p1:"Suggesting he \"check\" before explaining is a <strong>Sustainer mentor's</strong> instinct — warm and gentle.", p2:"It's too vague to change the habit. He needs a clear routine — ask, pause, collect theories, then explain — that keeps his enthusiasm in check without dampening it."},
+    {h:"This Is an Inspirer's Natural Move — More Activity, Same Pattern", p1:"A bigger class experiment is the natural move of a mentor with a strong <strong>Inspirer</strong> expression — and it speaks to Mr. Flores's own Inspirer side.", p2:"A larger experiment could be wonderful, but if he still answers his own questions, children won't do the thinking. The change needs to happen in how he asks."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Inspirer</strong> because it honors his questions — \"genuinely high-level\" — and then frames the change as a design challenge: making sure the questions do their job.",
+  matchText2:"Soraya leaning in shows him what he missed, and \"gravity becomes the answer to their ideas\" shows that his knowledge stays central. You didn't ask him to hold back the science; you asked him to let children reason first.",
+  actionSteps:[
+    "<strong>Ask, pause, collect.</strong> Help him practice a routine: ask the question, wait, gather three children's ideas, then explain.",
+    "<strong>Write down their theories.</strong> Encourage him to record children's ideas before sharing the science.",
+    "<strong>Test the prediction.</strong> Suggest he turn the bean jar sideways and let children observe what happens over several days.",
+    "<strong>Go back to Soraya.</strong> Suggest he ask Soraya what she was going to say about the roots and stem.",
+    "<strong>Let him walk you through his plan.</strong> Ask him to show you where he'll pause for children's ideas in his next lesson. Cultivator-Inspirers love explaining their thinking, and it helps him see the lesson the way children will experience it."
+  ],
+  completeLine:"You helped a Cultivator-Inspirer let children answer his great questions. That's powerful teaching."
+},
+
+// ── SCENARIO 16 · Cultivator-Sustainer Mentee ────────────────
+{
+  menteeType:"CS",
+  menteeLabel:"The Cultivator-Sustainer",
+  menteeDesc:"Ms. Patel is a thoughtful, quietly perceptive teacher who combines deep analytical observation with genuine empathy. She is endlessly curious herself. Her challenge: she asks children questions but rarely invites them to ask their own, so children observe new things silently instead of learning that wondering and questioning are part of thinking. She receives feedback best in quiet, respectful, unhurried conversations that treat her as the intelligent, caring professional she is.",
+  sceneTitle:"The New Snail", sceneTag:"Pre-K Classroom",
+  focusBadge:"Higher-Order Questioning · Inviting Children's Own Questions",
+  scene:"A class snail arrives in a glass tank. The children crowd around, watching it slide across the glass. Benji (4 years, 5 months) presses his nose to the tank and stares at the snail's eyes on long stalks. Ms. Patel watches the group quietly and writes in her notebook: <em>\"Children very interested in snail. Watching closely for 10 minutes.\"</em> She hands out magnifiers and says softly, <em>\"Take a look.\"</em> The children look silently for several minutes, then drift away. Benji stays longest, then returns to the blocks.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Children's Questions — Inviting Children to Wonder Aloud",
+  qcText1:"Higher-order thinking includes <strong>children learning to ask their own questions</strong>. A simple prompt — <em>\"What do you wonder about our snail?\"</em> — invites children to put their curiosity into words: \"Why are its eyes on sticks? Where does it sleep? What does it eat?\" Those questions can then guide observation and investigation.",
+  qcText2:"Ms. Patel noticed how interested the children were, and <strong>Benji's close study of the eye stalks showed a real question forming</strong>. But without an invitation to wonder aloud, the children's curiosity stayed silent and faded. Asking for their questions would have given Ms. Patel rich insight into their thinking and a plan for what to explore next.",
+  coachTitle:"The New Snail — Coaching Conversation",
+  question:"You're debriefing with Ms. Patel, a <strong>Cultivator-Sustainer</strong>. She says quietly, \"They were so absorbed. I didn't want to interrupt their observing.\" Which approach will help her?",
+  correct:3,
+  options:[
+    "\"You should have asked them questions. They just stared at the snail for ten minutes and then left.\"",
+    "\"What if you did a big snail celebration with snail crafts and snail songs? The kids would be so excited!\"",
+    "\"You're right — sometimes silent observation is best. They'll ask questions when they're ready.\"",
+    "\"Your notes captured it well — ten minutes of close watching. And Benji studied those eyes on stalks longer than anyone. I wonder if a question was forming. What if, after they'd watched for a while, you asked quietly, 'What do you wonder about our snail?' It doesn't interrupt observing; it gives their curiosity words. You could write their questions down, and you'd have their next investigation — chosen by them. What do you think Benji might have asked?\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Harsh for Her Careful Nature", p1:"A direct \"you should have asked\" is a <strong>Driver mentor's</strong> instinct — decisive and outcome-focused.", p2:"Ms. Patel will feel her careful choice was dismissed. A Cultivator-Sustainer under that kind of pressure often withdraws further. She needs her reasoning respected and a gentle, clear way to invite children's questions."},
+    {h:"This Is an Inspirer's Natural Move — Excitement Instead of Inquiry", p1:"A snail celebration is an <strong>Inspirer mentor's</strong> natural suggestion — joyful and energizing.", p2:"It adds activities but doesn't invite children to wonder or question. The children might enjoy it without putting their curiosity into words. Ms. Patel needs a simple invitation to ask questions."},
+    {h:"This Is a Sustainer's Natural Move — Reassurance That Extends the Pattern", p1:"Affirming silent observation is a <strong>Sustainer mentor's</strong> instinct — patient and kind.", p2:"It confirms the hesitation that's holding her back. The children's interest faded without being put into words. Ms. Patel would leave believing waiting was enough, and the chance to invite their questions would keep passing by."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Sustainer</strong> because it affirms her careful notes and gently draws her attention to Benji's close study — evidence that a question was forming.",
+  matchText2:"The prompt — \"What do you wonder about our snail?\" — is quiet and respectful, and the reframe \"It doesn't interrupt observing; it gives their curiosity words\" addresses her concern. Ending with \"What do you think Benji might have asked?\" engages her curiosity and invites her to imagine the next step.",
+  actionSteps:[
+    "<strong>Use \"What do you wonder?\"</strong> Help her practice asking children to share their questions after a period of observation.",
+    "<strong>Record children's questions.</strong> Encourage her to write down each question in the child's own words.",
+    "<strong>Choose one to investigate.</strong> Help her pick a child's question and plan a simple way to explore it.",
+    "<strong>Go back to Benji and the snail.</strong> Suggest she sit with Benji at the tank and ask what he wonders about the snail's eyes.",
+    "<strong>Record the response.</strong> Ask her to note the questions children ask over a week. That evidence will build her confidence to invite wondering."
+  ],
+  completeLine:"You helped a Cultivator-Sustainer invite children's wondering into words. That's thoughtful mentoring."
+}
+
+  ]
+}
 ]; // end CURRICULUM
 </script>
 </body>

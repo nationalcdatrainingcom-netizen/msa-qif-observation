@@ -6790,45 +6790,604 @@ const CURRICULUM = [
 
   ]
 },
+
 {
   id:11, domain:3, domainName:"Instructional Support",
-  title:"Conversation & Vocabulary", week:11,
+  title:"Language Modeling", week:11,
   focus:"Using rich, complex language to build children's vocabulary and oral language.",
   scenarios:[
-    {
-      menteeType:"C", menteeLabel:"The Cultivator",
-      menteeDesc:"Mr. Flores is precise and thoughtful. He speaks carefully and values accuracy. His challenge: he uses advanced vocabulary in his own speech but rarely pauses to make it accessible — he doesn't define, repeat, act out, or connect new words to children's existing knowledge. He assumes comprehension because children are attentive.",
-      sceneTitle:"The Word That Passed Them By", sceneTag:"Pre-K Classroom",
-      focusBadge:"Language Modeling · Vocabulary Development",
-      scene:"During a read-aloud, Mr. Flores reads: \"The bear hibernated all winter.\" A child raises her hand: <em>\"What's hibernated?\"</em> Mr. Flores responds: <em>\"Hibernated means the bear went to sleep for a long period of time during winter.\"</em> He continues reading. The definition was accurate. But no one acted it out, no connection was made to the children's own experience of sleeping, no visual was offered, no child was asked to use the word, and no one checked for understanding.",
-      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Vocabulary Instruction in Context",
-      qcText1:"<strong>Rich language modeling</strong> means more than providing accurate definitions — it means <em>building the word into the child's experience</em>. A definition deposits information; language modeling builds a network of meaning. Mr. Flores gave the children the right words, but not the experience of owning them.",
-      qcText2:"Vocabulary research consistently shows that new words are learned through <strong>multiple encounters across multiple modalities</strong>: hearing it, saying it, seeing it represented, connecting it to prior knowledge, and using it in context. A single accurate definition is the first step — not the last one.",
-      coachTitle:"The Word That Passed Them By — Coaching Conversation",
-      question:"You're debriefing with Mr. Flores, a <strong>Cultivator</strong>. He's satisfied that he answered the child's question accurately. How do you help him see that accuracy and richness are not the same thing?",
-      correct:1,
-      options:[
-        "\"The lesson felt a bit flat in terms of vocabulary engagement. I want to push back on the idea that defining a word is the same as teaching it. We need to redesign how you handle vocabulary moments.\"",
-        "\"You answered Camila's question accurately — and I want to show you what was possible in that same 45 seconds. Can we take that 'hibernated' moment and play it out differently? I think when you see the range of what could have happened, it's going to change how you hear vocabulary moments in text.\"",
-        "\"Oh, vocabulary is SO rich in that book! What if we created a 'word wall' together? You could add words from every read-aloud and the kids could revisit them! I think it would become such a special part of your classroom culture!\"",
-        "\"You provided an accurate definition, which is the right first step. I want to gently note that there's an opportunity to extend vocabulary instruction beyond the initial definition — research suggests multiple encounters help. Something to consider.\""
-      ],
-      wrongFeedback:[
-        {h:"Style Mismatch — Let's Reconsider", p1:"\"I want to push back\" and \"redesign how you handle\" will register as an attack on a <strong>Cultivator's</strong> competence — especially when Mr. Flores believes he responded correctly to the child.", p2:"Cultivators need to discover the gap themselves through evidence and inquiry. You can't argue him into seeing it; you have to show him."},
-        {h:"Style Mismatch — Let's Reconsider", p1:"A word wall is a reasonable classroom tool, but this is an <strong>Inspirer's</strong> enthusiastic suggestion that bypasses the real insight Mr. Flores needs. He doesn't yet understand what was missing in the 'hibernated' moment — adding a wall doesn't address that gap.", p2:"Mr. Flores needs the analytical insight first. Once he understands what rich vocabulary instruction looks like, he can choose his own tools for achieving it."},
-        {h:"Style Mismatch — Let's Reconsider", p1:"\"Something to consider\" is too tentative for a <strong>Cultivator</strong> who prides himself on his precision. This framing lets him hear the feedback as optional — and he'll decide his definition was sufficient.", p2:"Cultivators respond to evidence and specificity. Give him something concrete to examine, not a gentle nudge toward a possibility."}
-      ],
-      matchText:"This is elegant Cultivator coaching. You validated his accuracy — because it was accurate — and then immediately offered something more interesting: \"let's play it out differently.\"",
-      matchText2:"Cultivators are analytical by nature. By inviting him to explore the range of what was possible in those 45 seconds, you're engaging his intellectual curiosity rather than his defensiveness. The insight will land as a discovery, not a critique.",
-      actionSteps:[
-        "<strong>Play out the 'hibernated' moment together.</strong> Walk through it: what if he had acted it out? What if he'd asked a child to show with their body? What if he'd asked, \"Has anyone ever been SO tired they slept for a really long time?\" Let him feel the difference.",
-        "<strong>Introduce the vocabulary depth model.</strong> Share research on the levels of word learning: exposure → recognition → production → use in context. Help him see that his definition was Level 1 of a 4-level sequence.",
-        "<strong>Build a vocabulary protocol into read-alouds.</strong> For each read-aloud, identify 2-3 Tier 2 vocabulary words in advance. Plan: define, connect, act out, use in a sentence, revisit at the end.",
-        "<strong>Teach the 'word web' in the moment.</strong> Model how to take 90 seconds with a word: say it, define it, act it out, connect it, ask children to try it. This is a complete vocabulary encounter in under 2 minutes.",
-        "<strong>Observe and count vocabulary encounters.</strong> At next visit, track every vocabulary moment: how many words? How many modalities per word? Share the data at debrief."
-      ],
-      completeLine:"You helped a Cultivator see the difference between accuracy and richness — and that's a distinction that will change his practice permanently."
-    }
+// ── SCENARIO 1 · Driver Mentee ───────────────────────────────
+{
+  menteeType:"D",
+  menteeLabel:"The Driver",
+  menteeDesc:"Mr. Beaumont is confident, direct, and results-oriented. He runs a safe, orderly outdoor time and keeps a close eye on every child. His challenge: nearly everything he says outside is a direction or a safety reminder, so children hear plenty of instructions but very little conversation. He responds best to feedback that is honest, efficient, and tied to measurable outcomes, and he can dismiss feedback that feels soft or theoretical. Once he sees a concrete return, he changes fast.",
+  sceneTitle:"Stay Out of the Puddle", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Frequent Conversation",
+  scene:"After a morning rain, Mr. Beaumont's class is on the playground. He stands near the climber calling out: <em>\"Feet first down the slide. Walk, don't run. Share the bikes.\"</em> Anton (4 years, 4 months) crouches beside a puddle near the fence, where a thin film of oil has made swirls of color. <em>\"Mr. Beaumont! There's a rainbow IN the puddle! It's moving!\"</em> Mr. Beaumont glances over: <em>\"Stay out of the puddle, Anton.\"</em> Anton stands up, looks at the swirls for another moment, and walks to the sandbox without saying anything else.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Frequent Conversation — Talking With Children, Not Just to Them",
+  qcText1:"Language Modeling starts with <strong>frequent, genuine conversation</strong> — back-and-forth talk about things children notice and care about. Outdoor time is full of these opportunities. Anton offered a vivid, detailed observation and an invitation to talk: <em>\"There's a rainbow in the puddle! It's moving!\"</em>",
+  qcText2:"Mr. Beaumont's safety reminders were appropriate, but <strong>when nearly every adult sentence is a direction, children get very little language to learn from</strong>. A thirty-second exchange — \"A rainbow in a puddle? Show me. Which colors do you see? What happens if you blow on it?\" — would have kept Anton safe and given him rich language at the same time.",
+  coachTitle:"Stay Out of the Puddle — Coaching Conversation",
+  question:"You're debriefing with Mr. Beaumont, a <strong>Driver</strong>. He says, \"Outside time was safe and smooth. Everybody followed the rules.\" Which coaching approach is most likely to land and produce a real change in practice?",
+  correct:1,
+  options:[
+    "\"Outdoor time was so calm, and you clearly care about keeping everyone safe. I just wonder if the kids might enjoy chatting with you a little more out there. What do you think?\"",
+    "\"Here's what I tallied during twenty minutes outside: you spoke to children 34 times, and 31 were directions or safety reminders. That leaves three conversations. Anton brought you the best one — a rainbow in the puddle — and got 'Stay out of the puddle.' You can keep every safety reminder and add real talk. Goal for next week: five back-and-forth conversations during outdoor time. I'll count them with you.\"",
+    "\"Picture what Anton was feeling when he found that rainbow. What do you think he wanted from you in that moment?\"",
+    "\"There's strong research on how the amount of adult conversation affects children's vocabulary. I'll send you a summary to look over when you get a chance.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Sustainer's Natural Move — Too Cushioned for a Driver", p1:"Praising the calm and gently wondering is a <strong>Sustainer mentor's</strong> natural instinct. It protects the relationship and gives sensitive mentees room to hear hard feedback.", p2:"Mr. Beaumont will hear \"chatting\" as optional and a little unserious. He sees his job outside as keeping children safe. Without numbers and a clear target, he has no reason to change."},
+    {h:"This Is an Inspirer's Natural Move — Too Roundabout for a Driver", p1:"Inviting him to imagine Anton's feelings is an <strong>Inspirer mentor's</strong> natural approach — empathetic and reflective.", p2:"For a Driver, it reads as indirect. He'll wonder why you're asking about feelings instead of telling him what you observed. Give him the pattern and a goal, and he'll act on it."},
+    {h:"This Is a Cultivator's Natural Move — Too Deferred for a Driver", p1:"Sending research to review later is a <strong>Cultivator mentor's</strong> instinct — thorough and evidence-based.", p2:"\"When you get a chance\" means never for Mr. Beaumont. He needs the numbers from his own playground, today, and a concrete target for next week."}
+  ],
+  matchText:"This works for a <strong>Driver mentee</strong> because it leads with data he can't argue with — 34 statements, 31 directions — and then names the opportunity he missed with Anton. It doesn't dismiss his safety focus: \"You can keep every safety reminder.\"",
+  matchText2:"The goal is specific and measurable: five back-and-forth conversations during outdoor time. Drivers don't need to be convinced that conversation is nice. They need a clear metric and evidence that the change is worth their time.",
+  actionSteps:[
+    "<strong>Script the puddle moment.</strong> Rewrite it together: \"A rainbow in a puddle? Which colors do you see? What happens if you blow on it?\" Show him it takes thirty seconds.",
+    "<strong>Pair every reminder with a conversation.</strong> For each safety reminder, he finds one child to talk with about what they're doing or noticing.",
+    "<strong>Use conversation starters.</strong> Give him a short list for outdoors: \"What did you find?\" \"Tell me about your game.\" \"What are you building?\"",
+    "<strong>Track the ratio.</strong> Next visit, count directions and conversations. Set a goal together for at least five real conversations.",
+    "<strong>Review the data together.</strong> Share the before-and-after counts. Drivers stay motivated by progress they can measure."
+  ],
+  completeLine:"You showed a Driver how to turn supervision into conversation. That's the language he acts on."
+},
+
+// ── SCENARIO 2 · Driver-Inspirer Mentee ──────────────────────
+{
+  menteeType:"DI",
+  menteeLabel:"The Driver-Inspirer",
+  menteeDesc:"Ms. Holloway is a force of nature — energetic, bold, and deeply loved by her children and families. Her circle times are fast and lively, full of call-and-response. Her challenge: her questions are almost all yes-or-no or one-word questions answered in chorus, so children rarely get to form their own sentences or share their own ideas. She receives feedback best when it honors her energy and connects directly to the outcomes she's already chasing.",
+  sceneTitle:"Yes, Ms. Holloway!", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Open-Ended Questions",
+  scene:"Ms. Holloway holds up a picture book about a farm: <em>\"Is this a cow? Yes! Does a cow say moo? Yes! Is the barn red? Yes!\"</em> The children shout each answer together. Eloise (4 years, 5 months) raises her hand high: <em>\"My grandpa has a cow and her name is—\"</em> Ms. Holloway smiles and keeps going: <em>\"Is this a pig? Yes! Does it say oink? Yes!\"</em> Eloise puts her hand down and chants the next few answers with everyone else, then stops joining in.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Open-Ended Questions — Inviting Children to Use More Language",
+  qcText1:"Open-ended questions invite children to <strong>use their own words, form sentences, and share ideas</strong>. \"Is this a cow?\" gets a one-word answer. \"What do you know about cows?\" or \"What do you think is happening on this farm?\" gives children a reason to talk — and gives teachers something to build on.",
+  qcText2:"Ms. Holloway's circle was energetic, but <strong>the children's language was limited to \"yes\" and animal sounds</strong>. Eloise tried to share a real story with a real connection, and there was no room for it. Mixing in open-ended questions would let Ms. Holloway keep her energy while giving children like Eloise a chance to use rich language.",
+  coachTitle:"Yes, Ms. Holloway! — Coaching Conversation",
+  question:"You're debriefing with Ms. Holloway, a <strong>Driver-Inspirer</strong>. She's thrilled: \"Every single child was answering!\" Which approach reaches her?",
+  correct:3,
+  options:[
+    "\"Every question you asked was yes-or-no. Children said 'yes' about twenty times. That's not language development. Ask open-ended questions.\"",
+    "\"The kids clearly love circle with you. I wonder if maybe some of them might want to say a little more sometimes? Just something to think about.\"",
+    "\"Before our next visit, could you write down every question you ask during circle and sort them into open and closed? Then we can look at the ratio together.\"",
+    "\"Every child was answering — nobody pulls a whole group in like you do. Now imagine that energy with bigger answers. Eloise raised her hand to tell you her grandpa has a cow — she even knew its name — and the story got swept away in the next 'Yes!' What if you mixed in one question like 'Who knows something about cows?' and let Eloise tell her grandpa's story? You'd keep every child engaged — and hear what they actually know.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Efficient, but It Misses the Inspirer", p1:"Counting the yes-or-no questions and naming the problem bluntly is the natural move of a mentor with a strong <strong>Driver</strong> expression. It's clear and accurate, and it speaks to half of Ms. Holloway.", p2:"It ignores the other half. Ms. Holloway is proud of her lively circle, and \"that's not language development\" dismisses what she loves about it. A Driver-Inspirer will defend her circle instead of hearing Eloise's story."},
+    {h:"This Is a Sustainer's Natural Move — Too Vague to Move Her", p1:"Affirming her and gently wondering is a <strong>Sustainer mentor's</strong> instinct — caring and careful.", p2:"\"Something to think about\" gives her no stakes and no specific child. She needs to see Eloise's moment and a concrete question to try."},
+    {h:"This Is a Cultivator's Natural Move — Too Much Paperwork for Her Pace", p1:"Recording and sorting every question is a <strong>Cultivator mentor's</strong> instinct — systematic and thorough.", p2:"For a Driver-Inspirer, it feels like tedious homework that drains her energy. She'll skip it or do it without reflection. Show her Eloise first; she'll want to change on her own."}
+  ],
+  matchText:"This works for a <strong>Driver-Inspirer</strong> because it opens by agreeing with her — \"nobody pulls a whole group in like you do\" — and then invites her to imagine \"that energy with bigger answers.\" That speaks to both her enthusiasm and her drive for results.",
+  matchText2:"Eloise's grandpa story shows exactly what's being missed, and \"hear what they actually know\" gives her a new payoff to chase. She keeps her lively circle; she just adds questions that let children do more of the talking.",
+  actionSteps:[
+    "<strong>Add one open question per book.</strong> Start small: one \"What do you know about…?\" or \"What do you think…?\" question during each read-aloud.",
+    "<strong>Use turn-and-talk.</strong> Keep her energy up by having children tell a partner their answer, so every child talks at once.",
+    "<strong>Go back to Eloise.</strong> Suggest she invite Eloise to tell the group about her grandpa's cow at the next circle.",
+    "<strong>Keep some call-and-response.</strong> Reassure her she doesn't have to give up chants; she can mix them with open questions.",
+    "<strong>Celebrate the stories she hears.</strong> When children share longer answers, point it out. Driver-Inspirers repeat what gets results."
+  ],
+  completeLine:"You didn't ask a Driver-Inspirer to slow down — you gave her energy room for bigger answers. That's the work."
+},
+
+// ── SCENARIO 3 · Driver-Sustainer Mentee ─────────────────────
+{
+  menteeType:"DS",
+  menteeLabel:"The Driver-Sustainer",
+  menteeDesc:"Mr. Osei is a principled, protective leader who pushes for results while genuinely caring about every child in his room. He wants children to speak correctly and takes grammar seriously. His challenge: when a child's sentence is incomplete or incorrect, he asks the child to repeat it the \"right\" way, which can stop the conversation instead of growing it. He receives feedback best when it honors both his care for children and his commitment to excellence, and when it names one concrete way to serve both at once.",
+  sceneTitle:"Say It the Right Way", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Repetition and Extension",
+  scene:"In the block area, Dario (3 years, 10 months) sends a toy truck down a ramp and shouts, <em>\"Truck go fast! It go boom!\"</em> Mr. Osei kneels beside him: <em>\"Say, 'The truck goes fast.'\"</em> Dario repeats quietly, <em>\"The truck goes fast.\"</em> <em>\"Good talking.\"</em> Dario sends the truck down again, this time without saying anything. For the rest of block time, he plays silently.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Repetition and Extension — Modeling Language Without Stopping the Conversation",
+  qcText1:"Repetition and extension means <strong>repeating what a child says in a more complete form and adding new information</strong>, without asking the child to correct themselves. Dario's sentence was full of meaning and excitement. Mr. Osei could have modeled the correct grammar naturally: <em>\"Yes! The truck goes fast! It zoomed down the ramp and crashed at the bottom!\"</em>",
+  qcText2:"Mr. Osei's goal — correct language — was a good one, but <strong>asking Dario to repeat the sentence turned a conversation into a correction</strong>. Dario learned that talking might lead to being corrected, and he stopped talking. Modeling through extension gives children the correct form and new words while keeping them eager to talk.",
+  coachTitle:"Say It the Right Way — Coaching Conversation",
+  question:"Mr. Osei asks you directly: \"Shouldn't I correct his grammar? I want him to speak properly.\" He is a <strong>Driver-Sustainer</strong> — results-focused, protective of his children, and eager to get it right. Which response serves him best?",
+  correct:0,
+  options:[
+    "\"Wanting him to speak well is exactly the right goal — you care about his future. The question is how he learns it best. When you asked him to repeat the sentence, he said it once and then played silently for the rest of block time. Try modeling instead: 'Yes! The truck goes fast! It zoomed down the ramp!' He hears the correct form, plus new words like 'zoomed,' and he keeps talking. I'll watch your next block time, and we'll count how many sentences Dario says.\"",
+    "\"What if you sang a fun grammar song with the kids every morning? They'd learn proper sentences without even noticing!\"",
+    "\"There's research on recasting and how children learn grammar through modeling rather than correction. I'll send you some articles.\"",
+    "\"No. Asking him to repeat it shut him down. Just model the correct sentence instead.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Adds a Song but Skips the Answer", p1:"A grammar song is an <strong>Inspirer mentor's</strong> natural move — creative and fun.", p2:"It doesn't answer Mr. Osei's direct question, and it doesn't help him respond in the moment when a child speaks. He needs a clear explanation and a specific alternative for conversations like Dario's."},
+    {h:"This Is a Cultivator's Natural Move — Right Content, Wrong Timing", p1:"Offering research on recasting is a <strong>Cultivator mentor's</strong> instinct. The evidence is sound, and Cultivators trust good information.", p2:"Mr. Osei asked a direct question in the moment. He needs a clear answer and a concrete move he can use tomorrow. The articles can follow once he sees the difference."},
+    {h:"This Is a Driver's Natural Move — Accurate, but It Wounds the Sustainer", p1:"A blunt \"no, it shut him down\" is the natural move of a mentor with a strong <strong>Driver</strong> expression: fast and correct.", p2:"Mr. Osei's Sustainer side cares deeply about Dario. Hearing that he \"shut him down\" will make him feel he failed a child. He needs his goal affirmed before the correction."}
+  ],
+  matchText:"This works for a <strong>Driver-Sustainer</strong> because it affirms his goal — \"exactly the right goal\" — and his care for Dario's future. Then it reframes the question from whether to teach grammar to how children learn it best.",
+  matchText2:"The modeling example gives him a precise alternative: correct grammar plus a new word, \"zoomed.\" And counting Dario's sentences gives his Driver side a measurable result. He gets the outcome he wants without losing Dario's voice.",
+  actionSteps:[
+    "<strong>Practice recasting.</strong> Role-play common child sentences and have him repeat them correctly while adding one detail.",
+    "<strong>Add a new word.</strong> Encourage him to extend children's sentences with a descriptive word: zoomed, crashed, tumbled.",
+    "<strong>Go back to Dario.</strong> Suggest he play trucks with Dario and model sentences naturally, without asking him to repeat.",
+    "<strong>Count child sentences.</strong> Track how many sentences Dario says during block time before and after the change.",
+    "<strong>Observe and debrief quickly.</strong> Watch his next block time and debrief right after. A Driver-Sustainer wants fast feedback — and reassurance that the change is working."
+  ],
+  completeLine:"You honored a Driver-Sustainer's goal and gave him a better way to reach it. That's how he grows."
+},
+
+// ── SCENARIO 4 · Driver-Cultivator Mentee ────────────────────
+{
+  menteeType:"DC",
+  menteeLabel:"The Driver-Cultivator",
+  menteeDesc:"Ms. Reeves is a strategic, high-standards teacher who plans meticulously and executes decisively. Her circle time includes a carefully chosen \"word of the week\" with picture cards and definitions. Her challenge: the rich vocabulary stays at circle, and during play she uses simple, everyday words, so children rarely hear advanced language used naturally in context. She receives feedback best when it is specific, evidence-based, and names both the gap in her system and the precise intervention that closes it.",
+  sceneTitle:"Big, Big, Big", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Advanced Language in Context",
+  scene:"This week's vocabulary word, posted on Ms. Reeves's board, is <em>\"enormous.\"</em> At circle, children practiced saying it and acted it out. Later, in the block area, Harriet (4 years, 9 months) builds a tower taller than herself: <em>\"Look! It's big! It's so big! It's the biggest!\"</em> Ms. Reeves glances over: <em>\"Wow, it is big. Be careful it doesn't fall.\"</em> Harriet adds another block: <em>\"Now it's bigger!\"</em> The word <em>\"enormous\"</em> isn't used again for the rest of the day.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Advanced Language — Using Rich Vocabulary in Everyday Moments",
+  qcText1:"Advanced language means <strong>using rich vocabulary and varied sentence structures during real conversations</strong>, not only during planned lessons. Children learn new words best when they hear them used meaningfully in context — like a tower that really is enormous.",
+  qcText2:"Ms. Reeves's vocabulary lesson was well planned, but <strong>the word stayed on the board</strong>. Harriet's tower was the perfect moment to use it: <em>\"Your tower is enormous — it's even taller than you! How did you make it so tall and sturdy?\"</em> That one sentence would have connected circle-time learning to Harriet's own experience.",
+  coachTitle:"Big, Big, Big — Coaching Conversation",
+  question:"You're debriefing with Ms. Reeves, a <strong>Driver-Cultivator</strong>. She says, \"We covered 'enormous' thoroughly at circle, with pictures and actions.\" Which approach will move her?",
+  correct:2,
+  options:[
+    "\"Harriet's tower was amazing! You should just talk with the kids more during play — they learn so much from conversation!\"",
+    "\"I could tell Harriet was proud of her tower. Maybe you could have given her a little more attention in that moment?\"",
+    "\"Let's look at the evidence. At circle, children practiced 'enormous.' In the block area, Harriet built a tower taller than herself and said 'big' three times. That was the ideal context for your word, and it didn't appear again all day. Your system teaches vocabulary, but it doesn't include a way to use the words during play. Want to build one? For example, a short list of the week's words for each center, and a goal to use each word in conversation at least three times a day.\"",
+    "\"Your vocabulary lesson was too isolated. Use your words during play.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Enthusiasm Without Structure", p1:"Suggesting more conversation during play is an <strong>Inspirer mentor's</strong> natural move — energetic and child-centered.", p2:"For a Driver-Cultivator, \"talk with the kids more\" sounds vague. She'll dismiss it as a general idea rather than a plan. She needs a specific system for bringing vocabulary into play."},
+    {h:"This Is a Sustainer's Natural Move — Feelings Where She Needs Facts", p1:"Focusing on Harriet's pride is a <strong>Sustainer mentor's</strong> instinct — attentive and caring.", p2:"Ms. Reeves will find this unpersuasive. More attention doesn't address the real gap: the vocabulary wasn't used in context. She needs evidence and a system."},
+    {h:"This Is a Driver's Natural Move — A Directive Without the Mechanism", p1:"A crisp \"use your words during play\" is the natural move of a mentor with a strong <strong>Driver</strong> expression — decisive and outcome-focused.", p2:"It speaks to her Driver side but skips what her Cultivator side needs: a clear explanation and a structured way to make it happen. Without that, she'll treat it as a suggestion."}
+  ],
+  matchText:"This works for a <strong>Driver-Cultivator</strong> because it's built like an analysis: circle practice, Harriet's tower, \"big\" three times, and no use of \"enormous\" all day. The diagnosis names a gap in her system, not a failure of her teaching.",
+  matchText2:"The proposed system — words for each center and a target number of uses — gives her structure and measurable goals. Her Driver side gets a clear outcome; her Cultivator side gets a well-reasoned plan.",
+  actionSteps:[
+    "<strong>Post words at centers.</strong> Help her place the week's vocabulary words near the areas where they're most likely to be useful.",
+    "<strong>Plan the natural moments.</strong> For each word, she identifies two or three play situations where it might fit.",
+    "<strong>Extend children's words.</strong> Teach her to build from children's language: \"Big? It's enormous!\"",
+    "<strong>Go back to Harriet.</strong> Suggest she revisit the block area and use \"enormous\" as Harriet builds.",
+    "<strong>Track the words.</strong> Let her record how often she and the children use the week's words. She'll analyze the results and refine the system."
+  ],
+  completeLine:"You gave a Driver-Cultivator evidence, a diagnosis, and a system to build. That's exactly what she needed."
+},
+
+// ── SCENARIO 5 · Inspirer Mentee ─────────────────────────────
+{
+  menteeType:"I",
+  menteeLabel:"The Inspirer",
+  menteeDesc:"Ms. Reyes is warm, expressive, and genuinely beloved by the families and children in her program. She loves to talk with children and is eager to connect. Her challenge: in her excitement, she often finishes children's sentences for them or jumps in before they've found their words, so children get less practice putting their own thoughts into language. She receives feedback best when her strengths are genuinely honored first, and growth is framed as an expansion of what she already does well.",
+  sceneTitle:"Finishing His Sentences", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Wait Time and Child Talk",
+  scene:"At the playdough table, Hugo (4 years, 2 months) is shaping something long with bumps on it. He looks up at Ms. Reyes: <em>\"This is a... it's a... um, a...\"</em> Ms. Reyes jumps in brightly: <em>\"A snake! Oh, what a great snake! Is it hissing? Ssss!\"</em> Hugo frowns: <em>\"No, it's a...\"</em> <em>\"A caterpillar! Look at the bumps!\"</em> Hugo pauses, then nods and sets it down. Later, he tells a friend, <em>\"It was a dragon.\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Wait Time — Giving Children Room to Find Their Words",
+  qcText1:"Language Modeling includes <strong>giving children time to form their own words</strong>. When a child pauses, they are often searching for a word or organizing a sentence — valuable language work. Waiting a few seconds, or offering a gentle prompt like <em>\"Tell me about it,\"</em> lets the child finish their thought.",
+  qcText2:"Ms. Reyes's enthusiasm was genuine, but <strong>by finishing Hugo's sentence, she replaced his idea with hers</strong>. He had a dragon in mind and never got to say it to her. A few seconds of patient waiting would have given Hugo the chance to use his own words — and given Ms. Reyes a much richer conversation to join.",
+  coachTitle:"Finishing His Sentences — Coaching Conversation",
+  question:"You're debriefing with Ms. Reyes, an <strong>Inspirer</strong>. She laughs: \"Hugo and I had so much fun with his playdough snake!\" Which approach will land?",
+  correct:2,
+  options:[
+    "\"It wasn't a snake — it was a dragon. You finished his sentences twice. Stop jumping in and let children talk.\"",
+    "\"You're so enthusiastic with the kids. Maybe just try pausing a little sometimes? Only if it feels natural.\"",
+    "\"You two really connected — your excitement makes children want to talk to you. Here's a surprise: it wasn't a snake. Hugo told a friend later that it was a dragon. When he said 'This is a... um...' he was searching for his word, and your guesses filled the pause before he found it. What if you gave him three quiet seconds — or said, 'Tell me about it!' — and let him surprise you? Same joy, and you'd hear his dragon story.\"",
+    "\"There's research on wait time and how it increases children's language output. I'd suggest reading a summary before our next meeting.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Blunt for an Inspirer", p1:"Stating the facts and the fix plainly is a <strong>Driver mentor's</strong> instinct: clear and efficient.", p2:"Ms. Reyes will hear \"stop jumping in\" as criticism of her warmth and enthusiasm. Inspirers can deflate when feedback lands as a rule without recognition. She'll feel corrected rather than inspired."},
+    {h:"This Is a Sustainer's Natural Move — So Gentle the Point Disappears", p1:"Affirming her and softening the suggestion is a <strong>Sustainer mentor's</strong> natural move — caring and protective.", p2:"\"Only if it feels natural\" makes the change optional, and it doesn't show her what Hugo missed. She needs the dragon moment to see why waiting matters."},
+    {h:"This Is a Cultivator's Natural Move — Theory Before Connection", p1:"Assigning research on wait time is a <strong>Cultivator mentor's</strong> instinct — thorough and principled.", p2:"For an Inspirer, it feels like homework instead of connection. The research is sound, but she'll understand it best through Hugo's dragon. Lead with the child."}
+  ],
+  matchText:"This works for an <strong>Inspirer</strong> because it honors her gift — \"your excitement makes children want to talk to you\" — and then reveals a surprise: it was a dragon. The insight feels like a discovery rather than a correction.",
+  matchText2:"The reframe \"let him surprise you\" makes waiting sound exciting rather than restrictive. You didn't ask her to be less enthusiastic; you showed her how patience could lead to an even better conversation. \"Same joy, and you'd hear his dragon story\" is a trade she'll want to make.",
+  actionSteps:[
+    "<strong>Practice three quiet seconds.</strong> Role-play a child pausing mid-sentence and have her count silently before responding.",
+    "<strong>Use \"tell me about it.\"</strong> Give her an open prompt to use instead of guessing.",
+    "<strong>Go back to Hugo's dragon.</strong> Suggest she ask Hugo to make his dragon again and tell her about it.",
+    "<strong>Show interest with her face.</strong> Help her use an expectant smile and eye contact while waiting, so her warmth stays present.",
+    "<strong>Hear the story together.</strong> On your next visit, point out a moment when waiting led to a longer child sentence. Inspirers learn best from moments they can feel."
+  ],
+  completeLine:"You showed an Inspirer that waiting can lead to even better conversations. That's the work."
+},
+
+// ── SCENARIO 6 · Inspirer-Driver Mentee ──────────────────────
+{
+  menteeType:"ID",
+  menteeLabel:"The Inspirer-Driver",
+  menteeDesc:"Mr. Castillo is magnetic, persuasive, and absolutely committed to results. His cooking and science demonstrations are fast, exciting, and full of suspense. His challenge: he performs the steps with lots of energy but little description — \"Watch this! Now this!\" — so children see the action without hearing the language that explains it. He receives feedback best when it is both energetically engaging and immediately connected to real outcomes — he needs to feel it and be given something specific to do with it.",
+  sceneTitle:"Watch This! Now This!", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Self-Talk",
+  scene:"Mr. Castillo is making muffins with a small group. He cracks an egg with a flourish: <em>\"Watch this!\"</em> He pours in the milk: <em>\"Now this!\"</em> He whisks quickly: <em>\"And THIS!\"</em> The children giggle and cheer. Rahim (4 years, 7 months) points at the bowl: <em>\"What's that thing?\"</em> Mr. Castillo holds up the whisk and waves it: <em>\"This! Watch!\"</em> and whisks faster. At the end, the assistant teacher asks Rahim what they did. He says, <em>\"We did this and this and this.\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Self-Talk — Describing Your Own Actions Out Loud",
+  qcText1:"Self-talk means <strong>describing what you're doing as you do it</strong>: <em>\"I'm cracking the egg on the edge of the bowl. Now I'm whisking — stirring fast to mix the egg and milk together.\"</em> Cooking and science activities are full of rich words — crack, pour, whisk, mix, measure — that children can learn when they hear them attached to real actions.",
+  qcText2:"Mr. Castillo's energy kept the group excited, but <strong>\"this\" replaced every word children could have learned</strong>. Rahim even asked for the word — \"What's that thing?\" — and didn't get it. By the end, he could only describe the activity as \"this and this and this.\" Adding self-talk would make Mr. Castillo's demonstrations just as exciting and far richer in language.",
+  coachTitle:"Watch This! Now This! — Coaching Conversation",
+  question:"You're debriefing with Mr. Castillo, an <strong>Inspirer-Driver</strong>. He grins: \"The muffin group was a blast! They loved it!\" Which approach will actually land?",
+  correct:0,
+  options:[
+    "\"They loved it — you turn cooking into a show. Now let's make the show teach language too. Rahim asked 'What's that thing?' and heard 'This! Watch!' At the end, he could only say, 'We did this and this and this.' What if you kept the suspense and added the words? 'Watch this — I'm cracking the egg! Now I'm pouring the milk. This is a whisk — I'm whisking fast!' Same show, and every child walks away with a dozen new words.\"",
+    "\"It was fun, and the kids really love you. I just felt like Rahim wanted to know more. Maybe be a little more careful to answer their questions?\"",
+    "\"Could you record your next cooking activity and count how many specific vocabulary words you use? Then we can analyze the language you're modeling.\"",
+    "\"You kept saying 'this' instead of naming things. Describe what you're doing.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Sustainer's Natural Move — It Asks Him to Shrink", p1:"Focusing on Rahim's need and asking him to be \"more careful\" is a <strong>Sustainer mentor's</strong> instinct — gentle and attentive.", p2:"Mr. Castillo will hear it as a request to tone down his fun demonstrations. The problem isn't his energy; it's the missing words. He needs a way to keep his show and add language."},
+    {h:"This Is a Cultivator's Natural Move — Documentation Over Momentum", p1:"Recording and counting vocabulary is a <strong>Cultivator mentor's</strong> natural move — systematic and evidence-oriented.", p2:"For an Inspirer-Driver, it turns an exciting moment into paperwork, and he'll lose interest. He needs Rahim's story and a quick script he can try tomorrow."},
+    {h:"This Is a Driver's Natural Move — Correct, but He'll Charm Past It", p1:"A crisp \"describe what you're doing\" is a <strong>Driver mentor's</strong> instinct — direct and results-focused.", p2:"Without energy and a vivid reason, Mr. Castillo will treat it as a small note and keep performing the same way. He needs to feel Rahim's moment and see how self-talk makes his demonstrations better."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Driver</strong> because it celebrates his strength — \"you turn cooking into a show\" — and then gives it a bigger purpose: making the show teach language. Rahim's \"this and this and this\" makes the missing words impossible to ignore.",
+  matchText2:"The script keeps his suspense and energy — \"Watch this — I'm cracking the egg!\" — while adding vocabulary. \"Same show, and every child walks away with a dozen new words\" gives him both the excitement and the result he wants.",
+  actionSteps:[
+    "<strong>Practice \"Watch this — I'm…\"</strong> Help him keep his signature phrase and add a description after it.",
+    "<strong>List the action words.</strong> Before each cooking or science activity, he writes five words he'll use: crack, pour, whisk, mix, measure.",
+    "<strong>Answer \"What's that?\" with a name.</strong> Teach him to name tools and materials when children ask: \"This is a whisk.\"",
+    "<strong>Go back to Rahim.</strong> Suggest he invite Rahim to help whisk next time and describe what they're doing together.",
+    "<strong>Sit in as his signal.</strong> During his next demonstration, give him a thumbs-up each time he names an action or tool. He'll enjoy the game — and the habit will stick."
+  ],
+  completeLine:"You matched an Inspirer-Driver's energy and filled his show with language. He'll run with that."
+},
+
+// ── SCENARIO 7 · Inspirer-Sustainer Mentee ───────────────────
+{
+  menteeType:"IS",
+  menteeLabel:"The Inspirer-Sustainer",
+  menteeDesc:"Ms. Fontaine is warm-hearted, joyful, and deeply invested in every child and family she serves. She is especially tender with children who are learning English, and she works hard to make them feel safe. Her challenge: she anticipates their needs so well — handing them what they point to before they speak — that they rarely need to use words at all. She receives feedback best when she feels completely safe in the relationship, and when growth is framed as deepening her impact on the children she loves — not as a failure of her warmth.",
+  sceneTitle:"The Red Crayon", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Inviting Language From Emerging Speakers",
+  scene:"Paloma (3 years, 11 months) speaks Spanish at home and is beginning to learn English. At the art table, she points to the crayon bin and looks at Ms. Fontaine. Ms. Fontaine smiles and hands her the red crayon: <em>\"Here you go, sweetie.\"</em> A few minutes later, Paloma points to the glue. Ms. Fontaine hands it over. Then scissors. Then the green paper. In twenty minutes at the table, Paloma gets everything she needs and doesn't say a single word — in English or in Spanish.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Inviting Language — Supporting Children Who Are Learning English",
+  qcText1:"Children learning a new language need <strong>many chances to hear and use words in meaningful moments</strong>. Each time Paloma pointed, Ms. Fontaine had an opportunity to model language and gently invite her to use it: <em>\"Red? You want the red crayon. Red. Can you say red?\"</em> — or even <em>\"¿Rojo? Red!\"</em> to connect her home language with English.",
+  qcText2:"Ms. Fontaine's responsiveness helped Paloma feel safe, and that matters. But <strong>because her needs were met without words, Paloma had no reason or support to try speaking</strong>. Naming each item, pausing for Paloma to try, and celebrating any attempt would keep the same warmth while helping Paloma build her English.",
+  coachTitle:"The Red Crayon — Coaching Conversation",
+  question:"Ms. Fontaine says softly, \"I don't want to pressure her. I want her to feel safe.\" She is an <strong>Inspirer-Sustainer</strong> — joyful, relational, and deeply protective of children's feelings. Which approach will help her grow?",
+  correct:3,
+  options:[
+    "\"By handing her everything, you're keeping her from learning English. Make her use words before you give her things.\"",
+    "\"Let's create a vocabulary plan for Paloma with target words for each center and a system for tracking her progress.\"",
+    "\"What if you made a fun 'Spanish Word of the Day' for the whole class? Paloma could be the teacher, and everyone would learn Spanish!\"",
+    "\"Her feeling safe with you is so important — and she clearly does. Can I share something I noticed because I know how much you care about her? In twenty minutes at the art table, Paloma pointed for the crayon, glue, scissors, and paper, and got each one without saying a word. She's safe enough to try now. What if, each time she points, you named it warmly — 'Red? The red crayon!' — and paused for just a second in case she wants to say it too? If she does, celebrate it. If she doesn't, hand it over with a smile. She keeps her safety and gets a chance to use her words.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Correct, but It Breaks Her Sense of Safety", p1:"Naming the problem and requiring words is a <strong>Driver mentor's</strong> instinct — direct and standards-focused.", p2:"For an Inspirer-Sustainer, \"make her use words\" sounds like pressure, exactly what she's trying to avoid. She'll resist it, and she'd be right to worry about forcing a child. She needs a gentle invitation, not a requirement."},
+    {h:"This Is a Cultivator's Natural Move — A System Before a Reason", p1:"A vocabulary plan and progress tracking are a <strong>Cultivator mentor's</strong> natural move — organized and thorough.", p2:"A plan won't change Ms. Fontaine's practice until she sees how to invite language without pressure. Her barrier is emotional. Start with Paloma and a warm, gentle approach."},
+    {h:"This Is an Inspirer's Natural Move — A Fun Idea That Skips the Moment", p1:"A Spanish word of the day is the natural move of a mentor with a strong <strong>Inspirer</strong> expression — joyful and inclusive.", p2:"It's a lovely way to honor Paloma's home language, but it doesn't address the moments when Paloma points and gets things without speaking. She still needs everyday invitations to use words."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Sustainer</strong> because it begins by honoring Ms. Fontaine's commitment to safety — \"she clearly does\" feel safe. That reassurance is exactly what allows her to hear the rest.",
+  matchText2:"The suggestion is gentle and built around her values: name it warmly, pause briefly, celebrate any attempt, and hand it over with a smile either way. \"She keeps her safety and gets a chance to use her words\" shows that language and safety can grow together.",
+  actionSteps:[
+    "<strong>Name everything warmly.</strong> Help her practice naming each item Paloma points to: \"The red crayon!\"",
+    "<strong>Pause without pressure.</strong> Teach her to pause for a second with an encouraging smile, then hand over the item whether or not Paloma speaks.",
+    "<strong>Celebrate any word.</strong> When Paloma tries a word in English or Spanish, help Ms. Fontaine respond with genuine delight.",
+    "<strong>Honor her home language.</strong> Encourage her to learn a few Spanish words for common items and pair them with English.",
+    "<strong>Name her success out loud.</strong> When Paloma says her first word at the art table, tell Ms. Fontaine what you saw. An Inspirer-Sustainer needs to see that the relationship grew stronger."
+  ],
+  completeLine:"You helped an Inspirer-Sustainer see that inviting words can be another way to love a child. That changes her whole practice."
+},
+
+// ── SCENARIO 8 · Inspirer-Cultivator Mentee ──────────────────
+{
+  menteeType:"IC",
+  menteeLabel:"The Inspirer-Cultivator",
+  menteeDesc:"Ms. Park is a creative, intellectually curious teacher who brings both warmth and analytical depth to her practice. She loves asking children questions and is full of ideas about what they might explore. Her challenge: she asks several questions in a row without waiting, so children don't know which to answer and often end up saying very little. She receives feedback best when it engages both her intellectual curiosity and her relational energy, and when the path forward is both exciting and structured.",
+  sceneTitle:"Five Questions at Once", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · One Question, Then Wait",
+  scene:"Quinn (4 years, 6 months) comes to Ms. Park holding a beetle in a clear bug jar. Ms. Park kneels, eyes sparkling: <em>\"Ooh! What did you find? Is it a beetle? How many legs does it have? Where did you find it? What do you think it eats?\"</em> Quinn opens his mouth, closes it, looks at the beetle, then back at Ms. Park. He says, <em>\"Outside.\"</em> Ms. Park laughs: <em>\"Outside! Great!\"</em> and moves on to another child. Quinn stands holding the jar, then sets it on the science shelf.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Open-Ended Questions — Asking One Question and Waiting",
+  qcText1:"Ms. Park's questions were all interesting and open-ended, but <strong>five at once is too many for a four-year-old to process</strong>. Quinn likely didn't know which question to answer, so he picked the simplest one. One question — <em>\"Tell me about your beetle\"</em> — followed by a pause would have given him space to organize his thoughts and say much more.",
+  qcText2:"Her curiosity is a real strength, and <strong>her questions could lead to rich conversations if she gives children time to answer each one</strong>. Asking one question, waiting, and then building on the child's answer turns her ideas into a real exchange instead of a burst of questions.",
+  coachTitle:"Five Questions at Once — Coaching Conversation",
+  question:"Ms. Park asks eagerly, \"Wasn't Quinn's beetle amazing? I had so many questions for him!\" She is an <strong>Inspirer-Cultivator</strong> — curious, creative, and energized by ideas. Which approach will help her most?",
+  correct:1,
+  options:[
+    "\"You asked five questions without waiting for an answer. Ask one question at a time.\"",
+    "\"It really was — and your questions were fantastic, every one of them. Here's the puzzle: with five great questions arriving at once, Quinn could only answer 'Outside.' He had a beetle and a lot to say, but he didn't know which question to start with. What if you picked just one — 'Tell me about your beetle' — and waited? What do you think he'd have told you about the legs, the place he found it, or what it eats, on his own?\"",
+    "\"You're so curious, and the kids love your enthusiasm! I'm sure Quinn felt special that you were so interested.\"",
+    "\"Let's record your questions for one day and analyze the pattern: how many questions per exchange, and how many words children use in response.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Clear, but It Deflates Her", p1:"A direct \"ask one question at a time\" is a <strong>Driver mentor's</strong> instinct — efficient and outcome-oriented.", p2:"It misses what Ms. Park did well — her questions were excellent — and feels like a correction of her curiosity. An Inspirer-Cultivator who feels her ideas weren't valued may pull back. She needs her curiosity engaged."},
+    {h:"This Is a Sustainer's Natural Move — Reassurance That Skips the Growth", p1:"Praising her enthusiasm and reassuring her is a <strong>Sustainer mentor's</strong> natural move — warm and protective.", p2:"It reinforces the pattern she needs to grow past. Quinn may have felt special, but he didn't get to use his language. Ms. Park needs to see what he could have said."},
+    {h:"This Is a Cultivator's Natural Move — Analysis Without the Spark", p1:"Recording and analyzing question patterns is the natural move of a mentor with a strong <strong>Cultivator</strong> expression, and it speaks to half of Ms. Park.", p2:"It misses her Inspirer half. The task is heavy and joyless, and it turns an exciting discovery into data collection. She'll engage more deeply when the insight feels like a puzzle about Quinn."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Cultivator</strong> because it honors her questions — \"fantastic, every one of them\" — and then offers a puzzle: why could Quinn only say \"Outside\"? It invites her analytical mind without criticizing her curiosity.",
+  matchText2:"The final question — what might Quinn have said \"on his own?\" — engages her imagination. Her Cultivator side sees the logic of one question at a time; her Inspirer side gets excited about hearing Quinn's own discoveries.",
+  actionSteps:[
+    "<strong>Choose one question.</strong> Help her practice picking her best question and saving the rest.",
+    "<strong>Count to three silently.</strong> Teach her to wait after asking, giving the child time to think.",
+    "<strong>Build on the answer.</strong> Encourage her to use the child's response to choose her next question.",
+    "<strong>Go back to Quinn's beetle.</strong> Suggest she ask Quinn, \"Tell me about your beetle,\" and let him lead the conversation.",
+    "<strong>Celebrate a longer answer.</strong> When a child responds with more words after one question, point it out. An Inspirer-Cultivator who sees that payoff will want to create it again."
+  ],
+  completeLine:"You helped an Inspirer-Cultivator turn her many questions into one great conversation. That's the work."
+},
+
+// ── SCENARIO 9 · Sustainer Mentee ────────────────────────────
+{
+  menteeType:"S",
+  menteeLabel:"The Sustainer",
+  menteeDesc:"Ms. Okafor is nurturing, relationship-centered, and deeply committed to the children in her care. Mealtimes at her table are warm and full of conversation with children she knows well. Her challenge: with children whose behavior challenges her, her conversation shrinks to short reminders, so those children get far fewer chances to hear and use rich language. She receives feedback best when her care for children is honored first, and when growth is framed through the lens of a specific child's experience rather than a general critique of her practice.",
+  sceneTitle:"Two Conversations at Lunch", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Conversation With Every Child",
+  scene:"At lunch, Ms. Okafor sits with four children. She chats warmly with Mira about her new baby brother: <em>\"What does he do when he cries? Do you sing to him? What songs does he like?\"</em> Across the table, Obi (4 years, 3 months) — who has had several difficult mornings — says, <em>\"I went to the fire station and I sat in the truck!\"</em> Ms. Okafor glances over: <em>\"That's nice, Obi. Eat your carrots.\"</em> She turns back to Mira. Obi pokes his carrots and says nothing else for the rest of lunch.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Frequent Conversation — Extending Rich Talk to Every Child",
+  qcText1:"Ms. Okafor's conversation with Mira was excellent: <strong>open-ended questions, genuine interest, and several back-and-forth turns</strong>. That's exactly the kind of talk that builds children's language. Obi offered an equally rich topic — a visit to the fire station and sitting in a real truck.",
+  qcText2:"But Obi received a brief acknowledgment and a direction. <strong>Children who struggle with behavior often need rich conversation the most</strong>, and they notice when their stories get less interest. The same questions she asked Mira — \"What did you see? What did it feel like?\" — could have given Obi both language and connection.",
+  coachTitle:"Two Conversations at Lunch — Coaching Conversation",
+  question:"You're debriefing with Ms. Okafor, a <strong>Sustainer</strong>. She says, \"Lunch was lovely today. Mira had so much to say about her baby brother.\" Which approach will help her grow?",
+  correct:0,
+  options:[
+    "\"It was lovely — your questions to Mira were so warm, and she lit up telling you about her brother. Can I tell you what I saw from Obi's side? He told you he sat in a real fire truck. He heard 'That's nice, Obi. Eat your carrots,' and then watched you keep asking Mira questions. He didn't say another word all lunch. I wonder what Obi would have told you about that fire truck if he'd gotten one of your wonderful questions too.\"",
+    "\"You had a rich conversation with Mira and gave Obi a one-line response. That's unequal. Every child deserves the same conversation.\"",
+    "\"What if you did a 'Community Helpers Week'? Obi could tell everyone about his fire station visit, and you could invite a firefighter to visit!\"",
+    "\"Let's track who you talk with at lunch for a week. Research shows teachers often have longer conversations with some children than others.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Abrupt for a Sustainer", p1:"Naming the inequality directly is a <strong>Driver mentor's</strong> instinct — clear and fair.", p2:"For Ms. Okafor, \"unequal\" sounds like an accusation that she doesn't care about Obi. A Sustainer who feels judged may become defensive. She needs to see Obi's experience first."},
+    {h:"This Is an Inspirer's Natural Move — A Project Instead of the Insight", p1:"A community helpers week is an <strong>Inspirer mentor's</strong> natural suggestion — creative and engaging.", p2:"It's a nice idea, but it skips what Ms. Okafor needs to see: Obi's story was brushed aside while Mira's was explored. Without that insight, the same pattern will continue."},
+    {h:"This Is a Cultivator's Natural Move — Evidence Without the Child", p1:"Tracking conversations across children is a <strong>Cultivator mentor's</strong> instinct — principled and evidence-based.", p2:"The data would be useful, but a chart won't reach a Sustainer the way one child's story will. Ms. Okafor changes when she sees a specific child she cares about. Lead with Obi."}
+  ],
+  matchText:"This works for a <strong>Sustainer</strong> because it begins by honoring her conversation with Mira — \"so warm.\" Then it invites her to see lunch \"from Obi's side,\" without accusing her of treating him unfairly.",
+  matchText2:"The closing wonder — \"what Obi would have told you about that fire truck\" — lets Ms. Okafor draw the conclusion herself. She already knows how to have rich conversations. She just needs to see that Obi is waiting for one too.",
+  actionSteps:[
+    "<strong>Ask Obi about the fire truck.</strong> Suggest she find a quiet moment tomorrow and ask, \"Tell me about the fire truck. What did you see?\"",
+    "<strong>Give every child a turn.</strong> Help her make sure each child at the table gets at least one open question during lunch.",
+    "<strong>Notice who gets short answers.</strong> Encourage her to pay attention to which children receive brief responses and why.",
+    "<strong>Separate the story from the reminder.</strong> Help her respond to the story first, then the reminder: \"You sat in a real fire truck? Tell me more — and take a bite of your carrots.\"",
+    "<strong>Help her see Obi open up.</strong> When Obi talks longer, point it out. A Sustainer who sees a struggling child light up will keep offering that connection."
+  ],
+  completeLine:"You helped a Sustainer see that every child deserves her best conversation. Obi will feel the difference."
+},
+
+// ── SCENARIO 10 · Sustainer-Driver Mentee ────────────────────
+{
+  menteeType:"SD",
+  menteeLabel:"The Sustainer-Driver",
+  menteeDesc:"Mr. James is a steady, principled teacher who holds high expectations while genuinely protecting the emotional wellbeing of his children. During center time, he supervises carefully and quietly. His challenge: he watches children play without describing what they're doing, missing chances to use parallel talk to give them words for their own actions. He receives feedback best when his care for children is acknowledged first, followed by clear, specific, actionable guidance.",
+  sceneTitle:"The Silent Supervisor", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Parallel Talk",
+  scene:"Sienna (3 years, 9 months) is at the table-toys center, carefully building with magnetic tiles. She stacks two squares, adds a triangle on top, and makes a tall house. She looks up at Mr. James, who is standing nearby watching. He nods and says, <em>\"Good.\"</em> Sienna adds another triangle, looks at him again, and waits. He nods again. She keeps building quietly, glancing up every few minutes, then knocks the house down and starts over without a word.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Parallel Talk — Describing What Children Are Doing",
+  qcText1:"Parallel talk means <strong>describing a child's actions as they happen</strong>: <em>\"You put two squares together and added a triangle on top — it looks like a roof!\"</em> It gives children words for what they're doing, especially shapes, positions, and actions, and it shows them that someone is interested in their work.",
+  qcText2:"Mr. James was attentive and supportive, but <strong>his \"good\" and nods didn't give Sienna any language</strong>. She kept looking up, clearly wanting more engagement. A few sentences of parallel talk would have taught words like square, triangle, roof, and on top — without interrupting her play.",
+  coachTitle:"The Silent Supervisor — Coaching Conversation",
+  question:"You're debriefing with Mr. James, a <strong>Sustainer-Driver</strong>. He says, \"I was right there with her the whole time. I didn't want to interrupt.\" Which approach will help him?",
+  correct:2,
+  options:[
+    "\"What if you did a big shape hunt with the whole class? The kids would love finding squares and triangles all around the room!\"",
+    "\"There's research on parallel talk and how it builds children's vocabulary. I can send you an article.\"",
+    "\"You were right there — steady and present, and you didn't interrupt her building. That's real care. Here's what I noticed: every few minutes, Sienna looked up at you and waited. She wanted more than a nod. What if you described what she was doing, without taking over? 'You put two squares together and a triangle on top — it looks like a roof!' That doesn't interrupt her; it gives her the words for her own building. Try three sentences like that at the next center time.\"",
+    "\"You just nodded and said 'good.' Describe what she's doing instead.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Adds an Activity but Misses the Point", p1:"A shape hunt is an <strong>Inspirer mentor's</strong> natural move — lively and creative.", p2:"It doesn't address what Mr. James needs to change: how he talks while children play. A separate activity won't give Sienna words during her own building. He needs a clear, practical alternative to nodding."},
+    {h:"This Is a Cultivator's Natural Move — Right Evidence, Wrong Entry Point", p1:"Offering research on parallel talk is a <strong>Cultivator mentor's</strong> instinct — careful and evidence-based.", p2:"For a Sustainer-Driver, an article feels abstract. He'll be persuaded by Sienna looking up at him, delivered with respect for his care and followed by a concrete action."},
+    {h:"This Is a Driver's Natural Move — Correct, but It Skips His Care", p1:"A crisp \"describe what she's doing\" is the natural move of a mentor with a strong <strong>Driver</strong> expression — accurate and quick.", p2:"Mr. James's Sustainer side needs to hear that his presence mattered and that his concern about interrupting was reasonable. Without that, he'll feel his quiet support was criticized."}
+  ],
+  matchText:"This works for a <strong>Sustainer-Driver</strong> because it acknowledges his steady presence first and validates his concern about interrupting. Then it shows him Sienna looking up and waiting — evidence that she wanted more.",
+  matchText2:"The reframe \"That doesn't interrupt her; it gives her the words\" resolves his concern. And the specific example plus a goal of three sentences gives his Driver side exactly the clarity he needs.",
+  actionSteps:[
+    "<strong>Practice parallel talk.</strong> Role-play describing a child's building without giving directions or asking questions.",
+    "<strong>Name shapes, positions, and actions.</strong> Help him use words like square, triangle, on top, next to, stacking, balancing.",
+    "<strong>Use three sentences per center.</strong> Encourage him to offer at least three descriptions during each center time.",
+    "<strong>Go back to Sienna.</strong> Suggest he sit near Sienna at the next center time and describe her building as she works.",
+    "<strong>Reinforce his consistency.</strong> Over the next two weeks, notice when he uses parallel talk. Name those moments — steady feedback reinforces steady practice."
+  ],
+  completeLine:"You helped a Sustainer-Driver turn his quiet presence into language. That's steady growth."
+},
+
+// ── SCENARIO 11 · Sustainer-Inspirer Mentee ──────────────────
+{
+  menteeType:"SI",
+  menteeLabel:"The Sustainer-Inspirer",
+  menteeDesc:"Ms. Duvall is the warmest person in every room she enters. Her classroom is full of loving conversation, and children feel adored. Her challenge: her language is warm but simple — \"so pretty,\" \"so nice,\" \"so fun\" — and she rarely uses the richer, more specific words that would expand children's vocabulary. She receives feedback best in the context of deep trust, and when growth is framed through her love for the children she serves.",
+  sceneTitle:"So Pretty", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Rich Vocabulary",
+  scene:"Nora (4 years, 8 months) brings Ms. Duvall a painting of the sky at sunset, with layers of orange, pink, and purple blended together. <em>\"Look what I made!\"</em> Ms. Duvall hugs her: <em>\"Oh, it's so pretty! So, so pretty, sweetie!\"</em> Nora smiles and points: <em>\"The top part is dark and the bottom part is light.\"</em> Ms. Duvall nods: <em>\"It's so pretty!\"</em> Nora looks at her painting again and says, <em>\"Yeah. Pretty.\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Advanced Language — Using Specific, Descriptive Words",
+  qcText1:"Advanced language means <strong>using rich, specific vocabulary</strong> that goes beyond everyday words. Nora's painting was full of opportunities: <em>\"You blended the colors together — the orange fades into pink and then purple, like a sunset. The sky is darker at the top and lighter near the horizon.\"</em>",
+  qcText2:"Ms. Duvall's warmth was genuine, but <strong>\"pretty\" was the only descriptive word Nora heard — three times</strong>. Nora even offered her own observation about dark and light, which could have been extended with new words. By the end, Nora was using \"pretty\" too. Specific language would have kept all of Ms. Duvall's warmth and given Nora a much richer vocabulary.",
+  coachTitle:"So Pretty — Coaching Conversation",
+  question:"You're debriefing with Ms. Duvall, a <strong>Sustainer-Inspirer</strong>. She says fondly, \"Nora was so proud of her painting.\" Which approach will help her grow?",
+  correct:1,
+  options:[
+    "\"You said 'pretty' three times and didn't add any new words. You need to use richer vocabulary.\"",
+    "\"She was — and she brought it to you because your opinion means the world to her. I want to share something I noticed because I know how much you love her. Nora told you, 'The top part is dark and the bottom part is light.' She was describing her painting like an artist. What if you'd given her an artist's words back? 'You blended the colors — the orange fades into pink and purple, like a sunset.' She'd feel your love, and she'd walk away with words like 'blend,' 'fade,' and 'sunset' to describe her next painting.\"",
+    "\"Let's create a list of descriptive words for each center so you have richer vocabulary ready when children share their work.\"",
+    "\"What if you held an art show and invited families to see the kids' paintings? It would be so special!\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — It Feels Like an Accusation", p1:"Naming the gap directly is a <strong>Driver mentor's</strong> instinct — efficient and clear.", p2:"For a Sustainer-Inspirer, \"you didn't add any new words\" feels like criticism of her loving response. She'll feel hurt rather than supported. She needs to see how rich words can be part of her warmth."},
+    {h:"This Is a Cultivator's Natural Move — A System Before a Reason", p1:"A list of descriptive words is a <strong>Cultivator mentor's</strong> natural move — organized and thorough.", p2:"A list won't move Ms. Duvall until she sees why specific language matters to Nora. Her barrier is not knowing words; it's noticing the chance to use them. Start with Nora's painting."},
+    {h:"This Is an Inspirer's Natural Move — Celebration Instead of Language", p1:"An art show is the natural move of a mentor with a strong <strong>Inspirer</strong> expression — joyful and celebratory.", p2:"It speaks to Ms. Duvall's Inspirer side, but it doesn't change how she talks about children's work. Families might say \"pretty,\" too. Nora needs richer words in everyday conversations."}
+  ],
+  matchText:"This works for a <strong>Sustainer-Inspirer</strong> because it begins with trust — Nora brought the painting \"because your opinion means the world to her.\" The observation is offered out of love, keeping the relationship at the center.",
+  matchText2:"The reframe \"describing her painting like an artist\" helps Ms. Duvall see Nora's language as something to build on. And the example shows that rich words can carry warmth: Nora would \"feel your love\" and learn new words at the same time.",
+  actionSteps:[
+    "<strong>Replace \"pretty\" with one specific word.</strong> Help her practice describing children's work with words like blended, shiny, curved, bright, or bold.",
+    "<strong>Build on children's words.</strong> Teach her to extend what children say: \"Dark at the top? The sky is darker up high, near the night.\"",
+    "<strong>Go back to Nora's painting.</strong> Suggest she ask Nora to tell her about the sunset again and add a few new words.",
+    "<strong>Keep the warmth.</strong> Remind her she can still hug and say \"I love it\" — and add one specific description.",
+    "<strong>Share what happens next.</strong> When Nora uses a new word like \"blend,\" ask Ms. Duvall how it felt. A Sustainer-Inspirer who hears a child use her words will keep offering them."
+  ],
+  completeLine:"You helped a Sustainer-Inspirer add rich words to her loving voice. That's the heart of mentoring."
+},
+
+// ── SCENARIO 12 · Sustainer-Cultivator Mentee ────────────────
+{
+  menteeType:"SC",
+  menteeLabel:"The Sustainer-Cultivator",
+  menteeDesc:"Ms. Winters is a thoughtful, quietly powerful teacher who observes everything and processes deeply. She believes children's play should be their own and prefers not to intrude. Her challenge: she observes dramatic play from the edges and rarely joins, so children miss out on the rich conversation an adult play partner can model. She receives feedback best in quiet, unhurried conversations that honor both her emotional attunement and her intellectual depth.",
+  sceneTitle:"The Doctor's Office", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Joining Play Conversations",
+  scene:"Three children are playing doctor's office in the dramatic play area. Joaquin (4 years, 5 months) is the doctor: <em>\"You sick. Take medicine.\"</em> The patient lies down; the third child waits in a chair. The play repeats the same lines several times: <em>\"You sick. Medicine.\"</em> Ms. Winters watches from a nearby table, jotting notes: <em>\"Doctor play — limited vocabulary, repetitive script.\"</em> After ten minutes, the children drift away from the area.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Frequent Conversation — Joining Children's Play to Model Language",
+  qcText1:"Dramatic play is one of the richest settings for Language Modeling. When a teacher <strong>joins as a play partner</strong>, she can introduce new words and ideas naturally: <em>\"Doctor, my tummy hurts. Can you check my temperature with your thermometer? Do I need a prescription?\"</em>",
+  qcText2:"Ms. Winters's notes were accurate — the play had a limited vocabulary and a repetitive script. <strong>She had identified exactly what the children needed, but she stayed outside the play</strong>. A few minutes as a patient or receptionist would have modeled new words and extended the story, likely keeping the children engaged much longer.",
+  coachTitle:"The Doctor's Office — Coaching Conversation",
+  question:"You're debriefing with Ms. Winters, a <strong>Sustainer-Cultivator</strong>. She shows you her note and says quietly, \"I didn't want to take over their play.\" Which approach will help her?",
+  correct:3,
+  options:[
+    "\"Your notes are right, but you didn't do anything about it. Join their play and add vocabulary.\"",
+    "\"Ooh, what if you turned the dramatic play area into a real hospital with lab coats, X-rays, and a waiting room? The kids would go wild!\"",
+    "\"Before you change anything, let's research the best ways to support dramatic play and develop a plan for vocabulary instruction.\"",
+    "\"Your notes captured exactly what was happening — limited vocabulary, the same script repeating. You saw what they needed. And you're right not to want to take over. Here's a middle path: join as a patient, not as the one in charge. 'Doctor, my tummy hurts. Will you check my temperature with the thermometer?' Joaquin stays the doctor; you just add words to the story. Try five minutes next time and note what happens to their language.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Pressure Without Understanding", p1:"Pointing out the lack of action is a <strong>Driver mentor's</strong> instinct — direct and action-focused.", p2:"A Sustainer-Cultivator will feel her careful observation was dismissed and her concern about taking over ignored. She needs her insight honored and a respectful way to join the play."},
+    {h:"This Is an Inspirer's Natural Move — Bigger Setup Instead of the Insight", p1:"Turning the area into a full hospital is an <strong>Inspirer mentor's</strong> natural move — creative and energizing.", p2:"New props might help, but the key missing piece was an adult modeling language within the play. Without that, children may still repeat the same short lines. Ms. Winters needs a way to join, not only a new setup."},
+    {h:"This Is a Cultivator's Natural Move — More Planning for a Planner", p1:"Researching and planning is the natural move of a mentor with a strong <strong>Cultivator</strong> expression, and it speaks to half of Ms. Winters.", p2:"It reinforces the pattern keeping her at the edge of the play. She already knows what children need. She needs a gentle first step into the play itself."}
+  ],
+  matchText:"This works for a <strong>Sustainer-Cultivator</strong> because it honors her notes and her concern — \"you're right not to want to take over.\" That validation makes it possible for her to hear the suggestion.",
+  matchText2:"The \"middle path\" — joining as a patient, not a leader — resolves her concern and gives her a specific way to model language. And asking her to \"note what happens\" turns the change into an experiment that fits her thoughtful approach.",
+  actionSteps:[
+    "<strong>Choose a supporting role.</strong> Help her plan roles that let children lead: patient, customer, passenger, visitor.",
+    "<strong>Plan a few new words.</strong> Before joining, she chooses three words to model naturally, like thermometer, prescription, and appointment.",
+    "<strong>Join for five minutes.</strong> Encourage her to enter the play, model language, and then step back.",
+    "<strong>Return to the doctor's office.</strong> Suggest she join Joaquin's play as a patient this week.",
+    "<strong>Honor the follow-through.</strong> At your next debrief, ask what new words the children used after she joined. Acknowledge that she stepped in — that's the growth."
+  ],
+  completeLine:"You helped a Sustainer-Cultivator join children's play without taking it over. That's a breakthrough for her."
+},
+
+// ── SCENARIO 13 · Cultivator Mentee ──────────────────────────
+{
+  menteeType:"C",
+  menteeLabel:"The Cultivator",
+  menteeDesc:"Ms. Tran is analytical, principled, and detail-oriented. Her read-alouds are carefully planned, with specific skills to reinforce on each page. Her challenge: she stops often to quiz children — \"What letter is this? What color is the ball?\" — and doesn't leave room for children's own comments and ideas about the story. She can become quietly defensive when feedback feels like a personal judgment rather than a professional discussion. She receives feedback best when it is structured, evidence-based, and framed as a problem to analyze and solve together — not a verdict to receive.",
+  sceneTitle:"What Letter Is This?", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Open-Ended Conversation During Reading",
+  scene:"Ms. Tran is reading a story about a lost puppy. On each page, she stops: <em>\"What letter does 'puppy' start with? P. What color is the puppy? Brown. How many birds? Three.\"</em> On the page where the puppy is alone in the rain, Freya (4 years, 7 months) says, <em>\"He's sad. He misses his mommy, like when I—\"</em> Ms. Tran holds up a finger: <em>\"Let's find the letter R for 'rain.'\"</em> Freya stops talking. For the rest of the story, she answers only when called on.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Open-Ended Questions — Making Room for Children's Ideas in Stories",
+  qcText1:"Reading aloud is one of the best opportunities for rich conversation. <strong>Open-ended questions and comments</strong> — \"How do you think the puppy feels? What would you do if you were lost?\" — invite children to connect stories to their own lives and use longer, more complex sentences.",
+  qcText2:"Ms. Tran's questions reinforced useful skills, but <strong>they were all closed questions with one right answer</strong>. Freya's comment was the richest language moment in the story — she inferred the puppy's feelings and connected them to her own experience — and it was cut off for a letter quiz. Balancing skill questions with open conversation would let children use much more language.",
+  coachTitle:"What Letter Is This? — Coaching Conversation",
+  question:"You're debriefing with Ms. Tran, a <strong>Cultivator</strong>. She says, \"I reinforced letters, colors, and counting on every page.\" Which approach will help her?",
+  correct:2,
+  options:[
+    "\"You turned the story into a quiz and cut off Freya. Stop asking so many questions.\"",
+    "\"Freya is so sweet! I think if you just let the kids talk about stories, they'd love reading even more.\"",
+    "\"You did — the skill coverage was thorough. Let's look at the language data, though. Every question had a one-word answer: 'P,' 'brown,' 'three.' The longest sentence a child spoke was Freya's: 'He's sad. He misses his mommy, like when I—' It was cut off before she finished. So here's a question worth analyzing: which moments produced the most child language, and how could your read-alouds include both skill questions and open ones? What if you added one open question per book and recorded how many words children use?\"",
+    "\"I know you care so much about teaching skills. Maybe just relax a little during stories and let them enjoy it?\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — A Verdict She Will Resist", p1:"A direct \"stop asking so many questions\" is a <strong>Driver mentor's</strong> natural move — blunt and efficient.", p2:"It will feel like a personal judgment of her teaching, and Cultivators often respond to that with quiet defensiveness. She needs to analyze the evidence and reach the conclusion herself."},
+    {h:"This Is an Inspirer's Natural Move — Encouragement Without the Analysis", p1:"Suggesting children \"just talk\" about stories is an <strong>Inspirer mentor's</strong> instinct — warm and joyful.", p2:"To Ms. Tran, \"just talk\" sounds unstructured and unproductive. She needs to see evidence that open questions produce more language, and a clear way to include them."},
+    {h:"This Is a Sustainer's Natural Move — Soothing Where She Wants Substance", p1:"Suggesting she \"relax\" and let children enjoy it is a <strong>Sustainer mentor's</strong> instinct — gentle and supportive.", p2:"Ms. Tran isn't stressed; she's principled. Telling her to relax may feel condescending. She'll respect a careful look at the language evidence far more than comfort."}
+  ],
+  matchText:"This works for a <strong>Cultivator</strong> because it validates her goal — thorough skill coverage — and then presents new evidence: one-word answers throughout, and Freya's longer sentence cut off mid-thought.",
+  matchText2:"The question \"which moments produced the most child language?\" engages her analytical mind. The suggestion — one open question per book and a word count — gives her a structured experiment. She doesn't have to give up skills; she can measure the value of adding conversation.",
+  actionSteps:[
+    "<strong>Add one open question per book.</strong> Help her choose a question like \"How do you think the puppy feels?\" for each read-aloud.",
+    "<strong>Let comments finish.</strong> Teach her to let children complete their thoughts before returning to a skill question.",
+    "<strong>Balance the page.</strong> Encourage her to use some pages for skills and others for conversation, rather than quizzing on every page.",
+    "<strong>Go back to Freya.</strong> Suggest she revisit the lost-puppy page and ask Freya, \"You said he misses his mommy. Tell me more.\"",
+    "<strong>Review her notes together.</strong> Ask her to record the length of children's answers to open and closed questions. A Cultivator who analyzes her own evidence owns the conclusion."
+  ],
+  completeLine:"You gave a Cultivator a problem worth analyzing. She'll solve it better than anyone."
+},
+
+// ── SCENARIO 14 · Cultivator-Driver Mentee ───────────────────
+{
+  menteeType:"CD",
+  menteeLabel:"The Cultivator-Driver",
+  menteeDesc:"Ms. Chen is a meticulous, ambitious teacher who builds precise systems and drives them toward strong outcomes. She tracks each child's vocabulary growth carefully. Her challenge: in everyday conversation, she responds to children's comments with short confirmations — \"Yes,\" \"Right,\" \"Correct\" — instead of repeating and extending their words, so children don't hear longer, more complex sentences built on their own. She receives feedback best when it is specific, data-grounded, and framed around the gap between her intended outcome and the outcome she is actually producing.",
+  sceneTitle:"Yes. Right. Correct.", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Repetition and Extension",
+  scene:"During snack, Kalani (4 years, 1 month) holds up an orange slice: <em>\"Orange is juicy.\"</em> Ms. Chen nods: <em>\"Yes.\"</em> Kalani squeezes it: <em>\"It squirts!\"</em> <em>\"Right.\"</em> A few minutes later, Kalani looks out the window: <em>\"The bus is big.\"</em> <em>\"Correct.\"</em> Kalani eats the rest of her snack quietly. On Ms. Chen's clipboard, Kalani's vocabulary assessment notes: <em>\"Uses mostly two- to three-word sentences. Goal: expand sentence length.\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Repetition and Extension — Building Longer Sentences From Children's Words",
+  qcText1:"Repetition and extension means <strong>repeating what a child says and adding more words, ideas, or details</strong>. When Kalani said \"Orange is juicy,\" Ms. Chen could have said, <em>\"Yes, your orange is so juicy — the juice squirts out when you squeeze it!\"</em> Kalani hears her own idea in a longer, richer sentence.",
+  qcText2:"Ms. Chen's goal for Kalani is exactly right: longer sentences. But <strong>\"Yes,\" \"Right,\" and \"Correct\" gave Kalani no longer sentences to learn from</strong>. Snack was full of chances to model the language Ms. Chen is trying to build. Extending Kalani's words would directly support the goal written on her clipboard.",
+  coachTitle:"Yes. Right. Correct. — Coaching Conversation",
+  question:"You're debriefing with Ms. Chen, a <strong>Cultivator-Driver</strong>. She shows you her notes: \"Kalani is still using short sentences.\" Which approach will help her?",
+  correct:0,
+  options:[
+    "\"Your assessment is precise — you know exactly what Kalani needs: longer sentences. Here's the gap: at snack, she gave you three chances — 'Orange is juicy,' 'It squirts,' 'The bus is big' — and each response was one word: 'Yes,' 'Right,' 'Correct.' Your goal is longer sentences, but your responses modeled the shortest possible ones. What if you extended each comment? 'Your orange is so juicy — the juice squirts out when you squeeze it!' Track her sentence length for two weeks, and you'll have clear data on whether it works.\"",
+    "\"Kalani is so sweet! You should do lots of fun language games with her — rhyming, songs, silly stories.\"",
+    "\"I could see Kalani wanted to talk with you at snack. Maybe be a little warmer when she shares things?\"",
+    "\"You're responding with one word. Model longer sentences if you want her to use them.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Fun Without the Mechanism", p1:"Language games and songs are an <strong>Inspirer mentor's</strong> natural move — energetic and playful.", p2:"For Ms. Chen, games without a clear link to her goal sound like extra activities, not a solution. She needs to see how her everyday responses affect Kalani's sentence length."},
+    {h:"This Is a Sustainer's Natural Move — Warmth Without a Plan", p1:"Asking her to be warmer is a <strong>Sustainer mentor's</strong> instinct — caring and attuned.", p2:"Ms. Chen can lose sight of the child behind the data, so warmth matters. But \"be warmer\" gives her no strategy for longer sentences. She needs a data-based reason and a concrete method."},
+    {h:"This Is a Driver's Natural Move — Direction Without the Analysis", p1:"A crisp \"model longer sentences\" is the natural move of a mentor with a strong <strong>Driver</strong> expression, and it speaks to Ms. Chen's efficiency.", p2:"It skips the analysis her Cultivator side needs. Without seeing the connection between her responses and Kalani's goal, she'll treat it as general advice."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Driver</strong> because it starts with her own assessment and goal, then shows the precise gap: Kalani's three comments and three one-word responses. The mismatch between her goal and her modeling becomes impossible to miss.",
+  matchText2:"The extension example gives her a concrete strategy, and tracking sentence length for two weeks gives her the measurable outcome she values. You connected everyday conversation directly to the result she's already trying to achieve.",
+  actionSteps:[
+    "<strong>Extend every comment at snack.</strong> Help her practice repeating a child's words and adding two or three more.",
+    "<strong>Add describing words.</strong> Encourage her to include words like juicy, sticky, crunchy, and enormous.",
+    "<strong>Go back to Kalani.</strong> Suggest she sit with Kalani at snack and extend each comment she makes.",
+    "<strong>Track sentence length.</strong> Help her record Kalani's longest sentence each day for two weeks.",
+    "<strong>Reconnect the data to the child.</strong> Ask her to describe a moment when Kalani used a longer sentence. It builds the habit of seeing the child behind the checklist."
+  ],
+  completeLine:"You showed a Cultivator-Driver that her conversations are part of her data. She'll build a better system from here."
+},
+
+// ── SCENARIO 15 · Cultivator-Inspirer Mentee ─────────────────
+{
+  menteeType:"CI",
+  menteeLabel:"The Cultivator-Inspirer",
+  menteeDesc:"Mr. Flores is a creative, intellectually rich teacher who brings both deep analysis and social warmth to his practice. He loves conversation and has fascinating things to say about almost everything. His challenge: once he gets going, he does most of the talking, and children's contributions become brief interruptions to his explanations instead of turns in a real conversation. He receives feedback best when his intellectual investment is honored first, and growth is framed as making his depth more accessible — not asking him to simplify or sacrifice rigor.",
+  sceneTitle:"Ninety Percent Mr. Flores", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Balancing Teacher and Child Talk",
+  scene:"During a small group about the moon, Mr. Flores holds up pictures and talks animatedly for nearly eight minutes about moon phases, orbits, and how sunlight lights up the moon. Talia (4 years, 11 months) raises her hand: <em>\"I saw the moon in the DAYTIME at the park with my uncle, and it was white and only half—\"</em> Mr. Flores smiles: <em>\"Yes, you can see the moon in the day! That's because of its orbit. You see, the sun—\"</em> and continues. By the end, Talia has spoken for about ten seconds. Mr. Flores has spoken for more than seven minutes.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Frequent Conversation — Giving Children More of the Talk",
+  qcText1:"Language Modeling is not only about how richly the teacher talks, but how much <strong>children get to talk</strong>. Conversations build language when children take many turns and use their own words. Talia had a real story to tell: the moon in the daytime, white and only half, on a trip to the park with her uncle.",
+  qcText2:"Mr. Flores's explanation was rich and accurate, but <strong>he did about ninety percent of the talking</strong>. Talia's story was used as a springboard for his next point rather than a turn in a conversation. Asking, <em>\"What did the moon look like? Where was it in the sky? Why do you think it was only half?\"</em> would have let Talia use rich language — and given Mr. Flores a real-world example to connect to his ideas.",
+  coachTitle:"Ninety Percent Mr. Flores — Coaching Conversation",
+  question:"You're debriefing with Mr. Flores, a <strong>Cultivator-Inspirer</strong>. He says, \"I love teaching how the moon works — the kids were fascinated!\" Which approach will help him?",
+  correct:1,
+  options:[
+    "\"You talked for seven minutes and Talia got ten seconds. You need to talk less.\"",
+    "\"Your explanation was fascinating — real science, delivered with real enthusiasm. Here's a design challenge I think you'll enjoy: the richest moon example in the room was Talia's — she saw it in the daytime, white and only half, at the park with her uncle. It got about ten seconds before your next point. What if her story became the center of the conversation? 'What did the moon look like? Where was it in the sky?' Then you connect her answers to phases and orbits. Same rich content, and the children do more of the talking.\"",
+    "\"I could tell how much you love the moon. Maybe just check whether the kids have anything to add now and then?\"",
+    "\"What if you built a giant model of the sun, Earth, and moon with the kids? They'd love it, and it would make your lesson even more exciting!\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — It Dismisses His Thinking", p1:"A blunt \"talk less\" is a <strong>Driver mentor's</strong> instinct — efficient and outcome-focused.", p2:"Mr. Flores will hear that his knowledge and enthusiasm are the problem. A Cultivator-Inspirer who feels his depth isn't valued may resist. He needs a way to share his knowledge while giving children more of the conversation."},
+    {h:"This Is a Sustainer's Natural Move — Too Soft to Change the Pattern", p1:"Suggesting he \"check now and then\" is a <strong>Sustainer mentor's</strong> instinct — warm and gentle.", p2:"It doesn't address how he responds when children do contribute. Talia did share; the problem was that her story didn't become a real turn. He needs a clear way to build on children's contributions."},
+    {h:"This Is an Inspirer's Natural Move — More Activity, Same Talk Balance", p1:"Building a model of the sun, Earth, and moon is the natural move of a mentor with a strong <strong>Inspirer</strong> expression — and it speaks to Mr. Flores's own Inspirer side.", p2:"A hands-on project could be wonderful, but if Mr. Flores still does most of the talking, children's language won't grow. The fix is changing the balance of conversation."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Inspirer</strong> because it honors his content first — \"real science, delivered with real enthusiasm\" — and then frames the change as a design challenge: making Talia's story \"the center of the conversation.\"",
+  matchText2:"You didn't ask him to give up his rich explanations. You showed him how to connect them to children's experiences, so his content becomes a response to their ideas. \"Same rich content, and the children do more of the talking\" is a vision he can embrace.",
+  actionSteps:[
+    "<strong>Start with children's experiences.</strong> Help him open small groups with a question like \"Have you ever seen the moon during the day?\"",
+    "<strong>Give stories two follow-up turns.</strong> When a child shares, he asks two questions about the child's story before adding his own point.",
+    "<strong>Aim for balance.</strong> Encourage him to aim for children speaking at least as much as he does in small groups.",
+    "<strong>Go back to Talia.</strong> Suggest he invite Talia to tell the group about the daytime moon she saw and connect her description to his ideas.",
+    "<strong>Let him walk you through his plan.</strong> Ask him to show you where children's stories will enter his next lesson. Cultivator-Inspirers love explaining their thinking, and it helps him see the lesson the way children will experience it."
+  ],
+  completeLine:"You helped a Cultivator-Inspirer share the conversation with children. That's powerful teaching."
+},
+
+// ── SCENARIO 16 · Cultivator-Sustainer Mentee ────────────────
+{
+  menteeType:"CS",
+  menteeLabel:"The Cultivator-Sustainer",
+  menteeDesc:"Ms. Patel is a thoughtful, quietly perceptive teacher who combines deep analytical observation with genuine empathy. She has lovely one-on-one conversations with children. Her challenge: she rarely encourages children to talk with each other, so children who play side by side often do so in silence, missing chances to build language through peer conversation. She receives feedback best in quiet, respectful, unhurried conversations that treat her as the intelligent, caring professional she is.",
+  sceneTitle:"Side by Side, Not a Word", sceneTag:"Pre-K Classroom",
+  focusBadge:"Language Modeling · Encouraging Child-to-Child Conversation",
+  scene:"Amir (4 years, 6 months) and Bram (4 years, 5 months) sit next to each other at the playdough table, each making something. Amir rolls a long coil and wraps it into a snail shell. Bram makes a tall tower of little balls. Each glances at the other's work, but neither speaks. Ms. Patel watches from a few feet away and notes: <em>\"Amir — making spirals. Bram — stacking. Parallel play, no interaction.\"</em> Twenty minutes later, both boys leave the table without having said a word to each other.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Language Modeling — Encouraging Children to Talk With Each Other",
+  qcText1:"Children build language not only by talking with adults, but by <strong>talking with each other</strong>. Teachers can encourage peer conversation by making connections: <em>\"Amir, look — Bram built a tower. Bram, can you ask Amir how he made his snail?\"</em> These small bridges help children who are playing side by side begin to share ideas and words.",
+  qcText2:"Ms. Patel noticed exactly what was happening: <strong>parallel play with no interaction</strong>. Both boys were curious about each other's work — they kept glancing over — but neither started a conversation. One gentle prompt could have opened a peer exchange rich with describing words: coil, spiral, stack, tall, curly.",
+  coachTitle:"Side by Side, Not a Word — Coaching Conversation",
+  question:"You're debriefing with Ms. Patel, a <strong>Cultivator-Sustainer</strong>. She says quietly, \"They seemed content playing side by side. I didn't want to push them to interact.\" Which approach will help her?",
+  correct:3,
+  options:[
+    "\"They weren't talking at all. You need to make children talk to each other.\"",
+    "\"What if you made a big 'playdough buddy' game where everyone has to trade creations with a partner? The kids would love it!\"",
+    "\"You're right — some children just prefer to play alone. That's okay. They'll talk when they're ready.\"",
+    "\"Your notes captured it exactly — spirals, stacking, no interaction. And you noticed something else in the moment: they both kept glancing at each other's work. They were curious. What if you built a small bridge between them? 'Amir, Bram made a tall tower. Bram, would you like to ask Amir how he made his snail?' It's an invitation, not a push. If they don't pick it up, you let it go. If they do, you'll hear two children using describing words together.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Harsh for Her Careful Nature", p1:"A direct \"make children talk\" is a <strong>Driver mentor's</strong> instinct — decisive and outcome-focused.", p2:"Ms. Patel will feel her careful approach was dismissed, and \"make\" sounds like the pressure she's trying to avoid. A Cultivator-Sustainer may withdraw rather than change. She needs a gentle, respectful strategy."},
+    {h:"This Is an Inspirer's Natural Move — Too Much, Too Fast", p1:"A partner-trading game is an <strong>Inspirer mentor's</strong> natural suggestion — lively and social.", p2:"It may feel too structured and forced for two boys who haven't started talking yet. Ms. Patel will likely reject it for pushing children too hard. She needs a small, natural invitation."},
+    {h:"This Is a Sustainer's Natural Move — Reassurance That Extends the Pattern", p1:"Affirming that some children prefer to play alone is a <strong>Sustainer mentor's</strong> instinct — patient and kind.", p2:"It overlooks the evidence that both boys were curious about each other. Ms. Patel would leave believing silence was the best choice, and the chance for peer conversation would keep passing by."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Sustainer</strong> because it affirms her notes and then adds a detail she observed but didn't weigh: the boys kept glancing at each other's work. That evidence suggests they wanted to connect.",
+  matchText2:"The prompt is framed as \"an invitation, not a push,\" which respects her concern. And \"If they don't pick it up, you let it go\" makes the step feel safe. Her Cultivator side sees the evidence; her Sustainer side sees a gentle, respectful way forward.",
+  actionSteps:[
+    "<strong>Look for curiosity cues.</strong> Help her notice when children glance at, point to, or imitate each other's work.",
+    "<strong>Use bridge prompts.</strong> Give her simple invitations: \"Tell Amir about your tower,\" \"Ask Bram how he made it.\"",
+    "<strong>Step back once talk begins.</strong> Encourage her to let the children continue the conversation on their own once it starts.",
+    "<strong>Go back to Amir and Bram.</strong> Suggest she try one bridge prompt the next time they sit side by side.",
+    "<strong>Record the response.</strong> Ask her to note what the boys say to each other after the prompt. That evidence will build her confidence to encourage peer talk."
+  ],
+  completeLine:"You helped a Cultivator-Sustainer build a bridge between two quiet children. That's thoughtful mentoring."
+}
+
   ]
 },
 {

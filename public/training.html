@@ -4990,45 +4990,604 @@ const CURRICULUM = [
 
   ]
 },
+
 {
   id:8, domain:2, domainName:"Classroom Organization",
-  title:"Learning Environment & Design", week:8,
+  title:"Learning Environment Design", week:8,
   focus:"Creating physical spaces that actively support learning and child agency.",
   scenarios:[
-    {
-      menteeType:"S", menteeLabel:"The Sustainer",
-      menteeDesc:"Mr. Osei is thoughtful, nurturing, and has deep relationships with his children. His classroom feels like a warm, safe place — children are comfortable. The environment, however, is arranged the same way it was when he started teaching: it's comfortable but not intentional. He hasn't reconsidered the physical layout in years because \"the kids are happy.\"",
-      sceneTitle:"The Room That Stopped Growing", sceneTag:"Kindergarten Classroom",
-      focusBadge:"Learning Environment · Physical Design for Learning",
-      scene:"During a literacy center observation, you notice that the classroom library is in a high-traffic area near the door — children walking past constantly interrupt readers. The writing center has no display of children's work, only commercial posters. Three children consistently wander without purpose because the center boundaries are unclear — there are no visual markers distinguishing where one center ends and another begins. Mr. Osei circulates warmly and redirects wandering children one at a time, but the wandering pattern recurs every 3-4 minutes.",
-      qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Intentional Space Design",
-      qcText1:"The physical environment is the <strong>third teacher</strong>. A well-designed space reduces teacher redirections by making expected behavior obvious. The wandering children in Mr. Osei's room are not misbehaving — they're responding rationally to an ambiguous environment. <strong>Unclear spaces produce unclear behavior.</strong>",
-      qcText2:"The absence of children's work in the writing center sends a quiet message: the products of this center are not valued here. Displaying children's work communicates that <em>this space belongs to you</em>. Small environmental changes — boundary markers, strategic placement of the library, display of student work — often produce dramatic behavioral outcomes.",
-      coachTitle:"The Room That Stopped Growing — Coaching Conversation",
-      question:"You're debriefing with Mr. Osei, a <strong>Sustainer</strong>. He tells you the children \"seem happy\" and asks if you saw anything concerning. How do you start this conversation?",
-      correct:3,
-      options:[
-        "\"Yes — I counted three wandering incidents in 20 minutes. The center boundaries are unclear, the library placement is creating disruption, and there's no student work displayed in the writing center. The room needs a redesign.\"",
-        "\"The warmth in your classroom is genuinely beautiful — you've built something really special with these kids. I have some ideas about how we could make the physical space feel even more alive for them. What if we did a classroom redesign together? I think it would be SO fun!\"",
-        "\"I think the children are happy because of you — your warmth is palpable. I do want to gently flag one small observation: the wandering pattern seems to recur fairly regularly. When you have a chance, it might be worth reflecting on what could be causing it.\"",
-        "\"They do seem happy — and I think that's genuinely because of you, not the space. I want to share an observation about the room itself, because I think there's something here that would make the work even easier for you. The environment might be working against you in a few specific ways. Can I show you what I mean?\""
-      ],
-      wrongFeedback:[
-        {h:"Style Mismatch — Let's Reconsider", p1:"Leading with a count of incidents and a list of problems will feel like a formal evaluation to a <strong>Sustainer</strong>, not a mentoring conversation. Mr. Osei will feel assessed rather than supported.", p2:"The observations are accurate, but Sustainers need to be invited into a discovery — not handed a report. Start with his question about whether you saw anything concerning: he opened the door. Walk through it with him, not ahead of him."},
-        {h:"Style Mismatch — Let's Reconsider", p1:"The affirmation is genuine and right — but pivoting to \"SO fun\" and a full redesign idea is an <strong>Inspirer</strong> move that may feel overwhelming to a <strong>Sustainer</strong>. Mr. Osei hasn't yet named a problem; offering a big solution may feel like you're solving something he didn't ask about.", p2:"Sustainers need to arrive at the \"yes\" themselves. Start smaller — share one observation and let him respond."},
-        {h:"Style Mismatch — Let's Reconsider", p1:"The opening credit is right, but \"gently flag\" and \"when you have a chance\" minimize what is actually a recurring, meaningful pattern. Sustainers deserve honest feedback too — softening it into optionality doesn't serve Mr. Osei or his students.", p2:"The difference between this and the best answer: you're already crediting his warmth, but then you're backing away from the feedback. He can handle more than this."}
-      ],
-      matchText:"This is beautifully calibrated for a <strong>Sustainer</strong>. You affirmed what's real (his warmth creates the happiness), then created curiosity rather than concern: \"the environment might be working against you in a few specific ways.\"",
-      matchText2:"\"Can I show you what I mean?\" is an invitation, not a verdict. For a Sustainer who has lived comfortably with this room for years, being invited to see something new — rather than being told what's wrong — is exactly the right entry point.",
-      actionSteps:[
-        "<strong>Walk the room together.</strong> Don't describe what you observed — take him through the physical space and let him narrate what he notices. \"What do you think a child experiences when they walk into this corner?\"",
-        "<strong>Start with one change, not a redesign.</strong> Propose moving the library together — this week, right now if possible. A small, immediate change builds momentum and shows Sustainers that this doesn't have to be overwhelming.",
-        "<strong>Make the student work display personal.</strong> Help him gather 3-4 pieces of writing center work and display them with the children's names prominently. This is emotionally meaningful to a Sustainer: it honors the children he loves.",
-        "<strong>Use tape to create center boundaries.</strong> Low-barrier, non-permanent boundary markers (colored tape on the floor) can transform wandering behavior overnight. Give him a concrete, easy win.",
-        "<strong>Revisit the room at next observation.</strong> Before observing instruction, spend 5 minutes walking the room together. Build environmental reflection into the regular mentoring rhythm."
-      ],
-      completeLine:"You met a Sustainer's need for care and gradually opened his eyes to something he'd stopped seeing. That's patient, skillful mentoring."
-    }
+// ── SCENARIO 1 · Driver Mentee ───────────────────────────────
+{
+  menteeType:"D",
+  menteeLabel:"The Driver",
+  menteeDesc:"Mr. Beaumont is confident, direct, and results-oriented. He keeps his classroom orderly by controlling the materials: art supplies, scissors, and glue live on a high shelf, and he hands them out himself. He believes this prevents mess and waste. He responds best to feedback that is honest, efficient, and tied to measurable outcomes, and he can dismiss feedback that feels soft or theoretical. Once he sees a concrete return, he changes fast.",
+  sceneTitle:"Four Minutes for Scissors", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Accessible Materials",
+  scene:"During center time, Jasper (4 years, 5 months) is making a paper crown at the art table. He needs scissors. The scissors are in a bin on the top shelf, above the cubbies, where only adults can reach. Jasper raises his hand, then walks over and waits beside Mr. Beaumont, who is helping at the puzzle table. <em>\"One minute, buddy.\"</em> Jasper waits. Two other children join the line — one needs glue, one needs tape. Four minutes later, Mr. Beaumont hands out scissors, glue, and tape. By then, Jasper's crown has slid off the table, and he's wandered to the window.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Accessible Materials — Supporting Independence Through Room Setup",
+  qcText1:"A well-designed learning environment lets children <strong>get what they need without waiting for an adult</strong>. When everyday materials like scissors, glue, and tape are stored out of reach, every creative step depends on the teacher. Jasper had an idea and a plan, and the room's setup stopped him cold.",
+  qcText2:"Mr. Beaumont's system is meant to keep things orderly, but it has a hidden cost: <strong>lost learning time and a teacher pulled away from teaching</strong>. Three children spent minutes waiting while he was interrupted at another table. Child-level, labeled bins with a few supplies at a time would protect order and give children the independence to keep working.",
+  coachTitle:"Four Minutes for Scissors — Coaching Conversation",
+  question:"You're debriefing with Mr. Beaumont, a <strong>Driver</strong>. He says, \"Keeping supplies up high keeps my room under control.\" Which coaching approach is most likely to land and produce a real change in practice?",
+  correct:1,
+  options:[
+    "\"I can see you work hard to keep your room neat, and it shows. I wonder if the kids might feel a little more independent if they could reach the supplies. What do you think about maybe moving them down?\"",
+    "\"Here's the data from today: in twenty minutes of center time, you were interrupted six times for supplies, and three children waited a combined nine minutes. Jasper lost his project entirely. The high shelf is costing you control, not creating it. If you moved a small, labeled bin of scissors, glue, and tape to child level, you'd get those minutes back. Want to try it for one week and compare the numbers?\"",
+    "\"Let's imagine the room from Jasper's eyes for a second. What do you think it felt like to stand there waiting with his crown?\"",
+    "\"There's good research on how accessible materials support independence and self-regulation. I'll send you a summary to read when you get a chance.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Sustainer's Natural Move — Too Cushioned for a Driver", p1:"Opening with praise and suggesting a gentle \"maybe\" is a <strong>Sustainer mentor's</strong> natural instinct. It protects the relationship and gives sensitive mentees room to hear hard feedback.", p2:"Mr. Beaumont will hear it as optional and file it under nice ideas. He believes his system works. Without data showing what it costs him, he has no reason to change it."},
+    {h:"This Is an Inspirer's Natural Move — Too Roundabout for a Driver", p1:"Inviting him to imagine Jasper's feelings is an <strong>Inspirer mentor's</strong> natural approach — empathetic and vivid.", p2:"For a Driver, it reads as indirect and emotional. He's focused on control and efficiency. Show him the minutes lost and the interruptions, and he'll draw the conclusion himself."},
+    {h:"This Is a Cultivator's Natural Move — Too Deferred for a Driver", p1:"Sending research to read later is a <strong>Cultivator mentor's</strong> instinct — thorough and evidence-based.", p2:"\"When you get a chance\" means never for Mr. Beaumont. He needs the numbers from his own room, today, and a concrete experiment to run."}
+  ],
+  matchText:"This works for a <strong>Driver mentee</strong> because it leads with data from his own room — six interruptions, nine minutes of waiting — and reframes his goal in his own terms: the high shelf is \"costing you control, not creating it.\"",
+  matchText2:"The one-week experiment is exactly what a Driver needs. It's specific, time-limited, and measurable. He doesn't have to accept your opinion; he gets to test it and compare the numbers.",
+  actionSteps:[
+    "<strong>Set up one child-level supply bin.</strong> Start small: scissors, glue sticks, and tape in a clear, labeled bin on a low shelf by the art table.",
+    "<strong>Limit quantities, not access.</strong> Put out a manageable amount of each supply. Drivers worry about waste, so show him how small quantities keep control without the waiting.",
+    "<strong>Teach the routine once.</strong> Help him plan a two-minute lesson on getting and returning supplies. Clear expectations make independence work.",
+    "<strong>Count the interruptions again.</strong> After one week, tally supply requests during center time. Compare the numbers with today's six.",
+    "<strong>Expand what works.</strong> If the art bin succeeds, help him identify the next materials children could reach on their own."
+  ],
+  completeLine:"You showed a Driver that accessible materials give him more control, not less. That's the language he acts on."
+},
+
+// ── SCENARIO 2 · Driver-Inspirer Mentee ──────────────────────
+{
+  menteeType:"DI",
+  menteeLabel:"The Driver-Inspirer",
+  menteeDesc:"Ms. Holloway is a force of nature — energetic, bold, and deeply loved by her children and families. Her classroom is bright and exciting, and she's proud of how it looks: themed posters, colorful borders, and decorations on every wall. Her challenge: the room reflects her energy more than the children's work, and there's little space for children to see their own ideas on display. She receives feedback best when it honors her energy and connects directly to the outcomes she's already chasing.",
+  sceneTitle:"Where's My Painting?", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Displaying Children's Work",
+  scene:"Ms. Holloway's walls are covered from floor to ceiling: store-bought alphabet posters, a big bulletin board of cartoon apples, borders in every color, and a banner that says <em>\"Welcome to Our Happy Class!\"</em> At pickup, Keziah (4 years, 2 months) pulls her mom by the hand to the art wall. <em>\"Mama, I made a painting of our house!\"</em> She searches the wall, then the hallway. The painting is in a folder in Ms. Holloway's cabinet, waiting to go home. Keziah's face falls: <em>\"It's not here.\"</em> Her mom looks at the cartoon apples and says, <em>\"That's okay, baby.\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Displays of Children's Work — Making the Room Belong to Children",
+  qcText1:"A thoughtfully designed environment <strong>reflects the children who learn in it</strong>. Displays of children's own work — paintings, drawings, projects, photographs — show children that their ideas matter and give them a reason to talk about their learning with families.",
+  qcText2:"Ms. Holloway's room is cheerful, but <strong>nearly every surface is filled with commercial and teacher-made decoration</strong>. Keziah wanted to share her work and couldn't find it. Walls that feature children's creations, at their eye level, would give children ownership of the room and give families a window into their thinking.",
+  coachTitle:"Where's My Painting? — Coaching Conversation",
+  question:"You're debriefing with Ms. Holloway, a <strong>Driver-Inspirer</strong>. She's proud: \"Families always tell me my room is the brightest in the building!\" Which approach reaches her?",
+  correct:3,
+  options:[
+    "\"Your walls are almost entirely commercial posters. There's no children's work on display. That needs to change.\"",
+    "\"Your room is so cheerful, and the kids clearly love it. I just wonder if some of them might want to see their own work up too? Maybe think about that.\"",
+    "\"Before our next visit, could you inventory what's on your walls and categorize each item as child-made, teacher-made, or commercial? Then we can analyze the ratio.\"",
+    "\"It is bright — nobody brings a room to life like you. Here's something that could make it even more powerful for families: at pickup today, Keziah pulled her mom to the wall to show a painting of their house, and it wasn't there. She was so proud, and she couldn't find it. Imagine that wall covered with the children's own work at their eye level. Families would walk in and see their kids' ideas. That's the kind of bright that makes parents stop and stay.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Efficient, but It Misses the Inspirer", p1:"A blunt \"that needs to change\" is the natural move of a mentor with a strong <strong>Driver</strong> expression. It's clear and direct, and it speaks to half of Ms. Holloway.", p2:"It ignores the other half. Ms. Holloway put her energy into those walls, and hearing them dismissed feels like an attack on her pride. A Driver-Inspirer will defend the decorations instead of hearing Keziah's story."},
+    {h:"This Is a Sustainer's Natural Move — Too Vague to Move Her", p1:"Affirming the cheer and gently wondering is a <strong>Sustainer mentor's</strong> instinct — caring and careful.", p2:"\"Maybe think about that\" gives her no stakes and no specifics. She needs a real child and a real family moment that shows what's missing."},
+    {h:"This Is a Cultivator's Natural Move — Too Much Paperwork for Her Pace", p1:"A wall inventory with categories is a <strong>Cultivator mentor's</strong> instinct — systematic and thorough.", p2:"For a Driver-Inspirer, it feels like tedious homework. She'll skip it or do it without reflection. Show her Keziah's moment first, and she'll want to redesign the walls herself."}
+  ],
+  matchText:"This works for a <strong>Driver-Inspirer</strong> because it starts by agreeing with her — \"it is bright\" — and then offers something \"even more powerful for families.\" That speaks to both expressions: excitement for the Inspirer and a stronger result for the Driver.",
+  matchText2:"Keziah's moment at pickup gives her a vivid reason to change, and \"the kind of bright that makes parents stop and stay\" reframes children's work as the ultimate decoration. She keeps her energy and her pride in the room; she just changes what fills the walls.",
+  actionSteps:[
+    "<strong>Clear one wall for children's work.</strong> Start with one bulletin board at children's eye level, dedicated to their paintings and projects.",
+    "<strong>Add children's words.</strong> Next to each piece, post a sentence the child said about it: \"This is my house. My dog is in the window.\"",
+    "<strong>Hang Keziah's painting first.</strong> Suggest she display it this week and invite Keziah to show her mom at pickup.",
+    "<strong>Let children help decide.</strong> Encourage her to ask children which work they want to display. Ownership grows when children choose.",
+    "<strong>Celebrate family reactions.</strong> When families stop to look, point it out to Ms. Holloway. Driver-Inspirers repeat what gets results."
+  ],
+  completeLine:"You didn't ask a Driver-Inspirer to dim her room — you showed her how to fill it with children's ideas. That's the work."
+},
+
+// ── SCENARIO 3 · Driver-Sustainer Mentee ─────────────────────
+{
+  menteeType:"DS",
+  menteeLabel:"The Driver-Sustainer",
+  menteeDesc:"Mr. Osei is a principled, protective leader who pushes for results while genuinely caring about every child in his room. He works hard to keep children safe and to resolve conflicts fairly. His challenge: he spends so much energy stepping into conflicts that he doesn't step back to see how the room's arrangement is causing them. He receives feedback best when it honors both his care for children and his commitment to excellence, and when it names one concrete way to serve both at once.",
+  sceneTitle:"The Tower in the Hallway", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Room Arrangement and Traffic Flow",
+  scene:"In Mr. Osei's room, the block area sits in the open space between the carpet and the bathroom door. Tariq (4 years, 7 months) has built a tall tower of unit blocks with a ramp coming off the side. A child hurrying to the bathroom clips the ramp, and the tower crashes. Tariq shouts and shoves him. Mr. Osei rushes over, kneels, and helps them talk it through. Ten minutes later, it happens again with a different child. By the end of center time, Mr. Osei has mediated four conflicts in the block area, and Tariq has stopped building tall.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Room Arrangement — Protecting Play Through Traffic Flow",
+  qcText1:"How a room is arranged shapes behavior before a teacher says a word. The block area needs <strong>a protected space, out of main walkways</strong>, where structures can grow without being knocked down. Placing it in the path to the bathroom guarantees accidental crashes — and the conflicts that follow.",
+  qcText2:"Mr. Osei handled each conflict with care, but <strong>the conflicts came from the room, not the children</strong>. Four mediations in one center time is a sign of a design problem. Moving the block area to a corner, using shelves to create boundaries, and keeping the path to the bathroom clear would prevent most of these crashes — and let Tariq build tall again.",
+  coachTitle:"The Tower in the Hallway — Coaching Conversation",
+  question:"Mr. Osei asks you directly: \"I keep having conflicts in the block area. What am I doing wrong?\" He is a <strong>Driver-Sustainer</strong> — results-focused, protective of his children, and eager to get it right. Which response serves him best?",
+  correct:0,
+  options:[
+    "\"Your conflict resolution was excellent — every time, you knelt down and helped them work it out. That's real care. Here's the thing: those conflicts weren't about the children. The block area sits right in the path to the bathroom, and three of the four crashes happened when someone walked through. If you moved the blocks to that back corner and used the low shelf as a boundary, most of those crashes would never happen. Want to try it this week and count the conflicts?\"",
+    "\"What if you made the block area into a fun 'construction zone' with caution tape and hard hats? The kids would love it, and they'd know to walk around it!\"",
+    "\"There's research on classroom design and its effect on children's behavior. I can send you some resources on room arrangement and traffic flow.\"",
+    "\"The conflicts are because of your room layout. Move the block area.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Adds Fun but Skips the Fix", p1:"A construction-zone theme is an <strong>Inspirer mentor's</strong> natural move — creative and engaging.", p2:"It doesn't address the real problem: the block area is still in the walkway. Caution tape won't stop a child rushing to the bathroom. Mr. Osei asked a direct question and needs a direct, practical answer."},
+    {h:"This Is a Cultivator's Natural Move — Right Content, Wrong Timing", p1:"Offering research on room design is a <strong>Cultivator mentor's</strong> instinct. The evidence is sound, and Cultivators trust good information to lead to change.", p2:"Mr. Osei asked in the moment. He needs a clear answer and a concrete change he can make tomorrow. The research can come later, once he's seen the difference in his own room."},
+    {h:"This Is a Driver's Natural Move — Accurate, but It Wounds the Sustainer", p1:"A blunt \"move the block area\" is the natural move of a mentor with a strong <strong>Driver</strong> expression: fast and correct.", p2:"Mr. Osei asked \"what am I doing wrong?\" and hearing only the verdict confirms his worry. His Sustainer side needs to hear that his care was real before he hears the fix. Name the strength, then give the solution."}
+  ],
+  matchText:"This works for a <strong>Driver-Sustainer</strong> because it honors his care first — kneeling down, helping children work it out — and then relieves him: \"those conflicts weren't about the children.\" That reframe is both reassuring and precise.",
+  matchText2:"Then you gave him exactly what his Driver side wants: a specific diagnosis (three of four crashes in the walkway), a specific fix (the back corner and a shelf boundary), and a way to measure results. He keeps his caring approach and gets fewer conflicts to manage.",
+  actionSteps:[
+    "<strong>Walk the room together.</strong> Trace the paths children take to the bathroom, cubbies, and sink. Mark where those paths cross play areas.",
+    "<strong>Move the block area this week.</strong> Help him relocate blocks to a corner, using low shelves to create a clear, protected boundary.",
+    "<strong>Count the conflicts.</strong> Track block-area conflicts for one week after the move. Compare with today's four.",
+    "<strong>Watch Tariq build tall again.</strong> Encourage him to notice whether Tariq returns to tall towers once the space is protected.",
+    "<strong>Observe and debrief quickly.</strong> Visit soon after the change and debrief right away. A Driver-Sustainer wants fast feedback — and reassurance that the change is working."
+  ],
+  completeLine:"You honored a Driver-Sustainer's care and showed him the room was the real problem. That's how he grows."
+},
+
+// ── SCENARIO 4 · Driver-Cultivator Mentee ────────────────────
+{
+  menteeType:"DC",
+  menteeLabel:"The Driver-Cultivator",
+  menteeDesc:"Ms. Reeves is a strategic, high-standards teacher who plans meticulously and executes decisively. Her centers are precisely organized, labeled, and stocked according to a yearly plan. Her challenge: her environment follows the plan so closely that it rarely changes in response to children's current interests, and materials can stay the same for months. She receives feedback best when it is specific, evidence-based, and names both the gap in her system and the precise intervention that closes it.",
+  sceneTitle:"The Train Obsession", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Rotating Materials to Children's Interests",
+  scene:"Ms. Reeves's centers look exactly as they did in September: the same puzzles, the same dramatic play kitchen, the same block accessories. For three weeks, Finn (4 years, 3 months) has talked about trains nonstop — the train he saw at the depot, the sounds it makes, the cars it pulls. Every day he lines up chairs in the dramatic play area and calls, <em>\"All aboard!\"</em> Today he tries to use a row of unit blocks as train tracks, but there's nothing to put on them. He asks, <em>\"Do we have trains?\"</em> Ms. Reeves shakes her head: <em>\"Not in our block center, friend. Those are for building.\"</em> Finn kicks the blocks apart.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Rotating Materials — Responding to Children's Current Interests",
+  qcText1:"A learning environment works best when it <strong>changes to reflect what children are curious about right now</strong>. Rotating materials — adding new props, removing ones that have lost appeal — keeps centers engaging and connects children's interests to learning.",
+  qcText2:"Finn has shown a strong, sustained interest for three weeks, and <strong>the environment hasn't responded</strong>. Adding a basket of toy trains to the block area, train books to the library, or tickets to dramatic play would turn his interest into building, counting, reading, and pretend play. Ms. Reeves's organization is a strength; the gap is that her plan doesn't include a way to respond to children's interests.",
+  coachTitle:"The Train Obsession — Coaching Conversation",
+  question:"You're debriefing with Ms. Reeves, a <strong>Driver-Cultivator</strong>. She says, \"My centers are fully aligned with my yearly plan.\" Which approach will move her?",
+  correct:2,
+  options:[
+    "\"Finn is so into trains! You should just follow his lead and turn the whole room into a train station — the kids would love it!\"",
+    "\"I could see Finn got frustrated when there weren't any trains. Maybe you could bring some in for him? It would mean a lot to him.\"",
+    "\"Let's look at the evidence. Finn has talked about trains daily for three weeks. He's lining up chairs as trains, using blocks as tracks, and today he kicked the blocks apart when there were no trains. That's sustained interest with no materials to support it. Your plan is strong, but it doesn't include a mechanism for responding to children's interests. Want to build one? For example, a monthly review where you add materials based on what children are talking about — starting with trains in the block area.\"",
+    "\"Your centers haven't changed since September. Rotate your materials.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Enthusiasm Without Structure", p1:"Suggesting she turn the room into a train station is an <strong>Inspirer mentor's</strong> natural move — energetic and child-centered.", p2:"For a Driver-Cultivator, it sounds like abandoning her plan for one child's passion. She'll dismiss it. She needs a structured, planned way to respond to interests that fits her system."},
+    {h:"This Is a Sustainer's Natural Move — Feelings Where She Needs Facts", p1:"Focusing on Finn's frustration is a <strong>Sustainer mentor's</strong> instinct — attentive and caring.", p2:"Ms. Reeves will find this unpersuasive. One child's feelings won't compete with her yearly plan. She needs to see the pattern as evidence and have a system for acting on it."},
+    {h:"This Is a Driver's Natural Move — A Directive Without the Mechanism", p1:"A crisp \"rotate your materials\" is the natural move of a mentor with a strong <strong>Driver</strong> expression — decisive and outcome-focused.", p2:"It speaks to her Driver side but skips what her Cultivator side needs: the evidence and a structured way to decide what to rotate and when. Without that, she'll comply mechanically or defend her plan."}
+  ],
+  matchText:"This works for a <strong>Driver-Cultivator</strong> because it's built like an analysis: three weeks of evidence, specific behaviors, and a precise diagnosis — \"your plan doesn't include a mechanism for responding to children's interests.\"",
+  matchText2:"Then you invited her to build the system, offering a monthly review as a starting point. Her Driver side wants to own the solution; her Cultivator side wants it well reasoned. A Driver-Cultivator can adopt responsiveness once it becomes part of the plan.",
+  actionSteps:[
+    "<strong>Add trains to the block area this week.</strong> Start with one basket of toy trains and a few train books. Let her see how Finn and others respond.",
+    "<strong>Build a monthly interest review.</strong> Help her add a short review to her planning: what are children talking about, and what materials could support it?",
+    "<strong>Use an interest log.</strong> Suggest she note children's recurring interests during the week. The log becomes her evidence for rotation decisions.",
+    "<strong>Rotate, don't just add.</strong> Help her remove materials children haven't used in weeks, so the centers stay organized and fresh.",
+    "<strong>Review the results together.</strong> After adding trains, look at how long children stay in the block area. Let her analyze the change; she'll see the value herself."
+  ],
+  completeLine:"You gave a Driver-Cultivator evidence, a diagnosis, and a system to build. That's exactly what she needed."
+},
+
+// ── SCENARIO 5 · Inspirer Mentee ─────────────────────────────
+{
+  menteeType:"I",
+  menteeLabel:"The Inspirer",
+  menteeDesc:"Ms. Reyes is warm, expressive, and genuinely beloved by the families and children in her program. She loves abundance — she fills every bin and shelf with materials so children have lots of choices. Her challenge: her shelves are so full and mixed together that children can't find what they need, pieces get lost, and cleanup becomes chaos. She receives feedback best when her strengths are genuinely honored first, and growth is framed as an expansion of what she already does well.",
+  sceneTitle:"The Puzzle With No Pieces", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Organized, Uncluttered Shelves",
+  scene:"Ms. Reyes's table-toy shelf is packed: bins overflow with mixed puzzle pieces, beads, counting bears, and small cars all jumbled together. Soledad (4 years, 1 month) pulls out a farm puzzle and finds only half the pieces inside. She digs through a bin, pulling out beads and bears, looking for the cow. After several minutes she gives up and tries another puzzle — also missing pieces. At cleanup, children toss everything into whatever bin is closest. Ms. Reyes laughs, <em>\"Oh, it's a happy mess!\"</em> and sweeps pieces off the floor into a bin.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Organized Materials — Making Choices Usable",
+  qcText1:"Abundance only helps children learn when they can <strong>find, use, and return materials independently</strong>. An effective learning environment has clearly organized, uncluttered shelves, with each material in its own labeled container. Children can see their choices and complete what they start.",
+  qcText2:"Ms. Reyes's generosity with materials is real, but <strong>too many mixed materials made her choices unusable</strong>. Soledad spent her center time searching instead of playing. Fewer materials, sorted into labeled containers with complete sets, would give children more meaningful choices — and make cleanup something children can do on their own.",
+  coachTitle:"The Puzzle With No Pieces — Coaching Conversation",
+  question:"You're debriefing with Ms. Reyes, an <strong>Inspirer</strong>. She says happily, \"My kids always have so much to choose from!\" Which approach will land?",
+  correct:2,
+  options:[
+    "\"Your shelves are cluttered and disorganized. Children can't find anything. You need to sort and reduce your materials.\"",
+    "\"You're so generous with your materials, and the kids love it. Maybe just tidy up a little? Only if you have time.\"",
+    "\"They really do — you love giving children abundance, and that's a gift. Here's what I noticed: Soledad pulled out the farm puzzle and could only find half the pieces. She dug through bins full of beads and bears looking for the cow, then tried another puzzle and gave up. What if your abundance came in beautiful, complete sets — each puzzle in its own labeled tub, a few choices out at a time, the rest rotating in? Same generosity, and every child gets to finish what they start.\"",
+    "\"There's research on how clutter affects children's attention and self-regulation. I'd suggest reading a summary, and then we can discuss how to reorganize.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Blunt for an Inspirer", p1:"Stating the problem plainly is a <strong>Driver mentor's</strong> instinct: clear and accurate.", p2:"Ms. Reyes will hear \"cluttered and disorganized\" as criticism of her generosity. Inspirers can deflate when feedback lands as a verdict without recognition. She'll comply reluctantly but won't feel invested."},
+    {h:"This Is a Sustainer's Natural Move — So Gentle the Point Disappears", p1:"Affirming her and softening the ask is a <strong>Sustainer mentor's</strong> natural move — caring and protective.", p2:"\"Only if you have time\" makes the change optional, and \"tidy up\" misses the real issue. She needs to see Soledad's experience and a vision for organization that feels joyful."},
+    {h:"This Is a Cultivator's Natural Move — Theory Before Connection", p1:"Assigning research on clutter is a <strong>Cultivator mentor's</strong> instinct — thorough and principled.", p2:"For an Inspirer, it feels like homework instead of connection. The research is sound, but it won't move her until she feels Soledad's search for the cow. Lead with the child."}
+  ],
+  matchText:"This works for an <strong>Inspirer</strong> because it honors what she values most — generosity and abundance — and names it as a gift. Then it shows her Soledad's search as a story, not a criticism.",
+  matchText2:"The reframe \"abundance in beautiful, complete sets\" is the key. You didn't ask her to give less; you showed her how to make her generosity usable. \"Same generosity, and every child gets to finish what they start\" is a vision an Inspirer will embrace.",
+  actionSteps:[
+    "<strong>Sort one shelf together.</strong> Choose the table-toy shelf and help her sort materials into clear, labeled tubs with complete sets.",
+    "<strong>Put out fewer choices at a time.</strong> Help her select six to eight options for the shelf and store the rest for rotation.",
+    "<strong>Label with pictures.</strong> Add a picture label to each tub and its spot on the shelf, so children can return materials independently.",
+    "<strong>Make cleanup a matching game.</strong> Her energy can turn cleanup into fun: \"Can you find the tub with the cow picture?\"",
+    "<strong>Watch Soledad finish a puzzle.</strong> On your next visit, point out a child completing a full set. Inspirers learn best from moments they can feel."
+  ],
+  completeLine:"You showed an Inspirer how to make her generosity usable. That's the work."
+},
+
+// ── SCENARIO 6 · Inspirer-Driver Mentee ──────────────────────
+{
+  menteeType:"ID",
+  menteeLabel:"The Inspirer-Driver",
+  menteeDesc:"Mr. Castillo is magnetic, persuasive, and absolutely committed to results. His room is built for energy: open floor space for movement, music, and big group games. His challenge: in designing for excitement, he's left no quiet space where children can calm down or be alone, and some children struggle to cope with a room that never slows down. He receives feedback best when it is both energetically engaging and immediately connected to real outcomes — he needs to feel it and be given something specific to do with it.",
+  sceneTitle:"Under the Table", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Quiet, Cozy Spaces",
+  scene:"It's a loud, busy morning in Mr. Castillo's room: music is playing, children are dancing in the open space, and the block area is bustling. Malik (3 years, 11 months) has been crying since drop-off. He wanders from area to area, covering his ears. Finally, he crawls under the art table and curls up with his knees to his chest. Mr. Castillo spots him and crouches down with a big smile: <em>\"Hey, buddy! Come dance with us — it'll make you feel better!\"</em> Malik shakes his head and stays under the table for twenty minutes.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Quiet Spaces — Designing for Every Child's Needs",
+  qcText1:"A well-designed learning environment includes <strong>a quiet, cozy space where children can calm down, rest, or be alone</strong>. Soft pillows, books, and a small, enclosed area give children a place to regulate their emotions. Malik found the closest thing he could — the space under the art table.",
+  qcText2:"Mr. Castillo's energy is a gift for many children, but <strong>a room designed only for excitement leaves some children with nowhere to go</strong>. Malik needed a calm place, and the room didn't offer one. A cozy corner with soft seating and a few books would give him — and other children — a way to take a break without hiding.",
+  coachTitle:"Under the Table — Coaching Conversation",
+  question:"You're debriefing with Mr. Castillo, an <strong>Inspirer-Driver</strong>. He says, \"Malik just had a rough morning. He'll perk up.\" Which approach will actually land?",
+  correct:0,
+  options:[
+    "\"Your room has amazing energy — kids come alive in here. Here's what I noticed, though: Malik was overwhelmed, covering his ears, and the only calm spot he could find was under the art table. He stayed there twenty minutes. What if your room had one cozy corner — pillows, a few books, a small space — where a child like Malik could recharge and come back? You'd get more kids joining the fun, because they'd have a place to reset first.\"",
+    "\"I felt so sad for Malik. He seemed really upset. Maybe try being a little gentler with him when he's struggling?\"",
+    "\"Let's analyze the sensory load in your room. Could you document noise levels, activity types, and how many children seem overwhelmed each day?\"",
+    "\"Your room doesn't have a quiet space. Add one.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Sustainer's Natural Move — It Asks Him to Shrink", p1:"Focusing on Malik's sadness and asking him to be gentler is a <strong>Sustainer mentor's</strong> instinct — caring and attuned.", p2:"Mr. Castillo will hear it as a request to tone himself down, and he'll push back — \"He just needed to join in!\" The issue isn't his warmth; it's the room's design. He needs a specific environmental fix."},
+    {h:"This Is a Cultivator's Natural Move — Documentation Over Momentum", p1:"Asking him to document sensory load is a <strong>Cultivator mentor's</strong> natural move — systematic and evidence-oriented.", p2:"For an Inspirer-Driver, it turns a vivid moment into paperwork, and he'll lose interest. He needs the insight tied to Malik and a quick, concrete change he can make this week."},
+    {h:"This Is a Driver's Natural Move — Correct, but He'll Charm Past It", p1:"A crisp \"add one\" is a <strong>Driver mentor's</strong> instinct — direct and results-focused, and it speaks to his Driver side.", p2:"Without energy and a reason, he'll treat it as a minor task or argue that Malik just needs to warm up. He needs to feel Malik's experience and see how a quiet space improves his results."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Driver</strong> because it opens with genuine praise for what he does best — \"kids come alive in here.\" Then it shows him Malik's experience clearly and offers a concrete solution.",
+  matchText2:"The reframe \"you'd get more kids joining the fun\" speaks to both sides of him. His Inspirer side wants every child engaged; his Driver side wants results. A cozy corner doesn't reduce his energy; it helps more children participate in it.",
+  actionSteps:[
+    "<strong>Build a cozy corner this week.</strong> Help him choose a spot away from the music and blocks, with pillows, a soft rug, and a basket of books.",
+    "<strong>Teach it as a choice.</strong> Help him introduce the space positively: \"When you need a break, you can go to the cozy corner and come back when you're ready.\"",
+    "<strong>Show Malik the space.</strong> Suggest he walk Malik to the corner tomorrow and let him try it out.",
+    "<strong>Add calming tools.</strong> Soft toys, headphones, or a feelings chart can make the space more useful for children who need to regulate.",
+    "<strong>Notice who uses it.</strong> At your next visit, point out children who take a break and rejoin the group. Seeing kids return to the fun will convince him."
+  ],
+  completeLine:"You matched an Inspirer-Driver's energy and gave every child a way into it. He'll run with that."
+},
+
+// ── SCENARIO 7 · Inspirer-Sustainer Mentee ───────────────────
+{
+  menteeType:"IS",
+  menteeLabel:"The Inspirer-Sustainer",
+  menteeDesc:"Ms. Fontaine is warm-hearted, joyful, and deeply invested in every child and family she serves. Her classroom feels like belonging, and she loves taking care of children. Her challenge: she does so much for them — including putting everything away at cleanup — that her room isn't set up for children to be independent. Shelves are unlabeled, and only she knows where things go. She receives feedback best when she feels completely safe in the relationship, and when growth is framed as deepening her impact on the children she loves — not as a failure of her warmth.",
+  sceneTitle:"Only Ms. Fontaine Knows", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Labels That Support Independence",
+  scene:"At cleanup time in Ms. Fontaine's room, Ayla (4 years, 4 months) holds a bin of magnetic tiles and wanders from shelf to shelf. None of the shelves have labels or pictures. She tries one spot, then another, then sets the bin on the floor and waits. Other children do the same, leaving toys in piles. Ms. Fontaine smiles and says, <em>\"That's okay, sweethearts, I'll take care of it,\"</em> and spends ten minutes putting everything away while children sit on the carpet. The next morning, Ayla can't find the magnetic tiles and asks Ms. Fontaine where they went.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Labels and Organization — Designing for Children's Independence",
+  qcText1:"A well-designed learning environment lets children <strong>find and return materials on their own</strong>. Picture-and-word labels on shelves and bins show children exactly where things belong. That builds independence, responsibility, and early literacy — and it makes cleanup something children can do.",
+  qcText2:"Ms. Fontaine's instinct to help is loving, but <strong>without labels, children can't succeed at cleanup even when they try</strong>. Ayla wanted to put the tiles away and couldn't. When Ms. Fontaine does it for everyone, children lose ten minutes of learning and the chance to feel capable. Labeled shelves would let her warmth show up as trust in children's abilities.",
+  coachTitle:"Only Ms. Fontaine Knows — Coaching Conversation",
+  question:"Ms. Fontaine says, \"I don't mind cleaning up. I like taking care of them.\" She is an <strong>Inspirer-Sustainer</strong> — joyful, relational, and deeply nurturing. Which approach will help her grow?",
+  correct:3,
+  options:[
+    "\"You're doing children's work for them. They need to learn responsibility. Label your shelves and make them clean up.\"",
+    "\"Let's create a complete labeling system for every shelf and bin, with a cleanup chart assigning jobs. A clear system will make it easier to apply consistently.\"",
+    "\"Cleanup could be so much more fun! What if you played a cleanup song and made it a dance party? The kids would love helping!\"",
+    "\"I love how much you care for them — it's why your room feels so safe. Can I share something I saw? Ayla picked up the magnetic tiles at cleanup and really tried to put them away. She went from shelf to shelf, but she couldn't find where they belonged, so she set them down and waited. This morning she couldn't find them at all. What if the shelves had pictures showing where everything goes? Then Ayla could take care of her room too — and feel so proud doing it. That's another way of caring for her.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Correct, but It Breaks Her Sense of Safety", p1:"Stating the problem and prescribing the fix is a <strong>Driver mentor's</strong> instinct — direct and standards-focused.", p2:"For an Inspirer-Sustainer, \"you're doing children's work\" feels like criticism of her caring nature. She'll feel ashamed rather than equipped. She needs safety first, and a reason rooted in a child she loves."},
+    {h:"This Is a Cultivator's Natural Move — A System Without the Why", p1:"A complete labeling system and job chart is a <strong>Cultivator mentor's</strong> natural move — organized and thorough.", p2:"Ms. Fontaine's barrier is emotional: she enjoys taking care of children. A system won't change that until she sees how labels help Ayla feel capable. Lead with the child."},
+    {h:"This Is an Inspirer's Natural Move — More Fun, Same Setup", p1:"A cleanup dance party is the natural move of a mentor with a strong <strong>Inspirer</strong> expression — joyful and energizing.", p2:"It speaks to her Inspirer side, but a song won't help Ayla find where the tiles go. Without labels, children still can't succeed, and Ms. Fontaine will keep doing it for them."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Sustainer</strong> because it begins by honoring her care and naming it as the reason her room feels safe. Then it shows her Ayla's effort — she really tried — rather than a failure.",
+  matchText2:"The reframe \"another way of caring for her\" is the turning point. You didn't ask Ms. Fontaine to stop taking care of children; you showed her how labels let children feel capable and proud. She can express her love through trust, not only through helping.",
+  actionSteps:[
+    "<strong>Label one area together.</strong> Start with the table-toy shelf. Take photos of each material, print them, and tape them to both the bin and the shelf.",
+    "<strong>Invite children to help label.</strong> Children can help match pictures and choose spots. Ownership makes the system stick.",
+    "<strong>Teach cleanup as a match.</strong> Help her practice: \"Find the picture that matches your bin.\" Her warmth makes the teaching feel encouraging.",
+    "<strong>Show Ayla the new labels.</strong> Suggest she walk Ayla to the magnetic tiles' new labeled spot and let her put them away.",
+    "<strong>Name her success out loud.</strong> When children clean up independently, tell her what you saw on their faces. An Inspirer-Sustainer needs to see that the relationship grew stronger."
+  ],
+  completeLine:"You helped an Inspirer-Sustainer see independence as a form of love. That changes her whole practice."
+},
+
+// ── SCENARIO 8 · Inspirer-Cultivator Mentee ──────────────────
+{
+  menteeType:"IC",
+  menteeLabel:"The Inspirer-Cultivator",
+  menteeDesc:"Ms. Park is a creative, intellectually curious teacher who brings both warmth and analytical depth to her practice. She loves designing interesting spaces — nooks, lofts, and hidden reading tents. Her challenge: her creative designs don't always account for practical needs like supervision, and some of her favorite spaces create blind spots where she can't see children. She receives feedback best when it engages both her intellectual curiosity and her relational energy, and when the path forward is both exciting and structured.",
+  sceneTitle:"The Hidden Nook", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Supervision and Sightlines",
+  scene:"Ms. Park has built a beautiful \"secret garden\" reading nook behind two tall bookshelves, draped with fabric vines and fairy lights. Children love it. During center time, Ms. Park is working with a small group at the writing table. Behind the shelves, Ezra (4 years, 8 months) and another child argue over a stuffed rabbit. The argument escalates; Ezra is pushed and falls, bumping his head on the shelf. He cries quietly. Ms. Park doesn't hear it over the room's noise. Five minutes later, another child comes to tell her, <em>\"Ezra is crying in the garden.\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Sightlines — Designing Spaces Teachers Can See",
+  qcText1:"A well-designed environment balances <strong>cozy, inviting spaces with clear sightlines</strong>, so teachers can see children from anywhere in the room. Low shelves, open boundaries, and careful placement let children feel tucked away while adults can still supervise.",
+  qcText2:"Ms. Park's secret garden is creative and loved, but <strong>tall shelves created a blind spot</strong> where a conflict escalated and a child was hurt without an adult knowing for five minutes. The idea doesn't have to go — it needs a redesign. Lower shelves, sheer fabric instead of solid walls, or moving the nook to a spot within her line of sight would keep the magic and restore supervision.",
+  coachTitle:"The Hidden Nook — Coaching Conversation",
+  question:"Ms. Park asks eagerly, \"Isn't the secret garden amazing? The kids love it!\" She is an <strong>Inspirer-Cultivator</strong> — curious, creative, and energized by ideas. Which approach will help her most?",
+  correct:1,
+  options:[
+    "\"The nook is a safety hazard. You can't see children back there. Take down the tall shelves.\"",
+    "\"It really is — the kids adore it, and the fairy lights are magic. Here's a design puzzle I think you'll love: today, Ezra fell and bumped his head behind those tall shelves, and you didn't know for five minutes because you couldn't see or hear him. How could you keep the secret-garden feeling and still see every child from the writing table? Lower shelves? Sheer fabric instead of solid walls? A new spot? What's your first idea?\"",
+    "\"I can tell how much love went into that nook — it's beautiful. I'm sure Ezra's okay. Maybe just check on the nook a little more often during center time?\"",
+    "\"Let's do a supervision analysis. Map every area of your room, mark your position during each activity, and identify which areas are visible from each spot.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Clear, but It Deflates Her", p1:"Naming the hazard and prescribing the fix is a <strong>Driver mentor's</strong> instinct — efficient and safety-focused.", p2:"Ms. Park put her creativity into the garden. A blunt directive feels dismissive, and an Inspirer-Cultivator who feels her idea was rejected may pull back. She needs her design honored and her curiosity engaged in solving the problem."},
+    {h:"This Is a Sustainer's Natural Move — Reassurance That Skips the Growth", p1:"Honoring her effort and reassuring her is a <strong>Sustainer mentor's</strong> natural move — warm and protective.", p2:"It downplays a real safety issue. \"Check more often\" doesn't fix a blind spot; it just adds a task she'll forget. She needs to see the design problem clearly."},
+    {h:"This Is a Cultivator's Natural Move — Analysis Without the Spark", p1:"A full supervision map is the natural move of a mentor with a strong <strong>Cultivator</strong> expression, and it speaks to half of Ms. Park.", p2:"It misses her Inspirer half. The task is heavy and technical, and it treats her creation as a problem to audit rather than an idea to improve. She'll engage more deeply when the challenge feels like a creative puzzle."}
+  ],
+  matchText:"This works for an <strong>Inspirer-Cultivator</strong> because it opens with genuine appreciation — \"the fairy lights are magic\" — and then frames the safety issue as a \"design puzzle.\" Ezra's fall is presented clearly, but the focus is on solving it creatively.",
+  matchText2:"Asking \"What's your first idea?\" invites both sides of her into the redesign. Her Cultivator side can analyze the sightlines; her Inspirer side can imagine a new version of the garden. She keeps her creativity and adds the practical structure she tends to skip.",
+  actionSteps:[
+    "<strong>Stand in her teaching spots.</strong> Walk the room with her and stand where she usually teaches. Ask, \"What can you see from here?\"",
+    "<strong>Redesign the garden together.</strong> Help her choose a solution: lower shelves, sheer fabric, or a new location within her sightline.",
+    "<strong>Keep the magic.</strong> Encourage her to keep the fairy lights and vines. The goal is visibility, not a less creative space.",
+    "<strong>Apply the principle to the whole room.</strong> Help her check other areas for blind spots, using low shelves for boundaries.",
+    "<strong>Celebrate the new design.</strong> When the redesigned garden works, name it. An Inspirer-Cultivator who sees creativity and safety working together will design that way from now on."
+  ],
+  completeLine:"You helped an Inspirer-Cultivator keep the magic and see every child. That's the work."
+},
+
+// ── SCENARIO 9 · Sustainer Mentee ────────────────────────────
+{
+  menteeType:"S",
+  menteeLabel:"The Sustainer",
+  menteeDesc:"Ms. Okafor is nurturing, relationship-centered, and deeply committed to the children in her care. She builds genuine warmth with children she knows well, but she is slower to connect with children whose behaviors challenge her. Her challenge: when a child repeatedly struggles, she tends to see the problem in the child rather than in how a space is set up for him. She receives feedback best when her care for children is honored first, and when growth is framed through the lens of a specific child's experience rather than a general critique of her practice.",
+  sceneTitle:"Six Children, Two Scoops", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Preventing Conflict Through Design",
+  scene:"The sensory table in Ms. Okafor's room is full of colored rice, with two scoops and one funnel. Six children crowd around it. Brody (4 years, 2 months) — who has had several hard days — reaches for a scoop, and another child grabs it first. He pushes her. Ms. Okafor comes over: <em>\"Brody, we don't push. Go find another center.\"</em> He sits at the edge of the carpet, watching the table. Twenty minutes later, he tries again, the same thing happens, and he's sent away a second time. Ms. Okafor sighs to her co-teacher: <em>\"He just can't handle the sensory table.\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Preventing Conflict — How Design Shapes Behavior",
+  qcText1:"The environment can <strong>set children up to succeed or to struggle</strong>. Six children at one sensory table with two scoops is almost guaranteed to produce conflict — for any child. Clear limits on how many children can use a center, and enough materials for everyone who's there, prevent many conflicts before they start.",
+  qcText2:"Brody's pushing was real, and it needed a response. But <strong>the setup made that conflict likely, and Brody was the one who paid for it</strong>. Sent away twice, he learned that the sensory table isn't for him. A picture sign showing four children, plus four scoops and extra funnels, would give Brody and every child a fair chance to play well.",
+  coachTitle:"Six Children, Two Scoops — Coaching Conversation",
+  question:"You're debriefing with Ms. Okafor, a <strong>Sustainer</strong>. She says, \"Brody really struggles at the sensory table.\" Which approach will help her grow?",
+  correct:0,
+  options:[
+    "\"I can see how much you want every child to be safe at that table — you stepped in right away. Can I tell you what I saw from Brody's side? There were six children and two scoops. When he reached for one, someone else grabbed it first, and he pushed. Then he watched from the carpet for twenty minutes, tried again, and it happened the same way. I wonder if the table was set up so that someone was bound to struggle — and it kept being Brody. What if it had a sign for four children and a scoop for each? I think Brody might have a completely different morning.\"",
+    "\"The sensory table is overcrowded and under-stocked. That's why conflicts happen. Add limits and more scoops.\"",
+    "\"What if you made the sensory table extra fun for Brody — give him a special job, like 'rice captain'? He'd feel so important!\"",
+    "\"Let's collect data on conflicts at each center for a week, including how many children and materials were present. Then we can analyze the pattern.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Abrupt for a Sustainer", p1:"Diagnosing the problem and prescribing a fix is a <strong>Driver mentor's</strong> instinct — clear and efficient.", p2:"For Ms. Okafor, it skips the child entirely. A Sustainer who feels her judgment about Brody is being dismissed may become defensive. She needs to see Brody's experience first; then the fix will make sense to her."},
+    {h:"This Is an Inspirer's Natural Move — A Role Instead of the Real Fix", p1:"Giving Brody a special job is an <strong>Inspirer mentor's</strong> natural suggestion — upbeat and relationship-building.", p2:"It's a kind idea, but it doesn't change the setup: six children and two scoops will still create conflicts. It also singles Brody out rather than addressing the design problem that affects every child."},
+    {h:"This Is a Cultivator's Natural Move — Evidence Without the Child", p1:"Collecting conflict data across centers is a <strong>Cultivator mentor's</strong> instinct — principled and evidence-based.", p2:"The data would be useful, but a chart won't reach a Sustainer the way one child's story will. Ms. Okafor changes when she sees a specific child she cares about. Lead with Brody."}
+  ],
+  matchText:"This works for a <strong>Sustainer</strong> because it starts where her heart is — her desire to keep children safe — and then invites her to see the morning \"from Brody's side.\" The setup is described gently, through what Brody experienced.",
+  matchText2:"The key question — \"I wonder if the table was set up so that someone was bound to struggle\" — shifts the problem from Brody to the environment without blaming anyone. A Sustainer who genuinely cares about children will be relieved to find a solution that helps Brody succeed.",
+  actionSteps:[
+    "<strong>Add a center-limit sign.</strong> Help her create a picture sign showing four children at the sensory table and teach the class how to use it.",
+    "<strong>Match materials to children.</strong> Put out at least one scoop, funnel, or tool per child allowed at the center.",
+    "<strong>Welcome Brody back.</strong> Suggest she invite Brody to the sensory table when it's less crowded and stay close to support him.",
+    "<strong>Look for other crowded centers.</strong> Help her check each center for the same pattern: too many children, too few materials.",
+    "<strong>Help her see Brody succeed.</strong> When Brody plays calmly at the table, point it out. A Sustainer who sees a struggling child thrive will keep designing for him."
+  ],
+  completeLine:"You helped a Sustainer see that the room can help a struggling child succeed. Brody will feel the difference."
+},
+
+// ── SCENARIO 10 · Sustainer-Driver Mentee ────────────────────
+{
+  menteeType:"SD",
+  menteeLabel:"The Sustainer-Driver",
+  menteeDesc:"Mr. James is a steady, principled teacher who holds high expectations while genuinely protecting the emotional wellbeing of his children. He's consistent and predictable, and he expects children to learn the routine. His challenge: he relies on telling children the schedule rather than showing it, and when children keep asking, his Driver side can grow impatient. He receives feedback best when his care for children is acknowledged first, followed by clear, specific, actionable guidance.",
+  sceneTitle:"When Is Outside?", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Visual Schedules and Supports",
+  scene:"It's mid-morning in Mr. James's room. For the fourth time in thirty minutes, Yara (3 years, 10 months) comes up to him: <em>\"When is outside?\"</em> Mr. James answers patiently: <em>\"After centers and snack.\"</em> Ten minutes later, she asks again. Two other children ask when lunch is. By the fifth question, his voice is firm: <em>\"Yara, I've told you. After snack. Please stop asking.\"</em> Yara goes back to the carpet and sits with her arms crossed, watching the door. There's no picture schedule anywhere in the room.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Visual Supports — Making the Day Predictable for Children",
+  qcText1:"Young children, especially three-year-olds, <strong>can't hold a spoken schedule in their memory</strong>. A visual schedule — a row of pictures showing the day's routine — lets children see what comes next, reducing anxiety and repeated questions. It's one of the simplest and most powerful environmental supports.",
+  qcText2:"Mr. James answered patiently at first, but <strong>the room gave Yara no way to find the answer herself</strong>. Her questions weren't defiance; they were a need for predictability. A picture schedule at children's eye level, with a movable arrow, would let Yara check it herself — and protect Mr. James's patience too.",
+  coachTitle:"When Is Outside? — Coaching Conversation",
+  question:"You're debriefing with Mr. James, a <strong>Sustainer-Driver</strong>. He says, \"Yara asks the same question all day. She needs to learn the routine.\" Which approach will help him?",
+  correct:2,
+  options:[
+    "\"What if you made the schedule into a fun song? You could sing it every morning — the kids would love it and remember it!\"",
+    "\"There's research on visual supports and how they reduce anxiety in young children. I can send you some articles.\"",
+    "\"You were so patient with her — you answered four times before your voice got firm. That's real care. Here's what I noticed: Yara isn't forgetting on purpose; three-year-olds can't hold a schedule in their heads. And there's nothing in the room she can check. What if you added a picture schedule at her eye level, with an arrow that moves through the day? Then when she asks, you point: 'Let's check the schedule.' She learns to find the answer herself, and you get your patience back.\"",
+    "\"Yara isn't learning the routine because you haven't made it visual. Make a picture schedule.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — Adds a Song but Misses the Point", p1:"A schedule song is an <strong>Inspirer mentor's</strong> natural move — lively and creative.", p2:"A song is still something children have to remember. It doesn't give Yara something to check when she's worried. Mr. James needs a clear, practical tool, not another thing to add to his morning."},
+    {h:"This Is a Cultivator's Natural Move — Right Evidence, Wrong Entry Point", p1:"Offering research on visual supports is a <strong>Cultivator mentor's</strong> instinct — careful and evidence-based.", p2:"For a Sustainer-Driver, articles feel abstract. He'll be persuaded by Yara's experience in his room today, delivered with respect for his patience and followed by a concrete action."},
+    {h:"This Is a Driver's Natural Move — Correct, but It Skips His Care", p1:"A blunt \"you haven't made it visual\" is the natural move of a mentor with a strong <strong>Driver</strong> expression — accurate and quick.", p2:"Mr. James's Sustainer side needs to hear that his patience was real before he hears the correction. Without that, he'll feel judged and defend his expectation that she learn the routine."}
+  ],
+  matchText:"This works for a <strong>Sustainer-Driver</strong> because it acknowledges his patience first — four answers before his voice got firm — and then reframes Yara's questions as a developmental need, not a behavior problem.",
+  matchText2:"Then you gave him exactly what his Driver side wants: a specific tool and a script — \"Let's check the schedule.\" He keeps his high expectations; the visual schedule just gives Yara a way to meet them. And \"you get your patience back\" speaks directly to his experience.",
+  actionSteps:[
+    "<strong>Create a picture schedule this week.</strong> Use photos of the class doing each routine, arranged in order at children's eye level.",
+    "<strong>Add a movable arrow or clip.</strong> A marker that moves through the day shows children exactly where they are.",
+    "<strong>Practice the redirect.</strong> Help him replace answering with pointing: \"Let's check the schedule together.\"",
+    "<strong>Give Yara a job.</strong> Suggest Yara move the arrow at each transition. It gives her control and builds her confidence.",
+    "<strong>Reinforce his consistency.</strong> Over the next two weeks, notice when questions drop and his calm holds. Name those moments — steady feedback reinforces steady practice."
+  ],
+  completeLine:"You helped a Sustainer-Driver see that a picture can do what repetition couldn't. That's steady growth."
+},
+
+// ── SCENARIO 11 · Sustainer-Inspirer Mentee ──────────────────
+{
+  menteeType:"SI",
+  menteeLabel:"The Sustainer-Inspirer",
+  menteeDesc:"Ms. Duvall is the warmest person in every room she enters. Children and families feel instantly welcomed, and she wants every day to end calmly and happily. Her challenge: to keep cleanup smooth, she has everything taken apart and put away each day — including children's unfinished projects — and the room has no space for work in progress. She receives feedback best in the context of deep trust, and when growth is framed through her love for the children she serves.",
+  sceneTitle:"Please Save It", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Space for Work in Progress",
+  scene:"Mariam (5 years, 2 months) has spent all of center time building a zoo in the block area: fences, animal pens, a gift shop, and a sign she wrote that says <em>\"ZOO.\"</em> When Ms. Duvall announces cleanup, Mariam grabs her hand: <em>\"Please save it! I'm not done. I need to make the giraffe house tomorrow!\"</em> Ms. Duvall hugs her: <em>\"Oh, sweetheart, it's so beautiful. But we have to clean up so everyone can have a turn tomorrow.\"</em> She helps take the zoo apart. Mariam puts the sign in her cubby and doesn't go to the block area the next day.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Work in Progress — Designing Space for Ongoing Projects",
+  qcText1:"A thoughtfully designed environment <strong>makes room for children's ongoing work</strong>. A \"work in progress\" space — a marked-off area, a shelf, or a sign that says \"Please save\" — lets children return to complex projects over several days. That's how ideas grow deeper and planning becomes meaningful.",
+  qcText2:"Ms. Duvall's cleanup was loving, but <strong>it undid a whole day of Mariam's planning</strong>. Mariam had a clear next step — the giraffe house — and the room had no way to hold it. A \"Please save\" sign and a small protected area for works in progress would honor children's effort while keeping the room orderly.",
+  coachTitle:"Please Save It — Coaching Conversation",
+  question:"You're debriefing with Ms. Duvall, a <strong>Sustainer-Inspirer</strong>. She says softly, \"I felt bad taking her zoo apart, but everyone needs a turn.\" Which approach will help her grow?",
+  correct:1,
+  options:[
+    "\"You destroyed a child's project. Children need to be able to save their work. Add a work-in-progress space.\"",
+    "\"I can tell how much you care — you felt it, and you hugged her. I want to share what happened next, because I know you love her. Mariam put her zoo sign in her cubby and didn't go back to the block area the next day. She had a plan: the giraffe house. What if the room had a 'Please save' space — a sign she could put on her zoo, and a corner where it could wait? Everyone still gets a turn, and Mariam gets to finish what she dreamed up.\"",
+    "\"Let's create a work-in-progress policy with rules for how long projects can stay, how much space they take, and a sign-up system for saving work.\"",
+    "\"What if you took photos of every building before cleanup and made a big 'Block Builders Hall of Fame' wall? The kids would love seeing their creations up there!\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — It Feels Like an Accusation", p1:"Naming the problem directly is a <strong>Driver mentor's</strong> instinct — efficient and clear.", p2:"For a Sustainer-Inspirer, \"you destroyed a child's project\" is deeply painful, especially when she already felt bad about it. She'll feel judged rather than supported. She needs to see a loving solution, not a verdict."},
+    {h:"This Is a Cultivator's Natural Move — A System Before a Reason", p1:"A detailed work-in-progress policy is a <strong>Cultivator mentor's</strong> natural move — organized and thorough.", p2:"Ms. Duvall's barrier is emotional: she wants cleanup to be smooth and fair. A policy with rules won't move her until she sees what the lost zoo meant to Mariam. Start with the child."},
+    {h:"This Is an Inspirer's Natural Move — Celebration Instead of Continuation", p1:"A photo wall of fame is the natural move of a mentor with a strong <strong>Inspirer</strong> expression — joyful and celebratory.", p2:"It's a lovely way to honor finished work, but it doesn't solve Mariam's problem. She didn't want a photo; she wanted to keep building. Photos still mean the zoo gets taken apart."}
+  ],
+  matchText:"This works for a <strong>Sustainer-Inspirer</strong> because it begins by honoring her feelings — \"you felt it, and you hugged her.\" The observation is offered \"because I know you love her,\" keeping the relationship at the center.",
+  matchText2:"The solution respects both of her values: \"Everyone still gets a turn, and Mariam gets to finish what she dreamed up.\" Ms. Duvall doesn't have to choose between fairness and children's ideas. A small design change lets her honor both.",
+  actionSteps:[
+    "<strong>Make a \"Please Save\" sign.</strong> Help her create a simple sign children can place on unfinished work.",
+    "<strong>Mark a work-in-progress spot.</strong> Choose a corner of the block area or a shelf where saved projects can stay for a day or two.",
+    "<strong>Teach the routine.</strong> Help her introduce the sign at circle time so children know how it works and when to use it.",
+    "<strong>Invite Mariam to rebuild.</strong> Suggest Ms. Duvall offer Mariam a chance to rebuild her zoo, with the \"Please Save\" sign ready.",
+    "<strong>Share what happens next.</strong> When Mariam builds the giraffe house, ask Ms. Duvall how Mariam responded. A Sustainer-Inspirer who sees a child's joy will keep making room for ongoing work."
+  ],
+  completeLine:"You helped a Sustainer-Inspirer make room for children's dreams. That's the heart of mentoring."
+},
+
+// ── SCENARIO 12 · Sustainer-Cultivator Mentee ────────────────
+{
+  menteeType:"SC",
+  menteeLabel:"The Sustainer-Cultivator",
+  menteeDesc:"Ms. Winters is a thoughtful, quietly powerful teacher who observes everything and processes deeply. She keeps detailed notes on how children use each area of her room. Her challenge: her combination of emotional caution and analytical thoroughness means she can take far too long to act on what she already knows, waiting for the perfect plan before changing her environment. She receives feedback best in quiet, unhurried conversations that honor both her emotional attunement and her intellectual depth.",
+  sceneTitle:"The Library Nobody Visits", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Creating Inviting Areas",
+  scene:"Ms. Winters's library corner is in a dim back corner of the room: a tall bookshelf with books packed spine-out, one hard plastic chair, and no rug. For three weeks, her notes have read: <em>\"Library — 0 or 1 visitors per day. Dark? Books hard to see? Needs pillows?\"</em> Today, Otis (4 years, 6 months) wanders over, pulls out a book, can't tell what it's about from the spine, pushes it back, and leaves. When you ask about the library, Ms. Winters says, <em>\"I know. I'm still deciding how to redo it.\"</em>",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Inviting Areas — Acting on What You Observe",
+  qcText1:"Ms. Winters did the hard part: she noticed. Her notes identify exactly what makes the library uninviting — <strong>poor lighting, books that are hard to see, and nowhere comfortable to sit</strong>. A well-designed library has front-facing books, soft seating, good light, and a cozy feeling that draws children in.",
+  qcText2:"The gap is between insight and action. For three weeks, <strong>children like Otis have walked past a space that could build their love of books</strong>. Ms. Winters doesn't need a perfect redesign; she needs a first step. Turning some books face-out, adding a rug and a few pillows, and moving a lamp nearby could transform the library in an afternoon.",
+  coachTitle:"The Library Nobody Visits — Coaching Conversation",
+  question:"You're debriefing with Ms. Winters, a <strong>Sustainer-Cultivator</strong>. She says quietly, \"I want to plan it carefully before I change anything.\" Which approach will help her act?",
+  correct:3,
+  options:[
+    "\"You've known for three weeks. Just fix it. Put out some pillows and turn the books around.\"",
+    "\"Ooh, let's make it amazing! A reading tent, twinkle lights, a stuffed-animal reading buddy for every child — the kids would go wild!\"",
+    "\"Before you redesign it, let's research library-corner best practices and compare several layouts. Then you can choose the ideal plan.\"",
+    "\"Your notes are remarkable — you named exactly what's keeping children away: dim light, books they can't see, nowhere soft to sit. I don't think you need more planning. I think you need permission to try one small thing. What if this week you turned ten books face-out and added a rug and two pillows, then watched what happened, the same careful way you always do? Otis pulled out a book today and couldn't tell what it was about. He's ready for a library he can see.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Pressure Without Understanding", p1:"A crisp \"just fix it\" is a <strong>Driver mentor's</strong> instinct — decisive and action-focused.", p2:"A Sustainer-Cultivator will feel her careful observation was treated as a failing. The directive may get compliance, but it dismisses the thoughtful noticing that makes her a strong teacher. She needs her insight honored and a small, manageable step."},
+    {h:"This Is an Inspirer's Natural Move — Bigger Ideas Instead of a First Step", p1:"Proposing an elaborate reading tent is an <strong>Inspirer mentor's</strong> natural move — creative and energizing.", p2:"Ms. Winters is stuck because she's waiting for the perfect plan. A bigger, more ambitious vision gives her even more to plan and makes starting feel harder. She needs a small first step, not a grander design."},
+    {h:"This Is a Cultivator's Natural Move — More Planning for a Planner", p1:"Researching best practices and comparing layouts is the natural move of a mentor with a strong <strong>Cultivator</strong> expression, and it speaks to half of Ms. Winters.", p2:"It feeds the pattern that's keeping her stuck. Another round of research means another week with an empty library. She needs help moving from analysis to action."}
+  ],
+  matchText:"This works for a <strong>Sustainer-Cultivator</strong> because it honors her observation fully — \"you named exactly what's keeping children away\" — and then gently names the real barrier: \"you need permission to try one small thing.\"",
+  matchText2:"The small, specific step — ten books face-out, a rug, two pillows — makes action feel manageable, and \"watch what happened, the same careful way you always do\" turns the change into an experiment that fits her thinking. Otis's moment reaches her Sustainer side without shame.",
+  actionSteps:[
+    "<strong>Choose one small change today.</strong> Before the debrief ends, help her pick the first step: face-out books, a rug, and pillows.",
+    "<strong>Treat it as an experiment.</strong> Give her a simple cycle: change one thing, observe for a week, note what she sees, adjust.",
+    "<strong>Add light.</strong> Suggest a lamp or moving the library closer to a window. Better light makes books easier to see and the space more inviting.",
+    "<strong>Watch Otis.</strong> Encourage her to notice whether Otis visits the library after the change and what he does there.",
+    "<strong>Honor the follow-through.</strong> At your next debrief, start by asking what she saw in the new library. Acknowledge that she acted — that's the growth."
+  ],
+  completeLine:"You helped a Sustainer-Cultivator turn careful notes into a library children want to visit. That's a breakthrough for her."
+},
+
+// ── SCENARIO 13 · Cultivator Mentee ──────────────────────────
+{
+  menteeType:"C",
+  menteeLabel:"The Cultivator",
+  menteeDesc:"Ms. Tran is analytical, principled, and detail-oriented. Her art center is precise and well organized, stocked with pre-cut shapes, templates, and step-by-step models. Her challenge: her carefully prepared materials leave little room for children's own ideas, because nearly everything in the center is designed for one right outcome. She can become quietly defensive when feedback feels like a personal judgment rather than a professional discussion. She receives feedback best when it is structured, evidence-based, and framed as a problem to analyze and solve together — not a verdict to receive.",
+  sceneTitle:"The Brown Paper and Tape", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Open-Ended Materials",
+  scene:"Ms. Tran's art shelf holds neat bins of pre-cut paper pumpkins, pre-cut leaves, and a sample collage showing exactly how to glue them. Juniper (4 years, 9 months) looks at the shelf, then at Ms. Tran: <em>\"Can I have brown paper and tape? I want to make a hedgehog house.\"</em> Ms. Tran shakes her head: <em>\"We don't have brown paper out today. You can make a pumpkin collage like the sample.\"</em> Juniper glues three pumpkins onto a sheet exactly as shown, hands it to Ms. Tran, and asks if she can go outside.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Open-Ended Materials — Leaving Room for Children's Ideas",
+  qcText1:"A well-designed learning environment includes <strong>open-ended materials</strong> — paper in different sizes and colors, tape, cardboard, fabric scraps, recycled objects — that children can use in many ways. These materials invite planning, problem-solving, and creativity, because there's no single right product.",
+  qcText2:"Ms. Tran's materials are organized, but <strong>they were designed for one outcome</strong>. Juniper had her own idea and knew exactly what she needed, and the shelf couldn't support it. Adding a bin of open-ended materials alongside the templates would give children a choice between following a model and creating their own design.",
+  coachTitle:"The Brown Paper and Tape — Coaching Conversation",
+  question:"You're debriefing with Ms. Tran, a <strong>Cultivator</strong>. She says, \"The pumpkin collage teaches fine-motor skills and following directions.\" Which approach will help her?",
+  correct:2,
+  options:[
+    "\"Your art center is too structured. Children can't create anything of their own. Get rid of the templates.\"",
+    "\"Juniper is so creative! I bet if you just gave the kids more freedom, they'd make amazing things. Let them go wild!\"",
+    "\"Those are real goals, and your center supports them well. Let's look at what happened with Juniper, though. She came to the shelf with her own plan — a hedgehog house — and named the exact materials she needed: brown paper and tape. The shelf couldn't support it, so she made the sample instead and asked to leave. Here's a question worth analyzing: what skills would Juniper have used building her own design? Planning, measuring, problem-solving, fine motor? How could your shelf support both goals — the template and an open-ended option?\"",
+    "\"I know you work so hard to prepare your art center. Maybe just relax a little about the templates? I don't want you to stress about it.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — A Verdict She Will Resist", p1:"A blunt \"get rid of the templates\" is a <strong>Driver mentor's</strong> natural move — direct and efficient.", p2:"It will feel like a personal judgment of her planning, and Cultivators often respond to that with quiet defensiveness. She needs to analyze the evidence and reach her own conclusion."},
+    {h:"This Is an Inspirer's Natural Move — Encouragement Without the Analysis", p1:"Celebrating creativity and \"freedom\" is an <strong>Inspirer mentor's</strong> instinct — warm and motivating.", p2:"\"Let them go wild\" sounds like chaos to Ms. Tran. She'll reject it. She needs to see that open-ended materials build specific skills, with a clear structure for offering them."},
+    {h:"This Is a Sustainer's Natural Move — Soothing Where She Wants Substance", p1:"Reassuring her and suggesting she \"relax\" is a <strong>Sustainer mentor's</strong> instinct — gentle and supportive.", p2:"Ms. Tran isn't stressed; she's principled. Telling her to relax may feel condescending. She'll respect a careful look at the evidence far more than comfort."}
+  ],
+  matchText:"This works for a <strong>Cultivator</strong> because it validates her goals first — \"those are real goals\" — and then lays out the evidence precisely: Juniper's plan, her specific materials, and what happened when the shelf couldn't support it.",
+  matchText2:"The question \"what skills would Juniper have used?\" engages her analytical mind and shows that open-ended materials serve her goals too. Asking how the shelf could \"support both\" gives her a problem to solve rather than a directive to follow.",
+  actionSteps:[
+    "<strong>Add one open-ended bin.</strong> Start with brown paper, tape, cardboard, and scissors next to the template bins.",
+    "<strong>List the skills together.</strong> Help her write down the skills open-ended building supports: planning, measuring, problem-solving, fine motor.",
+    "<strong>Offer Juniper her materials.</strong> Suggest she invite Juniper to build the hedgehog house and ask her to explain her plan.",
+    "<strong>Label and organize open-ended materials.</strong> Cultivators appreciate order; help her give recycled and open-ended materials clear, labeled homes.",
+    "<strong>Review her notes together.</strong> Ask her to record what children create with the new bin for a week. A Cultivator who analyzes her own evidence owns the conclusion."
+  ],
+  completeLine:"You gave a Cultivator a problem worth analyzing. She'll solve it better than anyone."
+},
+
+// ── SCENARIO 14 · Cultivator-Driver Mentee ───────────────────
+{
+  menteeType:"CD",
+  menteeLabel:"The Cultivator-Driver",
+  menteeDesc:"Ms. Chen is a meticulous, ambitious teacher who builds precise systems and drives them toward strong outcomes. Her classroom materials are carefully selected for skill-building and aligned to her learning goals. Her challenge: she focuses so much on what materials teach that she rarely considers whether they reflect the children and families in her room. She receives feedback best when it is specific, data-grounded, and framed around the gap between her intended outcome and the outcome she is actually producing.",
+  sceneTitle:"Nobody Looks Like Me", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Materials That Reflect Children's Lives",
+  scene:"In Ms. Chen's library corner, Anaya (4 years, 5 months) pulls out one book after another, looking at the covers. In dramatic play, she picks up each doll, then puts it down. She walks over to Ms. Chen: <em>\"There's nobody who looks like me or my mom.\"</em> Ms. Chen glances at the shelves and realizes Anaya is right: most of the books, dolls, and pictures show only a few kinds of families. She says, <em>\"Oh — that's okay, honey. Why don't you read this one about the bus?\"</em> Anaya takes the book but doesn't open it.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Reflecting Children's Lives — Materials That Help Every Child Belong",
+  qcText1:"A well-designed learning environment includes <strong>books, dolls, pictures, and materials that reflect the children and families in the room</strong>. When children see themselves in their surroundings, they feel they belong, and they engage more deeply with the materials.",
+  qcText2:"Anaya noticed a real gap and said it out loud. <strong>Ms. Chen's materials were carefully chosen for skills, but not for the children using them.</strong> A quick review of her books and dramatic play materials, followed by a few additions that reflect her children's families, would help every child connect with the room.",
+  coachTitle:"Nobody Looks Like Me — Coaching Conversation",
+  question:"You're debriefing with Ms. Chen, a <strong>Cultivator-Driver</strong>. She says, \"I choose my materials based on learning goals.\" Which approach will help her?",
+  correct:0,
+  options:[
+    "\"Your materials are carefully aligned to skills — that's a strong system. Here's a gap in it, though: Anaya looked through the library and dramatic play and told you, 'There's nobody who looks like me or my mom.' She took the bus book but didn't open it. If your goal is engagement with those materials, representation affects the outcome. What if you ran a quick inventory — how many books and dolls reflect the families in your class — and added a few that close the gap? You'd have data on the before and after.\"",
+    "\"Anaya is such a sweet girl. You should let her bring in pictures of her family and make a special book about her!\"",
+    "\"I could see Anaya felt left out. Maybe just be more sensitive to how children feel when they don't see themselves?\"",
+    "\"Your materials don't reflect your children. Buy more diverse books and dolls.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is an Inspirer's Natural Move — A Kind Gesture, Not a System", p1:"Inviting Anaya to make a family book is an <strong>Inspirer mentor's</strong> natural move — warm and creative.", p2:"It helps one child but doesn't address the broader gap in Ms. Chen's materials. She needs a systematic way to see and close the gap across her room."},
+    {h:"This Is a Sustainer's Natural Move — Warmth Without a Plan", p1:"Focusing on Anaya's feelings and asking for more sensitivity is a <strong>Sustainer mentor's</strong> instinct — caring and attuned.", p2:"Ms. Chen can lose sight of the child behind her systems, so empathy matters. But \"be more sensitive\" gives her nothing concrete to act on. She needs a data-based reason and a clear plan."},
+    {h:"This Is a Driver's Natural Move — Direction Without the Analysis", p1:"A crisp \"buy more diverse materials\" is the natural move of a mentor with a strong <strong>Driver</strong> expression, and it speaks to Ms. Chen's efficiency.", p2:"It skips the analysis her Cultivator side needs. Without seeing how representation connects to engagement and her goals, she'll treat it as a shopping task rather than part of her system."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Driver</strong> because it honors her system and then identifies a precise gap. Anaya's words and her choice not to open the book are presented as evidence about engagement — an outcome Ms. Chen cares about.",
+  matchText2:"The inventory suggestion fits her perfectly. It's systematic, measurable, and produces \"before and after\" data. You didn't ask her to abandon her learning goals; you showed her how representation strengthens them.",
+  actionSteps:[
+    "<strong>Run a materials inventory.</strong> Help her count books, dolls, puzzles, and pictures that reflect the families in her class.",
+    "<strong>Learn about her families.</strong> Suggest a short family survey or conversations at drop-off to understand who's in her room.",
+    "<strong>Add a few materials first.</strong> Start with several books and dolls that close the biggest gaps. Small changes can make a big difference.",
+    "<strong>Invite Anaya to choose.</strong> When new books arrive, suggest Ms. Chen invite Anaya to look through them first.",
+    "<strong>Reconnect the data to the child.</strong> Ask her to describe what Anaya does with the new materials. It builds the habit of seeing the child behind the checklist."
+  ],
+  completeLine:"You showed a Cultivator-Driver that every child needs to see themselves in the room. She'll build a better system from here."
+},
+
+// ── SCENARIO 15 · Cultivator-Inspirer Mentee ─────────────────
+{
+  menteeType:"CI",
+  menteeLabel:"The Cultivator-Inspirer",
+  menteeDesc:"Mr. Flores is a creative, intellectually rich teacher who brings both deep analysis and social warmth to his practice. His science center is full of fascinating objects — fossils, shells, a real bird's nest — that he's collected over the years. His challenge: he protects these treasures so carefully that children can look but rarely touch, and the center becomes a museum rather than a place to explore. He receives feedback best when his intellectual investment is honored first, and growth is framed as making his depth more accessible — not asking him to simplify or sacrifice rigor.",
+  sceneTitle:"Look, Don't Touch", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Hands-On Access to Materials",
+  scene:"Mr. Flores's science center is impressive: a real bird's nest, a collection of fossils, a hornet's nest, and polished rocks, all arranged in a glass case with a label: <em>\"Look with your eyes!\"</em> Nikolai (4 years, 7 months) presses his face to the glass: <em>\"Is that nest soft? What's inside the rock?\"</em> Mr. Flores kneels beside him and explains how birds weave nests from grass and mud and how fossils form. Nikolai listens, then asks, <em>\"Can I hold it?\"</em> Mr. Flores shakes his head gently: <em>\"These are very special. We just look.\"</em> Nikolai taps the glass once more and walks to the block area.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Hands-On Access — Materials Children Can Explore",
+  qcText1:"Young children learn about the world by <strong>touching, holding, and investigating</strong>. A well-designed science center offers real materials children can handle — magnifiers, rocks, shells, nests, and tools — so they can observe details, ask questions, and test ideas with their hands.",
+  qcText2:"Mr. Flores's collection is fascinating, but <strong>behind glass, it becomes a museum instead of a learning center</strong>. Nikolai asked exactly the right questions — is it soft? what's inside? — and he could only answer them by touching. Keeping the most fragile items in the case while offering sturdy, touchable versions and magnifiers would preserve the treasures and let children explore.",
+  coachTitle:"Look, Don't Touch — Coaching Conversation",
+  question:"You're debriefing with Mr. Flores, a <strong>Cultivator-Inspirer</strong>. He says, \"Those specimens took me years to collect. They're too fragile for little hands.\" Which approach will help him?",
+  correct:1,
+  options:[
+    "\"Your science center is a museum, not a learning center. Take the materials out of the case and let the kids touch them.\"",
+    "\"Your collection is genuinely remarkable — real specimens most children never get to see. Here's a design challenge worthy of it: how do you get that wonder into their hands? Nikolai asked, 'Is that nest soft? What's inside the rock?' Those are real scientific questions, and he could only answer them by touching. What if the most fragile pieces stayed in the case, and you added sturdy specimens — a second nest, rocks you could crack open together, magnifiers? Same collection, now something they can investigate.\"",
+    "\"I can see how much those treasures mean to you. Maybe let the kids hold them just once in a while, with you right there?\"",
+    "\"What if you made a 'Science Explorer Day' where kids could dress up as scientists and do a big hands-on investigation? They'd love it!\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — It Dismisses His Thinking", p1:"Calling his center \"a museum\" and prescribing the fix is a <strong>Driver mentor's</strong> instinct — efficient and outcome-focused.", p2:"Mr. Flores will hear that his years of collecting are the problem. A Cultivator-Inspirer who feels his depth isn't valued will resist. He needs to see how to make his collection accessible, not how to abandon his care for it."},
+    {h:"This Is a Sustainer's Natural Move — Too Soft to Change the Pattern", p1:"Suggesting occasional supervised holding is a <strong>Sustainer mentor's</strong> instinct — warm and gentle.", p2:"It doesn't solve the design problem. \"Once in a while\" keeps the center mostly off-limits and doesn't give children daily access to hands-on exploration. He needs a clear redesign that protects the fragile items and adds touchable ones."},
+    {h:"This Is an Inspirer's Natural Move — An Event Instead of a Daily Space", p1:"A special Science Explorer Day is the natural move of a mentor with a strong <strong>Inspirer</strong> expression — and it speaks to Mr. Flores's own Inspirer side.", p2:"But one special day doesn't change the everyday environment. Children need hands-on access during regular center time, not only during events."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Inspirer</strong> because it honors his intellectual investment first — \"genuinely remarkable\" — and frames the change as a design challenge worthy of his collection: getting the wonder \"into their hands.\"",
+  matchText2:"You protected what matters to him by keeping the most fragile pieces in the case. And you gave him a clear redesign — sturdy specimens, rocks to crack open, magnifiers — so his depth becomes something children can investigate. \"Same collection, now something they can investigate\" is language he'll embrace.",
+  actionSteps:[
+    "<strong>Sort the collection together.</strong> Help him decide which items are too fragile to handle and which are sturdy enough for children.",
+    "<strong>Add touchable specimens.</strong> Suggest a second nest, sturdy rocks, shells, and pinecones in a hands-on basket beside the case.",
+    "<strong>Add investigation tools.</strong> Magnifiers, trays, and a simple observation clipboard make the center a place to explore.",
+    "<strong>Answer Nikolai's questions together.</strong> Suggest he crack open a rock with Nikolai this week so they can see what's inside.",
+    "<strong>Let him walk you through the new center.</strong> Ask him to show you how children will use each part of the redesigned space. Cultivator-Inspirers love explaining their thinking, and it helps him see the center the way children will experience it."
+  ],
+  completeLine:"You helped a Cultivator-Inspirer put his treasures in children's hands. That's powerful teaching."
+},
+
+// ── SCENARIO 16 · Cultivator-Sustainer Mentee ────────────────
+{
+  menteeType:"CS",
+  menteeLabel:"The Cultivator-Sustainer",
+  menteeDesc:"Ms. Patel is a thoughtful, quietly perceptive teacher who combines deep analytical observation with genuine empathy. She notices every child's needs and quietly steps in to help. Her challenge: rather than changing the environment to fit a child, she compensates for it herself, and she hesitates to rearrange her room for fear of disrupting others. She receives feedback best in quiet, respectful, unhurried conversations that treat her as the intelligent, caring professional she is.",
+  sceneTitle:"The Easel He Can't Reach", sceneTag:"Pre-K Classroom",
+  focusBadge:"Learning Environment Design · Access for Every Child",
+  scene:"Tobias (4 years, 6 months) uses a walker, and he loves to paint. The easel in Ms. Patel's room stands in a narrow corner between two shelves, too tight for his walker to fit. Every day, Ms. Patel notices him looking toward it, quietly brings a small tray of paints to a table, and helps him paint there. Today he watches two friends laughing together at the easel and says, <em>\"I want to paint with them.\"</em> Ms. Patel squeezes his shoulder: <em>\"Let's make something special here.\"</em> Tobias paints a few strokes at the table, then sets down his brush.",
+  qcTitle:"Quality Check: What's Missing Here?", qcSub:"Focus Area: Accessibility — Designing So Every Child Can Participate",
+  qcText1:"A well-designed environment ensures that <strong>every child can reach and use every learning area</strong>. Wide pathways, adjustable surfaces, and thoughtful placement allow children with different physical needs to participate alongside their peers.",
+  qcText2:"Ms. Patel's daily support for Tobias is caring, but <strong>it works around the barrier instead of removing it</strong>. Tobias doesn't just want to paint; he wants to paint with his friends. Moving the easel to an open spot or adding a table-height easel with space around it would let him join the others and give him the same independence they have.",
+  coachTitle:"The Easel He Can't Reach — Coaching Conversation",
+  question:"You're debriefing with Ms. Patel, a <strong>Cultivator-Sustainer</strong>. She says quietly, \"I don't mind helping him paint at the table. I didn't want to rearrange the room for everyone.\" Which approach will help her?",
+  correct:3,
+  options:[
+    "\"Tobias can't access your easel. That's an accessibility problem, and you need to fix the room, not work around it.\"",
+    "\"What if you made a big 'painting party' where everyone paints at the table with Tobias? He'd love having all his friends around him!\"",
+    "\"It's so kind of you to help him every day. Maybe that's enough for now — he still gets to paint, and you're right there with him.\"",
+    "\"You've noticed Tobias's interest every day and made sure he could paint — that's real care. Let's look at what happened today, though. He watched his friends laughing at the easel and said, 'I want to paint with them.' Your support gives him painting, but the room still keeps him apart. What if the easel moved to an open spot where his walker fits — even just a few feet? It might not disrupt the room much at all, and Tobias could paint beside his friends, on his own.\""
+  ],
+  wrongFeedback:[
+    {h:"This Is a Driver's Natural Move — Too Harsh for Her Careful Nature", p1:"Naming the problem directly and demanding a fix is a <strong>Driver mentor's</strong> instinct — decisive and principled.", p2:"Ms. Patel will feel judged for a caring choice she made thoughtfully. A Cultivator-Sustainer under that kind of pressure often withdraws further. She needs her care respected and a gentle, clear way forward."},
+    {h:"This Is an Inspirer's Natural Move — Moves Everyone Instead of the Easel", p1:"A painting party at Tobias's table is an <strong>Inspirer mentor's</strong> natural suggestion — joyful and inclusive in spirit.", p2:"It still works around the barrier rather than removing it. Tobias would be included for one day, but the easel would still be out of reach. Ms. Patel needs to see that the environment itself can change."},
+    {h:"This Is a Sustainer's Natural Move — Reassurance That Extends the Pattern", p1:"Affirming her kindness and suggesting it's \"enough\" is a <strong>Sustainer mentor's</strong> instinct — patient and kind.", p2:"It confirms the hesitation that's holding her back. Ms. Patel would leave believing her workaround was sufficient, and Tobias would keep painting apart from his friends."}
+  ],
+  matchText:"This works for a <strong>Cultivator-Sustainer</strong> because it honors her daily noticing and care first. Then it presents Tobias's own words as evidence: \"I want to paint with them.\" The gap between painting and belonging becomes clear.",
+  matchText2:"The suggestion is small and specific — move the easel a few feet — and addresses her concern directly: \"It might not disrupt the room much at all.\" Her Cultivator side can see the logic; her Sustainer side can see Tobias beside his friends. She doesn't have to redesign everything. She just has to take one gentle step.",
+  actionSteps:[
+    "<strong>Walk the room from Tobias's view.</strong> Help her trace the paths and spaces he uses, noting where his walker doesn't fit.",
+    "<strong>Move the easel this week.</strong> Choose an open spot with room around it. Test it with Tobias to make sure he can reach and paint comfortably.",
+    "<strong>Check other areas.</strong> Look at pathways, shelves, and tables across the room. Small changes can open up more of the room to him.",
+    "<strong>Ask Tobias and his family.</strong> Suggest she ask what works best for him. Families and children often have practical insights.",
+    "<strong>Record the response.</strong> Ask her to note how Tobias uses the easel and how often he paints with friends. That evidence will build her confidence to adapt the room sooner."
+  ],
+  completeLine:"You helped a Cultivator-Sustainer see that changing the room can be an act of belonging. That's thoughtful mentoring."
+}
+
   ]
 },
 

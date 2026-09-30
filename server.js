@@ -4,6 +4,7 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const path = require('path');
 const crypto = require('crypto');
+const certification = require('./certification');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -1181,6 +1182,9 @@ app.delete('/api/coaching-videos/:id', requireRole('admin'), async (req, res) =>
   res.json({ success: true });
 });
 
+// MSA Certified Mentor test + certificates (see certification.js)
+const cert = certification.register(app, pool, { requireAuth, requireRole });
+
 // Tally observations
 app.get('/api/observations/tally/:menteeId', requireRole('mentor'), async (req, res) => {
   const result = await pool.query(
@@ -1310,7 +1314,7 @@ app.get('/qif', (req, res) => res.sendFile(path.join(__dirname, 'public', 'qif.h
 app.get('/training', (req, res) => res.sendFile(path.join(__dirname, 'public', 'training.html')));
 app.get('/admin-upload', (req, res) => res.sendFile(path.join(__dirname, 'public', 'admin-upload.html')));
 
-initDB().then(() => {
+initDB().then(() => cert.initTables()).then(() => {
   app.listen(PORT, () => console.log(`MSA Platform running on port ${PORT}`));
 }).catch(e => {
   console.error('DB init failed:', e);

@@ -37,6 +37,7 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
 .screen{display:none !important;}
 .screen.active{display:block !important;}
 #s-welcome.screen.active{display:flex !important;}
+#s-cert.screen.active,#s-mcert.screen.active{display:flex !important;}
 
 #s-welcome{
   min-height:100vh;background:#181614;color:var(--cream);
@@ -266,6 +267,49 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
   .lib-list{max-height:320px;}
 }
 
+/* ── MSA Certified Mentor ── */
+.mc-panel{background:white;border:1px solid rgba(0,0,0,.08);border-left:4px solid var(--gold-dk);border-radius:8px;padding:1.1rem 1.35rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;}
+.mc-panel.ok{border-left-color:var(--green-br);}
+.mc-panel.warn{border-left-color:var(--red-br);}
+.mc-panel.muted{border-left-color:rgba(0,0,0,.15);}
+.mc-seal{width:48px;height:48px;border-radius:50%;background:var(--header);color:var(--gold-lt);display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex-shrink:0;}
+.mc-panel.ok .mc-seal{background:var(--green);color:white;}
+.mc-panel.muted .mc-seal{background:rgba(0,0,0,.08);color:var(--ink-lt);}
+.mc-info{flex:1;min-width:220px;}
+.mc-kicker{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dk);font-weight:700;margin-bottom:.2rem;}
+.mc-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--ink);margin-bottom:.2rem;}
+.mc-text{font-size:.82rem;color:var(--ink-mid);line-height:1.55;}
+.mc-actions{display:flex;gap:.5rem;flex-wrap:wrap;}
+
+#s-test{background:var(--cream);min-height:100vh;}
+.t-banner{margin-top:.9rem;border-radius:10px;padding:1rem 1.25rem;display:none;font-weight:700;font-size:.95rem;align-items:center;gap:.6rem;}
+.t-banner.right{display:flex;background:var(--green-bg);border:1.5px solid var(--green-br);color:var(--green);}
+.t-banner.wrong{display:flex;background:var(--red-bg);border:1.5px solid var(--red-br);color:var(--red);}
+.opt.picked{border-color:var(--gold-dk);background:var(--gold-pale);color:var(--ink);}
+.opt.picked .opt-ltr{background:var(--gold-dk);border-color:var(--gold-dk);color:white;}
+.t-foot{margin-top:1rem;display:flex;justify-content:flex-end;gap:.6rem;flex-wrap:wrap;}
+.t-note{font-size:.76rem;color:var(--ink-lt);margin-top:.75rem;line-height:1.5;}
+.t-intro{max-width:640px;margin:2.5rem auto;background:white;border-radius:12px;box-shadow:0 4px 20px var(--sh);overflow:hidden;}
+.t-intro .card-head h1{font-size:1.5rem;}
+.t-intro ul{margin:.25rem 0 0 1.1rem;font-size:.88rem;line-height:1.8;color:var(--ink-mid);}
+.t-score{font-family:'Playfair Display',serif;font-size:3rem;color:var(--gold-lt);line-height:1;margin:.4rem 0;}
+.t-dots{display:flex;gap:.3rem;flex-wrap:wrap;}
+.t-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.18);}
+.t-dot.right{background:#6fbf6f;}
+.t-dot.wrong{background:#d9745e;}
+.t-dot.now{background:var(--gold-lt);box-shadow:0 0 0 2px rgba(240,226,192,.3);}
+
+#s-mcert{background:var(--cream);display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem;}
+.mcert .cert-title{font-size:clamp(1.6rem,4.5vw,2.5rem);}
+.mcert-dates{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin:0 0 1.25rem;position:relative;z-index:1;}
+.mcert-dates div{text-align:center;}
+.mcert-dates .lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dk);font-weight:700;}
+.mcert-dates .val{font-family:'Playfair Display',serif;font-size:1rem;color:var(--ink);margin-top:.2rem;}
+.mcert .cert-footer{flex-wrap:nowrap;}
+.mcert .cert-logo{flex:1;}
+.mcert-no{font-size:.65rem;letter-spacing:.12em;color:var(--ink-lt);opacity:.7;position:relative;z-index:1;}
+.signed-in-as{font-size:.75rem;opacity:.55;margin:-.6rem 0 1rem;text-align:left;}
+
 @media(max-width:600px){
   .mod-grid{grid-template-columns:1fr;}
   .prog-bar-wrap{flex-direction:column;align-items:flex-start;}
@@ -277,8 +321,8 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
 }
 @media print{
   body *{visibility:hidden;}
-  #s-cert,#s-cert *{visibility:visible;}
-  #s-cert{position:absolute;left:0;top:0;padding:0;background:white;}
+  #s-cert.active,#s-cert.active *,#s-mcert.active,#s-mcert.active *{visibility:visible;}
+  #s-cert.active,#s-mcert.active{position:absolute;left:0;top:0;padding:0;background:white;}
   .cert-actions{display:none;}
   .certificate{box-shadow:none;}
 }
@@ -301,6 +345,7 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
     <div id="enroll-err" class="alert alert-err" style="display:none;"></div>
     <label for="learner-name">Your Name</label>
     <input type="text" id="learner-name" placeholder="Enter your full name">
+    <div class="signed-in-as" id="signed-in-as" style="display:none;"></div>
     <label for="learner-selcs">Your Natural Leadership Expression</label>
     <select id="learner-selcs">
       <option value="">Select your type&hellip;</option>
@@ -341,6 +386,7 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
       <h2>Your Learning Journey</h2>
       <p>Complete all 12 modules across 3 domains to earn your MSA LEAP Training certificate.</p>
     </div>
+    <div class="mc-panel muted" id="mc-panel" style="display:none;"></div>
     <div class="prog-bar-wrap">
       <div class="prog-stat">
         <span class="num" id="dash-done">0</span>
@@ -426,6 +472,51 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
   </div>
   <div class="mod-wrap">
     <div id="mod-content"></div>
+  </div>
+</div>
+
+<div id="s-test" class="screen">
+  <div class="mod-head">
+    <div class="mod-head-title" id="t-head-title">MSA Certified Mentor &middot; <span>Certification Test</span></div>
+    <div style="display:flex;align-items:center;gap:1.5rem;">
+      <div class="t-dots" id="t-dots"></div>
+      <button class="btn btn-outline btn-sm" onclick="leaveTest()">&larr; Dashboard</button>
+    </div>
+  </div>
+  <div class="mod-wrap" id="t-content"></div>
+</div>
+
+<div id="s-mcert" class="screen">
+  <div class="cert-wrap">
+    <div class="certificate mcert">
+      <div class="cert-academy">Mentor Success Academy</div>
+      <div class="cert-subtitle" style="margin-bottom:.4rem;">Certificate of Certification</div>
+      <div class="cert-title">MSA Certified Mentor</div>
+      <div class="cert-bar" style="margin-top:1rem;"></div>
+      <div class="cert-presented">This certifies that</div>
+      <div class="cert-name" id="mcert-name"></div>
+      <div class="cert-completed" style="max-width:480px;margin:0 auto 1.25rem;line-height:1.6;">has completed the MSA LEAP Training Program and demonstrated the ability to coach teachers across every natural leadership expression, and is hereby recognized as an MSA Certified Mentor.</div>
+      <div class="mcert-dates">
+        <div><div class="lbl">Certified</div><div class="val" id="mcert-date"></div></div>
+        <div><div class="lbl">Expires</div><div class="val" id="mcert-exp"></div></div>
+      </div>
+      <div class="mcert-no" id="mcert-no"></div>
+      <div class="cert-footer">
+        <div class="cert-sig">
+          <div class="sig-name">Mary Wardlaw</div>
+          <div class="sig-title">Co-Founder, Mentor Success Academy</div>
+        </div>
+        <div class="cert-logo">Mentor Success Academy<br>Mary Wardlaw &amp; Rebecca Munlyn</div>
+        <div class="cert-sig" style="text-align:right">
+          <div class="sig-name">Rebecca Munlyn</div>
+          <div class="sig-title">Co-Founder, Mentor Success Academy</div>
+        </div>
+      </div>
+    </div>
+    <div class="cert-actions">
+      <button class="btn btn-dark" onclick="window.print()">Print Certificate</button>
+      <button class="btn btn-outline" onclick="backToDashboard()">Back to Dashboard</button>
+    </div>
   </div>
 </div>
 
@@ -570,6 +661,7 @@ async function startTraining() {
   STATE.name = name;
   STATE.selcs = selcs;
   STATE.userId = makeUserId(name, selcs);
+  rememberSelcs(selcs);
   try { await loadState(STATE.userId); } catch(e) {}
   buildDashboard();
   showScreen('s-dash');
@@ -580,6 +672,7 @@ async function startTraining() {
 // ═══════════════════════════════════════════════════════════════
 function buildDashboard() {
   document.getElementById('dash-learner-name').textContent = STATE.name;
+  if (typeof loadCertStatus === 'function') loadCertStatus();
   const done = STATE.completed.length;
   const total = CURRICULUM.length;
   document.getElementById('dash-done').textContent = done;
@@ -8307,6 +8400,364 @@ async function deleteLibVideo(id) {
 }
 
 document.addEventListener('DOMContentLoaded', loadLibrary);
+</script>
+<script>
+// ═══════════════════════════════════════════════════════════════
+// SIGNED-IN LEARNER: fill in name + leadership expression
+// ═══════════════════════════════════════════════════════════════
+let ME = null;
+
+function selcsKey() { return ME ? 'msa_training_selcs_' + ME.id : null; }
+function rememberSelcs(v) {
+  try { if (selcsKey()) localStorage.setItem(selcsKey(), v); } catch (e) {}
+}
+
+async function prefillLearner() {
+  try {
+    const r = await fetch('/api/auth/me', { credentials: 'same-origin' });
+    if (!r.ok) return;
+    ME = await r.json();
+  } catch (e) { return; }
+  const nameEl = document.getElementById('learner-name');
+  const selEl = document.getElementById('learner-selcs');
+  if (!nameEl.value && ME.full_name) nameEl.value = ME.full_name;
+  const hint = document.getElementById('signed-in-as');
+  hint.textContent = 'Signed in as ' + (ME.email || ME.full_name || '');
+  hint.style.display = 'block';
+
+  let saved = null;
+  try { saved = localStorage.getItem(selcsKey()); } catch (e) {}
+  if (!saved && ME.email) {
+    // Fall back to the LEAP Quiz result, if they've taken it
+    try {
+      const lr = await fetch('https://selcs-quiz.onrender.com/api/lookup/' + encodeURIComponent(ME.email));
+      if (lr.ok) {
+        const leap = await lr.json();
+        const letter = String((leap && leap.found && leap.primary) || '').trim().charAt(0).toUpperCase();
+        if (['D','I','S','C'].includes(letter)) saved = letter;
+      }
+    } catch (e) { /* quiz app asleep — they'll pick it themselves */ }
+  }
+  if (saved && !selEl.value) selEl.value = saved;
+
+  // Links like /training?view=certificate or ?view=dashboard skip the welcome screen
+  const view = new URLSearchParams(location.search).get('view');
+  if (view && nameEl.value && selEl.value) {
+    await startTraining();
+    if (view === 'certificate') showMentorCertificate();
+  }
+}
+document.addEventListener('DOMContentLoaded', prefillLearner);
+
+// ═══════════════════════════════════════════════════════════════
+// MSA CERTIFIED MENTOR — status panel, test, certificate
+// ═══════════════════════════════════════════════════════════════
+let CERT = null;           // latest status from the server
+let TEST = null;           // the attempt in progress
+let _tPicked = null;
+
+function fmtDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+async function loadCertStatus() {
+  const panel = document.getElementById('mc-panel');
+  try {
+    const r = await fetch('/api/certification/status', { credentials: 'same-origin' });
+    if (!r.ok) { panel.style.display = 'none'; return; }
+    CERT = await r.json();
+  } catch (e) { panel.style.display = 'none'; return; }
+  renderCertPanel();
+}
+
+function renderCertPanel() {
+  const panel = document.getElementById('mc-panel');
+  const c = CERT;
+  const cert = c.certification;
+  const printBtn = cert ? `<button class="btn btn-outline btn-sm" style="color:var(--ink);border-color:var(--gold-dk);" onclick="showMentorCertificate()">Print Certificate</button>` : '';
+  const left = c.maxAttempts - c.attemptsUsed;
+  const attemptsLine = c.attemptsUsed > 0 ? ` You have ${left} attempt${left === 1 ? '' : 's'} left.` : '';
+  const rules = `${c.questionsPerTest} scenarios &middot; ${c.passScore} correct to pass &middot; one answer per question.`;
+  let cls = '', seal = '&#127941;', kicker = 'MSA Certified Mentor', title = '', text = '', actions = '';
+
+  switch (c.state) {
+    case 'not_eligible':
+      cls = 'muted'; seal = '&#128274;';
+      title = 'Certification Test';
+      text = `Unlocks once you complete all ${c.modulesRequired} modules. You&rsquo;ve completed <strong>${c.modulesComplete} of ${c.modulesRequired}</strong>.`;
+      break;
+    case 'eligible':
+      title = 'You&rsquo;re ready to certify!';
+      text = rules + attemptsLine;
+      actions = `<button class="btn btn-gold btn-sm" onclick="openTestIntro()">Take Certification Test &rarr;</button>`;
+      break;
+    case 'in_progress':
+      title = 'Certification test in progress';
+      text = `You&rsquo;ve answered ${c.inProgress.answered} of ${c.questionsPerTest}. Pick up where you left off.`;
+      actions = `<button class="btn btn-gold btn-sm" onclick="startTest()">Resume Test &rarr;</button>` + printBtn;
+      break;
+    case 'certified':
+      cls = 'ok'; seal = '&#10003;';
+      title = 'You are an MSA Certified Mentor';
+      text = `Certified ${fmtDate(cert.certifiedOn)} &middot; Expires <strong>${fmtDate(cert.expiresOn)}</strong>.<br>Your annual calibration opens ${fmtDate(cert.renewalOpensOn)}.`;
+      actions = printBtn;
+      break;
+    case 'renewal_open':
+      cls = 'ok'; seal = '&#10003;';
+      title = 'Annual calibration is open';
+      text = `Your certification expires <strong>${fmtDate(cert.expiresOn)}</strong>. Complete ${c.questionsPerTest} new scenarios to renew for another year. ` + attemptsLine;
+      actions = `<button class="btn btn-gold btn-sm" onclick="openTestIntro()">Take Calibration &rarr;</button>` + printBtn;
+      break;
+    case 'expired':
+      cls = 'warn'; seal = '&#9888;';
+      title = 'Certification expired';
+      text = `Your certification expired on ${fmtDate(cert.expiresOn)}. Complete the annual calibration to recertify. ` + attemptsLine;
+      actions = `<button class="btn btn-gold btn-sm" onclick="openTestIntro()">Take Calibration &rarr;</button>` + printBtn;
+      break;
+    case 'wait':
+      cls = 'muted'; seal = '&#9203;';
+      title = c.nextKind === 'initial' ? 'Certification Test' : 'Annual Calibration';
+      text = `Your next attempt opens <strong>${fmtDate(c.nextAttemptOn)}</strong>. Use the time to revisit the modules. You have ${left} attempt${left === 1 ? '' : 's'} left.`
+        + (cert ? `<br>Current certification expires ${fmtDate(cert.expiresOn)}.` : '');
+      actions = printBtn;
+      break;
+    case 'locked':
+      cls = 'warn'; seal = '&#128274;';
+      title = c.nextKind === 'initial' ? 'Certification Test locked' : 'Calibration locked';
+      text = `You&rsquo;ve used all ${c.maxAttempts} attempts. Please reach out to your MSA administrator to schedule a coaching conversation and unlock more attempts.`
+        + (cert ? `<br>Current certification expires ${fmtDate(cert.expiresOn)}.` : '');
+      actions = printBtn;
+      break;
+    default:
+      panel.style.display = 'none';
+      return;
+  }
+  panel.className = 'mc-panel ' + cls;
+  panel.innerHTML = `
+    <div class="mc-seal">${seal}</div>
+    <div class="mc-info">
+      <div class="mc-kicker">${kicker}</div>
+      <div class="mc-title">${title}</div>
+      <div class="mc-text">${text}</div>
+    </div>
+    ${actions ? `<div class="mc-actions">${actions}</div>` : ''}`;
+  panel.style.display = 'flex';
+}
+
+function backToDashboard() {
+  if (STATE.name) { buildDashboard(); showScreen('s-dash'); }
+  else showScreen('s-welcome');
+}
+
+function renderTestDots() {
+  const dots = [];
+  for (let i = 0; i < TEST.total; i++) {
+    const a = TEST.answered[i];
+    dots.push(`<div class="t-dot ${a ? (a.correct ? 'right' : 'wrong') : (i === TEST.answered.length ? 'now' : '')}"></div>`);
+  }
+  document.getElementById('t-dots').innerHTML = dots.join('');
+}
+
+function openTestIntro() {
+  const c = CERT;
+  const calibration = c.nextKind === 'calibration';
+  document.getElementById('t-dots').innerHTML = '';
+  document.getElementById('t-head-title').innerHTML = `MSA Certified Mentor &middot; <span>${calibration ? 'Annual Calibration' : 'Certification Test'}</span>`;
+  document.getElementById('t-content').innerHTML = `
+    <div class="t-intro">
+      <div class="card-head head-scene">
+        <div class="tag">${RINGS_SVG}&nbsp; ${calibration ? 'Annual Calibration' : 'Certification Test'}</div>
+        <h1>Before you begin</h1>
+        <p class="sub" style="margin-bottom:0">${calibration
+          ? 'Calibrate your coaching with 12 fresh scenarios to renew your MSA Certified Mentor status for another year.'
+          : 'Show what you&rsquo;ve learned across all 12 weeks to become an MSA Certified Mentor.'}</p>
+      </div>
+      <div class="coach-body">
+        <ul>
+          <li><strong>${c.questionsPerTest} scenarios</strong> &mdash; one from each week, each with a different leadership expression.</li>
+          <li><strong>One answer per question.</strong> Once you lock it in, you&rsquo;ll see whether it was right or wrong, and move on. No retries within the test.</li>
+          <li><strong>${c.passScore} of ${c.questionsPerTest} correct (75%)</strong> to pass. Your certificate is valid for one year.</li>
+          <li>You can stop and come back &mdash; your answers are saved as you go.</li>
+          <li>This will be attempt ${c.attemptsUsed + 1} of ${c.maxAttempts}.</li>
+        </ul>
+        <div class="t-foot">
+          <button class="btn btn-outline btn-sm" style="color:var(--ink-mid);border-color:rgba(0,0,0,.2);" onclick="backToDashboard()">Not yet</button>
+          <button class="btn btn-gold" onclick="startTest()">Begin &nbsp;&rarr;</button>
+        </div>
+      </div>
+    </div>`;
+  showScreen('s-test');
+}
+
+async function startTest() {
+  try {
+    const r = await fetch('/api/certification/start', { method: 'POST', credentials: 'same-origin' });
+    const d = await r.json();
+    if (!r.ok) { alert(d.error || 'The test could not be started.'); return loadCertStatus(); }
+    TEST = d;
+  } catch (e) { alert('Could not reach the server. Please check your connection.'); return; }
+  document.getElementById('t-head-title').innerHTML = `MSA Certified Mentor &middot; <span>${TEST.kind === 'calibration' ? 'Annual Calibration' : 'Certification Test'}</span>`;
+  showScreen('s-test');
+  renderTestQuestion();
+}
+
+function renderTestQuestion() {
+  const i = TEST.answered.length;
+  const q = TEST.questions[i];
+  const letters = ['A','B','C','D'];
+  _tPicked = null;
+  renderTestDots();
+  document.getElementById('t-content').innerHTML = `
+  <div class="card">
+    <div class="card-head head-scene">
+      <div class="tag">Question ${i + 1} of ${TEST.total} &middot; Week ${q.week}: ${q.moduleTitle}</div>
+      <h1>${q.sceneTitle}</h1>
+      <div class="focus-badge">&#128269;&nbsp; ${q.focusBadge}</div>
+    </div>
+    <div class="card-body">
+      <div class="scene-section">
+        <div class="sec-lbl">&#127916;&nbsp; The Scene &middot; ${q.sceneTag}</div>
+        <p class="scene-text">${q.scene}</p>
+      </div>
+      <div class="qc-wrap">
+        <div class="qc-box">
+          <div class="qc-head">
+            <div class="qc-icon">&#128269;</div>
+            <div><div class="qc-title">${q.qcTitle}</div><div class="qc-sub">${q.qcSub}</div></div>
+          </div>
+          <p class="qc-p">${q.qcText1}</p>
+          <p class="qc-p" style="margin-top:.6rem">${q.qcText2}</p>
+        </div>
+      </div>
+      <div class="coach-body" style="border-top:1px solid rgba(0,0,0,.06);">
+        <div class="mentee-card">
+          <div class="mentee-ico">&#128269;</div>
+          <div>
+            <div class="mentee-t">Your Mentee&rsquo;s Natural Leadership Expression: ${q.menteeLabel} (${q.menteeType})</div>
+            <div class="mentee-d">${q.menteeDesc}</div>
+          </div>
+        </div>
+        <div class="q-lbl">Your Coaching Question</div>
+        <div class="question">${q.question}</div>
+        <div class="opts">${q.options.map((o, k) => `
+          <button class="opt" id="topt-${k}" onclick="pickTestOption(${k})">
+            <span class="opt-ltr">${letters[k]}</span><span>${o}</span>
+          </button>`).join('')}</div>
+        <div class="t-banner" id="t-banner"></div>
+        <div class="t-foot" id="t-foot">
+          <button class="btn btn-dark" id="t-lock" onclick="lockTestAnswer()" disabled>Lock In Answer</button>
+        </div>
+        <div class="t-note">Choose carefully &mdash; each answer is final.</div>
+      </div>
+    </div>
+  </div>`;
+  window.scrollTo(0, 0);
+}
+
+function pickTestOption(k) {
+  if (_tPicked === 'locked') return;
+  _tPicked = k;
+  document.querySelectorAll('#t-content .opt').forEach((b, i) => b.classList.toggle('picked', i === k));
+  document.getElementById('t-lock').disabled = false;
+}
+
+async function lockTestAnswer() {
+  if (_tPicked === null || _tPicked === 'locked') return;
+  const choice = _tPicked;
+  const lockBtn = document.getElementById('t-lock');
+  lockBtn.disabled = true;
+  let d;
+  try {
+    const r = await fetch('/api/certification/answer', {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ attemptId: TEST.attemptId, index: TEST.answered.length, choice })
+    });
+    d = await r.json();
+    if (!r.ok) {
+      alert(d.error || 'Your answer could not be saved.');
+      if (r.status === 409) return startTest(); // re-sync with the server
+      lockBtn.disabled = false;
+      return;
+    }
+  } catch (e) {
+    alert('Could not reach the server — your answer was not saved. Please try again.');
+    lockBtn.disabled = false;
+    return;
+  }
+  _tPicked = 'locked';
+  TEST.answered.push({ correct: d.correct });
+  renderTestDots();
+  document.querySelectorAll('#t-content .opt').forEach((b, i) => {
+    b.disabled = true;
+    b.classList.remove('picked');
+    if (i === choice) b.classList.add(d.correct ? 'correct' : 'wrong');
+  });
+  const banner = document.getElementById('t-banner');
+  banner.className = 't-banner ' + (d.correct ? 'right' : 'wrong');
+  banner.innerHTML = d.correct ? '&#10003;&nbsp; Correct' : '&#10007;&nbsp; Incorrect';
+  document.querySelector('#t-content .t-note').style.display = 'none';
+  document.getElementById('t-foot').innerHTML = d.finished
+    ? `<button class="btn btn-gold" onclick='showTestResult(${JSON.stringify({ score: d.score, passed: d.passed })})'>See My Results &nbsp;&rarr;</button>`
+    : `<button class="btn btn-gold" onclick="renderTestQuestion()">Next Question &nbsp;&rarr;</button>`;
+  if (d.finished) CERT = d.status;
+  banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function showTestResult(r) {
+  const c = CERT;
+  const cert = c.certification;
+  const left = c.maxAttempts - c.attemptsUsed;
+  document.getElementById('t-dots').innerHTML = '';
+  let next = '';
+  if (!r.passed) {
+    if (c.state === 'locked') next = `You&rsquo;ve used all ${c.maxAttempts} attempts. Your MSA administrator will reach out to talk it through and unlock another attempt.`;
+    else if (c.state === 'wait') next = `You have ${left} attempt${left === 1 ? '' : 's'} left. Your next attempt opens ${fmtDate(c.nextAttemptOn)} &mdash; take some time to revisit the modules first.`;
+    else next = `You have ${left} attempt${left === 1 ? '' : 's'} left, with a new set of scenarios each time. Revisiting the modules first can help.`;
+  }
+  document.getElementById('t-content').innerHTML = `
+    <div class="t-intro">
+      <div class="card-head ${r.passed ? 'head-coach' : 'head-scene'}" style="text-align:center;">
+        <div class="tag">${r.passed ? '&#127881; Passed' : 'Not yet'}</div>
+        <div class="t-score">${r.score} / ${TEST.total}</div>
+        <p class="sub" style="margin-bottom:0">${r.passed
+          ? 'Congratulations &mdash; you are an MSA Certified Mentor!'
+          : `You needed ${TEST.passScore} correct to pass.`}</p>
+      </div>
+      <div class="coach-body" style="text-align:center;">
+        <p class="mc-text">${r.passed && cert
+          ? `Certified ${fmtDate(cert.certifiedOn)}. Your certification is valid through <strong>${fmtDate(cert.expiresOn)}</strong>, and your annual calibration opens ${fmtDate(cert.renewalOpensOn)}.`
+          : next}</p>
+        <div class="t-foot" style="justify-content:center;">
+          ${r.passed ? `<button class="btn btn-gold" onclick="showMentorCertificate()">View &amp; Print Certificate</button>` : ''}
+          <button class="btn btn-outline btn-sm" style="color:var(--ink-mid);border-color:rgba(0,0,0,.2);" onclick="backToDashboard()">Back to Dashboard</button>
+        </div>
+      </div>
+    </div>`;
+  TEST = null;
+  if (r.passed) launchConfetti();
+  window.scrollTo(0, 0);
+}
+
+function leaveTest() {
+  if (TEST && TEST.answered.length < TEST.total &&
+      !confirm('Leave the test for now? Your answers so far are saved and you can resume later.')) return;
+  TEST = null;
+  backToDashboard();
+}
+
+async function showMentorCertificate() {
+  if (!CERT) await loadCertStatus();
+  const cert = CERT && CERT.certification;
+  if (!cert) { alert('No certificate yet.'); return; }
+  document.getElementById('mcert-name').textContent = CERT.fullName || STATE.name;
+  document.getElementById('mcert-date').textContent = fmtDate(cert.certifiedOn);
+  document.getElementById('mcert-exp').textContent = fmtDate(cert.expiresOn);
+  document.getElementById('mcert-no').textContent = 'Certificate No. ' + cert.number;
+  showScreen('s-mcert');
+}
 </script>
 </body>
 </html>

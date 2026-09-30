@@ -314,14 +314,15 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
 .mcert-logo{display:block;width:250px;max-width:70%;height:auto;margin:0 auto .9rem;position:relative;z-index:1;}
 .mcert .cert-footer{justify-content:space-around;border-top:none;margin-top:1.5rem;padding-top:0;}
 .mcert .cert-sig{text-align:center;min-width:220px;}
-.mcert .sig-script{color:#1f2a44;line-height:1;white-space:nowrap;padding:0 .75rem .1rem;margin-bottom:.45rem;border-bottom:1px solid rgba(28,26,22,.4);-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-@font-face{font-family:'Mrs Saint Delafield';src:url('/fonts/mrs-saint-delafield.woff2') format('woff2');font-display:block;}
+.mcert .sig-script{color:#1f2a44;line-height:1;white-space:nowrap;padding:0 .75rem .1rem;margin-bottom:.7rem;border-bottom:1px solid rgba(28,26,22,.4);-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+@font-face{font-family:'Parisienne';src:url('/fonts/parisienne.woff2') format('woff2');font-display:block;}
 @font-face{font-family:'Allura';src:url('/fonts/allura.woff2') format('woff2');font-display:block;}
 .mcert .sig-script span{display:inline-block;}
-.mcert .sig-mary{font-family:'Mrs Saint Delafield',cursive;font-size:2.5rem;}
-.mcert .sig-mary span{transform:rotate(-3deg) translateY(.2rem);}
+.mcert .sig-mary{font-family:'Parisienne',cursive;font-size:2rem;}
+.mcert .sig-mary span{transform:rotate(-3deg);}
 .mcert .sig-rebecca{font-family:'Allura',cursive;font-size:2.15rem;}
 .mcert .sig-rebecca span{transform:rotate(-2deg) translateY(.15rem);}
+.mcert .sig-name{font-family:'Playfair Display',serif;font-size:.9rem;font-style:normal;color:var(--ink);margin-bottom:.1rem;}
 .mcert-sample-banner{display:none;position:relative;z-index:2;margin:-.5rem auto 1rem;width:fit-content;background:var(--red);color:white;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;padding:.3rem 1rem;border-radius:2px;}
 .mcert.sample .mcert-sample-banner{display:block;}
 .mcert.sample::after{content:'TEST CERTIFICATE';inset:auto;border:none;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-24deg);font-family:'Playfair Display',serif;font-size:clamp(2.2rem,8vw,4.6rem);font-weight:700;letter-spacing:.06em;color:rgba(122,48,32,.13);white-space:nowrap;pointer-events:none;z-index:3;}
@@ -523,10 +524,12 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
       <div class="cert-footer">
         <div class="cert-sig">
           <div class="sig-script sig-mary" aria-label="Signed: Mary Wardlaw"><span>Mary Wardlaw</span></div>
+          <div class="sig-name">Mary Wardlaw</div>
           <div class="sig-title">Co-Founder, Mentor Success Academy</div>
         </div>
         <div class="cert-sig">
           <div class="sig-script sig-rebecca" aria-label="Signed: Rebecca Munlyn"><span>Rebecca Munlyn</span></div>
+          <div class="sig-name">Rebecca Munlyn</div>
           <div class="sig-title">Co-Founder, Mentor Success Academy</div>
         </div>
       </div>

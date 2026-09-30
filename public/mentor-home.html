@@ -104,6 +104,40 @@
     line-height: 1.6;
   }
 
+  /* ── Certification status ── */
+  .cert-status {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-left: 5px solid var(--gold);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .cert-status.ok { border-left-color: var(--green-mid); }
+  .cert-status.warn { border-left-color: #b85540; }
+  .cert-status .seal {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--cream-dark); color: var(--green-deep);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .cert-status.ok .seal { background: var(--green-mid); color: white; }
+  .cert-status .info { flex: 1; min-width: 200px; }
+  .cert-status .title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; font-weight: 600; color: var(--green-deep);
+  }
+  .cert-status .detail { font-size: 13.5px; color: var(--text-soft); margin-top: 3px; line-height: 1.5; }
+  .cert-status a.action {
+    background: var(--green-deep); color: white; text-decoration: none;
+    padding: 9px 15px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  }
+  .cert-status a.action:hover { background: var(--green-mid); }
+
   /* ── Tool grid ── */
   .tool-grid {
     display: grid;
@@ -404,6 +438,8 @@
       <p>Your mentoring tools are below. Use the LEAP Quiz to find your own natural leadership expression, the training module to practice coaching scenarios, the QIF observation tool when you're in the classroom, and reflections to track your week-by-week journey alongside your mentee.</p>
     </div>
 
+    <div class="cert-status" id="cert-status" style="display:none;"></div>
+
     <div class="mentee-context" id="mentee-context" style="display:none;">
       <strong>Mentees:</strong>
       <span id="mentee-pills"></span>
@@ -417,7 +453,7 @@
         <div class="open">Open Quiz →</div>
       </a>
 
-      <a class="tool-card" href="/training">
+      <a class="tool-card" href="/training?view=dashboard">
         <div class="tool-icon">🎓</div>
         <h3>Mentor Training</h3>
         <p>Scenario-based coaching practice. Observe a classroom interaction and choose the right approach for your mentee's natural leadership expression.</p>
@@ -509,7 +545,7 @@ async function boot() {
     document.getElementById('user-name').textContent = me.full_name;
     document.getElementById('welcome-headline').textContent = 'Welcome, ' + firstName(me.full_name) + '.';
     setupLeapCard('Mentor');
-    await Promise.all([loadMentees(), loadSharedReflections(), loadContent()]);
+    await Promise.all([loadMentees(), loadSharedReflections(), loadContent(), loadCertStatus()]);
   } catch (e) {
     console.error(e);
     window.location.href = '/';
@@ -525,6 +561,55 @@ document.getElementById('logout-link').addEventListener('click', async (e) => {
 function firstName(full) {
   if (!full) return '';
   return full.trim().split(/\s+/)[0];
+}
+
+// ── MSA Certified Mentor status ──────────────────────────────────
+function longDate(iso) {
+  if (!iso) return '';
+  return new Date(iso + 'T12:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+async function loadCertStatus() {
+  const box = document.getElementById('cert-status');
+  let c;
+  try {
+    const r = await fetch('/api/certification/status');
+    if (!r.ok) return;
+    c = await r.json();
+  } catch (e) { return; }
+  const cert = c.certification;
+  let cls = '', seal = '🎓', title = '', detail = '', link = '';
+  if (cert && cert.active) {
+    cls = 'ok'; seal = '✓';
+    title = 'MSA Certified Mentor';
+    detail = `Certified ${longDate(cert.certifiedOn)} · Renew by <strong>${longDate(cert.expiresOn)}</strong>`;
+    if (['renewal_open', 'in_progress', 'wait', 'locked'].includes(c.state)) {
+      detail += '<br>Your annual calibration is open — complete it before your certification expires.';
+      link = '<a class="action" href="/training?view=dashboard">Take Calibration →</a>';
+    } else {
+      detail += `<br>Annual calibration opens ${longDate(cert.renewalOpensOn)}.`;
+      link = '<a class="action" href="/training?view=certificate">Print Certificate</a>';
+    }
+  } else if (cert) {
+    cls = 'warn'; seal = '⚠';
+    title = 'Certification expired';
+    detail = `Your MSA Certified Mentor status expired ${longDate(cert.expiresOn)}. Complete the annual calibration to recertify.`;
+    link = '<a class="action" href="/training?view=dashboard">Take Calibration →</a>';
+  } else if (c.state === 'not_eligible') {
+    title = 'Not yet certified';
+    detail = `Complete all ${c.modulesRequired} training modules to unlock the MSA Certified Mentor test. You've completed ${c.modulesComplete} of ${c.modulesRequired}.`;
+    link = '<a class="action" href="/training?view=dashboard">Continue Training →</a>';
+  } else {
+    title = 'Not yet certified';
+    detail = c.state === 'locked'
+      ? 'Your MSA administrator will reach out to unlock your next certification attempt.'
+      : 'You\'ve finished the training — you\'re ready to take the MSA Certified Mentor test.';
+    link = '<a class="action" href="/training?view=dashboard">Go to Certification →</a>';
+  }
+  box.className = 'cert-status ' + cls;
+  box.innerHTML = `<div class="seal">${seal}</div>
+    <div class="info"><div class="title">${title}</div><div class="detail">${detail}</div></div>${link}`;
+  box.style.display = 'flex';
 }
 
 // ── Mentee context ───────────────────────────────────────────────

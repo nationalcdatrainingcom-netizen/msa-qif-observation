@@ -529,6 +529,40 @@
     font-size: 13.5px;
   }
   .refl-row:last-child { border-bottom: none; }
+  .cert-row {
+    display: grid;
+    grid-template-columns: 1.8fr 1.2fr 1.3fr 1fr 1fr 0.7fr 0.8fr;
+    gap: 12px;
+    padding: 14px 18px;
+    align-items: center;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 13.5px;
+  }
+  .cert-row:last-child { border-bottom: none; }
+  .cert-row.head {
+    background: var(--cream-dark);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-soft);
+  }
+  .cert-row .sub { font-size: 12px; color: var(--text-muted); }
+  .cert-badge {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 10px;
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+  .cert-badge.ok { background: rgba(74,124,89,0.15); color: var(--green-deep); }
+  .cert-badge.due { background: rgba(201,149,58,0.18); color: #8a6420; }
+  .cert-badge.bad { background: #f6e1db; color: #8a3a26; }
+  .cert-badge.none { background: var(--cream-dark); color: var(--text-soft); }
+  @media (max-width: 780px) {
+    .cert-row { grid-template-columns: 1fr 1fr; }
+    .cert-row.head { display: none; }
+  }
   .refl-row.head {
     background: var(--cream-dark);
     font-size: 11px;
@@ -652,7 +686,7 @@
       </div>
     </div>
     <div class="top-right">
-      <a href="/training" class="header-btn" title="Open Mentor Training and the Coaching Call Library">🎓 Training &amp; Call Library</a>
+      <a href="/training?view=dashboard" class="header-btn" title="Open Mentor Training and the Coaching Call Library">🎓 Training &amp; Call Library</a>
       <span id="user-name"></span>
       <a href="#" id="logout-link">Sign out</a>
     </div>
@@ -661,6 +695,7 @@
   <nav class="tabs">
     <div class="tab active" data-panel="centers">Centers &amp; Directors</div>
     <div class="tab" data-panel="reflections">All Reflections</div>
+    <div class="tab" data-panel="certs">Certifications</div>
   </nav>
 
   <main>
@@ -698,6 +733,26 @@
     </div>
 
     <!-- ── Reflections Panel ── -->
+    <!-- ── Certifications Panel ── -->
+    <div class="panel" id="panel-certs">
+      <div class="section-head">
+        <h2>MSA Certified Mentors</h2>
+        <div class="meta" id="certs-count"></div>
+      </div>
+      <div class="reflection-table">
+        <div class="cert-row head">
+          <div>Mentor</div>
+          <div>Center</div>
+          <div>Status</div>
+          <div>Certified</div>
+          <div>Expires</div>
+          <div>Attempts</div>
+          <div></div>
+        </div>
+        <div id="cert-rows"><div class="empty">Loading…</div></div>
+      </div>
+    </div>
+
     <div class="panel" id="panel-reflections">
       <div class="section-head">
         <h2>All Reflections</h2>
@@ -829,11 +884,76 @@ function setupTabs() {
       tab.classList.add('active');
       const panel = tab.dataset.panel;
       document.getElementById('panel-' + panel).classList.add('active');
+      if (panel === 'certs') loadCertifications();
       if (panel === 'reflections' && allReflections.length === 0) {
         await loadReflections();
       }
     });
   });
+}
+
+// ── Certifications ───────────────────────────────────────────────
+function certDate(iso) {
+  if (!iso) return '—';
+  return new Date(iso + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function certBadge(st) {
+  const map = {
+    certified: ['ok', 'Certified'],
+    renewal_open: ['due', 'Calibration due'],
+    expired: ['bad', 'Expired'],
+    locked: ['bad', 'Locked — needs unlock'],
+    wait: ['none', 'Retry tomorrow'],
+    in_progress: ['due', 'Test in progress'],
+    eligible: ['due', 'Ready to test'],
+    not_eligible: ['none', 'In training']
+  };
+  let [cls, label] = map[st.state] || ['none', st.state];
+  // A mentor mid-calibration (or waiting/locked) may still hold an active certificate
+  if (st.certification && st.certification.active && !['certified', 'renewal_open'].includes(st.state)) {
+    label = 'Certified · ' + label.toLowerCase();
+  }
+  const sub = st.state === 'not_eligible' ? `<div class="sub">${st.modulesComplete}/${st.modulesRequired} modules</div>` : '';
+  return `<span class="cert-badge ${cls}">${label}</span>${sub}`;
+}
+
+async function loadCertifications() {
+  const rowsEl = document.getElementById('cert-rows');
+  try {
+    const r = await fetch('/api/admin/certifications');
+    if (!r.ok) throw new Error();
+    const rows = await r.json();
+    const certified = rows.filter(x => x.status.certification && x.status.certification.active).length;
+    document.getElementById('certs-count').textContent = `${certified} of ${rows.length} mentors currently certified`;
+    if (rows.length === 0) {
+      rowsEl.innerHTML = '<div class="empty">No mentors yet.</div>';
+      return;
+    }
+    rowsEl.innerHTML = rows.map(u => {
+      const st = u.status;
+      const c = st.certification;
+      const canUnlock = st.state === 'locked' || st.state === 'wait';
+      return `<div class="cert-row">
+        <div><div class="name">${escapeHtml(u.full_name)}</div><div class="sub">${escapeHtml(u.email)}</div></div>
+        <div>${escapeHtml(u.center_name || '—')}</div>
+        <div>${certBadge(st)}</div>
+        <div>${c ? certDate(c.certifiedOn) : '—'}</div>
+        <div>${c ? certDate(c.expiresOn) : '—'}</div>
+        <div>${st.attemptsUsed} / ${st.maxAttempts}</div>
+        <div>${canUnlock ? `<button class="ghost" data-name="${escapeHtml(u.full_name)}" onclick="unlockCert(${u.id}, this.dataset.name)">Unlock</button>` : ''}</div>
+      </div>`;
+    }).join('');
+  } catch (e) {
+    rowsEl.innerHTML = '<div class="empty">Could not load certifications.</div>';
+  }
+}
+
+async function unlockCert(userId, name) {
+  if (!confirm(`Reset ${name}'s test attempts? They'll get a fresh set of 5 attempts right away.`)) return;
+  const r = await fetch(`/api/admin/certifications/${userId}/unlock`, { method: 'POST' });
+  if (!r.ok) { alert('Could not unlock.'); return; }
+  loadCertifications();
 }
 
 // ── Centers ──────────────────────────────────────────────────────

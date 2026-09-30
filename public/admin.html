@@ -78,6 +78,19 @@
   .top-right { display: flex; align-items: center; gap: 16px; font-size: 13px; }
   .top-right a { color: rgba(255,255,255,0.85); text-decoration: none; }
   .top-right a:hover { color: white; }
+  .top-right a.header-btn {
+    background: var(--gold);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.15s;
+  }
+  .top-right a.header-btn:hover { background: var(--gold-soft); color: white; }
+  @media (max-width: 600px) {
+    header { flex-wrap: wrap; gap: 14px; }
+    .top-right { width: 100%; justify-content: space-between; }
+  }
 
   /* ── Tabs ── */
   .tabs {
@@ -639,6 +652,7 @@
       </div>
     </div>
     <div class="top-right">
+      <a href="/training" class="header-btn" title="Open Mentor Training and the Coaching Call Library">🎓 Training &amp; Call Library</a>
       <span id="user-name"></span>
       <a href="#" id="logout-link">Sign out</a>
     </div>

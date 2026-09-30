@@ -13,9 +13,6 @@
 //     at most one per day, then the test locks until an admin unlocks it.
 // Grading happens here on the server; the browser never gets the answers.
 // ════════════════════════════════════════════════════════════════════
-const fs = require('fs');
-const path = require('path');
-const vm = require('vm');
 
 const QUESTIONS_PER_TEST = 12;
 const PASS_PERCENT = 75;
@@ -25,16 +22,11 @@ const MAX_ATTEMPTS = 5;
 const RENEWAL_WINDOW_DAYS = 30;
 const TZ = process.env.CERT_TIMEZONE || 'America/Detroit';
 
-// The curriculum lives in training.html; read it once so the server can
-// pick scenarios and grade answers against the same content mentors train on.
+// The curriculum lives in training-curriculum.js (outside public/, so browsers
+// can only get it through /api/training/curriculum below). The server picks
+// test scenarios and grades answers from the same content mentors train on.
 function loadCurriculum() {
-  const html = fs.readFileSync(path.join(__dirname, 'public', 'training.html'), 'utf8');
-  const startMarker = 'const CURRICULUM = ';
-  const start = html.indexOf(startMarker);
-  const end = html.indexOf('// end CURRICULUM');
-  if (start < 0 || end < 0) throw new Error('CURRICULUM block not found in training.html');
-  const literal = html.slice(start + startMarker.length, end).trim().replace(/;$/, '');
-  const curriculum = vm.runInNewContext('(' + literal + ')', {}, { timeout: 2000 });
+  const curriculum = require('./training-curriculum');
   if (!Array.isArray(curriculum) || curriculum.length < QUESTIONS_PER_TEST) {
     throw new Error('CURRICULUM has fewer than ' + QUESTIONS_PER_TEST + ' modules');
   }
@@ -272,6 +264,22 @@ function register(app, pool, { requireAuth, requireRole }) {
 
   const certRoles = requireRole('mentor', 'admin');
 
+  // Training content for the training page. Withheld while the signed-in
+  // user has a certification test open, so they can't look up answers.
+  const curriculumJson = curriculum ? JSON.stringify(curriculum) : null;
+  app.get('/api/training/curriculum', requireAuth, async (req, res) => {
+    if (!curriculumJson) return res.status(503).json({ error: 'Training content is unavailable' });
+    const open = await pool.query(
+      'SELECT jsonb_array_length(answers) AS answered FROM certification_attempts WHERE user_id=$1 AND completed_at IS NULL',
+      [req.session.userId]
+    );
+    res.setHeader('Cache-Control', 'no-store');
+    if (open.rows.length > 0) {
+      return res.status(423).json({ locked: true, answered: open.rows[0].answered, total: QUESTIONS_PER_TEST });
+    }
+    res.type('application/json').send(curriculumJson);
+  });
+
   app.get('/api/certification/status', certRoles, async (req, res) => {
     try {
       res.json(await computeStatus(req.session.userId));
@@ -379,6 +387,18 @@ function register(app, pool, { requireAuth, requireRole }) {
       console.error('Admin certifications error:', e);
       res.status(500).json({ error: 'Server error' });
     }
+  });
+
+  // ── Director: certification status for the mentors at their own center ──
+  app.get('/api/director/certifications', requireRole('program_director'), async (req, res) => {
+    const users = await pool.query(
+      `SELECT id, full_name, email FROM users
+        WHERE center_id=$1 AND role='mentor' AND active=TRUE ORDER BY full_name`,
+      [req.effectiveCenterId]
+    );
+    const rows = [];
+    for (const u of users.rows) rows.push({ ...u, status: await computeStatus(u.id) });
+    res.json(rows);
   });
 
   app.post('/api/admin/certifications/:userId/unlock', requireRole('admin'), async (req, res) => {

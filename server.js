@@ -9,11 +9,38 @@ const certification = require('./certification');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// ── Crash protection ─────────────────────────────────────────────
+// Express 4 doesn't catch errors thrown inside async route handlers; one
+// failed database query (e.g. a missing table) used to take the whole site
+// down. Every route handler registered below is wrapped so its errors go to
+// the error handler at the bottom of this file and return a 500 instead.
+function catchAsync(fn) {
+  return function (req, res, next) {
+    try {
+      const result = fn(req, res, next);
+      if (result && typeof result.catch === 'function') result.catch(next);
+    } catch (e) {
+      next(e);
+    }
+  };
+}
+for (const method of ['get', 'post', 'put', 'patch', 'delete']) {
+  const original = app[method].bind(app);
+  app[method] = (routePath, ...handlers) => {
+    if (handlers.length === 0) return original(routePath); // app.get('setting')
+    return original(routePath, ...handlers.map(h => (typeof h === 'function' && h.length < 4) ? catchAsync(h) : h));
+  };
+}
+// Last line of defence: log instead of exiting on anything that slips through.
+process.on('unhandledRejection', (err) => console.error('Unhandled rejection:', err));
+
 // ── DB ────────────────────────────────────────────────────────────
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
+// An idle connection dropping (e.g. a database restart) must not crash the app.
+pool.on('error', (err) => console.error('Postgres pool error:', err.message));
 
 // Init / migrate tables
 async function initDB() {
@@ -935,10 +962,11 @@ app.get('/api/mentees', requireRole('mentor'), async (req, res) => {
     [req.session.userId]
   );
   // Also return any legacy mentees (created via old QIF flow) that haven't been migrated
+  // The legacy mentees table only exists on databases that predate v3.
   const legacy = await pool.query(
     'SELECT id, name, classroom, user_id FROM mentees WHERE mentor_id=$1',
     [req.session.userId]
-  );
+  ).catch(e => { if (e.code === '42P01') return { rows: [] }; throw e; });
   // Merge — legacy takes priority for backwards-compat if user_id matches
   const seen = new Set(result.rows.map(r => r.user_id));
   const merged = [...result.rows];
@@ -1313,6 +1341,13 @@ app.get('/change-password', (req, res) => res.sendFile(path.join(__dirname, 'pub
 app.get('/qif', (req, res) => res.sendFile(path.join(__dirname, 'public', 'qif.html')));
 app.get('/training', (req, res) => res.sendFile(path.join(__dirname, 'public', 'training.html')));
 app.get('/admin-upload', (req, res) => res.sendFile(path.join(__dirname, 'public', 'admin-upload.html')));
+
+// ── Error handler (must stay after all routes) ────────────────────
+app.use((err, req, res, next) => {
+  console.error(`Error on ${req.method} ${req.originalUrl}:`, err);
+  if (res.headersSent) return next(err);
+  res.status(500).json({ error: 'Server error' });
+});
 
 initDB().then(() => cert.initTables()).then(() => {
   app.listen(PORT, () => console.log(`MSA Platform running on port ${PORT}`));

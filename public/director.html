@@ -215,6 +215,43 @@
   .person.unpaired { color: var(--text-muted); font-style: italic; font-size: 13px; }
   .pair-actions { display: flex; gap: 8px; justify-content: flex-end; }
 
+  /* ── Mentor certification ── */
+  .cert-row {
+    display: grid;
+    grid-template-columns: 2fr 1.6fr 1fr 1fr 0.7fr;
+    gap: 14px;
+    padding: 14px 20px;
+    align-items: center;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 13.5px;
+  }
+  .cert-row:last-child { border-bottom: none; }
+  .cert-row.head {
+    background: var(--cream-dark);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-soft);
+  }
+  .cert-badge {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 10px;
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+  .cert-badge.ok { background: rgba(74,124,89,0.15); color: var(--green-deep); }
+  .cert-badge.due { background: rgba(201,149,58,0.18); color: #8a6420; }
+  .cert-badge.bad { background: #f6e1db; color: #8a3a26; }
+  .cert-badge.none { background: var(--cream-dark); color: var(--text-soft); }
+  .cert-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .section-note { font-size: 13px; color: var(--text-muted); }
+  @media (max-width: 700px) {
+    .cert-row { grid-template-columns: 1fr 1fr; }
+    .cert-row.head { display: none; }
+  }
+
   .empty {
     padding: 40px;
     text-align: center;
@@ -427,6 +464,14 @@
     <div class="pair-list" id="pair-list">
       <div class="empty">Loading…</div>
     </div>
+
+    <div class="section-head">
+      <h3>Mentor Certification</h3>
+      <div class="section-note" id="cert-summary"></div>
+    </div>
+    <div class="pair-list" id="cert-list">
+      <div class="empty">Loading…</div>
+    </div>
   </main>
 
   <!-- ── Add Pair Modal ── -->
@@ -488,6 +533,7 @@ async function boot() {
     if (me.must_change_password) { window.location.href = '/change-password'; return; }
     document.getElementById('user-name').textContent = me.full_name;
     await loadCenter();
+    loadCertifications();
   } catch (e) {
     console.error(e);
     window.location.href = '/';
@@ -499,6 +545,61 @@ document.getElementById('logout-link').addEventListener('click', async (e) => {
   await fetch('/api/auth/logout', { method: 'POST' });
   window.location.href = '/';
 });
+
+// ── Mentor certification ─────────────────────────────────────────
+function certDate(iso) {
+  if (!iso) return '—';
+  return new Date(iso + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function certBadge(st) {
+  const map = {
+    certified: ['ok', 'Certified'],
+    renewal_open: ['due', 'Calibration due'],
+    expired: ['bad', 'Expired'],
+    locked: ['bad', 'Locked — MSA will unlock'],
+    wait: ['none', 'Retry tomorrow'],
+    in_progress: ['due', 'Test in progress'],
+    eligible: ['due', 'Ready to test'],
+    not_eligible: ['none', 'In training']
+  };
+  let [cls, label] = map[st.state] || ['none', st.state];
+  if (st.certification && st.certification.active && !['certified', 'renewal_open'].includes(st.state)) {
+    label = 'Certified · ' + label.toLowerCase();
+  }
+  const sub = st.state === 'not_eligible' ? `<div class="cert-sub">${st.modulesComplete} of ${st.modulesRequired} modules done</div>` : '';
+  return `<span class="cert-badge ${cls}">${label}</span>${sub}`;
+}
+
+async function loadCertifications() {
+  const list = document.getElementById('cert-list');
+  try {
+    const r = await fetch('/api/director/certifications');
+    if (!r.ok) throw new Error();
+    const rows = await r.json();
+    const active = rows.filter(u => u.status.certification && u.status.certification.active).length;
+    document.getElementById('cert-summary').textContent = rows.length ? `${active} of ${rows.length} mentors certified` : '';
+    if (rows.length === 0) {
+      list.innerHTML = '<div class="empty">No mentors yet.</div>';
+      return;
+    }
+    list.innerHTML = `
+      <div class="cert-row head">
+        <div>Mentor</div><div>Status</div><div>Certified</div><div>Renew By</div><div>Attempts</div>
+      </div>` + rows.map(u => {
+        const st = u.status, c = st.certification;
+        return `<div class="cert-row">
+          <div class="person"><span class="person-name">${escapeHtml(u.full_name)}</span><span class="person-email">${escapeHtml(u.email)}</span></div>
+          <div>${certBadge(st)}</div>
+          <div>${c ? certDate(c.certifiedOn) : '—'}</div>
+          <div>${c ? certDate(c.expiresOn) : '—'}</div>
+          <div>${st.attemptsUsed} / ${st.maxAttempts}</div>
+        </div>`;
+      }).join('');
+  } catch (e) {
+    list.innerHTML = '<div class="empty">Could not load certification status.</div>';
+  }
+}
 
 // ── Load center ──────────────────────────────────────────────────
 async function loadCenter() {

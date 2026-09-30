@@ -307,8 +307,13 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
 .mcert-dates div{text-align:center;}
 .mcert-dates .lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dk);font-weight:700;}
 .mcert-dates .val{font-family:'Playfair Display',serif;font-size:1rem;color:var(--ink);margin-top:.2rem;}
-.mcert .cert-footer{flex-wrap:nowrap;}
-.mcert .cert-logo{flex:1;}
+/* MSA Certified Mentor certificate: logo, signers only, gold frame matching the logo */
+.mcert{border:14px solid transparent;border-image:linear-gradient(135deg,#F0E2C0 0%,#C9A56E 22%,#8E6440 45%,#E8D5A8 62%,#B8875A 82%,#F0E2C0 100%) 1;border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding-top:2.25rem;}
+.mcert::before{inset:8px;border:1.5px solid rgba(184,135,90,.75);}
+.mcert::after{inset:13px;border:1px solid rgba(184,135,90,.35);}
+.mcert-logo{display:block;width:250px;max-width:70%;height:auto;margin:0 auto .9rem;position:relative;z-index:1;}
+.mcert .cert-footer{justify-content:space-around;border-top:none;margin-top:1.5rem;padding-top:0;}
+.mcert .cert-sig{text-align:center;min-width:210px;padding-top:.55rem;border-top:1px solid rgba(28,26,22,.35);}
 .mcert-sample-banner{display:none;position:relative;z-index:2;margin:-.5rem auto 1rem;width:fit-content;background:var(--red);color:white;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;padding:.3rem 1rem;border-radius:2px;}
 .mcert.sample .mcert-sample-banner{display:block;}
 .mcert.sample::after{content:'TEST CERTIFICATE';inset:auto;border:none;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-24deg);font-family:'Playfair Display',serif;font-size:clamp(2.2rem,8vw,4.6rem);font-weight:700;letter-spacing:.06em;color:rgba(122,48,32,.13);white-space:nowrap;pointer-events:none;z-index:3;}
@@ -327,7 +332,7 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
 @media print{
   body *{visibility:hidden;}
   #s-cert.active,#s-cert.active *,#s-mcert.active,#s-mcert.active *{visibility:visible;}
-  #s-cert.active,#s-mcert.active{position:absolute;left:0;top:0;padding:0;background:white;}
+  #s-cert.active,#s-mcert.active{position:absolute;left:0;top:0;width:100%;padding:0;background:white;}
   .cert-actions{display:none;}
   .certificate{box-shadow:none;}
 }
@@ -495,7 +500,7 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
   <div class="cert-wrap">
     <div class="certificate mcert">
       <div class="mcert-sample-banner">Test Certificate &middot; Preview Only &middot; Not Valid</div>
-      <div class="cert-academy">Mentor Success Academy</div>
+      <img class="mcert-logo" src="/img/msa-logo-light.png" alt="Mentor Success Academy">
       <div class="cert-subtitle" style="margin-bottom:.4rem;">Certificate of Certification</div>
       <div class="cert-title">MSA Certified Mentor</div>
       <div class="cert-bar" style="margin-top:1rem;"></div>
@@ -512,8 +517,7 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
           <div class="sig-name">Mary Wardlaw</div>
           <div class="sig-title">Co-Founder, Mentor Success Academy</div>
         </div>
-        <div class="cert-logo">Mentor Success Academy<br>Mary Wardlaw &amp; Rebecca Munlyn</div>
-        <div class="cert-sig" style="text-align:right">
+        <div class="cert-sig">
           <div class="sig-name">Rebecca Munlyn</div>
           <div class="sig-title">Co-Founder, Mentor Success Academy</div>
         </div>

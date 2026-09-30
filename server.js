@@ -69,7 +69,34 @@ async function initDB() {
       );
 
       CREATE INDEX IF NOT EXISTS idx_training_progress_user ON training_progress(user_id);
+
+      -- Coaching call library: each entry is either a pasted link
+      -- (YouTube, etc.) or an uploaded video stored in 1 MB chunks.
+      CREATE TABLE IF NOT EXISTS coaching_videos (
+        id SERIAL PRIMARY KEY,
+        title TEXT NOT NULL,
+        description TEXT,
+        call_date DATE,
+        source_type TEXT NOT NULL CHECK (source_type IN ('link','upload')),
+        video_url TEXT,
+        filename TEXT,
+        mime_type TEXT,
+        size_bytes BIGINT,
+        status TEXT NOT NULL DEFAULT 'ready' CHECK (status IN ('uploading','ready')),
+        created_by INTEGER REFERENCES users(id) ON DELETE SET NULL,
+        created_at TIMESTAMP DEFAULT NOW()
+      );
+
+      CREATE TABLE IF NOT EXISTS coaching_video_chunks (
+        video_id INTEGER NOT NULL REFERENCES coaching_videos(id) ON DELETE CASCADE,
+        chunk_index INTEGER NOT NULL,
+        data BYTEA NOT NULL,
+        PRIMARY KEY (video_id, chunk_index)
+      );
     `);
+
+    // Clean up any uploads that were interrupted by a restart
+    await client.query(`DELETE FROM coaching_videos WHERE status='uploading' AND created_at < NOW() - INTERVAL '1 day'`);
 
     // ── Migrate legacy mentees table to reference users.id ────────
     // The old mentees table had: id, mentor_id, name, classroom
@@ -973,6 +1000,185 @@ app.post('/api/training/progress', requireAuth, async (req, res) => {
     console.error('Training progress save error:', e);
     res.status(500).json({ error: 'Server error' });
   }
+});
+
+// ──────────────────────────────────────────────────────────────────
+// COACHING CALL LIBRARY — recorded coaching calls shown beside the
+// training dashboard. Any signed-in user can watch; admins add/remove.
+// Uploads are streamed straight into 1 MB rows so large recordings
+// never sit in memory and survive redeploys without a persistent disk.
+// ──────────────────────────────────────────────────────────────────
+const VIDEO_CHUNK_SIZE = 1024 * 1024;
+const MAX_VIDEO_BYTES = (parseInt(process.env.MAX_VIDEO_MB, 10) || 1024) * 1024 * 1024;
+
+function cleanDate(d) {
+  return (typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d)) ? d : null;
+}
+
+app.get('/api/coaching-videos', requireAuth, async (req, res) => {
+  const result = await pool.query(
+    `SELECT id, title, description, to_char(call_date, 'YYYY-MM-DD') AS call_date, source_type, video_url, filename, mime_type, size_bytes, created_at
+       FROM coaching_videos WHERE status='ready'
+      ORDER BY call_date DESC NULLS LAST, created_at DESC`
+  );
+  res.json({ videos: result.rows, canManage: req.session.role === 'admin', maxUploadMb: MAX_VIDEO_BYTES / 1024 / 1024 });
+});
+
+app.post('/api/coaching-videos/link', requireRole('admin'), async (req, res) => {
+  const { title, description, callDate, url } = req.body || {};
+  if (!title || !title.trim()) return res.status(400).json({ error: 'Title is required' });
+  let parsed;
+  try { parsed = new URL(String(url || '').trim()); } catch (e) { parsed = null; }
+  if (!parsed || !['http:', 'https:'].includes(parsed.protocol)) {
+    return res.status(400).json({ error: 'Please paste a full link starting with https://' });
+  }
+  const result = await pool.query(
+    `INSERT INTO coaching_videos (title, description, call_date, source_type, video_url, created_by)
+     VALUES ($1, $2, $3, 'link', $4, $5) RETURNING id`,
+    [title.trim(), (description || '').trim() || null, cleanDate(callDate), parsed.toString(), req.session.userId]
+  );
+  res.json({ success: true, id: result.rows[0].id });
+});
+
+// Raw file body; metadata travels in the query string.
+app.post('/api/coaching-videos/upload', requireRole('admin'), async (req, res) => {
+  const title = String(req.query.title || '').trim();
+  const mime = String(req.headers['content-type'] || '').split(';')[0].trim();
+  const declared = parseInt(req.headers['content-length'], 10);
+  if (!title) return res.status(400).json({ error: 'Title is required' });
+  if (!mime.startsWith('video/')) return res.status(400).json({ error: 'Please choose a video file' });
+  if (declared > MAX_VIDEO_BYTES) {
+    return res.status(413).json({ error: `Video is larger than the ${MAX_VIDEO_BYTES / 1024 / 1024} MB limit` });
+  }
+
+  const created = await pool.query(
+    `INSERT INTO coaching_videos (title, description, call_date, source_type, filename, mime_type, size_bytes, status, created_by)
+     VALUES ($1, $2, $3, 'upload', $4, $5, 0, 'uploading', $6) RETURNING id`,
+    [title, String(req.query.description || '').trim() || null, cleanDate(req.query.callDate),
+     String(req.query.filename || 'video').slice(0, 200), mime, req.session.userId]
+  );
+  const videoId = created.rows[0].id;
+
+  let pending = [];
+  let pendingLen = 0;
+  let chunkIndex = 0;
+  let total = 0;
+  let failed = false;
+
+  async function flush(buf) {
+    await pool.query(
+      'INSERT INTO coaching_video_chunks (video_id, chunk_index, data) VALUES ($1, $2, $3)',
+      [videoId, chunkIndex++, buf]
+    );
+  }
+  async function fail(status, message) {
+    if (failed) return;
+    failed = true;
+    req.resume(); // drain and discard whatever is left of the body
+    await pool.query('DELETE FROM coaching_videos WHERE id=$1', [videoId]).catch(() => {});
+    if (!res.headersSent) res.status(status).json({ error: message });
+  }
+
+  req.on('data', async (data) => {
+    if (failed) return;
+    total += data.length;
+    if (total > MAX_VIDEO_BYTES) {
+      return fail(413, `Video is larger than the ${MAX_VIDEO_BYTES / 1024 / 1024} MB limit`);
+    }
+    pending.push(data);
+    pendingLen += data.length;
+    if (pendingLen < VIDEO_CHUNK_SIZE) return;
+    req.pause();
+    try {
+      let buf = Buffer.concat(pending, pendingLen);
+      while (buf.length >= VIDEO_CHUNK_SIZE) {
+        await flush(buf.subarray(0, VIDEO_CHUNK_SIZE));
+        buf = buf.subarray(VIDEO_CHUNK_SIZE);
+      }
+      pending = buf.length ? [buf] : [];
+      pendingLen = buf.length;
+      req.resume();
+    } catch (e) {
+      console.error('Coaching video chunk error:', e);
+      fail(500, 'Upload failed while saving');
+    }
+  });
+
+  req.on('end', async () => {
+    if (failed) return;
+    try {
+      if (pendingLen) await flush(Buffer.concat(pending, pendingLen));
+      if (total === 0) return fail(400, 'The file was empty');
+      await pool.query(`UPDATE coaching_videos SET status='ready', size_bytes=$1 WHERE id=$2`, [total, videoId]);
+      res.json({ success: true, id: videoId });
+    } catch (e) {
+      console.error('Coaching video finalize error:', e);
+      fail(500, 'Upload failed while saving');
+    }
+  });
+
+  req.on('aborted', () => fail(400, 'Upload was cancelled'));
+  req.on('error', () => fail(400, 'Upload was interrupted'));
+});
+
+// Streams an uploaded video with HTTP Range support so the player can seek.
+app.get('/api/coaching-videos/:id/stream', requireAuth, async (req, res) => {
+  const meta = await pool.query(
+    `SELECT mime_type, size_bytes FROM coaching_videos WHERE id=$1 AND source_type='upload' AND status='ready'`,
+    [req.params.id]
+  );
+  if (meta.rows.length === 0) return res.status(404).json({ error: 'Not found' });
+  const size = Number(meta.rows[0].size_bytes);
+  let start = 0;
+  let end = size - 1;
+  const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || '');
+  if (range) {
+    if (range[1] === '') {
+      start = Math.max(0, size - parseInt(range[2], 10));
+    } else {
+      start = parseInt(range[1], 10);
+      if (range[2] !== '') end = Math.min(parseInt(range[2], 10), size - 1);
+    }
+    if (start > end || start >= size) {
+      res.setHeader('Content-Range', `bytes */${size}`);
+      return res.status(416).end();
+    }
+    res.status(206);
+    res.setHeader('Content-Range', `bytes ${start}-${end}/${size}`);
+  }
+  res.setHeader('Accept-Ranges', 'bytes');
+  res.setHeader('Content-Type', meta.rows[0].mime_type || 'video/mp4');
+  res.setHeader('Content-Length', end - start + 1);
+  res.setHeader('Cache-Control', 'private, max-age=3600');
+
+  const first = Math.floor(start / VIDEO_CHUNK_SIZE);
+  const last = Math.floor(end / VIDEO_CHUNK_SIZE);
+  try {
+    for (let i = first; i <= last; i++) {
+      if (res.destroyed) return;
+      const r = await pool.query(
+        'SELECT data FROM coaching_video_chunks WHERE video_id=$1 AND chunk_index=$2',
+        [req.params.id, i]
+      );
+      if (r.rows.length === 0) break;
+      const chunkStart = i * VIDEO_CHUNK_SIZE;
+      const from = Math.max(start - chunkStart, 0);
+      const to = Math.min(end - chunkStart + 1, r.rows[0].data.length);
+      if (!res.write(r.rows[0].data.subarray(from, to))) {
+        await new Promise(resolve => { res.once('drain', resolve); res.once('close', resolve); });
+      }
+    }
+    res.end();
+  } catch (e) {
+    console.error('Coaching video stream error:', e);
+    res.destroy();
+  }
+});
+
+app.delete('/api/coaching-videos/:id', requireRole('admin'), async (req, res) => {
+  const result = await pool.query('DELETE FROM coaching_videos WHERE id=$1 RETURNING id', [req.params.id]);
+  if (result.rows.length === 0) return res.status(404).json({ error: 'Not found' });
+  res.json({ success: true });
 });
 
 // Tally observations

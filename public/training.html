@@ -309,6 +309,9 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
 .mcert-dates .val{font-family:'Playfair Display',serif;font-size:1rem;color:var(--ink);margin-top:.2rem;}
 .mcert .cert-footer{flex-wrap:nowrap;}
 .mcert .cert-logo{flex:1;}
+.mcert-sample-banner{display:none;position:relative;z-index:2;margin:-.5rem auto 1rem;width:fit-content;background:var(--red);color:white;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;padding:.3rem 1rem;border-radius:2px;}
+.mcert.sample .mcert-sample-banner{display:block;}
+.mcert.sample::after{content:'TEST CERTIFICATE';inset:auto;border:none;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-24deg);font-family:'Playfair Display',serif;font-size:clamp(2.2rem,8vw,4.6rem);font-weight:700;letter-spacing:.06em;color:rgba(122,48,32,.13);white-space:nowrap;pointer-events:none;z-index:3;}
 .mcert-no{font-size:.65rem;letter-spacing:.12em;color:var(--ink-lt);opacity:.7;position:relative;z-index:1;}
 .signed-in-as{font-size:.75rem;opacity:.55;margin:-.6rem 0 1rem;text-align:left;}
 
@@ -491,6 +494,7 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
 <div id="s-mcert" class="screen">
   <div class="cert-wrap">
     <div class="certificate mcert">
+      <div class="mcert-sample-banner">Test Certificate &middot; Preview Only &middot; Not Valid</div>
       <div class="cert-academy">Mentor Success Academy</div>
       <div class="cert-subtitle" style="margin-bottom:.4rem;">Certificate of Certification</div>
       <div class="cert-title">MSA Certified Mentor</div>
@@ -1275,6 +1279,7 @@ async function prefillLearner() {
 
   // Links like /training?view=certificate or ?view=dashboard skip the welcome screen
   const view = new URLSearchParams(location.search).get('view');
+  if (view === 'sample-certificate') { showSampleCertificate(); return; }
   if (view && nameEl.value && selEl.value) {
     await startTraining();
     if (view === 'certificate') showMentorCertificate();
@@ -1396,6 +1401,7 @@ function renderCertPanel() {
 }
 
 function backToDashboard() {
+  if (SAMPLE_CERT) { location.href = '/admin'; return; }
   if (STATE.name) { buildDashboard(); showScreen('s-dash'); }
   else showScreen('s-welcome');
 }
@@ -1601,10 +1607,29 @@ function leaveTest() {
   backToDashboard();
 }
 
+// Admin-only preview of the certificate design, clearly marked as a test.
+// Nothing is saved; it just fills the real certificate layout with sample data.
+let SAMPLE_CERT = false;
+function showSampleCertificate() {
+  if (!ME || ME.role !== 'admin') return;
+  const today = new Date();
+  const iso = d => d.toLocaleDateString('en-CA');
+  const nextYear = new Date(today); nextYear.setFullYear(today.getFullYear() + 1);
+  SAMPLE_CERT = true;
+  document.querySelector('#s-mcert .certificate').classList.add('sample');
+  document.getElementById('mcert-name').textContent = ME.full_name || 'Sample Mentor';
+  document.getElementById('mcert-date').textContent = fmtDate(iso(today));
+  document.getElementById('mcert-exp').textContent = fmtDate(iso(nextYear));
+  document.getElementById('mcert-no').textContent = 'Certificate No. TEST-SAMPLE';
+  showScreen('s-mcert');
+}
+
 async function showMentorCertificate() {
   if (!CERT) await loadCertStatus();
   const cert = CERT && CERT.certification;
   if (!cert) { alert('No certificate yet.'); return; }
+  SAMPLE_CERT = false;
+  document.querySelector('#s-mcert .certificate').classList.remove('sample');
   document.getElementById('mcert-name').textContent = CERT.fullName || STATE.name;
   document.getElementById('mcert-date').textContent = fmtDate(cert.certifiedOn);
   document.getElementById('mcert-exp').textContent = fmtDate(cert.expiresOn);

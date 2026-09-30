@@ -213,6 +213,59 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
 .alert{padding:.7rem 1rem;border-radius:4px;font-size:.83rem;margin-bottom:.75rem;}
 .alert-err{background:var(--red-bg);border-left:3px solid var(--red-br);color:var(--red);}
 
+/* ── Coaching call library (left column of the dashboard) ── */
+.dash-layout{max-width:1240px;margin:0 auto;padding:2rem 1.5rem;display:grid;grid-template-columns:300px minmax(0,1fr);gap:1.75rem;align-items:start;}
+.dash-layout .dash-body{max-width:none;margin:0;padding:0;}
+.lib-col{background:white;border:1px solid rgba(0,0,0,.07);border-radius:8px;overflow:hidden;position:sticky;top:1rem;max-height:calc(100vh - 2rem);display:flex;flex-direction:column;}
+.lib-head{background:var(--header);color:var(--cream);padding:1rem 1.1rem;}
+.lib-head h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;margin-bottom:.2rem;}
+.lib-head p{font-size:.72rem;opacity:.6;line-height:1.45;}
+.lib-add-btn{margin-top:.75rem;width:100%;justify-content:center;}
+.lib-list{overflow-y:auto;flex:1;}
+.lib-item{display:flex;gap:.7rem;padding:.8rem 1rem;border-bottom:1px solid rgba(0,0,0,.06);cursor:pointer;transition:background .15s;align-items:flex-start;}
+.lib-item:hover{background:var(--gold-pale);}
+.lib-item:last-child{border-bottom:none;}
+.lib-thumb{width:84px;height:48px;border-radius:4px;flex-shrink:0;background:var(--header) center/cover no-repeat;display:flex;align-items:center;justify-content:center;color:var(--gold-lt);font-size:1rem;position:relative;}
+.lib-thumb::after{content:'\25B6';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:white;font-size:.8rem;text-shadow:0 1px 4px rgba(0,0,0,.6);}
+.lib-info{flex:1;min-width:0;}
+.lib-title{font-size:.84rem;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:.15rem;overflow-wrap:anywhere;}
+.lib-meta{font-size:.68rem;color:var(--ink-lt);}
+.lib-del{background:none;border:none;color:var(--ink-lt);font-size:1rem;cursor:pointer;padding:0 .2rem;line-height:1;opacity:.5;}
+.lib-del:hover{opacity:1;color:var(--red);}
+.lib-empty{padding:1.5rem 1.1rem;text-align:center;font-size:.8rem;color:var(--ink-lt);line-height:1.6;}
+
+.lib-modal{position:fixed;inset:0;background:rgba(17,16,9,.7);z-index:500;display:none;align-items:center;justify-content:center;padding:1.25rem;}
+.lib-modal.show{display:flex;}
+.lib-panel{background:var(--cream);border-radius:10px;width:100%;max-width:520px;max-height:92vh;overflow-y:auto;box-shadow:0 12px 50px rgba(0,0,0,.35);}
+.lib-panel.wide{max-width:960px;}
+.lib-panel-head{background:var(--header);color:var(--cream);padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+.lib-panel-head h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;}
+.lib-x{background:none;border:none;color:var(--cream);font-size:1.5rem;cursor:pointer;line-height:1;opacity:.7;}
+.lib-x:hover{opacity:1;}
+.lib-panel-body{padding:1.25rem;}
+.lib-tabs{display:flex;gap:.4rem;margin-bottom:1rem;}
+.lib-tab{flex:1;padding:.55rem;border:1.5px solid rgba(0,0,0,.12);background:white;border-radius:6px;font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;color:var(--ink-mid);}
+.lib-tab.on{border-color:var(--gold-dk);background:var(--gold-pale);color:var(--ink);}
+.lib-field{margin-bottom:.85rem;}
+.lib-field label{display:block;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dk);font-weight:700;margin-bottom:.35rem;}
+.lib-field input,.lib-field textarea{width:100%;padding:.6rem .75rem;border:1px solid rgba(0,0,0,.15);border-radius:5px;font-family:inherit;font-size:.88rem;background:white;color:var(--ink);}
+.lib-field textarea{resize:vertical;min-height:60px;}
+.lib-field input:focus,.lib-field textarea:focus{outline:none;border-color:var(--gold-dk);}
+.lib-hint{font-size:.72rem;color:var(--ink-lt);margin-top:.3rem;line-height:1.45;}
+.lib-progress{height:6px;background:rgba(0,0,0,.08);border-radius:3px;overflow:hidden;margin:.5rem 0;display:none;}
+.lib-progress div{height:100%;width:0;background:linear-gradient(90deg,var(--gold-dk),var(--gold));transition:width .2s;}
+.lib-actions{display:flex;justify-content:flex-end;gap:.6rem;margin-top:1rem;}
+.lib-player{position:relative;width:100%;aspect-ratio:16/9;background:black;}
+.lib-player iframe,.lib-player video{position:absolute;inset:0;width:100%;height:100%;border:0;}
+.lib-desc{padding:1rem 1.25rem;font-size:.86rem;line-height:1.65;color:var(--ink-mid);white-space:pre-wrap;}
+.lib-desc:empty{display:none;}
+
+@media(max-width:900px){
+  .dash-layout{grid-template-columns:1fr;padding:1.25rem 1rem;}
+  .lib-col{position:static;max-height:none;}
+  .lib-list{max-height:320px;}
+}
+
 @media(max-width:600px){
   .mod-grid{grid-template-columns:1fr;}
   .prog-bar-wrap{flex-direction:column;align-items:flex-start;}
@@ -274,6 +327,15 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
       MSA LEAP Training
     </div>
   </div>
+  <div class="dash-layout">
+  <aside class="lib-col" id="lib-col">
+    <div class="lib-head">
+      <h3>&#127909;&nbsp; Coaching Call Library</h3>
+      <p>Recordings from our live coaching calls. Watch anytime to revisit the conversation.</p>
+      <button class="btn btn-gold btn-sm lib-add-btn" id="lib-add-btn" style="display:none;" onclick="openLibAdd()">+ Add Recording</button>
+    </div>
+    <div class="lib-list" id="lib-list"><div class="lib-empty">Loading&hellip;</div></div>
+  </aside>
   <div class="dash-body">
     <div class="dash-welcome">
       <h2>Your Learning Journey</h2>
@@ -294,6 +356,63 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--warm);color:var(--i
       </div>
     </div>
     <div id="domain-container"></div>
+  </div>
+  </div>
+</div>
+
+<!-- Coaching call: add recording -->
+<div class="lib-modal" id="lib-add-modal">
+  <div class="lib-panel">
+    <div class="lib-panel-head">
+      <h3>Add a Coaching Call Recording</h3>
+      <button class="lib-x" onclick="closeLibModal('lib-add-modal')">&times;</button>
+    </div>
+    <div class="lib-panel-body">
+      <div id="lib-add-err" class="alert alert-err" style="display:none;"></div>
+      <div class="lib-tabs">
+        <button class="lib-tab on" id="lib-tab-link" onclick="setLibMode('link')">Paste a Link</button>
+        <button class="lib-tab" id="lib-tab-upload" onclick="setLibMode('upload')">Upload a Video</button>
+      </div>
+      <div class="lib-field">
+        <label for="lib-title">Title</label>
+        <input type="text" id="lib-title" placeholder="e.g. Coaching Call #4 — Warmth &amp; Connection">
+      </div>
+      <div class="lib-field">
+        <label for="lib-date">Call Date</label>
+        <input type="date" id="lib-date">
+      </div>
+      <div class="lib-field" id="lib-url-field">
+        <label for="lib-url">YouTube (or other) Link</label>
+        <input type="url" id="lib-url" placeholder="https://www.youtube.com/watch?v=&hellip;">
+        <div class="lib-hint">YouTube links play right here on the page. Tip: set the video to &ldquo;Unlisted&rdquo; so only people with the link can find it.</div>
+      </div>
+      <div class="lib-field" id="lib-file-field" style="display:none;">
+        <label for="lib-file">Video File</label>
+        <input type="file" id="lib-file" accept="video/*">
+        <div class="lib-hint" id="lib-file-hint">MP4 plays best in every browser.</div>
+        <div class="lib-progress" id="lib-progress"><div></div></div>
+      </div>
+      <div class="lib-field">
+        <label for="lib-desc">Notes (optional)</label>
+        <textarea id="lib-desc" placeholder="Topics covered, key takeaways&hellip;"></textarea>
+      </div>
+      <div class="lib-actions">
+        <button class="btn btn-outline btn-sm" style="color:var(--ink-mid);border-color:rgba(0,0,0,.2);" onclick="closeLibModal('lib-add-modal')">Cancel</button>
+        <button class="btn btn-dark btn-sm" id="lib-save-btn" onclick="saveLibVideo()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Coaching call: player -->
+<div class="lib-modal" id="lib-play-modal">
+  <div class="lib-panel wide">
+    <div class="lib-panel-head">
+      <h3 id="lib-play-title"></h3>
+      <button class="lib-x" onclick="closeLibModal('lib-play-modal')">&times;</button>
+    </div>
+    <div class="lib-player" id="lib-player"></div>
+    <div class="lib-desc" id="lib-play-desc"></div>
   </div>
 </div>
 
@@ -7991,6 +8110,203 @@ const CURRICULUM = [
   ]
 }
 ]; // end CURRICULUM
+</script>
+<script>
+// ═══════════════════════════════════════════════════════════════
+// COACHING CALL LIBRARY
+// ═══════════════════════════════════════════════════════════════
+let LIB = { videos: [], canManage: false, maxUploadMb: 1024, mode: 'link', xhr: null };
+
+function libEsc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+function youTubeId(url) {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\.|^m\./, '');
+    if (host === 'youtu.be') return u.pathname.slice(1).split('/')[0] || null;
+    if (host === 'youtube.com' || host === 'youtube-nocookie.com') {
+      if (u.searchParams.get('v')) return u.searchParams.get('v');
+      const m = u.pathname.match(/^\/(embed|shorts|live|v)\/([\w-]+)/);
+      if (m) return m[2];
+    }
+  } catch (e) {}
+  return null;
+}
+
+function libDate(v) {
+  if (!v) return '';
+  const d = new Date(String(v).slice(0, 10) + 'T12:00:00');
+  return isNaN(d) ? '' : d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+async function loadLibrary() {
+  const list = document.getElementById('lib-list');
+  try {
+    const r = await fetch('/api/coaching-videos', { credentials: 'same-origin' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const d = await r.json();
+    LIB.videos = d.videos || [];
+    LIB.canManage = !!d.canManage;
+    LIB.maxUploadMb = d.maxUploadMb || LIB.maxUploadMb;
+  } catch (e) {
+    list.innerHTML = '<div class="lib-empty">Sign in to view coaching call recordings.</div>';
+    return;
+  }
+  document.getElementById('lib-add-btn').style.display = LIB.canManage ? 'inline-flex' : 'none';
+  renderLibrary();
+}
+
+function renderLibrary() {
+  const list = document.getElementById('lib-list');
+  if (LIB.videos.length === 0) {
+    list.innerHTML = '<div class="lib-empty">No recordings yet.<br>Coaching call videos will appear here as they&rsquo;re added.</div>';
+    return;
+  }
+  list.innerHTML = LIB.videos.map(v => {
+    const yt = v.source_type === 'link' ? youTubeId(v.video_url) : null;
+    const thumb = yt ? ` style="background-image:url('https://i.ytimg.com/vi/${encodeURIComponent(yt)}/mqdefault.jpg')"` : '';
+    const when = libDate(v.call_date) || libDate(v.created_at);
+    const kind = v.source_type === 'upload' ? 'Uploaded video' : (yt ? 'YouTube' : 'External link');
+    return `<div class="lib-item" onclick="playLibVideo(${v.id})">
+      <div class="lib-thumb"${thumb}></div>
+      <div class="lib-info">
+        <div class="lib-title">${libEsc(v.title)}</div>
+        <div class="lib-meta">${libEsc(when)}${when ? ' &middot; ' : ''}${kind}</div>
+      </div>
+      ${LIB.canManage ? `<button class="lib-del" title="Remove" onclick="event.stopPropagation();deleteLibVideo(${v.id})">&times;</button>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function playLibVideo(id) {
+  const v = LIB.videos.find(x => x.id === id);
+  if (!v) return;
+  const player = document.getElementById('lib-player');
+  if (v.source_type === 'upload') {
+    player.innerHTML = `<video controls autoplay playsinline preload="metadata" src="/api/coaching-videos/${v.id}/stream"></video>`;
+  } else {
+    const yt = youTubeId(v.video_url);
+    if (!yt) { window.open(v.video_url, '_blank', 'noopener'); return; }
+    player.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(yt)}?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  }
+  document.getElementById('lib-play-title').textContent = v.title + (v.call_date ? ' · ' + libDate(v.call_date) : '');
+  document.getElementById('lib-play-desc').textContent = v.description || '';
+  document.getElementById('lib-play-modal').classList.add('show');
+}
+
+function closeLibModal(id) {
+  if (id === 'lib-add-modal' && LIB.xhr) {
+    if (!confirm('An upload is in progress. Cancel it?')) return;
+    LIB.xhr.abort();
+  }
+  document.getElementById(id).classList.remove('show');
+  if (id === 'lib-play-modal') document.getElementById('lib-player').innerHTML = '';
+}
+document.querySelectorAll('.lib-modal').forEach(m => m.addEventListener('click', e => {
+  if (e.target === m) closeLibModal(m.id);
+}));
+
+function setLibMode(mode) {
+  LIB.mode = mode;
+  document.getElementById('lib-tab-link').classList.toggle('on', mode === 'link');
+  document.getElementById('lib-tab-upload').classList.toggle('on', mode === 'upload');
+  document.getElementById('lib-url-field').style.display = mode === 'link' ? 'block' : 'none';
+  document.getElementById('lib-file-field').style.display = mode === 'upload' ? 'block' : 'none';
+}
+
+function openLibAdd() {
+  ['lib-title', 'lib-url', 'lib-desc', 'lib-file'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('lib-date').value = new Date().toLocaleDateString('en-CA');
+  document.getElementById('lib-add-err').style.display = 'none';
+  document.getElementById('lib-progress').style.display = 'none';
+  document.getElementById('lib-file-hint').textContent = `MP4 plays best in every browser. Up to ${LIB.maxUploadMb} MB — for longer calls, YouTube (Unlisted) is the better home.`;
+  document.getElementById('lib-save-btn').disabled = false;
+  setLibMode('link');
+  document.getElementById('lib-add-modal').classList.add('show');
+}
+
+function libError(msg) {
+  const el = document.getElementById('lib-add-err');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+async function saveLibVideo() {
+  const title = document.getElementById('lib-title').value.trim();
+  const callDate = document.getElementById('lib-date').value;
+  const description = document.getElementById('lib-desc').value.trim();
+  const btn = document.getElementById('lib-save-btn');
+  if (!title) return libError('Please give the recording a title.');
+  document.getElementById('lib-add-err').style.display = 'none';
+
+  if (LIB.mode === 'link') {
+    const url = document.getElementById('lib-url').value.trim();
+    if (!/^https?:\/\//i.test(url)) return libError('Please paste a full link starting with https://');
+    btn.disabled = true;
+    try {
+      const r = await fetch('/api/coaching-videos/link', {
+        method: 'POST', credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, callDate, description, url })
+      });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(d.error || 'Could not save');
+      document.getElementById('lib-add-modal').classList.remove('show');
+      loadLibrary();
+    } catch (e) { libError(e.message); }
+    btn.disabled = false;
+    return;
+  }
+
+  const file = document.getElementById('lib-file').files[0];
+  if (!file) return libError('Please choose a video file.');
+  if (file.size > LIB.maxUploadMb * 1024 * 1024) {
+    return libError(`That file is ${Math.round(file.size / 1024 / 1024)} MB — the limit is ${LIB.maxUploadMb} MB. Try uploading it to YouTube as Unlisted and pasting the link instead.`);
+  }
+  const type = file.type && file.type.startsWith('video/') ? file.type : 'video/mp4';
+  const q = new URLSearchParams({ title, callDate, description, filename: file.name });
+  const bar = document.getElementById('lib-progress');
+  bar.style.display = 'block';
+  bar.firstElementChild.style.width = '0%';
+  btn.disabled = true;
+
+  const xhr = new XMLHttpRequest();
+  LIB.xhr = xhr;
+  xhr.open('POST', '/api/coaching-videos/upload?' + q.toString());
+  xhr.withCredentials = true;
+  xhr.setRequestHeader('Content-Type', type);
+  xhr.upload.onprogress = e => {
+    if (e.lengthComputable) bar.firstElementChild.style.width = (e.loaded / e.total * 100).toFixed(1) + '%';
+  };
+  xhr.onload = () => {
+    LIB.xhr = null;
+    btn.disabled = false;
+    let d = {};
+    try { d = JSON.parse(xhr.responseText); } catch (e) {}
+    if (xhr.status >= 200 && xhr.status < 300) {
+      document.getElementById('lib-add-modal').classList.remove('show');
+      loadLibrary();
+    } else {
+      bar.style.display = 'none';
+      libError(d.error || 'Upload failed (' + xhr.status + ')');
+    }
+  };
+  xhr.onerror = () => { LIB.xhr = null; btn.disabled = false; bar.style.display = 'none'; libError('Upload failed — check your connection and try again.'); };
+  xhr.onabort = () => { LIB.xhr = null; btn.disabled = false; bar.style.display = 'none'; };
+  xhr.send(file);
+}
+
+async function deleteLibVideo(id) {
+  const v = LIB.videos.find(x => x.id === id);
+  if (!v || !confirm(`Remove "${v.title}" from the library?`)) return;
+  const r = await fetch('/api/coaching-videos/' + id, { method: 'DELETE', credentials: 'same-origin' });
+  if (!r.ok) { alert('Could not remove that recording.'); return; }
+  loadLibrary();
+}
+
+document.addEventListener('DOMContentLoaded', loadLibrary);
 </script>
 </body>
 </html>

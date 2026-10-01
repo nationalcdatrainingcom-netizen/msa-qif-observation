@@ -417,7 +417,11 @@
   .path .btn { align-self: flex-start; }
   .price { font: 700 34px 'Playfair Display', serif; color: var(--green-deep); margin-top: 6px; }
   .price small { font: 400 15px 'Source Sans 3', sans-serif; color: var(--text-soft); }
-  .price-extra { font-size: 15px; color: var(--text-soft); margin-top: 2px; }
+  .discounts { margin-top: 14px; border: 1px solid var(--line-soft); border-radius: 12px; padding: 12px 16px; background: var(--cream); }
+  .discounts-title { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .discounts table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .discounts td { padding: 4px 0; color: var(--text-soft); }
+  .discounts td:last-child { text-align: right; color: var(--text); font-weight: 600; }
   .total-line { margin: 2px 0 16px; padding: 12px 14px; border-radius: 10px; background: var(--cream-dark); font-size: 15px; }
   .total-line strong { color: var(--green-deep); font-size: 17px; }
 
@@ -735,7 +739,16 @@
           <h3>Full program access</h3>
           <!-- The price below is replaced with the live Stripe price when it loads -->
           <div class="price" id="price-display">$249<small> / month for 1 mentor</small></div>
-          <div class="price-extra">$50 per month per additional mentor</div>
+          <!-- Filled from the Stripe price's tiers when it loads; these rows are the fallback -->
+          <div class="discounts" id="discounts">
+            <div class="discounts-title">Discounts for 2 or more mentors</div>
+            <table id="discount-rows">
+              <tr><td>2–3 mentors</td><td>$150 each / month</td></tr>
+              <tr><td>4–5 mentors</td><td>$125 each / month</td></tr>
+              <tr><td>6–7 mentors</td><td>$115 each / month</td></tr>
+              <tr><td>8 or more mentors</td><td>$105 each / month</td></tr>
+            </table>
+          </div>
           <ul>
             <li>Mentor training and annual certification for your mentors</li>
             <li>Each mentor works with one mentee at a time, with unlimited mentees over the membership</li>
@@ -973,6 +986,26 @@ function perText() {
   if (!pricing.interval) return '';
   return pricing.intervalCount > 1 ? ` every ${pricing.intervalCount} ${pricing.interval}s` : ` / ${pricing.interval}`;
 }
+// One row per tier after the first, e.g. "4–5 mentors · $125 each / month".
+// Volume pricing charges every mentor that tier's rate; graduated pricing
+// charges it only for the mentors within the tier.
+function renderDiscounts(model) {
+  const box = document.getElementById('discounts');
+  const rows = model.tiers.slice(1);
+  if (!rows.length) { box.hidden = true; return; }
+  let from = (model.tiers[0].upTo || 1) + 1;
+  const html = rows.map(t => {
+    const range = t.upTo == null ? `${from} or more mentors` : (t.upTo === from ? `${from} mentors` : `${from}–${t.upTo} mentors`);
+    const label = model.mode === 'volume' ? 'each' : 'per added mentor';
+    const flat = t.flat ? ` + ${money(t.flat)}` : '';
+    from = (t.upTo || from) + 1;
+    return `<tr><td>${range}</td><td>${money(t.unit)} ${label}${flat}${perText()}</td></tr>`;
+  }).join('');
+  document.getElementById('discount-rows').innerHTML = html;
+  document.querySelector('#discounts .discounts-title').textContent = 'Discounts for 2 or more mentors';
+  box.hidden = false;
+}
+
 function updateTotal() {
   const box = document.getElementById('total-line');
   const n = parseInt(document.getElementById('s-mentors').value, 10);
@@ -996,6 +1029,7 @@ fetch('/api/public/pricing').then(r => r.json()).then(p => {
   const el = document.getElementById('price-display');
   el.innerHTML = `${money(first)}<small>${perText()} for 1 mentor</small>`;
   el.hidden = false;
+  renderDiscounts(p.tiers);
   updateTotal();
 }).catch(() => {});
 

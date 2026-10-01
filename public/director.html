@@ -485,7 +485,7 @@
         <button class="modal-close" onclick="closeModal('modal-add-pair')">×</button>
       </div>
       <div class="modal-body">
-        <p class="help-note">Each mentee is paired with one mentor. If the mentor's email already exists in your center, you'll add a new mentee under that existing mentor instead of creating a duplicate.</p>
+        <p class="help-note">Each mentor works with one mentee at a time. To give an existing mentor their next mentee, first click <strong>Finish</strong> next to their current mentee, then enter the mentor's same email here.</p>
 
         <div class="pair-form-section">
           <h4>Mentor</h4>
@@ -677,7 +677,7 @@ function renderPairs() {
         </div>
         <div class="pair-actions">
           <button class="ghost" onclick="resetPwd(${mentee.id}, '${escapeHtml(mentee.full_name)}')">Reset Pwd</button>
-          <button class="danger" onclick="removeUser(${mentee.id}, '${escapeHtml(mentee.full_name)}')">Remove</button>
+          <button class="danger" data-mentee="${escapeHtml(mentee.full_name)}" data-mentor="${mentor ? escapeHtml(mentor.full_name) : ''}" onclick="finishMentee(${mentee.id}, this.dataset.mentee, this.dataset.mentor)">Finish</button>
         </div>
       </div>
     `;
@@ -781,6 +781,21 @@ async function resetPwd(userId, userName) {
     const data = await r.json();
     if (!r.ok) throw new Error(data.error || 'Reset failed');
     alert(`New temporary password for ${userName}:\n\n${data.tempPassword}\n\nShare it securely. They'll be asked to change it on next sign-in.`);
+  } catch (e) {
+    toast(e.message, true);
+  }
+}
+
+// ── Finish a mentee (frees their mentor for the next mentee) ───────
+async function finishMentee(userId, menteeName, mentorName) {
+  const freed = mentorName ? `${mentorName} can then be paired with a new mentee. ` : '';
+  if (!confirm(`Mark ${menteeName}'s mentoring as finished?\n\n${freed}${menteeName}'s reflections and history are kept for the admins.`)) return;
+  try {
+    const r = await fetch(`/api/director/users/${userId}`, { method: 'DELETE' });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Could not finish');
+    toast(`${menteeName}'s mentoring is marked finished.`);
+    await loadCenter();
   } catch (e) {
     toast(e.message, true);
   }

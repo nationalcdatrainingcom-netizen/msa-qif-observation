@@ -215,15 +215,21 @@ app.set('trust proxy', 1);
 //   STRIPE_WEBHOOK_SECRET  whsec_… — from the webhook endpoint pointed at
 //                          https://<site>/api/stripe/webhook
 // Until the key and price are set, the website shows "contact us" instead.
-const stripe = process.env.STRIPE_SECRET_KEY ? Stripe(process.env.STRIPE_SECRET_KEY) : null;
+// Values pasted into the host's settings often pick up stray spaces or quotes.
+const envValue = name => (process.env[name] || '').trim().replace(/^["']|["']$/g, '');
+const STRIPE_SECRET_KEY = envValue('STRIPE_SECRET_KEY');
+const STRIPE_PRICE_ID = envValue('STRIPE_PRICE_ID');
+const STRIPE_WEBHOOK_SECRET = envValue('STRIPE_WEBHOOK_SECRET');
+const stripe = STRIPE_SECRET_KEY ? Stripe(STRIPE_SECRET_KEY) : null;
+console.log(`Stripe: secret key ${STRIPE_SECRET_KEY ? 'set' : 'MISSING'}, price ID ${STRIPE_PRICE_ID ? 'set' : 'MISSING'}, webhook secret ${STRIPE_WEBHOOK_SECRET ? 'set' : 'MISSING'}`);
 
 // The webhook needs the raw request body to verify Stripe's signature, so it
 // is registered before the JSON body parser.
 app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
-  if (!stripe || !process.env.STRIPE_WEBHOOK_SECRET) return res.status(503).send('Stripe not configured');
+  if (!stripe || !STRIPE_WEBHOOK_SECRET) return res.status(503).send('Stripe not configured');
   let event;
   try {
-    event = stripe.webhooks.constructEvent(req.body, req.headers['stripe-signature'], process.env.STRIPE_WEBHOOK_SECRET);
+    event = stripe.webhooks.constructEvent(req.body, req.headers['stripe-signature'], STRIPE_WEBHOOK_SECRET);
   } catch (e) {
     console.error('Stripe webhook signature check failed:', e.message);
     return res.status(400).send('Bad signature');
@@ -1499,10 +1505,10 @@ app.post('/api/public/research-application', async (req, res) => {
 // price in the Stripe dashboard (and STRIPE_PRICE_ID) updates the website.
 let pricingCache = { at: 0, data: null };
 app.get('/api/public/pricing', async (req, res) => {
-  if (!stripe || !process.env.STRIPE_PRICE_ID) return res.json({ available: false });
+  if (!stripe || !STRIPE_PRICE_ID) return res.json({ available: false });
   if (pricingCache.data && Date.now() - pricingCache.at < 10 * 60 * 1000) return res.json(pricingCache.data);
   try {
-    const price = await stripe.prices.retrieve(process.env.STRIPE_PRICE_ID);
+    const price = await stripe.prices.retrieve(STRIPE_PRICE_ID);
     pricingCache = {
       at: Date.now(),
       data: {
@@ -1521,7 +1527,7 @@ app.get('/api/public/pricing', async (req, res) => {
 });
 
 app.post('/api/public/checkout', async (req, res) => {
-  if (!stripe || !process.env.STRIPE_PRICE_ID) return res.status(503).json({ error: 'Online checkout is not available yet.' });
+  if (!stripe || !STRIPE_PRICE_ID) return res.status(503).json({ error: 'Online checkout is not available yet.' });
   const b = req.body || {};
   const programName = cleanText(b.programName);
   const contactName = cleanText(b.contactName);
@@ -1532,7 +1538,7 @@ app.post('/api/public/checkout', async (req, res) => {
   const origin = process.env.PUBLIC_SITE_URL || `${req.protocol}://${req.get('host')}`;
   const checkout = await stripe.checkout.sessions.create({
     mode: 'subscription',
-    line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
+    line_items: [{ price: STRIPE_PRICE_ID, quantity: 1 }],
     customer_email: email,
     allow_promotion_codes: true,
     metadata: { programName, contactName },
@@ -1558,6 +1564,34 @@ app.patch('/api/admin/research-applications/:id', requireRole('admin'), async (r
   const result = await pool.query('UPDATE research_applications SET status=$1 WHERE id=$2 RETURNING id', [status, req.params.id]);
   if (result.rows.length === 0) return res.status(404).json({ error: 'Not found' });
   res.json({ success: true });
+});
+
+// Admin-only check of the Stripe setup: which settings are present (never
+// their values), whether the key is test or live, and what Stripe says about
+// the price. Open /api/admin/stripe-status while signed in as an admin.
+app.get('/api/admin/stripe-status', requireRole('admin'), async (req, res) => {
+  const mode = k => k.startsWith('sk_live_') ? 'live' : k.startsWith('sk_test_') ? 'test'
+    : k.startsWith('rk_live_') ? 'live (restricted key)' : k.startsWith('rk_test_') ? 'test (restricted key)' : 'unrecognized';
+  const out = {
+    secretKey: STRIPE_SECRET_KEY ? `set (${mode(STRIPE_SECRET_KEY)})` : 'MISSING: add STRIPE_SECRET_KEY',
+    priceId: !STRIPE_PRICE_ID ? 'MISSING: add STRIPE_PRICE_ID'
+      : STRIPE_PRICE_ID.startsWith('price_') ? `set (${STRIPE_PRICE_ID})`
+      : `WRONG: "${STRIPE_PRICE_ID.slice(0, 12)}..." should start with price_ (a prod_ ID is the product, not the price)`,
+    webhookSecret: !STRIPE_WEBHOOK_SECRET ? 'MISSING: add STRIPE_WEBHOOK_SECRET'
+      : STRIPE_WEBHOOK_SECRET.startsWith('whsec_') ? 'set' : 'WRONG: should start with whsec_',
+    webhookUrl: `${process.env.PUBLIC_SITE_URL || `${req.protocol}://${req.get('host')}`}/api/stripe/webhook`
+  };
+  if (stripe && STRIPE_PRICE_ID) {
+    try {
+      const price = await stripe.prices.retrieve(STRIPE_PRICE_ID);
+      out.price = price.recurring
+        ? `OK: ${(price.unit_amount / 100).toFixed(2)} ${price.currency.toUpperCase()} every ${price.recurring.interval_count > 1 ? price.recurring.interval_count + ' ' : ''}${price.recurring.interval}${price.active ? '' : ' (but this price is ARCHIVED; make it active)'}`
+        : 'WRONG: this price is one-time; create a Recurring price';
+    } catch (e) {
+      out.price = `Stripe error: ${e.message}`;
+    }
+  }
+  res.json(out);
 });
 
 app.get('/api/admin/subscriptions', requireRole('admin'), async (req, res) => {

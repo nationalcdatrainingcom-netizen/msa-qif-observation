@@ -183,6 +183,42 @@ async function initDB() {
       console.log(`Bootstrap admin created: ${bootstrapEmail} / ${bootstrapPassword}`);
     }
 
+    // ── Admin password reset (set on the host, used once) ─────────
+    // To recover an admin login, set ADMIN_RESET_EMAIL and
+    // ADMIN_RESET_PASSWORD on the host and redeploy. That admin's password
+    // becomes the temporary one and they must choose a new password at
+    // sign-in. Each email/password pair is applied only once (remembered
+    // in admin_password_resets), so leaving the settings in place does not
+    // undo a password changed later. Remove both settings afterwards.
+    const resetEmail = (process.env.ADMIN_RESET_EMAIL || '').trim().toLowerCase();
+    const resetPassword = (process.env.ADMIN_RESET_PASSWORD || '').trim();
+    if (resetEmail || resetPassword) {
+      await client.query(`
+        CREATE TABLE IF NOT EXISTS admin_password_resets (
+          fingerprint TEXT PRIMARY KEY,
+          applied_at TIMESTAMP DEFAULT NOW()
+        );
+      `);
+      const fingerprint = crypto.createHash('sha256').update(`${resetEmail}\n${resetPassword}`).digest('hex');
+      const admin = await client.query("SELECT id FROM users WHERE LOWER(email)=$1 AND role='admin'", [resetEmail]);
+      const used = await client.query('SELECT 1 FROM admin_password_resets WHERE fingerprint=$1', [fingerprint]);
+      if (!resetEmail || resetPassword.length < 8) {
+        console.log('Admin reset skipped: set ADMIN_RESET_EMAIL and an ADMIN_RESET_PASSWORD of at least 8 characters.');
+      } else if (admin.rows.length === 0) {
+        console.log(`Admin reset skipped: no admin account with email ${resetEmail}.`);
+      } else if (used.rows.length > 0) {
+        console.log(`Admin reset for ${resetEmail} was already applied; remove ADMIN_RESET_EMAIL and ADMIN_RESET_PASSWORD.`);
+      } else {
+        const hash = await bcrypt.hash(resetPassword, 10);
+        await client.query(
+          'UPDATE users SET password_hash=$1, must_change_password=TRUE, active=TRUE WHERE id=$2',
+          [hash, admin.rows[0].id]
+        );
+        await client.query('INSERT INTO admin_password_resets (fingerprint) VALUES ($1)', [fingerprint]);
+        console.log(`Admin password reset applied for ${resetEmail}. Sign in with the temporary password, then remove ADMIN_RESET_EMAIL and ADMIN_RESET_PASSWORD.`);
+      }
+    }
+
     // ── One-time: ensure Rebecca's admin account exists ───────────
     // This block runs every startup but only inserts if the row is missing.
     // Once Rebecca has signed in and changed her password, this becomes a no-op.

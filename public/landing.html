@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentor Success Academy · Mentoring for Early Childhood Programs</title>
+<meta name="description" content="Mentor Success Academy gives early childhood programs a 12-week system for teacher-to-teacher mentoring: mentor training, weekly reflections, classroom observation and certification.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep: #2c4a35;
+    --green-mid: #4a7c59;
+    --gold: #c9953a;
+    --gold-soft: #e0b870;
+    --cream: #faf8f3;
+    --cream-dark: #f0ebe0;
+    --line: #ddd8cc;
+    --line-soft: #eee8dc;
+    --text: #2c2c2c;
+    --text-soft: #5c5c5c;
+    --text-muted: #8a8a8a;
+    --error: #b54545;
+    --error-bg: #fdf3f3;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  a { color: var(--green-mid); }
+  h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--green-deep); line-height: 1.2; }
+  h2 { font-size: clamp(28px, 4vw, 38px); margin-bottom: 14px; }
+  h3 { font-size: 21px; margin-bottom: 8px; }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 88px 0; }
+  .eyebrow {
+    display: inline-block;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .lead { font-size: 18px; color: var(--text-soft); max-width: 680px; }
+  .center { text-align: center; }
+  .center .lead { margin: 0 auto; }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-block;
+    padding: 14px 26px;
+    border-radius: 12px;
+    font: 600 15.5px 'DM Sans', sans-serif;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--green-deep); color: #fff; box-shadow: 0 6px 18px rgba(44,74,53,.22); }
+  .btn-primary:hover { background: #24402d; }
+  .btn-gold { background: var(--gold); color: #fff; box-shadow: 0 6px 18px rgba(201,149,58,.28); }
+  .btn-gold:hover { background: #b7862f; }
+  .btn-outline { background: transparent; color: var(--green-deep); border: 1.5px solid var(--green-deep); }
+  .btn[disabled] { opacity: .6; cursor: wait; transform: none; }
+
+  /* ── Nav ── */
+  header.nav {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(250,248,243,.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 16px; }
+  .nav-logo img { height: 42px; display: block; }
+  .nav-links { display: flex; align-items: center; gap: 26px; }
+  .nav-links a { text-decoration: none; color: var(--text); font-size: 14.5px; font-weight: 500; }
+  .nav-links a:hover { color: var(--green-mid); }
+  .nav-links .btn { padding: 10px 18px; font-size: 14px; }
+  .nav-toggle { display: none; background: none; border: none; font-size: 26px; color: var(--green-deep); cursor: pointer; }
+
+  /* ── Banner ── */
+  .banner {
+    display: none;
+    background: var(--green-mid); color: #fff; text-align: center;
+    padding: 14px 24px; font-weight: 500;
+  }
+  .banner.show { display: block; }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 96px 0 104px;
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(201,149,58,.10) 0%, transparent 42%),
+      radial-gradient(circle at 88% 82%, rgba(74,124,89,.12) 0%, transparent 46%);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; }
+  .hero h1 { font-size: clamp(36px, 5.4vw, 58px); margin-bottom: 20px; }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero .lead { margin-bottom: 32px; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+  .hero-card {
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(44,74,53,.08);
+  }
+  .hero-card h3 { font-size: 19px; margin-bottom: 18px; }
+  .week-row { display: flex; gap: 14px; padding: 13px 0; border-top: 1px solid var(--line-soft); }
+  .week-row:first-of-type { border-top: none; padding-top: 0; }
+  .week-tag {
+    flex: 0 0 86px;
+    font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+    color: var(--gold);
+    padding-top: 2px;
+  }
+  .week-row strong { display: block; color: var(--green-deep); font-size: 15.5px; }
+  .week-row span { font-size: 13.5px; color: var(--text-soft); }
+
+  /* ── Features ── */
+  .alt { background: #fff; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 48px; }
+  .feature {
+    background: var(--cream);
+    border: 1px solid var(--line-soft);
+    border-radius: 16px;
+    padding: 26px;
+  }
+  .feature .icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    display: grid; place-items: center;
+    background: rgba(74,124,89,.12); color: var(--green-deep);
+    font-size: 20px; margin-bottom: 14px;
+  }
+  .feature p { color: var(--text-soft); font-size: 15px; }
+
+  /* ── Roles ── */
+  .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 44px; }
+  .role { border-left: 3px solid var(--gold); padding: 4px 0 4px 20px; }
+  .role p { color: var(--text-soft); font-size: 15px; }
+
+  /* ── Team ── */
+  .team { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 44px; }
+  .person {
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 20px;
+    padding: 32px;
+    display: flex; gap: 22px; align-items: flex-start;
+  }
+  .avatar {
+    flex: 0 0 76px; height: 76px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+    color: #fff; display: grid; place-items: center;
+    font: 600 26px 'Playfair Display', serif;
+    border: 3px solid var(--gold-soft);
+    overflow: hidden;
+  }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .person .role-title { font-size: 13.5px; color: var(--gold); font-weight: 600; margin-bottom: 10px; }
+  .person p { color: var(--text-soft); font-size: 15px; }
+
+  /* ── Two paths ── */
+  .paths { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; margin-top: 44px; }
+  .path {
+    border-radius: 20px;
+    padding: 36px;
+    display: flex; flex-direction: column;
+  }
+  .path.research { background: linear-gradient(140deg, var(--green-deep) 0%, var(--green-mid) 100%); color: #fff; }
+  .path.research h3, .path.research .eyebrow { color: #fff; }
+  .path.research .eyebrow { color: var(--gold-soft); }
+  .path.paid { background: #fff; border: 1.5px solid var(--line); }
+  .path h3 { font-size: 26px; }
+  .path ul { list-style: none; margin: 18px 0 28px; flex: 1; }
+  .path li { padding: 6px 0 6px 28px; position: relative; font-size: 15.5px; }
+  .path li::before { content: '✓'; position: absolute; left: 0; font-weight: 700; color: var(--gold); }
+  .path.research li::before { color: var(--gold-soft); }
+  .path .btn { align-self: flex-start; }
+  .price { font: 700 34px 'Playfair Display', serif; color: var(--green-deep); margin-top: 6px; }
+  .price small { font: 400 15px 'DM Sans', sans-serif; color: var(--text-soft); }
+
+  /* ── Research trial ── */
+  .research-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; margin-top: 44px; }
+  .criteria { list-style: none; margin-top: 10px; }
+  .criteria li {
+    background: #fff; border: 1px solid var(--line-soft); border-radius: 12px;
+    padding: 14px 16px 14px 48px; margin-bottom: 10px; position: relative; font-size: 15px;
+  }
+  .criteria li::before {
+    content: attr(data-n);
+    position: absolute; left: 14px; top: 13px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--green-deep); color: #fff;
+    font-size: 12.5px; font-weight: 600;
+    display: grid; place-items: center;
+  }
+  .note {
+    margin-top: 22px; padding: 18px 20px;
+    background: rgba(201,149,58,.10); border-radius: 12px;
+    font-size: 14.5px; color: var(--text-soft);
+  }
+
+  /* ── Forms ── */
+  .form-card {
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 10px 40px rgba(44,74,53,.07);
+  }
+  .form-card h3 { margin-bottom: 4px; }
+  .form-card .sub { font-size: 14.5px; color: var(--text-soft); margin-bottom: 22px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    font: 15px 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--green-mid); background: #fff; }
+  .field textarea { min-height: 80px; resize: vertical; }
+  .checks { margin: 8px 0 20px; border-top: 1px solid var(--line-soft); padding-top: 16px; }
+  .checks-title { font-size: 13.5px; font-weight: 600; margin-bottom: 10px; }
+  .check { display: flex; gap: 12px; align-items: flex-start; padding: 7px 0; font-size: 14.5px; cursor: pointer; }
+  .check input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--green-deep); flex: 0 0 18px; }
+  .hp { position: absolute; left: -9999px; }
+  .msg { display: none; margin-top: 14px; padding: 12px 14px; border-radius: 10px; font-size: 14.5px; }
+  .msg.error { display: block; background: var(--error-bg); color: var(--error); }
+  .msg.ok { display: block; background: rgba(74,124,89,.12); color: var(--green-deep); }
+  .success-panel { display: none; text-align: center; padding: 26px 8px; }
+  .success-panel .big { font-size: 44px; color: var(--green-mid); }
+
+  /* ── FAQ ── */
+  .faq { max-width: 800px; margin: 40px auto 0; }
+  details {
+    background: #fff; border: 1px solid var(--line-soft); border-radius: 14px;
+    padding: 18px 22px; margin-bottom: 12px;
+  }
+  summary { cursor: pointer; font-weight: 600; color: var(--green-deep); list-style: none; position: relative; padding-right: 28px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; position: absolute; right: 0; top: -2px; font-size: 22px; color: var(--gold); }
+  details[open] summary::after { content: '–'; }
+  details p { margin-top: 10px; color: var(--text-soft); font-size: 15px; }
+
+  /* ── Footer ── */
+  footer { background: var(--green-deep); color: rgba(255,255,255,.8); padding: 44px 0; font-size: 14px; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+  footer a { color: var(--gold-soft); text-decoration: none; }
+  footer .brand { font: 600 19px 'Playfair Display', serif; color: #fff; }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .hero-grid, .research-grid, .paths, .team { grid-template-columns: 1fr; }
+    .feature-grid, .roles { grid-template-columns: 1fr 1fr; }
+    section { padding: 64px 0; }
+    .hero { padding: 56px 0 72px; }
+  }
+  @media (max-width: 760px) {
+    .nav-toggle { display: block; }
+    .nav-links {
+      display: none;
+      position: absolute; top: 72px; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: var(--cream); border-bottom: 1px solid var(--line);
+      padding: 8px 24px 18px;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+    .nav-links .btn { margin-top: 12px; text-align: center; border-bottom: none; }
+  }
+  @media (max-width: 600px) {
+    .container { padding: 0 16px; }
+    .feature-grid, .roles, .row { grid-template-columns: 1fr; }
+    .person { flex-direction: column; padding: 26px; }
+    .path, .form-card { padding: 26px 20px; }
+    .nav-logo img { height: 34px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="banner" id="subscribed-banner">
+  Thank you for subscribing! We'll be in touch by email to set up your program's accounts.
+</div>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="nav-logo"><img src="/img/msa-logo-light.png" alt="Mentor Success Academy"></a>
+    <button class="nav-toggle" aria-label="Open menu" onclick="document.getElementById('nav-links').classList.toggle('open')">☰</button>
+    <nav class="nav-links" id="nav-links">
+      <a href="#program">The Program</a>
+      <a href="#team">About Us</a>
+      <a href="#research">Free Research Trial</a>
+      <a href="#pricing">Subscribe</a>
+      <a href="/login" class="btn btn-outline">Sign in</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Mentoring for early childhood programs</span>
+        <h1>Grow great teachers <em>from within.</em></h1>
+        <p class="lead">Mentor Success Academy pairs your experienced teachers with the teachers they support and gives them a 12-week structure for mentoring, observation and reflection, so strong classroom practice spreads across your program.</p>
+        <div class="hero-ctas">
+          <a href="#research" class="btn btn-gold">Join the free research trial</a>
+          <a href="#pricing" class="btn btn-primary">Subscribe</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>12 weeks, three focus areas</h3>
+        <div class="week-row">
+          <div class="week-tag">Weeks 1–4</div>
+          <div><strong>Emotional Climate &amp; Responsiveness</strong><span>Warmth, responsiveness, the child's perspective, emotional safety</span></div>
+        </div>
+        <div class="week-row">
+          <div class="week-tag">Weeks 5–8</div>
+          <div><strong>Learning Environment &amp; Organization</strong><span>Classroom guidance, learning time, learning formats, environment design</span></div>
+        </div>
+        <div class="week-row">
+          <div class="week-tag">Weeks 9–12</div>
+          <div><strong>Instructional Depth &amp; Language</strong><span>Concept development, feedback, language modeling, higher-order questions</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Program ── -->
+  <section class="alt" id="program">
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">The Program</span>
+        <h2>Everything a mentoring program needs, in one place</h2>
+        <p class="lead">Most programs know mentoring works. What's hard is keeping it going week after week. MSA gives mentors, mentees and directors a shared plan and a simple way to stay on track.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature">
+          <div class="icon">✦</div>
+          <h3>Mentor training</h3>
+          <p>Twelve weekly modules with real classroom scenarios teach mentors how to coach teachers with different personalities and working styles.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">✎</div>
+          <h3>Weekly reflections</h3>
+          <p>Mentors and mentees each reflect on the week's focus, so every meeting starts from what's actually happening in the classroom.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">◎</div>
+          <h3>Classroom observations</h3>
+          <p>The Quality Interaction Framework gives mentors a clear, consistent way to observe teacher–child interactions and talk about them.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">▤</div>
+          <h3>Director dashboard</h3>
+          <p>Directors see each pair's progress at a glance and can step in early when a pair falls behind.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">★</div>
+          <h3>Mentor certification</h3>
+          <p>Mentors who finish the training can earn the annual MSA Certified Mentor credential, with a printable certificate.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">▶</div>
+          <h3>Coaching call library</h3>
+          <p>Recorded coaching calls and resources stay available, so new mentors can catch up and experienced ones can revisit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Roles ── -->
+  <section>
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">Built for your whole team</span>
+        <h2>Directors, mentors and mentees each get what they need</h2>
+      </div>
+      <div class="roles">
+        <div class="role">
+          <h3>Directors</h3>
+          <p>Set up mentoring pairs, protect weekly meeting time and follow progress without chasing paperwork.</p>
+        </div>
+        <div class="role">
+          <h3>Mentors</h3>
+          <p>Get trained, observe with a shared framework and guide weekly conversations that build real skills.</p>
+        </div>
+        <div class="role">
+          <h3>Mentees</h3>
+          <p>Get steady, personal support from a colleague, and see their own growth over the 12 weeks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Team ── -->
+  <section class="alt" id="team">
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">About Us</span>
+        <h2>Created by early childhood leaders</h2>
+        <p class="lead">Mentor Success Academy was built by two people who have spent their careers supporting teachers and the children in their care.</p>
+      </div>
+      <div class="team">
+        <!-- To add a photo: put it in public/img/ and replace the initials with <img src="/img/mary.jpg" alt="Mary Wardlaw"> -->
+        <div class="person">
+          <div class="avatar">MW</div>
+          <div>
+            <h3>Mary Wardlaw</h3>
+            <div class="role-title">Co-founder</div>
+            <p>Mary leads The Children's Center, Inc., an early childhood program in southwest Michigan. Her doctoral research looks at how mentoring affects teaching quality in early childhood classrooms, and MSA's free research trial is part of that work.</p>
+          </div>
+        </div>
+        <div class="person">
+          <div class="avatar">RM</div>
+          <div>
+            <h3>Rebecca Munlyn</h3>
+            <div class="role-title">Co-founder</div>
+            <p>Rebecca is the founder of Inspired Growth LLC and the author of the Inspired Growth Mentor Training Curriculum, the 12-week reflection guide at the heart of MSA's weekly mentoring conversations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Two ways to join ── -->
+  <section>
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">Get started</span>
+        <h2>Two ways to bring MSA to your program</h2>
+      </div>
+      <div class="paths">
+        <div class="path research">
+          <span class="eyebrow">Free · 12 weeks</span>
+          <h3>3-month research trial</h3>
+          <p>Use MSA free for 12 weeks and help build the evidence for mentoring in early childhood education.</p>
+          <ul>
+            <li>Full access for one classroom's mentoring pair</li>
+            <li>Mentor training and certification included</li>
+            <li>For licensed, privately owned US programs</li>
+            <li>Two classrooms take part in short surveys</li>
+          </ul>
+          <a href="#research" class="btn btn-gold">See if you qualify</a>
+        </div>
+        <div class="path paid" id="pricing">
+          <span class="eyebrow">Subscription</span>
+          <h3>Full program access</h3>
+          <div class="price" id="price-display" hidden></div>
+          <ul>
+            <li>Every MSA tool for your mentors, mentees and director</li>
+            <li>Start any time, no research requirements</li>
+            <li>Mentor training and annual certification</li>
+            <li>Manage or cancel your subscription online</li>
+          </ul>
+          <a href="#subscribe" class="btn btn-primary" id="subscribe-cta">Subscribe now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Research trial ── -->
+  <section class="alt" id="research">
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">Free Research Trial</span>
+        <h2>Join the upcoming 3-month research trial</h2>
+        <p class="lead">This trial is part of Mary Wardlaw's doctoral research on the impact of mentoring in early childhood programs. Participating programs use MSA free for 12 weeks. In return, the data gathered, including surveys before and after the program, is used in the research.</p>
+      </div>
+      <div class="research-grid">
+        <div>
+          <h3>Who can take part</h3>
+          <ul class="criteria">
+            <li data-n="1">A <strong>licensed</strong> early childhood program in the <strong>United States</strong>.</li>
+            <li data-n="2">A <strong>privately owned</strong> program.</li>
+            <li data-n="3">At least <strong>2 classrooms</strong> serving children <strong>2½ years and older</strong>.</li>
+            <li data-n="4"><strong>One classroom uses MSA and one does not</strong>, so the research can compare the two.</li>
+            <li data-n="5">Staff in <strong>both classrooms</strong> complete the surveys before and after the program.</li>
+            <li data-n="6">The director agrees to provide <strong>time every week for the full 12 weeks</strong> for the mentor and mentee to meet.</li>
+          </ul>
+          <div class="note">
+            Taking part is voluntary. Results are reported in summary form, without naming individual programs or staff. Accepted programs will receive full research details and consent forms before the trial begins.
+          </div>
+        </div>
+
+        <div class="form-card">
+          <form id="research-form" novalidate>
+            <h3>Apply for the research trial</h3>
+            <p class="sub">The program director should complete this form. We'll follow up by email.</p>
+            <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="field">
+              <label for="r-program">Program name</label>
+              <input id="r-program" name="programName" required maxlength="200">
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="r-director">Director name</label>
+                <input id="r-director" name="directorName" required maxlength="200" autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="r-email">Email</label>
+                <input id="r-email" name="email" type="email" required maxlength="200" autocomplete="email">
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="r-phone">Phone (optional)</label>
+                <input id="r-phone" name="phone" type="tel" maxlength="40" autocomplete="tel">
+              </div>
+              <div class="field">
+                <label for="r-license">State license number</label>
+                <input id="r-license" name="licenseNumber" required maxlength="80">
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="r-city">City</label>
+                <input id="r-city" name="city" maxlength="100">
+              </div>
+              <div class="field">
+                <label for="r-state">State</label>
+                <select id="r-state" name="state" required><option value="">Select…</option></select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="r-classrooms">Number of classrooms serving children 2½ and older</label>
+              <input id="r-classrooms" name="preschoolClassrooms" type="number" min="1" max="99" required>
+            </div>
+            <div class="field">
+              <label for="r-notes">Anything else we should know? (optional)</label>
+              <textarea id="r-notes" name="notes" maxlength="2000"></textarea>
+            </div>
+
+            <div class="checks">
+              <div class="checks-title">Please confirm each of the following:</div>
+              <label class="check"><input type="checkbox" data-agree="licensedUS"> Our program is licensed and located in the United States.</label>
+              <label class="check"><input type="checkbox" data-agree="privatelyOwned"> Our program is privately owned.</label>
+              <label class="check"><input type="checkbox" data-agree="twoPreschoolClassrooms"> We have at least 2 classrooms serving children 2½ years and older.</label>
+              <label class="check"><input type="checkbox" data-agree="comparisonDesign"> I understand one classroom will use MSA and one will not.</label>
+              <label class="check"><input type="checkbox" data-agree="surveysBothClassrooms"> Staff in both classrooms will complete the surveys before and after the program.</label>
+              <label class="check"><input type="checkbox" data-agree="twelveWeekCommitment"> As director, I will provide time each week for the full 12 weeks for the mentor and mentee to meet.</label>
+              <label class="check"><input type="checkbox" data-agree="researchConsent"> I agree that data gathered during the trial, including survey responses, may be used in Mary Wardlaw's doctoral research.</label>
+            </div>
+
+            <button type="submit" class="btn btn-gold" style="width:100%">Submit application</button>
+            <div class="msg" id="research-msg"></div>
+          </form>
+          <div class="success-panel" id="research-success">
+            <div class="big">✓</div>
+            <h3>Application received</h3>
+            <p class="sub">Thank you! We'll review your application and email you about next steps.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Subscribe ── -->
+  <section id="subscribe">
+    <div class="container" style="max-width:640px">
+      <div class="form-card">
+        <form id="subscribe-form" novalidate>
+          <h3>Subscribe to Mentor Success Academy</h3>
+          <p class="sub" id="subscribe-sub">You'll be taken to our secure payment page, powered by Stripe, to finish.</p>
+          <div class="field">
+            <label for="s-program">Program name</label>
+            <input id="s-program" name="programName" required maxlength="200">
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="s-name">Your name</label>
+              <input id="s-name" name="contactName" required maxlength="200" autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="s-email">Email</label>
+              <input id="s-email" name="email" type="email" required maxlength="200" autocomplete="email">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%" id="subscribe-btn">Continue to payment</button>
+          <div class="msg" id="subscribe-msg"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section class="alt">
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">Questions</span>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>How much time does the program take each week?</summary>
+          <p>Each mentoring pair meets once a week, and mentors and mentees each complete a short reflection. Directors set aside that weekly meeting time for the 12 weeks.</p>
+        </details>
+        <details>
+          <summary>Why does one classroom not use MSA in the research trial?</summary>
+          <p>Comparing a classroom that uses MSA with one that doesn't lets the research measure what difference mentoring actually makes. Both classrooms complete the same surveys.</p>
+        </details>
+        <details>
+          <summary>What happens after the 3-month trial?</summary>
+          <p>When the trial ends, programs can continue with a paid subscription. There's no obligation to continue.</p>
+        </details>
+        <details>
+          <summary>Can we subscribe without joining the research?</summary>
+          <p>Yes. A subscription gives your program full access with no research requirements, and you can start at any time.</p>
+        </details>
+        <details>
+          <summary>Our program doesn't meet the trial criteria. Can we still use MSA?</summary>
+          <p>Yes. The criteria only apply to the free research trial. Any program can subscribe.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="brand">Mentor Success Academy</div>
+      <div>&copy; <span id="year"></span> Mentor Success Academy. All rights reserved.</div>
+    </div>
+    <div>
+      <a href="mailto:mary@childrenscenterinc.com">Contact us</a> &nbsp;·&nbsp; <a href="/login">Sign in</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Close the mobile menu after picking a link
+document.querySelectorAll('#nav-links a').forEach(a =>
+  a.addEventListener('click', () => document.getElementById('nav-links').classList.remove('open')));
+
+if (new URLSearchParams(location.search).get('subscribed') === '1') {
+  document.getElementById('subscribed-banner').classList.add('show');
+}
+
+const STATES = ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+const stateSel = document.getElementById('r-state');
+STATES.forEach(s => stateSel.insertAdjacentHTML('beforeend', `<option value="${s}">${s}</option>`));
+
+function showMsg(el, text, kind) {
+  el.textContent = text;
+  el.className = 'msg ' + kind;
+}
+
+// ── Price (comes from Stripe) ──
+fetch('/api/public/pricing').then(r => r.json()).then(p => {
+  if (!p.available) {
+    document.getElementById('subscribe-cta').textContent = 'Contact us about subscribing';
+    document.getElementById('subscribe-cta').href = 'mailto:mary@childrenscenterinc.com?subject=MSA%20subscription';
+    document.getElementById('subscribe').hidden = true;
+    return;
+  }
+  const amount = new Intl.NumberFormat('en-US', { style: 'currency', currency: p.currency.toUpperCase() })
+    .format(p.amount / 100).replace(/\.00$/, '');
+  const per = p.interval ? (p.intervalCount > 1 ? ` every ${p.intervalCount} ${p.interval}s` : ` / ${p.interval}`) : '';
+  const el = document.getElementById('price-display');
+  el.innerHTML = `${amount}<small>${per}</small>`;
+  el.hidden = false;
+}).catch(() => {});
+
+// ── Research application ──
+document.getElementById('research-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const form = e.target;
+  const msg = document.getElementById('research-msg');
+  const data = Object.fromEntries(new FormData(form));
+  data.agreements = {};
+  form.querySelectorAll('[data-agree]').forEach(cb => { data.agreements[cb.dataset.agree] = cb.checked; });
+
+  if (!data.programName || !data.directorName || !data.email || !data.licenseNumber || !data.state || !data.preschoolClassrooms) {
+    return showMsg(msg, 'Please fill in all the required fields.', 'error');
+  }
+  if (parseInt(data.preschoolClassrooms, 10) < 2) {
+    return showMsg(msg, 'The research trial needs at least 2 classrooms serving children 2½ and older. You can still subscribe to MSA.', 'error');
+  }
+  if (Object.values(data.agreements).some(v => !v)) {
+    return showMsg(msg, 'Please confirm every item in the list to apply.', 'error');
+  }
+
+  const btn = form.querySelector('button[type=submit]');
+  btn.disabled = true;
+  try {
+    const r = await fetch('/api/public/research-application', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+    });
+    const out = await r.json();
+    if (!r.ok) throw new Error(out.error || 'Something went wrong.');
+    form.style.display = 'none';
+    document.getElementById('research-success').style.display = 'block';
+  } catch (err) {
+    showMsg(msg, err.message || 'Something went wrong. Please try again.', 'error');
+    btn.disabled = false;
+  }
+});
+
+// ── Subscribe ──
+document.getElementById('subscribe-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const form = e.target;
+  const msg = document.getElementById('subscribe-msg');
+  const data = Object.fromEntries(new FormData(form));
+  if (!data.programName || !data.contactName || !data.email) {
+    return showMsg(msg, 'Please fill in all fields.', 'error');
+  }
+  const btn = document.getElementById('subscribe-btn');
+  btn.disabled = true;
+  try {
+    const r = await fetch('/api/public/checkout', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+    });
+    const out = await r.json();
+    if (!r.ok || !out.url) throw new Error(out.error || 'Something went wrong.');
+    location.href = out.url;
+  } catch (err) {
+    showMsg(msg, err.message || 'Something went wrong. Please try again.', 'error');
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>

@@ -1,10 +1,12 @@
 const express = require('express');
 const { Pool } = require('pg');
 const session = require('express-session');
+const PgSession = require('connect-pg-simple')(session);
 const bcrypt = require('bcrypt');
 const path = require('path');
 const crypto = require('crypto');
 const certification = require('./certification');
+const Stripe = require('stripe');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -123,6 +125,38 @@ async function initDB() {
       );
     `);
 
+    // ── Public website: research trial applications + paid subscribers ──
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS research_applications (
+        id SERIAL PRIMARY KEY,
+        program_name TEXT NOT NULL,
+        director_name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        phone TEXT,
+        city TEXT,
+        state TEXT,
+        license_number TEXT,
+        preschool_classrooms INTEGER NOT NULL,
+        notes TEXT,
+        agreements JSONB NOT NULL,
+        status TEXT NOT NULL DEFAULT 'new' CHECK (status IN ('new','accepted','waitlist','declined')),
+        created_at TIMESTAMP DEFAULT NOW()
+      );
+
+      CREATE TABLE IF NOT EXISTS subscriptions (
+        id SERIAL PRIMARY KEY,
+        checkout_session_id TEXT UNIQUE NOT NULL,
+        program_name TEXT NOT NULL,
+        contact_name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        stripe_customer_id TEXT,
+        stripe_subscription_id TEXT UNIQUE,
+        status TEXT NOT NULL DEFAULT 'pending',
+        created_at TIMESTAMP DEFAULT NOW(),
+        updated_at TIMESTAMP DEFAULT NOW()
+      );
+    `);
+
     // Clean up any uploads that were interrupted by a restart
     await client.query(`DELETE FROM coaching_videos WHERE status='uploading' AND created_at < NOW() - INTERVAL '1 day'`);
 
@@ -174,11 +208,60 @@ async function initDB() {
 // Trust Render's proxy so secure cookies + correct protocol detection work
 app.set('trust proxy', 1);
 
+// ── Stripe ────────────────────────────────────────────────────────
+// Paid subscriptions go through Stripe Checkout. Configure on the host:
+//   STRIPE_SECRET_KEY      sk_live_… (or sk_test_… while testing)
+//   STRIPE_PRICE_ID        price_… — the recurring price in the Stripe dashboard
+//   STRIPE_WEBHOOK_SECRET  whsec_… — from the webhook endpoint pointed at
+//                          https://<site>/api/stripe/webhook
+// Until the key and price are set, the website shows "contact us" instead.
+const stripe = process.env.STRIPE_SECRET_KEY ? Stripe(process.env.STRIPE_SECRET_KEY) : null;
+
+// The webhook needs the raw request body to verify Stripe's signature, so it
+// is registered before the JSON body parser.
+app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  if (!stripe || !process.env.STRIPE_WEBHOOK_SECRET) return res.status(503).send('Stripe not configured');
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(req.body, req.headers['stripe-signature'], process.env.STRIPE_WEBHOOK_SECRET);
+  } catch (e) {
+    console.error('Stripe webhook signature check failed:', e.message);
+    return res.status(400).send('Bad signature');
+  }
+  const obj = event.data.object;
+  if (event.type === 'checkout.session.completed') {
+    await pool.query(
+      `UPDATE subscriptions SET status='active', stripe_customer_id=$1, stripe_subscription_id=$2, updated_at=NOW()
+        WHERE checkout_session_id=$3`,
+      [obj.customer, obj.subscription, obj.id]
+    );
+  } else if (event.type === 'customer.subscription.updated' || event.type === 'customer.subscription.deleted') {
+    await pool.query(
+      'UPDATE subscriptions SET status=$1, updated_at=NOW() WHERE stripe_subscription_id=$2',
+      [obj.status, obj.id]
+    );
+  }
+  res.json({ received: true });
+});
+
+// ── Public landing page ───────────────────────────────────────────
+// mentorsuccessacademy.com shows the marketing landing page at "/"; the app's
+// own address keeps showing the sign-in page there. The landing page is also
+// reachable on any host at /welcome, and sign-in at /login.
+const LANDING_HOSTS = (process.env.LANDING_HOSTS || 'mentorsuccessacademy.com,www.mentorsuccessacademy.com')
+  .split(',').map(h => h.trim().toLowerCase()).filter(Boolean);
+const landingPage = path.join(__dirname, 'public', 'landing.html');
+app.get('/', (req, res, next) => LANDING_HOSTS.includes(req.hostname.toLowerCase()) ? res.sendFile(landingPage) : next());
+app.get('/welcome', (req, res) => res.sendFile(landingPage));
+app.get('/login', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
+
 // ── Middleware ────────────────────────────────────────────────────
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
+  // Sessions live in Postgres so logins survive restarts and deploys.
+  store: new PgSession({ pool, tableName: 'user_sessions', createTableIfMissing: true }),
   secret: process.env.SESSION_SECRET || 'msa-platform-secret-2026',
   resave: false,
   saveUninitialized: false,
@@ -1327,6 +1410,125 @@ app.delete('/api/resources/:id', async (req, res) => {
   const result = await pool.query('DELETE FROM mentee_resources WHERE id=$1 RETURNING id', [req.params.id]);
   if (result.rows.length === 0) return res.status(404).json({ error: 'Not found' });
   res.json({ success: true });
+});
+
+// ── PUBLIC WEBSITE ────────────────────────────────────────────────
+function cleanText(v, max = 200) {
+  return typeof v === 'string' ? v.trim().slice(0, max) : '';
+}
+const isEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+// Every box the director must tick to apply for the free research trial
+const RESEARCH_AGREEMENTS = [
+  'licensedUS', 'privatelyOwned', 'twoPreschoolClassrooms',
+  'comparisonDesign', 'surveysBothClassrooms', 'twelveWeekCommitment', 'researchConsent'
+];
+
+app.post('/api/public/research-application', async (req, res) => {
+  const b = req.body || {};
+  if (b.website) return res.json({ success: true }); // honeypot field — bots fill it in
+  const app_ = {
+    programName: cleanText(b.programName),
+    directorName: cleanText(b.directorName),
+    email: cleanText(b.email).toLowerCase(),
+    phone: cleanText(b.phone, 40),
+    city: cleanText(b.city, 100),
+    state: cleanText(b.state, 40),
+    licenseNumber: cleanText(b.licenseNumber, 80),
+    preschoolClassrooms: parseInt(b.preschoolClassrooms, 10),
+    notes: cleanText(b.notes, 2000)
+  };
+  if (!app_.programName || !app_.directorName || !isEmail(app_.email) || !app_.state || !app_.licenseNumber) {
+    return res.status(400).json({ error: 'Please fill in the program name, director name, a valid email, state and license number.' });
+  }
+  if (!(app_.preschoolClassrooms >= 2)) {
+    return res.status(400).json({ error: 'The research trial needs at least 2 classrooms serving children 2½ and older.' });
+  }
+  const agreements = {};
+  for (const key of RESEARCH_AGREEMENTS) {
+    if (!(b.agreements && b.agreements[key] === true)) {
+      return res.status(400).json({ error: 'Every eligibility and commitment box must be checked to apply.' });
+    }
+    agreements[key] = true;
+  }
+  await pool.query(
+    `INSERT INTO research_applications
+       (program_name, director_name, email, phone, city, state, license_number, preschool_classrooms, notes, agreements)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
+    [app_.programName, app_.directorName, app_.email, app_.phone, app_.city, app_.state,
+     app_.licenseNumber, app_.preschoolClassrooms, app_.notes, JSON.stringify(agreements)]
+  );
+  res.json({ success: true });
+});
+
+// Price shown on the landing page comes straight from Stripe, so changing the
+// price in the Stripe dashboard (and STRIPE_PRICE_ID) updates the website.
+let pricingCache = { at: 0, data: null };
+app.get('/api/public/pricing', async (req, res) => {
+  if (!stripe || !process.env.STRIPE_PRICE_ID) return res.json({ available: false });
+  if (pricingCache.data && Date.now() - pricingCache.at < 10 * 60 * 1000) return res.json(pricingCache.data);
+  try {
+    const price = await stripe.prices.retrieve(process.env.STRIPE_PRICE_ID);
+    pricingCache = {
+      at: Date.now(),
+      data: {
+        available: true,
+        amount: price.unit_amount,
+        currency: price.currency,
+        interval: price.recurring ? price.recurring.interval : null,
+        intervalCount: price.recurring ? price.recurring.interval_count : null
+      }
+    };
+    res.json(pricingCache.data);
+  } catch (e) {
+    console.error('Stripe price lookup failed:', e.message);
+    res.json({ available: false });
+  }
+});
+
+app.post('/api/public/checkout', async (req, res) => {
+  if (!stripe || !process.env.STRIPE_PRICE_ID) return res.status(503).json({ error: 'Online checkout is not available yet.' });
+  const b = req.body || {};
+  const programName = cleanText(b.programName);
+  const contactName = cleanText(b.contactName);
+  const email = cleanText(b.email).toLowerCase();
+  if (!programName || !contactName || !isEmail(email)) {
+    return res.status(400).json({ error: 'Please enter your program name, your name and a valid email.' });
+  }
+  const origin = process.env.PUBLIC_SITE_URL || `${req.protocol}://${req.get('host')}`;
+  const checkout = await stripe.checkout.sessions.create({
+    mode: 'subscription',
+    line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
+    customer_email: email,
+    allow_promotion_codes: true,
+    metadata: { programName, contactName },
+    subscription_data: { metadata: { programName, contactName } },
+    success_url: `${origin}/welcome?subscribed=1`,
+    cancel_url: `${origin}/welcome#pricing`
+  });
+  await pool.query(
+    'INSERT INTO subscriptions (checkout_session_id, program_name, contact_name, email) VALUES ($1,$2,$3,$4)',
+    [checkout.id, programName, contactName, email]
+  );
+  res.json({ url: checkout.url });
+});
+
+app.get('/api/admin/research-applications', requireRole('admin'), async (req, res) => {
+  const result = await pool.query('SELECT * FROM research_applications ORDER BY created_at DESC');
+  res.json(result.rows);
+});
+
+app.patch('/api/admin/research-applications/:id', requireRole('admin'), async (req, res) => {
+  const status = req.body && req.body.status;
+  if (!['new', 'accepted', 'waitlist', 'declined'].includes(status)) return res.status(400).json({ error: 'Bad status' });
+  const result = await pool.query('UPDATE research_applications SET status=$1 WHERE id=$2 RETURNING id', [status, req.params.id]);
+  if (result.rows.length === 0) return res.status(404).json({ error: 'Not found' });
+  res.json({ success: true });
+});
+
+app.get('/api/admin/subscriptions', requireRole('admin'), async (req, res) => {
+  const result = await pool.query("SELECT * FROM subscriptions WHERE status <> 'pending' ORDER BY created_at DESC");
+  res.json(result.rows);
 });
 
 // ── PAGE ROUTES ───────────────────────────────────────────────────

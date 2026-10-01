@@ -446,11 +446,11 @@ async function boot() {
   // Who am I?
   try {
     const r = await fetch('/api/auth/me');
-    if (!r.ok) { window.location.href = '/'; return; }
+    if (!r.ok) { window.location.href = '/login'; return; }
     me = await r.json();
     if (me.must_change_password) { window.location.href = '/change-password'; return; }
     if (me.role !== 'admin' && me.role !== 'program_director') {
-      window.location.href = '/';
+      window.location.href = '/login';
       return;
     }
     document.getElementById('user-name').textContent = me.full_name;
@@ -725,7 +725,7 @@ async function stopActing() {
 document.getElementById('logout-link').addEventListener('click', async (e) => {
   e.preventDefault();
   await fetch('/api/auth/logout', { method: 'POST' });
-  window.location.href = '/';
+  window.location.href = '/login';
 });
 
 boot();

@@ -946,7 +946,8 @@ fetch('/api/public/pricing').then(r => r.json()).then(p => {
     document.getElementById('subscribe').hidden = true;
     return;
   }
-  const amount = new Intl.NumberFormat('en-US', { style: 'currency', currency: p.currency.toUpperCase() })
+  if (!p.amount) return; // no fixed price to show; the button still works
+  const amount = (p.from ? 'From ' : '') + new Intl.NumberFormat('en-US', { style: 'currency', currency: p.currency.toUpperCase() })
     .format(p.amount / 100).replace(/\.00$/, '');
   const per = p.interval ? (p.intervalCount > 1 ? ` every ${p.intervalCount} ${p.interval}s` : ` / ${p.interval}`) : '';
   const el = document.getElementById('price-display');

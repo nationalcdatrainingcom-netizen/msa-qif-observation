@@ -257,6 +257,23 @@ const STRIPE_SECRET_KEY = envValue('STRIPE_SECRET_KEY');
 const STRIPE_PRICE_ID = envValue('STRIPE_PRICE_ID');
 const STRIPE_WEBHOOK_SECRET = envValue('STRIPE_WEBHOOK_SECRET');
 const stripe = STRIPE_SECRET_KEY ? Stripe(STRIPE_SECRET_KEY) : null;
+
+// What a price costs at quantity 1, in cents. Per-unit prices carry
+// unit_amount; tiered/volume prices keep it null and put amounts on tiers;
+// "customer chooses" prices have no fixed amount (null).
+function startingAmount(price) {
+  if (price.unit_amount != null) return { cents: price.unit_amount, from: false };
+  if (price.billing_scheme === 'tiered' && Array.isArray(price.tiers) && price.tiers.length) {
+    const t = price.tiers[0];
+    return { cents: (t.unit_amount || 0) + (t.flat_amount || 0), from: true };
+  }
+  return { cents: null, from: false };
+}
+function describePrice(price) {
+  if (price.custom_unit_amount) return 'customer chooses the amount';
+  if (price.billing_scheme === 'tiered') return `tiered (${price.tiers_mode || 'unknown mode'}) pricing`;
+  return 'per-unit pricing';
+}
 console.log(`Stripe: secret key ${STRIPE_SECRET_KEY ? 'set' : 'MISSING'}, price ID ${STRIPE_PRICE_ID ? 'set' : 'MISSING'}, webhook secret ${STRIPE_WEBHOOK_SECRET ? 'set' : 'MISSING'}`);
 
 // The webhook needs the raw request body to verify Stripe's signature, so it
@@ -1544,12 +1561,14 @@ app.get('/api/public/pricing', async (req, res) => {
   if (!stripe || !STRIPE_PRICE_ID) return res.json({ available: false });
   if (pricingCache.data && Date.now() - pricingCache.at < 10 * 60 * 1000) return res.json(pricingCache.data);
   try {
-    const price = await stripe.prices.retrieve(STRIPE_PRICE_ID);
+    const price = await stripe.prices.retrieve(STRIPE_PRICE_ID, { expand: ['tiers'] });
+    const start = startingAmount(price);
     pricingCache = {
       at: Date.now(),
       data: {
         available: true,
-        amount: price.unit_amount,
+        amount: start.cents,
+        from: start.from,
         currency: price.currency,
         interval: price.recurring ? price.recurring.interval : null,
         intervalCount: price.recurring ? price.recurring.interval_count : null
@@ -1619,10 +1638,12 @@ app.get('/api/admin/stripe-status', requireRole('admin'), async (req, res) => {
   };
   if (stripe && STRIPE_PRICE_ID) {
     try {
-      const price = await stripe.prices.retrieve(STRIPE_PRICE_ID);
-      out.price = price.recurring
-        ? `OK: ${(price.unit_amount / 100).toFixed(2)} ${price.currency.toUpperCase()} every ${price.recurring.interval_count > 1 ? price.recurring.interval_count + ' ' : ''}${price.recurring.interval}${price.active ? '' : ' (but this price is ARCHIVED; make it active)'}`
-        : 'WRONG: this price is one-time; create a Recurring price';
+      const price = await stripe.prices.retrieve(STRIPE_PRICE_ID, { expand: ['tiers'] });
+      const start = startingAmount(price);
+      out.priceDetails = `${describePrice(price)}; amount at quantity 1: ${start.cents == null ? 'none set' : (start.cents / 100).toFixed(2) + ' ' + price.currency.toUpperCase()}`;
+      out.price = !price.recurring ? 'WRONG: this price is one-time; create a Recurring price'
+        : !start.cents ? `WRONG: this price charges nothing at quantity 1 (${describePrice(price)}). Edit the product in Stripe and add a Recurring price with a fixed amount, then use its price_ ID`
+        : `OK: ${start.from ? 'from ' : ''}${(start.cents / 100).toFixed(2)} ${price.currency.toUpperCase()} every ${price.recurring.interval_count > 1 ? price.recurring.interval_count + ' ' : ''}${price.recurring.interval}${price.active ? '' : ' (but this price is ARCHIVED; make it active)'}`;
     } catch (e) {
       out.price = `Stripe error: ${e.message}`;
     }

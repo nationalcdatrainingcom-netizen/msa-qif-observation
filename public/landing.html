@@ -150,25 +150,24 @@
   .role p { color: var(--text-soft); font-size: 15px; }
 
   /* ── Team ── */
-  .team { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 44px; }
+  .team { display: grid; gap: 28px; margin-top: 44px; }
   .person {
     background: #fff;
     border: 1.5px solid var(--line);
     border-radius: 20px;
-    padding: 32px;
-    display: flex; gap: 22px; align-items: flex-start;
+    padding: 36px;
+    display: grid; grid-template-columns: 240px 1fr; gap: 36px; align-items: start;
   }
-  .avatar {
-    flex: 0 0 76px; height: 76px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
-    color: #fff; display: grid; place-items: center;
-    font: 600 26px 'Playfair Display', serif;
-    border: 3px solid var(--gold-soft);
-    overflow: hidden;
+  .person.flip { grid-template-columns: 1fr 240px; }
+  .person.flip .photo { order: 2; }
+  .photo {
+    width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(44,74,53,.12);
   }
-  .avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .person .role-title { font-size: 13.5px; color: var(--gold); font-weight: 600; margin-bottom: 10px; }
-  .person p { color: var(--text-soft); font-size: 15px; }
+  .person .role-title { font-size: 13.5px; color: var(--gold); font-weight: 600; margin-bottom: 12px; }
+  .person p { color: var(--text-soft); font-size: 15.5px; }
+  .person p + p { margin-top: 12px; }
 
   /* ── Two paths ── */
   .paths { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; margin-top: 44px; }
@@ -287,7 +286,9 @@
   @media (max-width: 600px) {
     .container { padding: 0 16px; }
     .feature-grid, .roles, .row { grid-template-columns: 1fr; }
-    .person { flex-direction: column; padding: 26px; }
+    .person, .person.flip { grid-template-columns: 1fr; padding: 26px 20px; gap: 22px; }
+    .person.flip .photo { order: 0; }
+    .photo { max-width: 260px; }
     .path, .form-card { padding: 26px 20px; }
     .nav-logo img { height: 34px; }
   }
@@ -319,7 +320,7 @@
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <span class="eyebrow">Mentoring for early childhood programs</span>
+        <span class="eyebrow">Mentoring for preschool teachers · ages 2½–5</span>
         <h1>Grow great teachers <em>from within.</em></h1>
         <p class="lead">Mentor Success Academy pairs your experienced teachers with the teachers they support and gives them a 12-week structure for mentoring, observation and reflection, so strong classroom practice spreads across your program.</p>
         <div class="hero-ctas">
@@ -417,25 +418,28 @@
     <div class="container">
       <div class="center">
         <span class="eyebrow">About Us</span>
-        <h2>Created by early childhood leaders</h2>
-        <p class="lead">Mentor Success Academy was built by two people who have spent their careers supporting teachers and the children in their care.</p>
+        <h2>Meet the co-founders</h2>
+        <p class="lead">We're the co-founders of Mentor Success Academy, combining decades of experience in early childhood education and leadership development. Together, we created a mentorship-focused training program designed to help strong teachers become confident mentors who grow, support, and retain great educators.</p>
       </div>
       <div class="team">
-        <!-- To add a photo: put it in public/img/ and replace the initials with <img src="/img/mary.jpg" alt="Mary Wardlaw"> -->
         <div class="person">
-          <div class="avatar">MW</div>
-          <div>
-            <h3>Mary Wardlaw</h3>
-            <div class="role-title">Co-founder</div>
-            <p>Mary leads The Children's Center, Inc., an early childhood program in southwest Michigan. Her doctoral research looks at how mentoring affects teaching quality in early childhood classrooms, and MSA's free research trial is part of that work.</p>
-          </div>
-        </div>
-        <div class="person">
-          <div class="avatar">RM</div>
+          <img class="photo" src="/img/rebecca.jpg" alt="Rebecca Munlyn" loading="lazy">
           <div>
             <h3>Rebecca Munlyn</h3>
-            <div class="role-title">Co-founder</div>
-            <p>Rebecca is the founder of Inspired Growth LLC and the author of the Inspired Growth Mentor Training Curriculum, the 12-week reflection guide at the heart of MSA's weekly mentoring conversations.</p>
+            <div class="role-title">Co-founder · Founder &amp; CEO, Inspired Growth, LLC</div>
+            <p>Rebecca Munlyn is the co-founder of the Mentor Success Academy as well as the founder and CEO of Inspired Growth, LLC, a consulting firm which partners with organizations to unlock potential and expand capacity of leaders and teams to support healthy organizational growth.</p>
+            <p>She integrates strategies with neuro-linguistic, data-driven, and research-based tools to facilitate self-awareness, communication, and increased performance. Rebecca is a leader and team development consultant with a proven record as a committed and passionate advocate for creating safe spaces for all voices to be heard and valued. Rebecca is gifted in empowering individuals to identify, access, and leverage individual strengths to create lives free of limits. Rebecca has more than 20 years of diverse coaching and consulting experience, within corporate and nonprofit organizations. Her innovative approach to implementing efficient systems, sustainable processes and navigating adult learning strategies are informed by her undergraduate and graduate degrees, Bachelor of Industrial Engineering (Georgia Tech) and Master of Education (Columbus State University), respectively.</p>
+            <p>Rebecca has a passion for connection and relationship, which is the foundation upon which the process of self-discovery and empowerment is explored, embraced, and facilitates transformational growth, both professionally and personally.</p>
+          </div>
+        </div>
+        <div class="person flip">
+          <img class="photo" src="/img/mary.jpg" alt="Mary Wardlaw" loading="lazy">
+          <div>
+            <h3>Mary Wardlaw</h3>
+            <div class="role-title">Co-founder · Founder, The Children's Center &amp; National CDA Training</div>
+            <p>Mary Wardlaw is the co-founder of Mentor Success Academy and a lifelong advocate for excellence in early childhood education. Mary began her journey in the field as an assistant preschool teacher in 1992, advancing to lead teacher, program director, and eventually founding The Children's Center in 2002 with just three teachers and 17 students. Today, she leads three thriving locations in southwest Michigan, serving over 450 students with a team of 80 dedicated staff.</p>
+            <p>In 2019, Mary expanded her impact by founding National CDA Training, helping hundreds of early childhood educators earn their Child Development Associate (CDA) credentials. She holds a bachelor's degree in Child Development (2004), a master's degree in Business Administration (2006), and completed her Education Specialist Degree in 2025. She is currently pursuing her Ph.D. in Early Childhood Education.</p>
+            <p>Since 2023, Mary's research has centered on the training, mentoring, and retention of high-quality early childhood teachers—work that inspired the creation of Mentor Success Academy to develop the next generation of confident, capable, and resilient educators.</p>
           </div>
         </div>
       </div>
@@ -455,10 +459,11 @@
           <h3>3-month research trial</h3>
           <p>Use MSA free for 12 weeks and help build the evidence for mentoring in early childhood education.</p>
           <ul>
-            <li>Full access for one classroom's mentoring pair</li>
-            <li>Mentor training and certification included</li>
-            <li>For licensed, privately owned US programs</li>
-            <li>Two classrooms take part in short surveys</li>
+            <li>Full access for every participating classroom</li>
+            <li>Mentor training valued at $1,200, free for participating mentors</li>
+            <li>Mentoring pairs meet 30–45 minutes a week</li>
+            <li>Classrooms not using MSA take the same surveys, for comparison</li>
+            <li>For licensed, privately owned US preschool programs</li>
           </ul>
           <a href="#research" class="btn btn-gold">See if you qualify</a>
         </div>
@@ -469,6 +474,7 @@
           <ul>
             <li>Every MSA tool for your mentors, mentees and director</li>
             <li>Start any time, no research requirements</li>
+            <li>Curriculum written for preschool classrooms (ages 2½–5)</li>
             <li>Mentor training and annual certification</li>
             <li>Manage or cancel your subscription online</li>
           </ul>
@@ -484,7 +490,7 @@
       <div class="center">
         <span class="eyebrow">Free Research Trial</span>
         <h2>Join the upcoming 3-month research trial</h2>
-        <p class="lead">This trial is part of Mary Wardlaw's doctoral research on the impact of mentoring in early childhood programs. Participating programs use MSA free for 12 weeks. In return, the data gathered, including surveys before and after the program, is used in the research.</p>
+        <p class="lead">This trial is part of Mary Wardlaw's doctoral research on the impact of mentoring in early childhood programs. Participating classrooms use MSA free for 12 weeks, and their mentors receive MSA's mentor training, valued at $1,200, at no cost. In return, the data gathered, including surveys before and after the program, is used in the research.</p>
       </div>
       <div class="research-grid">
         <div>
@@ -493,12 +499,12 @@
             <li data-n="1">A <strong>licensed</strong> early childhood program in the <strong>United States</strong>.</li>
             <li data-n="2">A <strong>privately owned</strong> program.</li>
             <li data-n="3">At least <strong>2 classrooms</strong> serving children <strong>2½ years and older</strong>.</li>
-            <li data-n="4"><strong>One classroom uses MSA and one does not</strong>, so the research can compare the two.</li>
-            <li data-n="5">Staff in <strong>both classrooms</strong> complete the surveys before and after the program.</li>
-            <li data-n="6">The director agrees to provide <strong>time every week for the full 12 weeks</strong> for the mentor and mentee to meet.</li>
+            <li data-n="4">You choose which classrooms take part. <strong>Participating classrooms use MSA</strong>, and <strong>at least one classroom does not</strong>, so the research can compare them.</li>
+            <li data-n="5">Staff in <strong>participating and non-participating classrooms</strong> complete the same surveys before and after the program.</li>
+            <li data-n="6">The director agrees to provide <strong>30–45 minutes every week for the full 12 weeks</strong> for each mentor and mentee to meet.</li>
           </ul>
           <div class="note">
-            Taking part is voluntary. Results are reported in summary form, without naming individual programs or staff. Accepted programs will receive full research details and consent forms before the trial begins.
+            Mentors complete the training on their own time. Taking part is voluntary. Results are reported in summary form, without naming individual programs or staff. Accepted programs will receive full research details and consent forms before the trial begins.
           </div>
         </div>
 
@@ -542,7 +548,7 @@
               </div>
             </div>
             <div class="field">
-              <label for="r-classrooms">Number of classrooms serving children 2½ and older</label>
+              <label for="r-classrooms">Total number of classrooms serving children 2½ and older</label>
               <input id="r-classrooms" name="preschoolClassrooms" type="number" min="1" max="99" required>
             </div>
             <div class="field">
@@ -555,9 +561,9 @@
               <label class="check"><input type="checkbox" data-agree="licensedUS"> Our program is licensed and located in the United States.</label>
               <label class="check"><input type="checkbox" data-agree="privatelyOwned"> Our program is privately owned.</label>
               <label class="check"><input type="checkbox" data-agree="twoPreschoolClassrooms"> We have at least 2 classrooms serving children 2½ years and older.</label>
-              <label class="check"><input type="checkbox" data-agree="comparisonDesign"> I understand one classroom will use MSA and one will not.</label>
-              <label class="check"><input type="checkbox" data-agree="surveysBothClassrooms"> Staff in both classrooms will complete the surveys before and after the program.</label>
-              <label class="check"><input type="checkbox" data-agree="twelveWeekCommitment"> As director, I will provide time each week for the full 12 weeks for the mentor and mentee to meet.</label>
+              <label class="check"><input type="checkbox" data-agree="comparisonDesign"> I understand participating classrooms will use MSA, and at least one classroom will not, for comparison.</label>
+              <label class="check"><input type="checkbox" data-agree="surveysBothClassrooms"> Staff in participating and non-participating classrooms will complete the surveys before and after the program.</label>
+              <label class="check"><input type="checkbox" data-agree="twelveWeekCommitment"> As director, I will provide 30–45 minutes each week for the full 12 weeks for each mentor and mentee to meet.</label>
               <label class="check"><input type="checkbox" data-agree="researchConsent"> I agree that data gathered during the trial, including survey responses, may be used in Mary Wardlaw's doctoral research.</label>
             </div>
 
@@ -612,11 +618,11 @@
       <div class="faq">
         <details>
           <summary>How much time does the program take each week?</summary>
-          <p>Each mentoring pair meets once a week, and mentors and mentees each complete a short reflection. Directors set aside that weekly meeting time for the 12 weeks.</p>
+          <p>Each mentoring pair meets for 30–45 minutes once a week, and mentors and mentees each complete a short reflection. Directors set aside that weekly meeting time for the 12 weeks. Mentors complete their training on their own time.</p>
         </details>
         <details>
-          <summary>Why does one classroom not use MSA in the research trial?</summary>
-          <p>Comparing a classroom that uses MSA with one that doesn't lets the research measure what difference mentoring actually makes. Both classrooms complete the same surveys.</p>
+          <summary>Why does a classroom not use MSA in the research trial?</summary>
+          <p>Comparing classrooms that use MSA with at least one that doesn't lets the research measure what difference mentoring actually makes. Participating and non-participating classrooms complete the same surveys.</p>
         </details>
         <details>
           <summary>What happens after the 3-month trial?</summary>
@@ -628,7 +634,7 @@
         </details>
         <details>
           <summary>Our program doesn't meet the trial criteria. Can we still use MSA?</summary>
-          <p>Yes. The criteria only apply to the free research trial. Any program can subscribe.</p>
+          <p>Yes. The criteria only apply to the free research trial. Any program can subscribe. The curriculum is written for teachers working with preschool-age children (2½–5).</p>
         </details>
       </div>
     </div>

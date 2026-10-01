@@ -692,7 +692,7 @@
       <div>&copy; <span id="year"></span> Mentor Success Academy. All rights reserved.</div>
     </div>
     <div>
-      <a href="mailto:mary@childrenscenterinc.com">Contact us</a> &nbsp;·&nbsp; <a href="/login">Sign in</a>
+      <a href="mailto:info@mentorsuccessacademy.com">Contact us</a> &nbsp;·&nbsp; <a href="/login">Sign in</a>
     </div>
   </div>
 </footer>
@@ -721,7 +721,7 @@ function showMsg(el, text, kind) {
 fetch('/api/public/pricing').then(r => r.json()).then(p => {
   if (!p.available) {
     document.getElementById('subscribe-cta').textContent = 'Contact us about subscribing';
-    document.getElementById('subscribe-cta').href = 'mailto:mary@childrenscenterinc.com?subject=MSA%20subscription';
+    document.getElementById('subscribe-cta').href = 'mailto:info@mentorsuccessacademy.com?subject=MSA%20subscription';
     document.getElementById('subscribe').hidden = true;
     return;
   }

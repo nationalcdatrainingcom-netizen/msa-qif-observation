@@ -28,6 +28,7 @@
   }
 
   html { scroll-behavior: smooth; }
+  section[id] { scroll-margin-top: 72px; }
   body {
     font-family: 'Source Sans 3', sans-serif;
     background: var(--cream);
@@ -87,6 +88,20 @@
   .nav-links a:hover { color: var(--green-mid); }
   .nav-links .btn { padding: 10px 18px; font-size: 14px; }
   .nav-toggle { display: none; background: none; border: none; font-size: 26px; color: var(--green-deep); cursor: pointer; }
+
+  /* ── Announcement ── */
+  .announce {
+    background: var(--green-deep); color: var(--gold-soft);
+    text-align: center; padding: 11px 16px; font-size: 14.5px; font-weight: 500;
+  }
+  .announce a { color: #fff; font-weight: 600; margin-left: 6px; white-space: nowrap; }
+  .open-badge {
+    display: inline-block; margin-bottom: 14px;
+    background: rgba(201, 151, 58, .15); color: #8a6420;
+    border: 1px solid rgba(201, 151, 58, .45);
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 13px; font-weight: 600;
+  }
 
   /* ── Banner ── */
   .banner {
@@ -310,6 +325,10 @@
 </head>
 <body>
 
+<div class="announce">
+  Now accepting applications for the free research trial, beginning January 2027.<a href="#research">Apply now →</a>
+</div>
+
 <div class="banner" id="subscribed-banner">
   Thank you for subscribing! We'll be in touch by email to set up your program's accounts.
 </div>
@@ -339,7 +358,7 @@
         <h1>Train one great mentor. <em>Grow teacher after teacher.</em></h1>
         <p class="lead">Mentor Success Academy trains your strong teachers to become skilled, confident mentors. Over 12 weeks, each mentor learns how to observe, give feedback and coach, and practices those skills right away with a colleague in your program. The skills stay with the mentor, ready for the next teacher, and the next.</p>
         <div class="hero-ctas">
-          <a href="#research" class="btn btn-gold">Join the free research trial</a>
+          <a href="#research" class="btn btn-gold">Apply for the January research trial</a>
           <a href="#pricing" class="btn btn-primary">Subscribe</a>
         </div>
       </div>
@@ -495,7 +514,7 @@
       </div>
       <div class="paths">
         <div class="path research">
-          <span class="eyebrow">Free · 12 weeks</span>
+          <span class="eyebrow">Free · 12 weeks · Begins January 2027</span>
           <h3>3-month research trial</h3>
           <p>Train your mentors free for 12 weeks and help build the evidence for mentoring in early childhood education.</p>
           <ul>
@@ -505,7 +524,7 @@
             <li>Classrooms not using MSA take the same surveys, for comparison</li>
             <li>For licensed, privately owned US preschool programs</li>
           </ul>
-          <a href="#research" class="btn btn-gold">See if you qualify</a>
+          <a href="#research" class="btn btn-gold">Apply now</a>
         </div>
         <div class="path paid" id="pricing">
           <span class="eyebrow">Subscription</span>
@@ -529,7 +548,8 @@
     <div class="container">
       <div class="center">
         <span class="eyebrow">Free Research Trial</span>
-        <h2>Join the upcoming 3-month research trial</h2>
+        <h2>Join the 3-month research trial, beginning January 2027</h2>
+        <div class="open-badge">● Applications are now being accepted</div>
         <p class="lead">This trial is part of Mary Wardlaw's doctoral research on the impact of mentoring in early childhood programs. Mentors in participating classrooms receive MSA's mentor training, valued at $1,200, at no cost, and use MSA with their mentees for 12 weeks. In return, the data gathered, including surveys before and after the program, is used in the research.</p>
       </div>
       <div class="research-grid">
@@ -550,7 +570,7 @@
 
         <div class="form-card">
           <form id="research-form" novalidate>
-            <h3>Apply for the research trial</h3>
+            <h3>Apply for the January 2027 research trial</h3>
             <p class="sub">The program director should complete this form. We'll follow up by email.</p>
             <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="field">

@@ -417,6 +417,9 @@
   .path .btn { align-self: flex-start; }
   .price { font: 700 34px 'Playfair Display', serif; color: var(--green-deep); margin-top: 6px; }
   .price small { font: 400 15px 'Source Sans 3', sans-serif; color: var(--text-soft); }
+  .price-extra { font-size: 15px; color: var(--text-soft); margin-top: 2px; }
+  .total-line { margin: 2px 0 16px; padding: 12px 14px; border-radius: 10px; background: var(--cream-dark); font-size: 15px; }
+  .total-line strong { color: var(--green-deep); font-size: 17px; }
 
   /* ── Research trial ── */
   .research-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; margin-top: 44px; }
@@ -731,8 +734,10 @@
           <span class="eyebrow">Center Membership</span>
           <h3>Full program access</h3>
           <div class="price" id="price-display" hidden></div>
+          <div class="price-extra" id="price-extra" hidden></div>
           <ul>
             <li>Mentor training and annual certification for your mentors</li>
+            <li>Each mentor works with one mentee at a time, with unlimited mentees over the membership</li>
             <li>Tools for your mentors, their mentees and your director</li>
             <li>Built for mentors of preschool teachers (children 2½–5)</li>
             <li>Start any time, no research requirements</li>
@@ -862,6 +867,11 @@
               <input id="s-email" name="email" type="email" required maxlength="200" autocomplete="email">
             </div>
           </div>
+          <div class="field">
+            <label for="s-mentors">Number of mentors</label>
+            <input id="s-mentors" name="mentors" type="number" min="1" max="500" value="1" required>
+          </div>
+          <div class="total-line" id="total-line" hidden></div>
           <button type="submit" class="btn btn-primary" style="width:100%" id="subscribe-btn">Continue to payment</button>
           <div class="msg" id="subscribe-msg"></div>
         </form>
@@ -939,6 +949,38 @@ function showMsg(el, text, kind) {
 }
 
 // ── Price (comes from Stripe) ──
+// Priced per mentor: the Stripe price's tiers give the cost for any number
+// of mentors (e.g. $249 for the first, $50 for each one after).
+let pricing = null;
+const money = cents => new Intl.NumberFormat('en-US', { style: 'currency', currency: pricing.currency.toUpperCase() })
+  .format(cents / 100).replace(/\.00$/, '');
+function costFor(model, n) {
+  if (model.mode === 'volume') {
+    const t = model.tiers.find(t => t.upTo == null || n <= t.upTo) || model.tiers[model.tiers.length - 1];
+    return n * t.unit + t.flat;
+  }
+  let total = 0, prev = 0;
+  for (const t of model.tiers) {
+    if (n <= prev) break;
+    const top = t.upTo == null ? n : Math.min(n, t.upTo);
+    total += (top - prev) * t.unit + t.flat;
+    prev = t.upTo == null ? n : t.upTo;
+  }
+  return total;
+}
+function perText() {
+  if (!pricing.interval) return '';
+  return pricing.intervalCount > 1 ? ` every ${pricing.intervalCount} ${pricing.interval}s` : ` / ${pricing.interval}`;
+}
+function updateTotal() {
+  const box = document.getElementById('total-line');
+  const n = parseInt(document.getElementById('s-mentors').value, 10);
+  if (!pricing || !pricing.tiers || !(n >= 1)) { box.hidden = true; return; }
+  box.innerHTML = `Total: <strong>${money(costFor(pricing.tiers, n))}</strong>${perText()} for ${n} mentor${n === 1 ? '' : 's'}`;
+  box.hidden = false;
+}
+document.getElementById('s-mentors').addEventListener('input', updateTotal);
+
 fetch('/api/public/pricing').then(r => r.json()).then(p => {
   if (!p.available) {
     document.getElementById('subscribe-cta').textContent = 'Contact us about a center membership';
@@ -946,13 +988,20 @@ fetch('/api/public/pricing').then(r => r.json()).then(p => {
     document.getElementById('subscribe').hidden = true;
     return;
   }
-  if (!p.amount) return; // no fixed price to show; the button still works
-  const amount = (p.from ? 'From ' : '') + new Intl.NumberFormat('en-US', { style: 'currency', currency: p.currency.toUpperCase() })
-    .format(p.amount / 100).replace(/\.00$/, '');
-  const per = p.interval ? (p.intervalCount > 1 ? ` every ${p.intervalCount} ${p.interval}s` : ` / ${p.interval}`) : '';
+  pricing = p;
+  if (!p.tiers) return;
+  const first = costFor(p.tiers, 1);
+  const extra = costFor(p.tiers, 2) - first;
+  if (!first) return; // no fixed price to show; the button still works
   const el = document.getElementById('price-display');
-  el.innerHTML = `${amount}<small>${per}</small>`;
+  el.innerHTML = `${money(first)}<small>${perText()} for 1 mentor</small>`;
   el.hidden = false;
+  if (extra > 0) {
+    const ex = document.getElementById('price-extra');
+    ex.textContent = `+ ${money(extra)}${perText()} for each additional mentor`;
+    ex.hidden = false;
+  }
+  updateTotal();
 }).catch(() => {});
 
 // ── Research application ──

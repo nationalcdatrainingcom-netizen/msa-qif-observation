@@ -157,6 +157,9 @@ async function initDB() {
       );
     `);
 
+    // Membership price is per mentor (Stripe quantity = number of mentors)
+    await client.query('ALTER TABLE subscriptions ADD COLUMN IF NOT EXISTS mentors INTEGER NOT NULL DEFAULT 1');
+
     // Clean up any uploads that were interrupted by a restart
     await client.query(`DELETE FROM coaching_videos WHERE status='uploading' AND created_at < NOW() - INTERVAL '1 day'`);
 
@@ -269,6 +272,32 @@ function startingAmount(price) {
   }
   return { cents: null, from: false };
 }
+// The price as tiers the page can total for any number of mentors.
+// A flat per-unit price becomes one open-ended tier.
+function priceTiers(price) {
+  if (price.billing_scheme === 'tiered' && Array.isArray(price.tiers) && price.tiers.length) {
+    return {
+      mode: price.tiers_mode === 'volume' ? 'volume' : 'graduated',
+      tiers: price.tiers.map(t => ({ upTo: t.up_to, unit: t.unit_amount || 0, flat: t.flat_amount || 0 }))
+    };
+  }
+  return { mode: 'graduated', tiers: [{ upTo: null, unit: price.unit_amount || 0, flat: 0 }] };
+}
+// Monthly cost in cents for n mentors, the way Stripe bills tiered prices.
+function costFor(model, n) {
+  if (model.mode === 'volume') {
+    const t = model.tiers.find(t => t.upTo == null || n <= t.upTo) || model.tiers[model.tiers.length - 1];
+    return n * t.unit + t.flat;
+  }
+  let total = 0, prev = 0;
+  for (const t of model.tiers) {
+    if (n <= prev) break;
+    const top = t.upTo == null ? n : Math.min(n, t.upTo);
+    total += (top - prev) * t.unit + t.flat;
+    prev = t.upTo == null ? n : t.upTo;
+  }
+  return total;
+}
 function describePrice(price) {
   if (price.custom_unit_amount) return 'customer chooses the amount';
   if (price.billing_scheme === 'tiered') return `tiered (${price.tiers_mode || 'unknown mode'}) pricing`;
@@ -295,9 +324,11 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
       [obj.customer, obj.subscription, obj.id]
     );
   } else if (event.type === 'customer.subscription.updated' || event.type === 'customer.subscription.deleted') {
+    // Quantity changes (mentors added or removed, e.g. in the customer portal)
+    const item = obj.items && obj.items.data && obj.items.data[0];
     await pool.query(
-      'UPDATE subscriptions SET status=$1, updated_at=NOW() WHERE stripe_subscription_id=$2',
-      [obj.status, obj.id]
+      'UPDATE subscriptions SET status=$1, mentors=COALESCE($3, mentors), updated_at=NOW() WHERE stripe_subscription_id=$2',
+      [obj.status, obj.id, item && item.quantity ? item.quantity : null]
     );
   }
   res.json({ received: true });
@@ -1569,6 +1600,7 @@ app.get('/api/public/pricing', async (req, res) => {
         available: true,
         amount: start.cents,
         from: start.from,
+        tiers: priceTiers(price),
         currency: price.currency,
         interval: price.recurring ? price.recurring.interval : null,
         intervalCount: price.recurring ? price.recurring.interval_count : null
@@ -1590,20 +1622,24 @@ app.post('/api/public/checkout', async (req, res) => {
   if (!programName || !contactName || !isEmail(email)) {
     return res.status(400).json({ error: 'Please enter your program name, your name and a valid email.' });
   }
+  const mentors = parseInt(b.mentors, 10);
+  if (!(mentors >= 1 && mentors <= 500)) {
+    return res.status(400).json({ error: 'Please enter the number of mentors (at least 1).' });
+  }
   const origin = process.env.PUBLIC_SITE_URL || `${req.protocol}://${req.get('host')}`;
   const checkout = await stripe.checkout.sessions.create({
     mode: 'subscription',
-    line_items: [{ price: STRIPE_PRICE_ID, quantity: 1 }],
+    line_items: [{ price: STRIPE_PRICE_ID, quantity: mentors }],
     customer_email: email,
     allow_promotion_codes: true,
-    metadata: { programName, contactName },
-    subscription_data: { metadata: { programName, contactName } },
+    metadata: { programName, contactName, mentors: String(mentors) },
+    subscription_data: { metadata: { programName, contactName, mentors: String(mentors) } },
     success_url: `${origin}/welcome?subscribed=1`,
     cancel_url: `${origin}/welcome#pricing`
   });
   await pool.query(
-    'INSERT INTO subscriptions (checkout_session_id, program_name, contact_name, email) VALUES ($1,$2,$3,$4)',
-    [checkout.id, programName, contactName, email]
+    'INSERT INTO subscriptions (checkout_session_id, program_name, contact_name, email, mentors) VALUES ($1,$2,$3,$4,$5)',
+    [checkout.id, programName, contactName, email, mentors]
   );
   res.json({ url: checkout.url });
 });
@@ -1640,7 +1676,9 @@ app.get('/api/admin/stripe-status', requireRole('admin'), async (req, res) => {
     try {
       const price = await stripe.prices.retrieve(STRIPE_PRICE_ID, { expand: ['tiers'] });
       const start = startingAmount(price);
-      out.priceDetails = `${describePrice(price)}; amount at quantity 1: ${start.cents == null ? 'none set' : (start.cents / 100).toFixed(2) + ' ' + price.currency.toUpperCase()}`;
+      const model = priceTiers(price);
+      const money = c => `${(c / 100).toFixed(2)} ${price.currency.toUpperCase()}`;
+      out.priceDetails = `${describePrice(price)}; monthly total for 1 mentor: ${money(costFor(model, 1))}, 2 mentors: ${money(costFor(model, 2))}, 5 mentors: ${money(costFor(model, 5))}`;
       out.price = !price.recurring ? 'WRONG: this price is one-time; create a Recurring price'
         : !start.cents ? `WRONG: this price charges nothing at quantity 1 (${describePrice(price)}). Edit the product in Stripe and add a Recurring price with a fixed amount, then use its price_ ID`
         : `OK: ${start.from ? 'from ' : ''}${(start.cents / 100).toFixed(2)} ${price.currency.toUpperCase()} every ${price.recurring.interval_count > 1 ? price.recurring.interval_count + ' ' : ''}${price.recurring.interval}${price.active ? '' : ' (but this price is ARCHIVED; make it active)'}`;

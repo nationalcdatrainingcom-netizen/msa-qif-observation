@@ -564,7 +564,7 @@
   .app-row select { padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); font: inherit; }
   .sub-row {
     display: grid;
-    grid-template-columns: 1.6fr 1.6fr 1fr 1fr;
+    grid-template-columns: 1.6fr 1.6fr 0.7fr 1fr 1fr;
     gap: 12px;
     padding: 14px 18px;
     align-items: center;
@@ -815,6 +815,7 @@
         <div class="sub-row head">
           <div>Program</div>
           <div>Contact</div>
+          <div>Mentors</div>
           <div>Status</div>
           <div>Started</div>
         </div>
@@ -1061,6 +1062,7 @@ async function loadWebsite() {
       return `<div class="sub-row">
         <div class="name">${escapeHtml(s.program_name)}</div>
         <div><div>${escapeHtml(s.contact_name)}</div><div class="sub"><a href="mailto:${escapeHtml(s.email)}">${escapeHtml(s.email)}</a></div></div>
+        <div>${s.mentors || 1}</div>
         <div><span class="cert-badge ${cls}">${escapeHtml(s.status.replace('_', ' '))}</span></div>
         <div>${new Date(s.created_at).toLocaleDateString()}</div>
       </div>`;

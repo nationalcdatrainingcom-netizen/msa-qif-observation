@@ -733,8 +733,9 @@
         <div class="path paid" id="pricing">
           <span class="eyebrow">Center Membership</span>
           <h3>Full program access</h3>
-          <div class="price" id="price-display" hidden></div>
-          <div class="price-extra" id="price-extra" hidden></div>
+          <!-- The price below is replaced with the live Stripe price when it loads -->
+          <div class="price" id="price-display">$249<small> / month for 1 mentor</small></div>
+          <div class="price-extra">$50 per month per additional mentor</div>
           <ul>
             <li>Mentor training and annual certification for your mentors</li>
             <li>Each mentor works with one mentee at a time, with unlimited mentees over the membership</li>
@@ -991,16 +992,10 @@ fetch('/api/public/pricing').then(r => r.json()).then(p => {
   pricing = p;
   if (!p.tiers) return;
   const first = costFor(p.tiers, 1);
-  const extra = costFor(p.tiers, 2) - first;
   if (!first) return; // no fixed price to show; the button still works
   const el = document.getElementById('price-display');
   el.innerHTML = `${money(first)}<small>${perText()} for 1 mentor</small>`;
   el.hidden = false;
-  if (extra > 0) {
-    const ex = document.getElementById('price-extra');
-    ex.textContent = `+ ${money(extra)}${perText()} for each additional mentor`;
-    ex.hidden = false;
-  }
   updateTotal();
 }).catch(() => {});
 

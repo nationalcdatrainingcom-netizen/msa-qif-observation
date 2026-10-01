@@ -972,6 +972,17 @@ app.post('/api/director/pairs', requireRole('program_director'), async (req, res
         return res.status(400).json({ error: 'Mentor email belongs to a different center' });
       }
       mentorRow = existingMentor.rows[0];
+      // Each mentor works with one mentee at a time. The current mentee has
+      // to be marked finished (soft-removed, history kept) before a new one.
+      const current = await pool.query(
+        "SELECT full_name FROM users WHERE mentor_user_id=$1 AND role='mentee' AND active=TRUE LIMIT 1",
+        [mentorRow.id]
+      );
+      if (current.rows.length > 0) {
+        return res.status(400).json({
+          error: `${mentorRow.full_name} is already working with ${current.rows[0].full_name}. Each mentor works with one mentee at a time. When that mentoring is complete, click "Finish" next to ${current.rows[0].full_name}, then pair ${mentorRow.full_name} with the new mentee.`
+        });
+      }
     } else {
       mentorTempPassword = generateTempPassword();
       const hash = await bcrypt.hash(mentorTempPassword, 10);

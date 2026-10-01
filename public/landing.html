@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mentor Success Academy · Mentoring for Early Childhood Programs</title>
-<meta name="description" content="Mentor Success Academy gives early childhood programs a 12-week system for teacher-to-teacher mentoring: mentor training, weekly reflections, classroom observation and certification.">
+<title>Mentor Success Academy · Mentor Training for Early Childhood Educators</title>
+<meta name="description" content="Mentor Success Academy trains experienced early childhood teachers to become skilled, confident mentors who can grow, support and retain great educators, one teacher after another.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -83,7 +83,7 @@
   .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 16px; }
   .nav-logo img { height: 42px; display: block; }
   .nav-links { display: flex; align-items: center; gap: 26px; }
-  .nav-links a { text-decoration: none; color: var(--text); font-size: 14.5px; font-weight: 500; }
+  .nav-links a { white-space: nowrap; text-decoration: none; color: var(--text); font-size: 14.5px; font-weight: 500; }
   .nav-links a:hover { color: var(--green-mid); }
   .nav-links .btn { padding: 10px 18px; font-size: 14px; }
   .nav-toggle { display: none; background: none; border: none; font-size: 26px; color: var(--green-deep); cursor: pointer; }
@@ -127,11 +127,24 @@
   .week-row strong { display: block; color: var(--green-deep); font-size: 15.5px; }
   .week-row span { font-size: 13.5px; color: var(--text-soft); }
 
+  /* ── Why train the mentor ── */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 44px; counter-reset: step; }
+  .step { position: relative; background: #fff; border: 1.5px solid var(--line); border-radius: 18px; padding: 30px 26px 26px; }
+  .step::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; top: -18px; left: 26px;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--gold); color: #fff;
+    font: 700 16px 'DM Sans', sans-serif;
+    display: grid; place-items: center;
+  }
+  .step p { color: var(--text-soft); font-size: 15px; }
+
   /* ── Features ── */
   .alt { background: #fff; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
   .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 48px; }
   .feature {
-    background: var(--cream);
+    background: #fff;
     border: 1px solid var(--line-soft);
     border-radius: 16px;
     padding: 26px;
@@ -267,10 +280,11 @@
   @media (max-width: 900px) {
     .hero-grid, .research-grid, .paths, .team { grid-template-columns: 1fr; }
     .feature-grid, .roles { grid-template-columns: 1fr 1fr; }
+    .steps { grid-template-columns: 1fr; gap: 30px; }
     section { padding: 64px 0; }
     .hero { padding: 56px 0 72px; }
   }
-  @media (max-width: 760px) {
+  @media (max-width: 960px) {
     .nav-toggle { display: block; }
     .nav-links {
       display: none;
@@ -305,6 +319,7 @@
     <a href="#top" class="nav-logo"><img src="/img/msa-logo-light.png" alt="Mentor Success Academy"></a>
     <button class="nav-toggle" aria-label="Open menu" onclick="document.getElementById('nav-links').classList.toggle('open')">☰</button>
     <nav class="nav-links" id="nav-links">
+      <a href="#how">How It Works</a>
       <a href="#program">The Program</a>
       <a href="#team">About Us</a>
       <a href="#research">Free Research Trial</a>
@@ -320,16 +335,16 @@
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <span class="eyebrow">Mentoring for preschool teachers · ages 2½–5</span>
-        <h1>Grow great teachers <em>from within.</em></h1>
-        <p class="lead">Mentor Success Academy pairs your experienced teachers with the teachers they support and gives them a 12-week structure for mentoring, observation and reflection, so strong classroom practice spreads across your program.</p>
+        <span class="eyebrow">Mentor training for early childhood educators</span>
+        <h1>Train one great mentor. <em>Grow teacher after teacher.</em></h1>
+        <p class="lead">Mentor Success Academy trains your strong teachers to become skilled, confident mentors. Over 12 weeks, each mentor learns how to observe, give feedback and coach, and practices those skills right away with a colleague in your program. The skills stay with the mentor, ready for the next teacher, and the next.</p>
         <div class="hero-ctas">
           <a href="#research" class="btn btn-gold">Join the free research trial</a>
           <a href="#pricing" class="btn btn-primary">Subscribe</a>
         </div>
       </div>
       <div class="hero-card">
-        <h3>12 weeks, three focus areas</h3>
+        <h3>12 weeks of mentor training, three focus areas</h3>
         <div class="week-row">
           <div class="week-tag">Weeks 1–4</div>
           <div><strong>Emotional Climate &amp; Responsiveness</strong><span>Warmth, responsiveness, the child's perspective, emotional safety</span></div>
@@ -346,24 +361,49 @@
     </div>
   </section>
 
+  <!-- ── Why train the mentor ── -->
+  <section class="alt" id="how">
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">How it works</span>
+        <h2>The mentor is the one being trained</h2>
+        <p class="lead">MSA is training for mentors: experienced teachers who support other teachers. We teach them how to mentor, so your program keeps those skills long after the 12 weeks end.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <h3>The mentor learns</h3>
+          <p>Each week, the mentor completes a short training module on their own time, with real classroom scenarios on coaching teachers with different personalities and working styles.</p>
+        </div>
+        <div class="step">
+          <h3>The mentor practices</h3>
+          <p>The mentor puts that week's skills to work right away, meeting with a mentee for <span style="white-space:nowrap">30–45 minutes</span>, observing in the classroom and reflecting together.</p>
+        </div>
+        <div class="step">
+          <h3>The skills stay</h3>
+          <p>After 12 weeks, the mentor can earn MSA certification and is ready to mentor the next teacher, and the next, building a team that grows its own great educators.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Program ── -->
-  <section class="alt" id="program">
+  <section id="program">
     <div class="container">
       <div class="center">
         <span class="eyebrow">The Program</span>
-        <h2>Everything a mentoring program needs, in one place</h2>
-        <p class="lead">Most programs know mentoring works. What's hard is keeping it going week after week. MSA gives mentors, mentees and directors a shared plan and a simple way to stay on track.</p>
+        <h2>Everything a mentor needs to learn, practice and grow</h2>
+        <p class="lead">Most programs know mentoring works. What's hard is knowing how to mentor well and keeping it going week after week. MSA gives mentors the training, and gives mentors, mentees and directors a shared plan to stay on track.</p>
       </div>
       <div class="feature-grid">
         <div class="feature">
           <div class="icon">✦</div>
           <h3>Mentor training</h3>
-          <p>Twelve weekly modules with real classroom scenarios teach mentors how to coach teachers with different personalities and working styles.</p>
+          <p>The heart of MSA. Twelve weekly modules with real classroom scenarios teach mentors how to coach teachers with different personalities and working styles.</p>
         </div>
         <div class="feature">
           <div class="icon">✎</div>
           <h3>Weekly reflections</h3>
-          <p>Mentors and mentees each reflect on the week's focus, so every meeting starts from what's actually happening in the classroom.</p>
+          <p>Mentors and their mentees each reflect on the week's focus, so every meeting starts from what's actually happening in the classroom.</p>
         </div>
         <div class="feature">
           <div class="icon">◎</div>
@@ -373,7 +413,7 @@
         <div class="feature">
           <div class="icon">▤</div>
           <h3>Director dashboard</h3>
-          <p>Directors see each pair's progress at a glance and can step in early when a pair falls behind.</p>
+          <p>Directors see each mentor's training and mentoring progress at a glance and can step in early when someone falls behind.</p>
         </div>
         <div class="feature">
           <div class="icon">★</div>
@@ -390,31 +430,31 @@
   </section>
 
   <!-- ── Roles ── -->
-  <section>
+  <section class="alt">
     <div class="container">
       <div class="center">
-        <span class="eyebrow">Built for your whole team</span>
-        <h2>Directors, mentors and mentees each get what they need</h2>
+        <span class="eyebrow">Who's involved</span>
+        <h2>Mentors are trained. Your whole program benefits.</h2>
       </div>
       <div class="roles">
         <div class="role">
-          <h3>Directors</h3>
-          <p>Set up mentoring pairs, protect weekly meeting time and follow progress without chasing paperwork.</p>
-        </div>
-        <div class="role">
           <h3>Mentors</h3>
-          <p>Get trained, observe with a shared framework and guide weekly conversations that build real skills.</p>
+          <p><strong>The ones being trained.</strong> Experienced teachers learn how to observe, give feedback and coach, then earn MSA certification and keep those skills for every teacher they support next.</p>
         </div>
         <div class="role">
           <h3>Mentees</h3>
-          <p>Get steady, personal support from a colleague, and see their own growth over the 12 weeks.</p>
+          <p>The teachers your mentors support. They meet with their mentor each week and get steady, personal support while the mentor puts new skills into practice.</p>
+        </div>
+        <div class="role">
+          <h3>Directors</h3>
+          <p>Choose the teachers to train as mentors, protect weekly meeting time and build a team that can grow its own great teachers.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ── Team ── -->
-  <section class="alt" id="team">
+  <section id="team">
     <div class="container">
       <div class="center">
         <span class="eyebrow">About Us</span>
@@ -447,7 +487,7 @@
   </section>
 
   <!-- ── Two ways to join ── -->
-  <section>
+  <section class="alt">
     <div class="container">
       <div class="center">
         <span class="eyebrow">Get started</span>
@@ -457,11 +497,11 @@
         <div class="path research">
           <span class="eyebrow">Free · 12 weeks</span>
           <h3>3-month research trial</h3>
-          <p>Use MSA free for 12 weeks and help build the evidence for mentoring in early childhood education.</p>
+          <p>Train your mentors free for 12 weeks and help build the evidence for mentoring in early childhood education.</p>
           <ul>
             <li>Full access for every participating classroom</li>
             <li>Mentor training valued at $1,200, free for participating mentors</li>
-            <li>Mentoring pairs meet 30–45 minutes a week</li>
+            <li>Mentoring pairs meet <span style="white-space:nowrap">30–45 minutes</span> a week</li>
             <li>Classrooms not using MSA take the same surveys, for comparison</li>
             <li>For licensed, privately owned US preschool programs</li>
           </ul>
@@ -472,10 +512,10 @@
           <h3>Full program access</h3>
           <div class="price" id="price-display" hidden></div>
           <ul>
-            <li>Every MSA tool for your mentors, mentees and director</li>
+            <li>Mentor training and annual certification for your mentors</li>
+            <li>Tools for your mentors, their mentees and your director</li>
+            <li>Built for mentors of preschool teachers (children 2½–5)</li>
             <li>Start any time, no research requirements</li>
-            <li>Curriculum written for preschool classrooms (ages 2½–5)</li>
-            <li>Mentor training and annual certification</li>
             <li>Manage or cancel your subscription online</li>
           </ul>
           <a href="#subscribe" class="btn btn-primary" id="subscribe-cta">Subscribe now</a>
@@ -485,12 +525,12 @@
   </section>
 
   <!-- ── Research trial ── -->
-  <section class="alt" id="research">
+  <section id="research">
     <div class="container">
       <div class="center">
         <span class="eyebrow">Free Research Trial</span>
         <h2>Join the upcoming 3-month research trial</h2>
-        <p class="lead">This trial is part of Mary Wardlaw's doctoral research on the impact of mentoring in early childhood programs. Participating classrooms use MSA free for 12 weeks, and their mentors receive MSA's mentor training, valued at $1,200, at no cost. In return, the data gathered, including surveys before and after the program, is used in the research.</p>
+        <p class="lead">This trial is part of Mary Wardlaw's doctoral research on the impact of mentoring in early childhood programs. Mentors in participating classrooms receive MSA's mentor training, valued at $1,200, at no cost, and use MSA with their mentees for 12 weeks. In return, the data gathered, including surveys before and after the program, is used in the research.</p>
       </div>
       <div class="research-grid">
         <div>
@@ -501,7 +541,7 @@
             <li data-n="3">At least <strong>2 classrooms</strong> serving children <strong>2½ years and older</strong>.</li>
             <li data-n="4">You choose which classrooms take part. <strong>Participating classrooms use MSA</strong>, and <strong>at least one classroom does not</strong>, so the research can compare them.</li>
             <li data-n="5">Staff in <strong>participating and non-participating classrooms</strong> complete the same surveys before and after the program.</li>
-            <li data-n="6">The director agrees to provide <strong>30–45 minutes every week for the full 12 weeks</strong> for each mentor and mentee to meet.</li>
+            <li data-n="6">The director agrees to provide <strong><span style="white-space:nowrap">30–45 minutes</span> every week for the full 12 weeks</strong> for each mentor and mentee to meet.</li>
           </ul>
           <div class="note">
             Mentors complete the training on their own time. Taking part is voluntary. Results are reported in summary form, without naming individual programs or staff. Accepted programs will receive full research details and consent forms before the trial begins.
@@ -563,7 +603,7 @@
               <label class="check"><input type="checkbox" data-agree="twoPreschoolClassrooms"> We have at least 2 classrooms serving children 2½ years and older.</label>
               <label class="check"><input type="checkbox" data-agree="comparisonDesign"> I understand participating classrooms will use MSA, and at least one classroom will not, for comparison.</label>
               <label class="check"><input type="checkbox" data-agree="surveysBothClassrooms"> Staff in participating and non-participating classrooms will complete the surveys before and after the program.</label>
-              <label class="check"><input type="checkbox" data-agree="twelveWeekCommitment"> As director, I will provide 30–45 minutes each week for the full 12 weeks for each mentor and mentee to meet.</label>
+              <label class="check"><input type="checkbox" data-agree="twelveWeekCommitment"> As director, I will provide <span style="white-space:nowrap">30–45 minutes</span> each week for the full 12 weeks for each mentor and mentee to meet.</label>
               <label class="check"><input type="checkbox" data-agree="researchConsent"> I agree that data gathered during the trial, including survey responses, may be used in Mary Wardlaw's doctoral research.</label>
             </div>
 
@@ -581,7 +621,7 @@
   </section>
 
   <!-- ── Subscribe ── -->
-  <section id="subscribe">
+  <section class="alt" id="subscribe">
     <div class="container" style="max-width:640px">
       <div class="form-card">
         <form id="subscribe-form" novalidate>
@@ -609,7 +649,7 @@
   </section>
 
   <!-- ── FAQ ── -->
-  <section class="alt">
+  <section>
     <div class="container">
       <div class="center">
         <span class="eyebrow">Questions</span>
@@ -617,8 +657,12 @@
       </div>
       <div class="faq">
         <details>
+          <summary>Who actually takes the training?</summary>
+          <p>The mentor. MSA trains experienced teachers to become skilled mentors. Mentees take part by meeting with their mentor each week and completing short reflections, but the training is for the mentor, so the skills stay in your program after the 12 weeks and can be used with the next teacher, and the next.</p>
+        </details>
+        <details>
           <summary>How much time does the program take each week?</summary>
-          <p>Each mentoring pair meets for 30–45 minutes once a week, and mentors and mentees each complete a short reflection. Directors set aside that weekly meeting time for the 12 weeks. Mentors complete their training on their own time.</p>
+          <p>Each mentoring pair meets for <span style="white-space:nowrap">30–45 minutes</span> once a week, and mentors and mentees each complete a short reflection. Directors set aside that weekly meeting time for the 12 weeks. Mentors complete their training on their own time.</p>
         </details>
         <details>
           <summary>Why does a classroom not use MSA in the research trial?</summary>
@@ -630,11 +674,11 @@
         </details>
         <details>
           <summary>Can we subscribe without joining the research?</summary>
-          <p>Yes. A subscription gives your program full access with no research requirements, and you can start at any time.</p>
+          <p>Yes. A subscription gives your mentors full training and your program full access, with no research requirements, and you can start at any time.</p>
         </details>
         <details>
           <summary>Our program doesn't meet the trial criteria. Can we still use MSA?</summary>
-          <p>Yes. The criteria only apply to the free research trial. Any program can subscribe. The curriculum is written for teachers working with preschool-age children (2½–5).</p>
+          <p>Yes. The criteria only apply to the free research trial. Any program can subscribe. The training is written for mentors supporting teachers of preschool-age children (2½–5).</p>
         </details>
       </div>
     </div>

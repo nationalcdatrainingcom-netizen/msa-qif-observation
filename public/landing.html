@@ -169,15 +169,15 @@
           "name": "What happens after the 3-month trial?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "When the trial ends, programs can continue with a paid subscription. There's no obligation to continue."
+            "text": "When the trial ends, programs can continue with a paid center membership. There's no obligation to continue."
           }
         },
         {
           "@type": "Question",
-          "name": "Can we subscribe without joining the research?",
+          "name": "Can we get a center membership without joining the research?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. A subscription gives your mentors full training and your program full access, with no research requirements, and you can start at any time."
+            "text": "Yes. A center membership gives your mentors full training and your program full access, with no research requirements, and you can start at any time."
           }
         },
         {
@@ -185,7 +185,7 @@
           "name": "Our program doesn't meet the trial criteria. Can we still use MSA?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The criteria only apply to the free research trial. Any program can subscribe. The training is written for mentors supporting teachers of preschool-age children (2½–5)."
+            "text": "Yes. The criteria only apply to the free research trial. Any program can get a center membership. The training is written for mentors supporting teachers of preschool-age children (2½–5)."
           }
         }
       ]
@@ -531,7 +531,7 @@
 </div>
 
 <div class="banner" id="subscribed-banner">
-  Thank you for subscribing! We'll be in touch by email to set up your program's accounts.
+  Welcome to Mentor Success Academy! Your center membership is active. We'll be in touch by email to set up your program's accounts.
 </div>
 
 <header class="nav">
@@ -543,7 +543,7 @@
       <a href="#program">The Program</a>
       <a href="#team">About Us</a>
       <a href="#research">Free Research Trial</a>
-      <a href="#pricing">Subscribe</a>
+      <a href="#pricing">Center Membership</a>
       <a href="/login" class="btn btn-outline">Sign in</a>
     </nav>
   </div>
@@ -728,7 +728,7 @@
           <a href="#research" class="btn btn-gold">Apply now</a>
         </div>
         <div class="path paid" id="pricing">
-          <span class="eyebrow">Subscription</span>
+          <span class="eyebrow">Center Membership</span>
           <h3>Full program access</h3>
           <div class="price" id="price-display" hidden></div>
           <ul>
@@ -736,9 +736,9 @@
             <li>Tools for your mentors, their mentees and your director</li>
             <li>Built for mentors of preschool teachers (children 2½–5)</li>
             <li>Start any time, no research requirements</li>
-            <li>Manage or cancel your subscription online</li>
+            <li>Manage or cancel your membership online</li>
           </ul>
-          <a href="#subscribe" class="btn btn-primary" id="subscribe-cta">Subscribe now</a>
+          <a href="#subscribe" class="btn btn-primary" id="subscribe-cta">Become a member</a>
         </div>
       </div>
     </div>
@@ -846,7 +846,7 @@
     <div class="container" style="max-width:640px">
       <div class="form-card">
         <form id="subscribe-form" novalidate>
-          <h3>Subscribe to Mentor Success Academy</h3>
+          <h3>Start your center membership</h3>
           <p class="sub" id="subscribe-sub">You'll be taken to our secure payment page, powered by Stripe, to finish.</p>
           <div class="field">
             <label for="s-program">Program name</label>
@@ -891,15 +891,15 @@
         </details>
         <details>
           <summary>What happens after the 3-month trial?</summary>
-          <p>When the trial ends, programs can continue with a paid subscription. There's no obligation to continue.</p>
+          <p>When the trial ends, programs can continue with a paid center membership. There's no obligation to continue.</p>
         </details>
         <details>
-          <summary>Can we subscribe without joining the research?</summary>
-          <p>Yes. A subscription gives your mentors full training and your program full access, with no research requirements, and you can start at any time.</p>
+          <summary>Can we get a center membership without joining the research?</summary>
+          <p>Yes. A center membership gives your mentors full training and your program full access, with no research requirements, and you can start at any time.</p>
         </details>
         <details>
           <summary>Our program doesn't meet the trial criteria. Can we still use MSA?</summary>
-          <p>Yes. The criteria only apply to the free research trial. Any program can subscribe. The training is written for mentors supporting teachers of preschool-age children (2½–5).</p>
+          <p>Yes. The criteria only apply to the free research trial. Any program can get a center membership. The training is written for mentors supporting teachers of preschool-age children (2½–5).</p>
         </details>
       </div>
     </div>
@@ -941,8 +941,8 @@ function showMsg(el, text, kind) {
 // ── Price (comes from Stripe) ──
 fetch('/api/public/pricing').then(r => r.json()).then(p => {
   if (!p.available) {
-    document.getElementById('subscribe-cta').textContent = 'Contact us about subscribing';
-    document.getElementById('subscribe-cta').href = 'mailto:info@mentorsuccessacademy.com?subject=MSA%20subscription';
+    document.getElementById('subscribe-cta').textContent = 'Contact us about a center membership';
+    document.getElementById('subscribe-cta').href = 'mailto:info@mentorsuccessacademy.com?subject=MSA%20center%20membership';
     document.getElementById('subscribe').hidden = true;
     return;
   }
@@ -967,7 +967,7 @@ document.getElementById('research-form').addEventListener('submit', async e => {
     return showMsg(msg, 'Please fill in all the required fields.', 'error');
   }
   if (parseInt(data.preschoolClassrooms, 10) < 2) {
-    return showMsg(msg, 'The research trial needs at least 2 classrooms serving children 2½ and older. You can still subscribe to MSA.', 'error');
+    return showMsg(msg, 'The research trial needs at least 2 classrooms serving children 2½ and older. You can still join MSA with a center membership.', 'error');
   }
   if (Object.values(data.agreements).some(v => !v)) {
     return showMsg(msg, 'Please confirm every item in the list to apply.', 'error');

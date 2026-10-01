@@ -729,7 +729,7 @@
     <div class="tab active" data-panel="centers">Centers &amp; Directors</div>
     <div class="tab" data-panel="reflections">All Reflections</div>
     <div class="tab" data-panel="certs">Certifications</div>
-    <div class="tab" data-panel="website">Trial Applications &amp; Subscribers</div>
+    <div class="tab" data-panel="website">Trial Applications &amp; Memberships</div>
   </nav>
 
   <main>
@@ -808,7 +808,7 @@
       </div>
 
       <div class="section-head" style="margin-top:36px;">
-        <h2>Paid Subscribers</h2>
+        <h2>Center Memberships</h2>
         <div class="meta" id="subs-count"></div>
       </div>
       <div class="reflection-table">
@@ -1056,7 +1056,7 @@ async function loadWebsite() {
 
     const active = subs.filter(s => s.status === 'active' || s.status === 'trialing').length;
     document.getElementById('subs-count').textContent = `${active} active`;
-    subsEl.innerHTML = subs.length === 0 ? '<div class="empty">No subscribers yet.</div>' : subs.map(s => {
+    subsEl.innerHTML = subs.length === 0 ? '<div class="empty">No center memberships yet.</div>' : subs.map(s => {
       const cls = (s.status === 'active' || s.status === 'trialing') ? 'ok' : (s.status === 'past_due' ? 'due' : 'bad');
       return `<div class="sub-row">
         <div class="name">${escapeHtml(s.program_name)}</div>

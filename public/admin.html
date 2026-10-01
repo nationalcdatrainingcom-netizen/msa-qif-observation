@@ -539,6 +539,36 @@
     font-size: 13.5px;
   }
   .cert-row:last-child { border-bottom: none; }
+  .app-row {
+    display: grid;
+    grid-template-columns: 1.8fr 1.4fr 0.9fr 1fr 1fr;
+    gap: 12px;
+    padding: 14px 18px;
+    align-items: center;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 13.5px;
+  }
+  .app-row:last-child { border-bottom: none; }
+  .app-row.head, .sub-row.head {
+    background: var(--cream-dark);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-soft);
+  }
+  .app-row .sub, .sub-row .sub { font-size: 12px; color: var(--text-muted); }
+  .app-row select { padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); font: inherit; }
+  .sub-row {
+    display: grid;
+    grid-template-columns: 1.6fr 1.6fr 1fr 1fr;
+    gap: 12px;
+    padding: 14px 18px;
+    align-items: center;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 13.5px;
+  }
+  .sub-row:last-child { border-bottom: none; }
   .cert-row.head {
     background: var(--cream-dark);
     font-size: 11px;
@@ -696,6 +726,7 @@
     <div class="tab active" data-panel="centers">Centers &amp; Directors</div>
     <div class="tab" data-panel="reflections">All Reflections</div>
     <div class="tab" data-panel="certs">Certifications</div>
+    <div class="tab" data-panel="website">Trial Applications &amp; Subscribers</div>
   </nav>
 
   <main>
@@ -753,6 +784,38 @@
           <div></div>
         </div>
         <div id="cert-rows"><div class="empty">Loading…</div></div>
+      </div>
+    </div>
+
+    <!-- ── Website Panel: research trial applications + paid subscribers ── -->
+    <div class="panel" id="panel-website">
+      <div class="section-head">
+        <h2>Research Trial Applications</h2>
+        <div class="meta" id="apps-count"></div>
+      </div>
+      <div class="reflection-table">
+        <div class="app-row head">
+          <div>Program</div>
+          <div>Director</div>
+          <div>Classrooms</div>
+          <div>Applied</div>
+          <div>Status</div>
+        </div>
+        <div id="app-rows"><div class="empty">Loading…</div></div>
+      </div>
+
+      <div class="section-head" style="margin-top:36px;">
+        <h2>Paid Subscribers</h2>
+        <div class="meta" id="subs-count"></div>
+      </div>
+      <div class="reflection-table">
+        <div class="sub-row head">
+          <div>Program</div>
+          <div>Contact</div>
+          <div>Status</div>
+          <div>Started</div>
+        </div>
+        <div id="sub-rows"><div class="empty">Loading…</div></div>
       </div>
     </div>
 
@@ -858,9 +921,9 @@ let reflectionContent = null;
 async function boot() {
   try {
     const r = await fetch('/api/auth/me');
-    if (!r.ok) { window.location.href = '/'; return; }
+    if (!r.ok) { window.location.href = '/login'; return; }
     me = await r.json();
-    if (me.role !== 'admin') { window.location.href = '/'; return; }
+    if (me.role !== 'admin') { window.location.href = '/login'; return; }
     if (me.must_change_password) { window.location.href = '/change-password'; return; }
     document.getElementById('user-name').textContent = me.full_name;
     setupTabs();
@@ -868,14 +931,14 @@ async function boot() {
     populateWeekFilter();
   } catch (e) {
     console.error(e);
-    window.location.href = '/';
+    window.location.href = '/login';
   }
 }
 
 document.getElementById('logout-link').addEventListener('click', async (e) => {
   e.preventDefault();
   await fetch('/api/auth/logout', { method: 'POST' });
-  window.location.href = '/';
+  window.location.href = '/login';
 });
 
 // ── Tabs ─────────────────────────────────────────────────────────
@@ -888,6 +951,7 @@ function setupTabs() {
       const panel = tab.dataset.panel;
       document.getElementById('panel-' + panel).classList.add('active');
       if (panel === 'certs') loadCertifications();
+      if (panel === 'website') loadWebsite();
       if (panel === 'reflections' && allReflections.length === 0) {
         await loadReflections();
       }
@@ -957,6 +1021,59 @@ async function unlockCert(userId, name) {
   const r = await fetch(`/api/admin/certifications/${userId}/unlock`, { method: 'POST' });
   if (!r.ok) { alert('Could not unlock.'); return; }
   loadCertifications();
+}
+
+// ── Trial applications & subscribers ────────────────────────────
+async function loadWebsite() {
+  const appsEl = document.getElementById('app-rows');
+  const subsEl = document.getElementById('sub-rows');
+  try {
+    const [ra, rs] = await Promise.all([fetch('/api/admin/research-applications'), fetch('/api/admin/subscriptions')]);
+    if (!ra.ok || !rs.ok) throw new Error();
+    const apps = await ra.json();
+    const subs = await rs.json();
+
+    document.getElementById('apps-count').textContent =
+      `${apps.length} application${apps.length === 1 ? '' : 's'} · ${apps.filter(a => a.status === 'accepted').length} accepted`;
+    appsEl.innerHTML = apps.length === 0 ? '<div class="empty">No applications yet.</div>' : apps.map(a => {
+      const place = [a.city, a.state].filter(Boolean).join(', ');
+      const opts = ['new', 'accepted', 'waitlist', 'declined']
+        .map(s => `<option value="${s}"${s === a.status ? ' selected' : ''}>${s[0].toUpperCase() + s.slice(1)}</option>`).join('');
+      return `<div class="app-row">
+        <div><div class="name">${escapeHtml(a.program_name)}</div>
+          <div class="sub">${escapeHtml(place)}${a.license_number ? ' · License ' + escapeHtml(a.license_number) : ''}</div>
+          ${a.notes ? `<div class="sub">“${escapeHtml(a.notes)}”</div>` : ''}</div>
+        <div><div>${escapeHtml(a.director_name)}</div>
+          <div class="sub"><a href="mailto:${escapeHtml(a.email)}">${escapeHtml(a.email)}</a>${a.phone ? ' · ' + escapeHtml(a.phone) : ''}</div></div>
+        <div>${a.preschool_classrooms}</div>
+        <div>${new Date(a.created_at).toLocaleDateString()}</div>
+        <div><select onchange="setAppStatus(${a.id}, this.value)">${opts}</select></div>
+      </div>`;
+    }).join('');
+
+    const active = subs.filter(s => s.status === 'active' || s.status === 'trialing').length;
+    document.getElementById('subs-count').textContent = `${active} active`;
+    subsEl.innerHTML = subs.length === 0 ? '<div class="empty">No subscribers yet.</div>' : subs.map(s => {
+      const cls = (s.status === 'active' || s.status === 'trialing') ? 'ok' : (s.status === 'past_due' ? 'due' : 'bad');
+      return `<div class="sub-row">
+        <div class="name">${escapeHtml(s.program_name)}</div>
+        <div><div>${escapeHtml(s.contact_name)}</div><div class="sub"><a href="mailto:${escapeHtml(s.email)}">${escapeHtml(s.email)}</a></div></div>
+        <div><span class="cert-badge ${cls}">${escapeHtml(s.status.replace('_', ' '))}</span></div>
+        <div>${new Date(s.created_at).toLocaleDateString()}</div>
+      </div>`;
+    }).join('');
+  } catch (e) {
+    appsEl.innerHTML = '<div class="empty">Could not load applications.</div>';
+    subsEl.innerHTML = '';
+  }
+}
+
+async function setAppStatus(id, status) {
+  const r = await fetch(`/api/admin/research-applications/${id}`, {
+    method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status })
+  });
+  if (!r.ok) { alert('Could not update status.'); loadWebsite(); return; }
+  loadWebsite();
 }
 
 // ── Centers ──────────────────────────────────────────────────────

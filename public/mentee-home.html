@@ -338,9 +338,9 @@ async function setupLeapCard(role) {
 async function boot() {
   try {
     const r = await fetch('/api/auth/me');
-    if (!r.ok) { window.location.href = '/'; return; }
+    if (!r.ok) { window.location.href = '/login'; return; }
     me = await r.json();
-    if (me.role !== 'mentee') { window.location.href = '/'; return; }
+    if (me.role !== 'mentee') { window.location.href = '/login'; return; }
     if (me.must_change_password) { window.location.href = '/change-password'; return; }
     document.getElementById('user-name').textContent = me.full_name;
     document.getElementById('welcome-headline').textContent = 'Welcome, ' + firstName(me.full_name) + '.';
@@ -348,14 +348,14 @@ async function boot() {
     await loadMentor();
   } catch (e) {
     console.error(e);
-    window.location.href = '/';
+    window.location.href = '/login';
   }
 }
 
 document.getElementById('logout-link').addEventListener('click', async (e) => {
   e.preventDefault();
   await fetch('/api/auth/logout', { method: 'POST' });
-  window.location.href = '/';
+  window.location.href = '/login';
 });
 
 function firstName(full) {

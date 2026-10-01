@@ -1697,6 +1697,34 @@ app.get('/api/admin/stripe-status', requireRole('admin'), async (req, res) => {
       out.price = `Stripe error: ${e.message}`;
     }
   }
+  // ?promo=CODE explains why a promotion code is or isn't accepted at checkout
+  const promo = typeof req.query.promo === 'string' ? req.query.promo.trim() : '';
+  if (stripe && promo) {
+    try {
+      const found = await stripe.promotionCodes.list({ code: promo, limit: 10, expand: ['data.coupon.applies_to'] });
+      if (!found.data.length) {
+        out.promo = `NOT FOUND: no promotion code "${promo}" in this Stripe account in ${mode(STRIPE_SECRET_KEY)} mode. A coupon alone is not enough: open the coupon and add a promotion code, with Test mode off.`;
+      } else {
+        out.promo = found.data.map(pc => {
+          const c = pc.coupon, r = pc.restrictions || {};
+          const problems = [];
+          if (!pc.active) problems.push('the promotion code is turned off (inactive)');
+          if (!c.valid) problems.push('the coupon is no longer valid (expired, used up, or deleted)');
+          if (pc.expires_at && pc.expires_at * 1000 < Date.now()) problems.push('the promotion code has expired');
+          if (pc.max_redemptions && pc.times_redeemed >= pc.max_redemptions) problems.push('the promotion code has been used the maximum number of times');
+          if (pc.customer) problems.push('it is limited to one specific customer');
+          if (r.first_time_transaction) problems.push('it is limited to first-time customers (your email may already be a customer)');
+          if (r.minimum_amount) problems.push(`it needs a minimum order of ${(r.minimum_amount / 100).toFixed(2)} ${(r.minimum_amount_currency || '').toUpperCase()}`);
+          if (c.applies_to && c.applies_to.products && c.applies_to.products.length) problems.push(`the coupon only applies to products ${c.applies_to.products.join(', ')}; make sure the MSA product is one of them`);
+          if (c.currency && c.currency !== 'usd') problems.push(`the coupon is in ${c.currency.toUpperCase()}, not USD`);
+          const what = c.percent_off ? `${c.percent_off}% off` : `${(c.amount_off / 100).toFixed(2)} off`;
+          return `${pc.code}: ${what}, ${c.duration}${problems.length ? ' - PROBLEM: ' + problems.join('; ') : ' - looks OK'}`;
+        });
+      }
+    } catch (e) {
+      out.promo = `Stripe error: ${e.message}`;
+    }
+  }
   res.json(out);
 });
 

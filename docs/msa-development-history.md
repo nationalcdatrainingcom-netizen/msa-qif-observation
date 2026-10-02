@@ -3,7 +3,7 @@
 From the first concept (spring 2025) to the live platform and research trial (fall 2026)
 
 Prepared as source material for a paper on how MSA changed over time.
-Last updated: October 2, 2026
+Last updated: October 2, 2026 (revised with the founders' clarifications on leadership expression, CLASS alignment and reflection privacy)
 
 ---
 
@@ -288,10 +288,12 @@ The platform organizes the 12 weeks into **three domains of four weeks each**:
 Three points matter for the paper:
 
 1. **The ECE content came back, with a different job.** The April 2025 curriculum taught teachers ECE topics. In the platform, ECE quality is still the subject of every week, but it is **what the mentor observes and coaches on**, not what the mentor or mentee is taught. The question "What does a teacher need to know?" survives as the observation lens. The question "What does a mentor need to do?" became the training itself.
-2. **The domains reflect research on teacher–child interaction quality.** The three-domain structure (emotional support, classroom organization, instructional support) closely follows the domains used in established classroom-quality research, especially the CLASS framework. In May 2026 the team deliberately relabeled topics in MSA's own terms. Some older wording remains in the code (for example, the end-of-domain reflections still say "Positive Climate," "Teacher Sensitivity" and "Negative Climate"). Week 4's move from "Negative Climate" to "Emotional Safety & Repair" (September 2026) also reframes the topic from avoiding harm to building safety and repairing it when it is broken.
+2. **The training is deliberately aligned to CLASS.** MSA's founders recognize the research showing that teacher–child interactions and the classroom environment are major drivers of classroom quality, and they aligned the mentor training to that research on purpose. The three domains follow CLASS's structure (emotional support, classroom organization, instructional support), and the training's focus areas use CLASS dimension names (for example, "Positive Climate · Warmth in Unstructured Time"). The alignment does two things. It **reminds the mentor**, every week, how much interactions and environment matter. And it gives the mentor a way to make sure **the mentee is gaining understanding, seeing the practice modeled, and developing their own skills.** In May 2026 the weekly topics were given MSA's own names. Week 4's move from "Negative Climate" to "Emotional Safety & Repair" (September 2026) also reframes the topic from avoiding harm to building safety and repairing it when it is broken. In October 2026 the reflections and the observation tool were updated to use the same weekly topic names as the training.
 3. **The focus narrowed to interaction quality.** Several topics from 2025 (families and community, physical health, professional advocacy, identity) are not weekly topics in the platform. The 12 weeks now concentrate on the moment-to-moment interactions between teachers and children, which can be observed, counted and coached.
 
 ## 19. LEAP: from knowing your own voice to coaching someone else's
+
+**Why "leadership expression."** The founders concluded that no single method, neither a natural "voice" nor a "leadership style," could reach their goals alone. A voice framework describes the emotional side of how a person shows up. A leadership-style framework describes the more intellectual side: how a person thinks, decides and works. MSA wanted to train to **both the emotional and the intellectual perspective**, so it combined them into a single construct: the **leadership expression**. This is the point where the 5 Voices work of 2025 (Section 7) was absorbed into something broader.
 
 **When:** the full curriculum (12 modules × 16 scenarios) was in place and being refined through September 2026.
 
@@ -308,7 +310,7 @@ The mentor training is called **MSA LEAP Training**. LEAP stands for **Leadershi
 5. **Feedback:** the correct choice is explained as a match to *this mentee's* expression. Each wrong choice is identified as **another mentor type's natural move** (for example, "This is a Sustainer's natural move. It won't land with a Driver").
 6. **Action steps:** concrete next moves for the coaching conversation and a trackable goal.
 
-**Why this is a major step in the story.** In 2025, the 5 Voices work centered on *self*-knowledge: know your voice so you can lead yourself and others (Section 7). LEAP keeps self-knowledge, since mentors still learn their own expression, but makes it the starting point rather than the goal. The training goal is **adaptation**: recognizing your own default coaching instinct, seeing when it will miss with a particular teacher, and choosing what will actually reach that person. In the platform's words, the right approach "works regardless of your own natural leadership expression."
+**Why this is a major step in the story.** The move to leadership expression did two things. First, it widened the lens from the emotional side alone to the emotional and intellectual sides together. Second, it changed the goal. In 2025, the 5 Voices work centered on *self*-knowledge: know your voice so you can lead yourself and others (Section 7). LEAP keeps self-knowledge, since mentors still learn their own expression, but makes it the starting point rather than the goal. The training goal is **adaptation**: recognizing your own default coaching instinct, seeing when it will miss with a particular teacher, and choosing what will actually reach that person. In the platform's words, the right approach "works regardless of your own natural leadership expression."
 
 This is the "mentor as primary learner" decision (Section 12) worked out in full. What the mentor practices each week is not ECE content. It is the **coaching decision**: what to say first, to this person, about this moment.
 
@@ -332,12 +334,16 @@ The platform makes the developmental reflection versus program evaluation distin
 
 - Self-ratings in the daily and weekly reflections are about *practice* ("How would you rate the overall positive climate in your classroom this week? What evidence supports your rating?").
 - Ratings of the *program* appear only at the end of each domain, three times in 12 weeks. That keeps product evaluation out of the everyday reflective conversation.
-- **Privacy is the default.** A mentee's reflection is "private to you and the program admins by default." The mentee can choose to share any reflection with their mentor and can change that choice at any time. The mentor home page shows only what the mentee has chosen to share.
+- **Who sees what.**
+  - **Mentors** see their own reflections.
+  - **Mentees** see their own reflections, and each mentee **chooses** whether to share any reflection with their mentor. They can change that choice at any time. The mentor home page shows only what the mentee has chosen to share.
+  - **The two admins, Mary and Rebecca,** can read reflections, so the founders can follow how the program is working and what participants are experiencing.
+  - **Program directors cannot read reflections.** The director dashboard shows only *counts* (for example, how many weekly reflections a mentor or mentee has completed), never the content.
 - The mentee page frames it this way: *"These reflections are not evaluations — they are invitations."*
 
 **Co-founder continuity.** Weeks 1 and 2 use Rebecca's exact wording from the **Inspired Growth Mentor Training Curriculum 12-Week Reflection Guide**. Weeks 3 to 12 use placeholder questions that follow her template while she finishes the guide. The April 2025 division of labor (Section 3) still holds in the platform: Rebecca owns the reflective and relational content, and Mary owns the observation content, the training scenarios and the infrastructure.
 
-This answers part of the Section 15 question, "What should stay private between mentor and mentee?" The mentee decides. One tension remains: program admins can see reflections by default (see Section 28).
+This answers part of the Section 15 question, "What should stay private between mentor and mentee?" The mentee decides. It also answers a question the 2026 redesign raised about the workplace: reflections are kept away from the people who supervise the participants. Directors can see *that* reflection is happening, which supports accountability, but not *what* anyone wrote, which protects relational safety. Only the program's two founders read the content.
 
 ## 21. From a mentor's tool to a program platform (May 2026)
 
@@ -412,10 +418,10 @@ and puts this front and center: ***"The mentor is the one being trained."*** The
 MSA is now a **mentor development system for early childhood programs**, made up of:
 
 1. **A theory of change:** mentor capability, not content delivery, is what drives teacher growth, and it stays inside the program.
-2. **A content lens:** three domains and 12 weekly topics in teacher–child interaction quality, in MSA's own terms.
-3. **An adaptive coaching curriculum:** 192 scenarios teaching mentors to fit their coaching to 16 leadership-expression profiles.
+2. **A content lens:** three domains and 12 weekly topics in teacher–child interactions and environment, deliberately aligned to CLASS and named in MSA's own terms.
+3. **An adaptive coaching curriculum:** built on leadership expression, which combines the emotional and intellectual sides of how people lead, with 192 scenarios teaching mentors to fit their coaching to 16 leadership-expression profiles.
 4. **An observation instrument:** the QIF, with tallied indicators, a five-day rhythm, Day 5 coaching reports, goals and mentee resources.
-5. **A reflection system:** daily, weekly and end-of-domain reflections, private by default and shared by the mentee's choice, with program evaluation kept separate.
+5. **A reflection system:** daily, weekly and end-of-domain reflections. Each person sees their own, mentees choose what to share with their mentor, only the two founders read the content, and directors see completion counts only. Program evaluation is kept separate.
 6. **Organizational infrastructure:** centers, roles, a director dashboard and a coaching call library.
 7. **A credential:** the annually calibrated MSA Certified Mentor.
 8. **A business model:** per-mentor center membership built around a growing number of mentees.
@@ -438,7 +444,7 @@ MSA is now a **mentor development system for early childhood programs**, made up
 | 2026 redesign | Apr 2026 | What makes someone good at developing another teacher? | Mentor capability itself |
 | Observation tool (QIF) | by May 2026 | How does a mentor see practice consistently? | Counted interaction evidence, weekly coaching cycle |
 | Platform v3 | May 2026 | How does mentoring run across a whole organization? | Roles, centers, private-by-default reflection |
-| LEAP curriculum | through Sep 2026 | How does a mentor reach *this* teacher? | Adapting coaching to 16 leadership-expression profiles |
+| LEAP curriculum | through Sep 2026 | How does a mentor reach *this* teacher? | Leadership expression (emotional + intellectual); adapting coaching to 16 profiles |
 | Certification | Sep 2026 | Can we tell whether a mentor is competent, and stays competent? | Scenario-based test, annual calibration |
 | Public launch and research trial | Oct 2026 | Does mentoring measurably work, and can it grow beyond one organization? | Center membership, comparison-group research |
 
@@ -452,6 +458,7 @@ Through implementation and design, that assumption gave way, one piece at a time
 
 - Knowledge transfer was not enough. **The developmental relationship mattered.** *(2025)*
 - Mentors needed specific skills, beginning with **self-awareness and communication**. *(5 Voices, June 2025)*
+- No single lens was enough. Mentors needed to understand both the **emotional and the intellectual** sides of how people lead. *(Leadership expression)*
 - Learning had to reach the classroom, so mentors needed to **observe practice**, not just discuss ideas. *(Practice model, then the QIF)*
 - Reflection needed structure, and it needed **protection** from evaluation. *(2026 redesign, then private-by-default reflections)*
 - Self-awareness was a starting point, not the goal. The goal was **adapting to another person.** *(LEAP)*
@@ -460,7 +467,7 @@ Through implementation and design, that assumption gave way, one piece at a time
 
 **The developmental arc:**
 
-> Content → Mentoring → Relationship → Self-awareness → Reflection → Observation → Application → Mentor competency → Adaptive coaching → Structured system → Credentialing → Evidence
+> Content → Mentoring → Relationship → Self-awareness → Leadership expression (emotional + intellectual) → Reflection → Observation → Application → Mentor competency → Adaptive coaching → Structured system → Credentialing → Evidence
 
 **One more finding for the paper:** the ECE content was never discarded. It was **repositioned.** The topics MSA first set out to *teach* teachers became what mentors *watch for and coach on*. MSA's 2025 starting point and its 2026 result are about the same classrooms and the same children. What changed is who is being developed and how.
 
@@ -470,15 +477,14 @@ Through implementation and design, that assumption gave way, one piece at a time
 
 These are gaps or conflicts between the two records, or facts the platform shows but does not explain.
 
-1. **5 Voices to LEAP.** The 2025 curriculum used the 5 Voices framework. The platform uses LEAP (Driver, Inspirer, Sustainer, Cultivator, and 12 blends), and 5 Voices does not appear. When and why did this change happen, and is LEAP adapted from 5 Voices, from Rebecca's Inspired Growth work, or from another model? This is likely one of the most important transitions to document clearly.
-2. **CLASS alignment.** The May 2026 note says topic labels were changed to be "distinct from CLASS terminology." The paper should say plainly how MSA's domains relate to CLASS (inspired by, adapted from, or independent of it) and why they were relabeled. Older terms remain in the end-of-domain reflections and should be updated.
-3. **Topic labels differ between files.** The reflections use "Engaging Activities," "Connections & Reasoning," "Responsive Feedback" and "Conversation & Vocabulary" for Weeks 7, 9, 10 and 11. The training and landing page use "Instructional Learning Formats," "Concept Development," "Quality of Feedback" and "Language Modeling." Domain names also differ slightly ("Classroom Organization" and "Instructional Support" in the training file). Decide which set is final.
-4. **When the QIF was built.** The QIF predates the repository (first commit May 18, 2026). Its original build date and version history should come from Mary's own files or the ChatGPT and Claude conversations.
-5. **Reflection privacy.** Reflections are "private to you and the program admins by default." Given the 2026 concern about relational safety, confirm that admin visibility is intended and that participants are told about it. In the research trial, confirm how reflection data relates to consent.
-6. **Reflections for Weeks 3 to 12.** These are still placeholders awaiting Rebecca's final wording, as are the end-of-domain questions.
-7. **Rebecca's surname.** The ChatGPT record spells it "Munlynn." The platform and website spell it "Munlyn." Use one spelling throughout.
-8. **Mentee population.** The 2025 concept included new hires, struggling teachers and future leaders. The 2026 product is written for "mentors supporting teachers of preschool-age children (2½–5)." This narrowing (or focusing) should be named and explained.
-9. **Topics dropped from the weekly sequence.** Families and community, health and physical wellbeing, and professional advocacy were 2025 weekly themes. Whether they moved to orientation, CDA or apprenticeship materials, or were dropped on purpose, belongs in the paper.
+1. **When 5 Voices became leadership expression.** The reasoning is now recorded (Section 19). The date of the change, and any intermediate versions, would help the timeline.
+2. **When the QIF was built.** The QIF predates the repository (first commit May 18, 2026). Its original build date and version history should come from Mary's own files or the ChatGPT and Claude conversations.
+3. **Reflections for Weeks 3 to 12.** These are still placeholders awaiting Rebecca's final wording, as are the end-of-domain questions.
+4. **The QIF's Week 4 focus.** The training and reflections call Week 4 "Emotional Safety & Repair." The observation tool still calls it "Conflict as Learning," and its indicators are about handling conflict between children ("stays calm during conflict," "guides problem-solving process"). This is a content difference, not just a label, so it was left as is. Decide whether the Week 4 observation indicators should be revised to match the training.
+5. **Domain names differ slightly.** The reflections and the website use "Learning Environment & Organization" and "Instructional Depth & Language." The training modules and the observation tool use "Classroom Organization" and "Instructional Support." Pick one pair.
+6. **Consent language for the research trial.** Trial participants should be told that the two founders can read reflections and that directors cannot.
+7. **Mentee population.** The 2025 concept included new hires, struggling teachers and future leaders. The 2026 product is written for "mentors supporting teachers of preschool-age children (2½–5)." This narrowing (or focusing) should be named and explained.
+8. **Topics dropped from the weekly sequence.** Families and community, health and physical wellbeing, and professional advocacy were 2025 weekly themes. Whether they moved to orientation, CDA or apprenticeship materials, or were dropped on purpose, belongs in the paper.
 
 ---
 
@@ -492,3 +498,4 @@ These are gaps or conflicts between the two records, or facts the platform shows
 | Sep 25, 2026 | Training page, mentor home and mentee home revised |
 | Sep 30, 2026 | Coaching Call Library added to the training dashboard. MSA Certified Mentor test, annual calibration and certificate. Training locked during tests. Director view |
 | Oct 1, 2026 | Public landing page. Research trial applications open (trial begins January 2027). Stripe center membership. "The mentor is the one being trained" message. Per-mentor pricing and volume discounts. One mentee at a time per mentor |
+| Oct 2, 2026 | Reflection and observation-tool topic names updated to match the weekly training topics |

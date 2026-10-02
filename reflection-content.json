@@ -1,8 +1,8 @@
 {
   "_meta": {
     "version": "1.0",
-    "lastUpdated": "2026-05-18",
-    "notes": "Weeks 1 and 2 use Rebecca's exact wording from the Inspired Growth Mentor Training Curriculum 12-Week Reflection Guide. Weeks 3-12 use placeholder questions following Rebecca's structural template. Update these as Rebecca finalizes her guide. Topic labels aligned to MSA framework (distinct from CLASS terminology) — May 2026."
+    "lastUpdated": "2026-10-02",
+    "notes": "Weeks 1 and 2 use Rebecca's exact wording from the Inspired Growth Mentor Training Curriculum 12-Week Reflection Guide. Weeks 3-12 use placeholder questions following Rebecca's structural template. Update these as Rebecca finalizes her guide. Topic labels aligned to MSA framework (distinct from CLASS terminology) — May 2026. Topic names and in-question references updated to match the weekly training topics — October 2026."
   },
   "domains": [
     {
@@ -70,7 +70,7 @@
           {
             "id": "goal_1",
             "section": "Goals for the Week Ahead",
-            "text": "Based on what you explored this week around Positive Climate, identify one specific, observable goal for your classroom environment next week."
+            "text": "Based on what you explored this week around Warmth & Connection, identify one specific, observable goal for your classroom environment next week."
           },
           {
             "id": "goal_2",
@@ -80,7 +80,7 @@
           {
             "id": "data_1",
             "section": "Data, Assessment & Progress",
-            "text": "On a scale of 1–5, how would you rate the overall positive climate in your classroom this week? What evidence supports your rating?"
+            "text": "On a scale of 1–5, how would you rate the overall warmth and connection in your classroom this week? What evidence supports your rating?"
           },
           {
             "id": "data_2",
@@ -93,7 +93,7 @@
         "mentee": [
           {
             "id": "d1",
-            "text": "Today's focus area was Positive Climate. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+            "text": "Today's focus area was Warmth & Connection. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
           },
           {
             "id": "d2",
@@ -120,7 +120,7 @@
         "mentor": [
           {
             "id": "m1",
-            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Positive Climate?"
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Warmth & Connection?"
           },
           {
             "id": "m2",
@@ -149,7 +149,7 @@
           {
             "id": "prev_1",
             "section": "Previous Week Recap",
-            "text": "Last week you focused on Positive Climate. Looking back, what was your biggest takeaway about the emotional tone in your classroom?"
+            "text": "Last week you focused on Warmth & Connection. Looking back, what was your biggest takeaway about the emotional tone in your classroom?"
           },
           {
             "id": "prev_2",
@@ -197,7 +197,7 @@
         "mentee": [
           {
             "id": "d1",
-            "text": "Today's focus area was Teacher Sensitivity. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+            "text": "Today's focus area was Teacher Responsiveness. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
           },
           {
             "id": "d2",
@@ -224,7 +224,7 @@
         "mentor": [
           {
             "id": "m1",
-            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Teacher Sensitivity?"
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Teacher Responsiveness?"
           },
           {
             "id": "m2",
@@ -254,7 +254,7 @@
           {
             "id": "prev_1",
             "section": "Previous Week Recap",
-            "text": "Last week you focused on Teacher Sensitivity. What was your biggest takeaway about reading children's cues?"
+            "text": "Last week you focused on Teacher Responsiveness. What was your biggest takeaway about reading children's cues?"
           },
           {
             "id": "prev_2",
@@ -407,7 +407,7 @@
         "mentee": [
           {
             "id": "d1",
-            "text": "Today's focus area was Negative Climate (Absence of). In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+            "text": "Today's focus area was Emotional Safety & Repair. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
           },
           {
             "id": "d2",
@@ -434,7 +434,7 @@
         "mentor": [
           {
             "id": "m1",
-            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Negative Climate (Absence of)?"
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Emotional Safety & Repair?"
           },
           {
             "id": "m2",
@@ -474,7 +474,7 @@
           {
             "id": "strat_1",
             "section": "Strategies Used & Outcomes",
-            "text": "Describe a behavior management moment this week where your proactive approach prevented a problem before it escalated."
+            "text": "Describe a classroom guidance moment this week where your proactive approach prevented a problem before it escalated."
           },
           {
             "id": "strat_2",
@@ -499,12 +499,12 @@
           {
             "id": "data_1",
             "section": "Data, Assessment & Progress",
-            "text": "On a scale of 1–5, how proactive (vs. reactive) was your behavior management this week? What evidence supports your rating?"
+            "text": "On a scale of 1–5, how proactive (vs. reactive) was your classroom guidance this week? What evidence supports your rating?"
           },
           {
             "id": "data_2",
             "section": "Data, Assessment & Progress",
-            "text": "What times of day or activities required the most behavior management this week? What does the pattern suggest about your environment or schedule?"
+            "text": "What times of day or activities required the most guidance this week? What does the pattern suggest about your environment or schedule?"
           }
         ]
       },
@@ -512,7 +512,7 @@
         "mentee": [
           {
             "id": "d1",
-            "text": "Today's focus area was Behavior Management. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+            "text": "Today's focus area was Proactive Classroom Guidance. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
           },
           {
             "id": "d2",
@@ -539,7 +539,7 @@
         "mentor": [
           {
             "id": "m1",
-            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Behavior Management?"
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Proactive Classroom Guidance?"
           },
           {
             "id": "m2",
@@ -569,7 +569,7 @@
           {
             "id": "prev_1",
             "section": "Previous Week Recap",
-            "text": "Last week you focused on Behavior Management. What was your biggest takeaway about being proactive rather than reactive?"
+            "text": "Last week you focused on Proactive Classroom Guidance. What was your biggest takeaway about being proactive rather than reactive?"
           },
           {
             "id": "prev_2",
@@ -589,7 +589,7 @@
           {
             "id": "strat_3",
             "section": "Strategies Used & Outcomes",
-            "text": "What part of your day still feels chaotic or low-productivity? What specifically is getting in the way?"
+            "text": "What part of your day still feels chaotic or loses the most learning time? What specifically is getting in the way?"
           },
           {
             "id": "goal_1",
@@ -617,7 +617,7 @@
         "mentee": [
           {
             "id": "d1",
-            "text": "Today's focus area was Productivity. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
+            "text": "Today's focus area was Maximizing Learning Time. In one to two sentences, describe the most significant moment in your classroom today — positive or challenging — related to this topic."
           },
           {
             "id": "d2",
@@ -644,7 +644,7 @@
         "mentor": [
           {
             "id": "m1",
-            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Productivity?"
+            "text": "Based on your observation or interaction today, what evidence of growth did you notice in your mentee related to Maximizing Learning Time?"
           },
           {
             "id": "m2",
@@ -666,7 +666,7 @@
       }
     },
     "7": {
-      "topic": "Engaging Activities",
+      "topic": "Instructional Learning Formats",
       "domain": 2,
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
@@ -674,7 +674,7 @@
           {
             "id": "prev_1",
             "section": "Previous Week Recap",
-            "text": "Last week you focused on Productivity. What was your biggest takeaway about how time and routines shape children's learning?"
+            "text": "Last week you focused on Maximizing Learning Time. What was your biggest takeaway about how time and routines shape children's learning?"
           },
           {
             "id": "prev_2",
@@ -771,7 +771,7 @@
       }
     },
     "8": {
-      "topic": "Learning Environment & Design",
+      "topic": "Learning Environment Design",
       "domain": 2,
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
@@ -876,7 +876,7 @@
       }
     },
     "9": {
-      "topic": "Connections & Reasoning",
+      "topic": "Concept Development",
       "domain": 3,
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
@@ -981,7 +981,7 @@
       }
     },
     "10": {
-      "topic": "Responsive Feedback",
+      "topic": "Quality of Feedback",
       "domain": 3,
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
@@ -1086,7 +1086,7 @@
       }
     },
     "11": {
-      "topic": "Conversation & Vocabulary",
+      "topic": "Language Modeling",
       "domain": 3,
       "_placeholder": "Awaiting Rebecca's final wording. Placeholder follows Week 1/2 template.",
       "weekly": {
@@ -1310,7 +1310,7 @@
           },
           {
             "id": "eod1_2",
-            "text": "Which week's topic — Positive Climate, Teacher Sensitivity, Regard for Child Perspective, or Negative Climate — challenged you most, and what did the struggle teach you?"
+            "text": "Which week's topic — Warmth & Connection, Teacher Responsiveness, Regard for Child Perspective, or Emotional Safety & Repair — challenged you most, and what did the struggle teach you?"
           },
           {
             "id": "eod1_3",
@@ -1366,7 +1366,7 @@
         "mentee": [
           {
             "id": "eod2_1",
-            "text": "Looking back across Domain 2 — Behavior Management, Productivity, Instructional Learning Formats, and Learning Environment Design — what is the single most important shift you have made in how your classroom runs?"
+            "text": "Looking back across Domain 2 — Proactive Classroom Guidance, Maximizing Learning Time, Instructional Learning Formats, and Learning Environment Design — what is the single most important shift you have made in how your classroom runs?"
           },
           {
             "id": "eod2_2",

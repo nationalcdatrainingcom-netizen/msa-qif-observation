@@ -181,6 +181,8 @@ function structuredData(page, siteUrl) {
       jobTitle: 'Co-founder, Mentor Success Academy',
       image: `${siteUrl}/img/mary.jpg`,
       url: `${siteUrl}/founders`,
+      // Her own bio site. Add Rebecca's the same way once she has one.
+      sameAs: ['https://mary-wardlaw.com'],
       worksFor: [
         { '@id': id('organization') },
         { '@type': 'Organization', name: "The Children's Center" },

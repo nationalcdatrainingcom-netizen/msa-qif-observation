@@ -292,6 +292,7 @@ footer { background: var(--green-deep); color: rgba(255,255,255,.8); padding: 44
 .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
 footer a { color: var(--gold-soft); text-decoration: none; }
 footer .brand { font: 600 19px 'Playfair Display', serif; color: #fff; }
+footer .updated { color: rgba(255,255,255,.6); font-size: 13px; }
 
 /* ── Current page in the nav ── */
 .nav-links a[aria-current="page"] { color: var(--gold); }

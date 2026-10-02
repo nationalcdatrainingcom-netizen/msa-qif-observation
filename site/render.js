@@ -191,7 +191,7 @@ function structuredData(page, siteUrl) {
       jobTitle: 'Co-founder, Mentor Success Academy',
       image: `${siteUrl}/img/mary.jpg`,
       url: `${siteUrl}/founders`,
-      // Her own bio site. Add Rebecca's the same way once she has one.
+      // Her own bio site
       sameAs: ['https://mary-wardlaw.com'],
       worksFor: [
         { '@id': id('organization') },
@@ -209,7 +209,7 @@ function structuredData(page, siteUrl) {
       url: `${siteUrl}/founders`,
       worksFor: [
         { '@id': id('organization') },
-        { '@type': 'Organization', name: 'Inspired Growth, LLC' }
+        { '@type': 'Organization', name: 'Inspired Growth, LLC', url: 'https://inspiredgrowthllc.com' }
       ],
       alumniOf: [
         { '@type': 'CollegeOrUniversity', name: 'Georgia Institute of Technology' },

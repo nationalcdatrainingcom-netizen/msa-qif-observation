@@ -1,0 +1,86 @@
+  <div class="banner" id="subscribed-banner">
+    Welcome to Mentor Success Academy! Your center membership is active. We'll be in touch by email to set up your program's accounts.
+  </div>
+
+  <section class="page-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › <span aria-current="page">Center Membership</span></nav>
+      <h1>Mentor Success Academy center membership</h1>
+      <p class="lead">A Mentor Success Academy center membership gives your program full access to MSA&rsquo;s mentor training, annual MSA Certified Mentor certification and tools for mentors, mentees and directors. It is priced monthly per mentor, with discounts for 2 or more mentors. Start any time, with no research requirements, and manage or cancel your membership online.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="container">
+      <div class="paths" style="margin-top:0">
+        <div class="path paid" id="pricing" style="background:var(--cream)">
+          <span class="eyebrow">Center Membership</span>
+          <h3>Full program access</h3>
+          <!-- The price below is replaced with the live Stripe price when it loads -->
+          <div class="price" id="price-display">$249<small> / month for 1 mentor</small></div>
+          <!-- Filled from the Stripe price's tiers when it loads; these rows are the fallback -->
+          <div class="discounts" id="discounts">
+            <div class="discounts-title">Discounts for 2 or more mentors</div>
+            <table id="discount-rows">
+              <tr><td>2–3 mentors</td><td>$150 each / month</td></tr>
+              <tr><td>4–5 mentors</td><td>$125 each / month</td></tr>
+              <tr><td>6–7 mentors</td><td>$115 each / month</td></tr>
+              <tr><td>8 or more mentors</td><td>$105 each / month</td></tr>
+            </table>
+          </div>
+          <ul>
+            <li>Mentor training and annual certification for your mentors</li>
+            <li>Each mentor works with one mentee at a time, with unlimited mentees over the membership</li>
+            <li>Tools for your mentors, their mentees and your director</li>
+            <li>Built for mentors of preschool teachers (children 2½–5)</li>
+            <li>Start any time, no research requirements</li>
+            <li>Manage or cancel your membership online</li>
+          </ul>
+          <a href="#subscribe" class="btn btn-primary" id="subscribe-cta">Become a member</a>
+        </div>
+      <div class="form-card" id="subscribe">
+        <form id="subscribe-form" novalidate>
+          <h3>Start your center membership</h3>
+          <p class="sub" id="subscribe-sub">You'll be taken to our secure payment page, powered by Stripe, to finish.</p>
+          <div class="field">
+            <label for="s-program">Program name</label>
+            <input id="s-program" name="programName" required maxlength="200">
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="s-name">Your name</label>
+              <input id="s-name" name="contactName" required maxlength="200" autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="s-email">Email</label>
+              <input id="s-email" name="email" type="email" required maxlength="200" autocomplete="email">
+            </div>
+          </div>
+          <div class="field">
+            <label for="s-mentors">Number of mentors</label>
+            <input id="s-mentors" name="mentors" type="number" min="1" max="500" value="1" required>
+          </div>
+          <div class="total-line" id="total-line" hidden></div>
+          <button type="submit" class="btn btn-primary" style="width:100%" id="subscribe-btn">Continue to payment</button>
+          <div class="msg" id="subscribe-msg"></div>
+        </form>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Membership questions ── -->
+  <section>
+    <div class="container prose">
+      <h2>Questions about membership</h2>
+      <h3>What does a center membership include?</h3>
+      <p>Each mentor gets the full 12-week training, built on MSA&rsquo;s LEAP framework, and can earn the annual MSA Certified Mentor credential. Mentors, their mentees and your director each get their own tools: weekly reflections, classroom observations with the Quality Interaction Framework, the director dashboard and the coaching call library. <a href="/program">See the program week by week</a>.</p>
+      <h3>How many mentees can each mentor have?</h3>
+      <p>Each mentor works with one mentee at a time, with unlimited mentees over the membership.</p>
+      <h3>Can we get a center membership without joining the research?</h3>
+      <p>Yes. A center membership gives your mentors full training and your program full access, with no research requirements, and you can start at any time.</p>
+      <h3>Is there a free option?</h3>
+      <p>The <a href="/research-trial">free research trial</a> begins January 2027 for licensed, privately owned US programs with at least 2 classrooms serving children 2½ and older.</p>
+      <p><a href="/faq">More questions and answers</a></p>
+    </div>
+  </section>

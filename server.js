@@ -334,27 +334,32 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
   res.json({ received: true });
 });
 
-// ── Public landing page ───────────────────────────────────────────
-// mentorsuccessacademy.com shows the marketing landing page at "/"; the app's
-// own address keeps showing the sign-in page there. The landing page is also
-// reachable on any host at /welcome, and sign-in at /login.
+// ── Public marketing site ─────────────────────────────────────────
+// mentorsuccessacademy.com shows the marketing site: a home page at "/" and
+// one page per topic (see site/render.js). The app's own address keeps
+// showing the sign-in page at "/". The home page is also reachable on any
+// host at /welcome, and sign-in at /login.
 const LANDING_HOSTS = (process.env.LANDING_HOSTS || 'mentorsuccessacademy.com,www.mentorsuccessacademy.com')
   .split(',').map(h => h.trim().toLowerCase()).filter(Boolean);
-const landingPage = path.join(__dirname, 'public', 'landing.html');
-// Only the landing page on the public domain should be indexed: every other
-// host (e.g. the onrender.com address) and the /welcome copy are noindex.
-// App pages also carry a noindex meta tag.
+const SITE_URL = (process.env.PUBLIC_SITE_URL || `https://${LANDING_HOSTS[0] || 'mentorsuccessacademy.com'}`).replace(/\/$/, '');
+const site = require('./site/render');
+const sitePages = site.render(SITE_URL);
+// Only the marketing pages on the public domain should be indexed: every
+// other host (e.g. the onrender.com address) and the /welcome copy are
+// noindex. App pages also carry a noindex meta tag.
 app.use((req, res, next) => {
   if (!LANDING_HOSTS.includes(req.hostname.toLowerCase()) || req.path === '/welcome') {
     res.set('X-Robots-Tag', 'noindex, nofollow');
   }
   next();
 });
-app.get('/', (req, res, next) => LANDING_HOSTS.includes(req.hostname.toLowerCase()) ? res.sendFile(landingPage) : next());
-app.get('/welcome', (req, res) => res.sendFile(landingPage));
+app.get('/', (req, res, next) => LANDING_HOSTS.includes(req.hostname.toLowerCase()) ? res.type('html').send(sitePages.home) : next());
+app.get('/welcome', (req, res) => res.type('html').send(sitePages.home));
+for (const page of site.PAGES.filter(p => p.path !== '/')) {
+  app.get(page.path, (req, res) => res.type('html').send(sitePages[page.key]));
+}
 
 // ── Search engines ────────────────────────────────────────────────
-const SITE_URL = (process.env.PUBLIC_SITE_URL || `https://${LANDING_HOSTS[0] || 'mentorsuccessacademy.com'}`).replace(/\/$/, '');
 app.get('/robots.txt', (req, res) => {
   const onDomain = LANDING_HOSTS.includes(req.hostname.toLowerCase());
   res.type('text/plain').send(onDomain
@@ -373,7 +378,7 @@ app.get('/sitemap.xml', (req, res) => {
   res.type('application/xml').send(
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-    `  <url><loc>${SITE_URL}/</loc><lastmod>${SITEMAP_LASTMOD}</lastmod></url>\n` +
+    site.PAGES.map(p => `  <url><loc>${SITE_URL}${p.path}</loc><lastmod>${SITEMAP_LASTMOD}</lastmod></url>\n`).join('') +
     '</urlset>\n'
   );
 });
@@ -1627,8 +1632,8 @@ app.post('/api/public/checkout', async (req, res) => {
     allow_promotion_codes: true,
     metadata: { programName, contactName, mentors: String(mentors) },
     subscription_data: { metadata: { programName, contactName, mentors: String(mentors) } },
-    success_url: `${origin}/welcome?subscribed=1`,
-    cancel_url: `${origin}/welcome#pricing`
+    success_url: `${origin}/membership?subscribed=1`,
+    cancel_url: `${origin}/membership`
   });
   await pool.query(
     'INSERT INTO subscriptions (checkout_session_id, program_name, contact_name, email, mentors) VALUES ($1,$2,$3,$4,$5)',

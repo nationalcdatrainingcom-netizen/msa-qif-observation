@@ -16,6 +16,15 @@ const FAQ = require('./faq');
 
 // The one-sentence description of MSA. Use it word for word wherever MSA is
 // introduced (home page, structured data, llms.txt) so AI quotes it the same way.
+// When the site's content was last reviewed, shown in every page's footer
+// ("Updated October 2026") and as dateModified in the structured data.
+// Fresh dates help AI tools trust a page: review the site and bump this
+// every few months. Format: YYYY-MM.
+const SITE_UPDATED = '2026-10';
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+  'August', 'September', 'October', 'November', 'December'];
+const updatedLabel = ym => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.slice(0, 4)}`;
+
 const STANDARD_DESCRIPTION = "Mentor Success Academy (MSA) is a 12-week mentor training program that teaches experienced preschool teachers how to mentor and coach other early childhood teachers, built on MSA's LEAP framework.";
 
 const DOMAINS = [
@@ -125,7 +134,8 @@ function structuredData(page, siteUrl) {
     description: page.description,
     isPartOf: { '@type': 'WebSite', '@id': id('website'), name: 'Mentor Success Academy', url: siteUrl + '/' },
     about: { '@id': id('organization') },
-    primaryImageOfPage: `${siteUrl}/img/og-image.jpg`
+    primaryImageOfPage: `${siteUrl}/img/og-image.jpg`,
+    dateModified: SITE_UPDATED
   };
   if (page.key !== 'home') {
     webPage.breadcrumb = {
@@ -181,7 +191,7 @@ function structuredData(page, siteUrl) {
       jobTitle: 'Co-founder, Mentor Success Academy',
       image: `${siteUrl}/img/mary.jpg`,
       url: `${siteUrl}/founders`,
-      // Her own bio site. Add Rebecca's the same way once she has one.
+      // Her own bio site
       sameAs: ['https://mary-wardlaw.com'],
       worksFor: [
         { '@id': id('organization') },
@@ -199,7 +209,7 @@ function structuredData(page, siteUrl) {
       url: `${siteUrl}/founders`,
       worksFor: [
         { '@id': id('organization') },
-        { '@type': 'Organization', name: 'Inspired Growth, LLC' }
+        { '@type': 'Organization', name: 'Inspired Growth, LLC', url: 'https://inspiredgrowthllc.com' }
       ],
       alumniOf: [
         { '@type': 'CollegeOrUniversity', name: 'Georgia Institute of Technology' },
@@ -234,6 +244,7 @@ function render(siteUrl) {
       description: esc(page.description),
       url: esc(url),
       siteUrl: esc(siteUrl),
+      updated: `<time datetime="${SITE_UPDATED}">${updatedLabel(SITE_UPDATED)}</time>`,
       jsonld: structuredData(page, siteUrl),
       nav: links.map(({ p, current }) => `      <a href="${p.path}"${current}>${esc(p.nav)}</a>`).join('\n'),
       footerNav: links.map(({ p }) => `        <a href="${p.path}">${esc(p.nav)}</a>`).join('\n'),

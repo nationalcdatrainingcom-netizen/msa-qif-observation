@@ -1,5 +1,5 @@
 // ════════════════════════════════════════════════════════════════════
-// MSA LEAP TRAINING — CURRICULUM
+// MENTOR SUCCESS ACADEMY MENTOR TRAINING (MSA'S LEAP FRAMEWORK) — CURRICULUM
 // ════════════════════════════════════════════════════════════════════
 // All 12 modules and their scenarios. Edit scenarios here.
 //

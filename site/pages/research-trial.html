@@ -1,0 +1,113 @@
+  <section class="page-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › <span aria-current="page">Free Research Trial</span></nav>
+      <h1>Free Mentor Success Academy research trial, beginning January 2027</h1>
+      <div class="open-badge">● Applications are now being accepted</div>
+      <p class="lead">Mentor Success Academy is offering a free 3-month research trial beginning January 2027, as part of Mary Wardlaw's doctoral research on the impact of mentoring in early childhood programs. Mentors in participating classrooms receive MSA's mentor training, valued at $1,200, at no cost, and use MSA with their mentees for 12 weeks. In return, the data gathered, including surveys before and after the program, is used in the research.</p>
+      <div class="hero-ctas" style="margin-top:26px"><a href="#apply" class="btn btn-gold">Check the criteria and apply</a></div>
+    </div>
+  </section>
+
+  <section class="alt" id="apply">
+    <div class="container">
+      <div class="research-grid" style="margin-top:0">
+        <div>
+          <h3>Who can take part</h3>
+          <ul class="criteria">
+            <li data-n="1">A <strong>licensed</strong> early childhood program in the <strong>United States</strong>.</li>
+            <li data-n="2">A <strong>privately owned</strong> program.</li>
+            <li data-n="3">At least <strong>2 classrooms</strong> serving children <strong>2½ years and older</strong>.</li>
+            <li data-n="4">You choose which classrooms take part. <strong>Participating classrooms use MSA</strong>, and <strong>at least one classroom does not</strong>, so the research can compare them.</li>
+            <li data-n="5">Staff in <strong>participating and non-participating classrooms</strong> complete the same surveys before and after the program.</li>
+            <li data-n="6">The director agrees to provide <strong><span style="white-space:nowrap">30–45 minutes</span> every week for the full 12 weeks</strong> for each mentor and mentee to meet.</li>
+          </ul>
+          <div class="note">
+            Mentors complete the training on their own time. Taking part is voluntary. Results are reported in summary form, without naming individual programs or staff. Accepted programs will receive full research details and consent forms before the trial begins.
+          </div>
+        </div>
+
+        <div class="form-card">
+          <form id="research-form" novalidate>
+            <h3>Apply for the January 2027 research trial</h3>
+            <p class="sub">The program director should complete this form. We'll follow up by email.</p>
+            <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="field">
+              <label for="r-program">Program name</label>
+              <input id="r-program" name="programName" required maxlength="200">
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="r-director">Director name</label>
+                <input id="r-director" name="directorName" required maxlength="200" autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="r-email">Email</label>
+                <input id="r-email" name="email" type="email" required maxlength="200" autocomplete="email">
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="r-phone">Phone (optional)</label>
+                <input id="r-phone" name="phone" type="tel" maxlength="40" autocomplete="tel">
+              </div>
+              <div class="field">
+                <label for="r-license">State license number</label>
+                <input id="r-license" name="licenseNumber" required maxlength="80">
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="r-city">City</label>
+                <input id="r-city" name="city" maxlength="100">
+              </div>
+              <div class="field">
+                <label for="r-state">State</label>
+                <select id="r-state" name="state" required><option value="">Select…</option></select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="r-classrooms">Total number of classrooms serving children 2½ and older</label>
+              <input id="r-classrooms" name="preschoolClassrooms" type="number" min="1" max="99" required>
+            </div>
+            <div class="field">
+              <label for="r-notes">Anything else we should know? (optional)</label>
+              <textarea id="r-notes" name="notes" maxlength="2000"></textarea>
+            </div>
+
+            <div class="checks">
+              <div class="checks-title">Please confirm each of the following:</div>
+              <label class="check"><input type="checkbox" data-agree="licensedUS"> Our program is licensed and located in the United States.</label>
+              <label class="check"><input type="checkbox" data-agree="privatelyOwned"> Our program is privately owned.</label>
+              <label class="check"><input type="checkbox" data-agree="twoPreschoolClassrooms"> We have at least 2 classrooms serving children 2½ years and older.</label>
+              <label class="check"><input type="checkbox" data-agree="comparisonDesign"> I understand participating classrooms will use MSA, and at least one classroom will not, for comparison.</label>
+              <label class="check"><input type="checkbox" data-agree="surveysBothClassrooms"> Staff in participating and non-participating classrooms will complete the surveys before and after the program.</label>
+              <label class="check"><input type="checkbox" data-agree="twelveWeekCommitment"> As director, I will provide <span style="white-space:nowrap">30–45 minutes</span> each week for the full 12 weeks for each mentor and mentee to meet.</label>
+              <label class="check"><input type="checkbox" data-agree="researchConsent"> I agree that data gathered during the trial, including survey responses, may be used in Mary Wardlaw's doctoral research.</label>
+            </div>
+
+            <button type="submit" class="btn btn-gold" style="width:100%">Submit application</button>
+            <div class="msg" id="research-msg"></div>
+          </form>
+          <div class="success-panel" id="research-success">
+            <div class="big">✓</div>
+            <h3>Application received</h3>
+            <p class="sub">Thank you! We'll review your application and email you about next steps.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Trial questions ── -->
+  <section>
+    <div class="container prose">
+      <h2>Questions about the trial</h2>
+      <h3>Why does a classroom not use MSA in the research trial?</h3>
+      <p>Comparing classrooms that use MSA with at least one that doesn't lets the research measure what difference mentoring actually makes. Participating and non-participating classrooms complete the same surveys.</p>
+      <h3>What happens after the 3-month trial?</h3>
+      <p>When the trial ends, programs can continue with a paid center membership. There's no obligation to continue.</p>
+      <h3>Our program doesn't meet the trial criteria. Can we still use MSA?</h3>
+      <p>Yes. The criteria only apply to the free research trial. Any program can get a <a href="/membership">center membership</a>. The training is written for mentors supporting teachers of preschool-age children (2½–5).</p>
+      <p><a href="/faq">More questions and answers</a></p>
+    </div>
+  </section>

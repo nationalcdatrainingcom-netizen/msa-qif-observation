@@ -24,17 +24,20 @@ LEAP (Leadership Expression Assessment Profile) is the framework inside Mentor S
 
 ## Ways to join
 
-- [Free research trial](https://mentorsuccessacademy.com/#research): a 3-month trial beginning January 2027, part of Mary Wardlaw's doctoral research on mentoring in early childhood programs. Participating mentors receive the training (valued at $1,200) at no cost. Open to licensed, privately owned US programs with at least 2 classrooms serving children 2½ and older.
-- [Center membership](https://mentorsuccessacademy.com/#pricing): paid monthly per mentor, with discounts for 2 or more mentors. Start any time, no research requirements, cancel online.
+- [Free research trial](https://mentorsuccessacademy.com/research-trial): a 3-month trial beginning January 2027, part of Mary Wardlaw's doctoral research on mentoring in early childhood programs. Participating mentors receive the training (valued at $1,200) at no cost. Open to licensed, privately owned US programs with at least 2 classrooms serving children 2½ and older.
+- [Center membership](https://mentorsuccessacademy.com/membership): paid monthly per mentor, with discounts for 2 or more mentors. Start any time, no research requirements, cancel online.
 
 ## Founders
 
-- [Mary Wardlaw, Ed.S., MBA](https://mentorsuccessacademy.com/#team): co-founder of Mentor Success Academy. Early childhood educator since 1992, founder of The Children's Center in southwest Michigan (2002) and National CDA Training (2019). Grew The Children's Center from 3 teachers and 17 children to 80 teachers and over 250 children. Ph.D. student in Early Childhood Education researching the training, mentoring and retention of early childhood teachers.
-- [Rebecca Munlyn](https://mentorsuccessacademy.com/#team): co-founder of Mentor Success Academy and founder and CEO of Inspired Growth, LLC. Leader and team development consultant with more than 20 years of coaching and consulting experience.
+- [Mary Wardlaw, Ed.S., MBA](https://mentorsuccessacademy.com/founders): co-founder of Mentor Success Academy. Early childhood educator since 1992, founder of The Children's Center in southwest Michigan (2002) and National CDA Training (2019). Grew The Children's Center from 3 teachers and 17 children to 80 teachers and over 250 children. Ph.D. student in Early Childhood Education researching the training, mentoring and retention of early childhood teachers.
+- [Rebecca Munlyn](https://mentorsuccessacademy.com/founders): co-founder of Mentor Success Academy and founder and CEO of Inspired Growth, LLC. Leader and team development consultant with more than 20 years of coaching and consulting experience.
 
 ## Pages
 
-- [Home](https://mentorsuccessacademy.com/): program overview, how it works, founders, research trial and membership
-- [How it works](https://mentorsuccessacademy.com/#how)
-- [The program](https://mentorsuccessacademy.com/#program)
-- [FAQ](https://mentorsuccessacademy.com/#faq)
+- [Home](https://mentorsuccessacademy.com/): overview of Mentor Success Academy
+- [How It Works](https://mentorsuccessacademy.com/how-it-works): what mentors, mentees and directors do each week, and MSA's LEAP framework
+- [The Program](https://mentorsuccessacademy.com/program): all 12 weeks, week by week
+- [About the Founders](https://mentorsuccessacademy.com/founders): Mary Wardlaw and Rebecca Munlyn
+- [Free Research Trial](https://mentorsuccessacademy.com/research-trial): criteria and application for the January 2027 trial
+- [Center Membership](https://mentorsuccessacademy.com/membership): pricing and sign-up
+- [FAQ](https://mentorsuccessacademy.com/faq): answers to common questions

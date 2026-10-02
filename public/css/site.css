@@ -189,6 +189,8 @@ header.nav {
 .person .role-title { font-size: 13.5px; color: var(--gold); font-weight: 600; margin-bottom: 12px; }
 .person p { color: var(--text-soft); font-size: 15.5px; }
 .person p + p { margin-top: 12px; }
+.person .bio-link a { font-weight: 600; color: var(--gold); text-decoration: none; }
+.person .bio-link a:hover { text-decoration: underline; }
 
 /* ── Two paths ── */
 .paths { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; margin-top: 44px; }

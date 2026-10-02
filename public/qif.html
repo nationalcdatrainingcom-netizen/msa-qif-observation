@@ -1132,38 +1132,38 @@ const DOMAINS = [
       ]
     },
     {
-      id: 'conflict_as_learning',
-      name: 'Conflict as Learning',
+      id: 'emotional_safety_repair',
+      name: 'Emotional Safety & Repair',
       week: 4,
-      icon: '⚖️',
+      icon: '🛡️',
       positiveItems: [
-        { id: 'p1', label: 'Stays calm during conflict' },
-        { id: 'p2', label: 'Names both children\'s feelings' },
-        { id: 'p3', label: 'Guides problem-solving process' },
-        { id: 'p4', label: 'Asks "what can we do?" questions' },
-        { id: 'p5', label: 'Lets children attempt solution first' },
-        { id: 'p6', label: 'Models negotiation language' },
-        { id: 'p7', label: 'Follows up after resolution' },
-        { id: 'p8', label: 'Frames conflict as learning' },
-        { id: 'p9', label: 'Celebrates peaceful resolution' },
+        { id: 'p1', label: 'Calm, respectful tone during redirection' },
+        { id: 'p2', label: 'Corrects privately, not in front of the group' },
+        { id: 'p3', label: 'Repairs after a sharp moment (names it, apologizes)' },
+        { id: 'p4', label: 'Reconnects with a child after a correction' },
+        { id: 'p5', label: 'Steps in when children tease or mock a peer' },
+        { id: 'p6', label: 'Keeps warmth steady under pressure' },
+        { id: 'p7', label: 'Treats mistakes as safe and normal' },
+        { id: 'p8', label: 'Even warmth toward every child' },
+        { id: 'p9', label: 'Keeps adult talk positive in front of children' },
         { id: 'p10', label: 'Other:', custom: true }
       ],
       negativeItems: [
-        { id: 'n1', label: 'Escalates instead of de-escalates' },
-        { id: 'n2', label: 'Takes sides immediately' },
-        { id: 'n3', label: 'Resolves conflict for children' },
-        { id: 'n4', label: 'Uses punishment as first response' },
-        { id: 'n5', label: 'Ignores conflict / hopes it resolves' },
-        { id: 'n6', label: 'Raises voice during conflict' },
-        { id: 'n7', label: 'No follow-up after resolution' },
+        { id: 'n1', label: 'Sharp or harsh tone in redirection' },
+        { id: 'n2', label: 'Sarcasm or teasing at a child\'s expense' },
+        { id: 'n3', label: 'Child corrected or shamed in front of peers' },
+        { id: 'n4', label: 'Peer teasing or mockery allowed to continue' },
+        { id: 'n5', label: 'Goes cold or withdrawn when frustrated' },
+        { id: 'n6', label: 'Negative adult talk in front of children' },
+        { id: 'n7', label: 'No repair after a harsh moment' },
         { id: 'n8', label: 'Other:', custom: true }
       ],
       goalSuggestions: [
-        'When conflict happens, take one breath before intervening to set a calm tone.',
-        'Practice naming both children\'s feelings before offering any solution.',
-        'Ask "what\'s a way you could both be happy?" in at least one conflict this week.',
-        'Give children 30 seconds to attempt their own resolution before stepping in.',
-        'After each conflict ends, take 60 seconds to check in with both children.'
+        'Before redirecting, move closer and lower your voice instead of calling across the room.',
+        'Handle every correction you can privately, at the child\'s eye level, this week.',
+        'After any sharp moment, go back to the child within 5 minutes: name it, own it, reconnect.',
+        'Step in every time a child is teased or laughed at, and restate the classroom expectation kindly.',
+        'Choose the child you find hardest to connect with and give them two warm moments every day.'
       ]
     }
   ]
@@ -1506,16 +1506,16 @@ const RESEARCH = {
     ],
     connection: 'Every time a teacher follows a child\'s curiosity, they send the message: "Your mind matters. Your ideas have value." That is the seed of a lifelong learner.'
   },
-  conflict_as_learning: {
-    why: 'Why Conflict as Learning Matters',
-    summary: 'Conflict is not a disruption to learning \u2014 it IS learning. How teachers respond to conflict shapes children\'s capacity for empathy, problem-solving, and emotional regulation.',
+  emotional_safety_repair: {
+    why: 'Why Emotional Safety & Repair Matters',
+    summary: 'Children cannot learn freely when they do not feel safe. Emotional safety is built by keeping sharpness, sarcasm, and shame out of the classroom \u2014 and by repairing quickly and honestly when they slip in.',
     points: [
-      'Children guided through conflict resolution develop stronger empathy and social problem-solving skills (Denham et al., 2003).',
-      'The prefrontal cortex is shaped heavily by repeated experiences of guided conflict resolution during the early years (Siegel, 2012).',
-      'Calm teachers model co-regulation — they lend their regulated nervous system to the dysregulated child (Porges, Polyvagal Theory).',
-      'Conflict-as-learning programs show 40-60% reductions in aggressive behavior within a single school year (Levin, 2003).'
+      'Negative climate (harshness, sarcasm, shaming, and peer negativity) is one of the core dimensions of emotional support in CLASS, the most widely used measure of preschool classroom quality (Pianta, La Paro & Hamre, 2008).',
+      'Children with close, low-conflict relationships with their early teachers show better behavioral and academic outcomes years later (Hamre & Pianta, 2001).',
+      'Breaks in connection are normal. Relationships grow stronger when the adult notices the break and repairs it (Tronick, 1989; Siegel & Hartzell, 2003).',
+      'Calm teachers model co-regulation \u2014 they lend their regulated nervous system to the dysregulated child (Porges, Polyvagal Theory).'
     ],
-    connection: 'When you ask "What can we do so you both feel okay?" — you are teaching problem-solving, empathy, and emotional intelligence all at once. That is some of the most important teaching you will ever do.'
+    connection: 'Every teacher has sharp moments. What children remember is what happens next. "I used a sharp voice with you earlier, and I\'m sorry" teaches a child that relationships can break and be mended \u2014 and that they are safe here.'
   },
 
   // ── Domain 2 Research ──
@@ -2128,7 +2128,7 @@ const RESOURCE_ICONS = {
   positive_climate: '🌤',
   teacher_responsiveness: '🤝',
   child_perspective: '👁',
-  conflict_as_learning: '⚖️'
+  emotional_safety_repair: '🛡️'
 };
 
 async function showResources() {

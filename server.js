@@ -382,6 +382,51 @@ app.get('/sitemap.xml', (req, res) => {
     '</urlset>\n'
   );
 });
+
+// IndexNow tells Bing, Yandex, Seznam, Naver and Yep the moment a page
+// changes, instead of waiting for them to recrawl. The key is public by
+// design: search engines fetch /<key>.txt to confirm we own the site.
+const INDEXNOW_KEY = '751320ef5e0d03ebe16ac9d25746a85a';
+app.get(`/${INDEXNOW_KEY}.txt`, (req, res) => res.type('text/plain').send(INDEXNOW_KEY));
+
+// After a deploy, submit the marketing pages whose HTML changed since the
+// last successful submission (remembered in Postgres, so restarts and
+// spin-ups don't re-submit unchanged pages). Production only.
+async function pingIndexNow() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS indexnow_pages (
+      path TEXT PRIMARY KEY,
+      hash TEXT NOT NULL,
+      submitted_at TIMESTAMP DEFAULT NOW()
+    );
+  `);
+  const seen = new Map((await pool.query('SELECT path, hash FROM indexnow_pages')).rows.map(r => [r.path, r.hash]));
+  const changed = site.PAGES
+    .map(p => ({ path: p.path, hash: crypto.createHash('sha256').update(sitePages[p.key]).digest('hex') }))
+    .filter(p => seen.get(p.path) !== p.hash);
+  if (changed.length === 0) return console.log('IndexNow: no page changes to submit.');
+  const r = await fetch('https://api.indexnow.org/indexnow', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    body: JSON.stringify({
+      host: new URL(SITE_URL).hostname,
+      key: INDEXNOW_KEY,
+      keyLocation: `${SITE_URL}/${INDEXNOW_KEY}.txt`,
+      urlList: changed.map(p => SITE_URL + p.path)
+    })
+  });
+  if (r.status !== 200 && r.status !== 202) {
+    return console.error(`IndexNow: submission failed (${r.status}): ${(await r.text()).slice(0, 200)}`);
+  }
+  for (const p of changed) {
+    await pool.query(
+      `INSERT INTO indexnow_pages (path, hash) VALUES ($1, $2)
+       ON CONFLICT (path) DO UPDATE SET hash=$2, submitted_at=NOW()`,
+      [p.path, p.hash]
+    );
+  }
+  console.log(`IndexNow: submitted ${changed.map(p => p.path).join(', ')}`);
+}
 app.get('/login', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
 
 // ── Middleware ────────────────────────────────────────────────────
@@ -1742,6 +1787,11 @@ app.use((err, req, res, next) => {
 
 initDB().then(() => cert.initTables()).then(() => {
   app.listen(PORT, () => console.log(`MSA Platform running on port ${PORT}`));
+  // Wait for Render to switch traffic to this deploy, so search engines that
+  // check the key file right away reach the new version.
+  if (process.env.NODE_ENV === 'production') {
+    setTimeout(() => pingIndexNow().catch(e => console.error('IndexNow:', e.message)), 60 * 1000);
+  }
 }).catch(e => {
   console.error('DB init failed:', e);
   process.exit(1);

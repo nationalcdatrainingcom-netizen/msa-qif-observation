@@ -73,7 +73,7 @@ const PAGES = [
   {
     key: 'faq', path: '/faq', file: 'faq.html', nav: 'FAQ',
     title: 'Frequently Asked Questions | Mentor Success Academy',
-    description: "Answers to common questions about Mentor Success Academy: who takes the training, time each week, MSA's LEAP framework, certification, the research trial and center membership."
+    description: "Answers to common questions about Mentor Success Academy: cost, time each week, training hours, results, mentoring vs. coaching, MSA's LEAP framework, certification and the research trial."
   }
 ];
 
